@@ -1,6 +1,6 @@
-/* Colle ici l'adresse et la clé publique de ton projet Supabase (étape 3 du guide).
-   La clé publique (« publishable » ou « anon ») peut être visible : tes données sont protégées par ton compte. */
+/* Adresse et clé publique de ton projet Supabase.
+   La clé publique peut être visible : tes données sont protégées par ton compte. */
 window.CERVEAU_CONFIG = {
-  supabaseUrl: "",
-  supabaseKey: ""
+  supabaseUrl: "https://zpkxxmuaoyehapxnpnoc.supabase.co",
+  supabaseKey: "sb_publishable_pg5OsGTZhJfDqh9XJzVEmQ_Jty1rQoA"
 };
