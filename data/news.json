@@ -1,27 +1,27 @@
 {
- "updated": "2026-10-08T11:00:00Z",
+ "updated": "2026-10-08T19:29:31.977Z",
  "snap": {
-  "date": "2026-10-07",
+  "date": "2026-10-08",
   "items": [
    {
-    "c": "−1,22 %",
     "n": "CAC 40",
-    "v": "7 769"
+    "v": "7 730",
+    "c": "−0,51 %"
    },
    {
-    "c": "−0,22 %",
     "n": "S&P 500",
-    "v": "7 802"
+    "v": "7 760",
+    "c": "−0,54 %"
    },
    {
-    "c": "−0,22 %",
     "n": "Nasdaq",
-    "v": "27 539"
+    "v": "27 174",
+    "c": "−1,32 %"
    },
    {
-    "c": "+0,4 %",
     "n": "Brent",
-    "v": "101 $"
+    "v": "104,2 $",
+    "c": "+4,02 %"
    },
    {
     "c": "",
@@ -29,23 +29,155 @@
     "v": "4,87 %"
    },
    {
-    "c": "",
     "n": "US 10 ans",
-    "v": "5,28 %"
+    "v": "5,23 %",
+    "c": "−0,05 pt"
    },
    {
-    "c": "−0,6 %",
     "n": "EUR/USD",
-    "v": "1,118"
+    "v": "1,121",
+    "c": "−0,36 %"
    },
    {
-    "c": "−0,2 %",
     "n": "Or (once)",
-    "v": "4 131 $"
+    "v": "4 153 $",
+    "c": "+0,29 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-08-tensions-geopolitiques-et-flambee-des-co",
+   "src": "Financial Times",
+   "date": "2026-10-08",
+   "url": "https://www.ft.com/content/ec860f96-5a2b-461a-a897-a957860c3dba?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Tensions géopolitiques et flambée des cours du pétrole",
+    "en": "Geopolitical Tensions and Surging Oil Prices"
+   },
+   "s": {
+    "fr": "Les prix du pétrole brut ont fortement augmenté suite à des attaques contre des navires pétroliers. Le passage du brut par le détroit d'Hormuz, une voie maritime essentielle, a chuté brutalement après avoir presque retrouvé son niveau d'avant-guerre. Cette perturbation de l'approvisionnement inquiète fortement les marchés énergétiques mondiaux.",
+    "en": "Crude oil prices have risen sharply following attacks on oil tankers. Transit through the Strait of Hormuz, a critical maritime route, fell abruptly after briefly recovering to near pre-war levels. This supply disruption is causing significant concern across global energy markets."
+   },
+   "d": {
+    "fr": "En trading, les matières premières comme le pétrole sont extrêmement sensibles aux risques géopolitiques qui menacent le transport physique. Une baisse de l'offre disponible face à une demande constante provoque mécaniquement une hausse rapide des prix.",
+    "en": "In trading, commodities like oil are highly sensitive to geopolitical risks that threaten physical transportation. A reduction in available supply while demand remains constant mechanically triggers a rapid increase in prices."
+   },
+   "v": [
+    [
+     "matières premières",
+     "commodities"
+    ],
+    [
+     "offre et demande",
+     "supply and demand"
+    ],
+    [
+     "cours du pétrole",
+     "oil prices"
+    ],
+    [
+     "chaîne d'approvisionnement",
+     "supply chain"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi un conflit dans une zone comme le détroit d'Hormuz a-t-il un impact immédiat sur le prix de l'essence à la pompe ?",
+    "en": "Why does a conflict in an area like the Strait of Hormuz have an immediate impact on fuel prices at the pump?"
+   },
+   "r": {
+    "fr": "Le détroit d'Hormuz est un point de passage stratégique pour une grande partie du pétrole mondial. Si le transit y est perturbé, les traders anticipent une pénurie globale, ce qui fait grimper instantanément les cours du brut et se répercute ensuite sur les carburants raffinés.",
+    "en": "The Strait of Hormuz is a strategic transit point for a large portion of global oil. If transit is disrupted, traders anticipate a global shortage, which instantly drives up crude prices and subsequently affects refined fuels."
+   }
+  },
+  {
+   "id": "2026-10-08-les-taux-immobiliers-americains-au-plus-",
+   "src": "Financial Times",
+   "date": "2026-10-08",
+   "url": "https://www.ft.com/content/04d6ae65-5d5f-4ed6-9c15-16aa0f4d0713?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Les taux immobiliers américains au plus haut depuis 2023",
+    "en": "US Mortgage Rates Reach Highest Level Since 2023"
+   },
+   "s": {
+    "fr": "Aux États-Unis, les taux des prêts immobiliers ont progressé pour la septième semaine consécutive. Cette hausse s'explique par la progression des rendements des obligations d'État, la cherté de l'énergie et les anticipations d'un durcissement monétaire de la Réserve fédérale. Les coûts d'emprunt atteignent désormais des sommets inédits depuis 2023.",
+    "en": "In the United States, mortgage rates have risen for the seventh consecutive week. This increase is driven by rising Treasury yields, high energy prices, and expectations of monetary tightening by the Federal Reserve. Borrowing costs have now reached levels not seen since 2023."
+   },
+   "d": {
+    "fr": "Pour un trader, suivre les taux d'intérêt est crucial car ils déterminent le coût de l'argent dans toute l'économie. Quand la banque centrale durcit sa politique pour lutter contre l'inflation, les taux d'emprunt augmentent, ce qui ralentit généralement le secteur immobilier et la consommation.",
+    "en": "For a trader, tracking interest rates is crucial because they determine the cost of money throughout the economy. When the central bank tightens policy to fight inflation, borrowing rates rise, which typically slows down the real estate sector and consumer spending."
+   },
+   "v": [
+    [
+     "taux d'intérêt hypothécaire",
+     "mortgage rate"
+    ],
+    [
+     "obligations du Trésor",
+     "Treasury yields"
+    ],
+    [
+     "durcissement monétaire",
+     "monetary tightening"
+    ],
+    [
+     "coût de l'emprunt",
+     "borrowing cost"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est le lien entre le rendement des obligations d'État et les taux d'intérêt des crédits aux particuliers ?",
+    "en": "What is the link between government bond yields and consumer loan interest rates?"
+   },
+   "r": {
+    "fr": "Les obligations d'État servent de référence pour le coût de l'argent à long terme. Lorsque leur rendement augmente, les banques répercutent cette hausse de coût sur les crédits qu'elles accordent aux ménages pour maintenir leurs marges.",
+    "en": "Government bonds serve as a benchmark for the long-term cost of money. When their yield rises, banks pass this increased cost onto the loans they grant to households to maintain their margins."
+   }
+  },
+  {
+   "id": "2026-10-08-diversification-agricole-face-a-l-insecu",
+   "src": "Financial Times",
+   "date": "2026-10-08",
+   "url": "https://www.ft.com/content/3f0d45e0-18a5-420d-8db4-d8224d87b8e6?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Diversification agricole face à l'insécurité au Mexique",
+    "en": "Agricultural Diversification Amid Insecurity in Mexico"
+   },
+   "s": {
+    "fr": "Le géant de l'avocat Mission Produce s'appuie désormais sur des plantations situées en dehors du Mexique pour approvisionner le marché américain. L'entreprise développe ses cultures au Pérou et au Guatemala afin de compenser les difficultés d'importation liées aux violences dans les régions productrices mexicaines. Cette stratégie permet de sécuriser les volumes de livraison malgré les crises locales.",
+    "en": "Avocado giant Mission Produce is now relying on orchards outside of Mexico to supply the US market. The company is expanding its farming in Peru and Guatemala to offset import difficulties caused by violence in Mexican growing regions. This strategy helps secure delivery volumes despite local crises."
+   },
+   "d": {
+    "fr": "En bourse, la gestion des risques opérationnels est un facteur clé pour évaluer la résilience d'une entreprise face aux imprévus. Un producteur qui diversifie ses sources géographiques évite de dépendre d'un seul pays et protège ainsi ses revenus contre les chocs géopolitiques ou climatiques.",
+    "en": "In stock trading, managing operational risks is a key factor in assessing a company's resilience to unexpected events. A producer that diversifies its geographical sources avoids relying on a single country, thereby protecting its revenues from geopolitical or climatic shocks."
+   },
+   "v": [
+    [
+     "gestion des risques",
+     "risk management"
+    ],
+    [
+     "sécuriser l'approvisionnement",
+     "securing supply"
+    ],
+    [
+     "diversification géographique",
+     "geographical diversification"
+    ],
+    [
+     "matières premières agricoles",
+     "agricultural commodities"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi la diversification géographique est-elle une stratégie payante pour une entreprise cotée ?",
+    "en": "Why is geographical diversification a winning strategy for a listed company?"
+   },
+   "r": {
+    "fr": "Elle permet de lisser les risques : si une catastrophe ou un conflit bloque la production dans un pays, les autres régions prennent le relais. Cela rassure les investisseurs car les bénéfices de l'entreprise deviennent plus stables et prévisibles.",
+    "en": "It helps mitigate risks: if a disaster or conflict halts production in one country, other regions can step in. This reassures investors because the company's profits become more stable and predictable."
+   }
+  },
   {
    "d": {
     "en": "When bond yields rise, bonds pay more and stocks look less attractive. Always look at sectors: on that day banks fell sharply while carmakers rose. An index going down does not stop some stocks from going up.",
