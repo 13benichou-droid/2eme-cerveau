@@ -1,0 +1,400 @@
+{
+ "updated": "2026-10-08T11:00:00Z",
+ "snap": {
+  "date": "2026-10-07",
+  "items": [
+   {
+    "c": "−1,22 %",
+    "n": "CAC 40",
+    "v": "7 769"
+   },
+   {
+    "c": "−0,22 %",
+    "n": "S&P 500",
+    "v": "7 802"
+   },
+   {
+    "c": "−0,22 %",
+    "n": "Nasdaq",
+    "v": "27 539"
+   },
+   {
+    "c": "+0,4 %",
+    "n": "Brent",
+    "v": "101 $"
+   },
+   {
+    "c": "",
+    "n": "OAT 10 ans",
+    "v": "4,87 %"
+   },
+   {
+    "c": "",
+    "n": "US 10 ans",
+    "v": "5,28 %"
+   },
+   {
+    "c": "−0,6 %",
+    "n": "EUR/USD",
+    "v": "1,118"
+   },
+   {
+    "c": "−0,2 %",
+    "n": "Or (once)",
+    "v": "4 131 $"
+   }
+  ]
+ },
+ "articles": [
+  {
+   "d": {
+    "en": "When bond yields rise, bonds pay more and stocks look less attractive. Always look at sectors: on that day banks fell sharply while carmakers rose. An index going down does not stop some stocks from going up.",
+    "fr": "Quand les taux d'emprunt montent, les obligations rapportent davantage et les actions deviennent moins attirantes. Regarde toujours les secteurs : ce jour-là les banques baissent fort alors que l'automobile monte. Un indice qui recule n'empêche pas certaines actions de gagner."
+   },
+   "date": "2026-10-07",
+   "q": {
+    "en": "Why can more expensive oil push stock prices down?",
+    "fr": "Pourquoi un pétrole plus cher peut-il faire baisser les actions ?"
+   },
+   "r": {
+    "en": "Expensive oil pushes inflation up. Central banks then keep rates high or raise them: companies pay more to borrow, and their future profits are worth less to investors.",
+    "fr": "Le pétrole cher relance l'inflation. Les banques centrales gardent alors des taux élevés, voire les montent : les entreprises empruntent plus cher et leurs profits futurs valent moins aux yeux des investisseurs."
+   },
+   "s": {
+    "en": "The Paris stock market ended Wednesday's session at 7,769 points. Two heavy weights pulled it down: rising borrowing costs, with France's 10-year bond yield close to 4.9%, and Brent crude back above $100. Banks were hit hardest (Société Générale −5%, BNP Paribas −3.9%), while Renault (+3.7%) and Stellantis (+1.6%) rose on rumours that rules on combustion engines could be relaxed. Paris still held up better than Frankfurt and Milan.",
+    "fr": "La Bourse de Paris a fini la séance de mercredi à 7 769 points. Deux poids lourds ont pesé : la hausse des taux d'emprunt, avec l'OAT française à 10 ans proche de 4,9 %, et un Brent revenu au-dessus de 100 dollars. Les banques ont le plus souffert (Société Générale −5 %, BNP Paribas −3,9 %), tandis que Renault (+3,7 %) et Stellantis (+1,6 %) ont monté sur des rumeurs d'assouplissement des règles sur les moteurs thermiques. Paris a quand même mieux résisté que Francfort et Milan."
+   },
+   "src": "BFM Bourse",
+   "t": {
+    "en": "CAC 40 slides 1.2%, dragged down by bond yields and oil",
+    "fr": "Le CAC 40 recule de 1,2 %, plombé par les taux et le pétrole"
+   },
+   "url": "https://www.tradingsat.com/cac-40-FR0003500008/actualites/cac-40-rattrape-par-les-tensions-sur-le-marche-obligataire-et-la-progression-des-cours-du-petrole-le-cac-40-abandonne-plus-de-12-1171417.html",
+   "v": [
+    [
+     "clôturer",
+     "to close"
+    ],
+    [
+     "le rendement",
+     "the yield"
+    ],
+    [
+     "peser sur",
+     "to weigh on"
+    ],
+    [
+     "les poids lourds de la cote",
+     "heavyweights"
+    ],
+    [
+     "résister",
+     "to hold up"
+    ]
+   ],
+   "id": "2026-10-07-cac"
+  },
+  {
+   "d": {
+    "en": "Bitcoin often behaves like a risk asset: when yields rise, it falls along with tech stocks. Gold tends to act as a safe haven. Comparing the two on the same day tells you a lot about investors' risk appetite.",
+    "fr": "Le bitcoin se comporte souvent comme un actif risqué : quand les taux montent, il baisse avec les valeurs technologiques. L'or joue plutôt le rôle de valeur refuge. Comparer les deux le même jour dit beaucoup sur l'appétit pour le risque des investisseurs."
+   },
+   "date": "2026-10-07",
+   "q": {
+    "en": "Why does Coinbase stock fall when bitcoin drops?",
+    "fr": "Pourquoi l'action Coinbase baisse-t-elle quand le bitcoin chute ?"
+   },
+   "r": {
+    "en": "Coinbase makes money on crypto trading. When prices fall, volumes and enthusiasm often drop too, and so do its future revenues: investors sell the stock.",
+    "fr": "Coinbase gagne de l'argent sur les échanges de cryptomonnaies. Quand les prix chutent, les volumes et l'enthousiasme baissent souvent, donc ses revenus futurs aussi : les investisseurs vendent l'action."
+   },
+   "s": {
+    "en": "Bitcoin fell below the $83,000 mark on Wednesday, weighing on crypto-linked stocks such as Coinbase, Robinhood and Strategy. The same day, broker Webull dropped about 20% after a US congressional report flagged its ties to the Chinese government, which the company disputes. Gold held steady around $4,130 an ounce.",
+    "fr": "Le bitcoin est tombé sous la barre des 83 000 dollars mercredi, ce qui a pesé sur les actions liées aux cryptomonnaies comme Coinbase, Robinhood et Strategy. Le même jour, le courtier Webull a chuté d'environ 20 % après un rapport parlementaire américain pointant ses liens avec le gouvernement chinois, ce que l'entreprise conteste. L'or, lui, est resté stable autour de 4 130 dollars l'once."
+   },
+   "src": "Yahoo Finance",
+   "t": {
+    "en": "Bitcoin drops below $83,000, dragging crypto stocks down",
+    "fr": "Le bitcoin repasse sous 83 000 dollars et entraîne les valeurs crypto"
+   },
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-october-7-dow-sp-500-nasdaq-080241833.html",
+   "v": [
+    [
+     "un actif risqué",
+     "a risk asset"
+    ],
+    [
+     "une valeur refuge",
+     "a safe haven"
+    ],
+    [
+     "un courtier",
+     "a broker"
+    ],
+    [
+     "une once",
+     "an ounce"
+    ],
+    [
+     "l'appétit pour le risque",
+     "risk appetite"
+    ]
+   ],
+   "id": "2026-10-07-crypto"
+  },
+  {
+   "d": {
+    "en": "Oil prices react first to supply: anything that threatens production or shipping pushes them up. Here two risks add up, one geopolitical (Hormuz), one weather-related (a hurricane). A trader separates a lasting shock from a temporary one.",
+    "fr": "Le prix du pétrole réagit d'abord à l'offre : tout ce qui menace la production ou le transport le fait grimper. Ici, deux risques s'additionnent, l'un géopolitique (Ormuz), l'autre météo (ouragan). Un trader distingue un choc durable d'un choc passager."
+   },
+   "date": "2026-10-07",
+   "q": {
+    "en": "What is the difference between Brent and WTI?",
+    "fr": "Quelle est la différence entre le Brent et le WTI ?"
+   },
+   "r": {
+    "en": "They are two benchmark crudes. Brent (North Sea) is the global and European reference; WTI (West Texas Intermediate) is the US reference. Brent is usually a bit more expensive.",
+    "fr": "Ce sont deux pétroles de référence. Le Brent (mer du Nord) sert de prix mondial et européen ; le WTI (West Texas Intermediate) sert de référence aux États-Unis. Le Brent est en général un peu plus cher."
+   },
+   "s": {
+    "en": "Brent climbed back above $101 a barrel and WTI is nearing $90. According to UK officials, at least nine attacks have targeted ships in the Strait of Hormuz since early October, amid the US-Iran conflict. Meanwhile, a tropical storm is threatening the US Gulf Coast, where Chevron is evacuating some staff from its offshore platforms.",
+    "fr": "Le Brent est remonté au-dessus de 101 dollars le baril et le WTI approche 90 dollars. Selon les autorités britanniques, au moins neuf attaques ont visé des navires dans le détroit d'Ormuz depuis le début d'octobre, sur fond de conflit entre les États-Unis et l'Iran. En parallèle, une tempête tropicale menace la côte américaine du golfe, où Chevron évacue une partie du personnel de ses plateformes."
+   },
+   "src": "Yahoo Finance",
+   "t": {
+    "en": "Oil back above $100 on Hormuz attacks and a Gulf storm threat",
+    "fr": "Le pétrole repasse les 100 dollars : attaques à Ormuz et tempête dans le golfe"
+   },
+   "url": "https://finance.yahoo.com/markets/article/oil-prices-climb-above-100-on-strait-of-hormuz-attacks-gulf-storm-threat-122612488.html",
+   "v": [
+    [
+     "le baril",
+     "the barrel"
+    ],
+    [
+     "une perturbation de l'offre",
+     "a supply disruption"
+    ],
+    [
+     "une plateforme pétrolière",
+     "an offshore platform"
+    ],
+    [
+     "un pétrole de référence",
+     "a benchmark crude"
+    ],
+    [
+     "un détroit",
+     "a strait"
+    ]
+   ],
+   "id": "2026-10-07-petrole"
+  },
+  {
+   "d": {
+    "en": "Fed minutes are a key event: they reveal what central bankers are thinking. Markets turn them into a probability of a rate hike, here about 17% for the October meeting. Another signal to watch: three giants (Nvidia, Apple, Microsoft) make up about a fifth of the S&P 500 on their own.",
+    "fr": "Les minutes de la Fed sont un rendez-vous clé : elles révèlent l'état d'esprit des banquiers centraux. Les marchés en déduisent une probabilité de hausse de taux, ici environ 17 % pour la réunion d'octobre. Autre signal à surveiller : trois géants (Nvidia, Apple, Microsoft) pèsent à eux seuls environ un cinquième du S&P 500."
+   },
+   "date": "2026-10-07",
+   "q": {
+    "en": "What does \"a 25 basis point hike\" mean?",
+    "fr": "Que veut dire « une hausse de 25 points de base » ?"
+   },
+   "r": {
+    "en": "One basis point is 0.01 percentage point. 25 basis points = 0.25 point: a 4.50% rate becomes 4.75%.",
+    "fr": "Un point de base vaut 0,01 point de pourcentage. 25 points de base = 0,25 point : un taux de 4,50 % passe à 4,75 %."
+   },
+   "s": {
+    "en": "A day after record highs, the S&P 500 and Nasdaq lost 0.2% and the Dow 0.7%. The US 10-year Treasury yield touched 5.36% during the session, a level not seen since 2002. Minutes from the Fed's September meeting, when it raised rates by 0.25 point, show most officials expect another hike before year-end.",
+    "fr": "Au lendemain de records, le S&P 500 et le Nasdaq ont cédé 0,2 % et le Dow Jones 0,7 %. Le rendement du Trésor américain à 10 ans a touché 5,36 % pendant la séance, un niveau inédit depuis 2002. Le compte rendu de la réunion de septembre de la Fed, qui avait relevé ses taux de 0,25 point, montre que la plupart de ses dirigeants s'attendent à une nouvelle hausse d'ici la fin de l'année."
+   },
+   "src": "Yahoo Finance",
+   "t": {
+    "en": "Wall Street slips from record highs as the US 10-year yield hits a 2002 high",
+    "fr": "Wall Street s'éloigne de ses records, le taux américain à 10 ans au plus haut depuis 2002"
+   },
+   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-october-7-dow-sp-500-nasdaq-080241833.html",
+   "v": [
+    [
+     "le compte rendu",
+     "the minutes"
+    ],
+    [
+     "une hausse des taux",
+     "a rate hike"
+    ],
+    [
+     "un point de base",
+     "a basis point"
+    ],
+    [
+     "un plus haut historique",
+     "an all-time high"
+    ],
+    [
+     "les bons du Trésor",
+     "Treasuries"
+    ]
+   ],
+   "id": "2026-10-07-wallst"
+  },
+  {
+   "d": {
+    "en": "The OAT-Bund spread is the thermometer of confidence in France: the wider it gets, the bigger the premium investors demand to lend to it. Add next year's presidential election and the budget battle: political risk shows up directly in yields.",
+    "fr": "Le spread OAT-Bund est le thermomètre de la confiance envers la France : plus il s'élargit, plus les investisseurs exigent une prime pour lui prêter. Ajoute la présidentielle de l'an prochain et la bataille budgétaire : le risque politique se voit directement dans les taux."
+   },
+   "date": "2026-10-06",
+   "q": {
+    "en": "If France's yields rise, why is it a problem for the government?",
+    "fr": "Si les taux de la France montent, pourquoi est-ce un problème pour l'État ?"
+   },
+   "r": {
+    "en": "Every year the government borrows to repay old debt and fund its deficit. With higher rates, interest costs rise: that money no longer goes to schools, hospitals or tax cuts.",
+    "fr": "Chaque année, l'État emprunte pour rembourser d'anciennes dettes et financer son déficit. À taux plus élevé, la charge des intérêts augmente : c'est de l'argent qui ne va plus aux écoles, aux hôpitaux ou aux baisses d'impôts."
+   },
+   "s": {
+    "en": "France's 10-year OAT yield neared 5% and the gap with Germany widened. In an interview with the Financial Times, Bank of France governor Emmanuel Moulin called the situation serious: without fixing public finances, rising rates could gradually choke the country. He rejected any comparison with Greece but called for a 2027 budget that cuts spending and the deficit. Since the Iran conflict began, France has seen the biggest rise in yields in the G7.",
+    "fr": "Le rendement de l'OAT à 10 ans s'est approché de 5 % et l'écart avec l'Allemagne s'est creusé. Dans un entretien au Financial Times, le gouverneur de la Banque de France, Emmanuel Moulin, juge la situation sérieuse : sans redressement des finances publiques, la hausse des taux pourrait peu à peu étouffer le pays. Il écarte toute comparaison avec la Grèce mais réclame un budget 2027 qui réduise dépenses et déficit. Depuis le début du conflit en Iran, la France est le pays du G7 dont les taux ont le plus monté."
+   },
+   "src": "Club Patrimoine, d'après le Financial Times",
+   "t": {
+    "en": "French debt: the Bank of France worries about soaring yields",
+    "fr": "Dette française : la Banque de France s'inquiète de la flambée des taux"
+   },
+   "url": "https://www.clubpatrimoine.com/contenus/oat-france",
+   "v": [
+    [
+     "la dette souveraine",
+     "sovereign debt"
+    ],
+    [
+     "l'écart de taux",
+     "the spread"
+    ],
+    [
+     "la prime de risque",
+     "the risk premium"
+    ],
+    [
+     "les finances publiques",
+     "public finances"
+    ],
+    [
+     "le déficit",
+     "the deficit"
+    ]
+   ],
+   "id": "2026-10-06-dette"
+  },
+  {
+   "d": {
+    "en": "Inflation is the number the ECB watches before every decision. Accelerating inflation makes another rate hike more likely, which weighs on stocks and lifts the euro. Traders always compare the published figure with what the market expected.",
+    "fr": "L'inflation est le chiffre que la BCE surveille avant chaque décision. Une inflation qui accélère rend plus probable une nouvelle hausse des taux, ce qui pèse sur les actions et fait monter l'euro. Les traders comparent toujours le chiffre publié à ce que le marché attendait."
+   },
+   "date": "2026-10-03",
+   "q": {
+    "en": "Trick question: year-on-year inflation went from 2.4% to 3.0%, but prices fell 0.3% month-on-month. How is that possible?",
+    "fr": "Piège : l'inflation sur un an est passée de 2,4 % à 3,0 %, mais les prix ont baissé de 0,3 % sur un mois. Comment est-ce possible ?"
+   },
+   "r": {
+    "en": "The two figures don't compare the same things. Year-on-year compares September 2026 with September 2025; month-on-month compares September with August. Prices can dip slightly in one month while staying much higher than a year earlier.",
+    "fr": "Les deux chiffres ne comparent pas la même chose. Sur un an, on compare septembre 2026 à septembre 2025 ; sur un mois, septembre à août. Les prix peuvent reculer un peu en un mois tout en restant bien plus hauts qu'un an plus tôt."
+   },
+   "s": {
+    "en": "According to Insee's flash estimate released on 30 September, prices rose 3.0% year-on-year in September, up from 2.4% in August. Energy jumped 21.2% over a year because of disruption in the Strait of Hormuz, and fresh food rose 9.9%. Across the euro area, inflation reached 3.4%.",
+    "fr": "Selon l'estimation provisoire de l'Insee publiée le 30 septembre, les prix ont augmenté de 3,0 % sur un an en septembre, contre 2,4 % en août. L'énergie bondit de 21,2 % sur un an à cause des perturbations dans le détroit d'Ormuz, et les produits frais de 9,9 %. Dans toute la zone euro, l'inflation atteint 3,4 %."
+   },
+   "src": "BDOR, d'après l'Insee",
+   "t": {
+    "en": "French inflation climbs to 3%, its highest since early 2024",
+    "fr": "L'inflation grimpe à 3 % en France, au plus haut depuis début 2024"
+   },
+   "url": "https://www.bdor.fr/actualites-or/inflation-3-pourcent-france-or-resiste-cac40",
+   "v": [
+    [
+     "les prix à la consommation",
+     "consumer prices"
+    ],
+    [
+     "sur un an",
+     "year-on-year"
+    ],
+    [
+     "une estimation provisoire",
+     "a flash estimate"
+    ],
+    [
+     "les produits frais",
+     "fresh food"
+    ],
+    [
+     "la zone euro",
+     "the euro area"
+    ]
+   ],
+   "id": "2026-09-30-inflation"
+  },
+  {
+   "d": {
+    "en": "A central bank that raises rates makes credit more expensive to slow prices down. Markets mostly watch the tone: a hawkish ECB (ready to hike again) supports the euro, a dovish ECB weakens it. Sources were already mentioning a possible new hike in October.",
+    "fr": "Une banque centrale qui monte ses taux renchérit le crédit pour freiner les prix. Les marchés regardent surtout le ton : une BCE « faucon » (prête à monter encore) soutient l'euro, une BCE « colombe » le fait baisser. Des sources évoquaient déjà une nouvelle hausse possible en octobre."
+   },
+   "date": "2026-09-10",
+   "q": {
+    "en": "Why does the ECB raise rates even though growth is weak?",
+    "fr": "Pourquoi la BCE monte-t-elle ses taux alors que la croissance est faible ?"
+   },
+   "r": {
+    "en": "Its main mandate is price stability (2% inflation). With inflation at 3.3%, it acts despite the risk of slowing growth further: that is the classic oil-shock dilemma.",
+    "fr": "Son mandat prioritaire est la stabilité des prix (2 % d'inflation). Avec une inflation à 3,3 %, elle agit malgré le risque de freiner encore la croissance : c'est le dilemme classique d'un choc pétrolier."
+   },
+   "s": {
+    "en": "On 10 September, the European Central Bank raised its three key interest rates by 25 basis points. It said the Middle East conflict keeps pushing energy prices up: euro area inflation reached 3.3% in August. Its projections see inflation at 3.0% in 2026 and 2.5% in 2027, with weak growth of 0.9% this year.",
+    "fr": "Le 10 septembre, la Banque centrale européenne a relevé ses trois taux directeurs de 25 points de base. Elle explique que le conflit au Moyen-Orient continue de faire monter les prix de l'énergie : l'inflation de la zone euro a atteint 3,3 % en août. Ses prévisions tablent sur 3,0 % d'inflation en 2026 puis 2,5 % en 2027, avec une croissance faible de 0,9 % cette année."
+   },
+   "src": "Banque centrale européenne",
+   "t": {
+    "en": "ECB raises rates by 0.25 point as energy prices bite",
+    "fr": "La BCE relève ses taux de 0,25 point face à l'énergie chère"
+   },
+   "url": "https://www.ecb.europa.eu/press/press_conference/monetary-policy-statement/2026/html/ecb.is260910~6a45359cfc.fr.html",
+   "v": [
+    [
+     "les taux directeurs",
+     "key interest rates"
+    ],
+    [
+     "faucon / colombe",
+     "hawkish / dovish"
+    ],
+    [
+     "les projections",
+     "the projections"
+    ],
+    [
+     "resserrer la politique monétaire",
+     "to tighten monetary policy"
+    ],
+    [
+     "la croissance",
+     "growth"
+    ]
+   ],
+   "id": "2026-09-10-bce"
+  }
+ ],
+ "actu": {
+  "a": 1,
+  "choices": [
+   "Les groupes pétroliers",
+   "Les compagnies aériennes",
+   "Les mines d'or",
+   "Les éditeurs de logiciels"
+  ],
+  "date": "2026-10-08",
+  "expl": "Le kérosène est l'un des plus gros coûts des compagnies aériennes : un pétrole cher réduit leurs marges. Les groupes pétroliers, eux, en profitent car ils vendent leur production plus cher.",
+  "q": "Le Brent est repassé au-dessus de 100 dollars le baril à cause des attaques dans le détroit d'Ormuz. Quel secteur en souffre le plus, en général ?",
+  "src": "Yahoo Finance",
+  "url": "https://finance.yahoo.com/markets/article/oil-prices-climb-above-100-on-strait-of-hormuz-attacks-gulf-storm-threat-122612488.html"
+ }
+}
