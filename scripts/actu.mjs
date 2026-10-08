@@ -18,8 +18,9 @@ const FEEDS = [
   ["BBC", "https://feeds.bbci.co.uk/news/business/rss.xml"],
 ];
 const MARKETS = [
-  ["CAC 40", "^FCHI", "idx"], ["S&P 500", "^GSPC", "idx"], ["Nasdaq", "^IXIC", "idx"], ["Brent", "BZ=F", "usd1"],
-  ["OAT 10 ans", null, "rate"], ["US 10 ans", "^TNX", "rate"], ["EUR/USD", "EURUSD=X", "fx"], ["Or (once)", "GC=F", "usd0"],
+  ["CAC 40", "^FCHI", "idx"], ["S&P 500", "^GSPC", "idx"], ["Nasdaq", "^IXIC", "idx"], ["VIX (peur)", "^VIX", "pts"],
+  ["Brent", "BZ=F", "usd1"], ["Pétrole WTI", "CL=F", "usd1"], ["Or (once)", "GC=F", "usd0"], ["Bitcoin", "BTC-USD", "usd0"],
+  ["US 10 ans", "^TNX", "rate"], ["EUR/USD", "EURUSD=X", "fx"],
 ];
 const today = new Date().toISOString().slice(0, 10);
 const nf = (x, d) => Number(x).toLocaleString("fr-FR", { minimumFractionDigits: d, maximumFractionDigits: d }).replace(/ /g, " ");
@@ -58,34 +59,18 @@ async function quote(sym) {
   const [last, t] = pts[pts.length - 1], prev = pts.length > 1 ? pts[pts.length - 2][0] : null;
   return { last, prev, date: new Date(t * 1000).toISOString().slice(0, 10) };
 }
-// Taux OAT 10 ans : cours du jour (stooq) si possible, sinon moyenne du dernier mois publiée par la BCE.
-const MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
-async function oat() {
-  for (const s of ["10FRY.B", "10fry.b"]) {
-    try {
-      const csv = await get(`https://stooq.com/q/l/?s=${s}&f=sd2t2c&h&e=csv`);
-      const v = parseFloat(csv.trim().split("\n")[1].split(",").pop());
-      if (v > 0 && v < 20) return { last: v, prev: null, date: today };
-    } catch (e) { console.log("OAT stooq indisponible :", s, e.message); }
-  }
-  const csv = await get("https://data-api.ecb.europa.eu/service/data/IRS/M.FR.L.L40.CI.0000.EUR.N.Z?lastNObservations=1&format=csvdata");
-  const [head, row] = csv.trim().split("\n"), h = head.split(","), r = row.split(",");
-  const v = parseFloat(r[h.indexOf("OBS_VALUE")]), per = r[h.indexOf("TIME_PERIOD")] || "";
-  if (!(v > 0 && v < 20)) throw new Error("valeur OAT invalide");
-  return { last: v, prev: null, date: today, label: "OAT 10 ans (moy. " + (MOIS[+per.slice(5, 7) - 1] || "mois") + ")" };
-}
 async function markets(old) {
   const prevItems = (old && old.items) || [];
   const items = []; let date = (old && old.date) || today;
   for (const [n, sym, kind] of MARKETS) {
-    const keep = prevItems.find(x => x.n === n || x.n.startsWith(n + " (")) || { n, v: "—", c: "" };
+    const keep = prevItems.find(x => x.n === n) || { n, v: "—", c: "" };
     try {
-      const q = sym ? await quote(sym) : await oat();
+      const q = await quote(sym);
       let v = q.last, p = q.prev;
       if (kind === "rate" && v > 20) { v /= 10; if (p) p /= 10; }
-      const val = kind === "idx" ? nf(v, 0) : kind === "usd1" ? nf(v, 1) + " $" : kind === "usd0" ? nf(v, 0) + " $" : kind === "fx" ? nf(v, 3) : nf(v, 2) + " %";
+      const val = kind === "idx" ? nf(v, 0) : kind === "usd1" ? nf(v, 1) + " $" : kind === "usd0" ? nf(v, 0) + " $" : kind === "fx" ? nf(v, 3) : kind === "pts" ? nf(v, 2) : nf(v, 2) + " %";
       const c = kind === "rate" ? (p ? (v - p >= 0 ? "+" : "−") + nf(Math.abs(v - p), 2) + " pt" : "") : p ? spct((v / p - 1) * 100) : "";
-      items.push({ n: q.label || n, v: val, c }); if (sym === "^FCHI") date = q.date;
+      items.push({ n, v: val, c }); if (sym === "^FCHI") date = q.date;
     } catch (e) { console.log("cours indisponible :", n, e.message); items.push(keep); }
   }
   return { date, items };
