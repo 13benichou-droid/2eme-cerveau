@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-08T20:06:55.101Z",
+ "updated": "2026-10-08T20:17:29.874Z",
  "snap": {
   "date": "2026-10-08",
   "items": [
@@ -19,14 +19,29 @@
     "c": "−1,25 %"
    },
    {
-    "n": "Brent",
-    "v": "103,9 $",
-    "c": "+3,69 %"
+    "n": "VIX (peur)",
+    "v": "15,46",
+    "c": "+2,52 %"
    },
    {
-    "n": "OAT 10 ans (moy. août)",
-    "v": "4,00 %",
-    "c": ""
+    "n": "Brent",
+    "v": "103,5 $",
+    "c": "+3,29 %"
+   },
+   {
+    "n": "Pétrole WTI",
+    "v": "90,8 $",
+    "c": "+2,84 %"
+   },
+   {
+    "n": "Or (once)",
+    "v": "4 159 $",
+    "c": "+0,45 %"
+   },
+   {
+    "n": "Bitcoin",
+    "v": "81 795 $",
+    "c": "−1,78 %"
    },
    {
     "n": "US 10 ans",
@@ -36,16 +51,55 @@
    {
     "n": "EUR/USD",
     "v": "1,122",
-    "c": "+0,15 %"
-   },
-   {
-    "n": "Or (once)",
-    "v": "4 156 $",
-    "c": "+0,38 %"
+    "c": "+0,16 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-08-intelligence-artificielle-mistral-defie-",
+   "src": "Le Figaro",
+   "date": "2026-10-08",
+   "url": "https://www.lefigaro.fr/secteur/high-tech/intelligence-artificielle-mistral-est-a-quelques-mois-de-rattraper-ses-concurrents-americains-assure-arthur-mensch-20261008",
+   "t": {
+    "fr": "Intelligence Artificielle : Mistral défie les géants américains",
+    "en": "Artificial Intelligence: Mistral Challenges US Giants"
+   },
+   "s": {
+    "fr": "Le champion français de l'intelligence artificielle, Mistral, affirme être sur le point de rattraper ses concurrents d'outre-Atlantique. Selon son dirigeant Arthur Mensch, le lancement récent du modèle Large 4 marque une avancée technologique majeure pour l'entreprise.",
+    "en": "The French artificial intelligence champion, Mistral, claims to be on the verge of catching up with its American competitors. According to its leader Arthur Mensch, the recent launch of the Large 4 model marks a major technological breakthrough for the company."
+   },
+   "d": {
+    "fr": "Dans le secteur de la tech, la vitesse d'innovation détermine souvent la valorisation d'une entreprise et l'intérêt des capital-risqueurs. Être capable de rivaliser avec les leaders du marché mondial peut attirer des flux massifs de capitaux vers une jeune pousse.",
+    "en": "In the tech sector, the speed of innovation often determines a company's valuation and venture capitalists' interest. Being able to compete with global market leaders can attract massive capital flows to a startup."
+   },
+   "v": [
+    [
+     "valorisation",
+     "valuation"
+    ],
+    [
+     "capital-risque",
+     "venture capital"
+    ],
+    [
+     "avantage technologique",
+     "technological edge"
+    ],
+    [
+     "part de marché",
+     "market share"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les investisseurs acceptent-ils de financer des entreprises technologiques qui ne sont pas encore rentables ?",
+    "en": "Why do investors agree to finance tech companies that are not yet profitable?"
+   },
+   "r": {
+    "fr": "Ils parient sur la croissance future et la capacité de l'entreprise à dominer un marché en forte expansion. Si la technologie s'impose, les bénéfices à long terme compenseront largement les pertes initiales.",
+    "en": "They bet on future growth and the company's ability to dominate a rapidly expanding market. If the technology succeeds, long-term profits will easily offset initial losses."
+   }
+  },
   {
    "id": "2026-10-08-carburants-le-gouvernement-reunit-les-di",
    "src": "Le Monde",
@@ -579,54 +633,6 @@
     ]
    ],
    "id": "2026-10-06-dette"
-  },
-  {
-   "d": {
-    "en": "Inflation is the number the ECB watches before every decision. Accelerating inflation makes another rate hike more likely, which weighs on stocks and lifts the euro. Traders always compare the published figure with what the market expected.",
-    "fr": "L'inflation est le chiffre que la BCE surveille avant chaque décision. Une inflation qui accélère rend plus probable une nouvelle hausse des taux, ce qui pèse sur les actions et fait monter l'euro. Les traders comparent toujours le chiffre publié à ce que le marché attendait."
-   },
-   "date": "2026-10-03",
-   "q": {
-    "en": "Trick question: year-on-year inflation went from 2.4% to 3.0%, but prices fell 0.3% month-on-month. How is that possible?",
-    "fr": "Piège : l'inflation sur un an est passée de 2,4 % à 3,0 %, mais les prix ont baissé de 0,3 % sur un mois. Comment est-ce possible ?"
-   },
-   "r": {
-    "en": "The two figures don't compare the same things. Year-on-year compares September 2026 with September 2025; month-on-month compares September with August. Prices can dip slightly in one month while staying much higher than a year earlier.",
-    "fr": "Les deux chiffres ne comparent pas la même chose. Sur un an, on compare septembre 2026 à septembre 2025 ; sur un mois, septembre à août. Les prix peuvent reculer un peu en un mois tout en restant bien plus hauts qu'un an plus tôt."
-   },
-   "s": {
-    "en": "According to Insee's flash estimate released on 30 September, prices rose 3.0% year-on-year in September, up from 2.4% in August. Energy jumped 21.2% over a year because of disruption in the Strait of Hormuz, and fresh food rose 9.9%. Across the euro area, inflation reached 3.4%.",
-    "fr": "Selon l'estimation provisoire de l'Insee publiée le 30 septembre, les prix ont augmenté de 3,0 % sur un an en septembre, contre 2,4 % en août. L'énergie bondit de 21,2 % sur un an à cause des perturbations dans le détroit d'Ormuz, et les produits frais de 9,9 %. Dans toute la zone euro, l'inflation atteint 3,4 %."
-   },
-   "src": "BDOR, d'après l'Insee",
-   "t": {
-    "en": "French inflation climbs to 3%, its highest since early 2024",
-    "fr": "L'inflation grimpe à 3 % en France, au plus haut depuis début 2024"
-   },
-   "url": "https://www.bdor.fr/actualites-or/inflation-3-pourcent-france-or-resiste-cac40",
-   "v": [
-    [
-     "les prix à la consommation",
-     "consumer prices"
-    ],
-    [
-     "sur un an",
-     "year-on-year"
-    ],
-    [
-     "une estimation provisoire",
-     "a flash estimate"
-    ],
-    [
-     "les produits frais",
-     "fresh food"
-    ],
-    [
-     "la zone euro",
-     "the euro area"
-    ]
-   ],
-   "id": "2026-09-30-inflation"
   }
  ],
  "actu": {
