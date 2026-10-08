@@ -1,0 +1,26 @@
+name: Actu du jour
+on:
+  schedule:
+    - cron: "40 5 * * 1-5"   # 7 h 40 à Paris (heure d'été), du lundi au vendredi
+  workflow_dispatch:          # bouton « Run workflow » pour lancer à la main
+permissions:
+  contents: write
+jobs:
+  actu:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Mettre à jour l'actu
+        run: node scripts/actu.mjs
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+      - name: Enregistrer
+        run: |
+          git config user.name "actu-bot"
+          git config user.email "actu-bot@users.noreply.github.com"
+          git add data/news.json
+          git diff --cached --quiet || (git commit -m "Actu du $(date +%F)" && git push)
