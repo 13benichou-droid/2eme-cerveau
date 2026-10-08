@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-08T19:59:04.278Z",
+ "updated": "2026-10-08T20:06:55.101Z",
  "snap": {
   "date": "2026-10-08",
   "items": [
@@ -10,18 +10,18 @@
    },
    {
     "n": "S&P 500",
-    "v": "7 767",
-    "c": "−0,45 %"
+    "v": "7 765",
+    "c": "−0,47 %"
    },
    {
     "n": "Nasdaq",
-    "v": "27 202",
-    "c": "−1,22 %"
+    "v": "27 193",
+    "c": "−1,25 %"
    },
    {
     "n": "Brent",
-    "v": "104,0 $",
-    "c": "+3,81 %"
+    "v": "103,9 $",
+    "c": "+3,69 %"
    },
    {
     "n": "OAT 10 ans (moy. août)",
@@ -36,16 +36,46 @@
    {
     "n": "EUR/USD",
     "v": "1,122",
-    "c": "−0,34 %"
+    "c": "+0,15 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 154 $",
-    "c": "+0,32 %"
+    "v": "4 156 $",
+    "c": "+0,38 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-08-carburants-le-gouvernement-reunit-les-di",
+   "src": "Le Monde",
+   "date": "2026-10-08",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/08/carburants-le-gouvernement-reunit-les-distributeurs-lundi-et-espere-une-baisse-des-prix-debut-novembre_6790284_3234.html",
+   "t": {
+    "fr": "Carburants : le gouvernement réunit les distributeurs lundi et espère une baisse des prix « début novembre »",
+    "en": "Carburants : le gouvernement réunit les distributeurs lundi et espère une baisse des prix « début novembre »"
+   }
+  },
+  {
+   "id": "2026-10-08-pour-son-avion-de-combat-du-futur-le-roy",
+   "src": "Le Monde",
+   "date": "2026-10-08",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/08/pour-son-avion-de-combat-du-futur-le-royaume-uni-fait-un-appel-du-pied-a-l-allemagne_6790280_3234.html",
+   "t": {
+    "fr": "Pour son avion de combat du futur, le Royaume-Uni fait un appel du pied à l’Allemagne",
+    "en": "Pour son avion de combat du futur, le Royaume-Uni fait un appel du pied à l’Allemagne"
+   }
+  },
+  {
+   "id": "2026-10-08-dans-les-journaux-du-groupe-ebra-l-ia-au",
+   "src": "Le Monde",
+   "date": "2026-10-08",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/08/dans-les-journaux-du-groupe-ebra-l-ia-au-c-ur-d-un-appel-a-la-greve_6790262_3234.html",
+   "t": {
+    "fr": "Dans les journaux du Groupe EBRA, l’IA au cœur d’un appel à la grève",
+    "en": "Dans les journaux du Groupe EBRA, l’IA au cœur d’un appel à la grève"
+   }
+  },
   {
    "id": "2026-10-08-l-etat-puise-dans-ses-reserves-de-gazole",
    "src": "Le Monde",
@@ -597,54 +627,6 @@
     ]
    ],
    "id": "2026-09-30-inflation"
-  },
-  {
-   "d": {
-    "en": "A central bank that raises rates makes credit more expensive to slow prices down. Markets mostly watch the tone: a hawkish ECB (ready to hike again) supports the euro, a dovish ECB weakens it. Sources were already mentioning a possible new hike in October.",
-    "fr": "Une banque centrale qui monte ses taux renchérit le crédit pour freiner les prix. Les marchés regardent surtout le ton : une BCE « faucon » (prête à monter encore) soutient l'euro, une BCE « colombe » le fait baisser. Des sources évoquaient déjà une nouvelle hausse possible en octobre."
-   },
-   "date": "2026-09-10",
-   "q": {
-    "en": "Why does the ECB raise rates even though growth is weak?",
-    "fr": "Pourquoi la BCE monte-t-elle ses taux alors que la croissance est faible ?"
-   },
-   "r": {
-    "en": "Its main mandate is price stability (2% inflation). With inflation at 3.3%, it acts despite the risk of slowing growth further: that is the classic oil-shock dilemma.",
-    "fr": "Son mandat prioritaire est la stabilité des prix (2 % d'inflation). Avec une inflation à 3,3 %, elle agit malgré le risque de freiner encore la croissance : c'est le dilemme classique d'un choc pétrolier."
-   },
-   "s": {
-    "en": "On 10 September, the European Central Bank raised its three key interest rates by 25 basis points. It said the Middle East conflict keeps pushing energy prices up: euro area inflation reached 3.3% in August. Its projections see inflation at 3.0% in 2026 and 2.5% in 2027, with weak growth of 0.9% this year.",
-    "fr": "Le 10 septembre, la Banque centrale européenne a relevé ses trois taux directeurs de 25 points de base. Elle explique que le conflit au Moyen-Orient continue de faire monter les prix de l'énergie : l'inflation de la zone euro a atteint 3,3 % en août. Ses prévisions tablent sur 3,0 % d'inflation en 2026 puis 2,5 % en 2027, avec une croissance faible de 0,9 % cette année."
-   },
-   "src": "Banque centrale européenne",
-   "t": {
-    "en": "ECB raises rates by 0.25 point as energy prices bite",
-    "fr": "La BCE relève ses taux de 0,25 point face à l'énergie chère"
-   },
-   "url": "https://www.ecb.europa.eu/press/press_conference/monetary-policy-statement/2026/html/ecb.is260910~6a45359cfc.fr.html",
-   "v": [
-    [
-     "les taux directeurs",
-     "key interest rates"
-    ],
-    [
-     "faucon / colombe",
-     "hawkish / dovish"
-    ],
-    [
-     "les projections",
-     "the projections"
-    ],
-    [
-     "resserrer la politique monétaire",
-     "to tighten monetary policy"
-    ],
-    [
-     "la croissance",
-     "growth"
-    ]
-   ],
-   "id": "2026-09-10-bce"
   }
  ],
  "actu": {
