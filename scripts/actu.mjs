@@ -7,11 +7,14 @@ import { readFile, writeFile } from "node:fs/promises";
 const FILE = "data/news.json";
 const UA = { "User-Agent": "Mozilla/5.0 (2eme-cerveau; +https://github.com)" };
 const FEEDS = [
+  // Une source qui ne répond pas est simplement ignorée ce jour-là.
   ["Le Monde", "https://www.lemonde.fr/economie/rss_full.xml"],
-  ["Les Échos", "https://services.lesechos.fr/rss/les-echos-finance-marches.xml"],
+  ["Le Figaro", "https://www.lefigaro.fr/rss/figaro_economie.xml"],
+  ["franceinfo", "https://www.francetvinfo.fr/economie.rss"],
   ["Financial Times", "https://www.ft.com/markets?format=rss"],
   ["CNBC", "https://www.cnbc.com/id/20910258/device/rss/rss.html"],
-  ["Yahoo Finance", "https://finance.yahoo.com/news/rssindex"],
+  ["Yahoo Finance", "https://feeds.finance.yahoo.com/rss/2.0/headline?s=%5EGSPC,%5EFCHI&region=US&lang=en-US"],
+  ["The Guardian", "https://www.theguardian.com/uk/business/rss"],
   ["BBC", "https://feeds.bbci.co.uk/news/business/rss.xml"],
 ];
 const MARKETS = [
@@ -55,24 +58,34 @@ async function quote(sym) {
   const [last, t] = pts[pts.length - 1], prev = pts.length > 1 ? pts[pts.length - 2][0] : null;
   return { last, prev, date: new Date(t * 1000).toISOString().slice(0, 10) };
 }
+// Taux OAT 10 ans : cours du jour (stooq) si possible, sinon moyenne du dernier mois publiée par la BCE.
+const MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
 async function oat() {
-  const csv = await get("https://stooq.com/q/l/?s=10fry.b&f=sd2t2c&h&e=csv");
-  const v = parseFloat(csv.trim().split("\n")[1].split(",").pop());
+  for (const s of ["10FRY.B", "10fry.b"]) {
+    try {
+      const csv = await get(`https://stooq.com/q/l/?s=${s}&f=sd2t2c&h&e=csv`);
+      const v = parseFloat(csv.trim().split("\n")[1].split(",").pop());
+      if (v > 0 && v < 20) return { last: v, prev: null, date: today };
+    } catch (e) { console.log("OAT stooq indisponible :", s, e.message); }
+  }
+  const csv = await get("https://data-api.ecb.europa.eu/service/data/IRS/M.FR.L.L40.CI.0000.EUR.N.Z?lastNObservations=1&format=csvdata");
+  const [head, row] = csv.trim().split("\n"), h = head.split(","), r = row.split(",");
+  const v = parseFloat(r[h.indexOf("OBS_VALUE")]), per = r[h.indexOf("TIME_PERIOD")] || "";
   if (!(v > 0 && v < 20)) throw new Error("valeur OAT invalide");
-  return { last: v, prev: null, date: today };
+  return { last: v, prev: null, date: today, label: "OAT 10 ans (moy. " + (MOIS[+per.slice(5, 7) - 1] || "mois") + ")" };
 }
 async function markets(old) {
   const prevItems = (old && old.items) || [];
   const items = []; let date = (old && old.date) || today;
   for (const [n, sym, kind] of MARKETS) {
-    const keep = prevItems.find(x => x.n === n) || { n, v: "—", c: "" };
+    const keep = prevItems.find(x => x.n === n || x.n.startsWith(n + " (")) || { n, v: "—", c: "" };
     try {
       const q = sym ? await quote(sym) : await oat();
       let v = q.last, p = q.prev;
       if (kind === "rate" && v > 20) { v /= 10; if (p) p /= 10; }
       const val = kind === "idx" ? nf(v, 0) : kind === "usd1" ? nf(v, 1) + " $" : kind === "usd0" ? nf(v, 0) + " $" : kind === "fx" ? nf(v, 3) : nf(v, 2) + " %";
       const c = kind === "rate" ? (p ? (v - p >= 0 ? "+" : "−") + nf(Math.abs(v - p), 2) + " pt" : "") : p ? spct((v / p - 1) * 100) : "";
-      items.push({ n, v: val, c }); if (sym === "^FCHI") date = q.date;
+      items.push({ n: q.label || n, v: val, c }); if (sym === "^FCHI") date = q.date;
     } catch (e) { console.log("cours indisponible :", n, e.message); items.push(keep); }
   }
   return { date, items };
@@ -80,7 +93,7 @@ async function markets(old) {
 
 async function gemini(cands) {
   const key = process.env.GEMINI_API_KEY; if (!key || !cands.length) return null;
-  const model = process.env.GEMINI_MODEL || "gemini-3.8-flash";
+  const model = process.env.GEMINI_MODEL || "gemini-3.5-flash";
   const list = cands.map((c, i) => `[${i}] ${c.src} (${c.date}) : ${c.title}${c.desc ? " — " + c.desc : ""}`).join("\n");
   const prompt = `Tu prépares la rubrique Finance d'une appli pour un lycéen qui apprend le trading. Voici des titres de presse économique des derniers jours :
 ${list}
