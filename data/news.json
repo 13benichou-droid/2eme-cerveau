@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-08T19:29:31.977Z",
+ "updated": "2026-10-08T19:59:04.278Z",
  "snap": {
   "date": "2026-10-08",
   "items": [
@@ -10,23 +10,23 @@
    },
    {
     "n": "S&P 500",
-    "v": "7 760",
-    "c": "−0,54 %"
+    "v": "7 767",
+    "c": "−0,45 %"
    },
    {
     "n": "Nasdaq",
-    "v": "27 174",
-    "c": "−1,32 %"
+    "v": "27 202",
+    "c": "−1,22 %"
    },
    {
     "n": "Brent",
-    "v": "104,2 $",
-    "c": "+4,02 %"
+    "v": "104,0 $",
+    "c": "+3,81 %"
    },
    {
-    "c": "",
-    "n": "OAT 10 ans",
-    "v": "4,87 %"
+    "n": "OAT 10 ans (moy. août)",
+    "v": "4,00 %",
+    "c": ""
    },
    {
     "n": "US 10 ans",
@@ -35,17 +35,149 @@
    },
    {
     "n": "EUR/USD",
-    "v": "1,121",
-    "c": "−0,36 %"
+    "v": "1,122",
+    "c": "−0,34 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 153 $",
-    "c": "+0,29 %"
+    "v": "4 154 $",
+    "c": "+0,32 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-08-l-etat-puise-dans-ses-reserves-de-gazole",
+   "src": "Le Monde",
+   "date": "2026-10-08",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/08/faire-baisser-les-prix-du-gazole-en-mobilisant-les-stocks-strategiques-une-demarche-inedite-qui-pose-de-nombreuses-questions_6790220_3234.html",
+   "t": {
+    "fr": "L'État puise dans ses réserves de gazole pour faire baisser les prix",
+    "en": "State taps strategic diesel reserves to lower prices"
+   },
+   "s": {
+    "fr": "Pour faire face à la hausse des prix à la pompe, le gouvernement français va utiliser ses stocks de carburant stratégiques. Cette mesure exceptionnelle devrait permettre de réduire le prix du gazole de 12 à 18 centimes par litre. Ces réserves sont normalement gardées pour éviter les pénuries d'approvisionnement.",
+    "en": "To combat rising fuel prices, the French government will tap into its strategic fuel reserves. This exceptional measure is expected to lower diesel prices by 12 to 18 cents per liter. These reserves are normally kept to prevent supply shortages."
+   },
+   "d": {
+    "fr": "En trading, cette intervention illustre comment l'augmentation artificielle de l'offre fait baisser le prix d'une matière première. Les traders doivent surveiller ces décisions politiques car elles modifient temporairement les lois naturelles du marché.",
+    "en": "In trading, this intervention illustrates how artificially increasing supply drives down the price of a commodity. Traders must monitor such political decisions as they temporarily alter natural market forces."
+   },
+   "v": [
+    [
+     "stocks stratégiques",
+     "strategic reserves"
+    ],
+    [
+     "matière première",
+     "commodity"
+    ],
+    [
+     "offre et demande",
+     "supply and demand"
+    ],
+    [
+     "approvisionnement",
+     "supply"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi l'utilisation des stocks stratégiques n'est-elle pas une solution durable pour faire baisser les prix ?",
+    "en": "Why is using strategic reserves not a sustainable solution for lowering prices?"
+   },
+   "r": {
+    "fr": "Ces réserves sont limitées et leur épuisement laisserait le pays vulnérable en cas de véritable crise d'approvisionnement géopolitique.",
+    "en": "These reserves are limited, and depleting them would leave the country vulnerable in the event of a real geopolitical supply crisis."
+   }
+  },
+  {
+   "id": "2026-10-08-la-big-tech-emprunte-massivement-pour-fi",
+   "src": "Le Figaro",
+   "date": "2026-10-08",
+   "url": "https://www.lefigaro.fr/economie/500-milliards-de-dollars-en-neuf-mois-les-emprunts-colossaux-de-la-big-tech-tech-mettent-sous-pression-le-marche-de-la-dette-20261008",
+   "t": {
+    "fr": "La Big Tech emprunte massivement pour financer l'intelligence artificielle",
+    "en": "Big Tech borrows heavily to finance artificial intelligence"
+   },
+   "s": {
+    "fr": "Les géants de la technologie ont emprunté 500 milliards de dollars en seulement neuf mois. Ces fonds colossaux sont destinés à financer leurs investissements massifs dans l'intelligence artificielle. Cette frénésie d'emprunts commence à bousculer le marché des obligations d'État américaines.",
+    "en": "Tech giants have borrowed 500 billion dollars in just nine months. These colossal funds are intended to finance their massive investments in artificial intelligence. This borrowing frenzy is starting to disrupt the US government bond market."
+   },
+   "d": {
+    "fr": "Quand des entreprises privées émettent autant de dettes, elles entrent en concurrence directe avec les États qui cherchent aussi à se financer. Pour les traders, cela peut faire grimper les taux d'intérêt globaux et modifier le rendement des obligations.",
+    "en": "When private companies issue so much debt, they compete directly with governments also seeking funding. For traders, this can push up global interest rates and alter bond yields."
+   },
+   "v": [
+    [
+     "marché de la dette",
+     "debt market"
+    ],
+    [
+     "emprunt",
+     "borrowing"
+    ],
+    [
+     "bons du trésor",
+     "treasury bonds"
+    ],
+    [
+     "rendement",
+     "yield"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est le risque pour une entreprise technologique d'accumuler trop de dettes pour l'IA ?",
+    "en": "What is the risk for a tech company of accumulating too much debt for AI?"
+   },
+   "r": {
+    "fr": "Si les investissements dans l'IA ne génèrent pas rapidement les profits espérés, l'entreprise aura des difficultés à rembourser ses créanciers.",
+    "en": "If AI investments do not quickly generate the expected profits, the company will struggle to repay its creditors."
+   }
+  },
+  {
+   "id": "2026-10-08-paul-krugman-s-inquiete-de-la-trajectoir",
+   "src": "Le Figaro",
+   "date": "2026-10-08",
+   "url": "https://www.lefigaro.fr/conjoncture/une-trajectoire-budgetaire-insoutenable-l-alerte-de-paul-krugman-ancien-prix-nobel-d-economie-sur-la-dette-de-la-france-20261008",
+   "t": {
+    "fr": "Paul Krugman s'inquiète de la trajectoire de la dette française",
+    "en": "Paul Krugman worries about France's debt trajectory"
+   },
+   "s": {
+    "fr": "L'économiste et prix Nobel Paul Krugman qualifie la France d'homme malade du monde occidental en raison de sa dette. Selon lui, la trajectoire budgétaire du pays est devenue intenable à long terme. Il pointe particulièrement du doigt le coût élevé et le fonctionnement du système de retraite français.",
+    "en": "Economist and Nobel laureate Paul Krugman calls France the sick man of the Western world due to its debt. According to him, the country's fiscal trajectory has become unsustainable in the long run. He particularly points to the high cost and structure of the French pension system."
+   },
+   "d": {
+    "fr": "La notation de la dette d'un pays influence directement la confiance des investisseurs internationaux. Si la dette est jugée insoutenable, les taux d'intérêt pour emprunter vont augmenter, ce qui pèse sur l'économie nationale et la monnaie.",
+    "en": "A country's debt rating directly influences international investor confidence. If debt is deemed unsustainable, borrowing interest rates will rise, weighing on the national economy and currency."
+   },
+   "v": [
+    [
+     "trajectoire budgétaire",
+     "fiscal trajectory"
+    ],
+    [
+     "dette souveraine",
+     "sovereign debt"
+    ],
+    [
+     "taux d'intérêt",
+     "interest rate"
+    ],
+    [
+     "système de retraite",
+     "pension system"
+    ]
+   ],
+   "q": {
+    "fr": "Comment la hausse des taux d'intérêt affecte-t-elle le budget d'un État ?",
+    "en": "How does rising interest rates affect a government's budget?"
+   },
+   "r": {
+    "fr": "Elle augmente le coût du remboursement des intérêts de la dette, ce qui réduit l'argent disponible pour les services publics.",
+    "en": "It increases the cost of debt interest payments, which reduces the money available for public services."
+   }
+  },
   {
    "id": "2026-10-08-tensions-geopolitiques-et-flambee-des-co",
    "src": "Financial Times",
@@ -516,17 +648,17 @@
   }
  ],
  "actu": {
-  "a": 1,
-  "choices": [
-   "Les groupes pétroliers",
-   "Les compagnies aériennes",
-   "Les mines d'or",
-   "Les éditeurs de logiciels"
-  ],
   "date": "2026-10-08",
-  "expl": "Le kérosène est l'un des plus gros coûts des compagnies aériennes : un pétrole cher réduit leurs marges. Les groupes pétroliers, eux, en profitent car ils vendent leur production plus cher.",
-  "q": "Le Brent est repassé au-dessus de 100 dollars le baril à cause des attaques dans le détroit d'Ormuz. Quel secteur en souffre le plus, en général ?",
-  "src": "Yahoo Finance",
-  "url": "https://finance.yahoo.com/markets/article/oil-prices-climb-above-100-on-strait-of-hormuz-attacks-gulf-storm-threat-122612488.html"
+  "q": "Quel montant colossal les géants de la technologie ont-ils emprunté en neuf mois pour financer l'IA ?",
+  "choices": [
+   "150 milliards de dollars",
+   "350 millions d'euros",
+   "500 milliards de dollars",
+   "125 milliards d'euros"
+  ],
+  "a": 2,
+  "expl": "Les entreprises de la Big Tech ont emprunté 500 milliards de dollars en neuf mois pour financer l'intelligence artificielle. Ce montant exceptionnel pèse lourdement sur le marché de la dette et concurrence les obligations d'État.",
+  "src": "Le Figaro",
+  "url": "https://www.lefigaro.fr/economie/500-milliards-de-dollars-en-neuf-mois-les-emprunts-colossaux-de-la-big-tech-tech-mettent-sous-pression-le-marche-de-la-dette-20261008"
  }
 }
