@@ -76,7 +76,7 @@ button{cursor:pointer}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
 .stat b{display:block;font-family:var(--display);font-size:1.3rem;line-height:1.15;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
 .stat span{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-.btn{border:0;border-radius:12px;background:var(--c);color:#fff;font-weight:700;padding:11px 16px}
+.btn{border:0;border-radius:12px;background:var(--c,var(--proj));color:#fff;font-weight:700;padding:11px 16px}
 .btn:disabled{opacity:.5;cursor:default}
 .ghost{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:7px 11px;font-size:.86rem;font-weight:600;color:var(--muted)}
 .ghost.on{border-color:var(--c);color:var(--c)}
@@ -1798,11 +1798,12 @@ async function aiSample(input,opts={}){
       await readLines(r,line=>{const j=JSON.parse(line);if(j.message&&j.message.content)emit(j.message.content)});
     }else{
       if(!a.key)throw{code:"no_key"};
-      const model=a.model||"gemini-3.8-flash";
+      const model=a.model||"gemini-3.5-flash";
       const body={contents:turns.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]})),generationConfig:{temperature:0.5,...(json?{responseMimeType:"application/json"}:{})}};
       const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":streamGenerateContent?alt=sse",
         {method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json","x-goog-api-key":a.key},body:JSON.stringify(body)});
-      if(!r.ok){const tx=await r.text().catch(()=>"");throw{code:r.status===429?"rate_limited":r.status===404?"bad_model":(r.status===400||r.status===401||r.status===403)&&/api.?key|permission|unauth/i.test(tx)?"bad_key":"upstream_error",message:tx.slice(0,300)}}
+      if(!r.ok){const tx=await r.text().catch(()=>"");let em=tx;try{const j=JSON.parse(tx);em=(j.error&&(j.error.message||j.error.status))||tx}catch(_){}
+        throw{code:r.status===429?"rate_limited":r.status===404?"bad_model":(r.status===400||r.status===401||r.status===403)&&/api.?key|permission|unauth/i.test(tx)?"bad_key":"upstream_error",message:"HTTP "+r.status+" : "+String(em).slice(0,220)}}
       await readLines(r,line=>{if(!line.startsWith("data:"))return;const j=JSON.parse(line.slice(5));
         const parts=(((j.candidates||[])[0]||{}).content||{}).parts||[];parts.forEach(p=>{if(p.text&&!p.thought)emit(p.text)})});
     }
@@ -1851,7 +1852,7 @@ function pageReglages(){
   const ai=`<div class="card stack"><p class="label" style="margin:0">Intelligence artificielle (profs IA, traducteur)</p>
     <div class="seg" role="group" aria-label="Fournisseur d'IA"><button data-aiprov="gemini" aria-pressed="${a.provider==="gemini"}">Gemini · gratuit avec quota</button><button data-aiprov="ollama" aria-pressed="${a.provider==="ollama"}">Ollama · sur ce PC, illimité</button></div>
     <form data-f="ai">${a.provider==="gemini"
-      ?`<input class="field" id="ai-key" name="key" type="password" autocomplete="off" placeholder="Clé API Gemini (AI Studio)" value="${esc(a.key)}"><input class="field" id="ai-model" name="model" autocomplete="off" placeholder="Modèle : gemini-3.8-flash" value="${esc(a.model)}">`
+      ?`<input class="field" id="ai-key" name="key" type="text" autocomplete="off" spellcheck="false" style="-webkit-text-security:disc" placeholder="Clé API Gemini (AI Studio)" value="${esc(a.key)}"><input class="field" id="ai-model" name="model" autocomplete="off" placeholder="Modèle : gemini-3.5-flash" value="${esc(a.model)}">`
       :`<input class="field" id="ai-url" name="url" autocomplete="off" placeholder="http://localhost:11434" value="${esc(a.ollamaUrl)}"><input class="field" id="ai-model" name="model" autocomplete="off" placeholder="Modèle : llama3.2" value="${esc(a.model)}">`}
       <div class="row"><button class="btn" ${V.aiBusy?"disabled":""}>${V.aiBusy?"Test en cours…":"Enregistrer et tester"}</button></div></form>
     ${V.aiMsg?`<p class="small">${esc(V.aiMsg)}</p>`:""}
@@ -1863,7 +1864,7 @@ function pageReglages(){
 async function testAI(){
   V.aiBusy=true;V.aiMsg="";render(true);
   try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.");V.aiMsg="✓ L'IA répond : "+r.text.trim().slice(0,80)}
-  catch(e){V.aiMsg=ERR(e.code)+(e.code==="bad_model"&&aiCfg().provider==="gemini"?" Essaie un autre nom de modèle (liste dans Google AI Studio).":"")}
+  catch(e){V.aiMsg=ERR(e.code)+(e.code==="bad_model"&&aiCfg().provider==="gemini"?" Essaie un autre nom de modèle (liste dans Google AI Studio).":"")+(e.message?" Détail : "+String(e.message).slice(0,240):"")}
   V.aiBusy=false;render(true);
 }
 
