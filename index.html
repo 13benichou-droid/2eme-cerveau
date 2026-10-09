@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>2ème cerveau</title>
-<meta name="description" content="Habitudes, cours, finance, lectures, projets et sport : ton deuxième cerveau.">
+<meta name="description" content="Habitudes, notes, finance, lectures et cours : ton deuxième cerveau.">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#7a5cff">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
@@ -250,6 +250,82 @@ ul.list>li+li{border-top:1px solid var(--line)}
 .simlog{font-size:.82rem;color:var(--muted);display:flex;flex-direction:column;gap:2px}
 .corr a{color:var(--c);font-weight:700}
 
+/* 🪶 : façon Notes d'Apple */
+.tiles>.tile:first-child{grid-column:1/-1;min-height:136px}
+.tile[data-page="proj"] svg.ill{display:none}
+.tile[data-page="proj"] h2{font-size:2.3rem;line-height:1;padding:0}
+.notesapp{--ny:#d99a00;--ncell:var(--surface);--nsep:var(--line);gap:10px;padding-bottom:72px;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue","Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .notesapp{--ny:#ffd60a}}
+:root[data-theme="dark"] .notesapp{--ny:#ffd60a}
+.notesapp h1,.notesapp h2,.notesapp h3{font-family:inherit;letter-spacing:-.01em}
+.nbar{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px}
+.nback{border:0;background:none;color:var(--ny);font-size:1.06rem;padding:6px 0;display:inline-flex;align-items:center;min-width:0;max-width:58%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nback::before{content:"";flex:none;width:11px;height:11px;border-left:2.6px solid currentColor;border-bottom:2.6px solid currentColor;border-radius:1px;transform:rotate(45deg);margin:0 7px 0 5px}
+.nlink{border:0;background:none;color:var(--ny);font-size:1rem;font-weight:600;padding:6px 8px}
+.nbig{font-size:2.1rem;font-weight:700;line-height:1.1;margin:0 0 4px;overflow-wrap:anywhere}
+.nsearch{display:flex;align-items:center;gap:7px;background:color-mix(in srgb,var(--muted) 15%,transparent);border-radius:11px;padding:0 10px;height:38px;color:var(--muted)}
+.nsearch svg{flex:none;width:17px;height:17px}
+.nsearch input{flex:1;min-width:0;height:100%;border:0;background:none;outline:none;font-size:1rem;color:var(--ink)}
+.nsearch input::-webkit-search-cancel-button{opacity:.6}
+.ngroup{background:var(--ncell);border-radius:12px;overflow:hidden;margin-top:6px}
+.nhead{font-size:1.2rem;font-weight:700;margin:14px 2px 0}
+.nsub,.nempty{color:var(--muted);font-size:.9rem;text-align:center;padding:14px 8px}
+.ncell,.nrow{position:relative;display:flex;width:100%;border:0;background:none;text-align:left;color:var(--ink)}
+.ncell{align-items:center;gap:12px;padding:11px 14px;min-height:46px;font-size:1.03rem}
+.ncell .ic{flex:none;width:25px;height:25px;color:var(--ny)}
+.ncell .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ncell .ct{color:var(--muted);font-variant-numeric:tabular-nums}
+.ncell .chev{color:var(--muted);opacity:.55;font-size:1.3rem;line-height:1}
+.ncell+.ncell::before{content:"";position:absolute;top:0;right:0;left:51px;border-top:1px solid var(--nsep)}
+.nrow{flex-direction:column;gap:1px;padding:10px 16px}
+.nrow+.nrow::before{content:"";position:absolute;top:0;right:0;left:16px;border-top:1px solid var(--nsep)}
+.nrow b{display:flex;align-items:center;gap:4px;font-weight:600;font-size:1.03rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nrow span{color:var(--muted);font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nrow span em{font-style:normal;color:var(--ink);opacity:.72;margin-right:8px}
+.nrow small{display:flex;align-items:center;gap:4px;color:var(--muted);font-size:.82rem}
+.nrow small svg{width:14px;height:14px}
+.npin{display:inline-flex;color:var(--ny)}.npin svg{width:15px;height:15px}
+.nfoot{position:fixed;left:0;right:0;bottom:0;z-index:6;padding:4px 16px calc(4px + env(safe-area-inset-bottom,0px));
+  background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--nsep)}
+.nfoot>div{max-width:608px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nfoot>div>span{font-size:.8rem;color:var(--muted)}
+.nfoot>div>span:first-child{width:44px}
+.nicon{border:0;background:none;color:var(--ny);width:42px;height:42px;display:grid;place-items:center;flex:none;padding:0}
+.nicon svg{width:25px;height:25px}
+.naa{font-size:1.15rem;font-weight:600}
+.ntools{display:flex;align-items:center;gap:0}
+.nok{border:0;background:none;color:var(--ny);font-weight:600;font-size:1.05rem;padding:6px 2px 6px 8px;visibility:hidden}
+.notesapp:has(#ned:focus) .nok{visibility:visible}
+.nedbar{position:sticky;top:0;z-index:5;margin:0 -16px;padding:2px 12px 2px 16px;background:color-mix(in srgb,var(--bg) 86%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.npanel{background:var(--ncell);border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:6px;box-shadow:0 6px 24px rgb(0 0 0 / .1);border:1px solid var(--nsep)}
+.nfmtrow{display:flex;gap:6px;flex-wrap:wrap}
+.nfmtrow button{border:0;border-radius:9px;background:var(--soft);padding:8px 12px;min-width:44px;font-size:.95rem;color:var(--ink)}
+.nfmtrow .t1{font-weight:700;font-size:1.12rem}.nfmtrow .t2{font-weight:700}.nfmtrow .t3{font-weight:600}
+.nmi{display:flex;align-items:center;gap:10px;border:0;background:none;width:100%;text-align:left;padding:9px 8px;border-radius:9px;font-size:1rem;color:var(--ink)}
+.nmi:hover{background:var(--soft)}
+.nmi svg{width:20px;height:20px;color:var(--ny);flex:none}
+.nmi.danger,.nmi.danger svg{color:var(--down)}
+.nmi select{margin-left:auto;border:1px solid var(--nsep);border-radius:8px;background:var(--soft);padding:4px 8px;max-width:55%}
+.nmi span{flex:1}
+.nform{display:flex;flex-direction:row;align-items:center;gap:4px;padding:6px 6px 6px 14px}
+.nin{flex:1;min-width:0;border:0;background:none;outline:none;font-size:1.03rem;padding:6px 0}
+.ndate{text-align:center;color:var(--muted);font-size:.8rem;margin-top:2px}
+.ned{outline:none;min-height:55vh;font-size:1.06rem;line-height:1.5;overflow-wrap:anywhere;caret-color:var(--ny);padding:2px 0 30vh;-webkit-user-select:text;user-select:text}
+.ned.ro{min-height:0;padding-bottom:0}
+.ned h1{font-size:1.75rem;font-weight:700;line-height:1.22;margin:0 0 2px}
+.ned h2{font-size:1.35rem;font-weight:700;line-height:1.3;margin:10px 0 2px}
+.ned h3{font-size:1.12rem;font-weight:600;margin:8px 0 2px}
+.ned p{margin:0}
+.ned ul,.ned ol{margin:2px 0;padding-left:26px}
+.ned ul.ck{list-style:none;padding-left:32px}
+.ned ul.ck>li{position:relative;padding:3px 0;min-height:1.5em}
+.ned ul.ck>li::before{content:"";position:absolute;left:-32px;top:5px;width:21px;height:21px;border-radius:50%;box-sizing:border-box;
+  border:1.6px solid color-mix(in srgb,var(--muted) 75%,transparent);cursor:pointer}
+.ned ul.ck>li[data-ok="1"]{color:var(--muted)}
+.ned ul.ck>li[data-ok="1"]::before{border-color:var(--ny);background:var(--ny) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.4l2.6 2.6L11 4.6' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
+.notesapp .out{background:color-mix(in srgb,var(--ny) 12%,var(--surface))}
+
 /* appli autonome */
 .topr{display:flex;align-items:center;gap:8px;flex-direction:column;align-items:flex-end}
 .gear{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:1.1rem}
@@ -266,14 +342,17 @@ ul.list>li+li{border-top:1px solid var(--line)}
 /* ================================================================
    DONNÉES FIXES
    ================================================================ */
-const COL={hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",sport:"--sport"};
+const COL={hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours"};
 const JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 
 const HABITS={sport:["Sport",""],piano:["Piano",""],mspe:["Maths spé","1 h"],mexp:["Maths expertes","1 h"],maths:["Maths","1 h"],
   fsci:["Science","fiche"],fphi:["Philosophie","fiche"],fses:["SES","fiche"],fhis:["Histoire","fiche"],esp:["Espagnol",""],ang:["Anglais",""]};
 const WE=["mspe","esp","fsci","mexp","fphi","ang","piano","sport"];
-const PLAN={1:["sport","piano","mspe","fsci","fphi","fses","fhis"],2:["piano","mspe","mexp"],3:["fsci","fses","mexp","piano"],4:["maths","fses"],5:["sport"],6:WE,0:WE};
+const PLAN={1:["sport","piano","mspe","fsci","fphi","fses","fhis"],2:["piano","mspe","mexp"],3:["fsci","fses","mexp","piano"],4:["maths","fses","sport","piano"],5:["piano"],6:WE,0:WE};
+/* planning d'avant le 9 octobre 2026 : les jours passés gardent leur liste */
+const PLAN0={...PLAN,4:["maths","fses"],5:["sport"]};
+const planOf=d=>(dkey(d)<"2026-10-09"?PLAN0:PLAN)[d.getDay()]||[];
 
 const AXES=["Identités et échanges","Espace privé et espace public","Art et pouvoir","Citoyenneté et mondes virtuels","Fictions et réalités","Innovations scientifiques et responsabilité","Diversité et inclusion","Territoire et mémoire"];
 const SESA_SPE="https://manuel.sesamath.net/numerique/?ouvrage=mstsspe_2020";
@@ -895,10 +974,6 @@ const DEFIS=["Écris la lettre que ton projet t'enverrait s'il pouvait parler.",
 const POIDS=[["🪶","léger"],["🍃","ça va"],["🪵","pesant"],["🪨","lourd"],["🧱","très lourd"]];
 const EMOJIS=["🪶","🚀","🎹","💡","🎨","🧪","📸","🌍"];
 
-const SPORT={1:["Pecs","Triceps","Épaules"],2:["Dos","Biceps"],6:["Jambes"]};
-const EXOS={Pecs:["Développé couché","Développé incliné haltères","Écarté à la poulie","Pompes"],Triceps:["Dips","Barre au front","Extension à la poulie"],
-  "Épaules":["Développé militaire","Élévations latérales","Oiseau"],Dos:["Tractions","Rowing barre","Tirage vertical","Rowing haltère"],
-  Biceps:["Curl barre","Curl haltères","Curl marteau"],Jambes:["Squat","Presse","Fentes","Soulevé de terre jambes tendues","Mollets"]};
 const BOOKCOL=["#7a5cff","#2d7ff0","#14a27a","#f0a30a","#ff6a55","#f2407d"];
 
 /* ================================================================
@@ -925,8 +1000,7 @@ const ILL={
  proj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M60 14C38 18 24 36 22 62l6-2c4-16 14-28 26-36-10 10-16 22-18 34 16-6 26-24 24-44z" fill="var(--proj)"/><path d="M22 62l-6 8" stroke="var(--proj)" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="62" r="8" fill="var(--proj)" opacity=".25"/></svg>`,
  fin:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="20" width="56" height="44" rx="8" fill="var(--fin)" opacity=".18"/><path d="M20 54l12-12 9 7 17-19" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 30h9v9" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  lect:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M42 26c-8-6-18-7-26-5v40c8-2 18-1 26 5z" fill="var(--lect)"/><path d="M42 26c8-6 18-7 26-5v40c-8-2-18-1-26 5z" fill="var(--lect)" opacity=".45"/><path d="M50 30h10M50 38h10M50 46h8" stroke="var(--surface)" stroke-width="2.5" stroke-linecap="round"/></svg>`,
- cours:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M42 18l30 14-30 14-30-14z" fill="var(--cours)"/><path d="M24 38v14c0 6 8 10 18 10s18-4 18-10V38l-18 8z" fill="var(--cours)" opacity=".4"/><path d="M70 32v18" stroke="var(--cours)" stroke-width="3" stroke-linecap="round"/><circle cx="70" cy="52" r="3.5" fill="var(--cours)"/></svg>`,
- sport:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="10" y="32" width="10" height="22" rx="3" fill="var(--sport)"/><rect x="20" y="28" width="8" height="30" rx="3" fill="var(--sport)" opacity=".6"/><rect x="64" y="32" width="10" height="22" rx="3" fill="var(--sport)"/><rect x="56" y="28" width="8" height="30" rx="3" fill="var(--sport)" opacity=".6"/><rect x="28" y="40" width="28" height="6" rx="3" fill="var(--sport)"/></svg>`
+ cours:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M42 18l30 14-30 14-30-14z" fill="var(--cours)"/><path d="M24 38v14c0 6 8 10 18 10s18-4 18-10V38l-18 8z" fill="var(--cours)" opacity=".4"/><path d="M70 32v18" stroke="var(--cours)" stroke-width="3" stroke-linecap="round"/><circle cx="70" cy="52" r="3.5" fill="var(--cours)"/></svg>`
 };
 
 /* ================================================================
@@ -939,8 +1013,8 @@ function localLoad(){try{const x=JSON.parse(localStorage.getItem("cerveau")||"{}
 function localSave(){try{localStorage.setItem("cerveau",JSON.stringify(S))}catch(e){}}
 let lsT=null;function localSaveSoon(){clearTimeout(lsT);lsT=setTimeout(localSave,500)}
 function setSync(t){syncTxt=t;const el=document.getElementById("sync");if(el)el.textContent=t}
-async function put(col,id,data){
-  S[col]={...S[col],[id]:data};render();localSaveSoon();enqueue(col,id,data,false);
+async function put(col,id,data,quiet){
+  S[col]={...S[col],[id]:data};if(!quiet)render();localSaveSoon();enqueue(col,id,data,false);
 }
 async function del(col,id){
   const n={...S[col]};delete n[id];S[col]=n;render();localSaveSoon();enqueue(col,id,null,true);
@@ -949,7 +1023,7 @@ async function del(col,id){
 /* ================================================================
    ÉTAT DE L'AFFICHAGE
    ================================================================ */
-let V={page:"home",day:today(),range:12,subj:"mspe",chap:null,proj:null,ptab:"journal",emoji:"🪶",confirm:null,
+let V={page:"home",day:today(),range:12,subj:"mspe",chap:null,proj:null,ptab:"journal",emoji:"🪶",confirm:null,nf:null,note:null,ndraft:null,nq:"",newf:false,renf:false,
   lang:"fr",trDir:"en-fr",gi:0,gflip:false,defi:0,
   rev:{},ans:{},out:{},busy:{},jd:{},jpoids:{},vt:"",vtProj:"",trIn:"",ctab:"cours",tier:"complex",lvl:0,live:{},ctl:{},ci:{},ftab:"jeu",g:null,gin:"",dataMsg:"",imp:null};
 try{const p=JSON.parse(localStorage.getItem("cerveau-v")||"{}");if(p.page)V.page=p.page;if(p.lang)V.lang=p.lang;if(p.subj)V.subj=p.subj;if(p.tier)V.tier=p.tier;if(p.ftab)V.ftab=p.ftab}catch(e){}
@@ -977,7 +1051,7 @@ function outBox(key){return V.out[key]?`<div class="out" id="out-${sid(key)}" ar
 /* ================================================================
    HABITUDES
    ================================================================ */
-function dayStats(d){const p=PLAN[d.getDay()]||[],k=(S.jours[dkey(d)]||{}).done||{};return{n:p.filter(h=>k[h]).length,t:p.length}}
+function dayStats(d){const p=planOf(d),k=(S.jours[dkey(d)]||{}).done||{};return{n:p.filter(h=>k[h]).length,t:p.length}}
 function streak(){let d=today(),s=0;const t=dayStats(d);if(t.n<t.t)d=add(d,-1);for(let i=0;i<400;i++){const x=dayStats(d);if(x.t&&x.n===x.t){s++;d=add(d,-1)}else break}return s}
 function ring(p,c){const r=24,L=2*Math.PI*r;return`<svg width="60" height="60" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="${r}" fill="none" stroke="var(--soft)" stroke-width="7"/><circle cx="30" cy="30" r="${r}" fill="none" stroke="var(${c})" stroke-width="7" stroke-linecap="round" stroke-dasharray="${L}" stroke-dashoffset="${L*(1-p)}" transform="rotate(-90 30 30)"/></svg>`}
 function weekSeries(nw){const o=[],m0=monday(today());for(let w=nw-1;w>=0;w--){const m=add(m0,-7*w);let n=0,t=0;for(let i=0;i<7;i++){const d=add(m,i);if(d>today())break;const s=dayStats(d);n+=s.n;t+=s.t}o.push({m,p:t?n/t:0})}return o}
@@ -994,7 +1068,7 @@ function lineChart(sr){
    <text x="${x(sr.length-1)-8}" y="${y(last.p)-10}" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)">${Math.round(last.p*100)}%</text>${lab}</svg>`;
 }
 function pageHab(){
-  const d=V.day,plan=PLAN[d.getDay()],k=(S.jours[dkey(d)]||{}).done||{},{n,t}=dayStats(d),isT=+d===+today(),m=monday(today());
+  const d=V.day,plan=planOf(d),k=(S.jours[dkey(d)]||{}).done||{},{n,t}=dayStats(d),isT=+d===+today(),m=monday(today());
   const week=[0,1,2,3,4,5,6].map(i=>{const x=add(m,i),s=dayStats(x),f=x>today();return`<button class="wd ${+x===+d?"on":""}" data-go="${dkey(x)}" ${f?'disabled style="opacity:.4"':""}><b>${JOURS[x.getDay()].slice(0,1)}</b><span class="vb"><i style="height:${s.t?s.n/s.t*100:0}%"></i></span><span class="num">${s.n}/${s.t}</span></button>`}).join("");
   return`
   <div class="card stack">
@@ -1505,77 +1579,195 @@ function simUI(top,quit){
 }
 
 /* ================================================================
-   PROJETS 🪶 : ÉCRIRE CE QUI PREND LA TÊTE
+   🪶 : NOTES, FAÇON NOTES D'APPLE
+   Dossiers = collection « projets » {nom, cree}
+   Notes = collection « notes » {projet, html, txt, ts, maj, epingle, suppr}
+   (les anciennes notes {projet, txt, ts} s'affichent telles quelles)
    ================================================================ */
-function projNotes(pid){return Object.entries(S.notes).filter(([,n])=>n.projet===pid).sort((a,b)=>(b[1].ts||0)-(a[1].ts||0))}
-function poidsSpark(list){
-  const v=list.slice(0,12).reverse().map(([,n])=>n.poids||0).filter(Boolean);if(v.length<2)return"";
-  const W=120,H=34,x=i=>4+i*(W-8)/(v.length-1),y=p=>H-4-(p-1)*(H-8)/4;
-  return`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Poids du projet au fil des notes"><polyline points="${v.map((p,i)=>x(i)+","+y(p)).join(" ")}" fill="none" stroke="var(--proj)" stroke-width="2" stroke-linejoin="round"/><circle cx="${x(v.length-1)}" cy="${y(v[v.length-1])}" r="3.5" fill="var(--proj)"/></svg>`;
+const NI={
+ folder:`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h3.6l2 2h7.4A2.5 2.5 0 0 1 21 9.5v8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>`,
+ folderAdd:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5h3.6l2 2h7.4A2.5 2.5 0 0 1 21 9.5v8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 10.5v6M9 13.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`,
+ compose:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H6.5A2.5 2.5 0 0 0 4 6.5v11A2.5 2.5 0 0 0 6.5 20h11a2.5 2.5 0 0 0 2.5-2.5V13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M17.6 3.6a2 2 0 0 1 2.8 2.8L12 14.8l-3.6.8.8-3.6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>`,
+ trash:`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9.5 7V4.8h5V7M6.5 7l.9 12.2A2 2 0 0 0 9.4 21h5.2a2 2 0 0 0 2-1.8L17.5 7M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ check:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.3 12.3l2.5 2.5 5-5.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ more:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="16" cy="12" r="1.3" fill="currentColor"/></svg>`,
+ search:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+ pin:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6l-1 6 3.2 3.2H6.8L10 10zM12 13.2V20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg>`
+};
+const nMaj=n=>n.maj||n.ts||0;
+const nLines=n=>String(n.txt||"").split("\n").map(s=>s.trim()).filter(Boolean);
+const nTitle=n=>(nLines(n)[0]||"Nouvelle note").slice(0,120);
+const nPrev=n=>nLines(n).slice(1).join(" ").slice(0,160)||"Aucun texte supplémentaire";
+const nRealF=f=>f&&f!=="all"&&f!=="none"&&f!=="trash"&&!!S.projets[f];
+function fName(f){return f==="all"?"Toutes les notes":f==="none"?"Notes":f==="trash"?"Suppr. récemment":f&&S.projets[f]?S.projets[f].nom:"Dossiers"}
+function nIn(f){
+  const all=Object.entries(S.notes).filter(([,n])=>n&&typeof n==="object");
+  const a=f==="trash"?all.filter(([,n])=>n.suppr):all.filter(([,n])=>!n.suppr&&(f==="all"||(f==="none"?!nRealF(n.projet):n.projet===f)));
+  return a.sort((x,y)=>(f==="trash"?(y[1].suppr-x[1].suppr):nMaj(y[1])-nMaj(x[1])));
 }
+function nDays(ts){const d=new Date(ts);d.setHours(0,0,0,0);return Math.round((today()-d)/864e5)}
+function nWhen(ts){const d=new Date(ts),k=nDays(ts);
+  if(k<=0)return d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"});
+  if(k===1)return"Hier";if(k<7)return JOURS[d.getDay()].toLowerCase();
+  return d.toLocaleDateString("fr-FR",{day:"2-digit",month:"2-digit",year:"numeric"})}
+function nGroup(ts){const d=new Date(ts),k=nDays(ts);
+  if(k<=0)return"Aujourd'hui";if(k===1)return"Hier";if(k<=7)return"7 jours précédents";if(k<=30)return"30 jours précédents";
+  return MOIS[d.getMonth()].replace(/^./,c=>c.toUpperCase())+(d.getFullYear()!==today().getFullYear()?" "+d.getFullYear():"")}
+function nLong(ts){const d=new Date(ts);return d.getDate()+" "+MOIS[d.getMonth()]+" "+d.getFullYear()+" à "+d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})}
+
+/* ---- HTML des notes : on ne garde que la mise en forme utile ---- */
+const NTAGS={H1:1,H2:1,H3:1,P:1,DIV:1,BR:1,B:1,STRONG:1,I:1,EM:1,U:1,S:1,STRIKE:1,UL:1,OL:1,LI:1};
+function cleanHtml(h){
+  const t=document.createElement("template");t.innerHTML=String(h||"");
+  const walk=el=>[...el.childNodes].forEach(c=>{
+    if(c.nodeType===3)return;
+    if(c.nodeType!==1||/^(SCRIPT|STYLE|IFRAME|OBJECT|EMBED|SVG|MATH|TEMPLATE|IMG|VIDEO|AUDIO|LINK|META)$/i.test(c.tagName)){c.remove();return}
+    walk(c);
+    if(!NTAGS[c.tagName]){c.replaceWith(...c.childNodes);return}
+    const ck=c.tagName==="UL"&&c.classList.contains("ck"),ok=c.tagName==="LI"&&c.getAttribute("data-ok")==="1";
+    [...c.attributes].forEach(a=>c.removeAttribute(a.name));if(ck)c.className="ck";if(ok)c.setAttribute("data-ok","1");
+  });
+  walk(t.content);return t.innerHTML;
+}
+function nHtml(n){return n.html!=null?cleanHtml(n.html):String(n.txt||"").split("\n").map(l=>`<div>${esc(l)||"<br>"}</div>`).join("")}
+function edText(el){return String(el.innerText||"").replace(/ /g," ").replace(/\n{3,}/g,"\n\n").trim()}
+
+/* ---- rangement : anciens projets, corbeille de 30 jours ---- */
+function nHousekeep(){
+  const lim=Date.now()-30*864e5;
+  Object.entries(S.notes).forEach(([id,n])=>{if(n&&n.suppr&&n.suppr<lim)del("notes",id)});
+  Object.entries(S.projets).forEach(([pid,p])=>{if(!p||p.migre)return;const ts=p.taches||[],cl=p.clair||{},now=Date.now();
+    const qa=CLAIR.map((q,i)=>cl[i]?[q,cl[i]]:null).filter(Boolean);if(!ts.length&&!qa.length)return;
+    if(ts.length&&!S.notes["mig-et-"+pid])put("notes","mig-et-"+pid,{projet:pid,html:`<h1>Étapes</h1><ul class="ck">${ts.map(t=>`<li${t.ok?' data-ok="1"':""}>${esc(t.t)}</li>`).join("")}</ul>`,txt:"Étapes\n"+ts.map(t=>t.t).join("\n"),ts:p.cree||now,maj:now},true);
+    if(qa.length&&!S.notes["mig-cl-"+pid])put("notes","mig-cl-"+pid,{projet:pid,html:"<h1>Y voir clair</h1>"+qa.map(([q,a])=>`<h3>${esc(q)}</h3>${String(a).split("\n").map(l=>`<div>${esc(l)||"<br>"}</div>`).join("")}`).join(""),txt:"Y voir clair\n"+qa.map(([q,a])=>q+"\n"+a).join("\n"),ts:p.cree||now,maj:now},true);
+    put("projets",pid,{...p,migre:true},true);
+  });
+}
+
+/* ---- pages ---- */
+function nFolderCell(f,n){const ic=f==="trash"?NI.trash:NI.folder;return`<button class="ncell" data-nf="${f}">${ic}<span class="nm">${esc(fName(f))}</span><span class="ct">${n}</span><span class="chev" aria-hidden="true">›</span></button>`}
+function nRow(id,n,showF){
+  const f=showF&&nRealF(n.projet)?`<small>${NI.folder}${esc(S.projets[n.projet].nom)}</small>`:"";
+  return`<button class="nrow" data-note="${id}"><b>${n.epingle&&!n.suppr?`<i class="npin">${NI.pin}</i>`:""}${esc(nTitle(n))}</b><span><em>${nWhen(n.suppr||nMaj(n))}</em>${esc(nPrev(n))}</span>${f}</button>`}
+function nListHtml(scope,q){
+  q=String(q||"").trim().toLowerCase();
+  if(q){const hits=nIn(scope==="trash"?"trash":scope||"all").filter(([,n])=>String(n.txt||"").toLowerCase().includes(q));
+    return`<p class="nhead">${hits.length} résultat${hits.length>1?"s":""}</p>${hits.length?`<div class="ngroup">${hits.map(([id,n])=>nRow(id,n,!scope||scope==="all")).join("")}</div>`:`<p class="nempty">Aucune note ne contient « ${esc(q)} ».</p>`}`}
+  if(!scope){
+    const fs=Object.entries(S.projets).filter(([,p])=>p&&p.nom).sort((a,b)=>a[1].nom.localeCompare(b[1].nom,"fr")),tr=nIn("trash").length;
+    return`<div class="ngroup">${fs.length?nFolderCell("all",nIn("all").length):""}${nFolderCell("none",nIn("none").length)}${fs.map(([id])=>nFolderCell(id,nIn(id).length)).join("")}</div>
+     ${V.newf?`<form class="ngroup nform" data-f="nfolder"><input class="nin" id="nf-nom" name="nom" placeholder="Nom du dossier" autocomplete="off" maxlength="60" required><button class="nlink" type="submit">Créer</button><button class="nlink" type="button" data-newf="0">Annuler</button></form>`:""}
+     ${tr?`<div class="ngroup">${nFolderCell("trash",tr)}</div>`:""}`}
+  const list=nIn(scope);
+  if(!list.length)return`<p class="nempty">${scope==="trash"?"Aucune note supprimée.":"Aucune note"}</p>`;
+  if(scope==="trash")return`<p class="nsub">Les notes sont supprimées définitivement au bout de 30 jours.</p><div class="ngroup">${list.map(([id,n])=>nRow(id,n,false)).join("")}</div>`;
+  const pins=list.filter(([,n])=>n.epingle),rest=list.filter(([,n])=>!n.epingle),groups=[];
+  rest.forEach(([id,n])=>{const g=nGroup(nMaj(n)),last=groups[groups.length-1];if(last&&last[0]===g)last[1].push([id,n]);else groups.push([g,[[id,n]]])});
+  return(pins.length?[["Épinglées",pins],...groups]:groups).map(([g,a])=>`<p class="nhead">${g}</p><div class="ngroup">${a.map(([id,n])=>nRow(id,n,scope==="all")).join("")}</div>`).join("");
+}
+function nFilter(){const box=document.getElementById("nres");if(box)box.innerHTML=nListHtml(V.nf,V.nq)}
+function nSearch(){return`<label class="nsearch">${NI.search}<input type="search" id="nq" data-nq="1" value="${esc(V.nq||"")}" placeholder="Rechercher" autocomplete="off" enterkeyhint="search"></label>`}
 function pageProj(){
-  if(V.proj&&S.projets[V.proj])return pageProjet();
-  const list=Object.entries(S.projets).sort((a,b)=>{const la=(projNotes(a[0])[0]||[,{}])[1].ts||a[1].cree||0,lb=(projNotes(b[0])[0]||[,{}])[1].ts||b[1].cree||0;return lb-la});
-  const vrac=projNotes(null);
-  return`<div class="card stack"><p class="label" style="margin:0">Vide-tête</p>
-    <p class="muted small">Lance le minuteur et écris tout ce qui tourne dans ta tête, sans te relire. On trie après.</p>
-    <div class="row" style="justify-content:space-between"><span class="timer" id="timer">${fmtTimer()}</span>
-      <div class="row"><button type="button" class="ghost" data-timer="300">5 min</button><button type="button" class="ghost" data-timer="600">10 min</button>${V.timerEnd?`<button type="button" class="ghost" data-timer="0">Stop</button>`:""}</div></div>
-    <textarea class="field" id="vt" data-vt="1" rows="6" placeholder="Ce qui me prend la tête en ce moment…">${esc(V.vt)}</textarea>
-    <div class="row"><select class="field" id="vt-proj" data-vtproj="1"><option value="">Sans projet (vrac)</option>${list.map(([id,p])=>`<option value="${id}" ${V.vtProj===id?"selected":""}>${esc(p.emoji)} ${esc(p.nom)}</option>`).join("")}</select><button class="btn" data-savevt="1">Ranger la note</button></div>
-  </div>
-  <div class="card stack"><p class="label" style="margin:0">Défi d'écriture</p><p class="prompt">${DEFIS[V.defi]}</p>
-    <div class="row"><button class="ghost" data-defi="1">🎲 Un autre</button><button class="ghost on" data-usedefi="1">Écrire là-dessus</button></div></div>
-  <div class="card"><form data-f="proj"><p class="label" style="margin:0">Nouveau projet</p>
-     <div class="emo">${EMOJIS.map(e=>`<button type="button" data-emo="${e}" aria-pressed="${V.emoji===e}">${e}</button>`).join("")}</div>
-     <div class="row"><input class="field" id="proj-nom" name="nom" placeholder="Ce qui me prend la tête…" autocomplete="off" required><button class="btn">Créer</button></div></form></div>
-  ${list.length?`<div class="stack">${list.map(([id,p])=>{const ns=projNotes(id),last=ns[0],ts=p.taches||[],ok=ts.filter(t=>t.ok).length,pw=last?POIDS[(last[1].poids||1)-1]:null;return`
-    <button class="card pcard" data-openp="${id}"><div class="pt"><span class="e">${esc(p.emoji||"🪶")}</span><h3>${esc(p.nom)}</h3>${pw?`<span title="${pw[1]}" style="font-size:1.2rem">${pw[0]}</span>`:""}</div>
-    <div class="row" style="justify-content:space-between"><span class="muted small">${ns.length} note${ns.length>1?"s":""}${last?" · dernière le "+fts(last[1].ts):""}${ts.length?` · ${ok}/${ts.length} étapes`:""}</span>${poidsSpark(ns)}</div></button>`}).join("")}</div>`
-   :`<div class="empty">Crée un projet pour chaque chose qui te trotte dans la tête : tu pourras y écrire, y voir plus clair et le découper en étapes.</div>`}
-  ${vrac.length?`<div class="card"><p class="label">Notes en vrac</p>${vrac.slice(0,10).map(([id,n])=>noteHtml(id,n)).join("")}</div>`:""}`;
+  if(V.note)return pageNote();
+  const f=V.nf,real=nRealF(f),cnt=f?nIn(f).length:0;
+  const top=f?`<div class="nbar"><button class="nback" data-nf="">Dossiers</button>${real?`<div class="ntools"><button class="nicon" data-ntoggle="nfmenu" aria-label="Options du dossier">${NI.more}</button></div>`:""}</div>`
+             :`<div class="nbar"><button class="nback" data-page="home">Accueil</button></div>`;
+  const fmenu=real?`<div class="npanel" id="nfmenu" hidden>${V.renf?`<form class="nform" data-f="nfren"><input class="nin" id="nf-ren" name="nom" value="${esc(S.projets[f].nom)}" maxlength="60" required><button class="nlink" type="submit">OK</button></form>`
+      :`<button class="nmi" data-nfren="1">Renommer</button>`}<button class="nmi danger" data-nfdel="${f}">${V.confirm===f?"Supprimer le dossier et ses notes ?":"Supprimer le dossier"}</button></div>`:"";
+  const foot=f==="trash"?"":`<div class="nfoot"><div>${f?`<span></span>`:`<button class="nicon" data-newf="1" aria-label="Nouveau dossier">${NI.folderAdd}</button>`}<span>${f?cnt+" note"+(cnt>1?"s":""):""}</span><button class="nicon" data-ncompose="1" aria-label="Nouvelle note">${NI.compose}</button></div></div>`;
+  return`${top}<h1 class="nbig">${f?esc(fName(f)):"Dossiers"}</h1>${fmenu}${nSearch()}<div id="nres" class="stack" style="gap:6px">${nListHtml(f,V.nq)}</div>${foot}`;
 }
-function noteHtml(id,n){const pw=POIDS[(n.poids||1)-1];return`<div class="entry"><div class="row" style="justify-content:space-between"><span class="muted small">${fts(n.ts)}${n.poids?` · ${pw[0]} ${pw[1]}`:""}</span><button class="ghost ${V.confirm===id?"danger":""}" data-deln="${id}">${V.confirm===id?"Confirmer":"✕"}</button></div><div class="txt">${esc(n.txt)}</div></div>`}
-function pageProjet(){
-  const id=V.proj,p=S.projets[id],ns=projNotes(id),ts=p.taches||[],ok=ts.filter(t=>t.ok).length,cl=p.clair||{},tab=V.ptab;
-  const dk="deb|"+id;
-  return`<button class="crumb" data-openp="">‹ Tous les projets</button>
-  <div class="pt"><span class="e" style="font-size:2rem">${esc(p.emoji)}</span><h2 style="flex:1;font-size:1.35rem;overflow-wrap:anywhere">${esc(p.nom)}</h2><button class="ghost ${V.confirm===id?"danger":""}" data-delp="${id}">${V.confirm===id?"Supprimer ?":"Supprimer"}</button></div>
-  <div class="seg" role="tablist">${[["journal","Journal"],["clair","Y voir clair"],["etapes","Étapes"]].map(([k,l])=>`<button role="tab" data-ptab="${k}" aria-pressed="${tab===k}">${l}</button>`).join("")}</div>
-  ${tab==="journal"?`
-   <div class="card"><form data-f="note"><p class="label" style="margin:0">Nouvelle note</p>
-     <textarea class="field" id="jd-${id}" data-jd="${id}" rows="5" placeholder="Où j'en suis, ce que je ressens, ce que j'ai compris…">${esc(V.jd[id]||"")}</textarea>
-     <div><p class="muted small" style="margin-bottom:6px">Combien ça pèse aujourd'hui ?</p><div class="emo">${POIDS.map(([e,l],i)=>`<button type="button" data-jp="${i+1}" aria-pressed="${(V.jpoids[id]||0)===i+1}" title="${l}" aria-label="${l}">${e}</button>`).join("")}</div></div>
-     <div class="row"><button class="btn">Enregistrer</button></div></form></div>
-   ${ns.length>1?`<div class="card"><p class="label">Le poids de ce projet au fil des notes</p>${poidsSpark(ns)}</div>`:""}
-   ${ns.length?`<div class="card">${ns.map(([nid,n])=>noteHtml(nid,n)).join("")}</div>`:`<div class="empty">Rien d'écrit pour l'instant. Commence par une phrase, même courte.</div>`}`:""}
-  ${tab==="clair"?`<div class="stack">${CLAIR.map((q,i)=>`<div class="card stack"><p class="qt">${q}</p><textarea class="field" id="cl-${id}-${i}" data-clair="${id}|${i}" rows="3" placeholder="Écris librement…">${esc(cl[i]||"")}</textarea></div>`).join("")}
-    <p class="muted small">Tes réponses s'enregistrent dès que tu quittes le cadre.</p></div>`:""}
-  ${tab==="etapes"?`<div class="card stack"><div class="row"><div class="bar" style="flex:1"><i style="width:${ts.length?ok/ts.length*100:0}%"></i></div><span class="muted num small">${ok}/${ts.length}</span></div>
-    ${ts.length?`<ul class="list">${ts.map(t=>`<li><label class="chk"><input type="checkbox" data-pt="${id}|${t.id}" ${t.ok?"checked":""}><span class="box">${tick}</span><span class="t">${esc(t.t)}</span></label></li>`).join("")}</ul>`:""}
-    <form data-ftask="${id}" class="row" style="flex-direction:row"><input class="field" id="task-${id}" name="t" placeholder="Nouvelle étape" autocomplete="off" required><button class="btn">Ajouter</button></form></div>`:""}
-  ${SAMPLE_ST!=="none"?`<div class="card stack"><p class="label" style="margin:0">Débloque-moi</p><p class="muted small">L'IA lit ce que tu as écrit sur ce projet et te renvoie trois questions et une micro-action.</p>
-    <div class="row"><button class="btn" data-deb="${id}" ${V.busy[dk]?"disabled":""}>${V.busy[dk]?"L'IA lit…":"🪶 Aide-moi à y voir clair"}</button></div>${outBox(dk)}</div>`:""}`;
+function nCur(){const id=V.note;return S.notes[id]||(V.ndraft&&V.ndraft.id===id?V.ndraft.n:null)}
+function pageNote(){
+  const id=V.note,n=nCur();if(!n){V.note=null;return pageProj()}
+  const back=V.nf?fName(V.nf):"Dossiers",dk="deb|"+id;
+  if(n.suppr)return`<div class="nbar"><button class="nback" data-nback="1">${esc(back)}</button></div>
+    <div class="npanel"><p class="small muted">Cette note est dans Suppr. récemment.</p><div class="row"><button class="nmi" data-nrest="${id}">Récupérer</button><button class="nmi danger" data-nkill="${id}">${V.confirm===id?"Supprimer définitivement ?":"Supprimer définitivement"}</button></div></div>
+    <p class="ndate">${nLong(n.suppr)}</p><div class="ned ro">${nHtml(n)}</div>`;
+  const fs=Object.entries(S.projets).filter(([,p])=>p&&p.nom).sort((a,b)=>a[1].nom.localeCompare(b[1].nom,"fr"));
+  return`<div class="nbar nedbar"><button class="nback" data-nback="1">${esc(back)}</button>
+    <div class="ntools"><button class="nicon" data-fmt="ck" aria-label="Liste de cases à cocher">${NI.check}</button><button class="nicon naa" data-ntoggle="nfmt" aria-label="Mise en forme">Aa</button><button class="nicon" data-ntoggle="nmenu" aria-label="Plus">${NI.more}</button><button class="nok" data-nok="1">OK</button></div></div>
+  <div class="npanel" id="nfmt" hidden>
+    <div class="nfmtrow"><button class="t1" data-fmt="h1">Titre</button><button class="t2" data-fmt="h2">En-tête</button><button class="t3" data-fmt="h3">Sous-titre</button><button data-fmt="div">Corps</button></div>
+    <div class="nfmtrow"><button data-fmt="bold" aria-label="Gras"><b>G</b></button><button data-fmt="italic" aria-label="Italique"><i>I</i></button><button data-fmt="underline" aria-label="Souligné"><u>S</u></button><button data-fmt="strikeThrough" aria-label="Barré"><s>B</s></button><button data-fmt="ul" aria-label="Liste à puces">• Liste</button><button data-fmt="ol" aria-label="Liste numérotée">1. Liste</button></div></div>
+  <div class="npanel" id="nmenu" hidden>
+    <button class="nmi" data-npin="${id}">${NI.pin}${n.epingle?"Désépingler":"Épingler"}</button>
+    <label class="nmi">${NI.folder}<span>Dossier</span><select data-nmove="${id}"><option value="">Notes</option>${fs.map(([fid,p])=>`<option value="${fid}" ${n.projet===fid?"selected":""}>${esc(p.nom)}</option>`).join("")}</select></label>
+    ${SAMPLE_ST!=="none"?`<button class="nmi" data-ndeb="${id}" ${V.busy[dk]?"disabled":""}>✨ ${V.busy[dk]?"L'IA lit…":"Y voir clair avec l'IA"}</button>`:""}
+    <button class="nmi danger" data-ndel="${id}">${NI.trash}Supprimer</button></div>
+  <p class="ndate">${nLong(nMaj(n))}</p>
+  <div class="ned" id="ned" contenteditable="true" data-ned="${id}" spellcheck="true" autocapitalize="sentences">${nHtml(n)||"<h1><br></h1>"}</div>
+  ${outBox(dk)}`;
 }
-function debloque(id){
-  const p=S.projets[id],cl=p.clair||{},ns=projNotes(id).slice(0,5);
-  const rep=CLAIR.map((q,i)=>cl[i]?`- ${q} ${cl[i]}`:"").filter(Boolean).join("\n")||"(pas encore de réponses)";
-  const notes=ns.map(([,n])=>`- ${fts(n.ts)}${n.poids?" (poids "+n.poids+"/5)":""} : ${String(n.txt).slice(0,800)}`).join("\n")||"(pas encore de notes)";
-  stream("deb|"+id,`Tu aides un lycéen à démêler un projet qui lui prend la tête. Sois chaleureux, direct et concret, sans jugement et sans psychologiser.
-Projet : ${p.nom}
-Ses réponses aux questions « Y voir clair » :
-${rep}
-Ses dernières notes :
-${notes}
+
+/* ---- édition ---- */
+let nT=null;
+function nSaveSoon(){clearTimeout(nT);nT=setTimeout(nSave,500)}
+function nSave(){
+  clearTimeout(nT);const el=document.getElementById("ned");if(!el)return;
+  const id=el.dataset.ned,n=S.notes[id]||(V.ndraft&&V.ndraft.id===id?V.ndraft.n:null);if(!n)return;
+  const html=cleanHtml(el.innerHTML),txt=edText(el);
+  if(html===cleanHtml(nHtml(n)))return;
+  if(!S.notes[id]&&!txt)return;
+  put("notes",id,{...n,html,txt,maj:Date.now()},true);
+  if(V.ndraft&&V.ndraft.id===id)V.ndraft=null;
+}
+function nBack(){
+  nSave();const id=V.note,n=S.notes[id];
+  if(n&&!n.suppr&&!String(n.txt||"").trim())del("notes",id);
+  V.note=null;V.ndraft=null;V.confirm=null;render(true);window.scrollTo(0,0);
+}
+function nCompose(){
+  const id=uid(),now=Date.now();V.ndraft={id,n:{projet:nRealF(V.nf)?V.nf:null,html:"",txt:"",ts:now,maj:now}};V.note=id;V.confirm=null;render(true);window.scrollTo(0,0);
+  const el=document.getElementById("ned");if(el){el.focus();const r=document.createRange();r.selectNodeContents(el.firstChild||el);r.collapse(true);const s=getSelection();s.removeAllRanges();s.addRange(r)}
+}
+let nRange=null;
+document.addEventListener("selectionchange",()=>{const el=document.getElementById("ned"),s=getSelection();if(el&&s.rangeCount&&el.contains(s.anchorNode))nRange=s.getRangeAt(0).cloneRange()});
+const upTo=(node,sel,root)=>{let x=node&&node.nodeType===3?node.parentNode:node;while(x&&x!==root){if(x.matches&&x.matches(sel))return x;x=x.parentNode}return null};
+function nFormat(cmd){
+  const el=document.getElementById("ned");if(!el)return;
+  if(document.activeElement!==el){el.focus();if(nRange){const s=getSelection();s.removeAllRanges();s.addRange(nRange)}}
+  try{document.execCommand("defaultParagraphSeparator",false,"div")}catch(e){}
+  const at=()=>getSelection().anchorNode;
+  if(cmd==="ck"){
+    const li=upTo(at(),"li",el),ul=li&&li.parentNode;
+    if(ul&&ul.tagName==="UL"&&ul.classList.contains("ck"))document.execCommand("insertUnorderedList");
+    else{if(!(ul&&ul.tagName==="UL"))document.execCommand(ul?"insertOrderedList":"insertUnorderedList");if(ul&&ul.tagName==="OL")document.execCommand("insertUnorderedList");const u=upTo(at(),"ul",el);if(u)u.className="ck"}
+  }else if(cmd==="ul"||cmd==="ol"){
+    const u=upTo(at(),"ul",el);if(cmd==="ul"&&u&&u.classList.contains("ck")){u.removeAttribute("class");[...u.children].forEach(li=>li.removeAttribute("data-ok"))}
+    else document.execCommand(cmd==="ul"?"insertUnorderedList":"insertOrderedList");
+  }else if(/^(h1|h2|h3|div)$/.test(cmd))document.execCommand("formatBlock",false,cmd==="div"?"div":"<"+cmd+">");
+  else document.execCommand(cmd);
+  nSaveSoon();
+}
+function nToggle(id){["nfmt","nmenu","nfmenu"].forEach(k=>{const p=document.getElementById(k);if(p)p.hidden=k===id?!p.hidden:true})}
+function nDebloque(id){
+  nSave();const n=S.notes[id];if(!n||!String(n.txt||"").trim())return;
+  stream("deb|"+id,`Tu aides un lycéen à démêler ce qui lui prend la tête. Sois chaleureux, direct et concret, sans jugement et sans psychologiser.
+Voici sa note${nRealF(n.projet)?` (dossier « ${S.projets[n.projet].nom} »)`:""} :
+${String(n.txt).slice(0,4000)}
 Réponds en français, sans titres markdown, en trois parties courtes séparées par une ligne vide :
 1) Ce que tu comprends de la situation (2 phrases).
 2) Trois questions pour l'aider à avancer (tirets).
 3) Une micro-action faisable en 15 minutes cette semaine.`);
 }
-function fmtTimer(){if(!V.timerEnd)return"5:00";const s=Math.max(0,Math.round((V.timerEnd-Date.now())/1000));return s?Math.floor(s/60)+":"+String(s%60).padStart(2,"0"):"Fini ✓"}
-let timerId=null;
-function startTimer(sec){clearInterval(timerId);if(!sec){V.timerEnd=null;return render(true)}V.timerEnd=Date.now()+sec*1000;render(true);
-  timerId=setInterval(()=>{const el=document.getElementById("timer");if(el)el.textContent=fmtTimer();if(Date.now()>=V.timerEnd)clearInterval(timerId)},500)}
+/* garder le curseur dans la note quand on touche la barre de mise en forme */
+document.addEventListener("mousedown",e=>{if(e.target.closest&&e.target.closest("[data-fmt]"))e.preventDefault()});
+/* cocher une case : toucher le rond à gauche de la ligne */
+document.addEventListener("click",e=>{
+  const li=e.target.closest&&e.target.closest("#ned ul.ck>li");if(!li)return;
+  if(e.clientX<li.getBoundingClientRect().left){e.preventDefault();if(li.getAttribute("data-ok")==="1")li.removeAttribute("data-ok");else li.setAttribute("data-ok","1");nSaveSoon()}
+},true);
+/* une nouvelle ligne de liste n'est jamais déjà cochée */
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Enter"||!e.target.closest||!e.target.closest("#ned"))return;
+  setTimeout(()=>{const el=document.getElementById("ned");const li=el&&upTo(getSelection().anchorNode,"li",el);if(li&&li.getAttribute("data-ok")==="1"&&!li.textContent.trim())li.removeAttribute("data-ok")},0);
+});
+/* coller du texte simple */
+document.addEventListener("paste",e=>{
+  if(!e.target.closest||!e.target.closest("#ned"))return;e.preventDefault();
+  const t=(e.clipboardData||window.clipboardData).getData("text/plain");document.execCommand("insertText",false,t);
+});
 
 /* ================================================================
    LECTURE
@@ -1600,44 +1792,16 @@ function setPage(id,v){const b=S.livres[id];if(!b)return;v=Math.max(0,Math.min(b
   put("livres",id,{...b,lu:v,fini,finiLe:fini?(b.finiLe||dkey(today())):null,maj:Date.now()})}
 
 /* ================================================================
-   SPORT
-   ================================================================ */
-function pageSport(){
-  const t=today(),grp=SPORT[t.getDay()],fait=!!(S.seances[dkey(t)]||{}).faite;
-  const mk=dkey(t).slice(0,7),nMois=Object.keys(S.seances).filter(k=>k.startsWith(mk)&&S.seances[k].faite).length;
-  const plan=[[1,"Lundi"],[2,"Mardi"],[6,"Samedi"]].map(([d,n])=>`<div class="pday ${d===t.getDay()?"today":""}"><b>${n}</b><span>${SPORT[d].join(" · ")}</span></div>`).join("");
-  const groups=grp||Object.keys(EXOS);
-  const by={};Object.values(S.muscu).forEach(e=>{(by[e.exo]=by[e.exo]||[]).push(e)});
-  const exos=Object.entries(by).map(([n,a])=>[n,a.sort((x,y)=>x.date.localeCompare(y.date))]).sort((a,b)=>b[1][b[1].length-1].date.localeCompare(a[1][a[1].length-1].date));
-  const spark=a=>{const v=a.slice(-8).map(e=>e.poids);if(v.length<2)return"";const mn=Math.min(...v),mx=Math.max(...v),r=mx-mn||1;
-    const P=v.map((p,i)=>[4+i*84/(v.length-1),26-(p-mn)/r*20]);return`<svg viewBox="0 0 92 30" width="92" height="30" aria-hidden="true"><polyline points="${P.map(p=>p.join(",")).join(" ")}" fill="none" stroke="var(--sport)" stroke-width="2" stroke-linejoin="round"/><circle cx="${P[P.length-1][0]}" cy="${P[P.length-1][1]}" r="3" fill="var(--sport)"/></svg>`};
-  const next=(()=>{for(let i=1;i<8;i++){const d=add(t,i);if(SPORT[d.getDay()])return JOURS[d.getDay()].toLowerCase()+" ("+SPORT[d.getDay()].join(", ")+")"}})();
-  return`<div class="card stack"><p class="label" style="margin:0">Aujourd'hui</p>
-    ${grp?`<div class="row" style="justify-content:space-between"><b style="font-family:var(--display);font-size:1.3rem">${grp.join(" · ")}</b>
-      <label class="chk" style="padding:0;min-height:0"><input type="checkbox" id="seance-faite" data-seance="1" ${fait?"checked":""}><span class="box">${tick}</span><span class="t">Séance faite</span></label></div>`
-    :`<div class="muted">Pas de muscu prévue aujourd'hui. Prochaine séance : ${next}.</div>`}
-  </div>
-  <div><p class="label">Programme</p><div class="plan">${plan}</div></div>
-  <div class="stats"><div class="stat"><b>${nMois}</b><span>séances ce mois</span></div><div class="stat"><b>${exos.length}</b><span>exercices suivis</span></div><div class="stat"><b>${Object.keys(S.muscu).length}</b><span>perfs notées</span></div></div>
-  <div class="card"><form data-f="muscu"><p class="label" style="margin:0">Noter une perf</p>
-    <select class="field" id="mu-exo" name="exo">${groups.map(g=>`<optgroup label="${g}">${EXOS[g].map(e=>`<option>${e}</option>`).join("")}</optgroup>`).join("")}</select>
-    <div class="row"><input class="field" id="mu-poids" name="poids" type="number" inputmode="decimal" step="0.5" min="0" placeholder="Charge (kg)" required><input class="field" id="mu-reps" name="reps" type="number" inputmode="numeric" min="1" placeholder="Répétitions" required><button class="btn">Noter</button></div></form></div>
-  <div class="card"><p class="label">Carnet de charges</p>${exos.length?exos.map(([n,a])=>{const l=a[a.length-1],f=a[0];return`<div class="exo"><div><b>${esc(n)}</b><small class="num">${l.poids} kg × ${l.reps}${a.length>1?` · ${l.poids-f.poids>=0?"+":""}${l.poids-f.poids} kg depuis le début`:""}</small></div>${spark(a)||"<span></span>"}<span class="muted" style="font-size:.78rem">${+l.date.slice(8)}/${l.date.slice(5,7)}</span></div>`}).join("")
-    :`<div class="empty">Note ta charge après chaque exercice : la courbe de progression apparaît dès la deuxième fois.</div>`}</div>`;
-}
-
-/* ================================================================
    ACCUEIL
    ================================================================ */
-const SECT=[["hab","Suivi d'habitudes"],["proj","Projets 🪶"],["fin","Finance"],["lect","Lecture"],["cours","Cours"],["sport","Sport"]];
+const SECT=[["hab","Suivi d'habitudes"],["proj","🪶"],["fin","Finance"],["lect","Lecture"],["cours","Cours"]];
 function summary(k){
   const t=today();
   if(k==="hab"){const s=dayStats(t);return[`${s.n}/${s.t}`,"tâches faites aujourd'hui"]}
-  if(k==="proj"){const p=Object.keys(S.projets).length,n=Object.keys(S.notes).length;return p||n?[`${p}`,`projet${p>1?"s":""} · ${n} note${n>1?"s":""}`]:["Vide-tête","écris ce qui te trotte dans la tête"]}
+  if(k==="proj"){const a=nIn("all");return a.length?[`${a.length}`,`note${a.length>1?"s":""} · ${esc(nTitle(a[0][1]))}`]:["Notes","écris ce qui te trotte dans la tête"]}
   if(k==="fin"){const dg=dailyGame(t),r=prog().days[dkey(t)];return r?[`✓ ${r.s}/${r.m}`,`défi du jour : ${dg.n} · ${levelOf(prog().xp).name}`]:[`${dg.e} Défi`,`du jour : ${dg.n} · actu FR/EN`]}
   if(k==="lect"){const b=Object.values(S.livres).filter(x=>!x.fini).sort((a,b)=>(b.maj||0)-(a.maj||0))[0];return b?[`${Math.round((b.lu||0)/b.pages*100)}%`,esc(b.titre)]:["—","Ajoute ton livre du moment"]}
   if(k==="cours"){const a=COURS.reduce((s,x)=>s+subjStats(x),0)/COURS.length;let ok=0;Object.values(S.quiz).forEach(q=>Object.values(q.r||{}).forEach(r=>ok+=r.ok||0));return[`${Math.round(a*100)}%`,`du programme maîtrisé${ok?` · ${ok} réponses sues`:""}`]}
-  if(k==="sport"){const g=SPORT[t.getDay()];return g?[(S.seances[dkey(t)]||{}).faite?"✓ Fait":"Séance",g.join(" · ")]:["Repos","pas de muscu aujourd'hui"]}
 }
 function pageHome(){
   const t=today(),h=new Date().getHours();
@@ -1871,23 +2035,25 @@ async function testAI(){
 /* ================================================================
    RENDU
    ================================================================ */
-const PAGES={reglages:pageReglages,hab:pageHab,proj:pageProj,fin:pageFin,lect:pageLect,cours:pageCours,sport:pageSport};
+const PAGES={reglages:pageReglages,hab:pageHab,proj:pageProj,fin:pageFin,lect:pageLect,cours:pageCours};
 let pending=false;
 function render(force){
   const a=document.activeElement;
-  if(!force&&a&&a.matches&&a.matches("input:not([type=checkbox]),select,textarea")&&a.closest("#app")){pending=true;return}
+  if(!force&&a&&a.matches&&a.matches("input:not([type=checkbox]),select,textarea,[contenteditable]")&&a.closest("#app")){pending=true;return}
   pending=false;
   const app=document.getElementById("app");
   if(V.page==="home"||!PAGES[V.page]){app.innerHTML=pageHome();return}
+  if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
   const n=(SECT.find(s=>s[0]===V.page)||[0,"Réglages"])[1];
   app.innerHTML=`<div class="sec" style="--c:var(${COL[V.page]||"--proj"})"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${n}</h1>${(ILL[V.page]||"").replace('class="ill"',"")}</div>${PAGES[V.page]()}</div>`;
 }
-document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},0));
+/* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
+document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},350));
 
 /* ================================================================
    INTERACTIONS
    ================================================================ */
-function go(p){V.page=p;V.confirm=null;V.chap=null;V.proj=null;saveV();render(true);window.scrollTo(0,0)}
+function go(p){if(V.note)nSave();V.page=p;V.confirm=null;V.chap=null;V.proj=null;V.note=null;V.ndraft=null;V.nf=null;V.nq="";V.newf=false;V.renf=false;if(p==="proj")nHousekeep();saveV();render(true);window.scrollTo(0,0)}
 function confirmOr(id,fn){if(V.confirm===id){V.confirm=null;return fn()}V.confirm=id;render(true)}
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;const d=b.dataset;
@@ -1934,18 +2100,22 @@ document.addEventListener("click",e=>{
   if(d.flip){V.gflip=!V.gflip;return render(true)}
   if(d.gl){V.gflip=false;V.gi=d.gl==="r"?Math.floor(Math.random()*GLOSS.length):(V.gi+ +d.gl+GLOSS.length)%GLOSS.length;return render(true)}
   if(d.trdir){V.trDir=d.trdir;return render(true)}
-  /* projets */
-  if(d.emo){V.emoji=d.emo;return render(true)}
-  if(d.openp!==undefined){V.proj=d.openp||null;V.ptab="journal";V.confirm=null;render(true);return window.scrollTo(0,0)}
-  if(d.ptab){V.ptab=d.ptab;return render(true)}
-  if(d.jp&&V.proj){V.jpoids[V.proj]=+d.jp;return render(true)}
-  if(d.timer!==undefined)return startTimer(+d.timer);
-  if(d.defi){V.defi=(V.defi+1+Math.floor(Math.random()*(DEFIS.length-1)))%DEFIS.length;return render(true)}
-  if(d.usedefi){V.vt=(V.vt?V.vt+"\n\n":"")+"Défi : "+DEFIS[V.defi]+"\n";render(true);const t=document.getElementById("vt");if(t){t.focus();t.selectionStart=t.selectionEnd=t.value.length}return}
-  if(d.savevt){const txt=V.vt.trim();if(!txt)return;put("notes",uid(),{projet:V.vtProj||null,txt,ts:Date.now()});V.vt="";clearInterval(timerId);V.timerEnd=null;return render(true)}
-  if(d.deb)return debloque(d.deb);
-  if(d.delp)return confirmOr(d.delp,()=>{const id=d.delp;V.proj=null;projNotes(id).forEach(([nid])=>del("notes",nid));del("projets",id)});
-  if(d.deln)return confirmOr(d.deln,()=>del("notes",d.deln));
+  /* 🪶 notes */
+  if(d.nf!==undefined){V.nf=d.nf||null;V.nq="";V.newf=false;V.renf=false;V.confirm=null;nHousekeep();render(true);return window.scrollTo(0,0)}
+  if(d.note){V.note=d.note;V.confirm=null;render(true);return window.scrollTo(0,0)}
+  if(d.nback)return nBack();
+  if(d.ncompose)return nCompose();
+  if(d.nok){nSave();const el=document.getElementById("ned");if(el)el.blur();return}
+  if(d.fmt)return nFormat(d.fmt);
+  if(d.ntoggle)return nToggle(d.ntoggle);
+  if(d.newf!==undefined){V.newf=d.newf==="1";render(true);const i=document.getElementById("nf-nom");if(i)i.focus();return}
+  if(d.nfren){V.renf=true;render(true);const i=document.getElementById("nf-ren");if(i){i.focus();i.select()}return}
+  if(d.nfdel)return confirmOr(d.nfdel,()=>{const f=d.nfdel,now=Date.now();nIn(f).forEach(([id,n])=>put("notes",id,{...n,suppr:now},true));del("projets",f);V.nf=null;render(true)});
+  if(d.npin){nSave();const n=S.notes[d.npin];if(n){put("notes",d.npin,{...n,epingle:!n.epingle},true);render(true)}return}
+  if(d.ndel){nSave();const n=S.notes[d.ndel];if(n&&String(n.txt||"").trim())put("notes",d.ndel,{...n,suppr:Date.now()},true);else if(n)del("notes",d.ndel);V.note=null;V.ndraft=null;render(true);return window.scrollTo(0,0)}
+  if(d.nrest){const n=S.notes[d.nrest];if(n){const r={...n};delete r.suppr;r.maj=Date.now();put("notes",d.nrest,r,true)}V.note=null;return render(true)}
+  if(d.nkill)return confirmOr(d.nkill,()=>{del("notes",d.nkill);V.note=null;render(true)});
+  if(d.ndeb)return nDebloque(d.ndeb);
   /* lecture */
   if(d.dell)return confirmOr(d.dell,()=>del("livres",d.dell));
   if(d.pg){const[id,n]=d.pg.split("|");setPage(id,(S.livres[id].lu||0)+ +n)}
@@ -1953,8 +2123,8 @@ document.addEventListener("click",e=>{
 document.addEventListener("input",e=>{
   const t=e.target,d=t.dataset;
   if(d.ans)V.ans[d.ans]=t.value;
-  if(d.vt)V.vt=t.value;
-  if(d.jd)V.jd[d.jd]=t.value;
+  if(d.ned!==undefined)nSaveSoon();
+  if(d.nq!==undefined){V.nq=t.value;nFilter()}
   if(d.trin)V.trIn=t.value;
   if(d.ci)V.ci[d.ci]=t.value;
   if(d.gin)V.gin=t.value;
@@ -1962,18 +2132,13 @@ document.addEventListener("input",e=>{
 document.addEventListener("change",e=>{
   const t=e.target,d=t.dataset;
   if(d.hab){const k=dkey(V.day),cur={...((S.jours[k]||{}).done||{})};if(t.checked)cur[d.hab]=true;else delete cur[d.hab];return put("jours",k,{date:k,done:cur})}
-  if(d.pt){const[pid,tid]=d.pt.split("|"),p=S.projets[pid];return put("projets",pid,{...p,taches:(p.taches||[]).map(x=>x.id===tid?{...x,ok:t.checked}:x)})}
-  if(d.clair){const[pid,i]=d.clair.split("|"),p=S.projets[pid];if(!p)return;const cl={...(p.clair||{})};if((cl[i]||"")===t.value)return;cl[i]=t.value;return put("projets",pid,{...p,clair:cl})}
-  if(d.vtproj!==undefined){V.vtProj=t.value;return}
+  if(d.nmove!==undefined){nSave();const id=d.nmove,v=t.value||null;if(S.notes[id])put("notes",id,{...S.notes[id],projet:v},true);else if(V.ndraft&&V.ndraft.id===id)V.ndraft.n.projet=v;return render(true)}
   if(d.simstop&&V.g&&V.g.sim){V.g.sim.stop=t.checked;return}
   if(d.imp&&t.files&&t.files[0]){readImport(t.files[0]);t.value="";return}
-  if(d.seance){const k=dkey(today());return t.checked?put("seances",k,{faite:true,groupes:SPORT[today().getDay()]||[]}):del("seances",k)}
   if(d.pgset){setTimeout(()=>setPage(d.pgset,+t.value),0)}
 });
 document.addEventListener("submit",e=>{
   e.preventDefault();const f=e.target,x=Object.fromEntries(new FormData(f));
-  if(f.dataset.ftask){const p=S.projets[f.dataset.ftask];const tx=(x.t||"").trim();if(!tx)return;
-    document.activeElement&&document.activeElement.blur();return put("projets",f.dataset.ftask,{...p,taches:[...(p.taches||[]),{id:uid(),t:tx,ok:false}]})}
   const k=f.dataset.f;
   if(k==="cfg"){const u=String(x.url||"").trim(),key=String(x.key||"").trim();if(!/^https:\/\/.+/.test(u)||!key){return}lsSet("cerveau-cfg",{supabaseUrl:u,supabaseKey:key});setSync("Non connecté");return render(true)}
   if(k==="login"){const act=(e.submitter&&e.submitter.value)||"in",em=String(x.email||"").trim(),pw=String(x.pw||"");V.authBusy=true;V.authMsg="";render(true);
@@ -1988,10 +2153,9 @@ Ensuite, après une ligne contenant seulement « — », liste les 5 termes fina
 Texte :
 ${txt.slice(0,6000)}`)}
   document.activeElement&&document.activeElement.blur();
-  if(k==="proj"){const n=(x.nom||"").trim();if(n){const id=uid();put("projets",id,{nom:n,emoji:V.emoji,taches:[],clair:{},cree:Date.now()});V.proj=id;V.ptab="journal";render(true)}}
-  if(k==="note"&&V.proj){const txt=(V.jd[V.proj]||"").trim();if(!txt)return;put("notes",uid(),{projet:V.proj,txt,poids:V.jpoids[V.proj]||null,ts:Date.now()});V.jd[V.proj]="";V.jpoids[V.proj]=0;render(true)}
+  if(k==="nfolder"){const nm=(x.nom||"").trim();if(nm)put("projets",uid(),{nom:nm,cree:Date.now()},true);V.newf=false;return render(true)}
+  if(k==="nfren"){const nm=(x.nom||"").trim();if(nm&&nRealF(V.nf))put("projets",V.nf,{...S.projets[V.nf],nom:nm},true);V.renf=false;return render(true)}
   if(k==="lect"){const p=parseInt(x.pages);if(x.titre.trim()&&p>0)put("livres",uid(),{titre:x.titre.trim(),auteur:(x.auteur||"").trim(),pages:p,lu:0,fini:false,maj:Date.now()})}
-  if(k==="muscu"){const p=parseFloat(x.poids),r=parseInt(x.reps);if(p>=0&&r>0){const g=Object.keys(EXOS).find(g=>EXOS[g].includes(x.exo));put("muscu",uid(),{exo:x.exo,groupe:g,poids:p,reps:r,date:dkey(today())})}}
 });
 
 /* ================================================================
