@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>2ème cerveau</title>
-<meta name="description" content="Habitudes, notes, finance, lectures et cours : ton deuxième cerveau.">
+<meta name="description" content="Habitudes, Pronote, notes, finance, lectures et cours : ton deuxième cerveau.">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#7a5cff">
 <link rel="icon" href="icons/icon-192.png" type="image/png">
@@ -111,6 +111,7 @@ ul.list>li+li{border-top:1px solid var(--line)}
 .chk .t{font-weight:600;flex:1;min-width:0;overflow-wrap:anywhere}
 .chk input:checked~.t{color:var(--muted);text-decoration:line-through}
 .tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.pnhw{display:block;font-weight:400;color:var(--muted);font-size:.86rem;line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere;text-decoration:none}
 
 /* habits */
 .daybar{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -329,6 +330,38 @@ ul.list>li+li{border-top:1px solid var(--line)}
 /* appli autonome */
 .topr{display:flex;align-items:center;gap:8px;flex-direction:column;align-items:flex-end}
 .gear{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:1.1rem}
+/* Pronote */
+:root{--pron:#e0457f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pron:#ff6b9d}}
+:root[data-theme="dark"]{--pron:#ff6b9d}
+.tile[data-page="pron"]{grid-column:1/-1;min-height:136px}
+.pnl{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:8px 0}
+.pnl+.pnl{border-top:1px solid var(--line)}
+.pnt{display:flex;flex-direction:column;font-variant-numeric:tabular-nums;font-size:.84rem;color:var(--muted);padding-top:1px}
+.pnt b{color:var(--ink);font-size:.96rem}
+.pnb{border-left:4px solid var(--pc,var(--c));padding:1px 0 1px 10px;display:flex;flex-direction:column;gap:1px;min-width:0}
+.pnb b{font-weight:700;overflow-wrap:anywhere}
+.pnb span{font-size:.86rem;color:var(--muted);overflow-wrap:anywhere}
+.pnb em{font-style:normal;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--c)}
+.pnl.off .pnb b,.pnl.off .pnt b{text-decoration:line-through;color:var(--muted)}
+.pnl.off .pnb em{color:var(--down)}
+.pnbig{font-family:var(--display);font-size:2.3rem;font-weight:700;color:var(--c);line-height:1.1}
+.pnsub{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 10px;padding:10px 0;align-items:center}
+.pnsub+.pnsub{border-top:1px solid var(--line)}
+.pnsub b{font-variant-numeric:tabular-nums}
+.pnbar{grid-column:1/-1;height:8px;border-radius:4px;background:var(--soft);position:relative}
+.pnbar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px}
+.pnbar u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--ink);opacity:.6}
+.pngr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:9px 0;align-items:center}
+.pngr+.pngr{border-top:1px solid var(--line)}
+.pngr .v{font-family:var(--display);font-weight:700;font-size:1.1rem;font-variant-numeric:tabular-nums;color:var(--c)}
+.pngr small{color:var(--muted);font-size:.8rem}
+.pnpj{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.pnpj a{font-size:.82rem;color:var(--c);font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pnsteps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.pnscan{position:fixed;inset:0;z-index:50;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px}
+.pnscan video{width:100%;max-width:520px;border-radius:16px;background:#111}
+.pnscan p{color:#fff;text-align:center}
 
 @media (max-width:460px){.plan{grid-template-columns:1fr}.snap{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -342,7 +375,7 @@ ul.list>li+li{border-top:1px solid var(--line)}
 /* ================================================================
    DONNÉES FIXES
    ================================================================ */
-const COL={hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours"};
+const COL={pron:"--pron",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours"};
 const JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 
@@ -996,6 +1029,7 @@ const tick=`<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-
    ILLUSTRATIONS
    ================================================================ */
 const ILL={
+ pron:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="14" width="56" height="58" rx="11" fill="var(--pron)" opacity=".2"/><rect x="14" y="14" width="56" height="17" rx="8.5" fill="var(--pron)"/><path d="M27 45h30M27 56h18" stroke="var(--pron)" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="61" r="11" fill="var(--pron)"/><path d="M55 61l3.4 3.4 6.4-7" stroke="#fff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  hab:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="18" width="52" height="50" rx="10" fill="var(--hab)" opacity=".2"/><rect x="14" y="18" width="52" height="13" rx="6" fill="var(--hab)"/><circle cx="28" cy="46" r="5" fill="var(--hab)"/><circle cx="40" cy="46" r="5" fill="var(--hab)"/><circle cx="52" cy="46" r="5" fill="var(--hab)" opacity=".35"/><circle cx="28" cy="58" r="5" fill="var(--hab)" opacity=".35"/><path d="M36 58l3 3 6-7" stroke="var(--hab)" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
  proj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M60 14C38 18 24 36 22 62l6-2c4-16 14-28 26-36-10 10-16 22-18 34 16-6 26-24 24-44z" fill="var(--proj)"/><path d="M22 62l-6 8" stroke="var(--proj)" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="62" r="8" fill="var(--proj)" opacity=".25"/></svg>`,
  fin:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="20" width="56" height="44" rx="8" fill="var(--fin)" opacity=".18"/><path d="M20 54l12-12 9 7 17-19" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 30h9v9" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -1006,7 +1040,7 @@ const ILL={
 /* ================================================================
    STOCKAGE (base partagée de l'appli, sinon ce navigateur)
    ================================================================ */
-const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu"];
+const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu","pronote"];
 let S={};C.forEach(c=>S[c]={});
 let db=null, DL=null, SAMPLE=null, SAMPLE_ST="none", TOOLS_OK=false, syncTxt="Sur cet appareil";
 function localLoad(){try{const x=JSON.parse(localStorage.getItem("cerveau")||"{}");C.forEach(c=>S[c]=x[c]||{})}catch(e){}}
@@ -1051,7 +1085,10 @@ function outBox(key){return V.out[key]?`<div class="out" id="out-${sid(key)}" ar
 /* ================================================================
    HABITUDES
    ================================================================ */
-function dayStats(d){const p=planOf(d),k=(S.jours[dkey(d)]||{}).done||{};return{n:p.filter(h=>k[h]).length,t:p.length}}
+/* devoirs Pronote : chacun apparaît la veille du jour où il est à rendre (rien si Pronote n'est pas relié) */
+function pnHwDay(x){const[y,m,d]=String(x.pour).slice(0,10).split("-").map(Number);return dkey(new Date(y,m-1,d-1))}
+function pnTasks(d){const p=S.pronote&&S.pronote.data,a=p&&Array.isArray(p.devoirs)?p.devoirs:[],k=dkey(d);return a.filter(x=>x&&x.id&&x.pour&&pnHwDay(x)===k)}
+function dayStats(d){const p=planOf(d),k=(S.jours[dkey(d)]||{}).done||{},pn=pnTasks(d);return{n:p.filter(h=>k[h]).length+pn.filter(x=>x.fait||k["pn:"+x.id]).length,t:p.length+pn.length}}
 function streak(){let d=today(),s=0;const t=dayStats(d);if(t.n<t.t)d=add(d,-1);for(let i=0;i<400;i++){const x=dayStats(d);if(x.t&&x.n===x.t){s++;d=add(d,-1)}else break}return s}
 function ring(p,c){const r=24,L=2*Math.PI*r;return`<svg width="60" height="60" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="${r}" fill="none" stroke="var(--soft)" stroke-width="7"/><circle cx="30" cy="30" r="${r}" fill="none" stroke="var(${c})" stroke-width="7" stroke-linecap="round" stroke-dasharray="${L}" stroke-dashoffset="${L*(1-p)}" transform="rotate(-90 30 30)"/></svg>`}
 function weekSeries(nw){const o=[],m0=monday(today());for(let w=nw-1;w>=0;w--){const m=add(m0,-7*w);let n=0,t=0;for(let i=0;i<7;i++){const d=add(m,i);if(d>today())break;const s=dayStats(d);n+=s.n;t+=s.t}o.push({m,p:t?n/t:0})}return o}
@@ -1076,7 +1113,7 @@ function pageHab(){
       <div class="dayname"><b>${isT?"Aujourd'hui":JOURS[d.getDay()]}</b><small>${JOURS[d.getDay()].toLowerCase()} ${d.getDate()} ${MOIS[d.getMonth()]}</small></div>
       <button data-a="next" aria-label="Jour suivant" ${isT?"disabled":""}>›</button></div>
     <div class="row" style="gap:14px">${ring(t?n/t:0,"--hab")}<div><b style="font-family:var(--display);font-size:1.4rem" class="num">${n} / ${t}</b><div class="muted">${n===t?"Journée bouclée":(t-n)+" à faire"}</div></div></div>
-    <ul class="list">${plan.map(h=>`<li><label class="chk"><input type="checkbox" id="hab-${h}" data-hab="${h}" ${k[h]?"checked":""}><span class="box">${tick}</span><span class="t">${HABITS[h][0]}</span><span class="tag">${HABITS[h][1]}</span></label></li>`).join("")}</ul>
+    <ul class="list">${plan.map(h=>`<li><label class="chk"><input type="checkbox" id="hab-${h}" data-hab="${h}" ${k[h]?"checked":""}><span class="box">${tick}</span><span class="t">${HABITS[h][0]}</span><span class="tag">${HABITS[h][1]}</span></label></li>`).join("")}${pnTasks(d).map(x=>`<li><label class="chk"><input type="checkbox" id="hab-pn-${sid(x.id)}" data-pnd="${esc(x.id)}|${dkey(d)}" ${x.fait||k["pn:"+x.id]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.m||"Devoir")}<small class="pnhw">${esc(String(x.txt||"").slice(0,140))}</small></span><span class="tag">Devoir</span></label></li>`).join("")}</ul>
   </div>
   <div><p class="label">Cette semaine</p><div class="week">${week}</div></div>
   <div class="stats"><div class="stat"><b>${streak()}</b><span>jours parfaits d'affilée</span></div>
@@ -1794,9 +1831,10 @@ function setPage(id,v){const b=S.livres[id];if(!b)return;v=Math.max(0,Math.min(b
 /* ================================================================
    ACCUEIL
    ================================================================ */
-const SECT=[["hab","Suivi d'habitudes"],["proj","🪶"],["fin","Finance"],["lect","Lecture"],["cours","Cours"]];
+const SECT=[["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["lect","Lecture"],["cours","Cours"]];
 function summary(k){
   const t=today();
+  if(k==="pron")return pnSummary();
   if(k==="hab"){const s=dayStats(t);return[`${s.n}/${s.t}`,"tâches faites aujourd'hui"]}
   if(k==="proj"){const a=nIn("all");return a.length?[`${a.length}`,`note${a.length>1?"s":""} · ${esc(nTitle(a[0][1]))}`]:["Notes","écris ce qui te trotte dans la tête"]}
   if(k==="fin"){const dg=dailyGame(t),r=prog().days[dkey(t)];return r?[`✓ ${r.s}/${r.m}`,`défi du jour : ${dg.n} · ${levelOf(prog().xp).name}`]:[`${dg.e} Défi`,`du jour : ${dg.n} · actu FR/EN`]}
@@ -1838,9 +1876,11 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.0.0";
+const APP_VERSION="1.1.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
+/* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
+const NOUP=(col,id)=>NOSYNC(col,id)||col==="pronote";
 function lsGet(k,def){try{const v=localStorage.getItem(k);return v===null?def:JSON.parse(v)}catch(e){return def}}
 function lsSet(k,v){try{v===null?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function cfg(){const b=window.CERVEAU_CONFIG||{},l=lsGet("cerveau-cfg",{});return{supabaseUrl:String(l.supabaseUrl||b.supabaseUrl||"").trim().replace(/\/+$/,""),supabaseKey:String(l.supabaseKey||b.supabaseKey||"").trim()}}
@@ -1890,7 +1930,7 @@ async function sbRest(method,path,body,extra){
 
 /* ---------- synchronisation : tout part d'abord sur l'appareil, puis vers le compte ---------- */
 let OUTBOX=lsGet("cerveau-outbox",{});
-function enqueue(col,id,data,deleted){if(NOSYNC(col,id))return;OUTBOX[col+"|"+id]={col,id,data:deleted?{}:data,deleted:!!deleted,ts:Date.now()};lsSet("cerveau-outbox",OUTBOX);flushSoon()}
+function enqueue(col,id,data,deleted){if(NOUP(col,id))return;OUTBOX[col+"|"+id]={col,id,data:deleted?{}:data,deleted:!!deleted,ts:Date.now()};lsSet("cerveau-outbox",OUTBOX);flushSoon()}
 let flT=null;function flushSoon(){clearTimeout(flT);flT=setTimeout(flush,700)}
 let flushing=false;
 async function flush(){
@@ -1926,7 +1966,7 @@ async function pull(full){
       }
       if(rows.length<1000)break;off+=1000;
     }
-    if(full)C.forEach(c=>Object.keys(S[c]||{}).forEach(id=>{if(!seen.has(c+"|"+id)&&!NOSYNC(c,id))enqueue(c,id,S[c][id],false)}));
+    if(full)C.forEach(c=>Object.keys(S[c]||{}).forEach(id=>{if(!seen.has(c+"|"+id)&&!NOUP(c,id))enqueue(c,id,S[c][id],false)}));
     if(maxTs)lsSet("cerveau-lastpull",maxTs);
     lsSet("cerveau-lastsync",Date.now());
     if(changed){localSaveSoon();render()}
@@ -2023,7 +2063,7 @@ function pageReglages(){
     <p class="muted small">${a.provider==="gemini"?"La clé reste sur cet appareil : colle-la aussi sur ton autre appareil. Google fixe le nombre de messages gratuits par jour.":"Ollama doit être installé et lancé sur ce PC (étape 6 du guide). Il ne marche que sur ce PC."}</p></div>`;
   const inst=`<div class="card stack"><p class="label" style="margin:0">Installer l'appli</p>${isStandalone()?`<p>✓ L'appli est installée sur cet appareil.</p>`:`${INSTALL_EVT?`<div><button class="btn" data-install="1">Installer sur cet appareil</button></div>`:""}
     <p class="small"><b>iPhone</b> : dans Safari, bouton Partager puis « Sur l'écran d'accueil ».<br><b>Android</b> : menu ⋮ de Chrome puis « Installer l'application ».<br><b>Ordinateur</b> : dans Chrome ou Edge, icône d'installation à droite de la barre d'adresse.</p>`}</div>`;
-  return sync+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
+  return sync+pnReglages()+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
 }
 async function testAI(){
   V.aiBusy=true;V.aiMsg="";render(true);
@@ -2033,9 +2073,197 @@ async function testAI(){
 }
 
 /* ================================================================
+   PRONOTE : emploi du temps, devoirs, notes, contenu des cours
+   Les données viennent de la fonction Supabase « pronote » (voir supabase/functions/pronote)
+   et arrivent sur tous tes appareils par la synchronisation (collection « pronote »).
+   ================================================================ */
+const PN_JSQR=["https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js","https://unpkg.com/jsqr@1.4.0/dist/jsQR.js"];
+const PN_COLS=["#2d7ff0","#14a27a","#e0457f","#f0a30a","#7a5cff","#0ea5b7","#ff6a55","#8a6b3d","#5b8c2a","#c2410c"];
+let PN_BUSY=false;
+const pnData=()=>{const p=S.pronote&&S.pronote.data;return p&&typeof p==="object"&&p.updated?p:null};
+const pnDay=s=>String(s||"").slice(0,10);
+const pnHM=s=>{const d=new Date(s);return isNaN(+d)?"":d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})};
+const pnNum=n=>n==null||isNaN(n)?"—":(+n).toLocaleString("fr-FR",{maximumFractionDigits:2});
+const pnCol=m=>{let h=0;String(m||"").split("").forEach(c=>h=(h*31+c.charCodeAt(0))>>>0);return PN_COLS[h%PN_COLS.length]};
+function pnDayName(dk){const t=dkey(today()),tm=dkey(add(today(),1));if(dk===t)return"Aujourd'hui";if(dk===tm)return"Demain";const[y,m,d]=dk.split("-").map(Number),x=new Date(y,m-1,d);return JOURS[x.getDay()]+" "+d+" "+MOIS[m-1]}
+function pnAge(iso){const m=Math.round((Date.now()-Date.parse(iso))/6e4);return m<1?"à l'instant":m<60?"il y a "+m+" min":m<24*60?"il y a "+Math.round(m/60)+" h":"le "+fts(Date.parse(iso))}
+function pnErr(e){
+  const c=e&&e.code,d=e&&e.detail?" ("+String(e.detail).slice(0,160)+")":"";
+  return({no_session:"Connecte d'abord ta synchronisation dans Réglages.",offline:"Pas de connexion internet.",
+    unreachable:"La fonction Pronote ne répond pas : vérifie qu'elle est installée dans Supabase sous le nom « pronote »."+d,
+    not_deployed:"La fonction Pronote n'est pas encore installée dans Supabase (nom : « pronote »).",auth:"Reconnecte-toi à la synchronisation dans Réglages."+d,
+    qr_invalid:"Ce QR code n'est pas celui de Pronote pour l'appli mobile.",pin_invalid:"Le code doit faire 4 chiffres.",
+    qr_refused:"Pronote a refusé : le QR code a sans doute expiré (il ne dure que quelques minutes) ou le code à 4 chiffres est faux. Génère un nouveau QR code et recommence."+d,
+    token_refused:"La connexion à Pronote a expiré : reconnecte Pronote avec un nouveau QR code (bouton plus bas)."+d,
+    not_connected:"Pronote n'est pas connecté.",server:"Erreur du côté de la fonction Pronote"+d}[c])||("Ça n'a pas marché"+(c?" ("+c+")":"")+d);
+}
+async function pnCall(action,extra){
+  if(!cfgOk()||!SESSION)throw{code:"no_session"};const t=await token();if(!t)throw{code:"no_session"};const c=cfg();
+  let r;try{r=await fetch(c.supabaseUrl+"/functions/v1/pronote",{method:"POST",headers:{apikey:c.supabaseKey,Authorization:"Bearer "+t,"Content-Type":"application/json"},body:JSON.stringify({action,...(extra||{})})})}
+  catch(e){throw{code:navigator.onLine?"unreachable":"offline",detail:String(e&&e.message||e)}}
+  const tx=await r.text();let j={};try{j=JSON.parse(tx)}catch(e){}
+  if(r.status===404&&!j.error)throw{code:"not_deployed"};
+  if(!r.ok||j.error)throw{code:j.error||(r.status===401?"auth":"http_"+r.status),detail:j.detail||j.message||tx.slice(0,160)};
+  return j;
+}
+function pnApply(data){if(!data||typeof data!=="object")return;S.pronote={...S.pronote,data};localSaveSoon();render()}
+async function pnRefresh(manual){
+  if(PN_BUSY)return;PN_BUSY=true;if(manual){V.pnMsg="";render(true)}
+  try{const j=await pnCall("refresh");pnApply(j.data);V.pnMsg="";V.pnBad=null}
+  catch(e){V.pnMsg=pnErr(e);V.pnBad=e.code||"err"}
+  PN_BUSY=false;render(!!manual);
+}
+function pnAuto(){
+  const p=pnData();if(!p||!SESSION||!navigator.onLine||PN_BUSY)return;
+  const age=Date.now()-Date.parse(p.updated),last=lsGet("cerveau-pn-try",0);
+  if(age>3*36e5&&Date.now()-last>30*6e4){lsSet("cerveau-pn-try",Date.now());pnRefresh(false)}
+}
+async function pnConnect(pin){
+  if(!V.pnQR)return;V.pnBusy=true;V.pnMsg="Connexion à Pronote…";render(true);
+  try{const j=await pnCall("connect",{qr:V.pnQR,pin});pnApply(j.data);V.pnQR=null;V.pnBad=null;V.pnConnecting=false;V.pnMsg="✓ Pronote est connecté.";V.pntab="jour"}
+  catch(e){V.pnMsg=pnErr(e);if(e.code==="qr_refused"||e.code==="qr_invalid")V.pnQR=null}
+  V.pnBusy=false;render(true);
+}
+async function pnLogout(){V.pnMsg="Déconnexion…";render(true);try{await pnCall("logout")}catch(e){}S.pronote={};localSaveSoon();V.pnMsg="Pronote est déconnecté.";V.pnBad=null;render(true)}
+
+/* ---- lecture du QR code : caméra ou photo ---- */
+function pnLoadQR(i=0){return window.jsQR?Promise.resolve(window.jsQR):new Promise((res,rej)=>{if(i>=PN_JSQR.length)return rej(new Error("jsQR"));
+  const s=document.createElement("script");s.src=PN_JSQR[i];s.onload=()=>window.jsQR?res(window.jsQR):rej(new Error("jsQR"));s.onerror=()=>{s.remove();pnLoadQR(i+1).then(res,rej)};document.head.appendChild(s)})}
+function pnQrOk(t){try{const o=JSON.parse(t);return!!(o&&o.url&&o.jeton&&o.login)}catch(e){return false}}
+function pnGotQR(t){
+  if(!pnQrOk(t)){V.pnMsg="Ce QR code n'est pas celui de Pronote pour l'appli mobile.";return render(true)}
+  V.pnQR=t;V.pnMsg="";render(true);setTimeout(()=>{const i=document.getElementById("pn-pin");if(i)i.focus()},60);
+}
+async function pnScan(){
+  let jsQR;try{jsQR=await pnLoadQR()}catch(e){V.pnMsg="Le lecteur de QR code ne se charge pas : vérifie ta connexion.";return render(true)}
+  let st;try{st=await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"},audio:false})}
+  catch(e){V.pnMsg="L'appareil photo n'est pas accessible. Autorise-le, ou prends une photo du QR code et utilise « Choisir une photo ».";return render(true)}
+  const ov=document.createElement("div");ov.className="pnscan";
+  ov.innerHTML=`<video playsinline muted autoplay></video><p>Vise le QR code affiché par Pronote sur ton ordi</p><button type="button" class="btn">Annuler</button>`;
+  document.body.appendChild(ov);
+  const v=ov.querySelector("video"),cv=document.createElement("canvas"),cx=cv.getContext("2d",{willReadFrequently:true});v.srcObject=st;
+  let on=true;const stop=()=>{on=false;st.getTracks().forEach(t=>t.stop());ov.remove()};ov.querySelector("button").onclick=stop;
+  const tick=()=>{if(!on)return;
+    if(v.readyState>=2&&v.videoWidth){const w=Math.min(720,v.videoWidth),h=Math.round(v.videoHeight*w/v.videoWidth);cv.width=w;cv.height=h;cx.drawImage(v,0,0,w,h);
+      const q=jsQR(cx.getImageData(0,0,w,h).data,w,h,{inversionAttempts:"dontInvert"});if(q&&q.data){stop();return pnGotQR(q.data)}}
+    requestAnimationFrame(tick)};
+  try{await v.play()}catch(e){}requestAnimationFrame(tick);
+}
+async function pnImage(file){
+  let jsQR;try{jsQR=await pnLoadQR()}catch(e){V.pnMsg="Le lecteur de QR code ne se charge pas : vérifie ta connexion.";return render(true)}
+  const url=URL.createObjectURL(file),im=new Image();
+  im.onload=()=>{const k=Math.min(1,1600/Math.max(im.width,im.height)),w=Math.round(im.width*k),h=Math.round(im.height*k),cv=document.createElement("canvas");cv.width=w;cv.height=h;
+    const cx=cv.getContext("2d");cx.drawImage(im,0,0,w,h);const q=jsQR(cx.getImageData(0,0,w,h).data,w,h);URL.revokeObjectURL(url);
+    if(q&&q.data)pnGotQR(q.data);else{V.pnMsg="Aucun QR code trouvé sur cette image : prends-la de plus près, bien nette.";render(true)}};
+  im.onerror=()=>{URL.revokeObjectURL(url);V.pnMsg="Image illisible.";render(true)};im.src=url;
+}
+
+/* ---- affichage ---- */
+function pnLesson(c){
+  const st=c.annule?(c.statut||"Annulé"):c.statut;
+  return`<div class="pnl ${c.annule?"off":""}"><div class="pnt"><b>${pnHM(c.d)}</b><span>${pnHM(c.f)}</span></div>
+   <div class="pnb" style="--pc:${pnCol(c.m)}"><b>${esc(c.m)}</b><span>${[c.salle,c.prof].filter(Boolean).map(esc).join(" · ")}</span>${st?`<em>${esc(st)}</em>`:""}${c.test?`<em>Contrôle</em>`:""}</div></div>`;
+}
+function pnPj(a){return a&&a.length?`<div class="pnpj">${a.map(f=>`<a href="${esc(f.u)}" target="_blank" rel="noopener">📎 ${esc(f.n)}</a>`).join("")}</div>`:""}
+function pnHwDone(x){const k=pnHwDay(x);return!!(x.fait||((S.jours[k]||{}).done||{})["pn:"+x.id])}
+function pnHw(x,showDay){const k=pnHwDay(x);return`<li><label class="chk"><input type="checkbox" data-pnd="${esc(x.id)}|${k}" ${pnHwDone(x)?"checked":""}><span class="box">${tick}</span>
+   <span class="t">${esc(x.m||"Devoir")}${showDay?` <span class="tag">pour ${esc(pnDayName(pnDay(x.pour)).toLowerCase())}</span>`:""}<small class="pnhw">${esc(x.txt||"")}</small>${pnPj(x.pj)}</span></label></li>`}
+function pnSecErr(p,k){return p.errors&&p.errors[k]?`<p class="muted small">Cette partie n'a pas pu être lue depuis Pronote (${esc(String(p.errors[k]).slice(0,140))}).</p>`:""}
+function pnGrade(g){const v=g.v!=null?pnNum(g.v)+(g.sur&&g.sur!==20?"/"+pnNum(g.sur):""):(g.lab||"—");
+  return`<div class="pngr"><div><b>${esc(g.m)}</b><small style="display:block">${g.d?fdate(pnDay(g.d)):""}${g.coef&&g.coef!==1?" · coef "+pnNum(g.coef):""}${g.moy!=null?" · classe "+pnNum(g.moy):""}${g.com?" · "+esc(g.com):""}</small></div><span class="v">${v}</span></div>`}
+function pnConnectCard(){
+  return`<div class="card stack"><p class="label" style="margin:0">Relier ton compte Pronote</p>
+   <ol class="pnsteps"><li><b>Sur ton ordi</b>, ouvre Pronote (par Atrium). En haut de la page, clique sur l'icône <b>QR code</b> pour l'application mobile, choisis un <b>code à 4 chiffres</b> et laisse le QR code affiché.</li>
+   <li><b>Sur ton téléphone</b>, appuie sur « Scanner le QR code » et vise l'écran de l'ordi.</li><li>Tape ton code à 4 chiffres, puis « Connecter ».</li></ol>
+   ${V.pnQR?`<p>✓ QR code lu.</p><form data-f="pnpin" class="row" style="flex-direction:row"><input class="field" id="pn-pin" name="pin" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="Code à 4 chiffres" autocomplete="off" required><button class="btn" ${V.pnBusy?"disabled":""}>${V.pnBusy?"Connexion…":"Connecter"}</button></form><div><button class="ghost" data-pnrescan="1">Scanner un autre QR code</button></div>`
+     :`<div class="row"><button class="btn" data-pnscan="1">📷 Scanner le QR code</button><label class="ghost on" for="pn-img" style="cursor:pointer">🖼️ Choisir une photo</label><input type="file" id="pn-img" data-pnimg="1" accept="image/*" hidden></div>`}
+   ${V.pnMsg?`<p class="small">${esc(V.pnMsg)}</p>`:""}${V.pnConnecting&&pnData()?`<div><button class="ghost" data-pncancel="1">Annuler</button></div>`:""}
+   <p class="muted small">Ton mot de passe n'est jamais demandé ni enregistré : seul un jeton de connexion est gardé dans ton compte. Pronote n'a pas d'accès officiel pour les applis extérieures : si Pronote change, la connexion peut s'arrêter le temps d'une mise à jour.</p></div>`;
+}
+function pagePron(){
+  if(!cfgOk()||!SESSION)return`<div class="card stack"><p>Pour relier Pronote, connecte d'abord ta synchronisation (même compte sur le téléphone et l'ordi).</p><div><button class="btn" data-page="reglages">Ouvrir les réglages</button></div></div>`;
+  const p=pnData();if(!p||V.pnConnecting)return pnConnectCard();
+  const tab=V.pntab||"jour",tk=dkey(today()),now=new Date();
+  const top=`<div class="row" style="justify-content:space-between"><span class="muted small">${p.eleve&&p.eleve.classe?esc(p.eleve.classe)+" · ":""}mis à jour ${pnAge(p.updated)}</span>
+    <button class="ghost on" data-pnrefresh="1" ${PN_BUSY?"disabled":""}>${PN_BUSY?"Mise à jour…":"↻ Actualiser"}</button></div>
+    ${V.pnMsg?`<div class="card" style="padding:12px 14px"><p class="small">${esc(V.pnMsg)}</p>${V.pnBad==="token_refused"?`<div style="margin-top:8px"><button class="ghost on" data-pnreconnect="1">Reconnecter avec un QR code</button></div>`:""}</div>`:""}
+    <div class="chips" role="tablist">${[["jour","Aujourd'hui"],["edt","Emploi du temps"],["dev","Devoirs"],["notes","Notes"],["cont","Contenu des cours"]].map(([k,l])=>`<button class="chip" role="tab" data-pntab="${k}" aria-pressed="${tab===k}">${l}</button>`).join("")}</div>`;
+  const edt=p.edt||[],days=[...new Set(edt.map(c=>pnDay(c.d)))].filter(d=>d>=tk).sort();
+  const hw=(p.devoirs||[]);let body="";
+  if(tab==="jour"){
+    const todayL=edt.filter(c=>pnDay(c.d)===tk),showToday=todayL.length&&todayL.some(c=>new Date(c.f)>now);
+    const dk=showToday?tk:(days.find(d=>d>tk)||tk),ls=edt.filter(c=>pnDay(c.d)===dk);
+    const next=hw.filter(x=>pnDay(x.pour)>tk&&!pnHwDone(x)).slice(0,6);
+    const notes=((p.notes&&p.notes.liste)||[]).slice(0,3);
+    body=`<div class="card"><p class="label">${esc(pnDayName(dk))}</p>${ls.length?ls.map(pnLesson).join(""):`<p class="muted">Pas de cours prévu.</p>`}${pnSecErr(p,"edt")}</div>
+     <div class="card"><p class="label">Prochains devoirs</p>${next.length?`<ul class="list">${next.map(x=>pnHw(x,true)).join("")}</ul>`:`<p class="muted">Rien à faire pour l'instant. 🎉</p>`}${pnSecErr(p,"devoirs")}</div>
+     ${notes.length?`<div class="card"><p class="label">Dernières notes</p>${notes.map(pnGrade).join("")}</div>`:""}`;
+  }
+  if(tab==="edt"){
+    const sel=days.includes(V.pnday)?V.pnday:days[0];
+    body=days.length?`<div class="chips">${days.slice(0,12).map(d=>{const[y,m,dd]=d.split("-").map(Number),x=new Date(y,m-1,dd);return`<button class="chip" data-pnday="${d}" aria-pressed="${d===sel}">${JOURS[x.getDay()].slice(0,3)}. ${dd}</button>`}).join("")}</div>
+      <div class="card"><p class="label">${esc(pnDayName(sel))}</p>${edt.filter(c=>pnDay(c.d)===sel).map(pnLesson).join("")}</div>`:`<div class="card"><p class="muted">Pas de cours dans les deux prochaines semaines.</p>${pnSecErr(p,"edt")}</div>`;
+  }
+  if(tab==="dev"){
+    const list=hw.filter(x=>V.pnpast?pnDay(x.pour)<tk:pnDay(x.pour)>=tk);const g={};list.forEach(x=>{(g[pnDay(x.pour)]=g[pnDay(x.pour)]||[]).push(x)});
+    const ks=Object.keys(g).sort();if(V.pnpast)ks.reverse();
+    body=`${ks.length?ks.map(d=>`<div class="card"><p class="label">Pour ${esc(pnDayName(d).toLowerCase())}</p><ul class="list">${g[d].map(x=>pnHw(x,false)).join("")}</ul></div>`).join(""):`<div class="card"><p class="muted">${V.pnpast?"Pas de devoirs passés.":"Aucun devoir à venir. 🎉"}</p>${pnSecErr(p,"devoirs")}</div>`}
+      <div><button class="ghost" data-pnpast="1">${V.pnpast?"Voir les devoirs à venir":"Voir les devoirs passés"}</button></div>
+      <p class="muted small">Chaque devoir s'ajoute aussi à ton suivi d'habitudes la veille du jour où il est à rendre.</p>`;
+  }
+  if(tab==="notes"){
+    const n=p.notes;
+    body=n?`<div class="card"><div class="row" style="justify-content:space-between;align-items:flex-end"><div><span class="pnbig num">${pnNum(n.moyenne)}</span><div class="muted small">moyenne générale${n.periode?" · "+esc(n.periode):""}</div></div>${n.classe!=null?`<div class="muted small" style="text-align:right">classe<br><b class="num" style="color:var(--ink);font-size:1.1rem">${pnNum(n.classe)}</b></div>`:""}</div></div>
+      ${(n.matieres||[]).length?`<div class="card"><p class="label">Par matière</p>${n.matieres.map(a=>{const s20=x=>x==null?null:Math.max(0,Math.min(100,x/(a.sur||20)*100));const e=s20(a.eleve),c=s20(a.classe);
+        return`<div class="pnsub"><span>${esc(a.m)}</span><b>${a.eleve!=null?pnNum(a.eleve):esc(a.lab||"—")}</b><div class="pnbar">${e!=null?`<i style="width:${e}%;background:${pnCol(a.m)}"></i>`:""}${c!=null?`<u style="left:${c}%" title="Moyenne de la classe"></u>`:""}</div>
+        <small class="muted" style="grid-column:1/-1">${a.classe!=null?"classe "+pnNum(a.classe):""}${a.min!=null?" · min "+pnNum(a.min):""}${a.max!=null?" · max "+pnNum(a.max):""}</small></div>`}).join("")}<p class="muted small">Le trait sur chaque barre montre la moyenne de la classe.</p></div>`:""}
+      ${(n.liste||[]).length?`<div class="card"><p class="label">Toutes les notes</p>${n.liste.map(pnGrade).join("")}</div>`:`<div class="card"><p class="muted">Pas encore de notes sur cette période.</p></div>`}`
+      :`<div class="card"><p class="muted">Les notes ne sont pas disponibles.</p>${pnSecErr(p,"notes")}</div>`;
+  }
+  if(tab==="cont"){
+    const cs=p.contenu||[];
+    body=cs.length?cs.map(x=>`<div class="card stack" style="gap:8px"><div class="row" style="justify-content:space-between"><b style="color:${pnCol(x.m)}">${esc(x.m)}</b><span class="muted small">${esc(fdate(pnDay(x.d)))}${x.prof?" · "+esc(x.prof):""}</span></div>
+      ${x.items.map(it=>`<div class="stack" style="gap:4px">${it.t?`<b>${esc(it.t)}</b>`:""}${it.cat?`<span class="tag">${esc(it.cat)}</span>`:""}${it.txt?`<p class="gtxt small">${esc(it.txt)}</p>`:""}${pnPj(it.pj)}</div>`).join("")}</div>`).join("")
+      :`<div class="card"><p class="muted">Pas de contenu de cours sur les trois dernières semaines.</p>${pnSecErr(p,"contenu")}</div>`;
+  }
+  return top+body;
+}
+function pnSummary(){
+  const p=pnData();if(!p)return["Relier","emploi du temps, devoirs, notes"];
+  const now=new Date(),tk=dkey(today()),nx=(p.edt||[]).find(c=>!c.annule&&pnDay(c.d)===tk&&new Date(c.f)>now);
+  if(nx)return[pnHM(nx.d),esc(nx.m)+(nx.salle?" · "+esc(nx.salle):"")];
+  const hw=pnTasks(today()).filter(x=>!pnHwDone(x));if(hw.length)return[hw.length+" devoir"+(hw.length>1?"s":""),"à faire aujourd'hui"];
+  const m=p.notes&&p.notes.moyenne;return m!=null?[pnNum(m),"moyenne générale"]:["✓","rien d'urgent"];
+}
+function pnReglages(){
+  const p=pnData();
+  return`<div class="card stack"><p class="label" style="margin:0">Pronote</p>${p?`<p>Connecté${p.eleve&&p.eleve.nom?" : <b>"+esc(p.eleve.nom)+"</b>":""}${p.eleve&&p.eleve.classe?" · "+esc(p.eleve.classe):""}</p><p class="muted small">Mis à jour ${pnAge(p.updated)}. L'appli se remet à jour toute seule toutes les 3 heures quand tu l'ouvres.</p>
+    <div class="row"><button class="ghost on" data-page="pron">Ouvrir Pronote</button><button class="ghost ${V.confirm==="pnlogout"?"danger":""}" data-pnlogout="1">${V.confirm==="pnlogout"?"Confirmer la déconnexion":"Déconnecter Pronote"}</button></div>`
+    :`<p class="muted small">Emploi du temps, devoirs, notes et contenu des cours, directement dans l'appli.</p><div><button class="ghost on" data-page="pron">Relier Pronote</button></div>`}</div>`;
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest&&e.target.closest("button");if(!b)return;const d=b.dataset;
+  if(d.pntab){V.pntab=d.pntab;V.pnMsg=V.pnBad?V.pnMsg:"";return render(true)}
+  if(d.pnday){V.pnday=d.pnday;return render(true)}
+  if(d.pnrefresh)return pnRefresh(true);
+  if(d.pnscan)return pnScan();
+  if(d.pnrescan){V.pnQR=null;V.pnMsg="";return render(true)}
+  if(d.pnreconnect){V.pnConnecting=true;V.pnQR=null;V.pnMsg="";return render(true)}
+  if(d.pncancel){V.pnConnecting=false;V.pnQR=null;V.pnMsg="";return render(true)}
+  if(d.pnpast){V.pnpast=!V.pnpast;return render(true)}
+  if(d.pnlogout)return confirmOr("pnlogout",pnLogout);
+});
+document.addEventListener("change",e=>{const t=e.target;if(t.dataset&&t.dataset.pnimg!==undefined&&t.files&&t.files[0]){const f=t.files[0];t.value="";pnImage(f)}});
+document.addEventListener("submit",e=>{
+  const f=e.target;if(!f.dataset||f.dataset.f!=="pnpin")return;e.preventDefault();
+  const pin=String(new FormData(f).get("pin")||"").trim();if(!/^\d{4}$/.test(pin)){V.pnMsg="Le code doit faire 4 chiffres.";return render(true)}
+  document.activeElement&&document.activeElement.blur();pnConnect(pin);
+});
+
+/* ================================================================
    RENDU
    ================================================================ */
-const PAGES={reglages:pageReglages,hab:pageHab,proj:pageProj,fin:pageFin,lect:pageLect,cours:pageCours};
+const PAGES={reglages:pageReglages,pron:pagePron,hab:pageHab,proj:pageProj,fin:pageFin,lect:pageLect,cours:pageCours};
 let pending=false;
 function render(force){
   const a=document.activeElement;
@@ -2132,6 +2360,7 @@ document.addEventListener("input",e=>{
 document.addEventListener("change",e=>{
   const t=e.target,d=t.dataset;
   if(d.hab){const k=dkey(V.day),cur={...((S.jours[k]||{}).done||{})};if(t.checked)cur[d.hab]=true;else delete cur[d.hab];return put("jours",k,{date:k,done:cur})}
+  if(d.pnd){const i=d.pnd.lastIndexOf("|"),id=d.pnd.slice(0,i),k=d.pnd.slice(i+1),cur={...((S.jours[k]||{}).done||{})};if(t.checked)cur["pn:"+id]=true;else delete cur["pn:"+id];return put("jours",k,{date:k,done:cur})}
   if(d.nmove!==undefined){nSave();const id=d.nmove,v=t.value||null;if(S.notes[id])put("notes",id,{...S.notes[id],projet:v},true);else if(V.ndraft&&V.ndraft.id===id)V.ndraft.n.projet=v;return render(true)}
   if(d.simstop&&V.g&&V.g.sim){V.g.sim.stop=t.checked;return}
   if(d.imp&&t.files&&t.files[0]){readImport(t.files[0]);t.value="";return}
@@ -2166,9 +2395,9 @@ DL={save:({filename,data})=>{const b=new Blob([data],{type:"application/json"}),
 setSync(!cfgOk()?"Sur cet appareil":SESSION?"Synchronisation…":"Non connecté");
 render(true);
 loadNews();handleAuthHash();
-if(SESSION)fullSync(!lsGet("cerveau-lastpull",null));
+if(SESSION)fullSync(!lsGet("cerveau-lastpull",null)).then(pnAuto);
 setInterval(()=>{if(document.visibilityState==="visible"&&SESSION)pull(false).then(flush)},20000);
-document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){if(SESSION)pull(false).then(flush);loadNews()}});
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"){if(SESSION)pull(false).then(flush).then(pnAuto);loadNews()}});
 window.addEventListener("online",()=>{if(SESSION)fullSync(false)});
 window.addEventListener("offline",()=>setSync("Hors ligne · enregistré sur l'appareil"));
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();INSTALL_EVT=e;if(V.page==="reglages")render()});
