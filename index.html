@@ -2090,16 +2090,26 @@ function pnAge(iso){const m=Math.round((Date.now()-Date.parse(iso))/6e4);return 
 function pnErr(e){
   const c=e&&e.code,d=e&&e.detail?" ("+String(e.detail).slice(0,160)+")":"";
   return({no_session:"Connecte d'abord ta synchronisation dans Réglages.",offline:"Pas de connexion internet.",
-    unreachable:"La fonction Pronote ne répond pas : vérifie qu'elle est installée dans Supabase sous le nom « pronote »."+d,
-    not_deployed:"La fonction Pronote n'est pas encore installée dans Supabase (nom : « pronote »).",auth:"Reconnecte-toi à la synchronisation dans Réglages."+d,
+    unreachable:"La fonction Pronote ne répond pas : vérifie qu'elle est bien déployée dans Supabase (Edge Functions)."+d,
+    not_deployed:"La fonction Pronote n'est pas encore installée dans Supabase (Edge Functions).",auth:"Accès refusé par Supabase : dans la fonction, onglet Settings, désactive « Verify JWT with legacy secret » puis enregistre. Sinon, reconnecte-toi dans Réglages."+d,
     qr_invalid:"Ce QR code n'est pas celui de Pronote pour l'appli mobile.",pin_invalid:"Le code doit faire 4 chiffres.",
     qr_refused:"Pronote a refusé : le QR code a sans doute expiré (il ne dure que quelques minutes) ou le code à 4 chiffres est faux. Génère un nouveau QR code et recommence."+d,
     token_refused:"La connexion à Pronote a expiré : reconnecte Pronote avec un nouveau QR code (bouton plus bas)."+d,
     not_connected:"Pronote n'est pas connecté.",server:"Erreur du côté de la fonction Pronote"+d}[c])||("Ça n'a pas marché"+(c?" ("+c+")":"")+d);
 }
+/* nom de la fonction dans Supabase : « pronote », ou le nom donné automatiquement par Supabase */
+const PN_SLUGS=["pronote","dynamic-worker"];
 async function pnCall(action,extra){
+  const saved=lsGet("cerveau-pn-slug",null),order=saved?[saved,...PN_SLUGS.filter(x=>x!==saved)]:PN_SLUGS;let last;
+  for(const slug of order){
+    try{const j=await pnCallSlug(slug,action,extra);lsSet("cerveau-pn-slug",slug);return j}
+    catch(e){last=e;if(e.code!=="unreachable"&&e.code!=="not_deployed")throw e}
+  }
+  throw last;
+}
+async function pnCallSlug(slug,action,extra){
   if(!cfgOk()||!SESSION)throw{code:"no_session"};const t=await token();if(!t)throw{code:"no_session"};const c=cfg();
-  let r;try{r=await fetch(c.supabaseUrl+"/functions/v1/pronote",{method:"POST",headers:{apikey:c.supabaseKey,Authorization:"Bearer "+t,"Content-Type":"application/json"},body:JSON.stringify({action,...(extra||{})})})}
+  let r;try{r=await fetch(c.supabaseUrl+"/functions/v1/"+slug,{method:"POST",headers:{apikey:c.supabaseKey,Authorization:"Bearer "+t,"Content-Type":"application/json"},body:JSON.stringify({action,...(extra||{})})})}
   catch(e){throw{code:navigator.onLine?"unreachable":"offline",detail:String(e&&e.message||e)}}
   const tx=await r.text();let j={};try{j=JSON.parse(tx)}catch(e){}
   if(r.status===404&&!j.error)throw{code:"not_deployed"};
