@@ -327,6 +327,23 @@ ul.list>li+li{border-top:1px solid var(--line)}
 .ned ul.ck>li[data-ok="1"]::before{border-color:var(--ny);background:var(--ny) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.4l2.6 2.6L11 4.6' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
 .notesapp .out{background:color-mix(in srgb,var(--ny) 12%,var(--surface))}
 
+/* objectif Top 3 */
+:root{--obj:#c48a00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obj:#f2c14e}}
+:root[data-theme="dark"]{--obj:#f2c14e}
+.objhero{display:flex;align-items:center;gap:16px}
+.objring{position:relative;width:132px;height:132px;flex:none}
+.objring>div{position:absolute;inset:0;display:grid;place-items:center}
+.objring b{font-family:var(--display);font-size:1.45rem;color:var(--c)}
+.objhero p{line-height:1.45}
+.objact{list-style:none;margin:0;padding:0}
+.objact li+li{border-top:1px solid var(--line)}
+.objact button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;border:0;background:none;text-align:left;padding:11px 0;color:var(--ink)}
+.objact b{color:var(--up);white-space:nowrap;font-family:var(--display)}
+.objq{border-left:4px solid var(--c)}
+.objq p{font-family:var(--display);font-size:1.08rem;line-height:1.45;margin-bottom:6px}
+.objp{display:flex;flex-direction:column;gap:6px;border:0;background:none;text-align:left;width:100%;padding:0;color:var(--ink)}
+@media (max-width:380px){.objhero{flex-direction:column;align-items:flex-start}}
 /* appli autonome */
 .topr{display:flex;align-items:center;gap:8px;flex-direction:column;align-items:flex-end}
 .gear{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);font-size:1.1rem}
@@ -375,7 +392,7 @@ ul.list>li+li{border-top:1px solid var(--line)}
 /* ================================================================
    DONNÉES FIXES
    ================================================================ */
-const COL={pron:"--pron",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours"};
+const COL={pron:"--pron",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",obj:"--obj"};
 const JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 
@@ -1030,6 +1047,7 @@ const tick=`<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-
    ================================================================ */
 const ILL={
  pron:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="14" width="56" height="58" rx="11" fill="var(--pron)" opacity=".2"/><rect x="14" y="14" width="56" height="17" rx="8.5" fill="var(--pron)"/><path d="M27 45h30M27 56h18" stroke="var(--pron)" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="61" r="11" fill="var(--pron)"/><path d="M55 61l3.4 3.4 6.4-7" stroke="#fff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ obj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M28 16h28v15a14 14 0 0 1-28 0z" fill="var(--obj)"/><path d="M28 21h-8a8 8 0 0 0 8 12M56 21h8a8 8 0 0 1-8 12" fill="none" stroke="var(--obj)" stroke-width="4" stroke-linecap="round"/><rect x="38" y="44" width="8" height="11" fill="var(--obj)" opacity=".55"/><rect x="27" y="55" width="30" height="9" rx="3" fill="var(--obj)"/><path d="M42 21.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8-4.3-2.3-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z" fill="#fff" opacity=".92"/></svg>`,
  hab:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="18" width="52" height="50" rx="10" fill="var(--hab)" opacity=".2"/><rect x="14" y="18" width="52" height="13" rx="6" fill="var(--hab)"/><circle cx="28" cy="46" r="5" fill="var(--hab)"/><circle cx="40" cy="46" r="5" fill="var(--hab)"/><circle cx="52" cy="46" r="5" fill="var(--hab)" opacity=".35"/><circle cx="28" cy="58" r="5" fill="var(--hab)" opacity=".35"/><path d="M36 58l3 3 6-7" stroke="var(--hab)" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
  proj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M60 14C38 18 24 36 22 62l6-2c4-16 14-28 26-36-10 10-16 22-18 34 16-6 26-24 24-44z" fill="var(--proj)"/><path d="M22 62l-6 8" stroke="var(--proj)" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="62" r="8" fill="var(--proj)" opacity=".25"/></svg>`,
  fin:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="20" width="56" height="44" rx="8" fill="var(--fin)" opacity=".18"/><path d="M20 54l12-12 9 7 17-19" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 30h9v9" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -1040,7 +1058,7 @@ const ILL={
 /* ================================================================
    STOCKAGE (base partagée de l'appli, sinon ce navigateur)
    ================================================================ */
-const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu","pronote"];
+const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu","pronote","objectif"];
 let S={};C.forEach(c=>S[c]={});
 let db=null, DL=null, SAMPLE=null, SAMPLE_ST="none", TOOLS_OK=false, syncTxt="Sur cet appareil";
 function localLoad(){try{const x=JSON.parse(localStorage.getItem("cerveau")||"{}");C.forEach(c=>S[c]=x[c]||{})}catch(e){}}
@@ -1829,16 +1847,139 @@ function setPage(id,v){const b=S.livres[id];if(!b)return;v=Math.max(0,Math.min(b
   put("livres",id,{...b,lu:v,fini,finiLe:fini?(b.finiLe||dkey(today())):null,maj:Date.now()})}
 
 /* ================================================================
+   OBJECTIF TOP 3 : HEC · ESSEC · ESCP
+   Indice de progression (pas une probabilité d'admission) :
+   notes Pronote 50 %, régularité du suivi d'habitudes 30 %, entraînement finance 20 %.
+   ================================================================ */
+const OBJ_W={n:50,h:30,f:20},OBJ_CIBLE=17;
+const OBJ_Q={
+ notes:[["Vingt fois sur le métier remettez votre ouvrage.","Nicolas Boileau"],
+  ["Le génie est fait d'un pour cent d'inspiration et de quatre-vingt-dix-neuf pour cent de transpiration.","Thomas Edison"],
+  ["Il n'y a pas de raccourci vers un endroit qui vaut la peine d'être atteint.","Beverly Sills"],
+  ["Le travail éloigne de nous trois grands maux : l'ennui, le vice et le besoin.","Voltaire, Candide"]],
+ hab:[["Nous sommes ce que nous faisons de manière répétée. L'excellence n'est donc pas un acte, mais une habitude.","Will Durant, d'après Aristote"],
+  ["La motivation vous fait commencer. L'habitude vous fait continuer.","Jim Ryun"],
+  ["Le succès est la somme de petits efforts, répétés jour après jour.","Robert Collier"],
+  ["Ce n'est pas parce que les choses sont difficiles que nous n'osons pas, c'est parce que nous n'osons pas qu'elles sont difficiles.","Sénèque"]],
+ fin:[["Le risque vient de ne pas savoir ce que l'on fait.","Warren Buffett"],
+  ["Règle n° 1 : ne jamais perdre d'argent. Règle n° 2 : ne jamais oublier la règle n° 1.","Warren Buffett"],
+  ["Sache ce que tu possèdes, et pourquoi tu le possèdes.","Peter Lynch"]],
+ elan:[["Dans les champs de l'observation, le hasard ne favorise que les esprits préparés.","Louis Pasteur"],
+  ["Le talent, c'est d'avoir envie de faire quelque chose.","Jacques Brel"],
+  ["Visez la lune. Même si vous la manquez, vous atterrirez parmi les étoiles.","Les Brown"]]
+};
+const clamp01=x=>Math.max(0,Math.min(1,x));
+const pct1=x=>(Math.round(x*10)/10).toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1});
+/* premier jour suivi (au plus 28 jours en arrière) */
+function objStart(){
+  const ks=[...Object.keys(S.jours||{}),...Object.keys(prog().days||{})].filter(k=>/^\d{4}-\d\d-\d\d$/.test(k)).sort();
+  const t=today(),min=add(t,-27),first=ks.length?(([y,m,d])=>new Date(y,m-1,d))(ks[0].split("-").map(Number)):t;
+  return first<min?min:first;
+}
+function objNotes(){
+  const n=S.pronote&&S.pronote.data&&S.pronote.data.notes;if(!n)return null;
+  const mats=(n.matieres||[]).filter(a=>typeof a.eleve==="number");
+  let g=typeof n.moyenne==="number"?n.moyenne:(mats.length?mats.reduce((s,a)=>s+a.eleve/(a.sur||20)*20,0)/mats.length:null);
+  if(g==null)return null;
+  const mm=mats.filter(a=>/math/i.test(a.m||"")),maths=mm.length?mm.reduce((s,a)=>s+a.eleve/(a.sur||20)*20,0)/mm.length:null;
+  const sg=clamp01((g-10)/(OBJ_CIBLE-10)),sm=maths==null?sg:clamp01((maths-10)/(OBJ_CIBLE-10));
+  const low=mats.map(a=>({m:a.m,v:a.eleve/(a.sur||20)*20})).sort((a,b)=>a.v-b.v)[0]||null;
+  return{g,maths,s:0.7*sg+0.3*sm,low,periode:n.periode||""};
+}
+/* score de régularité : tâches faites / prévues depuis le début (28 jours max), + série de jours parfaits */
+function objHab(extraToday){
+  const t=today();let n=0,tt=0;
+  for(let d=objStart();d<=t;d=add(d,1)){const s=dayStats(d);tt+=s.t;n+=s.n;if(+d===+t&&extraToday)n=Math.min(tt,n+extraToday)}
+  const rate=tt?n/tt:0,st=streak();
+  return{rate,streak:st,s:0.85*rate+0.15*Math.min(st/14,1)};
+}
+/* score finance : défi du jour (réussite) et question d'actu, sur 14 jours max ; + niveau du Trading Lab */
+function objFin(sim){
+  const p=prog(),t=today(),st=objStart(),d0=add(t,-13),from=st>d0?st:d0;let sum=0,nd=0,done=0;
+  const days={...p.days},actu={...p.actu};let xp=p.xp;
+  if(sim&&sim.defi){const k=dkey(t);if(!days[k]){days[k]={s:5,m:5};xp+=60}}
+  if(sim&&sim.actu&&S.jeu.actu){const a=S.jeu.actu;if(!actu[a.date]){actu[a.date]={ok:true};xp+=10}}
+  for(let d=new Date(from);d<=t;d=add(d,1)){
+    const k=dkey(d),r=days[k],we=d.getDay()===0||d.getDay()===6;nd++;
+    const def=r?0.5+0.5*(r.m?r.s/r.m:1):0;if(r)done++;
+    sum+=we?def:0.8*def+(actu[k]?0.2:0);
+  }
+  const reg=nd?sum/nd:0,lvl=Math.min(xp/1000,1);
+  return{reg,lvl,done,nd,xp,s:0.7*reg+0.3*lvl};
+}
+function objScore(o){
+  o=o||{};const N=objNotes(),H=objHab(o.hab||0),F=objFin(o);
+  const total=OBJ_W.n*(N?N.s:0)+OBJ_W.h*H.s+OBJ_W.f*F.s;
+  return{total,N,H,F};
+}
+/* ce qui ferait monter le pourcentage tout de suite */
+function objActions(sc){
+  const out=[],t=today(),ts=dayStats(t),rest=ts.t-ts.n;
+  if(rest>0){const d=objScore({hab:rest}).total-sc.total;if(d>0.04)out.push({g:d,t:`Coche ${rest>1?"les "+rest+" tâches qui restent":"la tâche qui reste"} aujourd'hui`,p:"hab"})}
+  if(!prog().days[dkey(t)]){const d=objScore({defi:true}).total-sc.total;if(d>0.04)out.push({g:d,t:"Fais le défi du jour du Trading Lab",p:"fin"})}
+  const a=S.jeu.actu;if(a&&a.date===dkey(t)&&!prog().actu[a.date]){const d=objScore({actu:true}).total-sc.total;if(d>0.04)out.push({g:d,t:"Réponds à la question d'actu (Finance)",p:"fin"})}
+  if(!sc.N)out.push({g:null,t:"Relie Pronote : tes notes comptent pour 50 % du score",p:"pron"});
+  else{
+    if(sc.N.g<OBJ_CIBLE)out.push({g:OBJ_W.n*0.7/(OBJ_CIBLE-10),t:`+1 point de moyenne générale (${pct1(sc.N.g)} → ${pct1(Math.min(20,sc.N.g+1))})`,per:true,p:"pron"});
+    if(sc.N.maths!=null&&sc.N.maths<OBJ_CIBLE)out.push({g:OBJ_W.n*0.3/(OBJ_CIBLE-10),t:`+1 point de moyenne en maths (${pct1(sc.N.maths)} → ${pct1(Math.min(20,sc.N.maths+1))})`,per:true,p:"cours"});
+    if(sc.N.low&&sc.N.low.v<OBJ_CIBLE-2)out.push({g:null,t:`Ta matière la plus basse : ${sc.N.low.m} (${pct1(sc.N.low.v)}). C'est là qu'un point se gagne le plus vite.`,p:"pron"});
+  }
+  return out.sort((x,y)=>(y.per?0:1)-(x.per?0:1)||(y.g||0)-(x.g||0));
+}
+function objNeed(sc){
+  const r=[["notes",sc.N?sc.N.s:0],["hab",sc.H.s],["fin",sc.F.s]].sort((a,b)=>a[1]-b[1]);
+  return r[0][1]>=0.75?"elan":r[0][0];
+}
+function objQuote(sc){const need=objNeed(sc),L=OBJ_Q[need];return{need,q:L[hashStr(dkey(today())+need)%L.length]}}
+/* une valeur par jour, pour la courbe de progression */
+function objSnap(sc){
+  if(!S.objectif)return;const k=dkey(today()),cur=S.objectif[k],v={p:Math.round(sc.total*10)/10,n:Math.round((sc.N?sc.N.s:0)*1000)/1000,h:Math.round(sc.H.s*1000)/1000,f:Math.round(sc.F.s*1000)/1000};
+  if(!cur||Math.abs((cur.p||0)-v.p)>=0.05)put("objectif",k,v,true);
+}
+function objPrev(){const k=dkey(today()),ks=Object.keys(S.objectif||{}).filter(x=>x<k).sort();return ks.length?S.objectif[ks[ks.length-1]]:null}
+function objChart(){
+  const pts=Object.entries(S.objectif||{}).filter(([k])=>/^\d{4}-/.test(k)).sort((a,b)=>a[0].localeCompare(b[0])).slice(-60);
+  if(pts.length<2)return`<p class="muted small">La courbe apparaît dès demain : l'appli garde ton pourcentage de chaque jour.</p>`;
+  const W=420,H=190,L=40,R=12,T=14,B=28,iw=W-L-R,ih=H-T-B,vals=pts.map(p=>p[1].p),mn=Math.max(0,Math.floor((Math.min(...vals)-5)/10)*10),mx=Math.min(100,Math.ceil((Math.max(...vals)+5)/10)*10);
+  const x=i=>L+i*iw/(pts.length-1),y=v=>T+ih*(1-(v-mn)/((mx-mn)||1));
+  const grid=[mn,(mn+mx)/2,mx].map(v=>`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="12" fill="var(--muted)">${Math.round(v)}%</text>`).join("");
+  const st=Math.ceil(pts.length/5),lab=pts.map(([k],i)=>(i%st===0||i===pts.length-1)?`<text x="${x(i)}" y="${H-7}" text-anchor="middle" font-size="12" fill="var(--muted)">${+k.slice(8)}/${k.slice(5,7)}</text>`:"").join("");
+  const line=pts.map((p,i)=>`${x(i)},${y(p[1].p)}`).join(" "),last=vals[vals.length-1];
+  return`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Évolution du pourcentage">${grid}<polyline points="${line}" fill="none" stroke="var(--c)" stroke-width="2.5" stroke-linejoin="round"/>
+   <circle cx="${x(pts.length-1)}" cy="${y(last)}" r="5" fill="var(--c)"/>${lab}</svg>`;
+}
+function objRing(p){const r=54,Lc=2*Math.PI*r;return`<svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true"><circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--soft)" stroke-width="12"/>
+  <circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--c)" stroke-width="12" stroke-linecap="round" stroke-dasharray="${Lc}" stroke-dashoffset="${Lc*(1-p/100)}" transform="rotate(-90 66 66)"/></svg>`}
+function pageObj(){
+  const sc=objScore();objSnap(sc);const prev=objPrev(),dlt=prev?sc.total-prev.p:null,acts=objActions(sc),{q}=objQuote(sc);
+  const bar=(lbl,w,s,detail,page)=>`<button class="objp" data-page="${page}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${lbl} <span class="muted small">· ${w} %</span></b><span class="num">${pct1(s*w)} / ${w}</span></div>
+    <div class="bar"><i style="width:${s*100}%"></i></div><span class="muted small">${detail}</span></button>`;
+  const N=sc.N,H=sc.H,F=sc.F,lv=levelOf(F.xp);
+  return`<div class="card objhero"><div class="objring">${objRing(sc.total)}<div><b class="num">${pct1(sc.total)} %</b></div></div>
+    <div class="stack" style="gap:6px"><p class="label" style="margin:0">Objectif HEC · ESSEC · ESCP</p>
+    <p>${dlt==null?"Premier jour de suivi : reviens demain pour voir ta progression.":dlt>=0.05?`<b class="up">+${pct1(dlt)} pt</b> depuis ${fdate(Object.keys(S.objectif).filter(x=>x<dkey(today())).sort().pop())}`:dlt<=-0.05?`<b class="down">−${pct1(-dlt)} pt</b> depuis la dernière fois : on remonte aujourd'hui.`:"Stable depuis la dernière fois."}</p></div></div>
+  <div class="card stack"><p class="label" style="margin:0">Ce qui te manque pour monter tout de suite</p>
+    ${acts.length?`<ul class="objact">${acts.map(a=>`<li><button data-page="${a.p}"><span>${esc(a.t)}</span>${a.g!=null?`<b class="num">+${pct1(a.g)} %${a.per?"":""}</b>`:""}</button></li>`).join("")}</ul>`:`<p>Tout est fait pour aujourd'hui. Il ne reste qu'à recommencer demain. 💪</p>`}</div>
+  <div class="card objq"><p>« ${esc(q[0])} »</p><span class="muted small">${esc(q[1])}</span></div>
+  <div class="card stack" style="gap:14px"><p class="label" style="margin:0">Tes 3 piliers</p>
+    ${bar("Notes",OBJ_W.n,N?N.s:0,N?`Moyenne générale ${pct1(N.g)}${N.maths!=null?` · maths ${pct1(N.maths)}`:""} · repère visé : ${OBJ_CIBLE}${N.periode?" · "+esc(N.periode):""}`:"Relie Pronote pour compter tes notes.","pron")}
+    ${bar("Régularité",OBJ_W.h,H.s,`${Math.round(H.rate*100)} % de tes tâches faites depuis le début · série de ${H.streak} jour${H.streak>1?"s":""} parfait${H.streak>1?"s":""}`,"hab")}
+    ${bar("Finance",OBJ_W.f,F.s,`${F.done} défi${F.done>1?"s":""} sur ${F.nd} jour${F.nd>1?"s":""} · ${esc(lv.name)} (${F.xp} XP)`,"fin")}</div>
+  <div class="card"><p class="label">Ta progression</p><div class="chart">${objChart()}</div></div>
+  <p class="muted small">C'est un indice de progression calculé par l'appli, pas une probabilité d'admission. Pour HEC, ESSEC et ESCP, la voie classique est une prépa ECG puis les concours. Un très bon dossier (repère : ${OBJ_CIBLE} de moyenne, maths solides) et de la régularité aident à intégrer une prépa de haut niveau.</p>`;
+}
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
-const SECT=[["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["lect","Lecture"],["cours","Cours"]];
+const SECT=[["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["cours","Cours"]];
 function summary(k){
   const t=today();
   if(k==="pron")return pnSummary();
   if(k==="hab"){const s=dayStats(t);return[`${s.n}/${s.t}`,"tâches faites aujourd'hui"]}
   if(k==="proj"){const a=nIn("all");return a.length?[`${a.length}`,`note${a.length>1?"s":""} · ${esc(nTitle(a[0][1]))}`]:["Notes","écris ce qui te trotte dans la tête"]}
   if(k==="fin"){const dg=dailyGame(t),r=prog().days[dkey(t)];return r?[`✓ ${r.s}/${r.m}`,`défi du jour : ${dg.n} · ${levelOf(prog().xp).name}`]:[`${dg.e} Défi`,`du jour : ${dg.n} · actu FR/EN`]}
-  if(k==="lect"){const b=Object.values(S.livres).filter(x=>!x.fini).sort((a,b)=>(b.maj||0)-(a.maj||0))[0];return b?[`${Math.round((b.lu||0)/b.pages*100)}%`,esc(b.titre)]:["—","Ajoute ton livre du moment"]}
+  if(k==="obj"){const sc=objScore();objSnap(sc);const ts=dayStats(t),up=objScore({hab:ts.t-ts.n,defi:true,actu:true}).total-sc.total;return[pct1(sc.total)+" %",up>=0.05?`jusqu'à +${pct1(up)} % possible aujourd'hui`:"HEC · ESSEC · ESCP"]}
   if(k==="cours"){const a=COURS.reduce((s,x)=>s+subjStats(x),0)/COURS.length;let ok=0;Object.values(S.quiz).forEach(q=>Object.values(q.r||{}).forEach(r=>ok+=r.ok||0));return[`${Math.round(a*100)}%`,`du programme maîtrisé${ok?` · ${ok} réponses sues`:""}`]}
 }
 function pageHome(){
@@ -2273,7 +2414,7 @@ document.addEventListener("submit",e=>{
 /* ================================================================
    RENDU
    ================================================================ */
-const PAGES={reglages:pageReglages,pron:pagePron,hab:pageHab,proj:pageProj,fin:pageFin,lect:pageLect,cours:pageCours};
+const PAGES={reglages:pageReglages,pron:pagePron,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
 let pending=false;
 function render(force){
   const a=document.activeElement;
