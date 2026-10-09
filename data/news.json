@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-08T20:17:29.874Z",
+ "updated": "2026-10-09T05:52:30.062Z",
  "snap": {
   "date": "2026-10-08",
   "items": [
@@ -20,28 +20,28 @@
    },
    {
     "n": "VIX (peur)",
-    "v": "15,46",
-    "c": "+2,52 %"
+    "v": "15,41",
+    "c": "+2,19 %"
    },
    {
     "n": "Brent",
-    "v": "103,5 $",
-    "c": "+3,29 %"
+    "v": "102,8 $",
+    "c": "−1,42 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "90,8 $",
-    "c": "+2,84 %"
+    "v": "90,3 $",
+    "c": "−1,36 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 159 $",
-    "c": "+0,45 %"
+    "v": "4 227 $",
+    "c": "+1,69 %"
    },
    {
     "n": "Bitcoin",
-    "v": "81 795 $",
-    "c": "−1,78 %"
+    "v": "82 316 $",
+    "c": "−1,15 %"
    },
    {
     "n": "US 10 ans",
@@ -50,12 +50,144 @@
    },
    {
     "n": "EUR/USD",
-    "v": "1,122",
-    "c": "+0,16 %"
+    "v": "1,124",
+    "c": "+0,34 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-09-deception-sur-les-revenus-d-openai-wall-",
+   "src": "Le Monde",
+   "date": "2026-10-09",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/09/les-ambiguites-sur-le-chiffre-d-affaires-d-openai-effraient-wall-street_6790497_3234.html",
+   "t": {
+    "fr": "Déception sur les revenus d'OpenAI : Wall Street s'inquiète",
+    "en": "OpenAI Revenue Disappointment Sparks Wall Street Concerns"
+   },
+   "s": {
+    "fr": "Les prévisions de chiffre d'affaires d'OpenAI ont été revues à la baisse, s'établissant à 50 milliards de dollars au lieu des 68 milliards attendus. Cette annonce a entraîné un report de son introduction en Bourse à 2027 et a provoqué une baisse des actions liées à l'intelligence artificielle. Les investisseurs craignent désormais que la rentabilité du secteur ne soit pas à la hauteur des attentes.",
+    "en": "OpenAI's revenue projections fell short of expectations, reaching 50 billion dollars instead of the anticipated 68 billion. This news prompted the company to delay its initial public offering to 2027 and triggered a sell-off in artificial intelligence stocks. Investors are now worried that the sector's profitability might not match previous hype."
+   },
+   "d": {
+    "fr": "En trading, lorsqu'une entreprise leader déçoit sur ses chiffres, cela peut entraîner une baisse collective de tout son secteur d'activité par effet de contagion. C'est pourquoi les traders surveillent de près les publications de résultats, car elles redéfinissent la valeur réelle des entreprises technologiques.",
+    "en": "In trading, when a sector leader underperforms, it can drag down the stock prices of all related companies due to a contagion effect. This is why traders closely monitor earnings reports, as they redefine the actual valuation of tech firms."
+   },
+   "v": [
+    [
+     "chiffre d'affaires",
+     "revenue"
+    ],
+    [
+     "introduction en Bourse",
+     "initial public offering"
+    ],
+    [
+     "secteur technologique",
+     "tech sector"
+    ],
+    [
+     "prévisions financières",
+     "financial forecasts"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi une baisse des prévisions d'une seule entreprise non cotée peut-elle faire chuter d'autres actions en Bourse ?",
+    "en": "Why can a drop in forecasts for a single unlisted company cause other stock prices to fall?"
+   },
+   "r": {
+    "fr": "OpenAI est perçue comme le baromètre de l'intelligence artificielle ; si ses revenus déçoivent, les investisseurs craignent que tout le marché de l'IA soit surévalué.",
+    "en": "OpenAI is seen as the bellwether for artificial intelligence; if its revenues disappoint, investors fear the entire AI market might be overvalued."
+   }
+  },
+  {
+   "id": "2026-10-09-alerte-sur-les-taux-d-interet-americains",
+   "src": "Financial Times",
+   "date": "2026-10-09",
+   "url": "https://www.ft.com/content/a752a86c-cf05-4152-b842-2ae6b6bf3fe0?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Alerte sur les taux d'intérêt américains à 10 ans",
+    "en": "Warning on US 10-Year Treasury Yields"
+   },
+   "s": {
+    "fr": "Selon le géant de l'investissement Pimco, les rendements des obligations d'État américaines à 10 ans risquent d'atteindre 6 % pour la première fois depuis l'an 2000. Cette hausse s'explique par l'obligation pour certains acteurs du marché de déboucler des positions perdantes. Une telle augmentation des coûts d'emprunt représente un risque majeur pour l'économie globale.",
+    "en": "According to investment giant Pimco, US 10-year Treasury yields could hit 6% for the first time since 2000. This potential rise is driven by market participants being forced to unwind losing bets. Such an increase in borrowing costs poses a major risk to the global economy."
+   },
+   "d": {
+    "fr": "Les obligations d'État sont considérées comme des placements sûrs, mais si leurs taux grimpent, emprunter devient plus cher pour tout le monde. Pour un trader, une hausse des taux obligataires rend souvent les actions moins attractives car les investisseurs préfèrent la sécurité des obligations à haut rendement.",
+    "en": "Government bonds are considered safe investments, but when their yields rise, borrowing becomes more expensive for everyone. For a trader, rising bond yields often make stocks less attractive because investors prefer the safety of high-yielding bonds."
+   },
+   "v": [
+    [
+     "rendement obligataire",
+     "bond yield"
+    ],
+    [
+     "obligations du Trésor",
+     "Treasury bonds"
+    ],
+    [
+     "coûts d'emprunt",
+     "borrowing costs"
+    ],
+    [
+     "déboucler une position",
+     "unwind a position"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'impact d'une hausse des taux d'intérêt sur les entreprises qui veulent se développer ?",
+    "en": "What is the impact of rising interest rates on companies looking to expand?"
+   },
+   "r": {
+    "fr": "Des taux plus élevés augmentent le coût de leurs dettes, ce qui réduit leurs bénéfices et freine leurs investissements.",
+    "en": "Higher rates increase their debt servicing costs, which reduces their profits and slows down their investments."
+   }
+  },
+  {
+   "id": "2026-10-09-virgin-trains-s-attaque-au-monopole-d-eu",
+   "src": "Le Monde",
+   "date": "2026-10-09",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/09/virgin-trains-se-pose-en-serieux-concurrent-d-eurostar-sur-le-trafic-transmanche_6790518_3234.html",
+   "t": {
+    "fr": "Virgin Trains s'attaque au monopole d'Eurostar",
+    "en": "Virgin Trains Challenges Eurostar's Monopoly"
+   },
+   "s": {
+    "fr": "La compagnie ferroviaire de Richard Branson, Virgin Trains, projette de lancer vingt liaisons quotidiennes à travers le tunnel sous la Manche d'ici 2030. Ce projet en ferait le tout premier concurrent direct d'Eurostar sur ce trajet stratégique reliant Londres au continent européen. Cette initiative pourrait transformer le marché des transports transmanches.",
+    "en": "Richard Branson's railway company, Virgin Trains, plans to launch twenty daily trips through the Channel Tunnel by 2030. This project would make it the very first direct competitor to Eurostar on this strategic route linking London to continental Europe. This initiative could transform the cross-Channel transport market."
+   },
+   "d": {
+    "fr": "L'arrivée d'un nouveau concurrent dans un secteur monopolistique stimule généralement la baisse des prix et l'innovation pour séduire les clients. En bourse, la fin d'un monopole peut affaiblir la rentabilité de l'acteur historique, ce que les traders anticipent en ajustant leurs investissements.",
+    "en": "The entry of a new competitor into a monopolistic sector generally drives down prices and stimulates innovation to attract customers. In the stock market, the end of a monopoly can weaken the incumbent's profitability, which traders anticipate by adjusting their investments."
+   },
+   "v": [
+    [
+     "concurrence",
+     "competition"
+    ],
+    [
+     "monopole",
+     "monopoly"
+    ],
+    [
+     "liaison ferroviaire",
+     "rail link"
+    ],
+    [
+     "part de marché",
+     "market share"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les investisseurs aiment-ils généralement les entreprises en situation de monopole ?",
+    "en": "Why do investors generally like companies with a monopoly?"
+   },
+   "r": {
+    "fr": "Les monopoles permettent de fixer les prix librement sans crainte de perdre des clients, garantissant des marges bénéficiaires élevées et stables.",
+    "en": "Monopolies allow companies to set prices freely without fear of losing customers, ensuring high and stable profit margins."
+   }
+  },
   {
    "id": "2026-10-08-intelligence-artificielle-mistral-defie-",
    "src": "Le Figaro",
@@ -489,150 +621,6 @@
     ]
    ],
    "id": "2026-10-07-crypto"
-  },
-  {
-   "d": {
-    "en": "Oil prices react first to supply: anything that threatens production or shipping pushes them up. Here two risks add up, one geopolitical (Hormuz), one weather-related (a hurricane). A trader separates a lasting shock from a temporary one.",
-    "fr": "Le prix du pétrole réagit d'abord à l'offre : tout ce qui menace la production ou le transport le fait grimper. Ici, deux risques s'additionnent, l'un géopolitique (Ormuz), l'autre météo (ouragan). Un trader distingue un choc durable d'un choc passager."
-   },
-   "date": "2026-10-07",
-   "q": {
-    "en": "What is the difference between Brent and WTI?",
-    "fr": "Quelle est la différence entre le Brent et le WTI ?"
-   },
-   "r": {
-    "en": "They are two benchmark crudes. Brent (North Sea) is the global and European reference; WTI (West Texas Intermediate) is the US reference. Brent is usually a bit more expensive.",
-    "fr": "Ce sont deux pétroles de référence. Le Brent (mer du Nord) sert de prix mondial et européen ; le WTI (West Texas Intermediate) sert de référence aux États-Unis. Le Brent est en général un peu plus cher."
-   },
-   "s": {
-    "en": "Brent climbed back above $101 a barrel and WTI is nearing $90. According to UK officials, at least nine attacks have targeted ships in the Strait of Hormuz since early October, amid the US-Iran conflict. Meanwhile, a tropical storm is threatening the US Gulf Coast, where Chevron is evacuating some staff from its offshore platforms.",
-    "fr": "Le Brent est remonté au-dessus de 101 dollars le baril et le WTI approche 90 dollars. Selon les autorités britanniques, au moins neuf attaques ont visé des navires dans le détroit d'Ormuz depuis le début d'octobre, sur fond de conflit entre les États-Unis et l'Iran. En parallèle, une tempête tropicale menace la côte américaine du golfe, où Chevron évacue une partie du personnel de ses plateformes."
-   },
-   "src": "Yahoo Finance",
-   "t": {
-    "en": "Oil back above $100 on Hormuz attacks and a Gulf storm threat",
-    "fr": "Le pétrole repasse les 100 dollars : attaques à Ormuz et tempête dans le golfe"
-   },
-   "url": "https://finance.yahoo.com/markets/article/oil-prices-climb-above-100-on-strait-of-hormuz-attacks-gulf-storm-threat-122612488.html",
-   "v": [
-    [
-     "le baril",
-     "the barrel"
-    ],
-    [
-     "une perturbation de l'offre",
-     "a supply disruption"
-    ],
-    [
-     "une plateforme pétrolière",
-     "an offshore platform"
-    ],
-    [
-     "un pétrole de référence",
-     "a benchmark crude"
-    ],
-    [
-     "un détroit",
-     "a strait"
-    ]
-   ],
-   "id": "2026-10-07-petrole"
-  },
-  {
-   "d": {
-    "en": "Fed minutes are a key event: they reveal what central bankers are thinking. Markets turn them into a probability of a rate hike, here about 17% for the October meeting. Another signal to watch: three giants (Nvidia, Apple, Microsoft) make up about a fifth of the S&P 500 on their own.",
-    "fr": "Les minutes de la Fed sont un rendez-vous clé : elles révèlent l'état d'esprit des banquiers centraux. Les marchés en déduisent une probabilité de hausse de taux, ici environ 17 % pour la réunion d'octobre. Autre signal à surveiller : trois géants (Nvidia, Apple, Microsoft) pèsent à eux seuls environ un cinquième du S&P 500."
-   },
-   "date": "2026-10-07",
-   "q": {
-    "en": "What does \"a 25 basis point hike\" mean?",
-    "fr": "Que veut dire « une hausse de 25 points de base » ?"
-   },
-   "r": {
-    "en": "One basis point is 0.01 percentage point. 25 basis points = 0.25 point: a 4.50% rate becomes 4.75%.",
-    "fr": "Un point de base vaut 0,01 point de pourcentage. 25 points de base = 0,25 point : un taux de 4,50 % passe à 4,75 %."
-   },
-   "s": {
-    "en": "A day after record highs, the S&P 500 and Nasdaq lost 0.2% and the Dow 0.7%. The US 10-year Treasury yield touched 5.36% during the session, a level not seen since 2002. Minutes from the Fed's September meeting, when it raised rates by 0.25 point, show most officials expect another hike before year-end.",
-    "fr": "Au lendemain de records, le S&P 500 et le Nasdaq ont cédé 0,2 % et le Dow Jones 0,7 %. Le rendement du Trésor américain à 10 ans a touché 5,36 % pendant la séance, un niveau inédit depuis 2002. Le compte rendu de la réunion de septembre de la Fed, qui avait relevé ses taux de 0,25 point, montre que la plupart de ses dirigeants s'attendent à une nouvelle hausse d'ici la fin de l'année."
-   },
-   "src": "Yahoo Finance",
-   "t": {
-    "en": "Wall Street slips from record highs as the US 10-year yield hits a 2002 high",
-    "fr": "Wall Street s'éloigne de ses records, le taux américain à 10 ans au plus haut depuis 2002"
-   },
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-october-7-dow-sp-500-nasdaq-080241833.html",
-   "v": [
-    [
-     "le compte rendu",
-     "the minutes"
-    ],
-    [
-     "une hausse des taux",
-     "a rate hike"
-    ],
-    [
-     "un point de base",
-     "a basis point"
-    ],
-    [
-     "un plus haut historique",
-     "an all-time high"
-    ],
-    [
-     "les bons du Trésor",
-     "Treasuries"
-    ]
-   ],
-   "id": "2026-10-07-wallst"
-  },
-  {
-   "d": {
-    "en": "The OAT-Bund spread is the thermometer of confidence in France: the wider it gets, the bigger the premium investors demand to lend to it. Add next year's presidential election and the budget battle: political risk shows up directly in yields.",
-    "fr": "Le spread OAT-Bund est le thermomètre de la confiance envers la France : plus il s'élargit, plus les investisseurs exigent une prime pour lui prêter. Ajoute la présidentielle de l'an prochain et la bataille budgétaire : le risque politique se voit directement dans les taux."
-   },
-   "date": "2026-10-06",
-   "q": {
-    "en": "If France's yields rise, why is it a problem for the government?",
-    "fr": "Si les taux de la France montent, pourquoi est-ce un problème pour l'État ?"
-   },
-   "r": {
-    "en": "Every year the government borrows to repay old debt and fund its deficit. With higher rates, interest costs rise: that money no longer goes to schools, hospitals or tax cuts.",
-    "fr": "Chaque année, l'État emprunte pour rembourser d'anciennes dettes et financer son déficit. À taux plus élevé, la charge des intérêts augmente : c'est de l'argent qui ne va plus aux écoles, aux hôpitaux ou aux baisses d'impôts."
-   },
-   "s": {
-    "en": "France's 10-year OAT yield neared 5% and the gap with Germany widened. In an interview with the Financial Times, Bank of France governor Emmanuel Moulin called the situation serious: without fixing public finances, rising rates could gradually choke the country. He rejected any comparison with Greece but called for a 2027 budget that cuts spending and the deficit. Since the Iran conflict began, France has seen the biggest rise in yields in the G7.",
-    "fr": "Le rendement de l'OAT à 10 ans s'est approché de 5 % et l'écart avec l'Allemagne s'est creusé. Dans un entretien au Financial Times, le gouverneur de la Banque de France, Emmanuel Moulin, juge la situation sérieuse : sans redressement des finances publiques, la hausse des taux pourrait peu à peu étouffer le pays. Il écarte toute comparaison avec la Grèce mais réclame un budget 2027 qui réduise dépenses et déficit. Depuis le début du conflit en Iran, la France est le pays du G7 dont les taux ont le plus monté."
-   },
-   "src": "Club Patrimoine, d'après le Financial Times",
-   "t": {
-    "en": "French debt: the Bank of France worries about soaring yields",
-    "fr": "Dette française : la Banque de France s'inquiète de la flambée des taux"
-   },
-   "url": "https://www.clubpatrimoine.com/contenus/oat-france",
-   "v": [
-    [
-     "la dette souveraine",
-     "sovereign debt"
-    ],
-    [
-     "l'écart de taux",
-     "the spread"
-    ],
-    [
-     "la prime de risque",
-     "the risk premium"
-    ],
-    [
-     "les finances publiques",
-     "public finances"
-    ],
-    [
-     "le déficit",
-     "the deficit"
-    ]
-   ],
-   "id": "2026-10-06-dette"
   }
  ],
  "actu": {
