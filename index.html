@@ -327,6 +327,32 @@ ul.list>li+li{border-top:1px solid var(--line)}
 .ned ul.ck>li[data-ok="1"]::before{border-color:var(--ny);background:var(--ny) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.4l2.6 2.6L11 4.6' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
 .notesapp .out{background:color-mix(in srgb,var(--ny) 12%,var(--surface))}
 
+/* ma journée */
+:root{--jour:#0b8fac}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--jour:#2fbfdc}}
+:root[data-theme="dark"]{--jour:#2fbfdc}
+.jnow{display:flex;flex-direction:column;gap:4px;border-left:5px solid var(--c)}
+.jnow b{font-family:var(--display);font-size:1.25rem}
+.jlist{list-style:none;margin:0;padding:0}
+.jst{display:grid;grid-template-columns:50px 26px minmax(0,1fr) auto;gap:8px;align-items:center;padding:9px 0}
+.jst+.jst{border-top:1px solid var(--line)}
+.jt{display:flex;flex-direction:column;font-weight:700;font-size:.92rem;line-height:1.15}
+.jt small{font-weight:500;color:var(--muted);font-size:.78rem}
+.ji{font-size:1.15rem;text-align:center}
+.jl{display:flex;flex-direction:column;min-width:0}
+.jl b{font-weight:600;overflow-wrap:anywhere}
+.jl small{color:var(--muted);font-size:.8rem}
+.jst.cours,.jst.trajet,.jst.pause,.jst.repas,.jst.libre{opacity:.72}
+.jst.on{background:color-mix(in srgb,var(--c) 12%,transparent);border-radius:12px;padding-left:6px;opacity:1}
+.jchk{padding:0;min-height:0}
+.jgo{width:32px;height:32px;border-radius:50%;border:1px solid var(--c);background:none;color:var(--c);font-size:.8rem;padding:0;flex:none}
+.jnow.over{border-left-color:var(--down);background:color-mix(in srgb,var(--down) 7%,var(--surface))}
+.jst.over{background:color-mix(in srgb,var(--down) 10%,transparent)}
+.jnow .bar{margin:4px 0}
+.jreste{background:color-mix(in srgb,var(--down) 10%,var(--surface));border-radius:12px;padding:10px 12px;font-size:.9rem}
+.jpr{justify-content:space-between;flex-wrap:nowrap}
+.jpr span{flex:1;font-size:.92rem}
+.jpr .field{flex:0 0 110px}
 /* objectif Top 3 */
 :root{--obj:#c48a00}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--obj:#f2c14e}}
@@ -351,7 +377,6 @@ ul.list>li+li{border-top:1px solid var(--line)}
 :root{--pron:#e0457f}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pron:#ff6b9d}}
 :root[data-theme="dark"]{--pron:#ff6b9d}
-.tile[data-page="pron"]{grid-column:1/-1;min-height:136px}
 .pnl{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;padding:8px 0}
 .pnl+.pnl{border-top:1px solid var(--line)}
 .pnt{display:flex;flex-direction:column;font-variant-numeric:tabular-nums;font-size:.84rem;color:var(--muted);padding-top:1px}
@@ -404,17 +429,21 @@ details.aide code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8
 /* ================================================================
    DONNÉES FIXES
    ================================================================ */
-const COL={pron:"--pron",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",obj:"--obj"};
+const COL={pron:"--pron",jour:"--jour",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",obj:"--obj"};
 const JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 
 const HABITS={sport:["Sport",""],piano:["Piano",""],mspe:["Maths spé","1 h"],mexp:["Maths expertes","1 h"],maths:["Maths","1 h"],
   fsci:["Science","fiche"],fphi:["Philosophie","fiche"],fses:["SES","fiche"],fhis:["Histoire","fiche"],esp:["Espagnol",""],ang:["Anglais",""]};
 const WE=["mspe","esp","fsci","mexp","fphi","ang","piano","sport"];
-const PLAN={1:["sport","piano","mspe","fsci","fphi","fses","fhis"],2:["piano","mspe","mexp"],3:["fsci","fses","mexp","piano"],4:["maths","fses","sport","piano"],5:["piano"],6:WE,0:WE};
+/* planning en vigueur (sport : mercredi, jeudi, dimanche) */
+const PLAN={1:["piano","mspe","fsci","fphi","fses","fhis"],2:["piano","mspe","mexp"],3:["fsci","fses","mexp","piano","sport"],4:["maths","fses","sport","piano"],5:["piano"],
+  6:["mspe","esp","fsci","mexp","fphi","ang","piano"],0:["mspe","esp","fsci","mexp","fphi","ang","piano","sport"]};
 /* planning d'avant le 9 octobre 2026 : les jours passés gardent leur liste */
-const PLAN0={...PLAN,4:["maths","fses"],5:["sport"]};
-const planOf=d=>(dkey(d)<"2026-10-09"?PLAN0:PLAN)[d.getDay()]||[];
+/* anciens plannings : les jours passés gardent leur liste */
+const PLAN_V2={1:["sport","piano","mspe","fsci","fphi","fses","fhis"],2:["piano","mspe","mexp"],3:["fsci","fses","mexp","piano"],4:["maths","fses","sport","piano"],5:["piano"],6:WE,0:WE};
+const PLAN0={...PLAN_V2,4:["maths","fses"],5:["sport"]};
+const planOf=d=>{const k=dkey(d);return(k<"2026-10-09"?PLAN0:k<"2026-10-11"?PLAN_V2:PLAN)[d.getDay()]||[]};
 
 const AXES=["Identités et échanges","Espace privé et espace public","Art et pouvoir","Citoyenneté et mondes virtuels","Fictions et réalités","Innovations scientifiques et responsabilité","Diversité et inclusion","Territoire et mémoire"];
 const SESA_SPE="https://manuel.sesamath.net/numerique/?ouvrage=mstsspe_2020";
@@ -1059,6 +1088,7 @@ const tick=`<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 7.5l3 3 6-
    ================================================================ */
 const ILL={
  pron:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="14" width="56" height="58" rx="11" fill="var(--pron)" opacity=".2"/><rect x="14" y="14" width="56" height="17" rx="8.5" fill="var(--pron)"/><path d="M27 45h30M27 56h18" stroke="var(--pron)" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="61" r="11" fill="var(--pron)"/><path d="M55 61l3.4 3.4 6.4-7" stroke="#fff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ jour:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="12" y="18" width="50" height="48" rx="9" fill="var(--jour)" opacity=".2"/><rect x="12" y="18" width="50" height="13" rx="6.5" fill="var(--jour)"/><path d="M22 40h14M22 49h20M22 58h10" stroke="var(--jour)" stroke-width="4" stroke-linecap="round"/><circle cx="58" cy="56" r="15" fill="var(--surface)" stroke="var(--jour)" stroke-width="4"/><path d="M58 48v8l5 4" stroke="var(--jour)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  obj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M28 16h28v15a14 14 0 0 1-28 0z" fill="var(--obj)"/><path d="M28 21h-8a8 8 0 0 0 8 12M56 21h8a8 8 0 0 1-8 12" fill="none" stroke="var(--obj)" stroke-width="4" stroke-linecap="round"/><rect x="38" y="44" width="8" height="11" fill="var(--obj)" opacity=".55"/><rect x="27" y="55" width="30" height="9" rx="3" fill="var(--obj)"/><path d="M42 21.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8-4.3-2.3-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z" fill="#fff" opacity=".92"/></svg>`,
  hab:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="18" width="52" height="50" rx="10" fill="var(--hab)" opacity=".2"/><rect x="14" y="18" width="52" height="13" rx="6" fill="var(--hab)"/><circle cx="28" cy="46" r="5" fill="var(--hab)"/><circle cx="40" cy="46" r="5" fill="var(--hab)"/><circle cx="52" cy="46" r="5" fill="var(--hab)" opacity=".35"/><circle cx="28" cy="58" r="5" fill="var(--hab)" opacity=".35"/><path d="M36 58l3 3 6-7" stroke="var(--hab)" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
  proj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M60 14C38 18 24 36 22 62l6-2c4-16 14-28 26-36-10 10-16 22-18 34 16-6 26-24 24-44z" fill="var(--proj)"/><path d="M22 62l-6 8" stroke="var(--proj)" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="62" r="8" fill="var(--proj)" opacity=".25"/></svg>`,
@@ -1070,7 +1100,7 @@ const ILL={
 /* ================================================================
    STOCKAGE (base partagée de l'appli, sinon ce navigateur)
    ================================================================ */
-const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu","pronote","objectif"];
+const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu","pronote","objectif","params"];
 let S={};C.forEach(c=>S[c]={});
 let db=null, DL=null, SAMPLE=null, SAMPLE_ST="none", TOOLS_OK=false, syncTxt="Sur cet appareil";
 function localLoad(){try{const x=JSON.parse(localStorage.getItem("cerveau")||"{}");C.forEach(c=>S[c]=x[c]||{})}catch(e){}}
@@ -1118,7 +1148,7 @@ function outBox(key){return V.out[key]?`<div class="out" id="out-${sid(key)}" ar
 /* devoirs Pronote : chacun apparaît la veille du jour où il est à rendre (rien si Pronote n'est pas relié) */
 function pnHwDay(x){const[y,m,d]=String(x.pour).slice(0,10).split("-").map(Number);return dkey(new Date(y,m-1,d-1))}
 function pnTasks(d){const p=S.pronote&&S.pronote.data,a=p&&Array.isArray(p.devoirs)?p.devoirs:[],k=dkey(d);return a.filter(x=>x&&x.id&&x.pour&&pnHwDay(x)===k)}
-function dayStats(d){const p=planOf(d),k=(S.jours[dkey(d)]||{}).done||{},pn=pnTasks(d);return{n:p.filter(h=>k[h]).length+pn.filter(x=>x.fait||k["pn:"+x.id]).length,t:p.length+pn.length}}
+function dayStats(d){const j=S.jours[dkey(d)]||{},p=planOf(d),k=j.done||{},pn=pnTasks(d),xs=j.extra||[];return{n:p.filter(h=>k[h]).length+pn.filter(x=>x.fait||k["pn:"+x.id]).length+xs.filter(x=>x.ok).length,t:p.length+pn.length+xs.length}}
 function streak(){let d=today(),s=0;const t=dayStats(d);if(t.n<t.t)d=add(d,-1);for(let i=0;i<400;i++){const x=dayStats(d);if(x.t&&x.n===x.t){s++;d=add(d,-1)}else break}return s}
 function ring(p,c){const r=24,L=2*Math.PI*r;return`<svg width="60" height="60" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="${r}" fill="none" stroke="var(--soft)" stroke-width="7"/><circle cx="30" cy="30" r="${r}" fill="none" stroke="var(${c})" stroke-width="7" stroke-linecap="round" stroke-dasharray="${L}" stroke-dashoffset="${L*(1-p)}" transform="rotate(-90 30 30)"/></svg>`}
 function weekSeries(nw){const o=[],m0=monday(today());for(let w=nw-1;w>=0;w--){const m=add(m0,-7*w);let n=0,t=0;for(let i=0;i<7;i++){const d=add(m,i);if(d>today())break;const s=dayStats(d);n+=s.n;t+=s.t}o.push({m,p:t?n/t:0})}return o}
@@ -1143,7 +1173,8 @@ function pageHab(){
       <div class="dayname"><b>${isT?"Aujourd'hui":JOURS[d.getDay()]}</b><small>${JOURS[d.getDay()].toLowerCase()} ${d.getDate()} ${MOIS[d.getMonth()]}</small></div>
       <button data-a="next" aria-label="Jour suivant" ${isT?"disabled":""}>›</button></div>
     <div class="row" style="gap:14px">${ring(t?n/t:0,"--hab")}<div><b style="font-family:var(--display);font-size:1.4rem" class="num">${n} / ${t}</b><div class="muted">${n===t?"Journée bouclée":(t-n)+" à faire"}</div></div></div>
-    <ul class="list">${plan.map(h=>`<li><label class="chk"><input type="checkbox" id="hab-${h}" data-hab="${h}" ${k[h]?"checked":""}><span class="box">${tick}</span><span class="t">${HABITS[h][0]}</span><span class="tag">${HABITS[h][1]}</span></label></li>`).join("")}${pnTasks(d).map(x=>`<li><label class="chk"><input type="checkbox" id="hab-pn-${sid(x.id)}" data-pnd="${esc(x.id)}|${dkey(d)}" ${x.fait||k["pn:"+x.id]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.m||"Devoir")}<small class="pnhw">${esc(String(x.txt||"").slice(0,140))}</small></span><span class="tag">Devoir</span></label></li>`).join("")}</ul>
+    <ul class="list">${plan.map(h=>`<li><label class="chk"><input type="checkbox" id="hab-${h}" data-hab="${h}" ${k[h]?"checked":""}><span class="box">${tick}</span><span class="t">${HABITS[h][0]}</span><span class="tag">${HABITS[h][1]}</span></label></li>`).join("")}${pnTasks(d).map(x=>`<li><label class="chk"><input type="checkbox" id="hab-pn-${sid(x.id)}" data-pnd="${esc(x.id)}|${dkey(d)}" ${x.fait||k["pn:"+x.id]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.m||"Devoir")}<small class="pnhw">${esc(String(x.txt||"").slice(0,140))}</small></span><span class="tag">Devoir</span></label></li>`).join("")}${((S.jours[dkey(d)]||{}).extra||[]).map(x=>`<li><label class="chk"><input type="checkbox" id="hab-x-${x.id}" data-jt="x|${x.id}|${dkey(d)}" ${x.ok?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.t)}</span><span class="tag">${x.min} min</span></label></li>`).join("")}</ul>
+    <form class="row" data-f="jadd" data-dk="${dkey(d)}" style="flex-direction:row;flex-wrap:nowrap"><input class="field" id="hab-add" name="t" placeholder="+ Ajouter une tâche pour ce jour" autocomplete="off" required><input type="hidden" name="min" value="30"><button class="ghost on" aria-label="Ajouter">Ajouter</button></form>
   </div>
   <div><p class="label">Cette semaine</p><div class="week">${week}</div></div>
   <div class="stats"><div class="stat"><b>${streak()}</b><span>jours parfaits d'affilée</span></div>
@@ -1859,6 +1890,164 @@ function setPage(id,v){const b=S.livres[id];if(!b)return;v=Math.max(0,Math.min(b
   put("livres",id,{...b,lu:v,fini,finiLe:fini?(b.finiLe||dkey(today())):null,maj:Date.now()})}
 
 /* ================================================================
+   MA JOURNÉE : planificateur étape par étape
+   Emploi du temps Pronote + suivi d'habitudes + devoirs + tâches ajoutées à la main.
+   ================================================================ */
+const JDEF={trajet:35,pause:35,diner:"20:00",dinerDur:45,stop:"22:00",debutWE:"9:30",dejWE:"12:30",libreWE:"17:30",sportTrajet:40,sportDur:75,devoir:30};
+const JDUR={mspe:60,mexp:60,maths:60,fsci:25,fphi:25,fses:25,fhis:25,esp:25,ang:25,piano:30};
+const JORD={mspe:1,mexp:2,maths:1,fsci:4,fses:4,fphi:5,fhis:5,esp:6,ang:6,piano:8};
+function jParams(){return{...JDEF,...((S.params||{}).planning||{})}}
+/* durées réelles apprises : moyenne des 5 dernières fois (dès 2 mesures) */
+function jLearn(){return((S.params||{}).durees)||{}}
+function jDur(ref,def){const a=jLearn()[ref];if(!Array.isArray(a)||a.length<2)return def;const m=a.reduce((x,y)=>x+y,0)/a.length;return Math.max(10,Math.min(300,Math.round(m/5)*5))}
+function jRecord(ref,min){if(!ref||!(min>=3&&min<=300))return;const d={...jLearn()};d[ref]=[...(d[ref]||[]),Math.round(min)].slice(-5);put("params","durees",d,true)}
+const nowMin=()=>{const n=new Date();return n.getHours()*60+n.getMinutes()+n.getSeconds()/60};
+const tsMin=ts=>{const n=new Date(ts);return n.getHours()*60+n.getMinutes()+n.getSeconds()/60};
+const jKey=x=>x.k+"|"+x.ref;
+const jLearnRef=(k,ref)=>k==="hab"?ref:k==="pn"?"devoir":null;
+const hm=s=>{const[h,m]=String(s||"0:0").split(":").map(Number);return(h||0)*60+(m||0)};
+const wallMin=s=>+String(s).slice(11,13)*60+ +String(s).slice(14,16);
+const fmin=m=>{m=Math.round(m);return Math.floor(m/60)+":"+String(m%60).padStart(2,"0")};
+const fdur=m=>m>=60?Math.floor(m/60)+" h"+(m%60?" "+String(m%60).padStart(2,"0"):""):m+" min";
+function jExtras(dk){return((S.jours[dk]||{}).extra)||[]}
+function jLessons(dk){const p=S.pronote&&S.pronote.data;return((p&&p.edt)||[]).filter(c=>c&&!c.annule&&String(c.d).slice(0,10)===dk)}
+function jHwDone(x){const k=pnHwDay(x);return!!(x.fait||((S.jours[k]||{}).done||{})["pn:"+x.id])}
+/* tout ce qu'il y a à faire ce jour-là, par ordre de priorité */
+function jTasks(d){
+  const P=jParams(),dk=dkey(d),done=(S.jours[dk]||{}).done||{},out=[];
+  const rp=(S.jours[dk]||{}).report||{};
+  jExtras(dk).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,l:x.t,min:x.min||30,p:0,tag:"Ajouté"}));
+  pnTasks(d).filter(x=>!jHwDone(x)&&!rp["pn|"+x.id]).forEach(x=>out.push({k:"pn",ref:x.id,l:`${x.m||"Devoir"} : ${String(x.txt||"devoir").split("\n")[0].slice(0,70)}`,min:jDur("devoir",P.devoir),p:1,tag:"Devoir pour demain"}));
+  planOf(d).filter(h=>!done[h]&&!rp["hab|"+h]).forEach(h=>out.push(h==="sport"?{k:"hab",ref:h,l:"Sport (trajets compris)",min:jDur("sport",P.sportTrajet+P.sportDur),p:0.5,tag:`${P.sportDur} min + ${P.sportTrajet} min de trajets`}
+    :{k:"hab",ref:h,l:HABITS[h][0]+(HABITS[h][1]==="fiche"?" (fiche)":""),min:jDur(h,JDUR[h]||30),p:1+(JORD[h]||5)/10,tag:(jLearn()[h]||[]).length>=2?"ton temps réel":""}));
+  /* devoirs des 2 jours suivants : à avancer s'il reste du temps */
+  for(let i=1;i<=2;i++)pnTasks(add(d,i)).filter(x=>!jHwDone(x)).forEach(x=>out.push({k:"pn",ref:x.id,dk:dkey(add(d,i)),l:`Avancer ${x.m||"un devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`,min:jDur("devoir",P.devoir),p:3+i,tag:"À avancer"}));
+  return out.sort((a,b)=>a.p-b.p);
+}
+function planDay(d){
+  const P=jParams(),dk=dkey(d),isT=dk===dkey(today()),nowM=new Date().getHours()*60+new Date().getMinutes();
+  const L=jLessons(dk),school=L.length>0,steps=[];let t;
+  if(school){
+    const a=Math.min(...L.map(c=>wallMin(c.d))),b=Math.max(...L.map(c=>wallMin(c.f))),tr=V.jTrajet||P.trajet,arr=b+tr,lunch=arr<14*60,rest=lunch?Math.max(P.pause,45):P.pause;
+    steps.push({a,b,k:"cours",l:"Cours au lycée"},{a:b,b:arr,k:"trajet",l:"Retour à la maison"},{a:arr,b:arr+rest,k:"pause",l:lunch?"Déjeuner et te poser":"Te poser (vraie pause, sans écrans si possible)"});
+    t=arr+rest;
+  }else t=hm(P.debutWE);
+  const stop=school?hm(P.stop):Math.min(hm(P.stop),hm(P.libreWE)||hm(P.stop));
+  const fixed=[{a:hm(P.diner),b:hm(P.diner)+P.dinerDur,k:"repas",l:"Dîner"}];
+  if(!school)fixed.push({a:hm(P.dejWE),b:hm(P.dejWE)+60,k:"repas",l:"Déjeuner"});
+  fixed.sort((x,y)=>x.a-y.a);
+  let live=false;if(isT&&nowM>t){t=Math.ceil(nowM/5)*5;live=true}
+  const q=jTasks(d),plan=[];let since=0;
+  /* tâche commencée avec ▶ : elle garde son vrai début ; si elle dépasse, le reste se décale */
+  const run=isT?(S.jours[dk]||{}).run:null,ri=run?q.findIndex(x=>jKey(x)===run.key):-1;
+  if(ri>=0){const x=q.splice(ri,1)[0],a=tsMin(run.start),end=a+x.min+(run.ext||0),over=nowM>end;
+    plan.push({...x,a,b:over?Math.ceil((nowM+1)/5)*5:end,run:true,over,overBy:Math.round(nowM-end),el:Math.round(nowM-a),dk});t=Math.max(t,plan[0].b);live=true;since=Math.max(0,nowM-a);}
+  for(let guard=0;guard<80&&q.length;guard++){
+    const fb=fixed.find(f=>f.b>t);
+    if(fb&&t>=fb.a){plan.push({...fb,a:Math.max(fb.a,t)});t=fb.b;since=0;continue}
+    if(t>=stop)break;
+    const lim=Math.min(fb?fb.a:stop,stop);
+    if(since>=50&&lim-t>=25){plan.push({a:t,b:t+10,k:"pause",l:"Pause : bouge, bois de l'eau"});t+=10;since=0;continue}
+    const i=q.findIndex(x=>x.min<=lim-t);
+    if(i<0){if(fb&&fb.a<stop&&fb.a>t){if(fb.a-t>=5)plan.push({a:t,b:fb.a,k:"libre",l:"Temps libre"});t=fb.a;continue}break}
+    const x=q.splice(i,1)[0];plan.push({...x,a:t,b:t+x.min});t+=x.min;since=x.ref==="sport"?0:since+x.min;
+  }
+  if(!q.length){const fb=fixed.find(f=>f.a>=t&&f.a<stop+60);if(fb)plan.push(fb)}
+  return{dk,school,live,steps:live?[]:steps,plan,reste:q,fin:t,stop,first:school?steps[0]:null};
+}
+function jCurrent(pl){const nowM=new Date().getHours()*60+new Date().getMinutes();const all=[...pl.steps,...pl.plan];return{cur:all.find(s=>s.a<=nowM&&nowM<s.b),next:all.find(s=>s.a>nowM)}}
+function jIcon(k,ref){return k==="cours"?"🏫":k==="trajet"?"🚶":k==="pause"?"☕":k==="repas"?"🍽️":k==="libre"?"🌿":ref==="sport"?"🏋️":k==="pn"?"📚":k==="x"?"📝":ref==="piano"?"🎹":/^m/.test(ref)?"📐":/^f/.test(ref)?"🗂️":"✏️"}
+function jStep(s,i,isT){
+  const work=s.k==="hab"||s.k==="pn"||s.k==="x",nowM=new Date().getHours()*60+new Date().getMinutes(),on=isT&&s.a<=nowM&&nowM<s.b;
+  const key=s.k==="hab"?`hab|${s.ref}`:s.k==="pn"?`pn|${s.ref}`:`x|${s.ref}`;
+  return`<li class="jst ${s.k} ${on||s.run?"on":""} ${s.over?"over":""}"><span class="jt num">${fmin(s.a)}<small>${fmin(s.b)}</small></span><span class="ji" aria-hidden="true">${jIcon(s.k,s.ref)}</span>
+   <span class="jl"><b>${esc(s.l)}</b>${s.tag?`<small>${esc(s.tag)} · ${fdur(s.b-s.a)}</small>`:`<small>${fdur(s.b-s.a)}</small>`}</span>
+   ${work?`<span class="row" style="gap:4px;flex-wrap:nowrap">${isT&&!s.run?`<button class="jgo" data-jstart="${esc(key)}" aria-label="Commencer">▶</button>`:""}<label class="chk jchk"><input type="checkbox" data-jt="${esc(key)}|${s.dk||V.jdk}"><span class="box">${tick}</span></label></span>`:""}</li>`;
+}
+function pageJour(){
+  const d=V.jdk?(([y,m,dd])=>new Date(y,m-1,dd))(V.jdk.split("-").map(Number)):today();V.jdk=dkey(d);
+  const isT=V.jdk===dkey(today()),P=jParams(),pl=planDay(d),{cur,next}=isT?jCurrent(pl):{};
+  const head=`<div class="seg" role="group" aria-label="Jour">${[0,1].map(i=>{const x=add(today(),i);return`<button data-jday="${dkey(x)}" aria-pressed="${dkey(x)===V.jdk}">${i?"Demain":"Aujourd'hui"}</button>`}).join("")}</div>`;
+  const R=pl.plan.find(s=>s.run),isWork=s=>s&&(s.k==="hab"||s.k==="pn"||s.k==="x"),todo=isWork(cur)?cur:isWork(next)?next:null;
+  const now=!isT?"":R?`<div class="card jnow ${R.over?"over":""}"><p class="label" style="margin:0">${R.over?`⏱️ Tu dépasses de ${fdur(Math.max(1,R.overBy))}`:"▶ En cours"}</p>
+      <b>${jIcon(R.k,R.ref)} ${esc(R.l)}</b><span class="muted">commencé à ${fmin(R.a)} · ${fdur(Math.max(0,R.el))} passées${R.over?"":` · fin prévue ${fmin(R.b)}`}</span>
+      <div class="bar"><i style="width:${R.over?100:Math.min(100,Math.max(0,R.el)/Math.max(1,R.b-R.a)*100)}%"></i></div>
+      <div class="row"><button class="btn" data-jfini="1">✓ J'ai fini</button><button class="ghost on" data-jplus="15">+15 min</button>${R.over?`<button class="ghost" data-jdemain="1">Je finis demain</button>`:`<button class="ghost" data-jstop="1">Arrêter</button>`}</div>
+      ${R.over?`<span class="muted small">Le reste de ta journée s'est décalé tout seul${pl.reste.length?" ; ce qui ne rentre plus est en bas":""}.</span>`:""}</div>`
+    :`<div class="card jnow">${cur?`<p class="label" style="margin:0">En ce moment</p><b>${jIcon(cur.k,cur.ref)} ${esc(cur.l)}</b><span class="muted">jusqu'à ${fmin(cur.b)}</span>`
+      :next?`<p class="label" style="margin:0">Prochaine étape à ${fmin(next.a)}</p><b>${jIcon(next.k,next.ref)} ${esc(next.l)}</b>`:`<b>✓ Journée bouclée</b><span class="muted">Plus rien de prévu. Repose-toi !</span>`}
+      ${cur&&next?`<span class="muted small">Ensuite : ${esc(next.l)} à ${fmin(next.a)}</span>`:""}
+      ${todo?`<div><button class="btn" data-jstart="${esc(jKey(todo))}">▶ Commencer : ${esc(todo.l.length>34?todo.l.slice(0,33)+"…":todo.l)}</button></div>`:""}</div>`;
+  const sched=pl.school?`${pl.first?`Cours jusqu'à <b>${fmin(pl.first.b)}</b>, `:""}trajet ${V.jTrajet||P.trajet} min, pause ${P.pause} min.`:"Pas de cours : journée à la maison.";
+  const tr=pl.school?`<div class="row" style="gap:6px"><span class="muted small">Trajet aujourd'hui :</span>${[20,30,45].map(m=>`<button class="chip" data-jtrajet="${m}" aria-pressed="${(V.jTrajet||P.trajet)===m}">${m} min</button>`).join("")}</div>`:"";
+  const list=[...pl.steps,...pl.plan];
+  const add_=`<form class="row jadd" data-f="jadd" style="flex-direction:row;flex-wrap:nowrap"><input class="field" id="jadd-t" name="t" placeholder="Ajouter une tâche (ex. apprendre le texte d'anglais)" autocomplete="off" required>
+    <select class="field" name="min" style="flex:0 0 92px">${[15,20,30,45,60,90].map(m=>`<option value="${m}" ${m===30?"selected":""}>${m} min</option>`).join("")}</select><button class="btn" aria-label="Ajouter">+</button></form>`;
+  const xs=jExtras(V.jdk);
+  return`${head}${now}
+  <div class="card stack" style="gap:10px"><p class="small muted" style="margin:0">${sched}${pl.live?" Le plan part de maintenant et se recalcule tout seul quand tu coches.":""}</p>${tr}
+    ${list.length?`<ol class="jlist">${list.map((s,i)=>jStep(s,i,isT)).join("")}</ol>`:`<p>Rien à planifier : tout est fait. 🎉</p>`}
+    ${pl.reste.length?`<div class="jreste"><b>Ne rentre pas avant ${fmin(pl.stop)} :</b> ${pl.reste.map(x=>esc(x.l)+" ("+fdur(x.min)+")").join(", ")}. Garde-les pour demain, ou réduis une tâche.</div>`:""}</div>
+  <div class="card stack" style="gap:10px"><p class="label" style="margin:0">Tâches en plus pour ${isT?"aujourd'hui":"demain"}</p>
+    <p class="muted small" style="margin:0">Pour un devoir qui n'est pas sur Pronote, un contrôle à réviser… Il s'ajoute aussi à ton suivi d'habitudes.</p>
+    ${xs.length?`<ul class="list">${xs.map(x=>`<li class="row" style="justify-content:space-between;flex-wrap:nowrap;padding:8px 0"><span>${x.ok?"✓ ":""}${esc(x.t)} <span class="muted small">· ${x.min} min</span></span><button class="ghost" data-jdel="${x.id}" aria-label="Supprimer">✕</button></li>`).join("")}</ul>`:""}${add_}</div>
+  <div class="card stack" style="gap:10px"><p class="label" style="margin:0">✨ Coach IA</p>
+    <p class="muted small" style="margin:0">Dis-lui ce qui se passe (contrôle, fatigue, sortie…) : il t'organise la journée étape par étape à partir de ton emploi du temps, de tes habitudes et de tes devoirs.</p>
+    <textarea class="field" id="jnote" data-jnote="1" rows="2" placeholder="Ex. : contrôle de maths jeudi, je suis crevé, je sors à 19 h…">${esc(V.jnote||"")}</textarea>
+    <div><button class="btn" data-jia="1" ${V.busy["jour-ia"]?"disabled":""}>${V.busy["jour-ia"]?"Le coach réfléchit…":"Organiser ma journée"}</button></div>${outBox("jour-ia")}</div>
+  <details class="card"><summary class="label" style="margin:0;cursor:pointer">⚙️ Mes réglages de journée</summary>
+    <form data-f="jparams" class="stack" style="gap:8px;margin-top:10px">
+    ${[["trajet","Retour des cours (min)","number"],["pause","Pause en rentrant (min)","number"],["diner","Heure du dîner","time"],["dinerDur","Durée du dîner (min)","number"],["stop","J'arrête de travailler à","time"],["debutWE","Le week-end, je commence à","time"],["dejWE","Déjeuner le week-end","time"],["libreWE","Le week-end, libre à partir de","time"],["sportTrajet","Trajets salle de sport, aller + retour (min)","number"],["sportDur","Séance de sport (min)","number"],["devoir","Temps par devoir Pronote (min)","number"]]
+      .map(([k,l,ty])=>`<label class="row jpr"><span>${l}</span><input class="field" name="${k}" type="${ty}" ${ty==="number"?'inputmode="numeric" min="0" step="5"':""} value="${esc(ty==="time"?String(P[k]).padStart(5,"0"):P[k])}"></label>`).join("")}
+    <div><button class="btn">Enregistrer</button></div></form>
+    ${Object.keys(jLearn()).length?`<div class="stack" style="gap:6px;margin-top:14px"><p class="label" style="margin:0">Ton vrai rythme (appris avec ▶ Commencer)</p>
+      ${Object.entries(jLearn()).map(([r,a])=>`<div class="row" style="justify-content:space-between"><span>${esc(r==="devoir"?"Un devoir Pronote":r==="sport"?"Sport (trajets compris)":(HABITS[r]||[r])[0])}</span><span class="muted small">${a.length>=2?fdur(jDur(r,0))+" en moyenne":"encore 1 mesure"} · ${a.length} fois</span></div>`).join("")}
+      <div><button class="ghost" data-jreset="1">${V.confirm==="jreset"?"Confirmer : tout oublier":"Oublier ces durées"}</button></div></div>`:`<p class="muted small" style="margin-top:12px">Appuie sur ▶ Commencer avant une tâche : l'appli apprend combien de temps tu mets vraiment, et ton plan devient plus juste.</p>`}</details>`;
+}
+function jourIA(){
+  const d=V.jdk?(([y,m,dd])=>new Date(y,m-1,dd))(V.jdk.split("-").map(Number)):today(),P=jParams(),pl=planDay(d),dk=dkey(d);
+  const L=jLessons(dk).map(c=>`${String(c.d).slice(11,16)}-${String(c.f).slice(11,16)} ${c.m}`).join(" ; ")||"pas de cours";
+  const soon=[];for(let i=1;i<=4;i++)jLessons(dkey(add(d,i))).filter(c=>c.test).forEach(c=>soon.push(`${fdate(dkey(add(d,i)))} : ${c.m}`));
+  const hw=(((S.pronote||{}).data||{}).devoirs||[]).filter(x=>String(x.pour)>=dk&&!jHwDone(x)).slice(0,10).map(x=>`- pour le ${fdate(String(x.pour).slice(0,10))} : ${x.m} : ${String(x.txt||"").slice(0,160)}`).join("\n")||"aucun";
+  const plan=[...pl.steps,...pl.plan].map(s=>`${fmin(s.a)}-${fmin(s.b)} ${s.l}`).join("\n");
+  stream("jour-ia",`Tu es le coach d'organisation de Nathan, élève de Terminale (spé maths, maths expertes, SES), qui a du mal à s'organiser. Sois concret, bienveillant et direct.
+Jour : ${JOURS[d.getDay()]} ${fdate(dk)}${dk===dkey(today())?` (il est ${fmin(new Date().getHours()*60+new Date().getMinutes())})`:""}.
+Cours (Pronote) : ${L}.
+Contraintes : il met entre 20 et 45 min à rentrer des cours, il a besoin de ${P.pause} min de pause en rentrant ; dîner vers ${P.diner} ; arrêter de travailler vers ${P.stop} ; le week-end, libre à partir de ${P.libreWE} ; sport = ${P.sportDur} min de séance + ${P.sportTrajet} min de trajets.
+Tâches du jour pas encore faites : ${jTasks(d).map(x=>x.l+" ("+x.min+" min)").join(" ; ")||"aucune"}.
+Devoirs à venir (Pronote) :
+${hw}
+${soon.length?"Contrôles prévus bientôt : "+soon.join(" ; "):""}
+Plan calculé par l'appli :
+${plan||"(vide)"}
+${pl.reste.length?"Ne rentre pas : "+pl.reste.map(x=>x.l).join(", "):""}
+Ce que Nathan précise : ${V.jnote||"rien"}
+Réponds en français, sans titres markdown. Donne le plan de sa journée étape par étape, avec les heures (format 17:10), en gardant les pauses, et en mettant les tâches les plus importantes ou difficiles quand il a le plus d'énergie. Ajoute pour 2 ou 3 étapes une astuce concrète pour la faire efficacement (par exemple pour apprendre un texte par cœur). Termine par une phrase d'encouragement courte. 20 lignes maximum.`);
+}
+function jourSummary(){
+  const pl=planDay(today()),{cur,next}=jCurrent(pl);
+  if(cur)return[`${jIcon(cur.k,cur.ref)} ${fmin(cur.b)}`,`en ce moment : ${esc(cur.l)}`];
+  if(next)return[fmin(next.a),`prochaine étape : ${esc(next.l)}`];
+  return["✓","journée bouclée"];
+}
+/* ---- ▶ commencer, terminer, dépasser ---- */
+function jMark(dk,key,ok){const a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),j=S.jours[dk]||{},cur={...(j.done||{})},doc={...j,date:dk,done:cur};
+  if(kind==="x")doc.extra=(j.extra||[]).map(x=>x.id===ref?{...x,ok}:x);else{const k=kind==="pn"?"pn:"+ref:ref;if(ok)cur[k]=true;else delete cur[k]}
+  return put("jours",dk,doc)}
+function jSetRun(run){const td=dkey(today()),j=S.jours[td]||{},doc={...j,date:td,done:j.done||{}};if(run)doc.run=run;else delete doc.run;return put("jours",td,doc)}
+function jToggle(s,ok){const a=s.indexOf("|"),b=s.lastIndexOf("|"),kind=s.slice(0,a),ref=s.slice(a+1,b),dk=s.slice(b+1),key=kind+"|"+ref,run=(S.jours[dkey(today())]||{}).run;
+  if(ok&&run&&run.key===key){jRecord(jLearnRef(kind,ref),(Date.now()-run.start)/60000);jSetRun(null)}
+  return jMark(dk,key,ok)}
+function jStart(s){const b=s.lastIndexOf("|"),key=s.slice(0,b),dk=s.slice(b+1);return jSetRun({key,dk,start:Date.now(),ext:0})}
+function jFinish(){const run=(S.jours[dkey(today())]||{}).run;if(!run)return;const a=run.key.indexOf("|");
+  jRecord(jLearnRef(run.key.slice(0,a),run.key.slice(a+1)),(Date.now()-run.start)/60000);jSetRun(null);return jMark(run.dk||dkey(today()),run.key,true)}
+function jTomorrow(){const td=dkey(today()),j=S.jours[td]||{},run=j.run;if(!run)return;const pl=planDay(today()),R=pl.plan.find(s=>s.run);
+  put("jours",td,{...j,date:td,done:j.done||{},report:{...(j.report||{}),[run.key]:true},run:undefined},true);delete S.jours[td].run;
+  const tm=dkey(add(today(),1)),jt=S.jours[tm]||{};return put("jours",tm,{...jt,date:tm,done:jt.done||{},extra:[...(jt.extra||[]),{id:uid(),t:"Finir : "+(R?R.l:"la tâche d'hier"),min:30,ok:false}]})}
+
+/* l'étape en cours se met à jour chaque minute */
+setInterval(()=>{if(V.page==="jour"||V.page==="home")render()},60000);
+/* ================================================================
    OBJECTIF TOP 3 : HEC · ESSEC · ESCP
    Indice de progression (pas une probabilité d'admission) :
    notes Pronote 50 %, régularité du suivi d'habitudes 30 %, entraînement finance 20 %.
@@ -1984,10 +2173,11 @@ function pageObj(){
 /* ================================================================
    ACCUEIL
    ================================================================ */
-const SECT=[["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["cours","Cours"]];
+const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["cours","Cours"]];
 function summary(k){
   const t=today();
   if(k==="pron")return pnSummary();
+  if(k==="jour")return jourSummary();
   if(k==="hab"){const s=dayStats(t);return[`${s.n}/${s.t}`,"tâches faites aujourd'hui"]}
   if(k==="proj"){const a=nIn("all");return a.length?[`${a.length}`,`note${a.length>1?"s":""} · ${esc(nTitle(a[0][1]))}`]:["Notes","écris ce qui te trotte dans la tête"]}
   if(k==="fin"){const dg=dailyGame(t),r=prog().days[dkey(t)];return r?[`✓ ${r.s}/${r.m}`,`défi du jour : ${dg.n} · ${levelOf(prog().xp).name}`]:[`${dg.e} Défi`,`du jour : ${dg.n} · actu FR/EN`]}
@@ -2529,7 +2719,7 @@ document.addEventListener("click",e=>{
 /* ================================================================
    RENDU
    ================================================================ */
-const PAGES={reglages:pageReglages,aide:pageAide,pron:pagePron,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
+const PAGES={reglages:pageReglages,aide:pageAide,pron:pagePron,jour:pageJour,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
 let pending=false;
 function render(force){
   const a=document.activeElement;
@@ -2594,6 +2784,17 @@ document.addEventListener("click",e=>{
   if(d.flip){V.gflip=!V.gflip;return render(true)}
   if(d.gl){V.gflip=false;V.gi=d.gl==="r"?Math.floor(Math.random()*GLOSS.length):(V.gi+ +d.gl+GLOSS.length)%GLOSS.length;return render(true)}
   if(d.trdir){V.trDir=d.trdir;return render(true)}
+  /* ma journée */
+  if(d.jday){V.jdk=d.jday;return render(true)}
+  if(d.jtrajet){V.jTrajet=+d.jtrajet;return render(true)}
+  if(d.jdel){const k=V.jdk,j=S.jours[k]||{};return put("jours",k,{...j,date:k,done:j.done||{},extra:(j.extra||[]).filter(x=>x.id!==d.jdel)})}
+  if(d.jia)return jourIA();
+  if(d.jstart)return jStart(d.jstart+"|"+((b.closest(".jst")&&b.closest(".jst").querySelector("[data-jt]"))?b.closest(".jst").querySelector("[data-jt]").dataset.jt.split("|").pop():V.jdk));
+  if(d.jfini)return jFinish();
+  if(d.jplus){const r=(S.jours[dkey(today())]||{}).run;if(r)return jSetRun({...r,ext:(r.ext||0)+ +d.jplus});return}
+  if(d.jstop)return jSetRun(null);
+  if(d.jdemain)return jTomorrow();
+  if(d.jreset)return confirmOr("jreset",()=>put("params","durees",{}));
   /* 🪶 notes */
   if(d.nf!==undefined){V.nf=d.nf||null;V.nq="";V.newf=false;V.renf=false;V.confirm=null;nHousekeep();render(true);return window.scrollTo(0,0)}
   if(d.note){V.note=d.note;V.confirm=null;render(true);return window.scrollTo(0,0)}
@@ -2618,6 +2819,7 @@ document.addEventListener("input",e=>{
   const t=e.target,d=t.dataset;
   if(d.ans)V.ans[d.ans]=t.value;
   if(d.ned!==undefined)nSaveSoon();
+  if(d.jnote!==undefined)V.jnote=t.value;
   if(d.nq!==undefined){V.nq=t.value;nFilter()}
   if(d.trin)V.trIn=t.value;
   if(d.ci)V.ci[d.ci]=t.value;
@@ -2625,8 +2827,9 @@ document.addEventListener("input",e=>{
 });
 document.addEventListener("change",e=>{
   const t=e.target,d=t.dataset;
-  if(d.hab){const k=dkey(V.day),cur={...((S.jours[k]||{}).done||{})};if(t.checked)cur[d.hab]=true;else delete cur[d.hab];return put("jours",k,{date:k,done:cur})}
-  if(d.pnd){const i=d.pnd.lastIndexOf("|"),id=d.pnd.slice(0,i),k=d.pnd.slice(i+1),cur={...((S.jours[k]||{}).done||{})};if(t.checked)cur["pn:"+id]=true;else delete cur["pn:"+id];return put("jours",k,{date:k,done:cur})}
+  if(d.hab){const k=dkey(V.day),cur={...((S.jours[k]||{}).done||{})};if(t.checked)cur[d.hab]=true;else delete cur[d.hab];return put("jours",k,{...(S.jours[k]||{}),date:k,done:cur})}
+  if(d.jt)return jToggle(d.jt,t.checked);
+  if(d.pnd){const i=d.pnd.lastIndexOf("|"),id=d.pnd.slice(0,i),k=d.pnd.slice(i+1),cur={...((S.jours[k]||{}).done||{})};if(t.checked)cur["pn:"+id]=true;else delete cur["pn:"+id];return put("jours",k,{...(S.jours[k]||{}),date:k,done:cur})}
   if(d.nmove!==undefined){nSave();const id=d.nmove,v=t.value||null;if(S.notes[id])put("notes",id,{...S.notes[id],projet:v},true);else if(V.ndraft&&V.ndraft.id===id)V.ndraft.n.projet=v;return render(true)}
   if(d.simstop&&V.g&&V.g.sim){V.g.sim.stop=t.checked;return}
   if(d.imp&&t.files&&t.files[0]){readImport(t.files[0]);t.value="";return}
@@ -2648,6 +2851,10 @@ Ensuite, après une ligne contenant seulement « — », liste les 5 termes fina
 Texte :
 ${txt.slice(0,6000)}`)}
   document.activeElement&&document.activeElement.blur();
+  if(k==="jadd"){const tx=(x.t||"").trim();if(!tx)return;const dk=f.dataset.dk||V.jdk||dkey(today()),j=S.jours[dk]||{};
+    return put("jours",dk,{...j,date:dk,done:j.done||{},extra:[...(j.extra||[]),{id:uid(),t:tx.slice(0,120),min:+x.min||30,ok:false}]})}
+  if(k==="jparams"){const o={};Object.keys(JDEF).forEach(key=>{const v=x[key];if(v===undefined||v==="")return;o[key]=typeof JDEF[key]==="number"?Math.max(0,Math.min(600,+v||0)):String(v).slice(0,5)});
+    V.jTrajet=0;return put("params","planning",{...((S.params||{}).planning||{}),...o})}
   if(k==="nfolder"){const nm=(x.nom||"").trim();if(nm)put("projets",uid(),{nom:nm,cree:Date.now()},true);V.newf=false;return render(true)}
   if(k==="nfren"){const nm=(x.nom||"").trim();if(nm&&nRealF(V.nf))put("projets",V.nf,{...S.projets[V.nf],nom:nm},true);V.renf=false;return render(true)}
   if(k==="lect"){const p=parseInt(x.pages);if(x.titre.trim()&&p>0)put("livres",uid(),{titre:x.titre.trim(),auteur:(x.auteur||"").trim(),pages:p,lu:0,fini:false,maj:Date.now()})}
