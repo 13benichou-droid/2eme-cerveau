@@ -379,6 +379,18 @@ ul.list>li+li{border-top:1px solid var(--line)}
 .pnscan{position:fixed;inset:0;z-index:50;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px}
 .pnscan video{width:100%;max-width:520px;border-radius:16px;background:#111}
 .pnscan p{color:#fff;text-align:center}
+/* dépannage */
+details.aide{display:flex;flex-direction:column;gap:10px}
+details.aide summary{font-family:var(--display);font-weight:700;font-size:1.02rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+details.aide summary::-webkit-details-marker{display:none}
+details.aide summary::after{content:"›";font-size:1.4rem;color:var(--muted);transition:transform .2s}
+details.aide[open] summary::after{transform:rotate(90deg)}
+details.aide[open] summary{margin-bottom:10px}
+details.aide h4{font-size:.92rem;margin:14px 0 6px;color:var(--c)}
+details.aide p{margin:4px 0}
+.aidesteps{margin:6px 0;padding-left:22px;display:flex;flex-direction:column;gap:8px;line-height:1.5}
+.aidesteps a,details.aide a{color:var(--c);font-weight:700}
+details.aide code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82em;background:var(--soft);padding:1px 5px;border-radius:5px;overflow-wrap:anywhere}
 
 @media (max-width:460px){.plan{grid-template-columns:1fr}.snap{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -1096,7 +1108,7 @@ function stream(key,prompt,tier){
   V.busy[key]=true;V.out[key]="Réflexion…";render(true);
   SAMPLE(prompt,{cache:false,modelTier:tier||"default",onText:({text})=>{V.out[key]=text;const el=document.getElementById("out-"+sid(key));if(el)el.textContent=text}})
    .then(()=>{V.busy[key]=false;render()})
-   .catch(e=>{V.busy[key]=false;if(e.code==="not_granted"||e.code==="sampling_disabled")SAMPLE_ST="none";V.out[key]=((e.text||"")+"\n\n"+ERR(e.code)).trim();render()});
+   .catch(e=>{if(e&&e.code&&e.code!=="cancelled")aideErr("ia",ERR(e.code)+(e.message?" "+String(e.message).slice(0,200):""));V.busy[key]=false;if(e.code==="not_granted"||e.code==="sampling_disabled")SAMPLE_ST="none";V.out[key]=((e.text||"")+"\n\n"+ERR(e.code)).trim();render()});
 }
 function outBox(key){return V.out[key]?`<div class="out" id="out-${sid(key)}" aria-live="polite">${esc(V.out[key])}</div>`:""}
 
@@ -1988,7 +2000,7 @@ function pageHome(){
   <div class="tiles">${SECT.map(([k,n])=>{const[b,s]=summary(k);return`<button class="tile" style="--c:var(${COL[k]})" data-page="${k}">${ILL[k]}<h2>${n}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>
   <div class="card stack" style="margin-top:16px"><p class="label" style="margin:0">💾 Mes données</p>
     <p class="muted small">Tout s'enregistre d'abord sur cet appareil, puis se synchronise avec ton compte (⚙️ Réglages). Garde aussi un fichier de sauvegarde de temps en temps.</p>
-    <div class="row">${DL?`<button class="ghost on" data-export="1">Sauvegarder dans un fichier</button>`:""}<label class="ghost on" for="imp" style="cursor:pointer">Restaurer un fichier</label><input type="file" id="imp" data-imp="1" accept=".json,application/json" hidden></div>
+    <div class="row">${DL?`<button class="ghost on" data-export="1">Sauvegarder dans un fichier</button>`:""}<label class="ghost on" for="imp" style="cursor:pointer">Restaurer un fichier</label><button class="ghost" data-page="aide">🛟 Dépannage</button><input type="file" id="imp" data-imp="1" accept=".json,application/json" hidden></div>
     ${V.dataMsg?`<p class="small">${esc(V.dataMsg)}</p>`:""}${V.imp?`<div class="row"><button class="btn" data-impok="1">Confirmer la restauration</button><button class="ghost" data-impno="1">Annuler</button></div>`:""}</div>`;
 }
 
@@ -2017,7 +2029,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.1.0";
+const APP_VERSION="1.2.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -2173,7 +2185,7 @@ aiSample.json=async(input,opts={})=>{
 async function loadNews(){try{const r=await fetch("data/news.json?t="+Date.now(),{cache:"no-store"});if(r.ok)applyNews(await r.json())}catch(e){}}
 function applyNews(n){
   if(!n||typeof n!=="object")return;const pr={};(n.articles||[]).forEach(a=>{if(a&&a.id&&a.t)pr[a.id]=a});
-  if(Object.keys(pr).length)S.presse=pr;if(n.snap)S.marche={snap:n.snap};if(n.actu)S.jeu={...S.jeu,actu:n.actu};
+  if(n.updated)lsSet("cerveau-news-upd",n.updated);if(Object.keys(pr).length)S.presse=pr;if(n.snap)S.marche={snap:n.snap};if(n.actu)S.jeu={...S.jeu,actu:n.actu};
   localSaveSoon();render();
 }
 
@@ -2200,16 +2212,17 @@ function pageReglages(){
       ?`<input class="field" id="ai-key" name="key" type="text" autocomplete="off" spellcheck="false" style="-webkit-text-security:disc" placeholder="Clé API Gemini (AI Studio)" value="${esc(a.key)}"><input class="field" id="ai-model" name="model" autocomplete="off" placeholder="Modèle : gemini-3.5-flash" value="${esc(a.model)}">`
       :`<input class="field" id="ai-url" name="url" autocomplete="off" placeholder="http://localhost:11434" value="${esc(a.ollamaUrl)}"><input class="field" id="ai-model" name="model" autocomplete="off" placeholder="Modèle : llama3.2" value="${esc(a.model)}">`}
       <div class="row"><button class="btn" ${V.aiBusy?"disabled":""}>${V.aiBusy?"Test en cours…":"Enregistrer et tester"}</button></div></form>
-    ${V.aiMsg?`<p class="small">${esc(V.aiMsg)}</p>`:""}
+    ${V.aiMsg?`<p class="small">${esc(V.aiMsg)}</p>${/^✓/.test(V.aiMsg)?"":`<div><button class="ghost on" data-page="aide" data-aide="ia">🛟 Que faire ?</button></div>`}`:""}
     <p class="muted small">${a.provider==="gemini"?"La clé reste sur cet appareil : colle-la aussi sur ton autre appareil. Google fixe le nombre de messages gratuits par jour.":"Ollama doit être installé et lancé sur ce PC (étape 6 du guide). Il ne marche que sur ce PC."}</p></div>`;
   const inst=`<div class="card stack"><p class="label" style="margin:0">Installer l'appli</p>${isStandalone()?`<p>✓ L'appli est installée sur cet appareil.</p>`:`${INSTALL_EVT?`<div><button class="btn" data-install="1">Installer sur cet appareil</button></div>`:""}
     <p class="small"><b>iPhone</b> : dans Safari, bouton Partager puis « Sur l'écran d'accueil ».<br><b>Android</b> : menu ⋮ de Chrome puis « Installer l'application ».<br><b>Ordinateur</b> : dans Chrome ou Edge, icône d'installation à droite de la barre d'adresse.</p>`}</div>`;
-  return sync+pnReglages()+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
+  const aide=`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">Un problème ?</p><p class="muted small">Pronote, IA, synchronisation, actu : un mode d'emploi pas à pas pour chaque panne.</p><div><button class="btn" data-page="aide">🛟 Ouvrir le dépannage</button></div></div>`;
+  return aide+sync+pnReglages()+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
 }
 async function testAI(){
   V.aiBusy=true;V.aiMsg="";render(true);
-  try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.");V.aiMsg="✓ L'IA répond : "+r.text.trim().slice(0,80)}
-  catch(e){V.aiMsg=ERR(e.code)+(e.code==="bad_model"&&aiCfg().provider==="gemini"?" Essaie un autre nom de modèle (liste dans Google AI Studio).":"")+(e.message?" Détail : "+String(e.message).slice(0,240):"")}
+  try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.");V.aiMsg="✓ L'IA répond : "+r.text.trim().slice(0,80);aideErr("ia",null)}
+  catch(e){V.aiMsg=ERR(e.code)+(e.code==="bad_model"&&aiCfg().provider==="gemini"?" Essaie un autre nom de modèle (liste dans Google AI Studio).":"")+(e.message?" Détail : "+String(e.message).slice(0,240):"");aideErr("ia",V.aiMsg)}
   V.aiBusy=false;render(true);
 }
 
@@ -2260,8 +2273,8 @@ async function pnCallSlug(slug,action,extra){
 function pnApply(data){if(!data||typeof data!=="object")return;S.pronote={...S.pronote,data};localSaveSoon();render()}
 async function pnRefresh(manual){
   if(PN_BUSY)return;PN_BUSY=true;if(manual){V.pnMsg="";render(true)}
-  try{const j=await pnCall("refresh");pnApply(j.data);V.pnMsg="";V.pnBad=null}
-  catch(e){V.pnMsg=pnErr(e);V.pnBad=e.code||"err"}
+  try{const j=await pnCall("refresh");pnApply(j.data);V.pnMsg="";V.pnBad=null;aideErr("pronote",null)}
+  catch(e){V.pnMsg=pnErr(e);V.pnBad=e.code||"err";aideErr("pronote",V.pnMsg)}
   PN_BUSY=false;render(!!manual);
 }
 function pnAuto(){
@@ -2271,8 +2284,8 @@ function pnAuto(){
 }
 async function pnConnect(pin){
   if(!V.pnQR)return;V.pnBusy=true;V.pnMsg="Connexion à Pronote…";render(true);
-  try{const j=await pnCall("connect",{qr:V.pnQR,pin});pnApply(j.data);V.pnQR=null;V.pnBad=null;V.pnConnecting=false;V.pnMsg="✓ Pronote est connecté.";V.pntab="jour"}
-  catch(e){V.pnMsg=pnErr(e);if(e.code==="qr_refused"||e.code==="qr_invalid")V.pnQR=null}
+  try{const j=await pnCall("connect",{qr:V.pnQR,pin});pnApply(j.data);V.pnQR=null;V.pnBad=null;V.pnConnecting=false;aideErr("pronote",null);V.pnMsg="✓ Pronote est connecté.";V.pntab="jour"}
+  catch(e){V.pnMsg=pnErr(e);V.pnBad=e.code||"err";aideErr("pronote",V.pnMsg);if(e.code==="qr_refused"||e.code==="qr_invalid")V.pnQR=null}
   V.pnBusy=false;render(true);
 }
 async function pnLogout(){V.pnMsg="Déconnexion…";render(true);try{await pnCall("logout")}catch(e){}S.pronote={};localSaveSoon();V.pnMsg="Pronote est déconnecté.";V.pnBad=null;render(true)}
@@ -2328,7 +2341,7 @@ function pnConnectCard(){
    <li><b>Sur ton téléphone</b>, appuie sur « Scanner le QR code » et vise l'écran de l'ordi.</li><li>Tape ton code à 4 chiffres, puis « Connecter ».</li></ol>
    ${V.pnQR?`<p>✓ QR code lu.</p><form data-f="pnpin" class="row" style="flex-direction:row"><input class="field" id="pn-pin" name="pin" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="Code à 4 chiffres" autocomplete="off" required><button class="btn" ${V.pnBusy?"disabled":""}>${V.pnBusy?"Connexion…":"Connecter"}</button></form><div><button class="ghost" data-pnrescan="1">Scanner un autre QR code</button></div>`
      :`<div class="row"><button class="btn" data-pnscan="1">📷 Scanner le QR code</button><label class="ghost on" for="pn-img" style="cursor:pointer">🖼️ Choisir une photo</label><input type="file" id="pn-img" data-pnimg="1" accept="image/*" hidden></div>`}
-   ${V.pnMsg?`<p class="small">${esc(V.pnMsg)}</p>`:""}${V.pnConnecting&&pnData()?`<div><button class="ghost" data-pncancel="1">Annuler</button></div>`:""}
+   ${V.pnMsg?`<p class="small">${esc(V.pnMsg)}</p>${V.pnBad&&!V.pnBusy?`<div><button class="ghost" data-page="aide" data-aide="pronote">🛟 Que faire ?</button></div>`:""}`:""}${V.pnConnecting&&pnData()?`<div><button class="ghost" data-pncancel="1">Annuler</button></div>`:""}
    <p class="muted small">Ton mot de passe n'est jamais demandé ni enregistré : seul un jeton de connexion est gardé dans ton compte. Pronote n'a pas d'accès officiel pour les applis extérieures : si Pronote change, la connexion peut s'arrêter le temps d'une mise à jour.</p></div>`;
 }
 function pagePron(){
@@ -2337,7 +2350,7 @@ function pagePron(){
   const tab=V.pntab||"jour",tk=dkey(today()),now=new Date();
   const top=`<div class="row" style="justify-content:space-between"><span class="muted small">${p.eleve&&p.eleve.classe?esc(p.eleve.classe)+" · ":""}mis à jour ${pnAge(p.updated)}</span>
     <button class="ghost on" data-pnrefresh="1" ${PN_BUSY?"disabled":""}>${PN_BUSY?"Mise à jour…":"↻ Actualiser"}</button></div>
-    ${V.pnMsg?`<div class="card" style="padding:12px 14px"><p class="small">${esc(V.pnMsg)}</p>${V.pnBad==="token_refused"?`<div style="margin-top:8px"><button class="ghost on" data-pnreconnect="1">Reconnecter avec un QR code</button></div>`:""}</div>`:""}
+    ${V.pnMsg?`<div class="card" style="padding:12px 14px"><p class="small">${esc(V.pnMsg)}</p><div class="row" style="margin-top:8px">${V.pnBad==="token_refused"?`<button class="ghost on" data-pnreconnect="1">Reconnecter avec un QR code</button>`:""}${V.pnBad?`<button class="ghost" data-page="aide" data-aide="pronote">🛟 Que faire ?</button>`:""}</div></div>`:""}
     <div class="chips" role="tablist">${[["jour","Aujourd'hui"],["edt","Emploi du temps"],["dev","Devoirs"],["notes","Notes"],["cont","Contenu des cours"]].map(([k,l])=>`<button class="chip" role="tab" data-pntab="${k}" aria-pressed="${tab===k}">${l}</button>`).join("")}</div>`;
   const edt=p.edt||[],days=[...new Set(edt.map(c=>pnDay(c.d)))].filter(d=>d>=tk).sort();
   const hw=(p.devoirs||[]);let body="";
@@ -2412,9 +2425,111 @@ document.addEventListener("submit",e=>{
 });
 
 /* ================================================================
+   DÉPANNAGE : mode d'emploi pas à pas pour chaque panne possible
+   (marche sans Claude : liens directs vers tes comptes GitHub, Supabase et Google)
+   ================================================================ */
+function aideLinks(){
+  const h=location.hostname,owner=/\.github\.io$/.test(h)?h.split(".")[0]:"13benichou-droid",repo=(/\.github\.io$/.test(h)&&location.pathname.split("/")[1])||"2eme-cerveau";
+  const ref=(cfg().supabaseUrl.match(/^https:\/\/([^.]+)\.supabase\.co/)||[])[1]||"",slug=lsGet("cerveau-pn-slug",null)||"dynamic-worker";
+  const gh=`https://github.com/${owner}/${repo}`,sb=`https://supabase.com/dashboard/project/${ref}`;
+  return{app:location.origin+location.pathname,gh,actions:gh+"/actions",secrets:gh+"/settings/secrets/actions",vars:gh+"/settings/variables/actions",pages:gh+"/settings/pages",upload:gh+"/upload/main",
+    sb,fn:`${sb}/functions/${slug}/code`,fns:`${sb}/functions`,slug,ref,studio:"https://aistudio.google.com/apikey",npm:"https://www.npmjs.com/package/@blockshub/pawnote-lts"};
+}
+function aideErr(k,m){const e=lsGet("cerveau-err",{});if(m){e[k]={m:String(m).slice(0,400),t:Date.now()}}else delete e[k];lsSet("cerveau-err",e)}
+function aideInfo(){
+  const L=aideLinks(),e=lsGet("cerveau-err",{}),p=typeof pnData==="function"?pnData():null,d=t=>t?new Date(t).toLocaleString("fr-FR"):"";
+  return`Bonjour, mon appli « 2ème cerveau » a un problème. Peux-tu m'expliquer étape par étape, simplement, comment le régler ?
+
+Contexte technique : appli web (PWA) hébergée sur GitHub Pages (${L.gh}). Synchronisation et fonction Pronote sur Supabase (projet ${L.ref}, Edge Function « ${L.slug} » en Deno, qui utilise la bibliothèque npm @blockshub/pawnote-lts avec une connexion par QR code). IA : Gemini (clé API Google). Actu : GitHub Actions, workflow « Actu du jour » (scripts/actu.mjs, secret GEMINI_API_KEY).
+Version de l'appli : ${APP_VERSION} · fonction Pronote : ${p&&p.v?"v"+p.v:"inconnue"} · Pronote mis à jour : ${p?d(p.updated):"jamais"}
+Dernière erreur Pronote : ${e.pronote?e.pronote.m+" ("+d(e.pronote.t)+")":"aucune"}
+Dernière erreur IA : ${e.ia?e.ia.m+" ("+d(e.ia.t)+")":"aucune"}
+Synchronisation : ${syncTxt}${lastSyncTxt()}
+Actu mise à jour : ${d(lsGet("cerveau-news-upd",null))||"inconnu"}
+Appareil : ${navigator.userAgent}`;
+}
+const A=(href,txt)=>`<a href="${href}" target="_blank" rel="noopener">${txt} ↗</a>`;
+function pageAide(){
+  const L=aideLinks(),o=k=>V.aideOpen===k?"open":"";
+  return`<div class="card stack" style="gap:8px"><p>Touche ce qui ne marche pas, puis suis les étapes <b>dans l'ordre</b>. Aucune de ces étapes n'efface tes données.</p>
+    <p class="muted small">Les liens ouvrent directement tes comptes (GitHub, Supabase, Google). Connecte-toi si on te le demande.</p></div>
+
+  <details class="card aide" ${o("pronote")}><summary>📚 Pronote ne marche plus</summary>
+    <p>Regarde le message affiché dans la page Pronote de l'appli, puis suis le cas qui correspond.</p>
+    <h4>Cas 1 : « La connexion à Pronote a expiré » ou « Pronote a refusé »</h4>
+    <ol class="aidesteps"><li>Sur l'ordi, ouvre Pronote (par Atrium). Clique sur l'icône <b>QR code</b> en haut et choisis un <b>code à 4 chiffres</b>.</li>
+      <li>Dans l'appli : page <b>Pronote</b> → <b>Reconnecter avec un QR code</b>. Si le bouton n'est pas là : ⚙️ Réglages → <b>Déconnecter Pronote</b>, puis <b>Relier Pronote</b>.</li>
+      <li>Appuie sur <b>Scanner le QR code</b>, vise l'écran, tape ton code, puis <b>Connecter</b>. Le QR code ne dure que 10 minutes : fais-le d'un coup.</li></ol>
+    <h4>Cas 2 : le message parle de « page », de « challenge », ou ça échoue même avec un nouveau QR code</h4>
+    <p class="small">Pronote a sûrement fait une mise à jour. Il faut mettre à jour la bibliothèque qui parle à Pronote. Ça prend 3 minutes :</p>
+    <ol class="aidesteps"><li>Ouvre ${A(L.npm,"la page de la bibliothèque Pawnote-LTS")} et note le <b>numéro de version</b> écrit en haut (par exemple 1.6.5).</li>
+      <li>Ouvre ${A(L.fn,"le code de ta fonction Pronote dans Supabase")}.</li>
+      <li>À la <b>ligne 7</b>, tu vois : <code>import * as P from "npm:@blockshub/pawnote-lts@1.6.4";</code>. Remplace seulement le numéro à la fin (<code>1.6.4</code>) par le nouveau. Ne touche à rien d'autre.</li>
+      <li>Clique sur <b>Deploy updates</b> et attends le message de réussite.</li>
+      <li>Refais le <b>cas 1</b>, avec un nouveau QR code.</li></ol>
+    <p class="small">Si le numéro est déjà le même, ou si ça ne marche toujours pas : va tout en bas de cette page, appuie sur « Copier les infos pour demander de l'aide » et colle-les à une IA gratuite. Ajoute le code de ta fonction : dans Supabase, onglet <b>Code</b>, puis Ctrl + A et Ctrl + C.</p>
+    <h4>Cas 3 : « La fonction Pronote ne répond pas »</h4>
+    <ol class="aidesteps"><li>Ton projet Supabase est sans doute en pause : suis la partie <b>« Mes données ne se synchronisent plus »</b> ci-dessous.</li>
+      <li>Ensuite, sur la page Pronote de l'appli, appuie sur <b>↻ Actualiser</b>.</li></ol></details>
+
+  <details class="card aide" ${o("ia")}><summary>🤖 L'IA ne répond plus (profs, traducteur)</summary>
+    <h4>« Quota gratuit de l'IA atteint »</h4>
+    <p class="small">Rien n'est cassé : Google limite le nombre de messages gratuits par jour. Réessaie plus tard ou demain.</p>
+    <h4>« La clé d'IA est refusée »</h4>
+    <ol class="aidesteps"><li>Ouvre ${A(L.studio,"Google AI Studio, page des clés")} avec ton compte Google.</li>
+      <li>Clique sur <b>Create API key</b>, puis copie la clé qui s'affiche. Ne l'envoie à personne.</li>
+      <li>Dans l'appli : ⚙️ Réglages → Intelligence artificielle → colle la clé → <b>Enregistrer et tester</b>.</li>
+      <li>Fais-le aussi sur ton autre appareil, car la clé est enregistrée sur chaque appareil.</li>
+      <li>Pour les résumés de l'actu : ouvre ${A(L.secrets,"les secrets de ton dépôt GitHub")} → <b>GEMINI_API_KEY</b> → crayon ✏️ → colle la nouvelle clé → <b>Update secret</b>.</li></ol>
+    <h4>« Ce modèle d'IA n'existe pas »</h4>
+    <ol class="aidesteps"><li>Dans ${A(L.studio,"Google AI Studio")}, regarde le nom des modèles « Flash » proposés, par exemple <code>gemini-3.5-flash</code>.</li>
+      <li>Dans l'appli : ⚙️ Réglages → champ <b>Modèle</b> → tape ce nom → <b>Enregistrer et tester</b>.</li>
+      <li>Pour l'actu : ouvre ${A(L.vars,"les variables de ton dépôt GitHub")}. Crée ou modifie la variable <b>GEMINI_MODEL</b> avec le même nom.</li></ol></details>
+
+  <details class="card aide" ${o("sync")}><summary>🔄 Mes données ne se synchronisent plus</summary>
+    <p class="small">Signes : l'accueil affiche « Synchro en attente », ou ton autre appareil ne voit pas tes changements. Tes données restent aussi enregistrées sur chaque appareil : rien n'est perdu.</p>
+    <ol class="aidesteps"><li>Ouvre ${A(L.sb,"ton projet Supabase")}.</li>
+      <li>Si tu vois « Project is paused » : clique sur <b>Restore project</b> et attends 2 à 5 minutes que tout redevienne vert. Ça arrive si l'appli n'est pas utilisée pendant 7 jours.</li>
+      <li>Dans l'appli : ⚙️ Réglages → <b>Synchroniser maintenant</b>.</li>
+      <li>Si l'appli dit « Reconnecte-toi » : ⚙️ Réglages → <b>Se connecter</b>, avec le même e-mail et le même mot de passe.</li></ol></details>
+
+  <details class="card aide" ${o("actu")}><summary>📰 L'actu ou les cours de la bourse ne bougent plus</summary>
+    <p class="small">Signe : les articles et les cours datent de plusieurs jours, en semaine.</p>
+    <ol class="aidesteps"><li>Ouvre ${A(L.actions,"l'onglet Actions de ton dépôt GitHub")}.</li>
+      <li>À gauche, clique sur <b>Actu du jour</b>.</li>
+      <li>Si un bandeau jaune dit « This scheduled workflow is disabled » : clique sur <b>Enable workflow</b>. GitHub l'arrête après 60 jours sans activité.</li>
+      <li>Clique sur <b>Run workflow</b>, puis sur le bouton vert <b>Run workflow</b>. Attends 1 minute : une coche verte ✓ doit apparaître.</li>
+      <li>Si c'est une croix rouge ✗ : clique dessus et lis le message. S'il parle de « Gemini », suis la partie <b>« L'IA ne répond plus »</b> (étape GitHub). Les titres des articles arrivent quand même.</li></ol></details>
+
+  <details class="card aide" ${o("app")}><summary>📱 L'appli ne s'ouvre plus ou n'est pas à jour</summary>
+    <ol class="aidesteps"><li>Ferme complètement l'appli, puis rouvre-la avec internet. Fais-le deux fois.</li>
+      <li>Ouvre ${A(L.app,"l'adresse de l'appli")} dans Safari ou Chrome. Si elle s'ouvre, réinstalle l'appli depuis là (⚙️ Réglages → Installer l'appli).</li>
+      <li>Si GitHub affiche une erreur 404 : ouvre ${A(L.pages,"les réglages Pages de ton dépôt")}. Vérifie <b>Deploy from a branch</b>, branche <b>main</b>, dossier <b>/ (root)</b>, puis <b>Save</b>.</li>
+      <li>Si tu as perdu des données : accueil → 💾 Mes données → <b>Restaurer un fichier</b>, et choisis ta dernière sauvegarde.</li></ol></details>
+
+  <details class="card aide" ${o("appareil")}><summary>💻 Nouveau téléphone ou nouvel ordi</summary>
+    <ol class="aidesteps"><li>Ouvre ${A(L.app,"l'adresse de l'appli")} et installe-la : sur iPhone, bouton Partager → « Sur l'écran d'accueil » ; sur ordi, l'icône d'installation de Chrome ; sur Mac avec Safari, Fichier → Ajouter au Dock.</li>
+      <li>⚙️ Réglages → <b>Se connecter</b>, avec le même e-mail et le même mot de passe. Tout revient tout seul, Pronote compris.</li>
+      <li>⚙️ Réglages → Intelligence artificielle → colle ta clé Gemini.</li></ol></details>
+
+  <div class="card stack"><p class="label" style="margin:0">Toujours bloqué ?</p>
+    <p class="small">Copie les infos de ton appli et colle-les dans une IA gratuite (Claude, Gemini, ChatGPT…) avec une capture du message d'erreur : elle aura tout ce qu'il faut pour t'aider. Ces infos ne contiennent ni mot de passe ni clé.</p>
+    <div><button class="btn" data-aidecopy="1">📋 Copier les infos pour demander de l'aide</button></div>
+    ${V.aideMsg?`<p class="small">${esc(V.aideMsg)}</p>`:""}${V.aideShow?`<textarea class="field" rows="10" readonly onfocus="this.select()">${esc(aideInfo())}</textarea>`:""}</div>`;
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest&&e.target.closest("button");if(!b)return;const d=b.dataset;
+  if(d.aide)V.aideOpen=d.aide;
+  if(d.aidecopy){const t=aideInfo();
+    (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject())
+      .then(()=>{V.aideMsg="✓ Copié. Colle-le dans une IA gratuite, avec une capture de l'erreur.";V.aideShow=false;render(true)})
+      .catch(()=>{V.aideMsg="Sélectionne le texte ci-dessous et copie-le.";V.aideShow=true;render(true)});}
+});
+
+/* ================================================================
    RENDU
    ================================================================ */
-const PAGES={reglages:pageReglages,pron:pagePron,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
+const PAGES={reglages:pageReglages,aide:pageAide,pron:pagePron,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
 let pending=false;
 function render(force){
   const a=document.activeElement;
@@ -2423,7 +2538,7 @@ function render(force){
   const app=document.getElementById("app");
   if(V.page==="home"||!PAGES[V.page]){app.innerHTML=pageHome();return}
   if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
-  const n=(SECT.find(s=>s[0]===V.page)||[0,"Réglages"])[1];
+  const n=(SECT.find(s=>s[0]===V.page)||[0,V.page==="aide"?"Dépannage":"Réglages"])[1];
   app.innerHTML=`<div class="sec" style="--c:var(${COL[V.page]||"--proj"})"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${n}</h1>${(ILL[V.page]||"").replace('class="ill"',"")}</div>${PAGES[V.page]()}</div>`;
 }
 /* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
