@@ -455,6 +455,37 @@ details.aide code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8
 .tiles>.tile:last-child:nth-child(even){grid-column:1/-1;min-height:136px}
 .sgres .seg{display:flex}
 .sgres .seg button{flex:1}
+/* maths */
+:root{--mx:#4553c4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--mx:#8f9bff}}
+:root[data-theme="dark"]{--mx:#8f9bff}
+.mxrow{display:grid;grid-template-columns:28px minmax(0,1fr) 46px;gap:10px;align-items:center;width:100%;border:0;background:none;text-align:left;padding:11px 0;color:var(--ink)}
+.mxrow.off{grid-template-columns:28px minmax(0,1fr);opacity:.5}
+.mxtt{display:flex;flex-direction:column;min-width:0}
+.mxtt b{font-weight:600;overflow-wrap:anywhere}
+.mxn{width:28px;height:28px;border-radius:50%;background:color-mix(in srgb,var(--c) 14%,var(--surface));color:var(--c);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.mxbar{height:6px;border-radius:3px;background:var(--soft);overflow:hidden}
+.mxbar i{display:block;height:100%;background:var(--c)}
+.mxh{font-size:1.3rem;line-height:1.25}
+.mxb{border-left:4px solid var(--b)}
+.mxkt{margin-bottom:8px}
+.mxk{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--b)}
+.mxbt{font-weight:700;margin-left:8px}
+details.mxb>summary{cursor:pointer}
+details.mxb[open]>summary{margin-bottom:8px}
+.mxt{line-height:1.6}
+.mxt>*+*{margin-top:8px}
+.mxt ul,.mxt ol{margin:0;padding-left:22px}
+.mxt li+li{margin-top:4px}
+.mxt code{background:var(--soft);border-radius:5px;padding:1px 5px;font-size:.88em}
+.mxsol{display:flex;flex-direction:column;gap:4px;background:color-mix(in srgb,var(--c) 7%,var(--surface));border-radius:12px;padding:10px 12px}
+.mxsol>b,.mxsol summary b{color:var(--c)}
+.mxsol summary{cursor:pointer}
+.mxe.ok{border-color:color-mix(in srgb,var(--up) 55%,var(--line))}
+.mxe.ko{border-color:color-mix(in srgb,var(--down) 45%,var(--line))}
+.mxet{font-family:var(--display)}
+.mxcode{background:var(--soft);border-radius:10px;padding:10px 12px;overflow-x:auto;font-size:.85rem;line-height:1.45;margin:0}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:4px 0;margin:6px 0}
 </style>
 <script src="config.js"></script>
 </head>
@@ -464,7 +495,7 @@ details.aide code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8
 /* ================================================================
    DONNÉES FIXES
    ================================================================ */
-const COL={cg:"--cg",idees:"--idee",pron:"--pron",jour:"--jour",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",obj:"--obj"};
+const COL={mx:"--mx",cg:"--cg",idees:"--idee",pron:"--pron",jour:"--jour",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",obj:"--obj"};
 const JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 
@@ -1130,6 +1161,7 @@ const ILL={
  obj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M28 16h28v15a14 14 0 0 1-28 0z" fill="var(--obj)"/><path d="M28 21h-8a8 8 0 0 0 8 12M56 21h8a8 8 0 0 1-8 12" fill="none" stroke="var(--obj)" stroke-width="4" stroke-linecap="round"/><rect x="38" y="44" width="8" height="11" fill="var(--obj)" opacity=".55"/><rect x="27" y="55" width="30" height="9" rx="3" fill="var(--obj)"/><path d="M42 21.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8-4.3-2.3-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z" fill="#fff" opacity=".92"/></svg>`,
  cg:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="40" cy="44" r="24" fill="var(--cg)" opacity=".2"/><circle cx="40" cy="44" r="24" fill="none" stroke="var(--cg)" stroke-width="4"/><ellipse cx="40" cy="44" rx="10" ry="24" fill="none" stroke="var(--cg)" stroke-width="3.5"/><path d="M17 44h46M21 32h38M21 56h38" stroke="var(--cg)" stroke-width="3" stroke-linecap="round"/><path d="M67 10l2.6 5.4 5.4 2.6-5.4 2.6-2.6 5.4-2.6-5.4-5.4-2.6 5.4-2.6z" fill="var(--cg)"/></svg>`,
  idees:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="34" r="20" fill="var(--idee)" opacity=".2"/><path d="M42 14a20 20 0 0 0-11 36.7V58h22v-7.3A20 20 0 0 0 42 14z" fill="none" stroke="var(--idee)" stroke-width="4" stroke-linejoin="round"/><path d="M34 65h16M37 71h10" stroke="var(--idee)" stroke-width="4" stroke-linecap="round"/><path d="M35 44l4-6 3 5 3-5 4 6" stroke="var(--idee)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ mx:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="12" y="14" width="58" height="56" rx="10" fill="var(--mx)" opacity=".16"/><path d="M20 62h46M24 66V20" stroke="var(--mx)" stroke-width="3.5" stroke-linecap="round"/><path d="M27 58c7-1 11-28 19-28s9 19 19 14" fill="none" stroke="var(--mx)" stroke-width="4" stroke-linecap="round"/><text x="50" y="31" font-size="17" font-weight="700" fill="var(--mx)" font-family="Georgia,serif">π</text></svg>`,
  hab:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="18" width="52" height="50" rx="10" fill="var(--hab)" opacity=".2"/><rect x="14" y="18" width="52" height="13" rx="6" fill="var(--hab)"/><circle cx="28" cy="46" r="5" fill="var(--hab)"/><circle cx="40" cy="46" r="5" fill="var(--hab)"/><circle cx="52" cy="46" r="5" fill="var(--hab)" opacity=".35"/><circle cx="28" cy="58" r="5" fill="var(--hab)" opacity=".35"/><path d="M36 58l3 3 6-7" stroke="var(--hab)" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
  proj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M60 14C38 18 24 36 22 62l6-2c4-16 14-28 26-36-10 10-16 22-18 34 16-6 26-24 24-44z" fill="var(--proj)"/><path d="M22 62l-6 8" stroke="var(--proj)" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="62" r="8" fill="var(--proj)" opacity=".25"/></svg>`,
  fin:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="20" width="56" height="44" rx="8" fill="var(--fin)" opacity=".18"/><path d="M20 54l12-12 9 7 17-19" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 30h9v9" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -1140,7 +1172,7 @@ const ILL={
 /* ================================================================
    STOCKAGE (base partagée de l'appli, sinon ce navigateur)
    ================================================================ */
-const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu","pronote","objectif","params","cg","perso"];
+const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu","pronote","objectif","params","cg","perso","maths"];
 let S={};C.forEach(c=>S[c]={});
 let db=null, DL=null, SAMPLE=null, SAMPLE_ST="none", TOOLS_OK=false, syncTxt="Sur cet appareil";
 function localLoad(){try{const x=JSON.parse(localStorage.getItem("cerveau")||"{}");C.forEach(c=>S[c]=x[c]||{})}catch(e){}}
@@ -1159,7 +1191,7 @@ async function del(col,id){
    ================================================================ */
 let V={page:"home",day:today(),range:12,subj:"mspe",chap:null,proj:null,ptab:"journal",emoji:"🪶",confirm:null,nf:null,note:null,ndraft:null,nq:"",newf:false,renf:false,
   lang:"fr",trDir:"en-fr",gi:0,gflip:false,defi:0,
-  rev:{},ans:{},out:{},busy:{},jd:{},jpoids:{},vt:"",vtProj:"",trIn:"",ctab:"cours",tier:"complex",lvl:0,live:{},ctl:{},ci:{},ftab:"jeu",g:null,gin:"",dataMsg:"",imp:null,sg:{},cgk:null};
+  rev:{},ans:{},out:{},busy:{},jd:{},jpoids:{},vt:"",vtProj:"",trIn:"",ctab:"cours",tier:"complex",lvl:0,live:{},ctl:{},ci:{},ftab:"jeu",g:null,gin:"",dataMsg:"",imp:null,sg:{},cgk:null,mxr:{},mxa:{}};
 try{const p=JSON.parse(localStorage.getItem("cerveau-v")||"{}");if(p.page)V.page=p.page;if(p.lang)V.lang=p.lang;if(p.subj)V.subj=p.subj;if(p.tier)V.tier=p.tier;if(p.ftab)V.ftab=p.ftab}catch(e){}
 function saveV(){try{localStorage.setItem("cerveau-v",JSON.stringify({page:V.page,lang:V.lang,subj:V.subj,tier:V.tier,ftab:V.ftab}))}catch(e){}}
 V.defi=Math.floor(Math.random()*DEFIS.length);V.gi=Math.floor(Math.random()*GLOSS.length);
@@ -2722,14 +2754,125 @@ function cgSummary(){const v=S.cg[dkey(today())],n=cgNotion(v);
   return n?[`<span class="cgbig">${esc(n.t)}</span>`,v.rep!=null?(v.ok?"✓ quiz réussi":"quiz fait · "+esc(n.c)):`${CG_CAT[n.c]||""} ${esc(n.c)} · quiz à faire`]:["À découvrir","ta notion du jour (2 min)"]}
 
 /* ================================================================
+   📐 MATHS : leçons et exercices, de la Terminale à la licence
+   Le contenu est dans le dossier maths/ du dépôt GitHub (un fichier texte par chapitre) :
+   on ajoute des chapitres sans toucher à l'appli. Les formules s'affichent avec KaTeX.
+   ================================================================ */
+const MX_KTX="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/";
+const MX_MAC={"\\R":"\\mathbb{R}","\\N":"\\mathbb{N}","\\Z":"\\mathbb{Z}","\\Q":"\\mathbb{Q}","\\C":"\\mathbb{C}","\\P":"\\mathbb{P}","\\E":"\\mathbb{E}","\\V":"\\mathbb{V}","\\e":"\\mathrm{e}","\\i":"\\mathrm{i}","\\d":"\\mathrm{d}",
+  "\\vect":"\\overrightarrow{#1}","\\abs":"\\left|#1\\right|","\\norme":"\\left\\|#1\\right\\|","\\Var":"\\operatorname{Var}","\\Cov":"\\operatorname{Cov}","\\pgcd":"\\operatorname{PGCD}","\\ppcm":"\\operatorname{PPCM}",
+  "\\Ker":"\\operatorname{Ker}","\\Imf":"\\operatorname{Im}","\\rg":"\\operatorname{rg}","\\tr":"\\operatorname{tr}","\\Card":"\\operatorname{Card}"};
+const MX_LV=["","★","★★","★★★"],MX_LVN=["","Facile","Moyen","Type bac"];
+const MX_BK={DEF:["Définition","#2d7ff0"],PROP:["Propriété","#14a27a"],THM:["Théorème","#7a5cff"],FORMULES:["Formules","#0b8fac"],METHODE:["Méthode","#c48a00"],EXEMPLE:["Exemple","#6a7486"],ATTENTION:["Attention","#d9443a"],REMARQUE:["Remarque","#6a7486"],DEMO:["Démonstration","#7a5cff"]};
+let MXI=null,MXC={},mxLoad={};
+async function mxIndex(){if(MXI||mxLoad.idx)return;mxLoad.idx=1;
+  try{const r=await fetch("maths/index.json",{cache:"no-cache"});if(!r.ok)throw 0;MXI=await r.json();V.mxErr=""}
+  catch(e){V.mxErr="Les chapitres de maths ne sont pas encore sur ton dépôt GitHub (dossier maths), ou tu n'as pas de connexion."}
+  mxLoad.idx=0;render()}
+async function mxFile(id,f){if(MXC[id]||mxLoad[id]||!f)return;mxLoad[id]=1;
+  try{const r=await fetch("maths/"+f,{cache:"no-cache"});if(!r.ok)throw 0;mxParse(await r.text()).forEach(c=>MXC[c.id]=c);if(!MXC[id])throw 0;V.mxErr=""}
+  catch(e){V.mxErr="Ce chapitre n'a pas pu être chargé : vérifie ta connexion."}
+  mxLoad[id]=0;render()}
+/* format des fichiers : @chapitre id | titre | thème, @resume, blocs « == DEF | titre », exercices « == EXO 2 type | titre » avec -- indice / -- reponse / -- solution */
+function mxParse(txt){const out=[];let ch=null,bl=null,sub=null;
+  String(txt).replace(/\r/g,"").split("\n").forEach(line=>{let m;
+    if((m=line.match(/^@chapitre\s+(\S+)\s*\|\s*([^|]+?)\s*(?:\|\s*(.+?))?\s*$/))){ch={id:m[1],t:m[2],th:m[3]||"",res:"",b:[],ex:[]};out.push(ch);bl=null;return}
+    if(!ch)return;
+    if((m=line.match(/^@resume\s+(.*)$/))){ch.res=m[1].trim();return}
+    if((m=line.match(/^==\s*EXO\s+([1-3])\s*([\wéè-]*)\s*\|\s*(.*)$/))){bl={ex:1,lv:+m[1],ty:m[2]||"",t:m[3].trim(),q:"",h:"",r:"",s:""};ch.ex.push(bl);sub="q";return}
+    if((m=line.match(/^==\s*([A-ZÉ]+)\s*(?:\|\s*(.*))?$/))){bl={k:m[1],t:(m[2]||"").trim(),x:""};ch.b.push(bl);sub="x";return}
+    if(bl&&bl.ex&&(m=line.match(/^--\s*(indice|reponse|réponse|solution)\s*$/i))){sub={indice:"h",reponse:"r","réponse":"r",solution:"s"}[m[1].toLowerCase()];return}
+    if(bl)bl[sub]+=(bl[sub]?"\n":"")+line});
+  out.forEach(c=>{c.b.forEach(b=>b.x=b.x.trim());c.ex.forEach((e,i)=>{e.n=i+1;["q","h","r","s"].forEach(k=>e[k]=e[k].trim())})});return out}
+/* texte → HTML : paragraphes, listes « - » et « 1. », **gras**, code entre ```, formules $…$ et $$…$$ */
+function mxFmt(t){let h="",list=null,para=[],code=null;
+  const flush=()=>{if(para.length){h+=`<p>${para.join("<br>")}</p>`;para=[]}},closeL=()=>{if(list){h+=`</${list}>`;list=null}},inl=s=>esc(s).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>").replace(/`([^`]+)`/g,"<code>$1</code>");
+  String(t||"").split("\n").forEach(l=>{let m;
+    if(/^\s*```/.test(l)){if(code!=null){h+=`<pre class="mxcode">${esc(code.join("\n"))}</pre>`;code=null}else{flush();closeL();code=[]}return}
+    if(code!=null){code.push(l);return}
+    if(!l.trim()){flush();closeL();return}
+    if((m=l.match(/^\s*[-•]\s+(.*)$/))){flush();if(list!=="ul"){closeL();h+="<ul>";list="ul"}h+=`<li>${inl(m[1])}</li>`;return}
+    if((m=l.match(/^\s*(\d+)[.)]\s+(.*)$/))){flush();if(list!=="ol"){closeL();h+=`<ol start="${m[1]}">`;list="ol"}h+=`<li>${inl(m[2])}</li>`;return}
+    closeL();para.push(inl(l))});
+  if(code!=null)h+=`<pre class="mxcode">${esc(code.join("\n"))}</pre>`;flush();closeL();return h}
+/* KaTeX se charge la première fois qu'on ouvre la rubrique */
+let mxK=null;
+function mxTex(){const app=document.getElementById("app");if(!app)return;
+  const run=()=>{try{renderMathInElement(app,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],macros:{...MX_MAC},throwOnError:false,ignoredTags:["script","noscript","style","textarea","pre","code","option"]})}catch(e){}};
+  if(window.renderMathInElement)return run();
+  if(!mxK)mxK=new Promise((res,rej)=>{const l=document.createElement("link");l.rel="stylesheet";l.href=MX_KTX+"katex.min.css";document.head.appendChild(l);
+    const s=document.createElement("script");s.src=MX_KTX+"katex.min.js";s.onerror=rej;s.onload=()=>{const a=document.createElement("script");a.src=MX_KTX+"contrib/auto-render.min.js";a.onload=res;a.onerror=rej;document.head.appendChild(a)};document.head.appendChild(s)})
+    .catch(()=>{mxK=null;throw 0});
+  mxK.then(()=>{if(V.page==="mx")run()}).catch(()=>{})}
+const mxDone=()=>S.maths||{};
+function mxStat(id){let ok=0,ko=0;Object.values((mxDone()[id]||{}).ex||{}).forEach(v=>{if(v==="ok")ok++;else if(v==="ko")ko++});return{ok,ko}}
+function mxMeta(id){for(const p of(MXI&&MXI.parcours)||[])for(const c of p.chap)if(c.id===id)return{...c,p};return null}
+function mxTotal(){let ok=0;Object.keys(mxDone()).forEach(id=>ok+=mxStat(id).ok);return ok}
+function pageMx(){
+  if(!MXI){mxIndex();return`<div class="card"><p>${esc(V.mxErr||"Chargement des chapitres…")}</p></div>`}
+  if(V.mxc)return mxChapPage();
+  const P=MXI.parcours||[],p=P.find(x=>x.id===V.mxp)||P[0];if(!p)return"";
+  const dispo=P.reduce((s,x)=>s+x.chap.filter(c=>c.f).length,0),nex=P.reduce((s,x)=>s+x.chap.reduce((a,c)=>a+(c.f?c.nex||0:0),0),0);
+  return`<div class="chips" role="tablist" aria-label="Parcours">${P.map(x=>`<button class="chip" data-mxp="${esc(x.id)}" aria-pressed="${x.id===p.id}">${esc(x.n)}</button>`).join("")}</div>
+  <div class="stats"><div class="stat"><b>${mxTotal()}</b><span>exercices réussis</span></div><div class="stat"><b>${nex}</b><span>exercices en tout</span></div><div class="stat"><b>${dispo}</b><span>chapitres prêts</span></div></div>
+  <div class="card">${p.intro?`<p class="muted small" style="margin-bottom:6px">${esc(p.intro)}</p>`:""}<ul class="list">${p.chap.map((c,i)=>{const st=mxStat(c.id);
+    return c.f?`<li><button class="mxrow" data-mxc="${esc(c.id)}"><span class="mxn">${i+1}</span><span class="mxtt"><b>${esc(c.t)}</b><small class="muted">${esc(c.th)} · ${c.nex||0} exercices${st.ok?` · ✓ ${st.ok}`:""}</small></span><span class="mxbar"><i style="width:${c.nex?Math.min(100,st.ok/c.nex*100):0}%"></i></span></button></li>`
+      :`<li><div class="mxrow off"><span class="mxn">${i+1}</span><span class="mxtt"><b>${esc(c.t)}</b><small class="muted">${esc(c.th)} · bientôt</small></span></div></li>`}).join("")}</ul></div>`}
+function mxChapPage(){
+  const meta=mxMeta(V.mxc),c=MXC[V.mxc],back=`<div><button class="ghost on" data-mxback="1">‹ Chapitres</button></div>`;
+  if(!c){mxFile(V.mxc,meta&&meta.f);return back+`<div class="card"><p>${esc(V.mxErr||"Chargement du chapitre…")}</p></div>`}
+  const tab=V.mxt||"cours",st=mxStat(c.id),lv=V.mxlv||0,n=c.ex.length;
+  const head=`${back}<div class="card stack" style="gap:8px"><span class="muted small">${esc(c.th)}${meta&&meta.p?" · "+esc(meta.p.n):""}</span><h2 class="mxh">${esc(c.t)}</h2>${c.res?`<div class="muted mxt">${mxFmt(c.res)}</div>`:""}
+    <div class="bar"><i style="width:${n?Math.min(100,st.ok/n*100):0}%"></i></div><span class="muted small">${st.ok} / ${n} exercices réussis${st.ko?` · ${st.ko} à revoir`:""}</span></div>
+  <div class="seg" role="tablist"><button data-mxt="cours" aria-pressed="${tab==="cours"}">📖 Leçon</button><button data-mxt="exos" aria-pressed="${tab==="exos"}">✏️ Exercices (${n})</button></div>`;
+  if(tab==="cours")return head+c.b.map(b=>{const k=MX_BK[b.k]||[b.k,"#6a7486"],tt=`<span class="mxk" style="--b:${k[1]}">${k[0]}</span>${b.t?`<span class="mxbt">${esc(b.t)}</span>`:""}`;
+    return b.k==="DEMO"?`<details class="card mxb" style="--b:${k[1]}"><summary>${tt}</summary><div class="mxt">${mxFmt(b.x)}</div></details>`:`<div class="card mxb" style="--b:${k[1]}"><p class="mxkt">${tt}</p><div class="mxt">${mxFmt(b.x)}</div></div>`}).join("")
+    +`<div><button class="btn" data-mxt="exos">✏️ Passer aux exercices</button></div>`;
+  const ex=c.ex.filter(e=>!lv||e.lv===lv);
+  return head+`<div class="chips">${[0,1,2,3].map(l=>`<button class="chip" data-mxlv="${l}" aria-pressed="${l===lv}">${l?MX_LV[l]+" "+MX_LVN[l]:"Tous"}</button>`).join("")}</div>`
+    +ex.map(e=>mxExo(c,e)).join("")
+    +`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">♾️ Encore des exercices</p><p class="muted small" style="margin:0">L'IA invente un nouvel exercice sur ce chapitre, avec son corrigé caché.</p>
+      ${SAMPLE?`<div class="row">${[1,2,3].map(l=>`<button class="ghost on" data-mxgen="${l}" ${V.busy["mxg|"+c.id]?"disabled":""}>${MX_LV[l]} ${MX_LVN[l]}</button>`).join("")}</div>${mxGenOut(c)}`:`<p class="small">Ajoute ta clé d'IA dans ⚙️ Réglages pour en avoir à l'infini.</p>`}</div>`}
+function mxExo(c,e){const k=c.id+"|"+e.n,r=V.mxr[k]||{},st=((mxDone()[c.id]||{}).ex||{})[e.n];
+  return`<div class="card stack mxe ${st||""}" style="gap:10px"><div class="row" style="justify-content:space-between"><span class="label" style="margin:0">Exercice ${e.n} · ${MX_LV[e.lv]} ${MX_LVN[e.lv]}</span>${st?`<span class="small ${st==="ok"?"up":"down"}">${st==="ok"?"✓ réussi":"à revoir"}</span>`:""}</div>
+    ${e.t?`<b class="mxet">${esc(e.t)}</b>`:""}<div class="mxt">${mxFmt(e.q)}</div>
+    <div class="row">${e.h?`<button class="ghost ${r.h?"on":""}" data-mxv="${esc(k)}|h">💡 Indice</button>`:""}${e.r?`<button class="ghost ${r.r?"on":""}" data-mxv="${esc(k)}|r">Réponse</button>`:""}${e.s?`<button class="ghost ${r.s?"on":""}" data-mxv="${esc(k)}|s">Corrigé détaillé</button>`:""}</div>
+    ${r.h&&e.h?`<div class="mxsol"><b>Indice</b><div class="mxt">${mxFmt(e.h)}</div></div>`:""}${r.r&&e.r?`<div class="mxsol"><b>Réponse</b><div class="mxt">${mxFmt(e.r)}</div></div>`:""}${r.s&&e.s?`<div class="mxsol"><b>Corrigé</b><div class="mxt">${mxFmt(e.s)}</div></div>`:""}
+    <div class="row"><button class="ghost ${st==="ok"?"on":""}" data-mxok="${esc(k)}|ok">✓ Réussi</button><button class="ghost ${st==="ko"?"danger":""}" data-mxok="${esc(k)}|ko">✗ À revoir</button>${SAMPLE?`<button class="ghost ${r.ia?"on":""}" data-mxv="${esc(k)}|ia">🤖 Prof IA</button>`:""}</div>
+    ${r.ia&&SAMPLE?`<div class="stack" style="gap:8px"><textarea class="field" rows="3" data-mxa="${esc(k)}" placeholder="Écris ta réponse pour qu'il la corrige, ou laisse vide si tu bloques.">${esc(V.mxa[k]||"")}</textarea>
+      <div><button class="btn" data-mxcor="${esc(k)}" ${V.busy["mx|"+k]?"disabled":""}>${V.busy["mx|"+k]?"Le prof lit…":"Envoyer au prof"}</button></div>${V.busy["mx|"+k]?outBox("mx|"+k):V.out["mx|"+k]?`<div class="out mxt">${mxFmt(V.out["mx|"+k])}</div>`:""}</div>`:""}</div>`}
+function mxEx(k){const i=k.lastIndexOf("|"),c=MXC[k.slice(0,i)];return c?{c,e:c.ex.find(x=>x.n===+k.slice(i+1))}:{}}
+function mxCorr(k){const{c,e}=mxEx(k);if(!e)return;const a=String(V.mxa[k]||"").trim();
+  stream("mx|"+k,`Tu es un excellent prof de maths, bienveillant et exigeant. Nathan, élève de Terminale (spé maths et maths expertes, programme français), travaille le chapitre « ${c.t} ».
+Exercice :
+${e.q}
+Corrigé de référence (ne le recopie pas d'un bloc) :
+${e.s||e.r}
+${a?`Ce que Nathan a écrit :
+${a.slice(0,3000)}
+Corrige sa réponse : dis ce qui est juste, ce qui est faux et pourquoi, puis donne-lui la piste pour avancer. Ne donne la solution complète que si sa réponse est presque bonne.`:"Nathan bloque. Donne-lui un coup de pouce progressif : une question pour le guider, puis la première étape, sans tout résoudre."}
+Écris chaque formule en LaTeX entre $…$, sur une seule ligne. Réponds en français, tutoie-le, sans titre markdown, 14 lignes maximum.`)}
+function mxGen(c,lv){stream("mxg|"+c.id,`Tu es un prof de maths (programme français de Terminale, spécialité et maths expertes). Invente UN nouvel exercice de niveau « ${MX_LVN[lv]} » sur le chapitre « ${c.t} ».
+Rappel du chapitre : ${c.res}
+Il doit être différent de ceux-ci : ${c.ex.map(e=>e.t).join(" ; ")}.
+Format : d'abord l'énoncé (questions numérotées 1., 2.…), puis une ligne qui contient seulement ===CORRIGÉ===, puis le corrigé détaillé et rigoureux.
+Écris chaque formule en LaTeX entre $…$, toujours sur une seule ligne. Français, tutoiement, pas de titre markdown. Vérifie tes calculs.`)}
+function mxGenOut(c){const key="mxg|"+c.id,t=V.out[key];if(V.busy[key])return`<p class="muted small">✨ L'IA invente un exercice…</p>`;if(!t)return"";
+  const i=t.indexOf("===CORRIG");if(i<0)return`<div class="out mxt">${mxFmt(t)}</div>`;const j=t.indexOf("\n",i);
+  return`<div class="mxsol"><b>Nouvel exercice</b><div class="mxt">${mxFmt(t.slice(0,i))}</div></div><details class="mxsol"><summary><b>Voir le corrigé</b></summary><div class="mxt">${mxFmt(j<0?"":t.slice(j+1))}</div></details>`}
+function mxSummary(){if(!MXI&&!mxLoad.idx&&!V.mxErr)mxIndex();const ok=mxTotal();
+  return MXI?[`${ok}`,`exercice${ok>1?"s":""} réussi${ok>1?"s":""} · leçons Terminale → licence`]:["Maths","leçons et exercices"]}
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
-const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["cours","Cours"],["cg","Culture G"]];
+const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["cours","Cours"],["mx","Maths"],["cg","Culture G"]];
 function summary(k){
   const t=today();
   if(k==="pron")return pnSummary();
   if(k==="jour")return jourSummary();
   if(k==="cg")return cgSummary();
+  if(k==="mx")return mxSummary();
   if(k==="hab"){const s=dayStats(t);return[`${s.n}/${s.t}`,"tâches faites aujourd'hui"]}
   if(k==="proj"){const a=nIn("all");return a.length?[`${a.length}`,`note${a.length>1?"s":""} · ${esc(nTitle(a[0][1]))}`]:["Notes","écris ce qui te trotte dans la tête"]}
   if(k==="fin"){const dg=dailyGame(t),r=prog().days[dkey(t)];return r?[`✓ ${r.s}/${r.m}`,`défi du jour : ${dg.n} · ${levelOf(prog().xp).name}`]:[`${dg.e} Défi`,`du jour : ${dg.n} · actu FR/EN`]}
@@ -2771,7 +2914,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.3.0";
+const APP_VERSION="1.4.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -3277,7 +3420,7 @@ document.addEventListener("click",e=>{
 /* ================================================================
    RENDU
    ================================================================ */
-const PAGES={idees:pageIdees,cg:pageCg,reglages:pageReglages,aide:pageAide,pron:pagePron,jour:pageJour,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
+const PAGES={idees:pageIdees,cg:pageCg,mx:pageMx,reglages:pageReglages,aide:pageAide,pron:pagePron,jour:pageJour,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
 let pending=false;
 function render(force){
   const a=document.activeElement;
@@ -3289,6 +3432,7 @@ function render(force){
   if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
   const body=mt?modHtml(mt.id,mt.page):modWrap(V.page,PAGES[V.page]());
   app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${esc(sectName(V.page))}</h1>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
+  if(V.page==="mx")mxTex();
 }
 /* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
 document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},350));
@@ -3300,7 +3444,7 @@ function go(p){if(V.note)nSave();V.page=p;V.confirm=null;V.chap=null;V.proj=null
 function confirmOr(id,fn){if(V.confirm===id){V.confirm=null;return fn()}V.confirm=id;render(true)}
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;const d=b.dataset;
-  if(d.page!==undefined)return go(d.page);
+  if(d.page!==undefined){if(d.page==="mx"&&V.page!=="mx")V.mxc=null;return go(d.page)}
   if(d.act!==undefined){const h=MOD.clicks[d.act];if(h){try{h.fn(b)}catch(err){modFail(h.id,err);render(true)}}return}
   /* suggestions */
   if(d.sgex){const i=d.sgex.indexOf("|"),el=document.getElementById("sg-"+d.sgex.slice(0,i));if(el){el.value=d.sgex.slice(i+1);el.focus()}return}
@@ -3327,6 +3471,16 @@ document.addEventListener("click",e=>{
   if(d.cga){const i=d.cga.lastIndexOf("|"),k=d.cga.slice(0,i),v=S.cg[k],n=cgNotion(v);if(!v||!n||v.rep!=null)return;const r=+d.cga.slice(i+1);return put("cg",k,{...v,rep:r,ok:r===n.a})}
   if(d.cgk){V.cgk=d.cgk;render(true);return window.scrollTo(0,0)}
   if(d.cgplus)return cgPlus();
+  /* maths */
+  if(d.mxp){V.mxp=d.mxp;return render(true)}
+  if(d.mxc){V.mxc=d.mxc;V.mxt="cours";V.mxlv=0;render(true);return window.scrollTo(0,0)}
+  if(d.mxback){V.mxc=null;render(true);return window.scrollTo(0,0)}
+  if(d.mxt){V.mxt=d.mxt;render(true);return window.scrollTo(0,0)}
+  if(d.mxlv!==undefined){V.mxlv=+d.mxlv;return render(true)}
+  if(d.mxv){const i=d.mxv.lastIndexOf("|"),k=d.mxv.slice(0,i),w=d.mxv.slice(i+1);V.mxr[k]={...(V.mxr[k]||{}),[w]:!(V.mxr[k]||{})[w]};return render(true)}
+  if(d.mxok){const p=d.mxok.split("|"),res=p.pop(),n=p.pop(),cid=p.join("|"),doc=(S.maths||{})[cid]||{},ex={...(doc.ex||{})};if(ex[n]===res)delete ex[n];else ex[n]=res;return put("maths",cid,{...doc,ex,maj:Date.now()})}
+  if(d.mxcor){document.activeElement&&document.activeElement.blur();return mxCorr(d.mxcor)}
+  if(d.mxgen){const c=MXC[V.mxc];if(c)return mxGen(c,+d.mxgen);return}
   if(d.aiprov){const a=aiCfg();a.provider=d.aiprov;lsSet("cerveau-ai",a);setupAI();V.aiMsg="";return render(true)}
   if(d.syncnow){setSync("Synchronisation…");render(true);return fullSync(false).then(()=>render(true))}
   if(d.logout){saveSession(null);lsSet("cerveau-lastpull",null);setSync("Non connecté");return render(true)}
@@ -3405,6 +3559,7 @@ document.addEventListener("input",e=>{
   if(d.ans)V.ans[d.ans]=t.value;
   if(d.ned!==undefined)nSaveSoon();
   if(d.jnote!==undefined)V.jnote=t.value;
+  if(d.mxa!==undefined)V.mxa[d.mxa]=t.value;
   if(d.nq!==undefined){V.nq=t.value;nFilter()}
   if(d.trin)V.trIn=t.value;
   if(d.ci)V.ci[d.ci]=t.value;

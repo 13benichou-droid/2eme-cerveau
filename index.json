@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "maj": "2026-10-11",
+ "parcours": [
+  {
+   "id": "tle-spe",
+   "n": "Terminale · spécialité",
+   "intro": "Programme de spécialité maths de Terminale (en vigueur en 2026-2027).",
+   "chap": [
+    {
+     "id": "spe-denombrement",
+     "t": "Combinatoire et dénombrement",
+     "th": "Algèbre"
+    },
+    {
+     "id": "spe-suites",
+     "t": "Suites : récurrence et limites",
+     "th": "Analyse",
+     "f": "spe-suites.txt",
+     "nex": 13,
+     "nb": 11
+    },
+    {
+     "id": "spe-limites",
+     "t": "Limites de fonctions",
+     "th": "Analyse"
+    },
+    {
+     "id": "spe-continuite",
+     "t": "Continuité et valeurs intermédiaires",
+     "th": "Analyse"
+    },
+    {
+     "id": "spe-derivation",
+     "t": "Dérivation et convexité",
+     "th": "Analyse"
+    },
+    {
+     "id": "spe-ln",
+     "t": "La fonction logarithme népérien",
+     "th": "Analyse"
+    },
+    {
+     "id": "spe-trigo",
+     "t": "Fonctions sinus et cosinus",
+     "th": "Analyse"
+    },
+    {
+     "id": "spe-primitives",
+     "t": "Primitives et équations différentielles",
+     "th": "Analyse"
+    },
+    {
+     "id": "spe-integrales",
+     "t": "Calcul intégral",
+     "th": "Analyse"
+    },
+    {
+     "id": "spe-espace",
+     "t": "Vecteurs, droites et plans de l'espace",
+     "th": "Géométrie"
+    },
+    {
+     "id": "spe-orthogonalite",
+     "t": "Orthogonalité et distances dans l'espace",
+     "th": "Géométrie"
+    },
+    {
+     "id": "spe-equations",
+     "t": "Représentations paramétriques et équations cartésiennes",
+     "th": "Géométrie"
+    },
+    {
+     "id": "spe-binomiale",
+     "t": "Épreuves indépendantes et loi binomiale",
+     "th": "Probabilités"
+    },
+    {
+     "id": "spe-sommes-va",
+     "t": "Sommes de variables aléatoires",
+     "th": "Probabilités"
+    },
+    {
+     "id": "spe-concentration",
+     "t": "Concentration et loi des grands nombres",
+     "th": "Probabilités"
+    }
+   ]
+  },
+  {
+   "id": "tle-exp",
+   "n": "Terminale · maths expertes",
+   "intro": "Programme de maths expertes de Terminale.",
+   "chap": [
+    {
+     "id": "exp-complexes-alg",
+     "t": "Nombres complexes : point de vue algébrique",
+     "th": "Complexes",
+     "f": "exp-complexes-alg.txt",
+     "nex": 12,
+     "nb": 9
+    },
+    {
+     "id": "exp-complexes-geo",
+     "t": "Nombres complexes : point de vue géométrique",
+     "th": "Complexes"
+    },
+    {
+     "id": "exp-complexes-eq",
+     "t": "Complexes, trigonométrie et équations",
+     "th": "Complexes"
+    },
+    {
+     "id": "exp-divisibilite",
+     "t": "Divisibilité, division euclidienne et congruences",
+     "th": "Arithmétique",
+     "f": "exp-divisibilite.txt",
+     "nex": 12,
+     "nb": 9
+    },
+    {
+     "id": "exp-pgcd",
+     "t": "PGCD, théorèmes de Bézout et de Gauss",
+     "th": "Arithmétique"
+    },
+    {
+     "id": "exp-premiers",
+     "t": "Nombres premiers",
+     "th": "Arithmétique"
+    },
+    {
+     "id": "exp-graphes",
+     "t": "Graphes et matrices",
+     "th": "Graphes et matrices"
+    },
+    {
+     "id": "exp-matrices",
+     "t": "Suites de matrices et chaînes de Markov",
+     "th": "Graphes et matrices"
+    }
+   ]
+  },
+  {
+   "id": "l1",
+   "n": "Licence 1",
+   "intro": "Après le bac : les bases de la licence de maths (arrive après la Terminale).",
+   "chap": [
+    {
+     "id": "l1-logique",
+     "t": "Logique, ensembles et raisonnements",
+     "th": "Fondements"
+    },
+    {
+     "id": "l1-reels-suites",
+     "t": "Nombres réels et suites",
+     "th": "Analyse"
+    },
+    {
+     "id": "l1-polynomes",
+     "t": "Polynômes",
+     "th": "Algèbre"
+    },
+    {
+     "id": "l1-algebre-lineaire",
+     "t": "Espaces vectoriels et matrices",
+     "th": "Algèbre linéaire"
+    },
+    {
+     "id": "l1-analyse",
+     "t": "Continuité, dérivabilité, développements limités",
+     "th": "Analyse"
+    },
+    {
+     "id": "l1-probas",
+     "t": "Probabilités sur un univers fini",
+     "th": "Probabilités"
+    }
+   ]
+  },
+  {
+   "id": "l2",
+   "n": "Licence 2",
+   "intro": "Deuxième année : algèbre linéaire, séries et probabilités.",
+   "chap": [
+    {
+     "id": "l2-series",
+     "t": "Séries numériques",
+     "th": "Analyse"
+    },
+    {
+     "id": "l2-reduction",
+     "t": "Réduction des endomorphismes",
+     "th": "Algèbre linéaire"
+    },
+    {
+     "id": "l2-integrales",
+     "t": "Intégrales généralisées",
+     "th": "Analyse"
+    },
+    {
+     "id": "l2-probas",
+     "t": "Variables aléatoires discrètes et à densité",
+     "th": "Probabilités"
+    }
+   ]
+  },
+  {
+   "id": "l3",
+   "n": "Licence 3",
+   "intro": "Troisième année : les outils du trader quantitatif.",
+   "chap": [
+    {
+     "id": "l3-mesure",
+     "t": "Intégration et probabilités",
+     "th": "Probabilités"
+    },
+    {
+     "id": "l3-optimisation",
+     "t": "Optimisation",
+     "th": "Analyse"
+    },
+    {
+     "id": "l3-stats",
+     "t": "Statistique inférentielle",
+     "th": "Statistique"
+    },
+    {
+     "id": "l3-processus",
+     "t": "Introduction aux processus aléatoires",
+     "th": "Probabilités"
+    }
+   ]
+  }
+ ]
+}

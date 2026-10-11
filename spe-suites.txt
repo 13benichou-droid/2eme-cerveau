@@ -1,0 +1,260 @@
+@chapitre spe-suites | Suites : récurrence et limites | Analyse
+@resume Démontrer une propriété par récurrence, étudier les variations et la limite d'une suite, et utiliser les théorèmes de comparaison, des gendarmes et de convergence monotone.
+
+== DEF | Le raisonnement par récurrence
+Pour démontrer qu'une propriété $P(n)$ est vraie pour tout entier $n\geq n_0$ :
+1. **Initialisation** : on vérifie que $P(n_0)$ est vraie.
+2. **Hérédité** : on suppose $P(n)$ vraie pour un entier $n\geq n_0$ quelconque (c'est l'hypothèse de récurrence) et on démontre que $P(n+1)$ est vraie.
+3. **Conclusion** : par récurrence, $P(n)$ est vraie pour tout entier $n\geq n_0$.
+C'est comme une rangée de dominos : le premier tombe (initialisation), et chaque domino fait tomber le suivant (hérédité).
+
+== METHODE | Bien rédiger une récurrence
+- Écris clairement la propriété $P(n)$ dès le début.
+- Dans l'hérédité, pars de ce que tu sais sur $u_n$ et arrive à $u_{n+1}$. Pour une inégalité avec $u_{n+1}=f(u_n)$ et $f$ croissante, applique $f$ aux membres de l'inégalité : l'ordre est conservé.
+- Termine toujours par une phrase de conclusion.
+
+== EXEMPLE | Une inégalité par récurrence
+Soit $(u_n)$ définie par $u_0=1$ et $u_{n+1}=\sqrt{u_n+2}$. Montrons que $0\leq u_n\leq u_{n+1}\leq2$ pour tout $n\in\N$.
+**Initialisation** : $u_0=1$ et $u_1=\sqrt3\approx1{,}73$, donc $0\leq u_0\leq u_1\leq2$.
+**Hérédité** : supposons $0\leq u_n\leq u_{n+1}\leq2$. La fonction $f:x\mapsto\sqrt{x+2}$ est croissante sur $[-2;+\infty[$, donc $f(0)\leq f(u_n)\leq f(u_{n+1})\leq f(2)$, c'est-à-dire $\sqrt2\leq u_{n+1}\leq u_{n+2}\leq2$. Comme $\sqrt2\geq0$, on a bien $0\leq u_{n+1}\leq u_{n+2}\leq2$.
+**Conclusion** : la propriété est vraie pour tout $n\in\N$.
+
+== DEF | Limite d'une suite
+- $(u_n)$ **converge** vers un réel $\ell$ si tout intervalle ouvert contenant $\ell$ contient tous les termes $u_n$ à partir d'un certain rang. On note $\lim\limits_{n\to+\infty}u_n=\ell$.
+- $(u_n)$ **tend vers** $+\infty$ si tout intervalle $]A;+\infty[$ contient tous les termes $u_n$ à partir d'un certain rang. Même idée pour $-\infty$.
+- Une suite qui ne converge pas est **divergente** : elle peut tendre vers $\pm\infty$, ou n'avoir aucune limite, comme $u_n=(-1)^n$.
+
+== FORMULES | Limites à connaître
+- $\lim n=\lim n^2=\lim\sqrt n=+\infty$ et $\lim\frac1n=\lim\frac1{n^2}=\lim\frac1{\sqrt n}=0$.
+- Suite géométrique $q^n$ : si $q>1$, $q^n\to+\infty$ ; si $-1<q<1$, $q^n\to0$ ; si $q=1$, $q^n=1$ ; si $q\leq-1$, pas de limite.
+- Les limites se combinent comme les nombres (somme, produit, quotient), sauf dans les **formes indéterminées** : $\infty-\infty$, $0\times\infty$, $\frac{\infty}{\infty}$ et $\frac00$.
+
+== METHODE | Lever une forme indéterminée
+- Polynôme ou quotient en $n$ : **factorise par le terme de plus haut degré**. Exemple : $\frac{3n^2+n}{n^2-5}=\frac{3+\frac1n}{1-\frac5{n^2}}\to3$.
+- Différence de racines : multiplie et divise par la **quantité conjuguée**. Exemple : $\sqrt{n+1}-\sqrt n=\frac{1}{\sqrt{n+1}+\sqrt n}\to0$.
+- Puissances : factorise par la plus grande. Exemple : $3^n-2^n=3^n\left(1-\left(\frac23\right)^n\right)\to+\infty$.
+
+== THM | Comparaison et gendarmes
+- **Comparaison** : si $u_n\leq v_n$ à partir d'un certain rang et $\lim u_n=+\infty$, alors $\lim v_n=+\infty$. Si $v_n\leq u_n$ et $\lim u_n=-\infty$, alors $\lim v_n=-\infty$.
+- **Gendarmes** : si $v_n\leq u_n\leq w_n$ à partir d'un certain rang, et si $(v_n)$ et $(w_n)$ convergent vers la même limite $\ell$, alors $(u_n)$ converge vers $\ell$.
+- **Passage à la limite** : si $u_n\leq v_n$ à partir d'un certain rang et si les deux suites convergent, alors $\lim u_n\leq\lim v_n$ (les inégalités strictes deviennent larges).
+
+== THM | Convergence monotone
+- Toute suite **croissante et majorée** converge. Toute suite **décroissante et minorée** converge.
+- Une suite croissante et non majorée tend vers $+\infty$.
+- Ce théorème donne l'existence de la limite, pas sa valeur : le majorant n'est pas forcément la limite.
+
+== METHODE | Trouver la limite d'une suite $u_{n+1}=f(u_n)$
+Si $(u_n)$ converge vers $\ell$ et si $f$ est **continue** en $\ell$, alors $\ell$ vérifie $f(\ell)=\ell$. On résout cette équation et on garde la solution compatible avec ce que l'on sait des termes.
+Exemple : avec $u_{n+1}=\sqrt{u_n+2}$, $\ell=\sqrt{\ell+2}$ donne $\ell^2-\ell-2=0$, donc $\ell=2$ ou $\ell=-1$. Comme $u_n\geq0$ pour tout $n$, la limite est $2$.
+
+== ATTENTION | Les erreurs qui coûtent des points
+- Oublier l'initialisation : une hérédité seule ne prouve rien.
+- Écrire $f(\ell)=\ell$ sans avoir d'abord prouvé que la suite converge.
+- Dire « $u_n\leq2$ donc $u_n$ tend vers $2$ » : un majorant n'est pas forcément la limite.
+- Confondre $q^n$ (suite géométrique) et $n^q$.
+
+== DEMO | L'inégalité de Bernoulli (à savoir refaire)
+Pour tout réel $a>0$ et tout $n\in\N$ : $(1+a)^n\geq1+na$.
+**Initialisation** : $(1+a)^0=1\geq1+0\times a$.
+**Hérédité** : si $(1+a)^n\geq1+na$, comme $1+a>0$, on multiplie : $(1+a)^{n+1}\geq(1+na)(1+a)=1+(n+1)a+na^2\geq1+(n+1)a$.
+**Conséquence** : si $q>1$, on pose $a=q-1>0$. Alors $q^n\geq1+n(q-1)$, et $1+n(q-1)\to+\infty$ : par comparaison, $q^n\to+\infty$.
+
+== EXO 1 calcul | Premiers termes et conjecture
+Soit $(u_n)$ définie par $u_0=2$ et $u_{n+1}=\frac12u_n+3$.
+1. Calcule $u_1$, $u_2$ et $u_3$.
+2. Conjecture le sens de variation de la suite et sa limite.
+-- indice
+Remplace $n$ par $0$, puis par $1$, puis par $2$ dans la relation $u_{n+1}=\frac12u_n+3$.
+-- reponse
+$u_1=4$, $u_2=5$, $u_3=5{,}5$. La suite semble croissante et converger vers $6$.
+-- solution
+1. $u_1=\frac12\times2+3=4$, $u_2=\frac12\times4+3=5$ et $u_3=\frac12\times5+3=5{,}5$.
+2. Les termes augmentent et se rapprochent de $6$ : on conjecture que $(u_n)$ est croissante et converge vers $6$. D'ailleurs, $6$ est le seul réel tel que $\ell=\frac12\ell+3$.
+
+== EXO 1 recurrence | Une formule explicite
+Soit $(u_n)$ définie par $u_0=1$ et $u_{n+1}=u_n+2n+3$. Démontre par récurrence que pour tout $n\in\N$, $u_n=(n+1)^2$.
+-- indice
+Dans l'hérédité, pars de $u_{n+1}=u_n+2n+3$ et remplace $u_n$ par $(n+1)^2$.
+-- reponse
+$(n+1)^2+2n+3=n^2+4n+4=(n+2)^2$.
+-- solution
+Soit $P(n)$ : « $u_n=(n+1)^2$ ».
+**Initialisation** : $u_0=1=(0+1)^2$, donc $P(0)$ est vraie.
+**Hérédité** : supposons $P(n)$ vraie pour un entier $n$. Alors $u_{n+1}=u_n+2n+3=(n+1)^2+2n+3=n^2+4n+4=(n+2)^2$, donc $P(n+1)$ est vraie.
+**Conclusion** : pour tout $n\in\N$, $u_n=(n+1)^2$.
+
+== EXO 1 limite | Limites de référence
+Détermine la limite de chaque suite :
+1. $a_n=3n^2-5$
+2. $b_n=\frac2n+7$, pour $n\geq1$
+3. $c_n=0{,}8^n$
+4. $d_n=-2\times1{,}5^n$
+-- indice
+Utilise les limites à connaître. Pour $q^n$, compare $q$ à $1$ et à $-1$.
+-- reponse
+$+\infty$ ; $7$ ; $0$ ; $-\infty$.
+-- solution
+1. $n^2\to+\infty$, donc $3n^2-5\to+\infty$.
+2. $\frac2n\to0$, donc $b_n\to7$.
+3. $-1<0{,}8<1$, donc $0{,}8^n\to0$.
+4. $1{,}5>1$, donc $1{,}5^n\to+\infty$ ; en multipliant par $-2<0$, $d_n\to-\infty$.
+
+== EXO 2 limite | Formes indéterminées
+Détermine la limite de :
+1. $u_n=n^2-3n+1$
+2. $v_n=\frac{2n^2+1}{5n^2-n}$
+3. $w_n=\frac{n+3}{n^2+1}$
+4. $t_n=\sqrt{n^2+n}-n$
+-- indice
+Factorise par le terme de plus haut degré. Pour la 4, multiplie et divise par la quantité conjuguée $\sqrt{n^2+n}+n$.
+-- reponse
+$+\infty$ ; $\frac25$ ; $0$ ; $\frac12$.
+-- solution
+1. $u_n=n^2\left(1-\frac3n+\frac1{n^2}\right)$ : la parenthèse tend vers $1$ et $n^2\to+\infty$, donc $u_n\to+\infty$.
+2. $v_n=\frac{n^2\left(2+\frac1{n^2}\right)}{n^2\left(5-\frac1n\right)}=\frac{2+\frac1{n^2}}{5-\frac1n}\to\frac25$.
+3. $w_n=\frac{n\left(1+\frac3n\right)}{n^2\left(1+\frac1{n^2}\right)}=\frac1n\times\frac{1+\frac3n}{1+\frac1{n^2}}\to0\times1=0$.
+4. $t_n=\frac{\left(\sqrt{n^2+n}-n\right)\left(\sqrt{n^2+n}+n\right)}{\sqrt{n^2+n}+n}=\frac{n}{\sqrt{n^2+n}+n}$. Pour $n>0$, $\sqrt{n^2+n}=n\sqrt{1+\frac1n}$, donc $t_n=\frac{1}{\sqrt{1+\frac1n}+1}\to\frac12$.
+
+== EXO 2 gendarmes | Gendarmes et comparaison
+1. Montre que pour tout $n\geq1$, $-\frac1n\leq\frac{(-1)^n}{n}\leq\frac1n$, puis déduis-en la limite de $\frac{(-1)^n}{n}$.
+2. Détermine la limite de $u_n=\frac{\cos(n)}{n^2}+3$.
+3. Détermine la limite de $v_n=n+\sin(n)$.
+-- indice
+$-1\leq\cos(n)\leq1$ et $-1\leq\sin(n)\leq1$. Pour la 3, une seule inégalité suffit : c'est le théorème de comparaison.
+-- reponse
+$0$ ; $3$ ; $+\infty$.
+-- solution
+1. $(-1)^n$ vaut $1$ ou $-1$, donc $-1\leq(-1)^n\leq1$. En divisant par $n>0$ : $-\frac1n\leq\frac{(-1)^n}{n}\leq\frac1n$. Les deux bornes tendent vers $0$ : par le théorème des gendarmes, $\frac{(-1)^n}{n}\to0$.
+2. $-\frac1{n^2}\leq\frac{\cos n}{n^2}\leq\frac1{n^2}$, donc $3-\frac1{n^2}\leq u_n\leq3+\frac1{n^2}$. Les bornes tendent vers $3$, donc $u_n\to3$.
+3. $\sin(n)\geq-1$, donc $v_n\geq n-1$. Comme $n-1\to+\infty$, par comparaison $v_n\to+\infty$.
+
+== EXO 2 variations | Sens de variation
+Étudie le sens de variation des suites suivantes.
+1. $u_n=n^2-4n$, pour $n\in\N$.
+2. $v_n=\frac{2^n}{n}$, pour $n\geq1$.
+3. $w_0=\frac12$ et $w_{n+1}=w_n-w_n^2$.
+-- indice
+Étudie le signe de $u_{n+1}-u_n$. Pour une suite à termes strictement positifs, tu peux aussi comparer $\frac{v_{n+1}}{v_n}$ à $1$.
+-- reponse
+$(u_n)$ est croissante à partir du rang $2$ ; $(v_n)$ est croissante ; $(w_n)$ est décroissante.
+-- solution
+1. $u_{n+1}-u_n=(n+1)^2-4(n+1)-n^2+4n=2n-3$. Pour $n\geq2$, $2n-3>0$ : la suite est croissante à partir du rang $2$ (elle décroît de $u_0=0$ à $u_2=-4$).
+2. $v_n>0$ et $\frac{v_{n+1}}{v_n}=\frac{2^{n+1}}{n+1}\times\frac{n}{2^n}=\frac{2n}{n+1}$. Or $\frac{2n}{n+1}\geq1\iff2n\geq n+1\iff n\geq1$. Donc $(v_n)$ est croissante pour $n\geq1$.
+3. $w_{n+1}-w_n=-w_n^2\leq0$, donc $(w_n)$ est décroissante.
+
+== EXO 2 recurrence | Divisibilité par récurrence
+Démontre par récurrence que pour tout $n\in\N$, $4^n-1$ est divisible par $3$.
+-- indice
+Écris $4^{n+1}-1=4\times4^n-1$, puis fais apparaître $4^n-1$.
+-- reponse
+$4^{n+1}-1=4\left(4^n-1\right)+3$.
+-- solution
+Soit $P(n)$ : « il existe un entier $k$ tel que $4^n-1=3k$ ».
+**Initialisation** : $4^0-1=0=3\times0$, donc $P(0)$ est vraie.
+**Hérédité** : supposons $4^n-1=3k$ avec $k$ entier. Alors $4^{n+1}-1=4\times4^n-1=4\left(4^n-1\right)+3=12k+3=3(4k+1)$, et $4k+1$ est un entier : $P(n+1)$ est vraie.
+**Conclusion** : pour tout $n\in\N$, $3$ divise $4^n-1$.
+
+== EXO 2 geometrique | Une suite arithmético-géométrique
+Soit $(u_n)$ définie par $u_0=10$ et $u_{n+1}=0{,}6u_n+8$. On pose $v_n=u_n-20$.
+1. Montre que $(v_n)$ est géométrique : précise sa raison et son premier terme.
+2. Exprime $v_n$, puis $u_n$, en fonction de $n$.
+3. Détermine la limite de $(u_n)$.
+-- indice
+Calcule $v_{n+1}=u_{n+1}-20$ et remplace $u_{n+1}$ par $0{,}6u_n+8$. Tu dois retrouver $0{,}6\times v_n$.
+-- reponse
+$v_n=-10\times0{,}6^n$, $u_n=20-10\times0{,}6^n$, et $\lim u_n=20$.
+-- solution
+1. $v_{n+1}=u_{n+1}-20=0{,}6u_n+8-20=0{,}6u_n-12=0{,}6\left(u_n-20\right)=0{,}6v_n$. La suite $(v_n)$ est géométrique de raison $0{,}6$ et de premier terme $v_0=10-20=-10$.
+2. $v_n=-10\times0{,}6^n$, donc $u_n=v_n+20=20-10\times0{,}6^n$.
+3. $-1<0{,}6<1$, donc $0{,}6^n\to0$ et $u_n\to20$.
+
+== EXO 2 logique | Vrai ou faux ?
+Pour chaque affirmation, dis si elle est vraie ou fausse, et justifie (une preuve si c'est vrai, un contre-exemple si c'est faux).
+1. Une suite croissante tend vers $+\infty$.
+2. Une suite majorée par $2$ converge vers $2$.
+3. Une suite croissante et majorée converge.
+4. Si $u_n\to+\infty$, alors $(u_n)$ est croissante à partir d'un certain rang.
+5. Une suite décroissante et minorée par $0$ converge vers $0$.
+-- indice
+Pour les affirmations fausses, cherche des exemples simples : $1-\frac1n$, $\frac1n+1$, $n+2(-1)^n$…
+-- reponse
+Faux ; faux ; vrai ; faux ; faux.
+-- solution
+1. Faux : $u_n=1-\frac1n$ est croissante et converge vers $1$.
+2. Faux : $u_n=0$ est majorée par $2$ et converge vers $0$.
+3. Vrai : c'est le théorème de convergence monotone.
+4. Faux : $u_n=n+2(-1)^n$ tend vers $+\infty$ (car $u_n\geq n-2$), mais $u_0=2$, $u_1=-1$, $u_2=4$, $u_3=1$ : elle monte et descend sans arrêt.
+5. Faux : $u_n=1+\frac1n$ est décroissante, minorée par $0$, mais converge vers $1$.
+
+== EXO 3 bac | Une suite logistique
+On considère $f(x)=2x(1-x)$ et la suite définie par $u_0=0{,}1$ et $u_{n+1}=f(u_n)$.
+1. Étudie les variations de $f$ sur $\left[0;\frac12\right]$.
+2. Démontre par récurrence que pour tout $n\in\N$, $0<u_n\leq u_{n+1}<\frac12$.
+3. Déduis-en que $(u_n)$ converge, puis détermine sa limite.
+-- indice
+$f'(x)=2-4x$. Pour la 3, utilise la convergence monotone, puis résous $f(\ell)=\ell$ et élimine une solution grâce à $u_n\geq u_0$.
+-- reponse
+$f$ est croissante sur $\left[0;\frac12\right]$ ; la suite est croissante et majorée par $\frac12$ ; elle converge vers $\frac12$.
+-- solution
+1. $f(x)=2x-2x^2$, donc $f'(x)=2-4x\geq0$ pour $x\leq\frac12$ : $f$ est croissante sur $\left[0;\frac12\right]$, avec $f(0)=0$ et $f\left(\frac12\right)=\frac12$.
+2. Soit $P(n)$ : « $0<u_n\leq u_{n+1}<\frac12$ ».
+**Initialisation** : $u_0=0{,}1$ et $u_1=2\times0{,}1\times0{,}9=0{,}18$, donc $0<u_0\leq u_1<\frac12$.
+**Hérédité** : si $0<u_n\leq u_{n+1}<\frac12$, comme $f$ est strictement croissante sur $\left[0;\frac12\right]$, $f(0)<f(u_n)\leq f(u_{n+1})<f\left(\frac12\right)$, soit $0<u_{n+1}\leq u_{n+2}<\frac12$.
+**Conclusion** : $P(n)$ est vraie pour tout $n\in\N$.
+3. La suite est croissante et majorée par $\frac12$ : elle converge vers un réel $\ell$. Comme $f$ est continue, $f(\ell)=\ell$, soit $2\ell-2\ell^2=\ell$, donc $\ell(1-2\ell)=0$ : $\ell=0$ ou $\ell=\frac12$. Or la suite est croissante, donc $u_n\geq u_0=0{,}1$ pour tout $n$, et par passage à la limite $\ell\geq0{,}1$. Donc $\ell=\frac12$.
+
+== EXO 3 bac | Un placement avec des retraits
+Nathan place $5000$ € à $4$ % par an. À la fin de chaque année, après le versement des intérêts, il retire $300$ €. On note $C_n$ le capital après $n$ années : $C_0=5000$ et $C_{n+1}=1{,}04\,C_n-300$.
+1. Calcule $C_1$ et $C_2$.
+2. On pose $w_n=C_n-7500$. Montre que $(w_n)$ est géométrique.
+3. Exprime $C_n$ en fonction de $n$, puis détermine la limite de $(C_n)$. Que signifie ce résultat ?
+4. Complète la fonction Python ci-dessous pour qu'elle renvoie le nombre d'années au bout duquel le capital devient négatif, puis donne ce nombre.
+```
+def annees():
+    C = 5000
+    n = 0
+    while ...:
+        C = ...
+        n = n + 1
+    return n
+```
+-- indice
+Pour la 2, calcule $w_{n+1}=C_{n+1}-7500$ et fais apparaître $1{,}04\left(C_n-7500\right)$. Pour la 4, la boucle tourne tant que le capital est positif.
+-- reponse
+$C_1=4900$ et $C_2=4796$ ; $C_n=7500-2500\times1{,}04^n\to-\infty$ ; le capital devient négatif au bout de $29$ ans.
+-- solution
+1. $C_1=1{,}04\times5000-300=4900$ et $C_2=1{,}04\times4900-300=4796$.
+2. $w_{n+1}=C_{n+1}-7500=1{,}04\,C_n-7800=1{,}04\left(C_n-7500\right)=1{,}04\,w_n$. Donc $(w_n)$ est géométrique de raison $1{,}04$ et de premier terme $w_0=5000-7500=-2500$.
+3. $w_n=-2500\times1{,}04^n$, donc $C_n=7500-2500\times1{,}04^n$. Comme $1{,}04>1$, $1{,}04^n\to+\infty$, donc $C_n\to-\infty$ : les retraits sont trop gros par rapport aux intérêts, et le capital finit par s'épuiser.
+4. La condition est `C > 0` et la mise à jour est `C = 1.04*C - 300`. On cherche le premier $n$ tel que $7500-2500\times1{,}04^n<0$, c'est-à-dire $1{,}04^n>3$. À la calculatrice : $1{,}04^{28}\approx2{,}999$ et $1{,}04^{29}\approx3{,}119$. La fonction renvoie donc $29$ : le capital devient négatif pendant la 29e année.
+
+== EXO 3 somme | Une somme télescopique
+Pour $n\geq1$, on pose $S_n=\frac1{1\times2}+\frac1{2\times3}+\dots+\frac1{n(n+1)}=\sum_{k=1}^{n}\frac1{k(k+1)}$.
+1. Vérifie que pour tout $k\geq1$, $\frac1{k(k+1)}=\frac1k-\frac1{k+1}$.
+2. Déduis-en une expression simple de $S_n$.
+3. Détermine la limite de $(S_n)$.
+4. Retrouve le résultat du 2 par récurrence.
+-- indice
+Dans la somme, écris chaque terme sous la forme $\frac1k-\frac1{k+1}$ : presque tout se simplifie.
+-- reponse
+$S_n=1-\frac1{n+1}$, qui tend vers $1$.
+-- solution
+1. $\frac1k-\frac1{k+1}=\frac{(k+1)-k}{k(k+1)}=\frac1{k(k+1)}$.
+2. $S_n=\left(1-\frac12\right)+\left(\frac12-\frac13\right)+\dots+\left(\frac1n-\frac1{n+1}\right)$. Chaque terme négatif s'annule avec le terme positif suivant : il reste $S_n=1-\frac1{n+1}$.
+3. $\frac1{n+1}\to0$, donc $S_n\to1$.
+4. $P(n)$ : « $S_n=1-\frac1{n+1}$ ». Pour $n=1$ : $S_1=\frac12=1-\frac12$. Si $P(n)$ est vraie, $S_{n+1}=S_n+\frac1{(n+1)(n+2)}=1-\frac1{n+1}+\frac1{n+1}-\frac1{n+2}=1-\frac1{n+2}$, donc $P(n+1)$ est vraie.
+
+== EXO 3 comparaison | Une somme qui tend vers l'infini
+Pour $n\geq1$, on pose $u_n=\sum_{k=1}^{n}\frac1{\sqrt k}=\frac1{\sqrt1}+\frac1{\sqrt2}+\dots+\frac1{\sqrt n}$.
+1. Montre que $(u_n)$ est croissante.
+2. Montre que pour tout $k$ compris entre $1$ et $n$, $\frac1{\sqrt k}\geq\frac1{\sqrt n}$.
+3. Déduis-en que $u_n\geq\sqrt n$, puis la limite de $(u_n)$.
+-- indice
+Dans la somme, il y a $n$ termes, et chacun est au moins égal au plus petit d'entre eux.
+-- reponse
+$u_n\geq n\times\frac1{\sqrt n}=\sqrt n$, donc $u_n\to+\infty$.
+-- solution
+1. $u_{n+1}-u_n=\frac1{\sqrt{n+1}}>0$ : la suite est croissante.
+2. Si $1\leq k\leq n$, alors $\sqrt k\leq\sqrt n$ (la racine est croissante), donc $\frac1{\sqrt k}\geq\frac1{\sqrt n}$ (la fonction inverse est décroissante sur $]0;+\infty[$).
+3. En ajoutant ces $n$ inégalités : $u_n\geq n\times\frac1{\sqrt n}=\sqrt n$. Comme $\sqrt n\to+\infty$, par comparaison $u_n\to+\infty$.

@@ -1,0 +1,214 @@
+@chapitre exp-complexes-alg | Nombres complexes : point de vue algébrique | Complexes
+@resume Calculer avec les nombres complexes sous forme algébrique $a+\i b$, utiliser le conjugué pour les quotients et les équations, et développer avec la formule du binôme de Newton.
+
+== DEF | L'ensemble $\C$ des nombres complexes
+Il existe un ensemble $\C$ qui contient $\R$, muni d'une addition et d'une multiplication qui prolongent celles des réels, et qui contient un nombre $\i$ tel que $\i^2=-1$.
+Tout nombre complexe s'écrit de façon unique $z=a+\i b$ avec $a$ et $b$ réels : c'est la **forme algébrique**.
+- $a=\mathrm{Re}(z)$ est la **partie réelle**, $b=\mathrm{Im}(z)$ est la **partie imaginaire**. Ce sont deux nombres réels.
+- $z$ est réel si $b=0$ ; $z$ est **imaginaire pur** si $a=0$.
+- Deux complexes sont égaux si et seulement s'ils ont la même partie réelle et la même partie imaginaire. En particulier, $a+\i b=0\iff a=0$ et $b=0$.
+
+== FORMULES | Calculer sous forme algébrique
+- Somme : $(a+\i b)+(c+\i d)=(a+c)+\i(b+d)$.
+- Produit : $(a+\i b)(c+\i d)=(ac-bd)+\i(ad+bc)$. On développe comme d'habitude, puis on remplace $\i^2$ par $-1$.
+- Puissances de $\i$ : $\i^2=-1$, $\i^3=-\i$, $\i^4=1$, puis ça recommence tous les 4 : $\i^n$ ne dépend que du reste de $n$ dans la division par $4$.
+- Les identités remarquables restent vraies : $(a+\i b)^2=a^2-b^2+2ab\,\i$ et $(a+\i b)(a-\i b)=a^2+b^2$.
+
+== DEF | Le conjugué
+Le conjugué de $z=a+\i b$ est $\bar z=a-\i b$.
+- $z+\bar z=2\,\mathrm{Re}(z)$ et $z-\bar z=2\i\,\mathrm{Im}(z)$.
+- $z\bar z=a^2+b^2$ : c'est toujours un réel positif ou nul.
+- $z$ est réel $\iff\bar z=z$, et $z$ est imaginaire pur $\iff\bar z=-z$.
+
+== PROP | Conjugué et opérations
+Pour tous complexes $z$ et $z'$, et tout entier naturel $n$ :
+- $\overline{z+z'}=\bar z+\overline{z'}$ et $\overline{zz'}=\bar z\times\overline{z'}$ ;
+- $\overline{z^n}=\left(\bar z\right)^n$ ;
+- si $z'\neq0$, $\overline{\left(\frac{z}{z'}\right)}=\frac{\bar z}{\overline{z'}}$ ;
+- $\overline{\bar z}=z$.
+
+== METHODE | Mettre un quotient sous forme algébrique
+On multiplie le numérateur et le dénominateur par le **conjugué du dénominateur** : le dénominateur devient un réel. En particulier $\frac{1}{a+\i b}=\frac{a-\i b}{a^2+b^2}$.
+Exemple : $\frac{3+\i}{1-2\i}=\frac{(3+\i)(1+2\i)}{(1-2\i)(1+2\i)}=\frac{3+6\i+\i+2\i^2}{1+4}=\frac{1+7\i}{5}=\frac15+\frac75\i$.
+
+== METHODE | Résoudre une équation qui contient $z$ et $\bar z$
+On pose $z=x+\i y$ avec $x$ et $y$ réels, on remplace dans l'équation, puis on **identifie** parties réelles et parties imaginaires : on obtient un système de deux équations à deux inconnues réelles.
+S'il n'y a que $z$ (sans $\bar z$), c'est plus rapide d'isoler $z$ comme d'habitude.
+
+== THM | La formule du binôme de Newton
+Pour tous complexes $a$ et $b$ et tout entier naturel $n$ : $(a+b)^n=\sum_{k=0}^{n}\binom{n}{k}a^{k}b^{n-k}$.
+Les coefficients $\binom nk$ se lisent dans le triangle de Pascal, grâce à $\binom{n}{k}=\binom{n-1}{k-1}+\binom{n-1}{k}$.
+Exemple : $(1+\i)^3=1+3\i+3\i^2+\i^3=1+3\i-3-\i=-2+2\i$.
+
+== ATTENTION | Les pièges classiques
+- $\mathrm{Im}(z)$ est un **réel** : pour $z=3-5\i$, $\mathrm{Im}(z)=-5$, et pas $-5\i$.
+- Il n'y a pas d'ordre dans $\C$ : « $z>0$ » n'a de sens que si $z$ est réel.
+- N'écris jamais $\sqrt{-4}$ : on dit que les solutions de $z^2=-4$ sont $2\i$ et $-2\i$.
+- Pour un quotient, on multiplie par le conjugué du **dénominateur**, pas du numérateur.
+
+== DEMO | Le conjugué d'un produit
+Soit $z=a+\i b$ et $z'=c+\i d$. On a $zz'=(ac-bd)+\i(ad+bc)$, donc $\overline{zz'}=(ac-bd)-\i(ad+bc)$.
+D'autre part, $\bar z\times\overline{z'}=(a-\i b)(c-\i d)=ac-\i ad-\i bc+\i^2bd=(ac-bd)-\i(ad+bc)$.
+Les deux sont égaux : $\overline{zz'}=\bar z\times\overline{z'}$. Par récurrence, on en déduit $\overline{z^n}=\left(\bar z\right)^n$.
+
+== EXO 1 calcul | Calculs de base
+Écris sous forme algébrique :
+1. $(2+3\i)+(1-\i)$
+2. $(2+3\i)(1-\i)$
+3. $(1+2\i)^2$
+4. $\i^{2026}$
+-- indice
+Développe, puis remplace $\i^2$ par $-1$. Pour la 4, cherche le reste de $2026$ dans la division par $4$.
+-- reponse
+$3+2\i$ ; $5+\i$ ; $-3+4\i$ ; $-1$.
+-- solution
+1. $(2+3\i)+(1-\i)=3+2\i$.
+2. $(2+3\i)(1-\i)=2-2\i+3\i-3\i^2=2+\i+3=5+\i$.
+3. $(1+2\i)^2=1+4\i+4\i^2=1+4\i-4=-3+4\i$.
+4. $2026=4\times506+2$, donc $\i^{2026}=\left(\i^4\right)^{506}\times\i^2=1\times(-1)=-1$.
+
+== EXO 1 conjugue | Parties réelle, imaginaire et conjugué
+Soit $z=4-3\i$.
+1. Donne $\mathrm{Re}(z)$, $\mathrm{Im}(z)$ et $\bar z$.
+2. Calcule $z+\bar z$, $z-\bar z$ et $z\bar z$.
+-- indice
+$\bar z$ s'obtient en changeant le signe de la partie imaginaire. Et $z\bar z=a^2+b^2$.
+-- reponse
+$\mathrm{Re}(z)=4$, $\mathrm{Im}(z)=-3$, $\bar z=4+3\i$ ; $z+\bar z=8$, $z-\bar z=-6\i$, $z\bar z=25$.
+-- solution
+1. $\mathrm{Re}(z)=4$, $\mathrm{Im}(z)=-3$ (un réel) et $\bar z=4+3\i$.
+2. $z+\bar z=8=2\,\mathrm{Re}(z)$ ; $z-\bar z=-6\i=2\i\,\mathrm{Im}(z)$ ; $z\bar z=4^2+3^2=25$.
+
+== EXO 1 quotient | Des quotients
+Écris sous forme algébrique :
+1. $\frac1\i$
+2. $\frac{1+\i}{1-\i}$
+3. $\frac{5}{2+\i}$
+-- indice
+Multiplie le numérateur et le dénominateur par le conjugué du dénominateur.
+-- reponse
+$-\i$ ; $\i$ ; $2-\i$.
+-- solution
+1. $\frac1\i=\frac{-\i}{\i\times(-\i)}=\frac{-\i}{1}=-\i$.
+2. $\frac{1+\i}{1-\i}=\frac{(1+\i)^2}{(1-\i)(1+\i)}=\frac{2\i}{2}=\i$.
+3. $\frac5{2+\i}=\frac{5(2-\i)}{(2+\i)(2-\i)}=\frac{5(2-\i)}{5}=2-\i$.
+
+== EXO 2 equation | Équations du premier degré
+Résous dans $\C$ :
+1. $(1+\i)z=3-\i$
+2. $2z+\i=\i z+1$
+-- indice
+Isole $z$ comme avec des réels, puis mets le quotient sous forme algébrique.
+-- reponse
+$z=1-2\i$ ; $z=\frac35-\frac15\i$.
+-- solution
+1. $z=\frac{3-\i}{1+\i}=\frac{(3-\i)(1-\i)}{(1+\i)(1-\i)}=\frac{3-3\i-\i+\i^2}{2}=\frac{2-4\i}{2}=1-2\i$.
+2. $2z-\i z=1-\i$, donc $z(2-\i)=1-\i$ et $z=\frac{1-\i}{2-\i}=\frac{(1-\i)(2+\i)}{(2-\i)(2+\i)}=\frac{2+\i-2\i-\i^2}{5}=\frac{3-\i}{5}=\frac35-\frac15\i$.
+
+== EXO 2 conjugue | Équations avec le conjugué
+Résous dans $\C$ :
+1. $2z+\bar z=6-2\i$
+2. $z+2\i\bar z=5+4\i$
+-- indice
+Pose $z=x+\i y$ avec $x$ et $y$ réels, remplace, puis identifie les parties réelles et imaginaires.
+-- reponse
+$z=2-2\i$ ; $z=1+2\i$.
+-- solution
+1. Avec $z=x+\i y$ : $2(x+\i y)+(x-\i y)=3x+\i y$. Donc $3x+\i y=6-2\i$, ce qui donne $x=2$ et $y=-2$ : $z=2-2\i$.
+2. $z+2\i\bar z=x+\i y+2\i(x-\i y)=x+\i y+2\i x+2y=(x+2y)+\i(2x+y)$. On identifie : $x+2y=5$ et $2x+y=4$. La première donne $x=5-2y$, puis $10-4y+y=4$, donc $y=2$ et $x=1$ : $z=1+2\i$. Vérification : $1+2\i+2\i(1-2\i)=1+4\i+4=5+4\i$.
+
+== EXO 2 parametre | Réel ou imaginaire pur ?
+Soit $m$ un réel et $Z=(m+\i)(2-\i)$.
+1. Écris $Z$ sous forme algébrique.
+2. Pour quelle valeur de $m$ le nombre $Z$ est-il réel ?
+3. Pour quelle valeur de $m$ est-il imaginaire pur ?
+-- indice
+Développe, puis regroupe la partie réelle et la partie imaginaire. $Z$ est réel si sa partie imaginaire est nulle.
+-- reponse
+$Z=(2m+1)+\i(2-m)$ ; réel pour $m=2$ ; imaginaire pur pour $m=-\frac12$.
+-- solution
+1. $Z=2m-m\i+2\i-\i^2=(2m+1)+\i(2-m)$.
+2. $Z$ est réel $\iff2-m=0\iff m=2$ (et alors $Z=5$).
+3. $Z$ est imaginaire pur $\iff2m+1=0\iff m=-\frac12$ (et alors $Z=\frac52\i$).
+
+== EXO 2 puissance | Puissances astucieuses
+1. Calcule $(1+\i)^2$.
+2. Déduis-en $(1+\i)^8$ et $(1+\i)^{10}$ sans développer.
+3. Calcule $(1-\i)^2$, puis $(1-\i)^{10}$.
+-- indice
+$(1+\i)^8=\left((1+\i)^2\right)^4$.
+-- reponse
+$2\i$ ; $16$ et $32\i$ ; $-2\i$ et $-32\i$.
+-- solution
+1. $(1+\i)^2=1+2\i+\i^2=2\i$.
+2. $(1+\i)^8=(2\i)^4=16\i^4=16$ et $(1+\i)^{10}=(2\i)^5=32\i^5=32\i$.
+3. $(1-\i)^2=1-2\i+\i^2=-2\i$, donc $(1-\i)^{10}=(-2\i)^5=-32\i^5=-32\i$. On retrouve que $(1-\i)^{10}$ est le conjugué de $(1+\i)^{10}$.
+
+== EXO 2 binome | Le binôme de Newton
+1. Développe $(2+\i)^3$ avec la formule du binôme.
+2. Développe $(1-\i)^4$ avec la formule du binôme, et vérifie ton résultat à l'aide de l'exercice précédent.
+-- indice
+Coefficients du triangle de Pascal : $1,3,3,1$ pour $n=3$ et $1,4,6,4,1$ pour $n=4$.
+-- reponse
+$(2+\i)^3=2+11\i$ et $(1-\i)^4=-4$.
+-- solution
+1. $(2+\i)^3=2^3+3\times2^2\times\i+3\times2\times\i^2+\i^3=8+12\i-6-\i=2+11\i$.
+2. $(1-\i)^4=1-4\i+6\i^2-4\i^3+\i^4=1-4\i-6+4\i+1=-4$. Vérification : $(1-\i)^4=\left((1-\i)^2\right)^2=(-2\i)^2=4\i^2=-4$.
+
+== EXO 2 preuve | Toujours réel
+1. Démontre que pour tout complexe $z$, le nombre $z^2+\left(\bar z\right)^2$ est réel.
+2. Démontre que pour tout complexe $z$, le nombre $z^2-\left(\bar z\right)^2$ est imaginaire pur.
+-- indice
+Utilise $\overline{z^2}=\left(\bar z\right)^2$, puis la caractérisation : $w$ est réel $\iff\bar w=w$.
+-- reponse
+Avec $w=z^2$ : $z^2+\left(\bar z\right)^2=w+\bar w=2\,\mathrm{Re}(w)$ et $z^2-\left(\bar z\right)^2=w-\bar w=2\i\,\mathrm{Im}(w)$.
+-- solution
+1. Posons $w=z^2$. Alors $\left(\bar z\right)^2=\overline{z^2}=\bar w$, donc $z^2+\left(\bar z\right)^2=w+\bar w=2\,\mathrm{Re}(w)$ : c'est un réel.
+2. De même, $z^2-\left(\bar z\right)^2=w-\bar w=2\i\,\mathrm{Im}(w)$ : c'est un imaginaire pur.
+Autre méthode : si $W=z^2+\left(\bar z\right)^2$, alors $\overline W=\left(\bar z\right)^2+z^2=W$, donc $W$ est réel.
+
+== EXO 3 suite | Une suite complexe qui tourne en rond
+On définit $z_0=1$ et, pour tout $n\in\N$, $z_{n+1}=\i z_n+1$.
+1. Calcule $z_1$, $z_2$, $z_3$ et $z_4$. Que remarques-tu ?
+2. Résous l'équation $\ell=\i\ell+1$.
+3. On pose $w_n=z_n-\ell$. Montre que $w_{n+1}=\i w_n$.
+4. Déduis-en $w_n$, puis $z_n$, en fonction de $n$, et calcule $z_{2026}$.
+-- indice
+Pour la 3, remplace $1$ par $\ell-\i\ell$ (c'est la question 2). Pour la 4, $(w_n)$ est une suite géométrique de raison $\i$.
+-- reponse
+$z_1=1+\i$, $z_2=\i$, $z_3=0$, $z_4=1$ : la suite est périodique de période $4$. $\ell=\frac{1+\i}{2}$, $z_n=\frac{1+\i}{2}+\i^n\times\frac{1-\i}{2}$ et $z_{2026}=\i$.
+-- solution
+1. $z_1=\i+1$, $z_2=\i(1+\i)+1=\i-1+1=\i$, $z_3=\i\times\i+1=0$, $z_4=0+1=1=z_0$. Les termes reviennent au départ tous les $4$ rangs.
+2. $\ell-\i\ell=1$, donc $\ell(1-\i)=1$ et $\ell=\frac1{1-\i}=\frac{1+\i}{2}$.
+3. Comme $\ell=\i\ell+1$, on a $1=\ell-\i\ell$. Donc $w_{n+1}=z_{n+1}-\ell=\i z_n+1-\ell=\i z_n+\ell-\i\ell-\ell=\i\left(z_n-\ell\right)=\i w_n$.
+4. $(w_n)$ est géométrique de raison $\i$ et $w_0=1-\frac{1+\i}2=\frac{1-\i}2$, donc $w_n=\i^n\times\frac{1-\i}{2}$ et $z_n=\frac{1+\i}{2}+\i^n\times\frac{1-\i}{2}$. Comme $2026=4\times506+2$, $\i^{2026}=-1$ et $z_{2026}=\frac{1+\i}2-\frac{1-\i}2=\i$. On retrouve bien $z_2$.
+
+== EXO 3 preuve | Une caractérisation avec le conjugué
+Soit $z$ un complexe différent de $1$, et $Z=\frac{z+1}{z-1}$.
+1. Exprime $\overline Z$ en fonction de $\bar z$.
+2. Démontre que $Z$ est imaginaire pur si et seulement si $z\bar z=1$.
+3. Vérifie avec $z=\i$.
+-- indice
+$Z$ est imaginaire pur $\iff\overline Z=-Z$. Fais un produit en croix, développe, et beaucoup de termes s'annulent.
+-- reponse
+$\overline Z=\frac{\bar z+1}{\bar z-1}$ ; $\overline Z=-Z\iff2z\bar z=2$ ; pour $z=\i$, $Z=-\i$.
+-- solution
+1. Avec les propriétés du conjugué : $\overline Z=\frac{\bar z+1}{\bar z-1}$ (on a bien $\bar z\neq1$ car $z\neq1$).
+2. $Z$ est imaginaire pur $\iff\overline Z=-Z\iff\frac{\bar z+1}{\bar z-1}=-\frac{z+1}{z-1}\iff(\bar z+1)(z-1)=-(z+1)(\bar z-1)$.
+En développant : $z\bar z-\bar z+z-1=-\left(z\bar z-z+\bar z-1\right)=-z\bar z+z-\bar z+1$.
+Les termes $-\bar z+z$ apparaissent des deux côtés, il reste $z\bar z-1=-z\bar z+1$, soit $2z\bar z=2$, c'est-à-dire $z\bar z=1$.
+3. $z=\i$ : $z\bar z=\i\times(-\i)=1$, et $Z=\frac{\i+1}{\i-1}=\frac{(1+\i)(-1-\i)}{(-1+\i)(-1-\i)}=\frac{-(1+\i)^2}{2}=\frac{-2\i}{2}=-\i$ : c'est bien un imaginaire pur.
+
+== EXO 3 somme | Une somme géométrique complexe
+On pose $S=1+\i+\i^2+\dots+\i^{2025}=\sum_{k=0}^{2025}\i^k$.
+1. Calcule $1+\i+\i^2+\i^3$.
+2. Déduis-en $S$ en regroupant les termes par paquets de $4$.
+3. Retrouve ce résultat avec la formule de la somme des termes d'une suite géométrique : $\sum_{k=0}^{n}q^k=\frac{1-q^{n+1}}{1-q}$ pour $q\neq1$.
+-- indice
+Il y a $2026$ termes. Combien de paquets complets de $4$, et combien de termes restent ?
+-- reponse
+$0$ ; $S=1+\i$.
+-- solution
+1. $1+\i-1-\i=0$.
+2. $2026=4\times506+2$ : il y a $506$ paquets de $4$ termes consécutifs, chacun de somme nulle (car $\i^{4p}\left(1+\i+\i^2+\i^3\right)=0$), puis il reste $\i^{2024}+\i^{2025}=1+\i$. Donc $S=1+\i$.
+3. $S=\frac{1-\i^{2026}}{1-\i}=\frac{1-(-1)}{1-\i}=\frac{2}{1-\i}=\frac{2(1+\i)}{2}=1+\i$.

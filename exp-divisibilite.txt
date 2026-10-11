@@ -1,0 +1,207 @@
+@chapitre exp-divisibilite | Divisibilité, division euclidienne et congruences | Arithmétique
+@resume Reconnaître et démontrer des divisibilités dans $\Z$, faire une division euclidienne, et calculer avec les congruences pour trouver des restes, même de très grandes puissances.
+
+== DEF | Divisibilité dans $\Z$
+Soit $a$ et $b$ deux entiers relatifs. On dit que $b$ **divise** $a$ (ou que $a$ est un **multiple** de $b$) s'il existe un entier $k$ tel que $a=kb$. On note $b\mid a$.
+- Tout entier divise $0$, et $1$ et $-1$ divisent tous les entiers.
+- Si $b\mid a$ et $a\neq0$, alors $\abs{b}\leq\abs{a}$ : un entier non nul n'a qu'un nombre fini de diviseurs.
+- $b$ et $-b$ ont les mêmes multiples : on peut souvent se limiter aux diviseurs positifs.
+
+== PROP | Les deux règles à connaître
+- **Transitivité** : si $a\mid b$ et $b\mid c$, alors $a\mid c$.
+- **Combinaisons linéaires** : si $d\mid a$ et $d\mid b$, alors $d\mid au+bv$ pour tous entiers $u$ et $v$. En particulier $d$ divise $a+b$ et $a-b$.
+C'est l'outil numéro un : pour montrer qu'un nombre $d$ divise quelque chose, on l'écrit comme une combinaison de nombres que $d$ divise.
+
+== THM | La division euclidienne
+Pour tout entier $a$ et tout entier $b\geq1$, il existe un **unique** couple d'entiers $(q;r)$ tel que $a=bq+r$ et $0\leq r<b$. On appelle $q$ le quotient et $r$ le reste.
+- $b$ divise $a$ si et seulement si le reste est nul.
+- Exemple : $-17=5\times(-4)+3$. Le reste de $-17$ par $5$ est $3$, et pas $-2$ : un reste est toujours positif.
+
+== DEF | Les congruences
+Soit $n\geq2$. On dit que $a$ est **congru** à $b$ modulo $n$, et on note $a\equiv b\pmod n$, si $n$ divise $a-b$. C'est la même chose que dire que $a$ et $b$ ont le même reste dans la division par $n$.
+Tout entier est congru modulo $n$ à son reste, qui est l'un des nombres $0,1,\dots,n-1$.
+Exemples : $17\equiv2\pmod5$, $-1\equiv6\pmod7$, $10\equiv1\pmod9$.
+
+== PROP | Calculer avec les congruences
+Si $a\equiv b\pmod n$ et $c\equiv d\pmod n$, alors :
+- $a+c\equiv b+d\pmod n$ et $a-c\equiv b-d\pmod n$ ;
+- $ac\equiv bd\pmod n$ ;
+- $a^k\equiv b^k\pmod n$ pour tout entier naturel $k$.
+On peut donc remplacer un nombre par n'importe quel nombre qui lui est congru, dans les sommes, les produits et les puissances.
+**Attention** : on ne peut pas diviser une congruence en général. $2\times3\equiv2\times1\pmod4$, mais $3\not\equiv1\pmod4$.
+
+== METHODE | Trouver le reste d'une très grande puissance
+1. Calcule les premières puissances modulo $n$ jusqu'à trouver une puissance congrue à $1$ (ou à $-1$).
+2. Fais la division euclidienne de l'exposant par la longueur du cycle.
+3. Conclus avec les règles de calcul.
+Exemple : reste de $2^{2026}$ par $7$. On a $2^3=8\equiv1\pmod7$ et $2026=3\times675+1$. Donc $2^{2026}=\left(2^3\right)^{675}\times2\equiv1^{675}\times2\equiv2\pmod7$. Le reste est $2$.
+
+== METHODE | Le tableau de congruences
+Pour étudier une expression selon les valeurs de l'entier $n$, on fait un tableau avec tous les restes possibles de $n$ modulo $k$.
+Exemple : les carrés modulo $4$. Si $n\equiv0$, $1$, $2$ ou $3\pmod4$, alors $n^2\equiv0$, $1$, $0$ ou $1\pmod4$. Un carré n'est donc jamais congru à $2$ ou à $3$ modulo $4$.
+
+== ATTENTION | Les pièges
+- Un reste est toujours **positif** et **strictement plus petit** que le diviseur.
+- $a\equiv b\pmod n$ ne veut pas dire $a=b$ : $13\equiv3\pmod{10}$.
+- On ne simplifie pas une congruence par un nombre sans justification (voir l'exemple ci-dessus).
+- Pour « $n$ divise… pour tout $n$ », pense au raisonnement par récurrence ou au tableau de congruences.
+
+== DEMO | Pourquoi le reste est unique
+Supposons $a=bq+r=bq'+r'$ avec $0\leq r<b$ et $0\leq r'<b$. Alors $b(q-q')=r'-r$, donc $r'-r$ est un multiple de $b$.
+Or $-b<r'-r<b$, et le seul multiple de $b$ strictement compris entre $-b$ et $b$ est $0$. Donc $r=r'$, puis $bq=bq'$ et $q=q'$.
+
+== EXO 1 diviseurs | Lister des diviseurs
+1. Donne tous les diviseurs positifs de $36$, puis de $45$.
+2. Donne tous les diviseurs de $12$ dans $\Z$.
+3. Quels sont les diviseurs positifs communs à $36$ et $45$ ?
+-- indice
+Cherche les diviseurs par paires : si $d\times d'=36$, alors $d$ et $d'$ sont deux diviseurs.
+-- reponse
+$36$ : $1,2,3,4,6,9,12,18,36$. $45$ : $1,3,5,9,15,45$. Diviseurs de $12$ : $\pm1,\pm2,\pm3,\pm4,\pm6,\pm12$. Communs : $1,3,9$.
+-- solution
+1. $36=1\times36=2\times18=3\times12=4\times9=6\times6$, donc les diviseurs positifs de $36$ sont $1,2,3,4,6,9,12,18,36$. De même $45=1\times45=3\times15=5\times9$ : $1,3,5,9,15,45$.
+2. Les diviseurs positifs de $12$ sont $1,2,3,4,6,12$ ; dans $\Z$, il faut ajouter leurs opposés : $\pm1,\pm2,\pm3,\pm4,\pm6,\pm12$.
+3. Les diviseurs positifs communs sont $1$, $3$ et $9$ (le plus grand, $9$, est le PGCD de $36$ et $45$).
+
+== EXO 1 division | Divisions euclidiennes
+Effectue la division euclidienne de :
+1. $157$ par $12$
+2. $-38$ par $7$
+3. $2026$ par $13$
+-- indice
+Pour un nombre négatif, cherche le multiple de $7$ juste **en dessous** de $-38$, pour que le reste soit positif.
+-- reponse
+$157=12\times13+1$ ; $-38=7\times(-6)+4$ ; $2026=13\times155+11$.
+-- solution
+1. $12\times13=156$, donc $157=12\times13+1$ : quotient $13$, reste $1$.
+2. $7\times(-6)=-42\leq-38<-35=7\times(-5)$, donc $-38=7\times(-6)+4$ : quotient $-6$, reste $4$.
+3. $13\times155=2015$, donc $2026=13\times155+11$ : quotient $155$, reste $11$ (et on a bien $11<13$).
+
+== EXO 1 congruence | Vrai ou faux ?
+Pour chaque congruence, dis si elle est vraie ou fausse.
+1. $27\equiv3\pmod8$
+2. $-5\equiv2\pmod7$
+3. $100\equiv1\pmod9$
+4. $50\equiv3\pmod7$
+5. $2026\equiv1\pmod5$
+-- indice
+$a\equiv b\pmod n$ signifie que $n$ divise $a-b$.
+-- reponse
+Vrai ; vrai ; vrai ; faux ; vrai.
+-- solution
+1. $27-3=24=8\times3$ : vrai.
+2. $-5-2=-7$ : vrai.
+3. $100-1=99=9\times11$ : vrai.
+4. $50-3=47$, qui n'est pas un multiple de $7$ ($7\times7=49$) : faux. En fait $50\equiv1\pmod7$.
+5. $2026-1=2025=5\times405$ : vrai.
+
+== EXO 2 combinaison | Une combinaison qui donne 1
+Soit $n$ un entier, et $d$ un entier qui divise à la fois $2n+3$ et $5n+7$.
+1. Montre que $d$ divise $5(2n+3)-2(5n+7)$.
+2. Déduis-en les valeurs possibles de $d$.
+-- indice
+Développe $5(2n+3)-2(5n+7)$ : les $n$ disparaissent.
+-- reponse
+$5(2n+3)-2(5n+7)=1$, donc $d=1$ ou $d=-1$.
+-- solution
+1. $d$ divise $2n+3$ et $5n+7$, donc il divise toute combinaison linéaire de ces deux nombres, en particulier $5(2n+3)-2(5n+7)$.
+2. $5(2n+3)-2(5n+7)=10n+15-10n-14=1$. Donc $d\mid1$, c'est-à-dire $d=1$ ou $d=-1$. Les nombres $2n+3$ et $5n+7$ n'ont aucun diviseur commun autre que $\pm1$ : ils sont premiers entre eux.
+
+== EXO 2 combinaison | Quand $n+2$ divise $3n+11$
+Détermine tous les entiers relatifs $n$ tels que $n+2$ divise $3n+11$.
+-- indice
+Écris $3n+11=3(n+2)+5$. Si $n+2$ divise $3n+11$, que divise-t-il encore ?
+-- reponse
+$n\in\{-7;-3;-1;3\}$.
+-- solution
+$3n+11=3(n+2)+5$.
+- Si $n+2\mid3n+11$, comme $n+2\mid3(n+2)$, il divise la différence : $n+2\mid5$. Donc $n+2\in\{-5;-1;1;5\}$, soit $n\in\{-7;-3;-1;3\}$.
+- Réciproquement, pour ces valeurs, $n+2$ divise $5$ et $3(n+2)$, donc il divise leur somme $3n+11$.
+Vérification : pour $n=3$, $5$ divise $20$ ; pour $n=-7$, $-5$ divise $-10$.
+
+== EXO 2 puissance | Restes de grandes puissances
+1. Détermine le reste de $3^{100}$ dans la division par $7$.
+2. Détermine le reste de $5^{2026}$ dans la division par $4$.
+3. Quel est le chiffre des unités de $7^{2026}$ ?
+-- indice
+Cherche la première puissance de $3$ congrue à $1$ modulo $7$. Pour la 3, le chiffre des unités est le reste modulo $10$.
+-- reponse
+$4$ ; $1$ ; $9$.
+-- solution
+1. Modulo $7$ : $3^1\equiv3$, $3^2\equiv2$, $3^3\equiv6$, $3^4\equiv4$, $3^5\equiv5$, $3^6\equiv1$. Comme $100=6\times16+4$, $3^{100}=\left(3^6\right)^{16}\times3^4\equiv1\times4\equiv4\pmod7$.
+2. $5\equiv1\pmod4$, donc $5^{2026}\equiv1^{2026}=1\pmod4$.
+3. Modulo $10$ : $7^1\equiv7$, $7^2\equiv9$, $7^3\equiv3$, $7^4\equiv1$. Comme $2026=4\times506+2$, $7^{2026}\equiv7^2\equiv9\pmod{10}$ : le chiffre des unités est $9$.
+
+== EXO 2 tableau | Tableaux de congruences
+1. Montre que pour tout entier $n$, $n^3-n$ est divisible par $3$.
+2. Montre que pour tout entier $n$, $n^2+n+1$ n'est jamais divisible par $5$.
+-- indice
+Fais un tableau avec les restes possibles de $n$ : $0,1,2$ modulo $3$, puis $0,1,2,3,4$ modulo $5$.
+-- reponse
+$n^3-n\equiv0\pmod3$ dans tous les cas ; $n^2+n+1\equiv1,3,2,3,1\pmod5$, jamais $0$.
+-- solution
+1. Si $n\equiv0$ : $n^3-n\equiv0$. Si $n\equiv1$ : $1-1=0$. Si $n\equiv2$ : $8-2=6\equiv0\pmod3$. Dans tous les cas, $3$ divise $n^3-n$.
+2. Modulo $5$ : si $n\equiv0$, $n^2+n+1\equiv1$ ; si $n\equiv1$, $\equiv3$ ; si $n\equiv2$, $\equiv7\equiv2$ ; si $n\equiv3$, $\equiv13\equiv3$ ; si $n\equiv4$, $\equiv21\equiv1$. Le reste n'est jamais $0$ : $5$ ne divise jamais $n^2+n+1$.
+
+== EXO 2 critere | Le critère de divisibilité par 9
+1. Montre que $10\equiv1\pmod9$, puis que $10^k\equiv1\pmod9$ pour tout entier naturel $k$.
+2. Déduis-en qu'un entier est congru modulo $9$ à la somme de ses chiffres.
+3. Sans poser la division, trouve le reste de $2\,026\,345$ dans la division par $9$.
+-- indice
+Un nombre s'écrit $a_0+a_1\times10+a_2\times10^2+\dots$ où les $a_k$ sont ses chiffres.
+-- reponse
+$N\equiv a_0+a_1+\dots+a_p\pmod9$ ; le reste est $4$.
+-- solution
+1. $10-1=9$, donc $10\equiv1\pmod9$, et par puissance $10^k\equiv1^k=1\pmod9$.
+2. Si $N=a_0+a_1\times10+\dots+a_p\times10^p$, en remplaçant chaque $10^k$ par $1$ : $N\equiv a_0+a_1+\dots+a_p\pmod9$.
+3. $2+0+2+6+3+4+5=22$ et $22=9\times2+4$, donc $2\,026\,345\equiv4\pmod9$ : le reste est $4$.
+
+== EXO 2 congruence | Une divisibilité sans récurrence
+Montre que pour tout entier naturel $n$, $3^{2n}-2^n$ est divisible par $7$.
+-- indice
+$3^{2n}=9^n$, et $9\equiv2\pmod7$.
+-- reponse
+$3^{2n}-2^n=9^n-2^n\equiv2^n-2^n=0\pmod7$.
+-- solution
+$3^{2n}=\left(3^2\right)^n=9^n$. Comme $9\equiv2\pmod7$, on a $9^n\equiv2^n\pmod7$, donc $3^{2n}-2^n\equiv2^n-2^n\equiv0\pmod7$ : $7$ divise $3^{2n}-2^n$ pour tout $n$.
+
+== EXO 3 equation | Équations avec des congruences
+1. Trouve un entier $u$ tel que $3u\equiv1\pmod7$.
+2. Résous l'équation $3x\equiv5\pmod7$, d'inconnue l'entier $x$.
+3. Résous l'équation $x^2\equiv2\pmod7$.
+-- indice
+Pour la 2, multiplie les deux membres par $u$ (c'est permis : on multiplie, on ne divise pas). Pour la 3, fais un tableau des carrés modulo $7$.
+-- reponse
+$u=5$ ; $x\equiv4\pmod7$ ; $x\equiv3$ ou $x\equiv4\pmod7$.
+-- solution
+1. $3\times5=15=2\times7+1$, donc $u=5$ convient.
+2. Si $3x\equiv5\pmod7$, en multipliant par $5$ : $15x\equiv25\pmod7$, soit $x\equiv4\pmod7$ (car $15\equiv1$ et $25\equiv4$). Réciproquement, si $x\equiv4$, $3x\equiv12\equiv5\pmod7$. Les solutions sont les entiers $x=4+7k$, avec $k\in\Z$.
+3. Les carrés modulo $7$ : $0^2\equiv0$, $1^2\equiv1$, $2^2\equiv4$, $3^2\equiv2$, $4^2\equiv2$, $5^2\equiv4$, $6^2\equiv1$. Donc $x^2\equiv2\pmod7\iff x\equiv3$ ou $x\equiv4\pmod7$.
+
+== EXO 3 bac | Les puissances de 4 modulo 7
+1. Détermine les restes de $4^n$ dans la division par $7$, selon les valeurs de $n$.
+2. Pour quels entiers naturels $n$ le nombre $4^n+3$ est-il divisible par $7$ ?
+3. On pose $A_n=1+4^n+4^{2n}$. Montre que $A_n$ est divisible par $7$ si et seulement si $n$ n'est pas un multiple de $3$.
+-- indice
+$4^3=64\equiv1\pmod7$ : les restes se répètent tous les $3$ rangs. Écris $n=3k$, $n=3k+1$ ou $n=3k+2$.
+-- reponse
+Restes $1,4,2$ selon que $n\equiv0,1,2\pmod3$ ; $4^n+3$ est divisible par $7$ si et seulement si $n\equiv1\pmod3$ ; $A_n\equiv3,0,0\pmod7$.
+-- solution
+1. $4^0\equiv1$, $4^1\equiv4$, $4^2=16\equiv2$, $4^3=64\equiv1\pmod7$. Donc si $n=3k$, $4^n=\left(4^3\right)^k\equiv1$ ; si $n=3k+1$, $4^n\equiv4$ ; si $n=3k+2$, $4^n\equiv2\pmod7$.
+2. $7\mid4^n+3\iff4^n\equiv-3\equiv4\pmod7\iff n=3k+1$, avec $k\in\N$.
+3. $4^{2n}=\left(4^n\right)^2$. Si $n=3k$ : $A_n\equiv1+1+1=3\pmod7$, pas divisible. Si $n=3k+1$ : $A_n\equiv1+4+16\equiv1+4+2=7\equiv0$. Si $n=3k+2$ : $A_n\equiv1+2+4=7\equiv0$. Donc $7\mid A_n$ si et seulement si $n$ n'est pas un multiple de $3$.
+
+== EXO 3 preuve | Sommes de deux carrés
+1. Montre que le carré d'un entier est toujours congru à $0$ ou à $1$ modulo $4$.
+2. Quels restes peut avoir, modulo $4$, la somme de deux carrés ?
+3. Déduis-en que $2027$ ne peut pas s'écrire comme la somme de deux carrés d'entiers.
+4. Montre de même que l'équation $x^2-4y=3$ n'a aucune solution en nombres entiers.
+-- indice
+Reprends le tableau de la méthode : les carrés modulo $4$ valent $0$ ou $1$.
+-- reponse
+$a^2+b^2\equiv0$, $1$ ou $2\pmod4$, jamais $3$. Or $2027\equiv3\pmod4$.
+-- solution
+1. Si $n\equiv0,1,2,3\pmod4$, alors $n^2\equiv0,1,4,9$, c'est-à-dire $0,1,0,1\pmod4$.
+2. $a^2+b^2\equiv0+0$, $0+1$ ou $1+1$, donc $0$, $1$ ou $2\pmod4$ : jamais $3$.
+3. $2027=4\times506+3$, donc $2027\equiv3\pmod4$ : ce n'est pas une somme de deux carrés.
+4. Si $x^2-4y=3$, alors $x^2=3+4y\equiv3\pmod4$, ce qui est impossible d'après la question 1. Il n'y a donc aucune solution.
