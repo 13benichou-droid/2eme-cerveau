@@ -568,6 +568,27 @@ body.jdragging{-webkit-user-select:none;user-select:none;cursor:grabbing}
 .arow span{overflow-wrap:anywhere}
 .arow small{font-weight:500}
 .arthist .art{box-shadow:none;border:1px solid var(--line);margin-bottom:10px}
+/* mode noir (noir pur, écran OLED) */
+:root[data-theme="dark"][data-black]{--bg:#000;--surface:#0f0f11;--soft:#1a1a1d;--line:#242428;--ink:#f5f5f7;--muted:#8e8e93}
+:root[data-black] .tile{box-shadow:none}
+.themeseg{display:flex;flex-wrap:wrap}
+.themeseg button{flex:1 1 auto;white-space:nowrap}
+/* dictée : micro dans les champs */
+.micpad{padding-right:48px!important}
+.micb{position:fixed;z-index:75;width:36px;height:36px}
+.micb.free{width:auto}
+.micb.free .micbtn{display:none}
+.micbtn{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;padding:0;font-size:1.05rem;box-shadow:0 2px 8px rgb(0 0 0 / .12);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation;cursor:pointer}
+.micbtn.on{background:#ff3b30;border-color:#ff3b30;color:#fff;font-size:.8rem}
+.micbtn.on.sr,.micbtn.on.rec{animation:micp 1.3s ease-out infinite}
+.micbtn.on.wait{background:var(--muted);border-color:var(--muted);animation:none}
+@keyframes micp{0%{box-shadow:0 0 0 0 rgb(255 59 48 / .55)}100%{box-shadow:0 0 0 12px rgb(255 59 48 / 0)}}
+.mictip{position:absolute;right:0;bottom:calc(100% + 6px);width:max-content;max-width:min(300px,calc(100vw - 24px));background:var(--ink);color:var(--surface);font-size:.8rem;font-weight:600;line-height:1.3;padding:6px 9px;border-radius:9px;box-shadow:0 4px 14px rgb(0 0 0 / .2);pointer-events:none}
+.micb.free .mictip{position:static;display:block}
+.mictip.err{background:#d9443a;color:#fff}
+.nkb.micbtn{border:0;box-shadow:none;background:none;width:auto;min-width:40px;height:38px;border-radius:9px}
+.nkb.micbtn.on{background:#ff3b30;color:#fff}
+@media (prefers-reduced-motion:reduce){.micbtn.on{animation:none!important}}
 </style>
 <script src="config.js"></script>
 </head>
@@ -2340,7 +2361,16 @@ function habSync(){Object.entries(edtP().custom||{}).forEach(([k,v])=>{if(v&&v.n
 const habN=h=>(HABITS[h]||[String(h)])[0];
 const habL=h=>habN(h)+(((HABITS[h]||[])[1])==="fiche"?" (fiche)":"");
 function jBase(h){const d=(edtP().dur||{})[h];if(d>0)return d;const c=(edtP().custom||{})[h];return(c&&c.min)||JDUR[h]||30}
-function themeSync(){const t=appP().theme,r=document.documentElement;if(t==="light"||t==="dark")r.dataset.theme=t;else delete r.dataset.theme}
+/* apparence : auto (comme le téléphone), clair, sombre, noir (noir pur, parfait pour l'écran OLED de l'iPhone) */
+function themeSync(){const t=appP().theme,r=document.documentElement;
+  if(t==="light"||t==="dark")r.dataset.theme=t;else if(t==="black")r.dataset.theme="dark";else delete r.dataset.theme;
+  if(t==="black")r.dataset.black="1";else delete r.dataset.black;
+  const dark=t==="dark"||t==="black"||(t!=="light"&&!!window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches),mc=document.querySelector('meta[name="theme-color"]');
+  if(mc){const c=t==="black"?"#000000":dark?"#0e1218":"#7a5cff";if(mc.content!==c)mc.content=c}}
+const THEMES=[["auto","📱 Auto"],["light","☀️ Clair"],["dark","🌙 Sombre"],["black","⚫ Noir"]];
+function themeCard(){const t=appP().theme||"auto";return`<div class="card stack" style="gap:10px"><p class="label" style="margin:0">🎨 Apparence</p>
+  <div class="seg themeseg" role="group" aria-label="Apparence">${THEMES.map(([k,l])=>`<button data-themeset="${k}" aria-pressed="${t===k}">${l}</button>`).join("")}</div>
+  <p class="muted small" style="margin:0">${t==="black"?"Noir pur : plus reposant le soir et ça économise la batterie de l'iPhone.":t==="auto"?"Clair le jour, sombre quand ton téléphone passe en mode sombre.":"Le choix vaut aussi sur ton autre appareil (après synchronisation)."}</p></div>`}
 /* tuiles de l'accueil : ordre, noms et tuiles cachées viennent de tes suggestions */
 /* tuiles cachées : celles que tu as cachées + Maths (cachée par défaut depuis la 1.6.0, « Afficher » la fait revenir) */
 const TILE_OFF=["mx"];
@@ -2431,7 +2461,7 @@ function sgCompute(ops,scope){
       if(o.hide!=null){a.hide=(a.hide||[]).filter(k=>k!==o.k);if(o.hide)a.hide.push(o.k);a.show=(a.show||[]).filter(k=>k!==o.k);if(!o.hide)a.show.push(o.k);lines.push(`Tuile « ${nm} » ${o.hide?"cachée":"affichée"}`)}
       if(o.nom){a.nom={...(a.nom||{}),[o.k]:String(o.nom).slice(0,30)};lines.push(`Tuile « ${nm} » renommée « ${a.nom[o.k]} »`)}
       if(o.pos){const ks=sects(true).map(s=>s[0]).filter(k=>k!==o.k);if(o.pos==="first")ks.unshift(o.k);else ks.push(o.k);a.order=ks;lines.push(`Tuile « ${nm} » ${o.pos==="first"?"en premier":"en dernier"}`)}}
-    else if(o.t==="theme"){D.appli.theme=o.v;lines.push(`Apparence : ${{light:"claire",dark:"sombre",auto:"comme ton téléphone"}[o.v]||o.v}`)}
+    else if(o.t==="theme"){D.appli.theme=o.v;lines.push(`Apparence : ${{light:"claire",dark:"sombre",black:"noire",auto:"comme ton téléphone"}[o.v]||o.v}`)}
   }
   Object.entries(pw).forEach(([w,l])=>{w=+w;const pl=l.length>1;lines.push(`Objectif Top 3 : ${l.join(", ")} ${w===0?(pl?"ne comptent plus":"ne compte plus"):(pl?"comptent ":"compte ")+wTxt(w)} dans la régularité`)});
   return{docs:D,jours:J,lines,notes}
@@ -2475,7 +2505,7 @@ const SG_CODE=/\b(rubrique|page|fonction\w*|bouton|graphique|courbe|onglet|modul
 function sgClause(c,raw){
   const H=re=>re.test(c),S_=sgSubj(c),ds=sgDays(c),du=sgDur(c),ck=sgClock(c),one=x=>[x];let m;
   /* apparence */
-  if(H(/\b(mode|theme|fond|apparence|couleurs?)\b/)){if(H(/sombre|noir|dark|nuit/))return one({t:"theme",v:"dark"});if(H(/clair|blanc|light/))return one({t:"theme",v:"light"});if(H(/\bauto/))return one({t:"theme",v:"auto"})}
+  if(H(/\b(mode|theme|fond|apparence|couleurs?)\b/)){if(H(/\bnoire?\b|black|oled|amoled/))return one({t:"theme",v:"black"});if(H(/sombre|dark|nuit/))return one({t:"theme",v:"dark"});if(H(/clair|blanc|light/))return one({t:"theme",v:"light"});if(H(/\bauto/))return one({t:"theme",v:"auto"})}
   /* tuiles de l'accueil */
   const tk=sgTile(c);
   if(tk&&H(/\b(tuile|rubrique|case|bloc|accueil|icone)\b|en premier|en haut|en dernier|en bas|au debut|a la fin|renomm/)){
@@ -2573,7 +2603,7 @@ Opérations possibles (champ "t") :
 {"t":"obj","cible":16} et/ou {"t":"obj","w":{"n":60,"h":25,"f":15}} (somme 100)
 {"t":"poids","a":id ou "devoir","w":0 à 3} combien une tâche compte dans la régularité de l'objectif
 {"t":"tuile","k":clé,"hide":true|false} ; {"t":"tuile","k":clé,"pos":"first"|"last"} ; {"t":"tuile","k":clé,"nom":"Nouveau nom"}
-{"t":"theme","v":"light"|"dark"|"auto"}
+{"t":"theme","v":"light"|"dark"|"black"|"auto"} (black = noir pur)
 Réponds UNIQUEMENT en JSON : {"ops":[…],"scope":"always" ou "once","resume":"une phrase courte en français (tutoiement) qui dit ce que tu as compris","code":true|false,"idee":"si code est true : l'idée reformulée clairement"}
 "scope" vaut "once" seulement si Nathan dit que c'est pour aujourd'hui, ce soir, demain ou une seule fois.
 "code" vaut true si la suggestion demande une nouvelle fonction de l'appli qu'aucune opération ne permet (nouvelle rubrique, graphique, bouton, rappel…).
@@ -2602,7 +2632,7 @@ function sgValid(o){if(!o||typeof o!=="object")throw{code:"invalid_json"};
     else if(t==="obj"&&(x.cible||x.w))ops.push({t,cible:+x.cible||undefined,w:x.w&&typeof x.w==="object"?x.w:undefined});
     else if(t==="poids"&&(H(x.a)||x.a==="devoir")&&x.w!=null&&!isNaN(+x.w))ops.push({t,a:x.a,w:+x.w});
     else if(t==="tuile"&&sects(true).some(s=>s[0]===x.k))ops.push({t,k:x.k,hide:typeof x.hide==="boolean"?x.hide:undefined,pos:["first","last"].includes(x.pos)?x.pos:undefined,nom:typeof x.nom==="string"&&x.nom.trim()?x.nom.trim():undefined});
-    else if(t==="theme"&&["light","dark","auto"].includes(x.v))ops.push({t,v:x.v});
+    else if(t==="theme"&&["light","dark","black","auto"].includes(x.v))ops.push({t,v:x.v});
     else if(t==="tache"&&typeof x.n==="string"&&x.n.trim())ops.push({t,n:x.n.trim().slice(0,120),min:+x.min||30,days:D(x.days)});
     else if(t==="report"&&typeof x.k==="string"&&TK.includes(x.k))ops.push({t,k:x.k});
     else if(t==="prio"){const ks=(Array.isArray(x.k)?x.k:[x.k]).filter(k=>typeof k==="string"&&TK.includes(k));if(ks.length)ops.push({t,k:ks})}});
@@ -3382,7 +3412,7 @@ function nUi(){const{b,k}=nEls(),el=document.getElementById("ned"),on=V.page==="
   /* barre au-dessus du clavier */
   if(on){k.innerHTML=`${nPanel?`<div class="nkp"><div class="nfmtrow"><button type="button" class="t1" data-nk="h1">Titre</button><button type="button" class="t2" data-nk="h2">En-tête</button><button type="button" class="t3" data-nk="h3">Sous-titre</button><button type="button" data-nk="div">Corps</button></div>
       <div class="nfmtrow">${nBtns(NBIUS)}<button type="button" class="nkb" data-nk="ul">• Liste</button><button type="button" class="nkb" data-nk="ol">1. Liste</button></div>${nColors()}</div>`:""}
-    <div class="nkrow"><button type="button" class="nkb naa ${nPanel?"on":""}" data-nk="panel" aria-label="Mise en forme">Aa</button><button type="button" class="nkb" data-nk="ck" aria-label="Cases à cocher">☑︎</button>${nBtns(NBIUS.slice(0,3))}<button type="button" class="nkb ${nCol?"on":""}" data-nk="cols" aria-label="Couleur">🎨</button><button type="button" class="nkb" data-nk="done" aria-label="Fermer le clavier">⌄</button></div>
+    <div class="nkrow"><button type="button" class="nkb naa ${nPanel?"on":""}" data-nk="panel" aria-label="Mise en forme">Aa</button><button type="button" class="nkb" data-nk="ck" aria-label="Cases à cocher">☑︎</button>${nBtns(NBIUS.slice(0,3))}${nMicBtn()}<button type="button" class="nkb ${nCol?"on":""}" data-nk="cols" aria-label="Couleur">🎨</button><button type="button" class="nkb" data-nk="done" aria-label="Fermer le clavier">⌄</button></div>
     ${nCol&&!nPanel?nColors():""}`;k.hidden=false;nPlace()}else{k.hidden=true;nPanel=false}
   /* petite barre près de la sélection */
   const sel=on&&s.rangeCount&&!s.isCollapsed&&el.contains(s.anchorNode);
@@ -3415,6 +3445,8 @@ function nCaret(){const k=document.getElementById("nkbar"),s=getSelection();if(!
   const rg=s.getRangeAt(0),rs=rg.getClientRects(),r=rs.length?rs[rs.length-1]:rg.getBoundingClientRect();if(!r||!r.height)return;
   const kt=k.getBoundingClientRect().top;if(r.bottom>kt-6)window.scrollBy(0,r.bottom-kt+28)}
 document.addEventListener("input",e=>{if(e.target&&e.target.id==="ned")requestAnimationFrame(nCaret)});
+/* micro de la barre du clavier (la dictée est dans mic.js) */
+function nMicBtn(){const on=typeof MIC!=="undefined"&&MIC&&MIC.el&&MIC.el.id==="ned";return`<button type="button" class="nkb micbtn ${on?"on "+MIC.st:""}" aria-label="${on?"Arrêter la dictée":"Dicter avec le micro"}">${on?(MIC.st==="wait"?"…":"■"):"🎤"}</button>`}
 
 /* ================================================================
    💭 CITATION DU JOUR (accueil) : un jour un philosophe, le lendemain un personnage d'anime
@@ -3452,6 +3484,116 @@ function artHist(his,card){if(!his.length)return"";const g={};
   return`<div class="card stack arthist" style="gap:8px"><button class="histhead" data-histo="1" aria-expanded="${!!V.histOpen}"><b>📚 Historique</b><span class="muted small">${his.length} article${his.length>1?"s":""} de plus d'une semaine ${V.histOpen?"▲":"▼"}</span></button>
     ${V.histOpen?Object.keys(g).sort().reverse().map(k=>`<p class="label" style="margin:6px 0 0">Semaine du ${fdate(k)}</p><ul class="list">${g[k].map(([id,a])=>{const o=V.rev["arto|"+id],L=V.lang;
       return`<li><button class="arow" data-arto="${esc(id)}"><span>${esc(a.t[L]||a.t.fr||a.t.en)}</span><small class="muted">${esc(a.src)} · ${fdate(a.date)} ${o?"▲":"▼"}</small></button>${o?card([id,a]):""}</li>`}).join("")}</ul>`).join(""):""}</div>`}
+
+/* ================================================================
+   🎤 DICTÉE : un micro apparaît dans chaque champ où tu écris (et dans la barre des Notes)
+   1. reconnaissance vocale du téléphone / de Chrome (gratuite, le texte s'écrit pendant que tu parles) ;
+   2. sinon : on enregistre ta voix et Gemini la transcrit (avec ta clé, comme les profs IA).
+   ================================================================ */
+const MIC_SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+let MIC=null,micSRoff=false,micMsgT=null;
+/* les champs où le micro a du sens (pas les adresses, clés, codes, nombres…) */
+function micOk(el){if(!el||!el.matches||!el.closest("#app")||el.readOnly||el.disabled||el.dataset.nomic)return false;
+  if(el.id==="ned")return false; /* les Notes ont leur micro dans la barre au-dessus du clavier */
+  if(el.matches("textarea"))return true;
+  if(!el.matches("input"))return false;
+  const t=(el.getAttribute("type")||"text").toLowerCase();if(t!=="text"&&t!=="search")return false;
+  if(/^(numeric|decimal|url|email|tel)$/.test(el.getAttribute("inputmode")||""))return false;
+  if(/^(cfg-|ai-|lg-|pn-)/.test(el.id||"")||/^(url|key|model|pin|email|pw)$/.test(el.name||""))return false;
+  return !el.style.webkitTextSecurity}
+function micEl(){let m=document.getElementById("micb");if(!m){m=document.createElement("div");m.id="micb";m.className="micb";m.hidden=true;
+  m.innerHTML=`<span class="mictip" hidden></span><button type="button" class="micbtn" aria-label="Dicter avec le micro">🎤</button>`;document.body.appendChild(m)}return m}
+let micField=null;
+function micPlace(){const m=document.getElementById("micb");if(!m||m.hidden||!micField)return;if(!micField.isConnected){micHide();return}
+  const r=micField.getBoundingClientRect(),ta=micField.matches("textarea"),s=36;
+  m.style.left=Math.max(4,r.right-s-6)+"px";m.style.top=(ta?r.bottom-s-6:r.top+(r.height-s)/2)+"px"}
+function micShow(el){const m=micEl();if(micField&&micField!==el)micField.classList.remove("micpad");micField=el;el.classList.add("micpad");m.hidden=false;micState();micPlace()}
+function micHide(){const m=document.getElementById("micb");if(MIC&&MIC.el!==(document.getElementById("ned")))micStop();if(micField)micField.classList.remove("micpad");micField=null;if(m)m.hidden=true}
+function micState(){const m=document.getElementById("micb");if(m){const b=m.querySelector(".micbtn"),on=MIC&&MIC.el===micField,tip=m.querySelector(".mictip");
+    b.className="micbtn"+(on?" on "+MIC.st:"");b.textContent=on?(MIC.st==="wait"?"…":"■"):"🎤";b.setAttribute("aria-label",on?"Arrêter la dictée":"Dicter avec le micro");
+    const t=on?(MIC.st==="wait"?"J'écris ce que tu as dit…":MIC.mode==="rec"?`J'enregistre ${MIC.sec||0} s · touche ■ quand tu as fini`:"Je t'écoute… touche ■ pour arrêter"):"";tip.textContent=t;tip.hidden=!t}
+  if(typeof nUi==="function"&&document.getElementById("nkbar")&&!document.getElementById("nkbar").hidden)nUi()}
+/* petit message sous le micro (erreur, conseil) */
+function micMsg(t){const m=micEl(),tip=m.querySelector(".mictip");if(m.hidden&&document.getElementById("nkbar")&&!document.getElementById("nkbar").hidden){m.hidden=false;m.classList.add("free");const k=document.getElementById("nkbar").getBoundingClientRect();m.style.left="8px";m.style.top=(k.top-46)+"px"}
+  tip.textContent=t;tip.hidden=false;tip.classList.add("err");clearTimeout(micMsgT);micMsgT=setTimeout(()=>{tip.classList.remove("err");if(m.classList.contains("free")){m.classList.remove("free");m.hidden=true}micState()},6000)}
+document.addEventListener("focusin",e=>{if(micOk(e.target))micShow(e.target)});
+document.addEventListener("focusout",e=>{if(e.target===micField)setTimeout(()=>{if(document.activeElement!==micField&&!(MIC&&MIC.el===micField&&MIC.st!=="sr"))micHide()},150)});
+window.addEventListener("scroll",micPlace,{passive:true,capture:true});window.addEventListener("resize",micPlace);
+if(window.visualViewport){visualViewport.addEventListener("resize",micPlace);visualViewport.addEventListener("scroll",micPlace)}
+document.addEventListener("input",e=>{if(e.target===micField)requestAnimationFrame(micPlace)});
+
+/* ---- écrire le texte dicté là où est le curseur ---- */
+function micBegin(el){const o={el,txt:""};
+  if(el.id==="ned"){if(typeof nFocus==="function")nFocus();const s=getSelection();let r=s.rangeCount&&el.contains(s.anchorNode)?s.getRangeAt(0):null;
+    if(!r){r=document.createRange();r.selectNodeContents(el);r.collapse(false)}r.deleteContents();const pre=r.startContainer.nodeType===3?r.startContainer.data.slice(0,r.startOffset):"";
+    o.node=document.createTextNode("");r.insertNode(o.node);o.sep=pre&&!/\s$/.test(pre)?" ":"";o.cap=!pre.trim()||/[.!?]\s*$/.test(pre)}
+  else{const v=el.value,a=el.selectionStart??v.length,b=el.selectionEnd??v.length;o.before=v.slice(0,a);o.after=v.slice(b);o.sep=o.before&&!/\s$/.test(o.before)?" ":"";o.cap=!o.before.trim()||/[.!?]\s*$/.test(o.before)}
+  return o}
+function micPut(o,t){t=String(t||"").replace(/\s+/g," ").trim();if(t&&o.cap)t=t[0].toUpperCase()+t.slice(1);o.txt=t;const ins=t?o.sep+t:"";
+  if(o.node){if(!o.node.isConnected)return;o.node.data=ins;const s=getSelection(),r=document.createRange();r.setStart(o.node,ins.length);r.collapse(true);s.removeAllRanges();s.addRange(r);if(typeof nSaveSoon==="function")nSaveSoon()}
+  else{if(!o.el.isConnected)return;o.el.value=o.before+ins+o.after;const p=(o.before+ins).length;try{o.el.setSelectionRange(p,p)}catch(e){}o.el.dispatchEvent(new Event("input",{bubbles:true}))}
+  requestAnimationFrame(micPlace)}
+
+/* ---- démarrer / arrêter ---- */
+function micToggle(el){if(MIC){const same=MIC.el===el;micStop();if(same)return}if(!el)return;
+  if(MIC_SR&&!micSRoff)micSR(el);else micRec(el)}
+function micStop(){if(!MIC)return;const m=MIC;if(m.mode==="sr"){m.stopped=true;try{m.r.stop()}catch(e){}micEnd()}else if(m.mode==="rec"&&m.st==="rec"){try{m.mr.stop()}catch(e){micEnd()}}else if(m.st==="wait"){}}
+function micEnd(){const m=MIC;MIC=null;if(m){clearInterval(m.tick);clearTimeout(m.dog);if(m.stream)m.stream.getTracks().forEach(t=>t.stop());if(m.o&&m.o.node&&!m.o.node.data&&m.o.node.isConnected)m.o.node.remove()}micState()}
+
+/* 1. reconnaissance vocale de l'appareil */
+function micSR(el){let r;try{r=new MIC_SR()}catch(e){micSRoff=true;return micRec(el)}
+  const m=MIC={mode:"sr",st:"sr",el,r,o:micBegin(el),got:false,started:false};r.lang="fr-FR";r.interimResults=true;r.continuous=true;r.maxAlternatives=1;
+  r.onstart=()=>{m.started=true};
+  r.onresult=e=>{if(MIC!==m)return;m.got=true;let t="";for(let i=0;i<e.results.length;i++)t+=e.results[i][0].transcript+" ";micPut(m.o,t)};
+  r.onerror=e=>{if(MIC!==m)return;const er=e.error;
+    if(er==="aborted")return;
+    if(er==="no-speech"){m.stopped=true;if(!m.got)micMsg("Je n'ai rien entendu : touche 🎤 et parle juste après.");return micEnd()}
+    /* l'appareil refuse la reconnaissance vocale dans l'appli : on passe à l'enregistrement + Gemini (s'il manque l'autorisation du micro, c'est là qu'on le dira) */
+    if(!m.got){m.stopped=true;micSRoff=true;micEnd();return micRec(el)}
+    micMsg("La dictée s'est arrêtée ("+er+"). Ce qui a été dit est gardé.");m.stopped=true;micEnd()};
+  r.onend=()=>{if(MIC!==m)return;if(!m.stopped&&!m.got&&!m.started){micSRoff=true;micEnd();return micRec(el)}micEnd()};
+  m.dog=setTimeout(()=>{if(MIC===m&&!m.started&&!m.got){try{r.abort()}catch(e){}micSRoff=true;micEnd();micRec(el)}},8000);
+  try{r.start()}catch(e){micSRoff=true;micEnd();return micRec(el)}micState()}
+
+/* 2. enregistrement, puis Gemini écrit le texte */
+async function micRec(el){const a=aiCfg();
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder)return micMsg("La dictée ne marche pas ici : utilise le micro 🎙️ du clavier (en bas à droite du clavier de l'iPhone).");
+  if(!a.key)return micMsg("Pour dicter ici, ajoute ta clé Gemini dans ⚙️ Réglages. Sinon, utilise le micro 🎙️ du clavier de l'iPhone.");
+  const m=MIC={mode:"rec",st:"rec",el,sec:0,chunks:[]};micState();
+  try{m.stream=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){MIC=null;micState();return micMsg("Le micro est bloqué : autorise-le pour l'appli (Réglages de l'iPhone → Safari → Micro), puis réessaie.")}
+  if(MIC!==m){m.stream.getTracks().forEach(t=>t.stop());return}
+  try{m.mr=new MediaRecorder(m.stream)}catch(e){micEnd();return micMsg("L'enregistrement ne marche pas ici : utilise le micro 🎙️ du clavier.")}
+  m.mr.ondataavailable=e=>{if(e.data&&e.data.size)m.chunks.push(e.data)};
+  m.mr.onstop=()=>{clearInterval(m.tick);m.stream.getTracks().forEach(t=>t.stop());m.st="wait";micState();micGemini(m).finally(()=>{if(MIC===m)micEnd()})};
+  m.mr.start(1000);m.tick=setInterval(()=>{m.sec++;if(m.sec>=120)micStop();micState()},1000)}
+async function micGemini(m){const blob=new Blob(m.chunks,{type:m.chunks[0]&&m.chunks[0].type||"audio/webm"});if(blob.size<800)return micMsg("Je n'ai rien entendu : réessaie en parlant un peu plus longtemps.");
+  let data,mime;try{data=await micWav(blob);mime="audio/wav"}catch(e){data=await micB64(blob);mime=(blob.type||"audio/webm").split(";")[0]}
+  const a=aiCfg(),model=a.model||"gemini-3.5-flash";
+  try{const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":generateContent",{method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":a.key},
+      body:JSON.stringify({contents:[{role:"user",parts:[{text:"Transcris mot pour mot ce que dit cette personne (en français, sauf si elle parle une autre langue). Ajoute la ponctuation. Réponds uniquement avec le texte, sans guillemets ni commentaire. Si on n'entend rien, réponds juste : (rien)"},{inline_data:{mime_type:mime,data}}]}],generationConfig:{temperature:0}})});
+    if(!r.ok)return micMsg(r.status===429?"Quota Gemini atteint pour aujourd'hui : utilise le micro 🎙️ du clavier.":"Gemini n'a pas pu écrire le texte (erreur "+r.status+"). Réessaie.");
+    const j=await r.json(),t=((((j.candidates||[])[0]||{}).content||{}).parts||[]).filter(p=>p.text&&!p.thought).map(p=>p.text).join("").trim();
+    if(!t||/^\(?rien\)?\.?$/i.test(t))return micMsg("Je n'ai rien entendu : réessaie.");
+    if(!m.el.isConnected)return micMsg("Le champ a disparu : rien n'a été écrit.");
+    if(m.el.id==="ned"){if(typeof nFocus==="function")nFocus()}else m.el.focus({preventScroll:true});micPut(micBegin(m.el),t)}
+  catch(e){micMsg(navigator.onLine?"Gemini ne répond pas : réessaie.":"Pas de connexion : la dictée a besoin d'Internet.")}}
+/* l'audio est converti en WAV 16 kHz mono : le format que Gemini lit le mieux */
+async function micWav(blob){const AC=window.AudioContext||window.webkitAudioContext,ac=new AC(),buf=await blob.arrayBuffer();
+  const ab=await new Promise((ok,ko)=>{const p=ac.decodeAudioData(buf,ok,ko);if(p&&p.then)p.then(ok,ko)});try{ac.close()}catch(e){}
+  const sr=16000,len=Math.max(1,Math.ceil(ab.duration*sr)),OC=window.OfflineAudioContext||window.webkitOfflineAudioContext,oc=new OC(1,len,sr),src=oc.createBufferSource();src.buffer=ab;src.connect(oc.destination);src.start(0);
+  const out=await new Promise((ok,ko)=>{oc.oncomplete=e=>ok(e.renderedBuffer);const p=oc.startRendering();if(p&&p.then)p.then(ok,ko)});
+  const d=out.getChannelData(0),n=d.length,v=new DataView(new ArrayBuffer(44+n*2)),w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+  w(0,"RIFF");v.setUint32(4,36+n*2,true);w(8,"WAVE");w(12,"fmt ");v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,"data");v.setUint32(40,n*2,true);
+  for(let i=0;i<n;i++){const x=Math.max(-1,Math.min(1,d[i]));v.setInt16(44+i*2,x<0?x*0x8000:x*0x7fff,true)}
+  return micB64(new Blob([v.buffer],{type:"audio/wav"}))}
+function micB64(blob){return new Promise((ok,ko)=>{const f=new FileReader();f.onload=()=>ok(String(f.result).split(",")[1]||"");f.onerror=ko;f.readAsDataURL(blob)})}
+
+/* ---- toucher le micro sans fermer le clavier ni perdre le curseur ---- */
+const micTarget=b=>b.closest("#nkbar")?document.getElementById("ned"):micField;
+document.addEventListener("touchstart",e=>{const b=e.target.closest&&e.target.closest(".micbtn");if(b){e.preventDefault();e.stopPropagation()}},{passive:false,capture:true});
+document.addEventListener("touchend",e=>{const b=e.target.closest&&e.target.closest(".micbtn");if(b){e.preventDefault();e.stopPropagation();micToggle(micTarget(b))}},{passive:false,capture:true});
+document.addEventListener("mousedown",e=>{if(e.target.closest&&e.target.closest(".micb,.micbtn"))e.preventDefault()},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest(".micbtn");if(b){e.preventDefault();e.stopPropagation();micToggle(micTarget(b))}},true);
 
 /* ================================================================
    ACCUEIL
@@ -3504,7 +3646,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.6.0";
+const APP_VERSION="1.7.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -3696,7 +3838,7 @@ function pageReglages(){
   const inst=`<div class="card stack"><p class="label" style="margin:0">Installer l'appli</p>${isStandalone()?`<p>✓ L'appli est installée sur cet appareil.</p>`:`${INSTALL_EVT?`<div><button class="btn" data-install="1">Installer sur cet appareil</button></div>`:""}
     <p class="small"><b>iPhone</b> : dans Safari, bouton Partager puis « Sur l'écran d'accueil ».<br><b>Android</b> : menu ⋮ de Chrome puis « Installer l'application ».<br><b>Ordinateur</b> : dans Chrome ou Edge, icône d'installation à droite de la barre d'adresse.</p>`}</div>`;
   const aide=`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">Un problème ?</p><p class="muted small">Pronote, IA, synchronisation, actu : un mode d'emploi pas à pas pour chaque panne.</p><div><button class="btn" data-page="aide">🛟 Ouvrir le dépannage</button></div></div>`;
-  return aide+sync+pnReglages()+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
+  return themeCard()+aide+sync+pnReglages()+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
 }
 async function testOllama(){V.aiMsg2="Test d'Ollama…";render(true);
   try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.",{_prov:"ollama"});V.aiMsg2="✓ Ollama répond : "+r.text.trim().slice(0,80)}
@@ -4037,7 +4179,7 @@ function render(force){
   if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
   const body=mt?modHtml(mt.id,mt.page):modWrap(V.page,PAGES[V.page]());
   app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${esc(sectName(V.page))}</h1>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
-  if(V.page==="mx")mxTex();if(V.page==="jour")jAfter();setTimeout(nUi,0);
+  if(V.page==="mx")mxTex();if(V.page==="jour")jAfter();setTimeout(()=>{nUi();micPlace()},0);
 }
 /* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
 document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},350));
@@ -4075,6 +4217,7 @@ document.addEventListener("click",e=>{
   if(d.cga){const i=d.cga.lastIndexOf("|"),k=d.cga.slice(0,i),v=S.cg[k],n=cgNotion(v);if(!v||!n||v.rep!=null)return;const r=+d.cga.slice(i+1);return put("cg",k,{...v,rep:r,ok:r===n.a})}
   if(d.cgk){V.cgk=d.cgk;render(true);return window.scrollTo(0,0)}
   if(d.cgplus)return cgPlus(V.cgPart);
+  if(d.themeset){put("params","appli",{...appP(),theme:d.themeset},true);themeSync();return render(true)}
   if(d.cgpart){V.cgPart=d.cgpart;V.cgk=null;return render(true)}
   /* finance : historique */
   if(d.histo){V.histOpen=!V.histOpen;return render(true)}
