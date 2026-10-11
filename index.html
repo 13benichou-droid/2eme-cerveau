@@ -589,6 +589,14 @@ body.jdragging{-webkit-user-select:none;user-select:none;cursor:grabbing}
 .nkb.micbtn{border:0;box-shadow:none;background:none;width:auto;min-width:40px;height:38px;border-radius:9px}
 .nkb.micbtn.on{background:#ff3b30;color:#fff}
 @media (prefers-reduced-motion:reduce){.micbtn.on{animation:none!important}}
+/* petits blocs (pauses, temps libre) : on les attrape par le milieu ; une fois touchés, les poignées dépassent en haut et en bas */
+.jb.tiny.sel{overflow:visible}
+.jb.tiny .jh{height:14px}
+.jb.tiny .jh.t{top:-15px}
+.jb.tiny .jh.bt{bottom:-15px}
+.jb.tiny .jh::after{opacity:1}
+.jb.tiny .jh.t::after{top:auto;bottom:3px}
+.jb.tiny .jh.bt::after{bottom:auto;top:3px}
 </style>
 <script src="config.js"></script>
 </head>
@@ -2134,7 +2142,7 @@ function planDayOld(d){
   return{dk,school,live,steps:live?[]:steps,plan,reste:q,fin:t,stop,first:school?steps[0]:null};
 }
 function jCurrent(pl){const nowM=new Date().getHours()*60+new Date().getMinutes();const all=[...pl.steps,...pl.plan];return{cur:all.find(s=>s.a<=nowM&&nowM<s.b),next:all.find(s=>s.a>nowM)}}
-function jIcon(k,ref){return k==="cours"?"🏫":k==="trajet"?"🚶":k==="pause"?"☕":k==="repas"?"🍽️":k==="libre"?"🌿":ref==="sport"?"🏋️":k==="pn"?"📚":k==="x"?"📝":ref==="piano"?"🎹":/^m/.test(ref)?"📐":/^f/.test(ref)?"🗂️":"✏️"}
+function jIcon(k,ref,l){return k==="bloc"?(/pause/i.test(l||"")?"☕":"🌿"):k==="cours"?"🏫":k==="trajet"?"🚶":k==="pause"?"☕":k==="repas"?"🍽️":k==="libre"?"🌿":ref==="sport"?"🏋️":k==="pn"?"📚":k==="x"?"📝":ref==="piano"?"🎹":/^m/.test(ref)?"📐":/^f/.test(ref)?"🗂️":"✏️"}
 function jStep(s,i,isT){
   const work=s.k==="hab"||s.k==="pn"||s.k==="x",nowM=new Date().getHours()*60+new Date().getMinutes(),on=isT&&s.a<=nowM&&nowM<s.b;
   const key=s.k==="hab"?`hab|${s.ref}`:s.k==="pn"?`pn|${s.ref}`:`x|${s.ref}`;
@@ -3126,11 +3134,11 @@ function planDay(d){
     const lim=Math.min(fb?fb.a:stop,stop);
     if(!jd.nap&&since>=50&&lim-t>=25){plan.push({a:t,b:t+10,k:"pause",auto:1,l:"Pause : bouge, bois de l'eau"});t+=10;since=0;continue}
     const i=q.findIndex(x=>x.min<=lim-t);
-    if(i<0){if(fb&&fb.a<stop&&fb.a>t){if(fb.a-t>=5)plan.push({a:t,b:fb.a,k:"libre",auto:1,l:"Temps libre"});t=fb.a;continue}break}
+    if(i<0){if(fb&&fb.a<stop&&fb.a>t){if(fb.a-t>=5&&!jd.nofree)plan.push({a:t,b:fb.a,k:"libre",auto:1,l:"Temps libre"});t=fb.a;continue}break}
     const x=q.splice(i,1)[0];plan.push({...x,a:t,b:t+x.min});t+=x.min;since=x.ref==="sport"?0:since+x.min;
   }
   /* blocs fixes pas encore placés (épinglés, ou repas dans la soirée) */
-  fixed.filter(f=>!f.used&&(f.pin||(f.k==="repas"&&f.a>=t&&f.a<stop+60))).forEach(f=>{f.used=1;plan.push({...f})});
+  fixed.filter(f=>!f.used&&(f.pin||(f.k==="repas"&&f.a<stop+60&&(f.a>=t||!live||f.b>nowM)))).forEach(f=>{f.used=1;plan.push({...f})});
   /* tâches déjà faites et épinglées : elles restent visibles à leur place */
   Object.entries(pins).forEach(([k,p])=>{if(p.done&&p.b>p.a&&jIsDone(dk,k)&&!plan.some(s=>jKey(s)===k)){const a=k.indexOf("|");plan.push({k:k.slice(0,a),ref:k.slice(a+1),l:jLabelK(dk,k),a:p.a,b:p.b,pin:1,w:p.w,done:true,min:p.b-p.a})}});
   plan.sort((x,y)=>x.a-y.a);
@@ -3143,7 +3151,7 @@ function jDayDoc(dk){const j=S.jours[dk]||{};return{...j,date:dk,done:j.done||{}
 function jPinSet(dk,key,p,quiet){const j=jDayDoc(dk);
   /* une pause ou un temps libre automatique qu'on touche devient un bloc à toi (et l'appli arrête d'ajouter des pauses ce jour-là) */
   if(key.startsWith("auto|")){if(!p)return;const kind=key.split("|")[1],s=jFind(dk,key);if(!s)return;const id=uid();
-    j.blocs=[...(j.blocs||[]),{id,l:kind==="pause"?"Pause":"Temps libre",a:p.a!=null?p.a:s.a,b:p.b!=null?p.b:s.b}];if(kind==="pause")j.nap=true;if(V.jsel===key)V.jsel="bloc|"+id;V.jHi=["bloc|"+id];return put("jours",dk,j,quiet)}
+    j.blocs=[...(j.blocs||[]),{id,l:kind==="pause"?"Pause":"Temps libre",a:p.a!=null?p.a:s.a,b:p.b!=null?p.b:s.b}];if(kind==="pause")j.nap=true;else j.nofree=true;if(V.jsel===key)V.jsel="bloc|"+id;V.jHi=["bloc|"+id];return put("jours",dk,j,quiet)}
   if(key.startsWith("bloc|")){const id=key.slice(5);j.blocs=(j.blocs||[]).map(x=>x.id===id?{...x,...(p||{})}:x).filter(x=>p||x.id!==id);return put("jours",dk,j,quiet)}
   const pin={...(j.pin||{})};if(p){pin[key]={...(pin[key]||{}),...p};delete pin[key].w}else delete pin[key];j.pin=pin;return put("jours",dk,j,quiet)}
 function jDateOf(dk){const[y,m,d]=dk.split("-").map(Number);return new Date(y,m-1,d)}
@@ -3162,6 +3170,7 @@ function jOut(dk,key){const d=jDateOf(dk),j=jDayDoc(dk),a=key.indexOf("|"),kind=
   else if(kind==="bloc")j.blocs=(j.blocs||[]).filter(x=>x.id!==ref);
   else if(kind==="step"||kind==="repas")j.hide={...(j.hide||{}),[key]:true};
   else if(kind==="auto"&&ref.startsWith("pause"))j.nap=true;
+  else if(kind==="auto"&&ref.startsWith("libre"))j.nofree=true;
   V.jsel=null;return put("jours",dk,j)}
 function jDoneSet(dk,key,ok){const s=jFind(dk,key);if(s&&ok){const j=jDayDoc(dk);j.pin={...(j.pin||{}),[key]:{...((j.pin||{})[key]||{}),a:s.a,b:s.b,done:1}};S.jours[dk]=j}
   if(!ok){const j=jDayDoc(dk);if(j.pin&&j.pin[key]){j.pin={...j.pin,[key]:{...j.pin[key],done:0}};S.jours[dk]=j}}
@@ -3187,7 +3196,7 @@ function jPalette(d,pl){const dk=dkey(d),inPlan=new Set(planOf(d)),items=[];
   Object.keys(HABITS).filter(h=>!inPlan.has(h)&&!doneOf(d)[h]).forEach(h=>items.push({t:"hab",id:h,l:habL(h),k:"hab",ref:h,min:h==="sport"?jParams(dk).sportDur+jParams(dk).sportTrajet:jDur(h,jBase(h)),g:"Ajouter"}));
   items.push({t:"pause",l:"Pause",k:"bloc",ref:"",min:15,g:"Ajouter"});
   let g="";return items.map((it,i)=>{const h=it.g!==g?`<p class="jpg">${it.g==="À caser"?"Ne rentre pas : glisse-les":"Ajouter"}</p>`:"";g=it.g;
-    return h+`<div class="jpi" data-jpal="${i}" style="--b:${jCol(it)}" title="${esc(it.l)}"><span>${jIcon(it.k,it.ref)}</span><b>${esc(it.l)}</b><small>${fdur(it.min)}</small></div>`}).join("")+`<p class="jpg jdrop">⬅ Glisse un bloc ici pour l'enlever de la journée</p>`}
+    return h+`<div class="jpi" data-jpal="${i}" style="--b:${jCol(it)}" title="${esc(it.l)}"><span>${jIcon(it.k,it.ref,it.l)}</span><b>${esc(it.l)}</b><small>${fdur(it.min)}</small></div>`}).join("")+`<p class="jpg jdrop">⬅ Glisse un bloc ici pour l'enlever de la journée</p>`}
 function jTimeline(d,pl,isT){
   const dk=dkey(d),nowM=nowMin();let items=[...pl.steps0,...pl.plan].filter(s=>s.b>s.a&&!(s.k==="libre"&&s.b-s.a<15));
   /* les jours de cours, l'emploi du temps commence une heure avant la sortie du lycée : on voit la fin des cours (et on peut la modifier) */
@@ -3195,21 +3204,21 @@ function jTimeline(d,pl,isT){
   const st=Math.max(0,Math.floor(lo0/60)*60),en=Math.min(24*60,Math.ceil(hi0/60)*60);items=items.filter(s=>s.b>st);const lanes=jLanes(items);
   V.jRange={st,en,dk};const pal=jPalette(d,pl);V.jPalItems=null;
   const hrs=[];for(let h=st;h<=en;h+=60)hrs.push(`<span class="jhl" style="top:${(h-st)*JPX}px">${h/60} h</span>`);
-  const blocks=items.map(s=>{const ln=lanes.get(s),key=jKeyOf(s),mv=jMovable(s),sel=V.jsel===key&&V.jselDk===dk,h=(s.b-s.a)*JPX;
+  const blocks=items.map(s=>{const ln=lanes.get(s),key=jKeyOf(s),mv=jMovable(s),sel=V.jsel===key&&V.jselDk===dk,h=(s.b-Math.max(s.a,st))*JPX,hd=mv&&!s.done&&(h>=34||sel);
     return`<div class="jb mv ${jWork(s)?"":"fx"} ${s.done?"done":""} ${s.pin?"pin":""} ${s.run?"run":""} ${s.over?"over":""} ${sel?"sel":""} ${h<34?"tiny":""} ${V.jHi&&V.jHi.includes(key)?"jnew":""}" ${mv?`data-jb="${esc(key)}" data-a="${s.a}" data-b="${s.b}" tabindex="0" role="button" aria-label="${esc(s.l)}, ${fmin(s.a)} à ${fmin(s.b)}"`:""} style="--b:${jCol(s)};top:${(Math.max(s.a,st)-st)*JPX}px;height:${Math.max(16,(s.b-Math.max(s.a,st))*JPX-2)}px;left:calc(${ln.c/ln.n*100}% + 2px);width:calc(${100/ln.n}% - 4px)">
-      ${mv&&!s.done?`<i class="jh t" data-jh="a"></i>`:""}<b>${s.done?"✓ ":""}${jIcon(s.k,s.ref)} ${esc(s.l)}</b><small>${fmin(s.a)}–${fmin(s.b)}${s.pin?(s.w?" · 📌 chaque semaine":" · placé à la main"):""}</small>${mv&&!s.done?`<i class="jh bt" data-jh="b"></i>`:""}</div>`}).join("");
+      ${hd?`<i class="jh t" data-jh="a"></i>`:""}<b>${s.done?"✓ ":""}${jIcon(s.k,s.ref,s.l)} ${esc(s.l)}</b><small>${fmin(s.a)}–${fmin(s.b)}${s.pin?(s.w?" · 📌 chaque semaine":" · placé à la main"):""}</small>${hd?`<i class="jh bt" data-jh="b"></i>`:""}</div>`}).join("");
   return`<div class="jcal"><div class="jhrs" style="height:${(en-st)*JPX}px">${hrs.join("")}</div>
     <div class="jgrid" id="jgrid" style="height:${(en-st)*JPX}px;--hh:${60*JPX}px">${blocks}${isT&&nowM>=st&&nowM<=en?`<div class="jnowl" style="top:${(nowM-st)*JPX}px"><span>${fmin(nowM)}</span></div>`:""}</div>
     <aside class="jpal" id="jpal" aria-label="Matières à placer">${pal}</aside></div>`}
 function jSheet(d,pl){if(!V.jsel||V.jselDk!==dkey(d))return"";const dk=dkey(d),key=V.jsel,s=jFind(dk,key);if(!s){V.jsel=null;return""}
   const w=jWork(s),wd=JOURS[d.getDay()].toLowerCase(),isT=dk===dkey(today()),wk=!!(((edtP().pinw||{})[d.getDay()]||{})[key]);
-  return`<div class="jsheet card" role="dialog" aria-label="${esc(s.l)}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${jIcon(s.k,s.ref)} ${esc(s.l)}</b><button class="ghost" data-jclose="1" aria-label="Fermer">✕</button></div>
+  return`<div class="jsheet card" role="dialog" aria-label="${esc(s.l)}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${jIcon(s.k,s.ref,s.l)} ${esc(s.l)}</b><button class="ghost" data-jclose="1" aria-label="Fermer">✕</button></div>
     ${s.done?`<p class="small muted">Fait de ${fmin(s.a)} à ${fmin(s.b)}.</p>`:`<div class="jadj"><span>Début <b class="num">${fmin(s.a)}</b></span><button class="ghost" data-jadj="a|-5">−5</button><button class="ghost" data-jadj="a|5">+5</button>
       <span>Fin <b class="num">${fmin(s.b)}</b></span><button class="ghost" data-jadj="b|-5">−5</button><button class="ghost" data-jadj="b|5">+5</button></div>`}
     <div class="row">${w?(s.done?`<button class="ghost" data-jfait="0">↺ Pas fait</button>`:`<button class="btn" data-jfait="1">✓ Fait</button>${isT&&!s.run?`<button class="ghost on" data-jstart="${esc(key)}">▶ Commencer</button>`:""}`):""}
       ${!s.done&&(w||s.k==="repas"||s.step)?`<button class="ghost ${wk?"on":""}" data-jweek="1">📌 ${wk?"Plus chaque "+wd:"Chaque "+wd+" à cette heure"}</button>`:""}
       ${s.pin&&!s.done&&!wk?`<button class="ghost" data-jauto="1">✨ Remettre en automatique</button>`:""}
-      ${s.k==="libre"?"":`<button class="ghost danger" data-jout="1">Enlever de la journée</button>`}</div>${s.auto?`<p class="small muted" style="margin:0">Déplace-la ou change sa durée : elle devient à toi${s.k==="pause"?", et l'appli n'ajoute plus de pauses toute seule aujourd'hui":""}.</p>`:""}${s.step?`<p class="small muted" style="margin:0">Si un cours est annulé ou finit plus tôt, ajuste les horaires ici.</p>`:""}</div>`}
+      <button class="ghost danger" data-jout="1">Enlever de la journée</button></div>${s.auto?`<p class="small muted" style="margin:0">${s.k==="pause"?"Déplace-la ou change sa durée : elle devient à toi, et l'appli n'ajoute plus de pauses toute seule aujourd'hui":"Déplace-le ou change sa durée : il devient à toi, et l'appli ne rajoute plus de temps libre toute seule aujourd'hui"}.</p>`:""}${s.step?`<p class="small muted" style="margin:0">Si un cours est annulé ou finit plus tôt, ajuste les horaires ici.</p>`:""}</div>`}
 function pageJour(){
   const d=V.jdk?jDateOf(V.jdk):today();V.jdk=dkey(d);
   const isT=V.jdk===dkey(today()),pl=planDay(d),{cur,next}=isT?jCurrent(pl):{};
@@ -3219,7 +3228,7 @@ function pageJour(){
       <b>${jIcon(R.k,R.ref)} ${esc(R.l)}</b><span class="muted small">commencé à ${fmin(R.a)} · ${fdur(Math.max(0,R.el))} passées${R.over?"":` · fin prévue ${fmin(R.b)}`}</span>
       <div class="bar"><i style="width:${R.over?100:Math.min(100,Math.max(0,R.el)/Math.max(1,R.b-R.a)*100)}%"></i></div>
       <div class="row"><button class="btn" data-jfini="1">✓ J'ai fini</button><button class="ghost on" data-jplus="15">+15 min</button>${R.over?`<button class="ghost" data-jdemain="1">Je finis demain</button>`:`<button class="ghost" data-jstop="1">Arrêter</button>`}</div></div>`
-    :`<div class="card jnow">${cur?`<p class="label" style="margin:0">En ce moment · jusqu'à ${fmin(cur.b)}</p><b>${jIcon(cur.k,cur.ref)} ${esc(cur.l)}</b>`:next?`<p class="label" style="margin:0">À ${fmin(next.a)}</p><b>${jIcon(next.k,next.ref)} ${esc(next.l)}</b>`:`<b>✓ Journée bouclée</b><span class="muted small">Plus rien de prévu. Repose-toi !</span>`}
+    :`<div class="card jnow">${cur?`<p class="label" style="margin:0">En ce moment · jusqu'à ${fmin(cur.b)}</p><b>${jIcon(cur.k,cur.ref,cur.l)} ${esc(cur.l)}</b>`:next?`<p class="label" style="margin:0">À ${fmin(next.a)}</p><b>${jIcon(next.k,next.ref,next.l)} ${esc(next.l)}</b>`:`<b>✓ Journée bouclée</b><span class="muted small">Plus rien de prévu. Repose-toi !</span>`}
       ${todo?`<div><button class="btn" data-jstart="${esc(jKey(todo))}">▶ Commencer : ${esc(todo.l.length>30?todo.l.slice(0,29)+"…":todo.l)}</button></div>`:""}</div>`;
   const P=jParams(),xs=jExtras(V.jdk);
   return`${head}${now}${sgCard("jour")}
@@ -3295,7 +3304,7 @@ document.addEventListener("keydown",e=>{if(e.key!=="Enter"||V.page!=="jour")retu
 /* boutons du réglage d'un bloc */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button");if(!b||V.page!=="jour")return;const d=b.dataset,dk=V.jdk,key=V.jsel;
   if(d.jclose){V.jsel=null;return render(true)}
-  if(d.jtout)return confirmOr("jtout",()=>{const j=jDayDoc(dk),pin={};Object.entries(j.pin||{}).forEach(([k,p])=>{if(p.done)pin[k]=p});j.pin=pin;delete j.hide;delete j.nap;V.jsel=null;put("jours",dk,j)});
+  if(d.jtout)return confirmOr("jtout",()=>{const j=jDayDoc(dk),pin={};Object.entries(j.pin||{}).forEach(([k,p])=>{if(p.done)pin[k]=p});j.pin=pin;delete j.hide;delete j.nap;delete j.nofree;V.jsel=null;put("jours",dk,j)});
   if(!key)return;
   if(d.jadj){const[w,n]=d.jadj.split("|"),s=jFind(dk,key);if(!s)return;let a=s.a,bb=s.b;if(w==="a")a=Math.min(s.a+ +n,s.b-10);else bb=Math.max(s.b+ +n,s.a+10);V.jHi=[key];return jPinSet(dk,key,{a,b:bb})}
   if(d.jfait!==undefined){V.jsel=null;return jDoneSet(dk,key,d.jfait==="1")}
@@ -3646,7 +3655,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.7.0";
+const APP_VERSION="1.7.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
