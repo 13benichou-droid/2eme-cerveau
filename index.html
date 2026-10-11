@@ -533,6 +533,41 @@ body.jdragging{-webkit-user-select:none;user-select:none;cursor:grabbing}
 .jadj{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 8px;align-items:center}
 .jadj .ghost{min-width:46px}
 @media (min-width:600px){.jcal{grid-template-columns:36px minmax(0,1fr) 150px}.jb{font-size:.86rem}}
+/* notes : barres de mise en forme (sélection + au-dessus du clavier) */
+.nkeep{--ny:#d99a00;position:fixed;z-index:70;background:color-mix(in srgb,var(--surface) 94%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6);border:1px solid var(--line);box-shadow:0 8px 26px rgb(0 0 0 / .16);display:flex;flex-direction:column;gap:6px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nkeep{--ny:#ffd60a}}
+:root[data-theme="dark"] .nkeep{--ny:#ffd60a}
+.nkeep[hidden]{display:none}
+.nbub{border-radius:14px;padding:5px;max-width:calc(100vw - 16px)}
+.nkbar{left:0;right:0;top:auto;border-radius:0;border-width:1px 0 0;padding:6px 8px;box-shadow:0 -4px 18px rgb(0 0 0 / .08)}
+.nkbar>*{width:100%;max-width:620px;margin:0 auto}
+.nkrow{display:flex;align-items:center;justify-content:space-between;gap:2px}
+.nbub .nkrow{justify-content:flex-start}
+.nkb{border:0;background:none;color:var(--ink);min-width:40px;height:38px;border-radius:9px;font-size:1.08rem;display:grid;place-items:center;padding:0 8px;font-family:inherit}
+.nkb.on{background:color-mix(in srgb,var(--ny) 24%,transparent);color:var(--ink)}
+.nkb.naa{font-weight:600}
+.nkp{display:flex;flex-direction:column;gap:6px;padding:2px 0 4px;border-bottom:1px solid var(--line)}
+.nkp .nfmtrow button.nkb{background:var(--soft);font-size:.95rem}
+.nkp .nfmtrow button.nkb.on{background:color-mix(in srgb,var(--ny) 30%,var(--soft))}
+.ncols{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 4px 2px}
+.ncol{width:30px;height:30px;border-radius:50%;border:2px solid var(--surface);background:var(--k);box-shadow:0 0 0 1px var(--line);padding:0;flex:none;font-size:.85rem;display:grid;place-items:center}
+.ncol.hl{background:#ffd60a}
+.ncol.none{background:var(--soft);color:var(--muted);font-weight:700}
+.ned span[style*="background"]{border-radius:3px}
+/* citation du jour */
+.citc{display:flex;flex-direction:column;gap:8px;margin-top:16px;border-left:4px solid var(--cg)}
+.citc blockquote{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:1.14rem;line-height:1.45;font-style:italic}
+/* finance : historique */
+.histhead{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border:0;background:none;padding:2px 0;color:var(--ink);text-align:left}
+.histhead b{white-space:nowrap;font-size:1.05rem}
+.histhead span{text-align:right}
+.arthist .list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.arthist .list>li{border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.arthist .list>li:first-child{border-top:0}
+.arow{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;border:0;background:none;text-align:left;padding:10px 0;color:var(--ink);font-weight:600}
+.arow span{overflow-wrap:anywhere}
+.arow small{font-weight:500}
+.arthist .art{box-shadow:none;border:1px solid var(--line);margin-bottom:10px}
 </style>
 <script src="config.js"></script>
 </head>
@@ -1510,12 +1545,13 @@ const T={fr:{take:"Décryptage du trader",voc:"Vocabulaire",you:"À toi de jouer
 function pageFin(){const t=V.ftab||"jeu";return`<div class="tabs two" role="tablist"><button role="tab" data-ftab="actu" aria-selected="${t==="actu"}">📰 Actualité</button><button role="tab" data-ftab="jeu" aria-selected="${t==="jeu"}">🎮 Trading Lab</button></div>`+(t==="jeu"?jeuUI():actuUI())}
 function actuUI(){
   const L=V.lang,t=T[L],snap=S.marche.snap;
-  const arts=Object.entries(S.presse).sort((a,b)=>String(b[1].date).localeCompare(a[1].date)||String(a[0]).localeCompare(b[0]));
+  const all=Object.entries(S.presse).sort((a,b)=>String(b[1].date).localeCompare(a[1].date)||String(a[0]).localeCompare(b[0])),lim=dkey(add(today(),-7));
+  const arts=all.filter(([,a])=>String(a.date).slice(0,10)>=lim),his=all.filter(([,a])=>String(a.date).slice(0,10)<lim);let ac;
   const g=GLOSS[V.gi%GLOSS.length],front=L==="fr"?g[0]:g[1],back=L==="fr"?g[1]:g[0];
   return`<div class="row" style="justify-content:space-between"><div class="seg" role="group" aria-label="Langue"><button data-lang="fr" aria-pressed="${L==="fr"}">🇫🇷 Français</button><button data-lang="en" aria-pressed="${L==="en"}">🇬🇧 English</button></div></div>
   ${snap?`<div><p class="label">${t.snap} · ${L==="fr"?"clôture du "+fdate(snap.date):"close of "+snap.date}</p><div class="snap">${snap.items.map(x=>`<div class="tick"><span>${esc(x.n)}</span><b>${esc(x.v)}</b>${x.c?`<em class="${String(x.c).startsWith("−")||String(x.c).startsWith("-")?"down":"up"}">${esc(x.c)}</em>`:""}</div>`).join("")}</div></div>`:""}
   <div class="stack"><p class="label" style="margin:0">${t.arts}</p>
-  ${arts.length?arts.map(([id,a])=>{const rk="art|"+id;return`<article class="card art">
+  ${(ac=([id,a])=>{const rk="art|"+id;return`<article class="card art">
     <p class="meta">${esc(a.src)} · ${L==="fr"?fdate(a.date):esc(a.date)}</p>
     <h3>${esc(a.t[L]||a.t.fr||a.t.en)}</h3>
     ${a.s&&a.s[L]?`<p>${esc(a.s[L])}</p>`:""}
@@ -1523,7 +1559,8 @@ function actuUI(){
     ${a.v&&a.v.length?`<div><p class="label" style="margin-bottom:6px">${t.voc}</p><div class="voc">${a.v.map(([f,e])=>`<span>${esc(L==="fr"?f:e)} <i>→ ${esc(L==="fr"?e:f)}</i></span>`).join("")}</div></div>`:""}
     ${a.q&&a.q[L]?`<div class="stack" style="gap:8px"><p><b>${t.you} :</b> ${esc(a.q[L])}</p><div><button class="ghost ${V.rev[rk]?"on":""}" data-rev="${rk}">${V.rev[rk]?t.hide:t.show}</button></div>${V.rev[rk]?`<div class="corr">${esc(a.r[L])}</div>`:""}</div>`:""}
     <a href="${esc(a.url)}" target="_blank" rel="noopener">${t.read} ↗</a>
-  </article>`}).join(""):`<div class="empty">Les articles arrivent chaque matin en semaine.</div>`}</div>
+  </article>`},arts.length?arts.map(ac).join(""):`<div class="empty">${his.length?"Pas encore d'article cette semaine : les plus anciens sont dans l'Historique.":"Les articles arrivent chaque matin en semaine."}</div>`)}</div>
+  ${artHist(his,ac)}
   <div class="card stack"><p class="label" style="margin:0">${t.gl} · ${V.gi%GLOSS.length+1}/${GLOSS.length}</p>
     <button class="flash" data-flip="1" aria-label="Retourner la carte">${V.gflip?`<b>${esc(back)}</b><small>${esc(g[2])}</small>`:`<b>${esc(front)}</b><small>${L==="fr"?"Touche pour voir la traduction":"Tap to see the translation"}</small>`}</button>
     <div class="row" style="justify-content:space-between"><button class="ghost" data-gl="-1">← ${L==="fr"?"Précédent":"Previous"}</button><button class="ghost" data-gl="r">🔀</button><button class="ghost" data-gl="1">${L==="fr"?"Suivant":"Next"} →</button></div>
@@ -1834,7 +1871,7 @@ function nLong(ts){const d=new Date(ts);return d.getDate()+" "+MOIS[d.getMonth()
 
 /* ---- HTML des notes : on ne garde que la mise en forme utile ---- */
 const NTAGS={H1:1,H2:1,H3:1,P:1,DIV:1,BR:1,B:1,STRONG:1,I:1,EM:1,U:1,S:1,STRIKE:1,UL:1,OL:1,LI:1};
-function cleanHtml(h){
+function cleanHtmlOld(h){
   const t=document.createElement("template");t.innerHTML=String(h||"");
   const walk=el=>[...el.childNodes].forEach(c=>{
     if(c.nodeType===3)return;
@@ -2305,9 +2342,12 @@ const habL=h=>habN(h)+(((HABITS[h]||[])[1])==="fiche"?" (fiche)":"");
 function jBase(h){const d=(edtP().dur||{})[h];if(d>0)return d;const c=(edtP().custom||{})[h];return(c&&c.min)||JDUR[h]||30}
 function themeSync(){const t=appP().theme,r=document.documentElement;if(t==="light"||t==="dark")r.dataset.theme=t;else delete r.dataset.theme}
 /* tuiles de l'accueil : ordre, noms et tuiles cachées viennent de tes suggestions */
+/* tuiles cachées : celles que tu as cachées + Maths (cachée par défaut depuis la 1.6.0, « Afficher » la fait revenir) */
+const TILE_OFF=["mx"];
+function tilesHidden(){const ap=appP();return[...new Set([...(ap.hide||[]),...TILE_OFF.filter(k=>!(ap.show||[]).includes(k))])]}
 function sects(all){const ap=appP(),base=[...SECT,...MOD.tiles.map(t=>[t.k,t.nom])],ord=ap.order||[];
   const L=[...ord.map(k=>base.find(s=>s[0]===k)).filter(Boolean),...base.filter(s=>!ord.includes(s[0]))].map(([k,n])=>[k,(ap.nom||{})[k]||n]);
-  return all?L:L.filter(s=>!(ap.hide||[]).includes(s[0]))}
+  const hid=tilesHidden();return all?L:L.filter(s=>!hid.includes(s[0]))}
 function sectName(k){const s=sects(true).find(x=>x[0]===k);return s?s[1]:k==="aide"?"Dépannage":k==="idees"?"Suggestions":"Réglages"}
 
 const SG_JN=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
@@ -2388,7 +2428,7 @@ function sgCompute(ops,scope){
     else if(o.t==="poids"){const w=Math.max(0,Math.min(3,Math.round(+o.w*2)/2));if(isNaN(w))continue;D.top3.p={...(D.top3.p||{}),[o.a]:w};
       (pw[w]=pw[w]||[]).push(o.a==="devoir"?"les devoirs Pronote":habN(o.a))}
     else if(o.t==="tuile"){const a=D.appli,nm=sectName(o.k);
-      if(o.hide!=null){a.hide=(a.hide||[]).filter(k=>k!==o.k);if(o.hide)a.hide.push(o.k);lines.push(`Tuile « ${nm} » ${o.hide?"cachée":"affichée"}`)}
+      if(o.hide!=null){a.hide=(a.hide||[]).filter(k=>k!==o.k);if(o.hide)a.hide.push(o.k);a.show=(a.show||[]).filter(k=>k!==o.k);if(!o.hide)a.show.push(o.k);lines.push(`Tuile « ${nm} » ${o.hide?"cachée":"affichée"}`)}
       if(o.nom){a.nom={...(a.nom||{}),[o.k]:String(o.nom).slice(0,30)};lines.push(`Tuile « ${nm} » renommée « ${a.nom[o.k]} »`)}
       if(o.pos){const ks=sects(true).map(s=>s[0]).filter(k=>k!==o.k);if(o.pos==="first")ks.unshift(o.k);else ks.push(o.k);a.order=ks;lines.push(`Tuile « ${nm} » ${o.pos==="first"?"en premier":"en dernier"}`)}}
     else if(o.t==="theme"){D.appli.theme=o.v;lines.push(`Apparence : ${{light:"claire",dark:"sombre",auto:"comme ton téléphone"}[o.v]||o.v}`)}
@@ -2643,7 +2683,7 @@ function sgClaude(){const L=sgList().filter(x=>x.etat==="idee"),g=aideLinks().gh
 Voici des idées pour l'améliorer que je n'ai pas pu faire directement dans l'appli :
 ${L.map((x,i)=>`${i+1}. ${x.idee||x.txt}`).join("\n")}
 Peux-tu modifier index.html pour les ajouter, puis me donner le nouveau fichier et les étapes pour le mettre sur GitHub ? Explique-moi simplement, étape par étape.`}
-function pageIdees(){const L=sgList(),ideas=L.filter(x=>x.etat==="idee"),hist=L.filter(x=>x.etat!=="idee").slice(0,15),last=L.find(x=>x.etat==="ok"),hid=appP().hide||[];
+function pageIdees(){const L=sgList(),ideas=L.filter(x=>x.etat==="idee"),hist=L.filter(x=>x.etat!=="idee").slice(0,15),last=L.find(x=>x.etat==="ok"),hid=tilesHidden().filter(k=>sects(true).some(s=>s[0]===k));
   const et={ok:"✓ appliquée",annule:"↩︎ annulée",fait:"🧩 module créé"};
   return`${sgCard("idees")}${modCard()}
   ${ideas.length?`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">💡 Ma boîte à idées</p><ul class="list">${ideas.map(x=>`<li class="modrow"><div><span>${esc(x.idee||x.txt)}</span><span class="muted small">${fts(x.ts)}</span></div><div class="row" style="flex-wrap:nowrap">${SAMPLE?`<button class="ghost on" data-modgen="i:${x.id}" aria-label="Créer avec l'IA">✨</button>`:""}<button class="ghost" data-sgdel="${x.id}" aria-label="Supprimer">✕</button></div></li>`).join("")}</ul>
@@ -2820,19 +2860,44 @@ const CG=[
 {c:"Histoire",t:"De Maastricht à l'euro",x:"Signé le 7 février 1992, le traité de Maastricht transforme la Communauté européenne en Union européenne et prévoit une monnaie unique. Pour y entrer, les pays doivent respecter des « critères de convergence », par exemple un déficit public inférieur à 3 % du PIB et une dette inférieure à 60 % du PIB. L'euro naît le 1er janvier 1999, d'abord seulement pour les banques et les marchés financiers. Les pièces et les billets arrivent dans les porte-monnaie le 1er janvier 2002. Sa valeur est gérée par la Banque centrale européenne, installée à Francfort.",
  s:"En France, le référendum sur Maastricht a été très serré : le « oui » l'a emporté avec à peine plus de 51 % des voix.",q:"En quelle année les pièces et les billets en euros sont-ils arrivés ?",o:["2002","1999","1992"],a:0,e:"L'euro existe depuis 1999, mais les pièces et les billets n'arrivent que le 1er janvier 2002."}
 ];
-const cgDocs=()=>Object.entries(S.cg||{}).filter(([k,v])=>v&&/^\d{4}-\d\d-\d\d/.test(k)).sort((a,b)=>a[0].localeCompare(b[0]));
-const cgNotion=v=>v?(v.src==="ia"?v.n:CG[v.i]):null;
-const cgKeys=dk=>Object.keys(S.cg||{}).filter(k=>k===dk||k.startsWith(dk+"~")).sort((a,b)=>a.length-b.length||a.localeCompare(b));
-function cgNext(){const seen=new Set(cgDocs().filter(([,v])=>v.src==="base").map(([,v])=>v.i));for(let i=0;i<CG.length;i++)if(!seen.has(i))return i;return-1}
-function cgLeast(){const last={};cgDocs().forEach(([k,v])=>{if(v.src==="base")last[v.i]=k});let b=0;CG.forEach((_,i)=>{if((last[i]||"")<(last[b]||""))b=i});return b}
-function cgPickSync(k){const i=cgNext();if(i>=0||!SAMPLE){put("cg",k,{src:"base",i:i>=0?i:cgLeast(),ts:Date.now()},true);return true}return false}
-function cgEnsure(k){if(S.cg[k]||V.cgBusy)return;if(!cgPickSync(k))setTimeout(()=>cgGenFor(k),0)}
-async function cgGenFor(k){if(V.cgBusy||S.cg[k])return;V.cgBusy=true;V.cgMsg="";render(true);
-  try{put("cg",k,{src:"ia",n:await cgGen(),ts:Date.now()},true)}catch(e){V.cgMsg=ERR(e.code);put("cg",k,{src:"base",i:cgLeast(),ts:Date.now()},true)}
+/* ---- « Mon programme » : des notions de tes matières de Terminale ---- */
+const CGP_CAT={"Maths spé":"➗","Maths expertes":"🔢","SES":"📈","Philosophie":"🤔","Histoire-géo":"🗺️","Enseignement scientifique":"🔬","Anglais":"🇬🇧","Espagnol":"🇪🇸"};
+const CGP=[
+{c:"Philosophie",t:"« Je pense, donc je suis »",x:"Dans le « Discours de la méthode » (1637), Descartes cherche une vérité absolument certaine. Il doute de tout ce qui peut l'être : ses sens peuvent le tromper, il peut rêver, un « malin génie » pourrait même le tromper sur les mathématiques. Mais pendant qu'il doute, il pense, et pour penser il faut exister. D'où la première certitude : « je pense, donc je suis » (le cogito). C'est un exemple parfait pour les notions de vérité, de raison et de conscience au bac.",s:"En latin, la formule devient « cogito, ergo sum », dans les « Principes de la philosophie » (1644).",q:"Dans quel ouvrage Descartes écrit-il « je pense, donc je suis » ?",o:["Le Discours de la méthode","La République","Le Léviathan"],a:0,e:"Il l'écrit en français dans le « Discours de la méthode », en 1637."},
+{c:"SES",t:"La productivité globale des facteurs",x:"La croissance d'une économie vient de l'augmentation des facteurs de production (le travail et le capital) et de leur meilleure utilisation. En 1957, l'économiste Robert Solow montre qu'une grande partie de la croissance américaine ne s'explique pas par la seule hausse du travail et du capital. Ce « résidu de Solow » est appelé productivité globale des facteurs (PGF). Elle reflète surtout le progrès technique, mais aussi l'organisation du travail et la qualification des travailleurs. C'est une notion clé du chapitre sur les sources de la croissance.",s:"Solow a reçu le prix Nobel d'économie en 1987 pour ses travaux sur la croissance.",q:"Comment appelle-t-on la part de la croissance qui ne s'explique pas par la hausse du travail et du capital ?",o:["La productivité globale des facteurs","Le PIB potentiel","La valeur ajoutée"],a:0,e:"C'est le « résidu » mis en évidence par Solow, qu'on appelle productivité globale des facteurs."},
+{c:"Histoire-géo",t:"La crise de Cuba (1962)",x:"En octobre 1962, un avion espion américain photographie des rampes de missiles soviétiques en construction à Cuba, à moins de 200 km des côtes de la Floride. Le président Kennedy décide un blocus naval de l'île. Pendant treize jours, le monde craint une guerre nucléaire. Finalement, Khrouchtchev retire les missiles, en échange de la promesse américaine de ne pas envahir Cuba et, en secret, du retrait de missiles américains installés en Turquie. Après la crise, un « téléphone rouge » relie Washington et Moscou : c'est le début de la détente.",s:"Le « téléphone rouge » n'était pas un téléphone : c'était une ligne de téléscripteurs, pour éviter les malentendus.",q:"Quel pays avait installé des missiles à Cuba en 1962 ?",o:["L'URSS","La Chine","Les États-Unis"],a:0,e:"L'URSS de Khrouchtchev, alliée du régime de Fidel Castro."},
+{c:"Enseignement scientifique",t:"L'effet de serre",x:"La Terre reçoit l'énergie du Soleil et en renvoie une partie vers l'espace sous forme de rayonnement infrarouge. Certains gaz de l'atmosphère, comme la vapeur d'eau, le dioxyde de carbone (CO₂) et le méthane, absorbent une partie de ce rayonnement et le réémettent, notamment vers le sol : c'est l'effet de serre. Il est naturel et indispensable à la vie. Mais les activités humaines augmentent la concentration de ces gaz, ce qui renforce l'effet de serre et réchauffe le climat.",s:"Sans effet de serre naturel, la température moyenne à la surface de la Terre serait d'environ −18 °C, au lieu d'environ +15 °C.",q:"Sans effet de serre naturel, la température moyenne de la Terre serait d'environ…",o:["−18 °C","+15 °C","+30 °C"],a:0,e:"L'effet de serre naturel « réchauffe » la surface d'environ 33 °C."},
+{c:"Maths spé",t:"Espérance et variance de la loi binomiale",x:"Si X suit la loi binomiale de paramètres n et p (n épreuves de Bernoulli indépendantes, avec une probabilité de succès p), alors son espérance vaut E(X) = np et sa variance V(X) = np(1 − p). L'espérance est le nombre moyen de succès sur un grand nombre de répétitions de l'expérience. Exemple : sur 20 tirs avec 30 % de réussite, on marque en moyenne 20 × 0,3 = 6 paniers. L'écart-type, racine de la variance, mesure la dispersion autour de cette moyenne.",s:"Ces formules se démontrent en écrivant X comme une somme de n variables de Bernoulli indépendantes.",q:"Si X suit la loi binomiale B(20 ; 0,3), que vaut E(X) ?",o:["6","0,3","14"],a:0,e:"E(X) = np = 20 × 0,3 = 6."},
+{c:"Maths expertes",t:"Le petit théorème de Fermat",x:"Si p est un nombre premier et a un entier qui n'est pas divisible par p, alors a^(p−1) ≡ 1 (mod p). Autrement dit, a^(p−1) − 1 est un multiple de p. Ce théorème permet de calculer très vite des restes de grandes puissances. Exemple : 11 est premier et ne divise pas 2, donc 2^10 ≡ 1 (mod 11). On vérifie : 2^10 = 1 024 = 93 × 11 + 1. Il est aussi à la base de tests de primalité et de la cryptographie.",s:"Fermat l'a énoncé en 1640 dans une lettre, sans donner la démonstration ; Euler l'a démontré un siècle plus tard.",q:"Quel est le reste de la division de 2^10 par 11 ?",o:["1","2","10"],a:0,e:"11 est premier et ne divise pas 2, donc 2^10 ≡ 1 (mod 11)."},
+{c:"Anglais",t:"The American Dream",x:"The expression « American Dream » was popularised in 1931 by the historian James Truslow Adams in his book « The Epic of America ». It describes the idea that in the United States, anyone can succeed through hard work, whatever their origins. It is linked to the Declaration of Independence, which mentions « Life, Liberty and the pursuit of Happiness ». Many novels and films question this dream, like « The Great Gatsby » by F. Scott Fitzgerald. It fits the axes « Identités et échanges » and « Fictions et réalités ».",s:"« The Great Gatsby » was published in 1925, a few years before the expression became popular.",q:"Who popularised the expression « American Dream » in 1931?",o:["James Truslow Adams","F. Scott Fitzgerald","Abraham Lincoln"],a:0,e:"James Truslow Adams, in « The Epic of America » (1931)."},
+{c:"Espagnol",t:"La Movida madrileña",x:"Après la mort de Franco en 1975 et le retour de la démocratie, Madrid connaît au début des années 1980 une explosion de créativité : la Movida. Musique, cinéma, photographie, mode : une jeunesse libérée de la censure invente une culture provocante et joyeuse. Le cinéaste Pedro Almodóvar en est la figure la plus connue. La Movida symbolise la transition démocratique espagnole et colle aux axes « Art et pouvoir » et « Territoire et mémoire ».",s:"Le maire de Madrid de l'époque, Enrique Tierno Galván, a soutenu ce mouvement culturel.",q:"Quel cinéaste est la grande figure de la Movida ?",o:["Pedro Almodóvar","Luis Buñuel","Guillermo del Toro"],a:0,e:"Pedro Almodóvar a commencé sa carrière en plein cœur de la Movida."},
+{c:"Philosophie",t:"Hobbes et l'état de nature",x:"Dans le « Léviathan » (1651), Thomas Hobbes imagine les hommes avant toute société : c'est l'état de nature. Comme chacun veut se protéger et rien ne limite personne, c'est « la guerre de chacun contre chacun », et la vie y est misérable et brève. Pour en sortir, les hommes passent un contrat : ils confient leur pouvoir à un souverain qui garantit la paix. L'État naît ainsi de la peur et du besoin de sécurité. Utile pour les notions d'État, de liberté et de justice.",s:"Le Léviathan est un monstre biblique : Hobbes l'utilise comme image de la puissance de l'État.",q:"Dans quel ouvrage Hobbes décrit-il l'état de nature comme une « guerre de chacun contre chacun » ?",o:["Le Léviathan","Du contrat social","L'Éthique"],a:0,e:"Dans le « Léviathan » (1651) ; « Du contrat social » est de Rousseau."},
+{c:"SES",t:"Table de destinée et table de recrutement",x:"Pour mesurer la mobilité sociale, on compare la position sociale des individus à celle de leurs parents. La table de destinée se lit à partir de l'origine : que deviennent les enfants d'ouvriers, de cadres… ? La table de recrutement se lit à partir de la position actuelle : d'où viennent les cadres d'aujourd'hui, de quel milieu social ? Les deux utilisent les mêmes données de l'Insee, mais répondent à des questions différentes. C'est un piège classique en épreuve de SES.",s:"En France, l'Insee réalise ces enquêtes (« Formation et qualification professionnelle ») depuis les années 1960.",q:"Pour savoir ce que deviennent les enfants d'ouvriers, quelle table utilise-t-on ?",o:["La table de destinée","La table de recrutement","La table de mortalité"],a:0,e:"La destinée part de l'origine sociale et regarde la position atteinte."},
+{c:"Histoire-géo",t:"Les zones économiques exclusives",x:"La convention des Nations unies sur le droit de la mer, signée à Montego Bay en 1982, découpe les océans. Chaque État côtier dispose d'une zone économique exclusive (ZEE) jusqu'à 200 milles marins (environ 370 km) de ses côtes : il y contrôle la pêche, le pétrole, le gaz et les autres ressources. Au-delà, c'est la haute mer, ouverte à tous. Grâce à ses territoires d'outre-mer, la France possède l'une des plus grandes ZEE du monde, juste derrière les États-Unis.",s:"Plus de 95 % de la ZEE française se trouve autour des territoires d'outre-mer.",q:"Jusqu'à quelle distance des côtes s'étend une ZEE ?",o:["200 milles marins","12 milles marins","1 000 km"],a:0,e:"200 milles marins ; les 12 milles correspondent aux eaux territoriales."},
+{c:"Enseignement scientifique",t:"Le modèle de Hardy-Weinberg",x:"Pour un gène qui a deux versions (allèles) A et a, de fréquences p et q avec p + q = 1, le modèle de Hardy-Weinberg prédit les fréquences des génotypes : p² pour AA, 2pq pour Aa et q² pour aa. Ces fréquences restent stables de génération en génération si la population est très grande, sans sélection, sans mutation, sans migration et avec des unions au hasard. Quand on observe un écart, c'est qu'une force évolutive est à l'œuvre : c'est tout l'intérêt du modèle.",s:"C'est la même identité que (p + q)² = p² + 2pq + q² : de la génétique avec une identité remarquable !",q:"Selon le modèle de Hardy-Weinberg, quelle est la fréquence des hétérozygotes Aa ?",o:["2pq","p²","q²"],a:0,e:"Les hétérozygotes ont la fréquence 2pq."}
+];
+const cgPre=P=>P==="p"?"p":"";
+const cgDay=k=>String(k).replace(/^p/,"").slice(0,10);
+const cgDocs=P=>Object.entries(S.cg||{}).filter(([k,v])=>v&&(P==="p"?/^p\d{4}-\d\d-\d\d/:/^\d{4}-\d\d-\d\d/).test(k)).sort((a,b)=>a[0].localeCompare(b[0]));
+const cgNotion=v=>v?(v.src==="ia"?v.n:(v.p?CGP:CG)[v.i]):null;
+const cgKeys=(dk,P)=>{const b=cgPre(P)+dk;return Object.keys(S.cg||{}).filter(k=>k===b||k.startsWith(b+"~")).sort((a,c)=>a.length-c.length||a.localeCompare(c))};
+const cgBase=P=>P==="p"?CGP:CG;
+function cgNext(P){const seen=new Set(cgDocs(P).filter(([,v])=>v.src==="base").map(([,v])=>v.i)),B=cgBase(P);for(let i=0;i<B.length;i++)if(!seen.has(i))return i;return-1}
+function cgLeast(P){const last={};cgDocs(P).forEach(([k,v])=>{if(v.src==="base")last[v.i]=k});let b=0;cgBase(P).forEach((_,i)=>{if((last[i]||"")<(last[b]||""))b=i});return b}
+function cgPickSync(k,P){const i=cgNext(P);if(i>=0||!SAMPLE){put("cg",k,{src:"base",i:i>=0?i:cgLeast(P),ts:Date.now(),...(P==="p"?{p:1}:{})},true);return true}return false}
+function cgEnsure(k,P){if(S.cg[k]||V.cgBusy)return;if(!cgPickSync(k,P))setTimeout(()=>cgGenFor(k,P),0)}
+async function cgGenFor(k,P){if(V.cgBusy||S.cg[k])return;V.cgBusy=true;V.cgMsg="";render(true);
+  try{put("cg",k,{src:"ia",n:await cgGen(P),ts:Date.now(),...(P==="p"?{p:1}:{})},true)}catch(e){V.cgMsg=ERR(e.code);put("cg",k,{src:"base",i:cgLeast(P),ts:Date.now(),...(P==="p"?{p:1}:{})},true)}
   V.cgBusy=false;V.cgk=k;render(true)}
-async function cgGen(){
-  const cats=Object.keys(CG_CAT),seen=cgDocs().map(([,v])=>cgNotion(v)).filter(Boolean),cat=cats[seen.length%cats.length],titles=seen.slice(-90).map(n=>n.t).join(" ; ");
-  const o=await aiSample.json(`Tu es un professeur de culture générale passionnant. Écris la notion du jour pour Nathan, élève de Terminale (spé maths, maths expertes, SES) qui vise HEC, ESSEC ou ESCP et veut devenir trader quantitatif.
+async function cgGen(P){
+  const pr=P==="p",cats=Object.keys(pr?CGP_CAT:CG_CAT),seen=cgDocs(P).map(([,v])=>cgNotion(v)).filter(Boolean),cat=cats[seen.length%cats.length],titles=seen.slice(-90).map(n=>n.t).join(" ; ");
+  const o=await aiSample.json(pr?`Tu es un excellent professeur de Terminale. Écris la notion de cours du jour pour Nathan, élève de Terminale générale en France (spé maths, maths expertes, SES), qui prépare le bac.
+Matière : ${cat}. Choisis une notion du programme officiel de Terminale de cette matière (programme en vigueur en 2026-2027)${/Anglais|Espagnol/.test(cat)?", liée à un des axes culturels (identités et échanges, art et pouvoir, fictions et réalités, territoire et mémoire…)":""}.
+Notions déjà vues, à ne pas reprendre : ${titles||"aucune"}.
+Sois exact (définitions, dates, auteurs, formules). Écris ${cat==="Anglais"?"en anglais simple":cat==="Espagnol"?"en français, avec les mots-clés en espagnol":"en français simple"}, tutoie Nathan.
+Réponds UNIQUEMENT avec ce JSON :
+{"c":"${cat}","t":"titre court (7 mots maximum)","x":"explication claire en 4 à 6 phrases, avec un exemple et, si utile, le piège à éviter le jour de l'épreuve","s":"un fait ou une astuce en une phrase","q":"une question pour vérifier qu'il a retenu","o":["la bonne réponse","une réponse fausse mais plausible","une autre réponse fausse mais plausible"],"a":0,"e":"pourquoi c'est la bonne réponse, en une phrase"}`
+  :`Tu es un professeur de culture générale passionnant. Écris la notion du jour pour Nathan, élève de Terminale (spé maths, maths expertes, SES) qui vise HEC, ESSEC ou ESCP et veut devenir trader quantitatif.
 Catégorie : ${cat}.
 Sujets déjà vus, à ne pas reprendre : ${titles||"aucun"}.
 Choisis un fait ou un concept solide et vérifiable, qui sert pour la culture générale d'un futur étudiant d'école de commerce (pas d'actualité récente, pas de chiffre douteux). Écris en français simple et tutoie Nathan.
@@ -2841,28 +2906,31 @@ Réponds UNIQUEMENT avec ce JSON :
   const s=x=>typeof x==="string"&&x.trim()?x.trim():null,op=Array.isArray(o&&o.o)?o.o.map(s).filter(Boolean).slice(0,4):[];
   if(!o||!s(o.t)||!s(o.x)||!s(o.q)||op.length<2)throw{code:"invalid_json"};const a=Number.isInteger(o.a)&&o.a>=0&&o.a<op.length?o.a:0;
   return{c:cats.includes(o.c)?o.c:cat,t:s(o.t).slice(0,80),x:s(o.x).slice(0,1400),s:(s(o.s)||"").slice(0,400),q:s(o.q).slice(0,240),o:op,a,e:(s(o.e)||"").slice(0,300)}}
-function cgStats(){const D=cgDocs(),days=new Set(D.map(([k])=>k.slice(0,10)));let q=0,ok=0;D.forEach(([,v])=>{if(v.rep!=null){q++;if(v.ok)ok++}});
+function cgStats(P){const D=cgDocs(P),days=new Set(D.map(([k])=>cgDay(k)));let q=0,ok=0;D.forEach(([,v])=>{if(v.rep!=null){q++;if(v.ok)ok++}});
   let d=today(),serie=0;if(!days.has(dkey(d)))d=add(d,-1);while(days.has(dkey(d))){serie++;d=add(d,-1)}return{n:D.length,q,ok,serie}}
+const cgEmo=n=>CG_CAT[n.c]||CGP_CAT[n.c]||"💡";
 function cgCard(k,v,n,past){const ord=shuffle(rngOf(hashStr(k+n.t)),n.o.map((_,i)=>i)),ans=v.rep!=null;
-  return`<article class="card stack cgcard"><div class="row" style="justify-content:space-between"><span class="cgcat">${CG_CAT[n.c]||"💡"} ${esc(n.c)}</span><span class="muted small">${past?fdate(k.slice(0,10)):k.includes("~")?"Bonus du jour":"Notion du jour"}</span></div>
-    <h2 class="cgt">${esc(n.t)}</h2><p class="cgx">${esc(n.x)}</p>${n.s?`<div class="cgfact"><b>Le savais-tu ?</b> ${esc(n.s)}</div>`:""}</article>
+  return`<article class="card stack cgcard"><div class="row" style="justify-content:space-between"><span class="cgcat">${cgEmo(n)} ${esc(n.c)}</span><span class="muted small">${past?fdate(cgDay(k)):k.includes("~")?"Bonus du jour":v.p?"Notion de cours du jour":"Notion du jour"}</span></div>
+    <h2 class="cgt">${esc(n.t)}</h2><p class="cgx">${esc(n.x)}</p>${n.s?`<div class="cgfact"><b>${v.p?"À retenir":"Le savais-tu ?"}</b> ${esc(n.s)}</div>`:""}</article>
   <div class="card stack cgquiz"><p class="label" style="margin:0">Vérifie que tu as retenu</p><p><b>${esc(n.q)}</b></p>
     <div class="stack" style="gap:8px">${ord.map(i=>`<button class="cgo ${ans?(i===n.a?"ok":i===v.rep?"ko":""):""}" data-cga="${k}|${i}" ${ans?"disabled":""}>${esc(n.o[i])}</button>`).join("")}</div>
     ${ans?`<p class="small">${v.ok?"✓ Bravo !":"✗ Pas tout à fait."} ${esc(n.e||"")}</p>`:""}</div>`}
 function pageCg(){
-  const dk=dkey(today());cgEnsure(dk);
-  const k=V.cgk&&S.cg[V.cgk]?V.cgk:dk,v=S.cg[k],n=cgNotion(v),past=k.slice(0,10)!==dk,tk=cgKeys(dk),st=cgStats();
-  const hist=cgDocs().filter(([x])=>x.slice(0,10)!==dk).reverse().slice(0,40);
+  const P=V.cgPart==="p"?"p":"g",dk=dkey(today()),k0=cgPre(P)+dk;cgEnsure(k0,P);
+  const k=V.cgk&&S.cg[V.cgk]&&(P==="p")===/^p/.test(V.cgk)?V.cgk:k0,v=S.cg[k],n=cgNotion(v),past=cgDay(k)!==dk,tk=cgKeys(dk,P),st=cgStats(P);
+  const hist=cgDocs(P).filter(([x])=>cgDay(x)!==dk).reverse().slice(0,40);
+  const parts=`<div class="seg" role="tablist" aria-label="Partie" style="display:flex"><button style="flex:1" data-cgpart="g" aria-pressed="${P==="g"}">🌍 Tout et rien</button><button style="flex:1" data-cgpart="p" aria-pressed="${P==="p"}">📚 Mon programme</button></div>`;
   const tabs=!past&&tk.length>1?`<div class="seg" role="group" aria-label="Notions du jour">${tk.map((x,i)=>`<button data-cgk="${x}" aria-pressed="${x===k}">${i?"Bonus "+i:"Notion du jour"}</button>`).join("")}</div>`:"";
-  return`${past?`<div><button class="ghost on" data-cgk="${dk}">‹ Retour à aujourd'hui</button></div>`:tabs}
+  return`${parts}${P==="p"?`<p class="muted small" style="margin:0">Chaque jour, une notion de tes matières de Terminale : maths, SES, philo, histoire-géo, sciences, anglais, espagnol.</p>`:""}
+  ${past?`<div><button class="ghost on" data-cgk="${k0}">‹ Retour à aujourd'hui</button></div>`:tabs}
   ${n?cgCard(k,v,n,past):`<div class="card"><p>${V.cgBusy?"✨ Ta notion du jour se prépare…":esc(V.cgMsg||"Ta notion du jour arrive…")}</p></div>`}
   ${!past&&n?`<div class="row"><button class="ghost on" data-cgplus="1" ${V.cgBusy?"disabled":""}>${V.cgBusy?"Préparation…":"✨ Encore une notion"}</button>${V.cgMsg?`<span class="muted small">${esc(V.cgMsg)}</span>`:""}</div>`:""}
   <div class="stats"><div class="stat"><b>${st.n}</b><span>notion${st.n>1?"s":""} découverte${st.n>1?"s":""}</span></div><div class="stat"><b>${st.q?Math.round(st.ok/st.q*100)+" %":"—"}</b><span>bonnes réponses</span></div><div class="stat"><b>${st.serie}</b><span>jour${st.serie>1?"s":""} d'affilée</span></div></div>
-  ${hist.length?`<div class="card stack" style="gap:4px"><p class="label" style="margin:0">Déjà découvertes</p><ul class="list">${hist.map(([x,w])=>{const m=cgNotion(w);return m?`<li><button class="cgh" data-cgk="${x}"><span>${CG_CAT[m.c]||"💡"} ${esc(m.t)}</span><span class="muted small">${fdate(x.slice(0,10))}${w.rep!=null?(w.ok?" · ✓":" · ✗"):""}</span></button></li>`:""}).join("")}</ul></div>`:""}
-  <p class="muted small">Les ${CG.length} premières notions ont été écrites et vérifiées à la main. Ensuite, l'IA en crée une nouvelle chaque jour${SAMPLE?"":" (ajoute ta clé d'IA dans ⚙️ Réglages ; sans elle, les notions reviennent dans l'ordre)"}.</p>`}
-function cgPlus(){const dk=dkey(today()),k=dk+"~"+(cgKeys(dk).length+1);V.cgk=k;if(!cgPickSync(k))cgGenFor(k);else render(true)}
+  ${hist.length?`<div class="card stack" style="gap:4px"><p class="label" style="margin:0">Déjà découvertes</p><ul class="list">${hist.map(([x,w])=>{const m=cgNotion(w);return m?`<li><button class="cgh" data-cgk="${x}"><span>${cgEmo(m)} ${esc(m.t)}</span><span class="muted small">${fdate(cgDay(x))}${w.rep!=null?(w.ok?" · ✓":" · ✗"):""}</span></button></li>`:""}).join("")}</ul></div>`:""}
+  <p class="muted small">Les ${cgBase(P).length} premières notions ont été écrites et vérifiées à la main. Ensuite, l'IA en crée une nouvelle chaque jour${SAMPLE?"":" (ajoute ta clé d'IA dans ⚙️ Réglages ; sans elle, les notions reviennent dans l'ordre)"}.</p>`}
+function cgPlus(P){P=P==="p"?"p":"g";const dk=dkey(today()),k=cgPre(P)+dk+"~"+(cgKeys(dk,P).length+1);V.cgk=k;if(!cgPickSync(k,P))cgGenFor(k,P);else render(true)}
 function cgSummary(){const v=S.cg[dkey(today())],n=cgNotion(v);
-  return n?[`<span class="cgbig">${esc(n.t)}</span>`,v.rep!=null?(v.ok?"✓ quiz réussi":"quiz fait · "+esc(n.c)):`${CG_CAT[n.c]||""} ${esc(n.c)} · quiz à faire`]:["À découvrir","ta notion du jour (2 min)"]}
+  return n?[`<span class="cgbig">${esc(n.t)}</span>`,v.rep!=null?(v.ok?"✓ quiz réussi":"quiz fait · "+esc(n.c)):`${CG_CAT[n.c]||""} ${esc(n.c)} · quiz à faire`]:["À découvrir","notion du jour + ton programme"]}
 
 /* ================================================================
    📐 MATHS : leçons et exercices, de la Terminale à la licence
@@ -2986,8 +3054,8 @@ function mxSummary(){if(!MXI)mxIndex();const ok=mxTotal();
    ================================================================ */
 const JPX=1.25;/* pixels par minute */
 const jWork=s=>s&&(s.k==="hab"||s.k==="pn"||s.k==="x");
-const jKeyOf=s=>s.k==="repas"?"repas|"+s.ref:s.k==="bloc"?"bloc|"+s.ref:s.k+"|"+s.ref;
-const jMovable=s=>jWork(s)||s.k==="repas"||s.k==="bloc";
+const jKeyOf=s=>s.k==="repas"?"repas|"+s.ref:s.k==="bloc"?"bloc|"+s.ref:s.step?"step|"+s.ref:s.auto?"auto|"+s.k+"|"+s.a:s.k+"|"+s.ref;
+const jMovable=s=>true;/* tu as la main sur tout */
 function jPins(d){const w=((edtP().pinw||{})[d.getDay()])||{},p=(S.jours[dkey(d)]||{}).pin||{};const o={};Object.entries(w).forEach(([k,v])=>o[k]={...v,w:1});Object.entries(p).forEach(([k,v])=>o[k]={...(o[k]||{}),...v,w:o[k]?1:0});return o}
 function jIsDone(dk,key){const a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),j=S.jours[dk]||{},dn=j.done||{};
   if(kind==="hab")return!!dn[ref];if(kind==="x")return!!(j.extra||[]).find(x=>x.id===ref&&x.ok);
@@ -2999,15 +3067,17 @@ function jLabelK(dk,key){const a=key.indexOf("|"),kind=key.slice(0,a),ref=key.sl
 /* le planificateur : mêmes règles qu'avant, mais les blocs épinglés restent à leur place */
 function planDay(d){
   const dk=dkey(d),P=jParams(dk),isT=dk===dkey(today()),nowM=new Date().getHours()*60+new Date().getMinutes(),pins=jPins(d),jd=S.jours[dk]||{};
-  const L=jLessons(dk),school=L.length>0,steps=[];let t;
+  const L=jLessons(dk),school=L.length>0,steps=[],pinSteps=[];let t;
   if(school){
     const a=Math.min(...L.map(c=>wallMin(c.d))),b=Math.max(...L.map(c=>wallMin(c.f))),tr=V.jTrajet||P.trajet,arr=b+tr,lunch=arr<14*60,rest=lunch?Math.max(P.pause,45):P.pause;
-    steps.push({a,b,k:"cours",l:"Cours au lycée"},{a:b,b:arr,k:"trajet",l:"Retour à la maison"},{a:arr,b:arr+rest,k:"pause",l:lunch?"Déjeuner et te poser":"Te poser (vraie pause, sans écrans si possible)"});
-    t=arr+rest;
+    const hide=jd.hide||{},base=[{a,b,k:"cours",ref:"cours",step:1,l:"Cours au lycée"},{a:b,b:arr,k:"trajet",ref:"trajet",step:1,l:"Retour à la maison"},{a:arr,b:arr+rest,k:"pause",ref:"retour",step:1,l:lunch?"Déjeuner et te poser":"Te poser (vraie pause, sans écrans si possible)"}];
+    base.forEach(s=>{const key="step|"+s.ref;if(hide[key])return;const p=pins[key];if(p&&p.b>p.a){s.a=p.a;s.b=p.b;s.pin=1;s.w=p.w;pinSteps.push(s)}else steps.push(s)});
+    t=steps.length?Math.max(...steps.map(s=>s.b)):b;
   }else t=hm(P.debutWE);
   const od=jd.par||{},stop=school||od.stop?hm(P.stop):Math.min(hm(P.stop),hm(P.libreWE)||hm(P.stop));
-  const fixed=[{a:hm(P.diner),b:hm(P.diner)+P.dinerDur,k:"repas",ref:"diner",l:"Dîner"}];
+  let fixed=[{a:hm(P.diner),b:hm(P.diner)+P.dinerDur,k:"repas",ref:"diner",l:"Dîner"}];
   if(!school)fixed.push({a:hm(P.dejWE),b:hm(P.dejWE)+60,k:"repas",ref:"dej",l:"Déjeuner"});
+  fixed=fixed.filter(f=>!(jd.hide||{})["repas|"+f.ref]);pinSteps.forEach(s=>fixed.push(s));
   fixed.forEach(f=>{const p=pins["repas|"+f.ref];if(p&&p.b>p.a){f.a=p.a;f.b=p.b;f.pin=1;f.w=p.w}});
   (jd.blocs||[]).forEach(x=>{if(x&&x.b>x.a)fixed.push({a:x.a,b:x.b,k:"bloc",ref:x.id,l:x.l||"Pause",pin:1})});
   let live=false;if(isT&&nowM>t){t=Math.ceil(nowM/5)*5;live=true}
@@ -3024,9 +3094,9 @@ function planDay(d){
     if(fb&&t>=fb.a){fb.used=1;plan.push(fb.pin?{...fb}:{...fb,a:Math.max(fb.a,t)});t=Math.max(t,fb.b);since=0;continue}
     if(t>=stop)break;
     const lim=Math.min(fb?fb.a:stop,stop);
-    if(since>=50&&lim-t>=25){plan.push({a:t,b:t+10,k:"pause",l:"Pause : bouge, bois de l'eau"});t+=10;since=0;continue}
+    if(!jd.nap&&since>=50&&lim-t>=25){plan.push({a:t,b:t+10,k:"pause",auto:1,l:"Pause : bouge, bois de l'eau"});t+=10;since=0;continue}
     const i=q.findIndex(x=>x.min<=lim-t);
-    if(i<0){if(fb&&fb.a<stop&&fb.a>t){if(fb.a-t>=5)plan.push({a:t,b:fb.a,k:"libre",l:"Temps libre"});t=fb.a;continue}break}
+    if(i<0){if(fb&&fb.a<stop&&fb.a>t){if(fb.a-t>=5)plan.push({a:t,b:fb.a,k:"libre",auto:1,l:"Temps libre"});t=fb.a;continue}break}
     const x=q.splice(i,1)[0];plan.push({...x,a:t,b:t+x.min});t+=x.min;since=x.ref==="sport"?0:since+x.min;
   }
   /* blocs fixes pas encore placés (épinglés, ou repas dans la soirée) */
@@ -3041,6 +3111,9 @@ function planDay(d){
 /* ---- écrire dans la journée ---- */
 function jDayDoc(dk){const j=S.jours[dk]||{};return{...j,date:dk,done:j.done||{}}}
 function jPinSet(dk,key,p,quiet){const j=jDayDoc(dk);
+  /* une pause ou un temps libre automatique qu'on touche devient un bloc à toi (et l'appli arrête d'ajouter des pauses ce jour-là) */
+  if(key.startsWith("auto|")){if(!p)return;const kind=key.split("|")[1],s=jFind(dk,key);if(!s)return;const id=uid();
+    j.blocs=[...(j.blocs||[]),{id,l:kind==="pause"?"Pause":"Temps libre",a:p.a!=null?p.a:s.a,b:p.b!=null?p.b:s.b}];if(kind==="pause")j.nap=true;if(V.jsel===key)V.jsel="bloc|"+id;V.jHi=["bloc|"+id];return put("jours",dk,j,quiet)}
   if(key.startsWith("bloc|")){const id=key.slice(5);j.blocs=(j.blocs||[]).map(x=>x.id===id?{...x,...(p||{})}:x).filter(x=>p||x.id!==id);return put("jours",dk,j,quiet)}
   const pin={...(j.pin||{})};if(p){pin[key]={...(pin[key]||{}),...p};delete pin[key].w}else delete pin[key];j.pin=pin;return put("jours",dk,j,quiet)}
 function jDateOf(dk){const[y,m,d]=dk.split("-").map(Number);return new Date(y,m-1,d)}
@@ -3057,6 +3130,8 @@ function jOut(dk,key){const d=jDateOf(dk),j=jDayDoc(dk),a=key.indexOf("|"),kind=
   else if(kind==="x")j.extra=(j.extra||[]).filter(x=>x.id!==ref);
   else if(kind==="pn")j.report={...(j.report||{}),[key]:true};
   else if(kind==="bloc")j.blocs=(j.blocs||[]).filter(x=>x.id!==ref);
+  else if(kind==="step"||kind==="repas")j.hide={...(j.hide||{}),[key]:true};
+  else if(kind==="auto"&&ref.startsWith("pause"))j.nap=true;
   V.jsel=null;return put("jours",dk,j)}
 function jDoneSet(dk,key,ok){const s=jFind(dk,key);if(s&&ok){const j=jDayDoc(dk);j.pin={...(j.pin||{}),[key]:{...((j.pin||{})[key]||{}),a:s.a,b:s.b,done:1}};S.jours[dk]=j}
   if(!ok){const j=jDayDoc(dk);if(j.pin&&j.pin[key]){j.pin={...j.pin,[key]:{...j.pin[key],done:0}};S.jours[dk]=j}}
@@ -3084,14 +3159,14 @@ function jPalette(d,pl){const dk=dkey(d),inPlan=new Set(planOf(d)),items=[];
   let g="";return items.map((it,i)=>{const h=it.g!==g?`<p class="jpg">${it.g==="À caser"?"Ne rentre pas : glisse-les":"Ajouter"}</p>`:"";g=it.g;
     return h+`<div class="jpi" data-jpal="${i}" style="--b:${jCol(it)}" title="${esc(it.l)}"><span>${jIcon(it.k,it.ref)}</span><b>${esc(it.l)}</b><small>${fdur(it.min)}</small></div>`}).join("")+`<p class="jpg jdrop">⬅ Glisse un bloc ici pour l'enlever de la journée</p>`}
 function jTimeline(d,pl,isT){
-  const dk=dkey(d),nowM=nowMin();let items=[...pl.steps0,...pl.plan].filter(s=>s.b>s.a);
-  /* les jours de cours, l'emploi du temps commence à la sortie du lycée (les heures de cours ne se déplacent pas) */
-  const own=items.filter(s=>s.k!=="cours"&&s.k!=="trajet").map(s=>s.a),lo0=Math.min(...own,isT?nowM:24*60,pl.school?pl.steps0[0].b:hm(jParams(dk).debutWE)),hi0=Math.max(...items.map(s=>s.b),pl.stop,isT?nowM+60:0);
+  const dk=dkey(d),nowM=nowMin();let items=[...pl.steps0,...pl.plan].filter(s=>s.b>s.a&&!(s.k==="libre"&&s.b-s.a<15));
+  /* les jours de cours, l'emploi du temps commence une heure avant la sortie du lycée : on voit la fin des cours (et on peut la modifier) */
+  const own=items.filter(s=>s.k!=="cours"&&s.k!=="trajet").map(s=>s.a),lo0=Math.min(...own,isT?nowM:24*60,pl.school?(pl.steps0.find(x=>x.k==="cours")||pl.plan.find(x=>x.k==="cours")||{b:16*60}).b-60:hm(jParams(dk).debutWE)),hi0=Math.max(...items.map(s=>s.b),pl.stop,isT?nowM+60:0);
   const st=Math.max(0,Math.floor(lo0/60)*60),en=Math.min(24*60,Math.ceil(hi0/60)*60);items=items.filter(s=>s.b>st);const lanes=jLanes(items);
   V.jRange={st,en,dk};const pal=jPalette(d,pl);V.jPalItems=null;
   const hrs=[];for(let h=st;h<=en;h+=60)hrs.push(`<span class="jhl" style="top:${(h-st)*JPX}px">${h/60} h</span>`);
   const blocks=items.map(s=>{const ln=lanes.get(s),key=jKeyOf(s),mv=jMovable(s),sel=V.jsel===key&&V.jselDk===dk,h=(s.b-s.a)*JPX;
-    return`<div class="jb ${mv?"mv":"fx"} ${s.done?"done":""} ${s.pin?"pin":""} ${s.run?"run":""} ${s.over?"over":""} ${sel?"sel":""} ${h<34?"tiny":""} ${V.jHi&&V.jHi.includes(key)?"jnew":""}" ${mv?`data-jb="${esc(key)}" data-a="${s.a}" data-b="${s.b}" tabindex="0" role="button" aria-label="${esc(s.l)}, ${fmin(s.a)} à ${fmin(s.b)}"`:""} style="--b:${jCol(s)};top:${(Math.max(s.a,st)-st)*JPX}px;height:${Math.max(16,(s.b-Math.max(s.a,st))*JPX-2)}px;left:calc(${ln.c/ln.n*100}% + 2px);width:calc(${100/ln.n}% - 4px)">
+    return`<div class="jb mv ${jWork(s)?"":"fx"} ${s.done?"done":""} ${s.pin?"pin":""} ${s.run?"run":""} ${s.over?"over":""} ${sel?"sel":""} ${h<34?"tiny":""} ${V.jHi&&V.jHi.includes(key)?"jnew":""}" ${mv?`data-jb="${esc(key)}" data-a="${s.a}" data-b="${s.b}" tabindex="0" role="button" aria-label="${esc(s.l)}, ${fmin(s.a)} à ${fmin(s.b)}"`:""} style="--b:${jCol(s)};top:${(Math.max(s.a,st)-st)*JPX}px;height:${Math.max(16,(s.b-Math.max(s.a,st))*JPX-2)}px;left:calc(${ln.c/ln.n*100}% + 2px);width:calc(${100/ln.n}% - 4px)">
       ${mv&&!s.done?`<i class="jh t" data-jh="a"></i>`:""}<b>${s.done?"✓ ":""}${jIcon(s.k,s.ref)} ${esc(s.l)}</b><small>${fmin(s.a)}–${fmin(s.b)}${s.pin?(s.w?" · 📌 chaque semaine":" · placé à la main"):""}</small>${mv&&!s.done?`<i class="jh bt" data-jh="b"></i>`:""}</div>`}).join("");
   return`<div class="jcal"><div class="jhrs" style="height:${(en-st)*JPX}px">${hrs.join("")}</div>
     <div class="jgrid" id="jgrid" style="height:${(en-st)*JPX}px;--hh:${60*JPX}px">${blocks}${isT&&nowM>=st&&nowM<=en?`<div class="jnowl" style="top:${(nowM-st)*JPX}px"><span>${fmin(nowM)}</span></div>`:""}</div>
@@ -3102,9 +3177,9 @@ function jSheet(d,pl){if(!V.jsel||V.jselDk!==dkey(d))return"";const dk=dkey(d),k
     ${s.done?`<p class="small muted">Fait de ${fmin(s.a)} à ${fmin(s.b)}.</p>`:`<div class="jadj"><span>Début <b class="num">${fmin(s.a)}</b></span><button class="ghost" data-jadj="a|-5">−5</button><button class="ghost" data-jadj="a|5">+5</button>
       <span>Fin <b class="num">${fmin(s.b)}</b></span><button class="ghost" data-jadj="b|-5">−5</button><button class="ghost" data-jadj="b|5">+5</button></div>`}
     <div class="row">${w?(s.done?`<button class="ghost" data-jfait="0">↺ Pas fait</button>`:`<button class="btn" data-jfait="1">✓ Fait</button>${isT&&!s.run?`<button class="ghost on" data-jstart="${esc(key)}">▶ Commencer</button>`:""}`):""}
-      ${!s.done&&s.k!=="bloc"?`<button class="ghost ${wk?"on":""}" data-jweek="1">📌 ${wk?"Plus chaque "+wd:"Chaque "+wd+" à cette heure"}</button>`:""}
+      ${!s.done&&(w||s.k==="repas"||s.step)?`<button class="ghost ${wk?"on":""}" data-jweek="1">📌 ${wk?"Plus chaque "+wd:"Chaque "+wd+" à cette heure"}</button>`:""}
       ${s.pin&&!s.done&&!wk?`<button class="ghost" data-jauto="1">✨ Remettre en automatique</button>`:""}
-      ${s.k!=="repas"?`<button class="ghost danger" data-jout="1">Enlever de la journée</button>`:""}</div></div>`}
+      ${s.k==="libre"?"":`<button class="ghost danger" data-jout="1">Enlever de la journée</button>`}</div>${s.auto?`<p class="small muted" style="margin:0">Déplace-la ou change sa durée : elle devient à toi${s.k==="pause"?", et l'appli n'ajoute plus de pauses toute seule aujourd'hui":""}.</p>`:""}${s.step?`<p class="small muted" style="margin:0">Si un cours est annulé ou finit plus tôt, ajuste les horaires ici.</p>`:""}</div>`}
 function pageJour(){
   const d=V.jdk?jDateOf(V.jdk):today();V.jdk=dkey(d);
   const isT=V.jdk===dkey(today()),pl=planDay(d),{cur,next}=isT?jCurrent(pl):{};
@@ -3119,7 +3194,7 @@ function pageJour(){
   const P=jParams(),xs=jExtras(V.jdk);
   return`${head}${now}${sgCard("jour")}
   <div class="card stack jcard" style="gap:10px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">🗓️ ${isT?"Aujourd'hui":"Demain"}</p><button class="ghost" data-jtout="1">${V.confirm==="jtout"?"Confirmer":"✨ Tout réorganiser"}</button></div>
-    <p class="muted small" style="margin:0">Fais glisser un bloc pour changer l'heure, tire son haut ou son bas pour la durée${matchMedia&&matchMedia("(pointer:coarse)").matches?" (appuie une demi-seconde avant de glisser)":""}. Glisse une matière de la droite pour l'ajouter. Le reste s'organise tout seul.</p>
+    <p class="muted small" style="margin:0">Toutes les cases bougent : fais glisser un bloc pour changer l'heure, tire son haut ou son bas pour la durée${matchMedia&&matchMedia("(pointer:coarse)").matches?" (appuie une demi-seconde avant de glisser)":""}. Glisse une matière de la droite pour l'ajouter. Le reste s'organise tout seul.</p>
     ${jTimeline(d,pl,isT)}</div>${jSheet(d,pl)}
   <div class="card stack" style="gap:10px"><p class="label" style="margin:0">Tâches en plus pour ${isT?"aujourd'hui":"demain"}</p>
     ${xs.length?`<ul class="list">${xs.map(x=>`<li class="row" style="justify-content:space-between;flex-wrap:nowrap;padding:8px 0"><span>${x.ok?"✓ ":""}${esc(x.t)} <span class="muted small">· ${x.min} min</span></span><button class="ghost" data-jdel="${x.id}" aria-label="Supprimer">✕</button></li>`).join("")}</ul>`:""}
@@ -3190,7 +3265,7 @@ document.addEventListener("keydown",e=>{if(e.key!=="Enter"||V.page!=="jour")retu
 /* boutons du réglage d'un bloc */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button");if(!b||V.page!=="jour")return;const d=b.dataset,dk=V.jdk,key=V.jsel;
   if(d.jclose){V.jsel=null;return render(true)}
-  if(d.jtout)return confirmOr("jtout",()=>{const j=jDayDoc(dk),pin={};Object.entries(j.pin||{}).forEach(([k,p])=>{if(p.done)pin[k]=p});j.pin=pin;V.jsel=null;put("jours",dk,j)});
+  if(d.jtout)return confirmOr("jtout",()=>{const j=jDayDoc(dk),pin={};Object.entries(j.pin||{}).forEach(([k,p])=>{if(p.done)pin[k]=p});j.pin=pin;delete j.hide;delete j.nap;V.jsel=null;put("jours",dk,j)});
   if(!key)return;
   if(d.jadj){const[w,n]=d.jadj.split("|"),s=jFind(dk,key);if(!s)return;let a=s.a,bb=s.b;if(w==="a")a=Math.min(s.a+ +n,s.b-10);else bb=Math.max(s.b+ +n,s.a+10);V.jHi=[key];return jPinSet(dk,key,{a,b:bb})}
   if(d.jfait!==undefined){V.jsel=null;return jDoneSet(dk,key,d.jfait==="1")}
@@ -3257,6 +3332,128 @@ function pageHab(){
 }
 
 /* ================================================================
+   🪶 NOTES : la mise en forme toujours à portée de doigt, comme dans Notes d'Apple
+   - sélectionne un mot : une petite barre apparaît juste en dessous (gras, italique, souligné, barré, couleurs) ;
+   - pendant que tu écris : une barre reste collée au-dessus du clavier (Aa, cases à cocher, gras, couleurs…).
+   Plus besoin de remonter en haut de la note.
+   ================================================================ */
+const NCOL=[["#af52de","Violet"],["#ff2d55","Rose"],["#ff9500","Orange"],["#34c759","Vert"],["#007aff","Bleu"]];
+const NHL="#ffd60a",NSENT="rgb(1, 2, 3)";
+/* garder seulement la mise en forme utile, couleurs comprises */
+const NOKC=/^(#[0-9a-f]{3,8}|rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*(,\s*[\d.]+\s*)?\))$/i;
+function cleanHtml(h){
+  const t=document.createElement("template");t.innerHTML=String(h||"");
+  const walk=el=>[...el.childNodes].forEach(c0=>{let c=c0;
+    if(c.nodeType===3)return;
+    if(c.nodeType!==1||/^(SCRIPT|STYLE|IFRAME|OBJECT|EMBED|SVG|MATH|TEMPLATE|IMG|VIDEO|AUDIO|LINK|META)$/i.test(c.tagName)){c.remove();return}
+    walk(c);
+    if(c.tagName==="FONT"){const col=c.getAttribute("color"),sp=document.createElement("span");if(col&&NOKC.test(col))sp.style.color=col;sp.append(...c.childNodes);c.replaceWith(sp);c=sp}
+    if(c.tagName==="SPAN"||c.tagName==="MARK"){const col=c.style.color,bg=c.style.backgroundColor;[...c.attributes].forEach(a=>c.removeAttribute(a.name));
+      const kc=col&&NOKC.test(col)&&col!==NSENT,kb=bg&&NOKC.test(bg)&&bg!==NSENT&&!/^rgba\(0, 0, 0, 0\)$/.test(bg);
+      if(!kc&&!kb){c.replaceWith(...c.childNodes);return}const sp=c.tagName==="SPAN"?c:document.createElement("span");if(kc)sp.style.color=col;if(kb)sp.style.backgroundColor=bg;if(sp!==c){sp.append(...c.childNodes);c.replaceWith(sp)}return}
+    if(!NTAGS[c.tagName]){c.replaceWith(...c.childNodes);return}
+    const ck=c.tagName==="UL"&&c.classList.contains("ck"),ok=c.tagName==="LI"&&c.getAttribute("data-ok")==="1",col=c.style.color,bg=c.style.backgroundColor;
+    [...c.attributes].forEach(a=>c.removeAttribute(a.name));if(ck)c.className="ck";if(ok)c.setAttribute("data-ok","1");
+    /* le navigateur met parfois la couleur directement sur <b>, <i>, <u>… : on la garde */
+    if(col&&NOKC.test(col)&&col!==NSENT)c.style.color=col;if(bg&&NOKC.test(bg)&&bg!==NSENT&&!/^rgba\(0, 0, 0, 0\)$/.test(bg))c.style.backgroundColor=bg;
+  });
+  walk(t.content);return t.innerHTML;
+}
+function nFocus(){const el=document.getElementById("ned");if(!el)return null;if(document.activeElement!==el){el.focus({preventScroll:true});if(nRange){const s=getSelection();s.removeAllRanges();s.addRange(nRange)}}return el}
+/* gras, italique, souligné, barré, couleur, surligné */
+function nInline(cmd,val){const el=nFocus();if(!el)return;
+  if(cmd==="color"||cmd==="hl"){try{document.execCommand("styleWithCSS",false,true)}catch(e){}
+    const v=val||"#010203";if(cmd==="color")document.execCommand("foreColor",false,v);else if(!document.execCommand("hiliteColor",false,v))document.execCommand("backColor",false,v);
+    try{document.execCommand("styleWithCSS",false,false)}catch(e){}
+    if(!val)el.querySelectorAll("[style],font").forEach(s=>{if(s.style.color===NSENT)s.style.color="";if(s.style.backgroundColor===NSENT)s.style.backgroundColor="";if(s.tagName==="FONT"&&/^#010203$/i.test(s.getAttribute("color")||""))s.removeAttribute("color")})}
+  else document.execCommand(cmd);
+  nSaveSoon();setTimeout(nUi,0)}
+/* état des boutons (gras actif…) */
+function nState(c){try{return document.queryCommandState(c)}catch(e){return false}}
+function nBtns(list){return list.map(([c,l,a])=>`<button type="button" class="nkb ${nState(c)?"on":""}" data-nk="${c}" aria-label="${a}">${l}</button>`).join("")}
+const NBIUS=[["bold","<b>B</b>","Gras"],["italic","<i>I</i>","Italique"],["underline","<u>U</u>","Souligné"],["strikeThrough","<s>S</s>","Barré"]];
+function nColors(){return`<div class="ncols">${NCOL.map(([c,n])=>`<button type="button" class="ncol" data-nk="color" data-v="${c}" style="--k:${c}" aria-label="${n}"></button>`).join("")}<button type="button" class="ncol hl" data-nk="hl" data-v="${NHL}" aria-label="Surligner">🖍️</button><button type="button" class="ncol none" data-nk="nocolor" aria-label="Sans couleur">⌀</button></div>`}
+/* les deux barres vivent en dehors de la page (elles ne disparaissent pas quand l'appli se redessine) */
+function nEls(){let b=document.getElementById("nbub"),k=document.getElementById("nkbar");
+  if(!b){b=document.createElement("div");b.id="nbub";b.className="nbub nkeep";b.hidden=true;document.body.appendChild(b)}
+  if(!k){k=document.createElement("div");k.id="nkbar";k.className="nkbar nkeep";k.hidden=true;document.body.appendChild(k)}return{b,k}}
+let nCol=false,nPanel=false;
+function nUi(){const{b,k}=nEls(),el=document.getElementById("ned"),on=V.page==="proj"&&el&&document.activeElement===el,s=getSelection();
+  /* barre au-dessus du clavier */
+  if(on){k.innerHTML=`${nPanel?`<div class="nkp"><div class="nfmtrow"><button type="button" class="t1" data-nk="h1">Titre</button><button type="button" class="t2" data-nk="h2">En-tête</button><button type="button" class="t3" data-nk="h3">Sous-titre</button><button type="button" data-nk="div">Corps</button></div>
+      <div class="nfmtrow">${nBtns(NBIUS)}<button type="button" class="nkb" data-nk="ul">• Liste</button><button type="button" class="nkb" data-nk="ol">1. Liste</button></div>${nColors()}</div>`:""}
+    <div class="nkrow"><button type="button" class="nkb naa ${nPanel?"on":""}" data-nk="panel" aria-label="Mise en forme">Aa</button><button type="button" class="nkb" data-nk="ck" aria-label="Cases à cocher">☑︎</button>${nBtns(NBIUS.slice(0,3))}<button type="button" class="nkb ${nCol?"on":""}" data-nk="cols" aria-label="Couleur">🎨</button><button type="button" class="nkb" data-nk="done" aria-label="Fermer le clavier">⌄</button></div>
+    ${nCol&&!nPanel?nColors():""}`;k.hidden=false;nPlace()}else{k.hidden=true;nPanel=false}
+  /* petite barre près de la sélection */
+  const sel=on&&s.rangeCount&&!s.isCollapsed&&el.contains(s.anchorNode);
+  if(sel){const r=s.getRangeAt(0).getBoundingClientRect();b.innerHTML=`<div class="nkrow">${nBtns(NBIUS)}<button type="button" class="nkb ${nCol?"on":""}" data-nk="cols" aria-label="Couleur">🎨</button></div>${nCol?nColors():""}`;b.hidden=false;
+    const vv=window.visualViewport,vh=vv?vv.height+vv.offsetTop:innerHeight,w=b.offsetWidth,h=b.offsetHeight;let top=r.bottom+14;if(top+h>vh-(k.hidden?8:k.offsetHeight+8))top=Math.max(8,r.top-h-10);
+    b.style.top=top+"px";b.style.left=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2))+"px"}else b.hidden=true}
+/* la barre suit le haut du clavier (iPhone) grâce à visualViewport */
+function nPlace(){const k=document.getElementById("nkbar");if(!k||k.hidden)return;const vv=window.visualViewport;k.style.top=((vv?vv.offsetTop+vv.height:innerHeight)-k.offsetHeight)+"px"}
+if(window.visualViewport){visualViewport.addEventListener("resize",()=>{nPlace();nUi()});visualViewport.addEventListener("scroll",nPlace)}
+let nUiT=null;document.addEventListener("selectionchange",()=>{clearTimeout(nUiT);nUiT=setTimeout(nUi,90)});
+document.addEventListener("focusin",e=>{if(e.target&&e.target.id==="ned")setTimeout(nUi,30)});
+document.addEventListener("focusout",e=>{if(e.target&&e.target.id==="ned")setTimeout(()=>{if(document.activeElement&&document.activeElement.id==="ned")return;nCol=false;nUi()},120)});
+window.addEventListener("scroll",()=>{const b=document.getElementById("nbub");if(b&&!b.hidden)nUi()},{passive:true});
+/* toucher un bouton des barres : on agit tout de suite, sans faire perdre la sélection ni fermer le clavier */
+function nAct(btn){const c=btn.dataset.nk,v=btn.dataset.v;
+  if(c==="panel"){nPanel=!nPanel;nCol=false;return nUi()}
+  if(c==="cols"){nCol=!nCol;return nUi()}
+  if(c==="done"){nPanel=false;nCol=false;const el=document.getElementById("ned");if(el)el.blur();nSave();return}
+  if(c==="color"||c==="hl")return nInline(c,v);
+  if(c==="nocolor"){nInline("color","");return nInline("hl","")}
+  if(/^(bold|italic|underline|strikeThrough)$/.test(c))return nInline(c);
+  nFocus();nFormat(c);setTimeout(nUi,0)}
+const nOnTool=e=>{const btn=e.target.closest&&e.target.closest(".nkeep [data-nk]");if(!btn)return false;e.preventDefault();e.stopPropagation();nAct(btn);return true};
+document.addEventListener("touchstart",e=>{if(e.target.closest&&e.target.closest(".nkeep")){if(!nOnTool(e))e.preventDefault()}},{passive:false,capture:true});
+document.addEventListener("mousedown",e=>{if(e.target.closest&&e.target.closest(".nkeep")){if(!nOnTool(e))e.preventDefault()}},true);
+/* clavier ou souris sur PC : le clic qui suit ne doit pas déclencher autre chose */
+document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".nkeep")){e.preventDefault();e.stopPropagation();if(e.detail===0)nOnTool(e)}},true);
+/* le curseur ne doit jamais se cacher derrière la barre du clavier */
+function nCaret(){const k=document.getElementById("nkbar"),s=getSelection();if(!k||k.hidden||!s.rangeCount)return;
+  const rg=s.getRangeAt(0),rs=rg.getClientRects(),r=rs.length?rs[rs.length-1]:rg.getBoundingClientRect();if(!r||!r.height)return;
+  const kt=k.getBoundingClientRect().top;if(r.bottom>kt-6)window.scrollBy(0,r.bottom-kt+28)}
+document.addEventListener("input",e=>{if(e.target&&e.target.id==="ned")requestAnimationFrame(nCaret)});
+
+/* ================================================================
+   💭 CITATION DU JOUR (accueil) : un jour un philosophe, le lendemain un personnage d'anime
+   ================================================================ */
+const CIT_PHILO=[["Ce qui trouble les hommes, ce ne sont pas les choses, mais les jugements qu'ils portent sur les choses.","Épictète","Manuel"],
+ ["La meilleure manière de te venger, c'est de ne pas lui ressembler.","Marc Aurèle","Pensées"],
+ ["Ce qui ne me tue pas me rend plus fort.","Friedrich Nietzsche","Crépuscule des idoles"],
+ ["Le cœur a ses raisons que la raison ne connaît point.","Blaise Pascal","Pensées"],
+ ["Aie le courage de te servir de ton propre entendement.","Emmanuel Kant","Qu'est-ce que les Lumières ?"],
+ ["Je pense, donc je suis.","René Descartes","Discours de la méthode"],
+ ["Il faut imaginer Sisyphe heureux.","Albert Camus","Le Mythe de Sisyphe"],
+ ["L'homme est condamné à être libre.","Jean-Paul Sartre","L'existentialisme est un humanisme"],
+ ["Ne pas railler, ne pas déplorer, ne pas détester, mais comprendre.","Baruch Spinoza","Traité politique"],
+ ["On ne se baigne jamais deux fois dans le même fleuve.","Héraclite","d'après Platon"],
+ ["Ce n'est pas parce que les choses sont difficiles que nous n'osons pas, c'est parce que nous n'osons pas qu'elles sont difficiles.","Sénèque","Lettres à Lucilius"],
+ ["Que sais-je ?","Montaigne","Essais"]];
+const CIT_ANIME=[["Si tu ne prends pas de risques, tu ne peux pas créer de futur.","Monkey D. Luffy","One Piece"],
+ ["Quelqu'un qui ne peut rien sacrifier ne pourra jamais rien changer.","Armin Arlert","L'Attaque des Titans"],
+ ["Si tu gagnes, tu vis. Si tu perds, tu meurs. Si tu ne te bats pas, tu ne peux pas gagner.","Eren Jäger","L'Attaque des Titans"],
+ ["Le travail acharné ne sert à rien à ceux qui ne croient pas en eux-mêmes.","Naruto Uzumaki","Naruto"],
+ ["Un raté peut battre un génie à force de travail.","Rock Lee","Naruto"],
+ ["Quand est-ce qu'un homme meurt ? Quand il est oublié.","Dr Hiluluk","One Piece"],
+ ["Le monde n'est pas parfait. Mais il est là pour nous, il fait de son mieux… et c'est ce qui le rend si beau.","Roy Mustang","Fullmetal Alchemist"],
+ ["On ne peut rien obtenir sans sacrifier quelque chose en retour.","Alphonse Elric","Fullmetal Alchemist"],
+ ["Les gens vivent leur vie enchaînés à ce qu'ils croient juste et vrai. C'est ce qu'ils appellent la réalité.","Itachi Uchiha","Naruto Shippuden"],
+ ["Ce monde est cruel, mais il est aussi très beau.","Mikasa Ackerman","L'Attaque des Titans"]];
+function citCard(){const n=dayNum(today()),an=n%2===1,L=an?CIT_ANIME:CIT_PHILO,c=L[Math.floor(n/2)%L.length];
+  return`<div class="card citc"><p class="label" style="margin:0">💭 Citation du jour · ${an?"anime":"philosophie"}</p><blockquote>« ${esc(c[0])} »</blockquote><span class="muted small">— ${esc(c[1])}, <i>${esc(c[2])}</i></span></div>`}
+
+/* ================================================================
+   📰 FINANCE : les articles de plus d'une semaine vont dans « Historique » (gardés 3 mois sur cet appareil)
+   ================================================================ */
+function artHist(his,card){if(!his.length)return"";const g={};
+  his.forEach(e=>{const[y,m,d]=String(e[1].date).slice(0,10).split("-").map(Number),k=dkey(monday(new Date(y,m-1,d)));(g[k]=g[k]||[]).push(e)});
+  return`<div class="card stack arthist" style="gap:8px"><button class="histhead" data-histo="1" aria-expanded="${!!V.histOpen}"><b>📚 Historique</b><span class="muted small">${his.length} article${his.length>1?"s":""} de plus d'une semaine ${V.histOpen?"▲":"▼"}</span></button>
+    ${V.histOpen?Object.keys(g).sort().reverse().map(k=>`<p class="label" style="margin:6px 0 0">Semaine du ${fdate(k)}</p><ul class="list">${g[k].map(([id,a])=>{const o=V.rev["arto|"+id],L=V.lang;
+      return`<li><button class="arow" data-arto="${esc(id)}"><span>${esc(a.t[L]||a.t.fr||a.t.en)}</span><small class="muted">${esc(a.src)} · ${fdate(a.date)} ${o?"▲":"▼"}</small></button>${o?card([id,a]):""}</li>`}).join("")}</ul>`).join(""):""}</div>`}
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
 const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["cours","Cours"],["mx","Maths"],["cg","Culture G"]];
@@ -3275,7 +3472,7 @@ function summary(k){
 function pageHome(){
   const t=today(),h=new Date().getHours();
   return`<div class="top"><div><h1>2ème cerveau 🧠</h1><p>${h<18?"Bonjour":"Bonsoir"} · ${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p></div><div class="topr"><div class="topb"><button class="gear" data-page="idees" aria-label="Suggestions">💡</button><button class="gear" data-page="reglages" aria-label="Réglages">⚙️</button></div><div class="sync" id="sync">${syncTxt}</div></div></div>
-  <div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>${modWrap("accueil","")}
+  <div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>${modWrap("accueil","")}${citCard()}
   <div class="card stack" style="margin-top:16px"><p class="label" style="margin:0">💾 Mes données</p>
     <p class="muted small">Tout s'enregistre d'abord sur cet appareil, puis se synchronise avec ton compte (⚙️ Réglages). Garde aussi un fichier de sauvegarde de temps en temps.</p>
     <div class="row">${DL?`<button class="ghost on" data-export="1">Sauvegarder dans un fichier</button>`:""}<label class="ghost on" for="imp" style="cursor:pointer">Restaurer un fichier</label><button class="ghost" data-page="aide">🛟 Dépannage</button><input type="file" id="imp" data-imp="1" accept=".json,application/json" hidden></div>
@@ -3307,7 +3504,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.5.0";
+const APP_VERSION="1.6.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -3466,7 +3663,7 @@ aiSample.json=async(input,opts={})=>{
 async function loadNews(){try{const r=await fetch("data/news.json?t="+Date.now(),{cache:"no-store"});if(r.ok)applyNews(await r.json())}catch(e){}}
 function applyNews(n){
   if(!n||typeof n!=="object")return;const pr={};(n.articles||[]).forEach(a=>{if(a&&a.id&&a.t)pr[a.id]=a});
-  if(n.updated)lsSet("cerveau-news-upd",n.updated);if(Object.keys(pr).length)S.presse=pr;if(n.snap)S.marche={snap:n.snap};if(n.actu)S.jeu={...S.jeu,actu:n.actu};
+  if(n.updated)lsSet("cerveau-news-upd",n.updated);if(Object.keys(pr).length){const lim=dkey(add(today(),-92)),m={};Object.entries(S.presse||{}).filter(([,a])=>a&&a.t&&String(a.date).slice(0,10)>=lim).sort((a,b)=>String(b[1].date).localeCompare(a[1].date)).slice(0,300).forEach(([id,a])=>m[id]=a);S.presse={...m,...pr}}if(n.snap)S.marche={snap:n.snap};if(n.actu)S.jeu={...S.jeu,actu:n.actu};
   localSaveSoon();render();
 }
 
@@ -3840,7 +4037,7 @@ function render(force){
   if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
   const body=mt?modHtml(mt.id,mt.page):modWrap(V.page,PAGES[V.page]());
   app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${esc(sectName(V.page))}</h1>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
-  if(V.page==="mx")mxTex();if(V.page==="jour")jAfter();
+  if(V.page==="mx")mxTex();if(V.page==="jour")jAfter();setTimeout(nUi,0);
 }
 /* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
 document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},350));
@@ -3877,7 +4074,11 @@ document.addEventListener("click",e=>{
   /* culture générale */
   if(d.cga){const i=d.cga.lastIndexOf("|"),k=d.cga.slice(0,i),v=S.cg[k],n=cgNotion(v);if(!v||!n||v.rep!=null)return;const r=+d.cga.slice(i+1);return put("cg",k,{...v,rep:r,ok:r===n.a})}
   if(d.cgk){V.cgk=d.cgk;render(true);return window.scrollTo(0,0)}
-  if(d.cgplus)return cgPlus();
+  if(d.cgplus)return cgPlus(V.cgPart);
+  if(d.cgpart){V.cgPart=d.cgpart;V.cgk=null;return render(true)}
+  /* finance : historique */
+  if(d.histo){V.histOpen=!V.histOpen;return render(true)}
+  if(d.arto){V.rev["arto|"+d.arto]=!V.rev["arto|"+d.arto];return render(true)}
   /* maths */
   if(d.mxretry){mxFail={};V.mxErr="";return render(true)}
   if(d.mxp){V.mxp=d.mxp;return render(true)}
