@@ -486,6 +486,53 @@ details.mxb[open]>summary{margin-bottom:8px}
 .mxet{font-family:var(--display)}
 .mxcode{background:var(--soft);border-radius:10px;padding:10px 12px;overflow-x:auto;font-size:.85rem;line-height:1.45;margin:0}
 .katex-display{overflow-x:auto;overflow-y:hidden;padding:4px 0;margin:6px 0}
+.jst.jnew{background:color-mix(in srgb,var(--up) 15%,transparent);border-radius:12px;padding-left:6px;opacity:1}
+.jst.jnew .jl b::after{content:" · nouveau";font-weight:600;font-size:.75rem;color:var(--up)}
+/* ma journée 2 : emploi du temps à glisser */
+.jcal{display:grid;grid-template-columns:30px minmax(0,1fr) 108px;gap:6px;align-items:start}
+.jhrs{position:relative}
+.jhl{position:absolute;right:2px;transform:translateY(-50%);font-size:.7rem;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.jhl:first-child{transform:none}
+.jgrid{position:relative;border-left:1px solid var(--line);background-image:repeating-linear-gradient(to bottom,var(--line) 0 1px,transparent 1px var(--hh))}
+.jb{position:absolute;border-radius:9px;background:color-mix(in srgb,var(--b) 16%,var(--surface));border-left:4px solid var(--b);padding:3px 6px;overflow:hidden;display:flex;flex-direction:column;gap:0;line-height:1.2;font-size:.82rem;box-shadow:0 1px 2px rgb(0 0 0 / .06)}
+.jb b{font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jb small{color:var(--muted);font-size:.72rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jb.tiny{flex-direction:row;align-items:center;gap:6px;padding-top:0;padding-bottom:0}
+.jb.tiny small{display:none}
+.jb.fx{background:color-mix(in srgb,var(--b) 10%,var(--surface));border-left-style:dashed}
+.jb.mv{cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.jb.pin{box-shadow:0 0 0 1px color-mix(in srgb,var(--b) 45%,transparent) inset}
+.jb.done{opacity:.55}
+.jb.done b{text-decoration:line-through}
+.jb.run{box-shadow:0 0 0 2px var(--b)}
+.jb.over{border-left-color:var(--down)}
+.jb.sel{box-shadow:0 0 0 2px var(--c);z-index:3}
+.jb.drag{z-index:5;opacity:.92;box-shadow:0 8px 22px rgb(0 0 0 / .22);cursor:grabbing}
+.jb.jnew{box-shadow:0 0 0 2px var(--up)}
+.jh{position:absolute;left:0;right:0;height:12px;cursor:ns-resize;z-index:2}
+.jh.t{top:-2px}
+.jh.bt{bottom:-2px}
+.jh::after{content:"";position:absolute;left:50%;width:22px;height:3px;margin-left:-11px;border-radius:2px;background:color-mix(in srgb,var(--b) 55%,transparent);opacity:0;transition:opacity .15s}
+.jh.t::after{top:3px}.jh.bt::after{bottom:3px}
+.jb.mv:hover .jh::after,.jb.sel .jh::after,.jb.drag .jh::after{opacity:1}
+.jnowl{position:absolute;left:-4px;right:0;height:2px;background:var(--down);z-index:4;pointer-events:none}
+.jnowl::before{content:"";position:absolute;left:-3px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--down)}
+.jnowl span{position:absolute;right:2px;top:-16px;font-size:.66rem;font-weight:700;color:var(--down);background:var(--surface);padding:0 3px;border-radius:4px}
+.jpal{position:sticky;top:10px;max-height:calc(100vh - 20px);overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:6px;border-radius:12px;background:var(--soft);border:1px dashed transparent;transition:border-color .15s,background .15s}
+.jpal.hot{border-color:var(--down);background:color-mix(in srgb,var(--down) 10%,var(--soft))}
+.jpg{font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin:4px 2px 0}
+.jpg.jdrop{text-transform:none;letter-spacing:0;font-weight:500;line-height:1.3;margin-top:6px}
+.jpi{display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:4px;align-items:center;background:var(--surface);border-radius:9px;border-left:4px solid var(--b);padding:5px 6px;cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;font-size:.78rem;line-height:1.15}
+.jpi span{grid-row:span 2}
+.jpi b{font-weight:600;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
+.jpi small{color:var(--muted);font-size:.68rem}
+.jghost{position:fixed;z-index:50;pointer-events:none;width:120px;transform:translate(-50%,-60%) rotate(-2deg);box-shadow:0 10px 24px rgb(0 0 0 / .25);opacity:.95}
+.jtip{position:fixed;z-index:60;transform:translateX(-50%);background:var(--ink);color:var(--surface);font-size:.8rem;font-weight:700;padding:4px 8px;border-radius:8px;pointer-events:none;white-space:nowrap}
+body.jdragging{-webkit-user-select:none;user-select:none;cursor:grabbing}
+.jsheet{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:40;max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:10px;box-shadow:0 12px 32px rgb(0 0 0 / .25)}
+.jadj{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 8px;align-items:center}
+.jadj .ghost{min-width:46px}
+@media (min-width:600px){.jcal{grid-template-columns:36px minmax(0,1fr) 150px}.jb{font-size:.86rem}}
 </style>
 <script src="config.js"></script>
 </head>
@@ -1220,10 +1267,10 @@ function outBox(key){return V.out[key]?`<div class="out" id="out-${sid(key)}" ar
 /* devoirs Pronote : chacun apparaît la veille du jour où il est à rendre (rien si Pronote n'est pas relié) */
 function pnHwDay(x){const[y,m,d]=String(x.pour).slice(0,10).split("-").map(Number);return dkey(new Date(y,m-1,d-1))}
 function pnTasks(d){const p=S.pronote&&S.pronote.data,a=p&&Array.isArray(p.devoirs)?p.devoirs:[],k=dkey(d);return a.filter(x=>x&&x.id&&x.pour&&pnHwDay(x)===k)}
-function dayStats(d){const j=S.jours[dkey(d)]||{},p=planOf(d),k=j.done||{},pn=pnTasks(d),xs=j.extra||[];return{n:p.filter(h=>k[h]).length+pn.filter(x=>x.fait||k["pn:"+x.id]).length+xs.filter(x=>x.ok).length,t:p.length+pn.length+xs.length}}
-function streak(){let d=today(),s=0;const t=dayStats(d);if(t.n<t.t)d=add(d,-1);for(let i=0;i<400;i++){const x=dayStats(d);if(x.t&&x.n===x.t){s++;d=add(d,-1)}else break}return s}
+function dayStatsOld(d){const j=S.jours[dkey(d)]||{},p=planOf(d),k=j.done||{},pn=pnTasks(d),xs=j.extra||[];return{n:p.filter(h=>k[h]).length+pn.filter(x=>x.fait||k["pn:"+x.id]).length+xs.filter(x=>x.ok).length,t:p.length+pn.length+xs.length}}
+function streakOld(){let d=today(),s=0;const t=dayStats(d);if(t.n<t.t)d=add(d,-1);for(let i=0;i<400;i++){const x=dayStats(d);if(x.t&&x.n===x.t){s++;d=add(d,-1)}else break}return s}
 function ring(p,c){const r=24,L=2*Math.PI*r;return`<svg width="60" height="60" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="${r}" fill="none" stroke="var(--soft)" stroke-width="7"/><circle cx="30" cy="30" r="${r}" fill="none" stroke="var(${c})" stroke-width="7" stroke-linecap="round" stroke-dasharray="${L}" stroke-dashoffset="${L*(1-p)}" transform="rotate(-90 30 30)"/></svg>`}
-function weekSeries(nw){const o=[],m0=monday(today());for(let w=nw-1;w>=0;w--){const m=add(m0,-7*w);let n=0,t=0;for(let i=0;i<7;i++){const d=add(m,i);if(d>today())break;const s=dayStats(d);n+=s.n;t+=s.t}o.push({m,p:t?n/t:0})}return o}
+function weekSeriesOld(nw){const o=[],m0=monday(today());for(let w=nw-1;w>=0;w--){const m=add(m0,-7*w);let n=0,t=0;for(let i=0;i<7;i++){const d=add(m,i);if(d>today())break;const s=dayStats(d);n+=s.n;t+=s.t}o.push({m,p:t?n/t:0})}return o}
 function lineChart(sr){
   const W=520,H=200,L=38,R=14,T=16,B=28,iw=W-L-R,ih=H-T-B,x=i=>L+(sr.length<2?iw/2:i*iw/(sr.length-1)),y=p=>T+ih*(1-p);
   const g=[0,.5,1].map(p=>`<line x1="${L}" x2="${W-R}" y1="${y(p)}" y2="${y(p)}" stroke="var(--line)"/><text x="${L-6}" y="${y(p)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${p*100}%</text>`).join("");
@@ -1236,7 +1283,7 @@ function lineChart(sr){
    <circle cx="${x(sr.length-1)}" cy="${y(last.p)}" r="5" fill="var(--hab)"/>
    <text x="${x(sr.length-1)-8}" y="${y(last.p)-10}" text-anchor="end" font-size="12" font-weight="700" fill="var(--ink)">${Math.round(last.p*100)}%</text>${lab}</svg>`;
 }
-function pageHab(){
+function pageHabOld(){
   const d=V.day,plan=planOf(d),k=(S.jours[dkey(d)]||{}).done||{},{n,t}=dayStats(d),isT=+d===+today(),m=monday(today());
   const week=[0,1,2,3,4,5,6].map(i=>{const x=add(m,i),s=dayStats(x),f=x>today();return`<button class="wd ${+x===+d?"on":""}" data-go="${dkey(x)}" ${f?'disabled style="opacity:.4"':""}><b>${JOURS[x.getDay()].slice(0,1)}</b><span class="vb"><i style="height:${s.t?s.n/s.t*100:0}%"></i></span><span class="num">${s.n}/${s.t}</span></button>`}).join("");
   return`
@@ -1986,7 +2033,7 @@ function jLessons(dk){const p=S.pronote&&S.pronote.data;return((p&&p.edt)||[]).f
 function jHwDone(x){const k=pnHwDay(x);return!!(x.fait||((S.jours[k]||{}).done||{})["pn:"+x.id])}
 /* tout ce qu'il y a à faire ce jour-là, par ordre de priorité */
 function jTasks(d){
-  const dk=dkey(d),P=jParams(dk),done=(S.jours[dk]||{}).done||{},od=(S.jours[dk]||{}).dur||{},out=[];
+  const dk=dkey(d),P=jParams(dk),done=doneOf(d),od=(S.jours[dk]||{}).dur||{},out=[];
   const rp=(S.jours[dk]||{}).report||{};
   jExtras(dk).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,l:x.t,min:x.min||30,p:0,tag:"Ajouté"}));
   pnTasks(d).filter(x=>!jHwDone(x)&&!rp["pn|"+x.id]).forEach(x=>out.push({k:"pn",ref:x.id,l:`${x.m||"Devoir"} : ${String(x.txt||"devoir").split("\n")[0].slice(0,70)}`,min:jDur("devoir",P.devoir),p:1,tag:"Devoir pour demain"}));
@@ -1997,7 +2044,7 @@ function jTasks(d){
   const pr=(S.jours[dk]||{}).prio||[];if(pr.length)out.forEach(x=>{const i=pr.indexOf(jKey(x));if(i>=0)x.p=-1+i*0.01});
   return out.sort((a,b)=>a.p-b.p);
 }
-function planDay(d){
+function planDayOld(d){
   const dk=dkey(d),P=jParams(dk),isT=dk===dkey(today()),nowM=new Date().getHours()*60+new Date().getMinutes();
   const L=jLessons(dk),school=L.length>0,steps=[];let t;
   if(school){
@@ -2005,7 +2052,7 @@ function planDay(d){
     steps.push({a,b,k:"cours",l:"Cours au lycée"},{a:b,b:arr,k:"trajet",l:"Retour à la maison"},{a:arr,b:arr+rest,k:"pause",l:lunch?"Déjeuner et te poser":"Te poser (vraie pause, sans écrans si possible)"});
     t=arr+rest;
   }else t=hm(P.debutWE);
-  const stop=school?hm(P.stop):Math.min(hm(P.stop),hm(P.libreWE)||hm(P.stop));
+  const od=(S.jours[dk]||{}).par||{},stop=school||od.stop?hm(P.stop):Math.min(hm(P.stop),hm(P.libreWE)||hm(P.stop));
   const fixed=[{a:hm(P.diner),b:hm(P.diner)+P.dinerDur,k:"repas",l:"Dîner"}];
   if(!school)fixed.push({a:hm(P.dejWE),b:hm(P.dejWE)+60,k:"repas",l:"Déjeuner"});
   fixed.sort((x,y)=>x.a-y.a);
@@ -2033,11 +2080,11 @@ function jIcon(k,ref){return k==="cours"?"🏫":k==="trajet"?"🚶":k==="pause"?
 function jStep(s,i,isT){
   const work=s.k==="hab"||s.k==="pn"||s.k==="x",nowM=new Date().getHours()*60+new Date().getMinutes(),on=isT&&s.a<=nowM&&nowM<s.b;
   const key=s.k==="hab"?`hab|${s.ref}`:s.k==="pn"?`pn|${s.ref}`:`x|${s.ref}`;
-  return`<li class="jst ${s.k} ${on||s.run?"on":""} ${s.over?"over":""}"><span class="jt num">${fmin(s.a)}<small>${fmin(s.b)}</small></span><span class="ji" aria-hidden="true">${jIcon(s.k,s.ref)}</span>
+  return`<li class="jst ${s.k} ${on||s.run?"on":""} ${s.over?"over":""} ${work&&V.jHi&&V.jHi.includes(key)?"jnew":""}"><span class="jt num">${fmin(s.a)}<small>${fmin(s.b)}</small></span><span class="ji" aria-hidden="true">${jIcon(s.k,s.ref)}</span>
    <span class="jl"><b>${esc(s.l)}</b>${s.tag?`<small>${esc(s.tag)} · ${fdur(s.b-s.a)}</small>`:`<small>${fdur(s.b-s.a)}</small>`}</span>
    ${work?`<span class="row" style="gap:4px;flex-wrap:nowrap">${isT&&!s.run?`<button class="jgo" data-jstart="${esc(key)}" aria-label="Commencer">▶</button>`:""}<label class="chk jchk"><input type="checkbox" data-jt="${esc(key)}|${s.dk||V.jdk}"><span class="box">${tick}</span></label></span>`:""}</li>`;
 }
-function pageJour(){
+function pageJourOld(){
   const d=V.jdk?(([y,m,dd])=>new Date(y,m-1,dd))(V.jdk.split("-").map(Number)):today();V.jdk=dkey(d);
   const isT=V.jdk===dkey(today()),P=jParams(),pl=planDay(d),{cur,next}=isT?jCurrent(pl):{};
   const head=`<div class="seg" role="group" aria-label="Jour">${[0,1].map(i=>{const x=add(today(),i);return`<button data-jday="${dkey(x)}" aria-pressed="${dkey(x)===V.jdk}">${i?"Demain":"Aujourd'hui"}</button>`}).join("")}</div>`;
@@ -2116,7 +2163,7 @@ function jTomorrow(){const td=dkey(today()),j=S.jours[td]||{},run=j.run;if(!run)
   const tm=dkey(add(today(),1)),jt=S.jours[tm]||{};return put("jours",tm,{...jt,date:tm,done:jt.done||{},extra:[...(jt.extra||[]),{id:uid(),t:"Finir : "+(R?R.l:"la tâche d'hier"),min:30,ok:false}]})}
 
 /* l'étape en cours se met à jour chaque minute */
-setInterval(()=>{if(V.page==="jour"||V.page==="home")render()},60000);
+setInterval(()=>{if(!(typeof JD!=="undefined"&&JD)&&(V.page==="jour"||V.page==="home"))render()},60000);
 /* ================================================================
    OBJECTIF TOP 3 : HEC · ESSEC · ESCP
    Indice de progression (pas une probabilité d'admission) :
@@ -2159,8 +2206,8 @@ function objNotes(){
   return{g,maths,s:0.7*sg+0.3*sm,low,periode:n.periode||""};
 }
 /* score de régularité : tâches faites / prévues depuis le début (28 jours max), + série de jours parfaits */
-/* chaque tâche pèse selon son importance pour l'objectif (réglable par suggestion) */
-function dayW(d){const j=S.jours[dkey(d)]||{},k=j.done||{};let n=0,t=0;planOf(d).forEach(h=>{const w=tW(h);t+=w;if(k[h])n+=w});
+/* chaque tâche pèse selon son importance pour l'objectif (réglable par suggestion) ; la version week-end est dans we.js */
+function dayWOld(d){const j=S.jours[dkey(d)]||{},k=j.done||{};let n=0,t=0;planOf(d).forEach(h=>{const w=tW(h);t+=w;if(k[h])n+=w});
   pnTasks(d).forEach(x=>{const w=tW("devoir");t+=w;if(x.fait||k["pn:"+x.id])n+=w});(j.extra||[]).forEach(x=>{t+=1;if(x.ok)n+=1});return{n,t}}
 function objHab(all){
   const t=today();let n=0,tt=0;
@@ -2291,19 +2338,22 @@ function sgCompute(ops,scope){
   const jd=k=>{if(!J[k]){const j=S.jours[k]||{};J[k]={...j,date:k,done:j.done||{}}}return J[k]};
   const list=wd=>{if(once){const x=dateOf(wd),j=jd(dkey(x));if(!Array.isArray(j.plan))j.plan=planOf(x).slice();return j.plan}
     if(!ver){ver={from:tk,p:{}};for(let i=0;i<7;i++)ver.p[i]=planBase(tk,i).slice();e.v.push(ver)}return ver.p[wd]};
+  /* un changement « chaque semaine » s'applique aussi aux jours qui ont déjà leur propre planning (aujourd'hui modifié, par exemple) */
+  const lists=wd=>{const L=[list(wd)];if(!once)Object.keys(S.jours||{}).filter(k=>k>=tk&&k<=dkey(add(today(),6))&&Array.isArray((S.jours[k]||{}).plan)&&new Date(+k.slice(0,4),+k.slice(5,7)-1,+k.slice(8,10)).getDay()===wd)
+    .forEach(k=>{const j=jd(k);if(!Array.isArray(j.plan)||j.plan===S.jours[k].plan)j.plan=S.jours[k].plan.slice();L.push(j.plan)});return L};
   const cur=wd=>once?planOf(dateOf(wd)):planBase(tk,wd);
   const days=(o,need)=>Array.isArray(o.days)&&o.days.length?o.days:once?[tdy]:need?[0,1,2,3,4,5,6].filter(w=>cur(w).includes(need)):[tdy];
   const when=ds=>once?ds.map(w=>{const x=dateOf(w);return+x===+today()?"Aujourd'hui":+x===+add(today(),1)?"Demain":"Ce "+SG_JN[w]+" "+fdate(dkey(x))}).join(", "):sgDaysTxt(ds);
   const whenD=ds=>ds.map(w=>{const x=dateOf(w);return+x===+today()?"Aujourd'hui":+x===+add(today(),1)?"Demain":"Ce "+SG_JN[w]+" "+fdate(dkey(x))}).join(", ");
   for(const o of ops){once=sgSc(o,scope)==="once";
-    if(o.t==="rep"){const ok=[];days(o,o.a).forEach(w=>{const L=list(w),i=L.indexOf(o.a);if(i<0)return;if(L.includes(o.b))L.splice(i,1);else L[i]=o.b;ok.push(w)});
+    if(o.t==="rep"){const ok=[];days(o,o.a).forEach(w=>{let hit=false;lists(w).forEach((L,n)=>{const i=L.indexOf(o.a);if(i<0)return;if(L.includes(o.b))L.splice(i,1);else L[i]=o.b;if(!n)hit=true});if(hit)ok.push(w)});
       if(ok.length)lines.push(`${when(ok)} : ${habL(o.a)} → ${habL(o.b)}`);else notes.push(`${habL(o.a)} n'est pas prévu${o.days&&o.days.length?" "+sgDaysTxt(o.days).toLowerCase():""}.`)}
-    else if(o.t==="del"){const ok=[];days(o,o.a).forEach(w=>{const L=list(w),i=L.indexOf(o.a);if(i>=0){L.splice(i,1);ok.push(w)}});
+    else if(o.t==="del"){const ok=[];days(o,o.a).forEach(w=>{let hit=false;lists(w).forEach((L,n)=>{const i=L.indexOf(o.a);if(i>=0){L.splice(i,1);if(!n)hit=true}});if(hit)ok.push(w)});
       if(ok.length)lines.push(`${when(ok)} : − ${habL(o.a)}`);else notes.push(`${habL(o.a)} n'était déjà pas prévu.`)}
     else if(o.t==="add"||o.t==="new"){let a=o.a;
       if(o.t==="new"){a="c_"+(SG_N(o.n).replace(/[^a-z0-9]+/g,"").slice(0,14)||uid());const m=Math.max(5,Math.min(300,Math.round(+o.min||30)));
         e.custom={...(e.custom||{}),[a]:{n:String(o.n).slice(0,40),min:m}};if(!HABITS[a])HABITS[a]=[e.custom[a].n,""];lines.push(`Nouvelle habitude : ${e.custom[a].n} (${fdur(m)})`)}
-      const ok=[];days(o,null).forEach(w=>{const L=list(w);if(!L.includes(a)){L.push(a);ok.push(w)}});
+      const ok=[];days(o,null).forEach(w=>{let hit=false;lists(w).forEach((L,n)=>{if(!L.includes(a)){L.push(a);if(!n)hit=true}});if(hit)ok.push(w)});
       if(ok.length)lines.push(`${when(ok)} : + ${habL(a)}`);else if(o.t==="add")notes.push(`${habL(a)} est déjà prévu ce jour-là.`)}
     else if(o.t==="dur"){const pk=SG_DURK[o.a],isH=!pk&&!!HABITS[o.a];if(!pk&&!isH)continue;
       const now=pk?jParams()[pk]:jDur(o.a,jBase(o.a));let m=Math.round(+o.min||0);
@@ -2413,6 +2463,10 @@ function sgClause(c,raw){
   const less=H(/moins de temps|moins long|plus court|plus vite|plus rapide|moins longtemps|trop long/),more=H(/plus de temps|plus long|plus longtemps|plus lent|pas assez de temps/);
   if(!S_.length&&(du||less||more)){const rel=du?0:less?-1:1,o=a=>one({t:"dur",a,min:du||0,rel,days:ds});
     if(H(/\bdin\w*|\brepas/))return o("dinerDur");if(H(/\btrajet|\brentrer|\bretour|\brentre/))return o("trajet");if(H(/\bpause|me poser|souffler/))return o("pause");if(H(/\bdevoirs?\b/))return o("devoir")}
+  /* « ajoute une tâche réviser l'histoire 30 min » : une tâche à caser dans la journée, pas une durée */
+  if(H(/\b(ajout|rajout|note|prevoi|cale)\w*/)&&H(/\b(taches?|activites?|revis\w*|apprend\w*|lire|lecture|finir|termin\w*|prepar\w*|redig\w*|relire|exercices?|dm|expose|dossier|appel\w*)\b/)){
+    const n=sgTaskName(raw);if(n)return one(SG_WK.test(c)&&!SG_TD.test(c)&&n.length<=30?{t:"new",n,min:du||30,days:ds}:{t:"tache",n,min:du||30,days:SG_TD.test(c)?ds:[]})}
+  if(H(/\bcontrole|\brevis\w*|\binterro\w*|\bds\b|\bexamen|\bbac blanc|\bpartiel/))return one({t:"tache",n:sgTaskName(raw,true),min:du||45,weak:true});
   /* durée d'une matière */
   if(S_.length&&(du||less||more)&&!H(/remplac|a la place|au lieu|echang/)){
     if(S_.some(x=>x.id==="sport")&&H(/\btrajet/))return du?one({t:"dur",a:"sportTrajet",min:du}):null;
@@ -2446,6 +2500,12 @@ function sgClause(c,raw){
   return null}
 const SG_TD=/aujourd hui|ce soir|ce matin|cet apres|\bdemain\b|cette fois|pour une fois|cette semaine|exceptionnel|\bce (lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)\b/;
 const SG_WK=/\b(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)s?\b|\bchaque\b|tous les|toutes les|week ?-?end|en semaine|desormais|dorenavant|toujours|d habitude|a partir de|en general|tout le temps/;
+/* nom d'une tâche tapée : on enlève « ajoute une tâche », la durée et le jour */
+function sgTaskName(raw,keepDay){let n=String(raw).trim();
+  if(!keepDay)n=n.replace(/^.*?\b(ajoute[rsz]?|rajoute[rsz]?|note[rsz]?|prévois|prevois|cale[rsz]?)\b\s*/i,"").replace(/^(une?|des|du|la|le|les|l['’]|de la|de l['’]|d['’])\s*/i,"").replace(/^(tâches?|taches?|activités?|activites?)\s*(de |d['’]|:|pour )?\s*/i,"");
+  n=n.replace(/\s*(\b(pendant|en|pour|de|à|a)\b\s*)?\d+\s*(min|minutes?|mn|h|heures?)\b\s*\d*/gi," ");
+  if(!keepDay)n=n.replace(/\s*\b(le |les |ce |chaque )?(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|demain|aujourd['’]hui|ce soir)s?\b.*$/i,"");
+  n=n.replace(/\s+/g," ").replace(/[.,;:!]+$/,"").trim();return n.length>=2?(n[0].toUpperCase()+n.slice(1)).slice(0,70):""}
 function sgToday(id){if(id!=="maths")return id;const L=planOf(today());return["maths","mspe","mexp"].find(x=>L.includes(x))||"mspe"}
 function sgLocal(txt){
   const parts=String(txt).split(/[;\n]+|\.\s+|\s+puis\s+|,?\s+et\s+(?=(?:remplace|ajoute|rajoute|enl[eè]ve|supprime|mets|met|retire|cache|j['’ ]|je |la |le |les |l['’]|plus de|pas de|ce soir|demain))/i).map(s=>s.trim()).filter(Boolean),ops=[];
@@ -2531,24 +2591,29 @@ function sgResetPlan(){const tk=dkey(today()),e=JSON.parse(JSON.stringify(edtP()
   V.sg.idees={msg:"✓ Ton emploi du temps de départ est revenu (à partir d'aujourd'hui).",logId:id};render(true)}
 
 /* ---- envoyer une suggestion : le planning change tout de suite, on peut annuler ---- */
-function sgSnap(){const pl=planDay(today());return{s:objScore().total,f:pl.plan.length?pl.fin:null,r:pl.reste.length}}
-function sgDo(st,scope){const before=sgSnap(),r=sgCompute(st.p.ops,scope);st.res=r;if(!r.lines.length){st.logId=null;return}
-  st.logId=sgCommit(r,st.txt,scope);st.scopes=[...new Set(st.p.ops.filter(o=>SG_SCOPED.includes(o.t)).map(o=>sgSc(o,scope)))];st.eff={a:before,b:sgSnap()}}
+function sgSnap(){const pl=planDay(today());return{s:objScore().total,f:pl.plan.length?pl.fin:null,v:pl.plan.filter(x=>x.k==="hab"||x.k==="pn"||x.k==="x").length}}
+const sgVis=()=>{const p=planDay(today());return{v:p.plan.filter(x=>x.k==="hab"||x.k==="pn"||x.k==="x").map(jKey),r:p.reste.map(jKey)}};
+function sgDo(st,scope){const before=sgSnap(),v0=sgVis(),r=sgCompute(st.p.ops,scope);st.res=r;V.jHi=[];if(!r.lines.length){st.logId=null;return}
+  st.logId=sgCommit(r,st.txt,scope);st.scopes=[...new Set(st.p.ops.filter(o=>SG_SCOPED.includes(o.t)).map(o=>sgSc(o,scope)))];st.eff={a:before,b:sgSnap()};
+  const v1=sgVis(),pr=st.p.ops.filter(o=>o.t==="prio").flatMap(o=>Array.isArray(o.k)?o.k:[o.k]);
+  V.jHi=[...new Set([...v1.v.filter(k=>!v0.v.includes(k)),...pr.filter(k=>v1.v.includes(k))])];
+  st.cache=!V.jHi.length&&v1.v.join()===v0.v.join()&&(v1.r.length>0)}
+function sgShow(){if(V.page!=="jour"||!V.jHi||!V.jHi.length)return;setTimeout(()=>{const el=document.querySelector(".jst.jnew");if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"center"})},60)}
 async function sgSubmit(place,txt){
   txt=String(txt||"").trim();if(!txt)return;const st=V.sg[place]={txt,busy:true};render(true);
   let p=sgLocal(txt);
   if((!p||p.code||p.weak)&&SAMPLE){try{const q=await sgAI(txt,place);if(q.ops.length||q.code||!p)p=q}catch(e){if(!p)st.err=ERR(e.code)}}
   st.busy=false;st.p=p||null;
   if(p&&p.ops.length)sgDo(st,place==="jour"?"auto":"autoA");
-  if(V.sg[place]===st)render(true)}
+  if(V.sg[place]===st){render(true);sgShow()}}
 /* « Plutôt chaque semaine » / « Plutôt juste aujourd'hui » : on annule puis on refait avec l'autre portée */
-function sgSwitch(place){const st=V.sg[place];if(!st||!st.p||!st.logId)return;const to=st.scopes.includes("once")?"always":"once";sgUndo(st.logId,true);sgDo(st,to);render(true)}
+function sgSwitch(place){const st=V.sg[place];if(!st||!st.p||!st.logId)return;const to=st.scopes.includes("once")?"always":"once";sgUndo(st.logId,true);sgDo(st,to);render(true);sgShow()}
 function sgIdee(place){const st=V.sg[place];if(!st)return;sgLog({id:uid(),ts:Date.now(),txt:st.txt,idee:(st.p&&st.p.idee)||st.txt,etat:"idee"});
   V.sg[place]={msg:"💡 Idée gardée dans ta boîte à idées (page 💡 Suggestions)."};render(true)}
 function sgFx(x){const out=[],d=x.b.s-x.a.s;
   if(Math.abs(d)>=0.05)out.push(`🎯 Objectif Top 3 : ${pct1(x.a.s)} % → <b>${pct1(x.b.s)} %</b>`);
   if(x.a.f!=null&&x.b.f!=null&&Math.round(x.a.f)!==Math.round(x.b.f))out.push(`🕒 Ton travail finit maintenant à <b>${fmin(x.b.f)}</b> (au lieu de ${fmin(x.a.f)})`);
-  if(x.b.r!==x.a.r){const n=Math.abs(x.b.r-x.a.r),pl=n>1;out.push(x.b.r<x.a.r?`✓ ${n} tâche${pl?"s":""} de plus rentre${pl?"nt":""} dans ta journée`:`⚠️ ${n} tâche${pl?"s":""} ne rentre${pl?"nt":""} plus aujourd'hui`)}
+  if(x.b.v!==x.a.v){const n=Math.abs(x.b.v-x.a.v),pl=n>1;out.push(x.b.v>x.a.v?`✓ ${n} tâche${pl?"s":""} de plus dans ta journée`:`⚠️ ${n} tâche${pl?"s":""} de moins dans ta journée (voir « Ne rentre pas »)`)}
   return out}
 function sgResult(place){const st=V.sg[place];
   if(st.busy)return`<p class="muted small">Je modifie ton planning…</p>`;
@@ -2557,7 +2622,7 @@ function sgResult(place){const st=V.sg[place];
   if(p&&r&&r.lines.length&&live){const sw=st.scopes.length===1&&(place==="jour"||st.scopes[0]==="once"),jr=place==="jour";
     return`<div class="sgres ok"><p><b>✓ ${jr?"Ton planning est modifié":"C'est fait"}</b>${jr?" : regarde juste en dessous.":""}</p>
       <ul class="sgl">${r.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>${r.notes.length?`<p class="small muted">${esc(r.notes.join(" "))}</p>`:""}
-      ${st.eff?`<div class="sgfx">${sgFx(st.eff).map(x=>`<p>${x}</p>`).join("")}</div>`:""}
+      ${st.eff?`<div class="sgfx">${sgFx(st.eff).map(x=>`<p>${x}</p>`).join("")}</div>`:""}${jr&&st.cache?`<p class="small muted">Les étapes affichées ne bougent pas : ce changement concerne une tâche qui ne rentre pas aujourd'hui (liste « Ne rentre pas », en bas du planning).</p>`:""}${jr&&V.jHi&&V.jHi.length?`<p class="small muted">Les étapes surlignées en vert sont celles qui ont changé.</p>`:""}
       <div class="row">${sw?`<button class="ghost on" data-sgswitch="${place}">${st.scopes[0]==="once"?"Plutôt chaque semaine":"Plutôt juste aujourd'hui"}</button>`:""}<button class="ghost" data-sgundo="${st.logId}">↩︎ Annuler</button><button class="ghost" data-sgno="${place}">OK</button></div></div>`}
   const code=p&&p.code;
   return`<div class="sgres"><p class="small muted">« ${esc(st.txt)} »</p>
@@ -2913,6 +2978,285 @@ function mxSummary(){if(!MXI)mxIndex();const ok=mxTotal();
   return MXI?[`${ok}`,`exercice${ok>1?"s":""} réussi${ok>1?"s":""} · leçons Terminale → licence`]:["Maths","leçons et exercices"]}
 
 /* ================================================================
+   MA JOURNÉE 2 : l'emploi du temps se manipule à la main
+   - fais glisser un bloc pour changer l'heure (par pas de 5 min), tire le haut ou le bas pour changer la durée ;
+   - à droite, les matières : glisse-les dans l'emploi du temps ;
+   - tout ce que tu n'as pas placé à la main s'organise tout seul autour.
+   Un bloc placé à la main est « épinglé » pour ce jour (ou pour chaque semaine).
+   ================================================================ */
+const JPX=1.25;/* pixels par minute */
+const jWork=s=>s&&(s.k==="hab"||s.k==="pn"||s.k==="x");
+const jKeyOf=s=>s.k==="repas"?"repas|"+s.ref:s.k==="bloc"?"bloc|"+s.ref:s.k+"|"+s.ref;
+const jMovable=s=>jWork(s)||s.k==="repas"||s.k==="bloc";
+function jPins(d){const w=((edtP().pinw||{})[d.getDay()])||{},p=(S.jours[dkey(d)]||{}).pin||{};const o={};Object.entries(w).forEach(([k,v])=>o[k]={...v,w:1});Object.entries(p).forEach(([k,v])=>o[k]={...(o[k]||{}),...v,w:o[k]?1:0});return o}
+function jIsDone(dk,key){const a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),j=S.jours[dk]||{},dn=j.done||{};
+  if(kind==="hab")return!!dn[ref];if(kind==="x")return!!(j.extra||[]).find(x=>x.id===ref&&x.ok);
+  if(kind==="pn"){const x=(((S.pronote||{}).data||{}).devoirs||[]).find(y=>y.id===ref);return!!(dn["pn:"+ref]||(x&&x.fait))}return false}
+function jLabelK(dk,key){const a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),j=S.jours[dk]||{};
+  if(kind==="hab")return habL(ref);if(kind==="x"){const x=(j.extra||[]).find(y=>y.id===ref);return x?x.t:"Tâche"}
+  if(kind==="pn"){const x=(((S.pronote||{}).data||{}).devoirs||[]).find(y=>y.id===ref);return x?`${x.m||"Devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`:"Devoir"}return key}
+
+/* le planificateur : mêmes règles qu'avant, mais les blocs épinglés restent à leur place */
+function planDay(d){
+  const dk=dkey(d),P=jParams(dk),isT=dk===dkey(today()),nowM=new Date().getHours()*60+new Date().getMinutes(),pins=jPins(d),jd=S.jours[dk]||{};
+  const L=jLessons(dk),school=L.length>0,steps=[];let t;
+  if(school){
+    const a=Math.min(...L.map(c=>wallMin(c.d))),b=Math.max(...L.map(c=>wallMin(c.f))),tr=V.jTrajet||P.trajet,arr=b+tr,lunch=arr<14*60,rest=lunch?Math.max(P.pause,45):P.pause;
+    steps.push({a,b,k:"cours",l:"Cours au lycée"},{a:b,b:arr,k:"trajet",l:"Retour à la maison"},{a:arr,b:arr+rest,k:"pause",l:lunch?"Déjeuner et te poser":"Te poser (vraie pause, sans écrans si possible)"});
+    t=arr+rest;
+  }else t=hm(P.debutWE);
+  const od=jd.par||{},stop=school||od.stop?hm(P.stop):Math.min(hm(P.stop),hm(P.libreWE)||hm(P.stop));
+  const fixed=[{a:hm(P.diner),b:hm(P.diner)+P.dinerDur,k:"repas",ref:"diner",l:"Dîner"}];
+  if(!school)fixed.push({a:hm(P.dejWE),b:hm(P.dejWE)+60,k:"repas",ref:"dej",l:"Déjeuner"});
+  fixed.forEach(f=>{const p=pins["repas|"+f.ref];if(p&&p.b>p.a){f.a=p.a;f.b=p.b;f.pin=1;f.w=p.w}});
+  (jd.blocs||[]).forEach(x=>{if(x&&x.b>x.a)fixed.push({a:x.a,b:x.b,k:"bloc",ref:x.id,l:x.l||"Pause",pin:1})});
+  let live=false;if(isT&&nowM>t){t=Math.ceil(nowM/5)*5;live=true}
+  const q=jTasks(d),plan=[];let since=0;
+  /* tâche commencée avec ▶ : elle garde son vrai début ; si elle dépasse, le reste se décale */
+  const run=isT?jd.run:null,ri=run?q.findIndex(x=>jKey(x)===run.key):-1;
+  if(ri>=0){const x=q.splice(ri,1)[0],a=tsMin(run.start),end=a+x.min+(run.ext||0),over=nowM>end;
+    plan.push({...x,a,b:over?Math.ceil((nowM+1)/5)*5:end,run:true,over,overBy:Math.round(nowM-end),el:Math.round(nowM-a),dk});t=Math.max(t,plan[0].b);live=true;since=Math.max(0,nowM-a);}
+  /* les tâches épinglées deviennent des blocs fixes */
+  for(let i=q.length-1;i>=0;i--){const x=q[i],p=pins[jKey(x)];if(p&&p.b>p.a&&!p.done){q.splice(i,1);fixed.push({...x,a:p.a,b:p.b,pin:1,w:p.w,dk:x.dk})}}
+  fixed.sort((x,y)=>x.a-y.a);
+  for(let guard=0;guard<120&&q.length;guard++){
+    const fb=fixed.find(f=>!f.used&&f.b>t);
+    if(fb&&t>=fb.a){fb.used=1;plan.push(fb.pin?{...fb}:{...fb,a:Math.max(fb.a,t)});t=Math.max(t,fb.b);since=0;continue}
+    if(t>=stop)break;
+    const lim=Math.min(fb?fb.a:stop,stop);
+    if(since>=50&&lim-t>=25){plan.push({a:t,b:t+10,k:"pause",l:"Pause : bouge, bois de l'eau"});t+=10;since=0;continue}
+    const i=q.findIndex(x=>x.min<=lim-t);
+    if(i<0){if(fb&&fb.a<stop&&fb.a>t){if(fb.a-t>=5)plan.push({a:t,b:fb.a,k:"libre",l:"Temps libre"});t=fb.a;continue}break}
+    const x=q.splice(i,1)[0];plan.push({...x,a:t,b:t+x.min});t+=x.min;since=x.ref==="sport"?0:since+x.min;
+  }
+  /* blocs fixes pas encore placés (épinglés, ou repas dans la soirée) */
+  fixed.filter(f=>!f.used&&(f.pin||(f.k==="repas"&&f.a>=t&&f.a<stop+60))).forEach(f=>{f.used=1;plan.push({...f})});
+  /* tâches déjà faites et épinglées : elles restent visibles à leur place */
+  Object.entries(pins).forEach(([k,p])=>{if(p.done&&p.b>p.a&&jIsDone(dk,k)&&!plan.some(s=>jKey(s)===k)){const a=k.indexOf("|");plan.push({k:k.slice(0,a),ref:k.slice(a+1),l:jLabelK(dk,k),a:p.a,b:p.b,pin:1,w:p.w,done:true,min:p.b-p.a})}});
+  plan.sort((x,y)=>x.a-y.a);
+  const fin=plan.filter(jWork).reduce((m,s)=>Math.max(m,s.b),0)||t;
+  return{dk,school,live,steps:live?[]:steps,steps0:steps,plan,reste:q,fin,stop,first:school?steps[0]:null};
+}
+
+/* ---- écrire dans la journée ---- */
+function jDayDoc(dk){const j=S.jours[dk]||{};return{...j,date:dk,done:j.done||{}}}
+function jPinSet(dk,key,p,quiet){const j=jDayDoc(dk);
+  if(key.startsWith("bloc|")){const id=key.slice(5);j.blocs=(j.blocs||[]).map(x=>x.id===id?{...x,...(p||{})}:x).filter(x=>p||x.id!==id);return put("jours",dk,j,quiet)}
+  const pin={...(j.pin||{})};if(p){pin[key]={...(pin[key]||{}),...p};delete pin[key].w}else delete pin[key];j.pin=pin;return put("jours",dk,j,quiet)}
+function jDateOf(dk){const[y,m,d]=dk.split("-").map(Number);return new Date(y,m-1,d)}
+function jFind(dk,key){const pl=planDay(jDateOf(dk));return[...pl.steps0,...pl.plan].find(s=>jKeyOf(s)===key)}
+/* placer une matière de la palette à l'heure a */
+function jPlace(dk,it,a){const d=jDateOf(dk),j=jDayDoc(dk),P=jParams(dk);a=Math.max(0,Math.min(24*60-10,a));
+  if(it.t==="pause"){j.blocs=[...(j.blocs||[]),{id:uid(),l:"Pause",a,b:a+15}];return put("jours",dk,j)}
+  if(it.t==="hab"){const id=it.id,plan=planOf(d).slice();if(!plan.includes(id))plan.push(id);j.plan=plan;
+    const m=id==="sport"?jDur("sport",P.sportTrajet+P.sportDur):jDur(id,jBase(id));j.pin={...(j.pin||{}),["hab|"+id]:{a,b:a+m}};return put("jours",dk,j)}
+  j.pin={...(j.pin||{}),[it.key]:{a,b:a+(it.min||30)}};return put("jours",dk,j)}
+/* enlever un bloc de la journée (il retourne dans la palette) */
+function jOut(dk,key){const d=jDateOf(dk),j=jDayDoc(dk),a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),pin={...(j.pin||{})};delete pin[key];j.pin=pin;
+  if(kind==="hab")j.plan=planOf(d).filter(h=>h!==ref);
+  else if(kind==="x")j.extra=(j.extra||[]).filter(x=>x.id!==ref);
+  else if(kind==="pn")j.report={...(j.report||{}),[key]:true};
+  else if(kind==="bloc")j.blocs=(j.blocs||[]).filter(x=>x.id!==ref);
+  V.jsel=null;return put("jours",dk,j)}
+function jDoneSet(dk,key,ok){const s=jFind(dk,key);if(s&&ok){const j=jDayDoc(dk);j.pin={...(j.pin||{}),[key]:{...((j.pin||{})[key]||{}),a:s.a,b:s.b,done:1}};S.jours[dk]=j}
+  if(!ok){const j=jDayDoc(dk);if(j.pin&&j.pin[key]){j.pin={...j.pin,[key]:{...j.pin[key],done:0}};S.jours[dk]=j}}
+  return jMark(dk,key,ok)}
+/* « chaque lundi à cette heure » : épingle dans l'emploi du temps de la semaine */
+function jWeekPin(dk,key){const d=jDateOf(dk),wd=d.getDay(),e=JSON.parse(JSON.stringify(edtP())),pw=e.pinw||{},w={...(pw[wd]||{})};
+  if(w[key]){delete w[key]}else{const s=jFind(dk,key);if(!s)return;w[key]={a:s.a,b:s.b}}
+  e.pinw={...pw,[wd]:w};put("params","edt",e,true);render(true)}
+/* ▶ commencer : la tâche quitte sa place épinglée et démarre maintenant ; ✓ fini : elle reste visible où elle a été faite */
+const jStart0=jStart;jStart=function(s){const b=s.lastIndexOf("|"),key=s.slice(0,b),dk=s.slice(b+1),j=S.jours[dk]||{};
+  if(j.pin&&j.pin[key]&&!j.pin[key].done){const p={...j.pin};delete p[key];S.jours[dk]={...j,pin:p}}V.jsel=null;return jStart0(s)};
+const jFinish0=jFinish;jFinish=function(){const td=dkey(today()),j=S.jours[td]||{},run=j.run;
+  if(run){const a=Math.floor(tsMin(run.start)/5)*5,b=Math.max(a+5,Math.ceil(nowMin()/5)*5);S.jours[td]={...j,pin:{...(j.pin||{}),[run.key]:{a,b,done:1}}}}return jFinish0()};
+
+/* ---- affichage ---- */
+function jCol(s){if(s.k==="cours"||s.k==="trajet")return"#8a94a6";if(s.k==="repas")return"#d39b00";if(s.k==="pause"||s.k==="libre"||s.k==="bloc")return"#4fa38a";if(s.k==="pn")return"var(--pron)";if(s.k==="x")return"var(--jour)";
+  const r=String(s.ref||"");return/^m/.test(r)?"var(--mx)":/^f/.test(r)?"#e07b39":r==="esp"||r==="ang"?"#0ea5b7":r==="piano"?"#7a5cff":r==="sport"?"#f2407d":"var(--jour)"}
+function jLanes(items){const out=new Map(),s=[...items].sort((x,y)=>x.a-y.a||y.b-x.b);let cl=[],cols=[],end=-1;
+  const flush=()=>{cl.forEach(it=>out.get(it).n=cols.length);cl=[];cols=[];end=-1};
+  s.forEach(it=>{if(cl.length&&it.a>=end)flush();let c=cols.findIndex(e=>e<=it.a);if(c<0){c=cols.length;cols.push(it.b)}else cols[c]=it.b;out.set(it,{c,n:1});cl.push(it);end=Math.max(end,it.b)});if(cl.length)flush();return out}
+function jPalette(d,pl){const dk=dkey(d),inPlan=new Set(planOf(d)),items=[];
+  pl.reste.forEach(x=>items.push({t:"task",key:jKey(x),min:x.min,l:x.l,k:x.k,ref:x.ref,g:"À caser"}));
+  Object.keys(HABITS).filter(h=>!inPlan.has(h)&&!doneOf(d)[h]).forEach(h=>items.push({t:"hab",id:h,l:habL(h),k:"hab",ref:h,min:h==="sport"?jParams(dk).sportDur+jParams(dk).sportTrajet:jDur(h,jBase(h)),g:"Ajouter"}));
+  items.push({t:"pause",l:"Pause",k:"bloc",ref:"",min:15,g:"Ajouter"});
+  let g="";return items.map((it,i)=>{const h=it.g!==g?`<p class="jpg">${it.g==="À caser"?"Ne rentre pas : glisse-les":"Ajouter"}</p>`:"";g=it.g;
+    return h+`<div class="jpi" data-jpal="${i}" style="--b:${jCol(it)}" title="${esc(it.l)}"><span>${jIcon(it.k,it.ref)}</span><b>${esc(it.l)}</b><small>${fdur(it.min)}</small></div>`}).join("")+`<p class="jpg jdrop">⬅ Glisse un bloc ici pour l'enlever de la journée</p>`}
+function jTimeline(d,pl,isT){
+  const dk=dkey(d),nowM=nowMin();let items=[...pl.steps0,...pl.plan].filter(s=>s.b>s.a);
+  /* les jours de cours, l'emploi du temps commence à la sortie du lycée (les heures de cours ne se déplacent pas) */
+  const own=items.filter(s=>s.k!=="cours"&&s.k!=="trajet").map(s=>s.a),lo0=Math.min(...own,isT?nowM:24*60,pl.school?pl.steps0[0].b:hm(jParams(dk).debutWE)),hi0=Math.max(...items.map(s=>s.b),pl.stop,isT?nowM+60:0);
+  const st=Math.max(0,Math.floor(lo0/60)*60),en=Math.min(24*60,Math.ceil(hi0/60)*60);items=items.filter(s=>s.b>st);const lanes=jLanes(items);
+  V.jRange={st,en,dk};const pal=jPalette(d,pl);V.jPalItems=null;
+  const hrs=[];for(let h=st;h<=en;h+=60)hrs.push(`<span class="jhl" style="top:${(h-st)*JPX}px">${h/60} h</span>`);
+  const blocks=items.map(s=>{const ln=lanes.get(s),key=jKeyOf(s),mv=jMovable(s),sel=V.jsel===key&&V.jselDk===dk,h=(s.b-s.a)*JPX;
+    return`<div class="jb ${mv?"mv":"fx"} ${s.done?"done":""} ${s.pin?"pin":""} ${s.run?"run":""} ${s.over?"over":""} ${sel?"sel":""} ${h<34?"tiny":""} ${V.jHi&&V.jHi.includes(key)?"jnew":""}" ${mv?`data-jb="${esc(key)}" data-a="${s.a}" data-b="${s.b}" tabindex="0" role="button" aria-label="${esc(s.l)}, ${fmin(s.a)} à ${fmin(s.b)}"`:""} style="--b:${jCol(s)};top:${(Math.max(s.a,st)-st)*JPX}px;height:${Math.max(16,(s.b-Math.max(s.a,st))*JPX-2)}px;left:calc(${ln.c/ln.n*100}% + 2px);width:calc(${100/ln.n}% - 4px)">
+      ${mv&&!s.done?`<i class="jh t" data-jh="a"></i>`:""}<b>${s.done?"✓ ":""}${jIcon(s.k,s.ref)} ${esc(s.l)}</b><small>${fmin(s.a)}–${fmin(s.b)}${s.pin?(s.w?" · 📌 chaque semaine":" · placé à la main"):""}</small>${mv&&!s.done?`<i class="jh bt" data-jh="b"></i>`:""}</div>`}).join("");
+  return`<div class="jcal"><div class="jhrs" style="height:${(en-st)*JPX}px">${hrs.join("")}</div>
+    <div class="jgrid" id="jgrid" style="height:${(en-st)*JPX}px;--hh:${60*JPX}px">${blocks}${isT&&nowM>=st&&nowM<=en?`<div class="jnowl" style="top:${(nowM-st)*JPX}px"><span>${fmin(nowM)}</span></div>`:""}</div>
+    <aside class="jpal" id="jpal" aria-label="Matières à placer">${pal}</aside></div>`}
+function jSheet(d,pl){if(!V.jsel||V.jselDk!==dkey(d))return"";const dk=dkey(d),key=V.jsel,s=jFind(dk,key);if(!s){V.jsel=null;return""}
+  const w=jWork(s),wd=JOURS[d.getDay()].toLowerCase(),isT=dk===dkey(today()),wk=!!(((edtP().pinw||{})[d.getDay()]||{})[key]);
+  return`<div class="jsheet card" role="dialog" aria-label="${esc(s.l)}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${jIcon(s.k,s.ref)} ${esc(s.l)}</b><button class="ghost" data-jclose="1" aria-label="Fermer">✕</button></div>
+    ${s.done?`<p class="small muted">Fait de ${fmin(s.a)} à ${fmin(s.b)}.</p>`:`<div class="jadj"><span>Début <b class="num">${fmin(s.a)}</b></span><button class="ghost" data-jadj="a|-5">−5</button><button class="ghost" data-jadj="a|5">+5</button>
+      <span>Fin <b class="num">${fmin(s.b)}</b></span><button class="ghost" data-jadj="b|-5">−5</button><button class="ghost" data-jadj="b|5">+5</button></div>`}
+    <div class="row">${w?(s.done?`<button class="ghost" data-jfait="0">↺ Pas fait</button>`:`<button class="btn" data-jfait="1">✓ Fait</button>${isT&&!s.run?`<button class="ghost on" data-jstart="${esc(key)}">▶ Commencer</button>`:""}`):""}
+      ${!s.done&&s.k!=="bloc"?`<button class="ghost ${wk?"on":""}" data-jweek="1">📌 ${wk?"Plus chaque "+wd:"Chaque "+wd+" à cette heure"}</button>`:""}
+      ${s.pin&&!s.done&&!wk?`<button class="ghost" data-jauto="1">✨ Remettre en automatique</button>`:""}
+      ${s.k!=="repas"?`<button class="ghost danger" data-jout="1">Enlever de la journée</button>`:""}</div></div>`}
+function pageJour(){
+  const d=V.jdk?jDateOf(V.jdk):today();V.jdk=dkey(d);
+  const isT=V.jdk===dkey(today()),pl=planDay(d),{cur,next}=isT?jCurrent(pl):{};
+  const head=`<div class="seg" role="group" aria-label="Jour">${[0,1].map(i=>{const x=add(today(),i);return`<button data-jday="${dkey(x)}" aria-pressed="${dkey(x)===V.jdk}">${i?"Demain":"Aujourd'hui"}</button>`}).join("")}</div>`;
+  const R=pl.plan.find(s=>s.run),todo=jWork(cur)&&!cur.done?cur:jWork(next)&&!next.done?next:null;
+  const now=!isT?"":R?`<div class="card jnow ${R.over?"over":""}"><p class="label" style="margin:0">${R.over?`⏱️ Tu dépasses de ${fdur(Math.max(1,R.overBy))}`:"▶ En cours"}</p>
+      <b>${jIcon(R.k,R.ref)} ${esc(R.l)}</b><span class="muted small">commencé à ${fmin(R.a)} · ${fdur(Math.max(0,R.el))} passées${R.over?"":` · fin prévue ${fmin(R.b)}`}</span>
+      <div class="bar"><i style="width:${R.over?100:Math.min(100,Math.max(0,R.el)/Math.max(1,R.b-R.a)*100)}%"></i></div>
+      <div class="row"><button class="btn" data-jfini="1">✓ J'ai fini</button><button class="ghost on" data-jplus="15">+15 min</button>${R.over?`<button class="ghost" data-jdemain="1">Je finis demain</button>`:`<button class="ghost" data-jstop="1">Arrêter</button>`}</div></div>`
+    :`<div class="card jnow">${cur?`<p class="label" style="margin:0">En ce moment · jusqu'à ${fmin(cur.b)}</p><b>${jIcon(cur.k,cur.ref)} ${esc(cur.l)}</b>`:next?`<p class="label" style="margin:0">À ${fmin(next.a)}</p><b>${jIcon(next.k,next.ref)} ${esc(next.l)}</b>`:`<b>✓ Journée bouclée</b><span class="muted small">Plus rien de prévu. Repose-toi !</span>`}
+      ${todo?`<div><button class="btn" data-jstart="${esc(jKey(todo))}">▶ Commencer : ${esc(todo.l.length>30?todo.l.slice(0,29)+"…":todo.l)}</button></div>`:""}</div>`;
+  const P=jParams(),xs=jExtras(V.jdk);
+  return`${head}${now}${sgCard("jour")}
+  <div class="card stack jcard" style="gap:10px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">🗓️ ${isT?"Aujourd'hui":"Demain"}</p><button class="ghost" data-jtout="1">${V.confirm==="jtout"?"Confirmer":"✨ Tout réorganiser"}</button></div>
+    <p class="muted small" style="margin:0">Fais glisser un bloc pour changer l'heure, tire son haut ou son bas pour la durée${matchMedia&&matchMedia("(pointer:coarse)").matches?" (appuie une demi-seconde avant de glisser)":""}. Glisse une matière de la droite pour l'ajouter. Le reste s'organise tout seul.</p>
+    ${jTimeline(d,pl,isT)}</div>${jSheet(d,pl)}
+  <div class="card stack" style="gap:10px"><p class="label" style="margin:0">Tâches en plus pour ${isT?"aujourd'hui":"demain"}</p>
+    ${xs.length?`<ul class="list">${xs.map(x=>`<li class="row" style="justify-content:space-between;flex-wrap:nowrap;padding:8px 0"><span>${x.ok?"✓ ":""}${esc(x.t)} <span class="muted small">· ${x.min} min</span></span><button class="ghost" data-jdel="${x.id}" aria-label="Supprimer">✕</button></li>`).join("")}</ul>`:""}
+    <form class="row jadd" data-f="jadd" style="flex-direction:row;flex-wrap:nowrap"><input class="field" id="jadd-t" name="t" placeholder="Ex. apprendre le texte d'anglais" autocomplete="off" required>
+    <select class="field" name="min" style="flex:0 0 92px">${[15,20,30,45,60,90].map(m=>`<option value="${m}" ${m===30?"selected":""}>${m} min</option>`).join("")}</select><button class="btn" aria-label="Ajouter">+</button></form></div>
+  <details class="card"><summary class="label" style="margin:0;cursor:pointer">⚙️ Mes réglages de journée</summary>
+    <form data-f="jparams" class="stack" style="gap:8px;margin-top:10px">
+    ${[["trajet","Retour des cours (min)","number"],["pause","Pause en rentrant (min)","number"],["diner","Heure du dîner","time"],["dinerDur","Durée du dîner (min)","number"],["stop","J'arrête de travailler à","time"],["debutWE","Le week-end, je commence à","time"],["dejWE","Déjeuner le week-end","time"],["libreWE","Le week-end, libre à partir de","time"],["sportTrajet","Trajets salle de sport, aller + retour (min)","number"],["sportDur","Séance de sport (min)","number"],["devoir","Temps par devoir Pronote (min)","number"]]
+      .map(([k,l,ty])=>`<label class="row jpr"><span>${l}</span><input class="field" name="${k}" type="${ty}" ${ty==="number"?'inputmode="numeric" min="0" step="5"':""} value="${esc(ty==="time"?String(P[k]).padStart(5,"0"):P[k])}"></label>`).join("")}
+    <div><button class="btn">Enregistrer</button></div></form>
+    ${Object.keys(jLearn()).length?`<div class="stack" style="gap:6px;margin-top:14px"><p class="label" style="margin:0">Ton vrai rythme (appris avec ▶ Commencer)</p>
+      ${Object.entries(jLearn()).map(([r,a])=>`<div class="row" style="justify-content:space-between"><span>${esc(r==="devoir"?"Un devoir Pronote":r==="sport"?"Sport (trajets compris)":habN(r))}</span><span class="muted small">${a.length>=2?fdur(jDur(r,0))+" en moyenne":"encore 1 mesure"} · ${a.length} fois</span></div>`).join("")}
+      <div><button class="ghost" data-jreset="1">${V.confirm==="jreset"?"Confirmer : tout oublier":"Oublier ces durées"}</button></div></div>`:""}</details>`;
+}
+function sgShowJ(){setTimeout(()=>{const el=document.querySelector(".jb.jnew");if(el&&el.scrollIntoView)el.scrollIntoView({behavior:"smooth",block:"center"})},60)}
+/* à la première ouverture du jour, on fait défiler jusqu'à maintenant */
+function jAfter(){if(V.page!=="jour")return;const k=V.jdk+"|"+(V.jdk===dkey(today()));if(V.jScrolled===k)return;V.jScrolled=k;
+  setTimeout(()=>{const el=document.querySelector(".jnowl")||document.querySelector(".jb.mv");if(el&&el.scrollIntoView)el.scrollIntoView({block:"center"})},30)}
+
+/* ---- glisser-déposer (souris et doigt) ---- */
+let JD=null;
+const jSnap=m=>Math.round(m/5)*5;
+function jMinAt(y){const g=document.getElementById("jgrid");if(!g||!V.jRange)return null;const r=g.getBoundingClientRect();return V.jRange.st+(y-r.top)/JPX}
+function jOver(id,x,y){const e=document.getElementById(id);if(!e)return false;const r=e.getBoundingClientRect();return x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom}
+function jTip(x,y,t){let tp=document.getElementById("jtip");if(!tp){tp=document.createElement("div");tp.id="jtip";tp.className="jtip";document.body.appendChild(tp)}tp.textContent=t;tp.style.left=x+"px";tp.style.top=(y-44)+"px";tp.hidden=false}
+function jTipOff(){const tp=document.getElementById("jtip");if(tp)tp.hidden=true}
+function jdStart(){const d=JD;d.active=true;try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}document.body.classList.add("jdragging");
+  if(d.kind==="new"){const g=d.el.cloneNode(true);g.classList.add("jghost");g.removeAttribute("data-jpal");document.body.appendChild(g);d.ghost=g}else d.el.classList.add("drag")}
+function jdMove(e){const d=JD,x=e.clientX,y=e.clientY;
+  if(y<70)window.scrollBy(0,-12);else if(y>innerHeight-70)window.scrollBy(0,12);
+  const pal=jOver("jpal",x,y);document.getElementById("jpal")&&document.getElementById("jpal").classList.toggle("hot",pal&&d.kind!=="new");
+  if(d.kind==="new"){d.ghost.style.left=x+"px";d.ghost.style.top=y+"px";const m=jMinAt(y),inG=jOver("jgrid",x,y);d.na=inG&&m!=null?jSnap(m-5):null;
+    if(d.na!=null)jTip(x,y,`${fmin(d.na)} → ${fmin(d.na+d.min)}`);else jTipOff();return}
+  const m=jMinAt(y);if(m==null)return;const dm=jSnap(m-d.m0);let a=d.a0,b=d.b0;
+  if(d.kind==="move"){a=d.a0+dm;b=d.b0+dm;if(a<0){b-=a;a=0}if(b>24*60){a-=b-24*60;b=24*60}}else if(d.kind==="a")a=Math.min(d.a0+dm,d.b0-10);else b=Math.max(d.b0+dm,d.a0+10);
+  d.na=a;d.nb=b;d.el.style.top=(a-V.jRange.st)*JPX+"px";d.el.style.height=Math.max(16,(b-a)*JPX-2)+"px";const sm=d.el.querySelector("small");if(sm)sm.textContent=`${fmin(a)}–${fmin(b)}`;
+  jTip(x,y,pal?"Enlever de la journée":`${fmin(a)} → ${fmin(b)}`)}
+function jdEnd(e){const d=JD;JD=null;clearTimeout(d.timer);jTipOff();document.body.classList.remove("jdragging");if(d.ghost)d.ghost.remove();
+  if(!d.active){if(d.moved)return;if(d.kind!=="new"){V.jsel=d.key;V.jselDk=V.jdk;return render(true)}
+    /* toucher une matière sans la glisser : elle s'ajoute et se range toute seule */
+    if(d.it.t==="hab"){const dd=jDateOf(V.jdk),j=jDayDoc(V.jdk),pl=planOf(dd).slice();if(!pl.includes(d.it.id))pl.push(d.it.id);j.plan=pl;V.jHi=["hab|"+d.it.id];put("jours",V.jdk,j);return sgShowJ()}
+    if(d.it.t==="pause"){V.jHi=[];jPlace(V.jdk,d.it,jSnap(Math.max(nowMin(),V.jRange?V.jRange.st:0)+5));return}
+    jTip(d.x0,d.y0,"Glisse-la dans l'emploi du temps");setTimeout(jTipOff,1600);return}
+  const dk=V.jdk,x=e.clientX,y=e.clientY;
+  if(d.kind==="new"){if(d.na!=null){V.jHi=[];jPlace(dk,d.it,d.na);V.jHi=[d.it.t==="hab"?"hab|"+d.it.id:d.it.key||""]}render(true);return}
+  if(jOver("jpal",x,y)){V.jHi=[];jOut(dk,d.key);render(true);return}
+  if(d.na!=null&&(d.na!==d.a0||d.nb!==d.b0)){V.jHi=[d.key];jPinSet(dk,d.key,{a:d.na,b:d.nb})}render(true)}
+document.addEventListener("pointerdown",e=>{if(V.page!=="jour"||e.button>0||JD)return;
+  const bl=e.target.closest("[data-jb]"),pi=e.target.closest("[data-jpal]");if(!bl&&!pi)return;
+  const touch=e.pointerType!=="mouse",m=jMinAt(e.clientY);
+  if(pi){const it=jPaletteItem(+pi.dataset.jpal);if(!it)return;JD={kind:"new",el:pi,it,min:it.min||30,x0:e.clientX,y0:e.clientY,pid:e.pointerId,touch}}
+  else{const hd=e.target.closest("[data-jh]");if(bl.classList.contains("done")&&hd)return;JD={kind:hd?hd.dataset.jh:"move",el:bl,key:bl.dataset.jb,a0:+bl.dataset.a,b0:+bl.dataset.b,m0:m,x0:e.clientX,y0:e.clientY,pid:e.pointerId,touch}}
+  if(touch)JD.timer=setTimeout(()=>{if(JD&&!JD.moved&&!JD.active)jdStart()},280)});
+document.addEventListener("pointermove",e=>{const d=JD;if(!d||e.pointerId!==d.pid)return;
+  if(!d.active){if(Math.hypot(e.clientX-d.x0,e.clientY-d.y0)>7){if(d.touch){d.moved=true;clearTimeout(d.timer);JD=null;return}jdStart()}else return}
+  e.preventDefault();jdMove(e)},{passive:false});
+document.addEventListener("pointerup",e=>{if(JD&&e.pointerId===JD.pid)jdEnd(e)});
+document.addEventListener("pointercancel",()=>{if(!JD)return;const d=JD;JD=null;clearTimeout(d.timer);jTipOff();document.body.classList.remove("jdragging");if(d.ghost)d.ghost.remove();render(true)});
+document.addEventListener("touchmove",e=>{if(JD&&JD.active)e.preventDefault()},{passive:false});
+document.addEventListener("contextmenu",e=>{if(JD)e.preventDefault()});
+/* les éléments de la palette sont recalculés au moment du clic (même ordre que l'affichage) */
+function jPaletteItem(i){const d=jDateOf(V.jdk),pl=planDay(d),inPlan=new Set(planOf(d)),items=[];
+  pl.reste.forEach(x=>items.push({t:"task",key:jKey(x),min:x.min}));
+  Object.keys(HABITS).filter(h=>!inPlan.has(h)&&!doneOf(d)[h]).forEach(h=>items.push({t:"hab",id:h,min:h==="sport"?jParams(V.jdk).sportDur+jParams(V.jdk).sportTrajet:jDur(h,jBase(h))}));
+  items.push({t:"pause",min:15});return items[i]}
+/* clavier : Entrée ouvre le réglage du bloc */
+document.addEventListener("keydown",e=>{if(e.key!=="Enter"||V.page!=="jour")return;const bl=e.target.closest&&e.target.closest("[data-jb]");if(bl){V.jsel=bl.dataset.jb;V.jselDk=V.jdk;render(true)}});
+/* boutons du réglage d'un bloc */
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button");if(!b||V.page!=="jour")return;const d=b.dataset,dk=V.jdk,key=V.jsel;
+  if(d.jclose){V.jsel=null;return render(true)}
+  if(d.jtout)return confirmOr("jtout",()=>{const j=jDayDoc(dk),pin={};Object.entries(j.pin||{}).forEach(([k,p])=>{if(p.done)pin[k]=p});j.pin=pin;V.jsel=null;put("jours",dk,j)});
+  if(!key)return;
+  if(d.jadj){const[w,n]=d.jadj.split("|"),s=jFind(dk,key);if(!s)return;let a=s.a,bb=s.b;if(w==="a")a=Math.min(s.a+ +n,s.b-10);else bb=Math.max(s.b+ +n,s.a+10);V.jHi=[key];return jPinSet(dk,key,{a,b:bb})}
+  if(d.jfait!==undefined){V.jsel=null;return jDoneSet(dk,key,d.jfait==="1")}
+  if(d.jweek)return jWeekPin(dk,key);
+  if(d.jauto){V.jsel=null;return jPinSet(dk,key,null)}
+  if(d.jout)return jOut(dk,key);
+});
+
+/* ================================================================
+   WEEK-END : samedi et dimanche forment un seul bloc dans le suivi d'habitudes.
+   Une tâche du week-end compte une seule fois, qu'elle soit faite le samedi ou le dimanche :
+   si tu la fais samedi, elle ne revient pas dimanche (ni dans la liste, ni dans Ma journée).
+   ================================================================ */
+const isWE=d=>d.getDay()===6||d.getDay()===0;
+function weBlock(d){const s=d.getDay()===6?d:add(d,-1);return[s,add(s,1)]}
+const weHasToday=d=>isWE(d)&&weBlock(d).some(x=>+x===+today());
+/* ce qui est coché ce jour-là (pour le week-end : samedi + dimanche) */
+function doneOf(d){if(!isWE(d))return(S.jours[dkey(d)]||{}).done||{};const[a,b]=weBlock(d);return{...((S.jours[dkey(a)]||{}).done||{}),...((S.jours[dkey(b)]||{}).done||{})}}
+/* les tâches d'un jour, ou du bloc week-end (sans doublon) */
+function unitItems(d){const days=isWE(d)?weBlock(d):[d],dn=doneOf(d),hab=[],pn=[],xs=[];
+  days.forEach(x=>{planOf(x).forEach(h=>{if(!hab.includes(h))hab.push(h)});pnTasks(x).forEach(y=>{if(!pn.some(z=>z.id===y.id))pn.push({...y,_dk:dkey(x)})});((S.jours[dkey(x)]||{}).extra||[]).forEach(e=>xs.push({...e,_dk:dkey(x)}))});
+  return{days,dn,hab,pn,xs}}
+function dayStats(d){const u=unitItems(d),k=u.dn;return{n:u.hab.filter(h=>k[h]).length+u.pn.filter(x=>x.fait||k["pn:"+x.id]).length+u.xs.filter(x=>x.ok).length,t:u.hab.length+u.pn.length+u.xs.length}}
+/* objectif Top 3 : le bloc week-end compte une fois (le samedi tant que dimanche n'est pas arrivé, sinon le dimanche) */
+function dayW(d){if(d.getDay()===6&&+today()>+d)return{n:0,t:0};
+  const u=unitItems(d),k=u.dn;let n=0,t=0;u.hab.forEach(h=>{const w=tW(h);t+=w;if(k[h])n+=w});u.pn.forEach(x=>{const w=tW("devoir");t+=w;if(x.fait||k["pn:"+x.id])n+=w});u.xs.forEach(x=>{t+=1;if(x.ok)n+=1});return{n,t}}
+/* série de jours parfaits : le week-end compte pour un */
+function streak(){const prev=x=>x.getDay()===0?add(x,-2):add(x,-1);let d=today(),s=0;const t=dayStats(d);if(t.n<t.t)d=prev(d);
+  for(let i=0;i<400;i++){const x=dayStats(d);if(x.t&&x.n===x.t){s++;d=prev(d)}else break}return s}
+function weekSeries(nw){const o=[],m0=monday(today());for(let w=nw-1;w>=0;w--){const m=add(m0,-7*w);let n=0,t=0;
+  for(let i=0;i<6;i++){const d=add(m,i);if(d>today())break;const s=dayStats(d);n+=s.n;t+=s.t}o.push({m,p:t?n/t:0})}return o}
+/* navigation : lundi ← week-end ← vendredi */
+const habPrev=d=>isWE(d)?add(weBlock(d)[0],-1):add(d,-1);
+const habNext=d=>isWE(d)?add(weBlock(d)[1],1):add(d,1);
+const habCanGo=d=>d<=today()||weHasToday(d);
+/* cocher : dans le week-end, la case vaut pour samedi et dimanche */
+function habToggle(d,h,on){const ks=isWE(d)?weBlock(d).map(dkey):[dkey(d)],tk=dkey(today());
+  if(on){const k=ks.includes(tk)?tk:ks[0],j=S.jours[k]||{};return put("jours",k,{...j,date:k,done:{...(j.done||{}),[h]:true}})}
+  ks.forEach(k=>{const j=S.jours[k];if(j&&j.done&&j.done[h]){const dn={...j.done};delete dn[h];put("jours",k,{...j,done:dn})}})}
+function pageHab(){
+  const d=V.day,we=isWE(d),u=unitItems(d),k=u.dn,{n,t}=dayStats(d),isT=we?weHasToday(d):+d===+today(),m=monday(today());
+  const [sa,su]=weBlock(d),addK=we?(weHasToday(d)?dkey(today()):dkey(sa)):dkey(d);
+  const week=[0,1,2,3,4,5].map(i=>{const x=add(m,i),s=dayStats(x),wb=i===5,f=wb?!(x<=today()||weHasToday(x)):x>today(),on=wb?isWE(d)&&+weBlock(d)[0]===+x:+x===+d;
+    return`<button class="wd ${on?"on":""} ${wb?"wdwe":""}" data-go="${dkey(x)}" ${f?'disabled style="opacity:.4"':""}><b>${wb?"WE":JOURS[x.getDay()].slice(0,1)}</b><span class="vb"><i style="height:${s.t?s.n/s.t*100:0}%"></i></span><span class="num">${s.n}/${s.t}</span></button>`}).join("");
+  const title=we?(isT?"Ce week-end":"Week-end"):isT?"Aujourd'hui":JOURS[d.getDay()];
+  const sub=we?`sam. ${sa.getDate()}${sa.getMonth()!==su.getMonth()?" "+MOIS[sa.getMonth()]:""} et dim. ${su.getDate()} ${MOIS[su.getMonth()]}`:`${JOURS[d.getDay()].toLowerCase()} ${d.getDate()} ${MOIS[d.getMonth()]}`;
+  return`
+  <div class="card stack">
+    <div class="daybar"><button data-a="prev" aria-label="Précédent">‹</button>
+      <div class="dayname"><b>${title}</b><small>${sub}</small></div>
+      <button data-a="next" aria-label="Suivant" ${habCanGo(habNext(d))?"":"disabled"}>›</button></div>
+    <div class="row" style="gap:14px">${ring(t?n/t:0,"--hab")}<div><b style="font-family:var(--display);font-size:1.4rem" class="num">${n} / ${t}</b><div class="muted">${n===t?(we?"Week-end bouclé":"Journée bouclée"):(t-n)+" à faire"}</div></div></div>
+    ${we?`<p class="small muted" style="margin:0">Une tâche du week-end compte une fois : fais-la samedi ou dimanche, comme tu veux.</p>`:""}
+    <ul class="list">${u.hab.map(h=>`<li><label class="chk"><input type="checkbox" id="hab-${h}" data-hab="${h}" ${k[h]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(habN(h))}</span><span class="tag">${(HABITS[h]||[])[1]||""}</span></label></li>`).join("")}${u.pn.map(x=>`<li><label class="chk"><input type="checkbox" id="hab-pn-${sid(x.id)}" data-pnd="${esc(x.id)}|${x._dk}" ${x.fait||k["pn:"+x.id]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.m||"Devoir")}<small class="pnhw">${esc(String(x.txt||"").slice(0,140))}</small></span><span class="tag">Devoir</span></label></li>`).join("")}${u.xs.map(x=>`<li><label class="chk"><input type="checkbox" id="hab-x-${x.id}" data-jt="x|${x.id}|${x._dk}" ${x.ok?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.t)}</span><span class="tag">${x.min} min</span></label></li>`).join("")}</ul>
+    <form class="row" data-f="jadd" data-dk="${addK}" style="flex-direction:row;flex-wrap:nowrap"><input class="field" id="hab-add" name="t" placeholder="+ Ajouter une tâche pour ${we?"ce week-end":"ce jour"}" autocomplete="off" required><input type="hidden" name="min" value="30"><button class="ghost on" aria-label="Ajouter">Ajouter</button></form>
+  </div>
+  <div><p class="label">Cette semaine</p><div class="week" style="grid-template-columns:repeat(6,minmax(0,1fr))">${week}</div></div>
+  <div class="stats"><div class="stat"><b>${streak()}</b><span>jours parfaits d'affilée (le week-end compte pour un)</span></div>
+    <div class="stat"><b>${Math.round(weekSeries(1)[0].p*100)}%</b><span>cette semaine</span></div>
+    <div class="stat"><b>${Math.round(weekSeries(4).reduce((a,s)=>a+s.p,0)/4*100)}%</b><span>sur 4 semaines</span></div></div>
+  <div class="card"><div class="row" style="justify-content:space-between;margin-bottom:8px"><p class="label" style="margin:0">Progression</p>
+    <div class="seg">${[[4,"1 mois"],[12,"3 mois"],[26,"6 mois"]].map(([v,l])=>`<button data-range="${v}" aria-pressed="${v===V.range}">${l}</button>`).join("")}</div></div>
+    <div class="chart">${lineChart(weekSeries(V.range))}</div></div>`;
+}
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
 const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["cours","Cours"],["mx","Maths"],["cg","Culture G"]];
@@ -2922,7 +3266,7 @@ function summary(k){
   if(k==="jour")return jourSummary();
   if(k==="cg")return cgSummary();
   if(k==="mx")return mxSummary();
-  if(k==="hab"){const s=dayStats(t);return[`${s.n}/${s.t}`,"tâches faites aujourd'hui"]}
+  if(k==="hab"){const s=dayStats(t);return[`${s.n}/${s.t}`,isWE(t)?"tâches du week-end":"tâches faites aujourd'hui"]}
   if(k==="proj"){const a=nIn("all");return a.length?[`${a.length}`,`note${a.length>1?"s":""} · ${esc(nTitle(a[0][1]))}`]:["Notes","écris ce qui te trotte dans la tête"]}
   if(k==="fin"){const dg=dailyGame(t),r=prog().days[dkey(t)];return r?[`✓ ${r.s}/${r.m}`,`défi du jour : ${dg.n} · ${levelOf(prog().xp).name}`]:[`${dg.e} Défi`,`du jour : ${dg.n} · actu FR/EN`]}
   if(k==="obj"){const sc=objScore();objSnap(sc);const ts=dayStats(t),up=objScore({hab:ts.t-ts.n,defi:true,actu:true}).total-sc.total;return[pct1(sc.total)+" %",up>=0.05?`jusqu'à +${pct1(up)} % possible aujourd'hui`:"HEC · ESSEC · ESCP"]}
@@ -2963,7 +3307,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.4.3";
+const APP_VERSION="1.5.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -2972,7 +3316,7 @@ function lsGet(k,def){try{const v=localStorage.getItem(k);return v===null?def:JS
 function lsSet(k,v){try{v===null?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function cfg(){const b=window.CERVEAU_CONFIG||{},l=lsGet("cerveau-cfg",{});return{supabaseUrl:String(l.supabaseUrl||b.supabaseUrl||"").trim().replace(/\/+$/,""),supabaseKey:String(l.supabaseKey||b.supabaseKey||"").trim()}}
 const cfgOk=()=>{const c=cfg();return!!(c.supabaseUrl&&c.supabaseKey)};
-function aiCfg(){const a=lsGet("cerveau-ai",{});return{provider:a.provider||"gemini",key:a.key||"",model:a.model||"",ollamaUrl:a.ollamaUrl||"http://localhost:11434"}}
+function aiCfg(){const a=lsGet("cerveau-ai",{});return{provider:a.provider||"gemini",key:a.key||"",model:a.model||"",ollamaUrl:a.ollamaUrl||"http://localhost:11434",backup:!!a.backup,omodel:a.omodel||""}}
 
 /* ---------- compte ---------- */
 let SESSION=lsGet("cerveau-session",null);
@@ -3066,7 +3410,7 @@ async function fullSync(full){await flush();await pull(full);await flush()}
 function lastSyncTxt(){const t=lsGet("cerveau-lastsync",0);if(!t)return"";const m=Math.round((Date.now()-t)/60000);return" · dernière synchro "+(m<1?"à l'instant":m<60?"il y a "+m+" min":"le "+fts(t))}
 
 /* ---------- IA : Gemini (gratuit avec quota) ou Ollama (sur le PC, illimité) ---------- */
-function setupAI(){const a=aiCfg();if(a.provider==="ollama"||a.key){SAMPLE=aiSample;SAMPLE_ST="ok"}else{SAMPLE=null;SAMPLE_ST="none"}TOOLS_OK=false}
+function setupAI(){const a=aiCfg();if(a.provider==="ollama"||a.key||a.backup){SAMPLE=aiSample;SAMPLE_ST="ok"}else{SAMPLE=null;SAMPLE_ST="none"}TOOLS_OK=false}
 function mergeTurns(input){
   const t=typeof input==="string"?[{role:"user",content:input}]:input,out=[];
   t.forEach(m=>{const role=m.role==="assistant"?"assistant":"user";if(out.length&&out[out.length-1].role===role)out[out.length-1].content+="\n\n"+m.content;else out.push({role,content:String(m.content)})});
@@ -3079,12 +3423,12 @@ async function readLines(r,fn){
   if(buf.trim())try{fn(buf.trim())}catch(e){}
 }
 async function aiSample(input,opts={}){
-  const a=aiCfg(),turns=mergeTurns(input),json=!!opts._json;let text="";
+  const a=aiCfg(),turns=mergeTurns(input),json=!!opts._json,prov=opts._prov||(a.provider==="gemini"&&!a.key&&a.backup?"ollama":a.provider);let text="";
   const emit=d=>{if(!d)return;text+=d;try{opts.onText&&opts.onText({text,delta:d})}catch(e){}};
   try{
-    if(a.provider==="ollama"){
+    if(prov==="ollama"){
       const r=await fetch(a.ollamaUrl.replace(/\/+$/,"")+"/api/chat",{method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({model:a.model||"llama3.2",messages:turns,stream:true,...(json?{format:"json"}:{})})});
+        body:JSON.stringify({model:(a.provider==="ollama"?a.model:a.omodel)||"llama3.2",messages:turns,stream:true,...(json?{format:"json"}:{})})});
       if(!r.ok)throw{code:r.status===404?"bad_model":"upstream_error",message:"Ollama "+r.status};
       await readLines(r,line=>{const j=JSON.parse(line);if(j.message&&j.message.content)emit(j.message.content)});
     }else{
@@ -3100,8 +3444,11 @@ async function aiSample(input,opts={}){
     }
   }catch(e){
     if(e&&e.name==="AbortError")throw{code:"cancelled",text:text||undefined};
+    /* Gemini ne répond pas (quota, réseau, panne) : on passe sur Ollama si c'est activé sur cet appareil */
+    const ec=e&&e.code?e.code:navigator.onLine?"upstream_error":"offline";
+    if(prov==="gemini"&&a.backup&&!opts._prov&&["rate_limited","offline","upstream_error"].includes(ec)){try{return await aiSample(input,{...opts,_prov:"ollama"})}catch(e2){if(e2&&e2.code==="cancelled")throw e2}}
     if(e&&e.code)throw{...e,text:text||undefined};
-    throw{code:navigator.onLine?(a.provider==="ollama"?"ollama_down":"upstream_error"):"offline",text:text||undefined,message:String(e&&e.message||e)};
+    throw{code:navigator.onLine?(prov==="ollama"?"ollama_down":"upstream_error"):"offline",text:text||undefined,message:String(e&&e.message||e)};
   }
   if(!text.trim())throw{code:"empty_completion"};
   return{text,truncated:false,modelTierApplied:"default"};
@@ -3147,12 +3494,17 @@ function pageReglages(){
       :`<input class="field" id="ai-url" name="url" autocomplete="off" placeholder="http://localhost:11434" value="${esc(a.ollamaUrl)}"><input class="field" id="ai-model" name="model" autocomplete="off" placeholder="Modèle : llama3.2" value="${esc(a.model)}">`}
       <div class="row"><button class="btn" ${V.aiBusy?"disabled":""}>${V.aiBusy?"Test en cours…":"Enregistrer et tester"}</button></div></form>
     ${V.aiMsg?`<p class="small">${esc(V.aiMsg)}</p>${/^✓/.test(V.aiMsg)?"":`<div><button class="ghost on" data-page="aide" data-aide="ia">🛟 Que faire ?</button></div>`}`:""}
+    ${a.provider==="gemini"?`<div class="stack" style="gap:8px;border-top:1px solid var(--line);padding-top:12px"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><span><b>🖥️ Ollama en secours</b><br><span class="muted small">Sur ce PC : si Gemini ne répond pas (quota atteint, pas d'internet), l'appli passe toute seule sur Ollama.</span></span><button class="ghost ${a.backup?"on":""}" data-aibackup="1">${a.backup?"Activé":"Activer"}</button></div>${a.backup?`<form data-f="aibk" class="stack" style="gap:8px"><input class="field" name="url" autocomplete="off" placeholder="http://localhost:11434" value="${esc(a.ollamaUrl)}"><input class="field" name="model" autocomplete="off" placeholder="Modèle : gemma3:4b" value="${esc(a.omodel)}"><div><button class="ghost on">Enregistrer et tester Ollama</button></div></form>${V.aiMsg2?`<p class="small">${esc(V.aiMsg2)}</p>`:""}<p class="muted small">Ollama doit être installé sur ce PC : 🛟 Dépannage → L'IA ne répond plus → Ollama.</p>`:""}</div>`:""}
     <p class="muted small">${a.provider==="gemini"?"La clé reste sur cet appareil : colle-la aussi sur ton autre appareil. Google fixe le nombre de messages gratuits par jour.":"Ollama doit être installé et lancé sur ce PC (étape 6 du guide). Il ne marche que sur ce PC."}</p></div>`;
   const inst=`<div class="card stack"><p class="label" style="margin:0">Installer l'appli</p>${isStandalone()?`<p>✓ L'appli est installée sur cet appareil.</p>`:`${INSTALL_EVT?`<div><button class="btn" data-install="1">Installer sur cet appareil</button></div>`:""}
     <p class="small"><b>iPhone</b> : dans Safari, bouton Partager puis « Sur l'écran d'accueil ».<br><b>Android</b> : menu ⋮ de Chrome puis « Installer l'application ».<br><b>Ordinateur</b> : dans Chrome ou Edge, icône d'installation à droite de la barre d'adresse.</p>`}</div>`;
   const aide=`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">Un problème ?</p><p class="muted small">Pronote, IA, synchronisation, actu : un mode d'emploi pas à pas pour chaque panne.</p><div><button class="btn" data-page="aide">🛟 Ouvrir le dépannage</button></div></div>`;
   return aide+sync+pnReglages()+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
 }
+async function testOllama(){V.aiMsg2="Test d'Ollama…";render(true);
+  try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.",{_prov:"ollama"});V.aiMsg2="✓ Ollama répond : "+r.text.trim().slice(0,80)}
+  catch(e){V.aiMsg2=e.code==="bad_model"?"Ce modèle n'est pas installé dans Ollama : vérifie son nom.":"Ollama ne répond pas : vérifie qu'il est lancé et que OLLAMA_ORIGINS est réglé (🛟 Dépannage → L'IA ne répond plus → Ollama)."}
+  render(true)}
 async function testAI(){
   V.aiBusy=true;V.aiMsg="";render(true);
   try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.");V.aiMsg="✓ L'IA répond : "+r.text.trim().slice(0,80);aideErr("ia",null)}
@@ -3418,7 +3770,13 @@ function pageAide(){
     <h4>« Ce modèle d'IA n'existe pas »</h4>
     <ol class="aidesteps"><li>Dans ${A(L.studio,"Google AI Studio")}, regarde le nom des modèles « Flash » proposés, par exemple <code>gemini-3.5-flash</code>.</li>
       <li>Dans l'appli : ⚙️ Réglages → champ <b>Modèle</b> → tape ce nom → <b>Enregistrer et tester</b>.</li>
-      <li>Pour l'actu : ouvre ${A(L.vars,"les variables de ton dépôt GitHub")}. Crée ou modifie la variable <b>GEMINI_MODEL</b> avec le même nom.</li></ol></details>
+      <li>Pour l'actu : ouvre ${A(L.vars,"les variables de ton dépôt GitHub")}. Crée ou modifie la variable <b>GEMINI_MODEL</b> avec le même nom.</li></ol>
+    <h4>Ollama, l'IA de secours sur ton PC</h4>
+    <ol class="aidesteps"><li>Installe Ollama depuis ${A("https://ollama.com/download","ollama.com")} (version Windows), puis lance-le.</li>
+      <li>Dans la recherche de Windows, tape <b>variables d'environnement</b> → « Modifier les variables d'environnement pour votre compte » → <b>Nouvelle…</b> Nom : <code>OLLAMA_ORIGINS</code>, valeur : <code>${esc(location.origin)}</code> → OK.</li>
+      <li>Quitte Ollama (clic droit sur son icône près de l'horloge → Quit), puis relance-le.</li>
+      <li>Ouvre l'<b>Invite de commandes</b> et tape <code>ollama pull gemma3:4b</code> (environ 3 Go à télécharger).</li>
+      <li>Dans l'appli sur ce PC : ⚙️ Réglages → Ollama en secours → <b>Activer</b> → modèle <code>gemma3:4b</code> → <b>Enregistrer et tester Ollama</b>. Si Chrome demande d'autoriser l'accès aux applis de cet appareil, clique sur <b>Autoriser</b>.</li></ol></details>
 
   <details class="card aide" ${o("sync")}><summary>🔄 Mes données ne se synchronisent plus</summary>
     <p class="small">Signes : l'accueil affiche « Synchro en attente », ou ton autre appareil ne voit pas tes changements. Tes données restent aussi enregistrées sur chaque appareil : rien n'est perdu.</p>
@@ -3474,6 +3832,7 @@ let pending=false;
 function render(force){
   const a=document.activeElement;
   if(!force&&a&&a.matches&&a.matches("input:not([type=checkbox]),select,textarea,[contenteditable]")&&a.closest("#app")){pending=true;return}
+  if(!force&&typeof JD!=="undefined"&&JD&&JD.active){pending=true;return}
   pending=false;
   habSync();objCfg();themeSync();if(MOD.sig!==modSig())modLoad();
   const app=document.getElementById("app"),mt=MOD.tiles.find(t=>t.k===V.page);
@@ -3481,7 +3840,7 @@ function render(force){
   if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
   const body=mt?modHtml(mt.id,mt.page):modWrap(V.page,PAGES[V.page]());
   app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${esc(sectName(V.page))}</h1>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
-  if(V.page==="mx")mxTex();
+  if(V.page==="mx")mxTex();if(V.page==="jour")jAfter();
 }
 /* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
 document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},350));
@@ -3498,8 +3857,8 @@ document.addEventListener("click",e=>{
   /* suggestions */
   if(d.sgex){const i=d.sgex.indexOf("|"),el=document.getElementById("sg-"+d.sgex.slice(0,i));if(el){el.value=d.sgex.slice(i+1);el.focus()}return}
   if(d.sgswitch)return sgSwitch(d.sgswitch);
-  if(d.sgno){V.sg[d.sgno]=null;return render(true)}
-  if(d.sgundo)return sgUndo(d.sgundo);
+  if(d.sgno){V.sg[d.sgno]=null;V.jHi=[];return render(true)}
+  if(d.sgundo){V.jHi=[];return sgUndo(d.sgundo)}
   if(d.sgidee)return sgIdee(d.sgidee);
   if(d.sgdel){sgSave(sgList().filter(x=>x.id!==d.sgdel));return render(true)}
   if(d.sgshow)return sgQuick([{t:"tuile",k:d.sgshow,hide:false}],"Afficher la tuile « "+sectName(d.sgshow)+" »");
@@ -3530,6 +3889,7 @@ document.addEventListener("click",e=>{
   if(d.mxok){const p=d.mxok.split("|"),res=p.pop(),n=p.pop(),cid=p.join("|"),doc=(S.maths||{})[cid]||{},ex={...(doc.ex||{})};if(ex[n]===res)delete ex[n];else ex[n]=res;return put("maths",cid,{...doc,ex,maj:Date.now()})}
   if(d.mxcor){document.activeElement&&document.activeElement.blur();return mxCorr(d.mxcor)}
   if(d.mxgen){const c=MXC[V.mxc];if(c)return mxGen(c,+d.mxgen);return}
+  if(d.aibackup){const a=lsGet("cerveau-ai",{});a.backup=!a.backup;lsSet("cerveau-ai",a);setupAI();V.aiMsg2="";return render(true)}
   if(d.aiprov){const a=aiCfg();a.provider=d.aiprov;lsSet("cerveau-ai",a);setupAI();V.aiMsg="";return render(true)}
   if(d.syncnow){setSync("Synchronisation…");render(true);return fullSync(false).then(()=>render(true))}
   if(d.logout){saveSession(null);lsSet("cerveau-lastpull",null);setSync("Non connecté");return render(true)}
@@ -3547,8 +3907,8 @@ document.addEventListener("click",e=>{
   if(d.export)return exportData();
   if(d.impok)return importData();
   if(d.impno){V.imp=null;V.dataMsg="";return render(true)}
-  if(d.a==="prev"){V.day=add(V.day,-1);return render(true)}
-  if(d.a==="next"){const n=add(V.day,1);if(n<=today())V.day=n;return render(true)}
+  if(d.a==="prev"){V.day=habPrev(V.day);return render(true)}
+  if(d.a==="next"){const n=habNext(V.day);if(habCanGo(n))V.day=n;return render(true)}
   if(d.go){const[y,m,dd]=d.go.split("-").map(Number);V.day=new Date(y,m-1,dd);return render(true)}
   if(d.range){V.range=+d.range;return render(true)}
   /* cours */
@@ -3616,7 +3976,7 @@ document.addEventListener("input",e=>{
 });
 document.addEventListener("change",e=>{
   const t=e.target,d=t.dataset;
-  if(d.hab){const k=dkey(V.day),cur={...((S.jours[k]||{}).done||{})};if(t.checked)cur[d.hab]=true;else delete cur[d.hab];return put("jours",k,{...(S.jours[k]||{}),date:k,done:cur})}
+  if(d.hab)return habToggle(V.day,d.hab,t.checked);
   if(d.jt)return jToggle(d.jt,t.checked);
   if(d.pnd){const i=d.pnd.lastIndexOf("|"),id=d.pnd.slice(0,i),k=d.pnd.slice(i+1),cur={...((S.jours[k]||{}).done||{})};if(t.checked)cur["pn:"+id]=true;else delete cur["pn:"+id];return put("jours",k,{...(S.jours[k]||{}),date:k,done:cur})}
   if(d.nmove!==undefined){nSave();const id=d.nmove,v=t.value||null;if(S.notes[id])put("notes",id,{...S.notes[id],projet:v},true);else if(V.ndraft&&V.ndraft.id===id)V.ndraft.n.projet=v;return render(true)}
@@ -3634,6 +3994,7 @@ document.addEventListener("submit",e=>{
     (act==="up"?signUp(em,pw).then(r=>{V.authMsg=r==="ok"?"Compte créé, tu es connecté.":"Compte créé ! Ouvre le mail de confirmation, puis reviens te connecter ici."}):signIn(em,pw).then(()=>{V.authMsg=""}))
       .catch(err=>{V.authMsg=authErr(err.message)}).finally(()=>{V.authBusy=false;render(true)});return}
   if(k==="ai"){const a=aiCfg();if(a.provider==="gemini"){a.key=String(x.key||"").trim()}else{a.ollamaUrl=String(x.url||"").trim()||"http://localhost:11434"}a.model=String(x.model||"").trim();lsSet("cerveau-ai",a);setupAI();document.activeElement&&document.activeElement.blur();return testAI()}
+  if(k==="aibk"){const a=lsGet("cerveau-ai",{});a.ollamaUrl=String(x.url||"").trim()||"http://localhost:11434";a.omodel=String(x.model||"").trim();lsSet("cerveau-ai",a);setupAI();document.activeElement&&document.activeElement.blur();return testOllama()}
   if(k==="gnum"){document.activeElement&&document.activeElement.blur();return gAnswer(V.gin)}
   if(k==="chat"){const[sk,ck]=f.dataset.chat.split("|");document.activeElement&&document.activeElement.blur();return sendChat(sk,ck,V.ci[sk+"-"+ck])}
   if(k==="tr"){const txt=V.trIn.trim();if(!txt)return;
