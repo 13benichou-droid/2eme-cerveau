@@ -2764,14 +2764,17 @@ const MX_MAC={"\\R":"\\mathbb{R}","\\N":"\\mathbb{N}","\\Z":"\\mathbb{Z}","\\Q":
   "\\Ker":"\\operatorname{Ker}","\\Imf":"\\operatorname{Im}","\\rg":"\\operatorname{rg}","\\tr":"\\operatorname{tr}","\\Card":"\\operatorname{Card}"};
 const MX_LV=["","★","★★","★★★"],MX_LVN=["","Facile","Moyen","Type bac"];
 const MX_BK={DEF:["Définition","#2d7ff0"],PROP:["Propriété","#14a27a"],THM:["Théorème","#7a5cff"],FORMULES:["Formules","#0b8fac"],METHODE:["Méthode","#c48a00"],EXEMPLE:["Exemple","#6a7486"],ATTENTION:["Attention","#d9443a"],REMARQUE:["Remarque","#6a7486"],DEMO:["Démonstration","#7a5cff"]};
-let MXI=null,MXC={},mxLoad={};
-async function mxIndex(){if(MXI||mxLoad.idx)return;mxLoad.idx=1;
-  try{const r=await fetch("maths/index.json",{cache:"no-cache"});if(!r.ok)throw 0;MXI=await r.json();V.mxErr=""}
-  catch(e){V.mxErr="Les chapitres de maths ne sont pas encore sur ton dépôt GitHub (dossier maths), ou tu n'as pas de connexion."}
+let MXI=null,MXC={},mxLoad={},MXB="maths/",mxFail={};
+/* après un échec, on ne réessaie pas tout seul en boucle (sinon la page se redessine sans arrêt et les boutons ne répondent plus) */
+/* les chapitres peuvent être dans le dossier maths/ ou directement à la racine du dépôt */
+async function mxIndex(){if(MXI||mxLoad.idx||mxFail.idx)return;mxLoad.idx=1;
+  try{let j=null;for(const b of["maths/",""]){try{const r=await fetch(b+"index.json",{cache:"no-cache"});if(r.ok){const x=await r.json();if(x&&x.parcours){j=x;MXB=b;break}}}catch(_){}}
+    if(!j)throw 0;MXI=j;V.mxErr=""}
+  catch(e){mxFail.idx=1;V.mxErr="Les chapitres de maths ne sont pas encore sur ton dépôt GitHub, ou tu n'as pas de connexion."}
   mxLoad.idx=0;render()}
-async function mxFile(id,f){if(MXC[id]||mxLoad[id]||!f)return;mxLoad[id]=1;
-  try{const r=await fetch("maths/"+f,{cache:"no-cache"});if(!r.ok)throw 0;mxParse(await r.text()).forEach(c=>MXC[c.id]=c);if(!MXC[id])throw 0;V.mxErr=""}
-  catch(e){V.mxErr="Ce chapitre n'a pas pu être chargé : vérifie ta connexion."}
+async function mxFile(id,f){if(MXC[id]||mxLoad[id]||mxFail[id]||!f)return;mxLoad[id]=1;
+  try{const r=await fetch(MXB+f,{cache:"no-cache"});if(!r.ok)throw 0;mxParse(await r.text()).forEach(c=>MXC[c.id]=c);if(!MXC[id])throw 0;V.mxErr=""}
+  catch(e){mxFail[id]=1;V.mxErr="Ce chapitre n'a pas pu être chargé : vérifie ta connexion."}
   mxLoad[id]=0;render()}
 /* format des fichiers : @chapitre id | titre | thème, @resume, blocs « == DEF | titre », exercices « == EXO 2 type | titre » avec -- indice / -- reponse / -- solution */
 function mxParse(txt){const out=[];let ch=null,bl=null,sub=null;
@@ -2809,7 +2812,7 @@ function mxStat(id){let ok=0,ko=0;Object.values((mxDone()[id]||{}).ex||{}).forEa
 function mxMeta(id){for(const p of(MXI&&MXI.parcours)||[])for(const c of p.chap)if(c.id===id)return{...c,p};return null}
 function mxTotal(){let ok=0;Object.keys(mxDone()).forEach(id=>ok+=mxStat(id).ok);return ok}
 function pageMx(){
-  if(!MXI){mxIndex();return`<div class="card"><p>${esc(V.mxErr||"Chargement des chapitres…")}</p></div>`}
+  if(!MXI){mxIndex();return`<div class="card stack" style="gap:10px"><p>${esc(V.mxErr||"Chargement des chapitres…")}</p>${mxFail.idx?`<div class="row"><button class="ghost on" data-mxretry="1">↻ Réessayer</button><button class="ghost" data-page="home">‹ Accueil</button></div>`:""}</div>`}
   if(V.mxc)return mxChapPage();
   const P=MXI.parcours||[],p=P.find(x=>x.id===V.mxp)||P[0];if(!p)return"";
   const dispo=P.reduce((s,x)=>s+x.chap.filter(c=>c.f).length,0),nex=P.reduce((s,x)=>s+x.chap.reduce((a,c)=>a+(c.f?c.nex||0:0),0),0);
@@ -2820,7 +2823,7 @@ function pageMx(){
       :`<li><div class="mxrow off"><span class="mxn">${i+1}</span><span class="mxtt"><b>${esc(c.t)}</b><small class="muted">${esc(c.th)} · bientôt</small></span></div></li>`}).join("")}</ul></div>`}
 function mxChapPage(){
   const meta=mxMeta(V.mxc),c=MXC[V.mxc],back=`<div><button class="ghost on" data-mxback="1">‹ Chapitres</button></div>`;
-  if(!c){mxFile(V.mxc,meta&&meta.f);return back+`<div class="card"><p>${esc(V.mxErr||"Chargement du chapitre…")}</p></div>`}
+  if(!c){mxFile(V.mxc,meta&&meta.f);return back+`<div class="card stack" style="gap:10px"><p>${esc(V.mxErr||"Chargement du chapitre…")}</p>${mxFail[V.mxc]?`<div><button class="ghost on" data-mxretry="1">↻ Réessayer</button></div>`:""}</div>`}
   const tab=V.mxt||"cours",st=mxStat(c.id),lv=V.mxlv||0,n=c.ex.length;
   const head=`${back}<div class="card stack" style="gap:8px"><span class="muted small">${esc(c.th)}${meta&&meta.p?" · "+esc(meta.p.n):""}</span><h2 class="mxh">${esc(c.t)}</h2>${c.res?`<div class="muted mxt">${mxFmt(c.res)}</div>`:""}
     <div class="bar"><i style="width:${n?Math.min(100,st.ok/n*100):0}%"></i></div><span class="muted small">${st.ok} / ${n} exercices réussis${st.ko?` · ${st.ko} à revoir`:""}</span></div>
@@ -2860,7 +2863,7 @@ Format : d'abord l'énoncé (questions numérotées 1., 2.…), puis une ligne q
 function mxGenOut(c){const key="mxg|"+c.id,t=V.out[key];if(V.busy[key])return`<p class="muted small">✨ L'IA invente un exercice…</p>`;if(!t)return"";
   const i=t.indexOf("===CORRIG");if(i<0)return`<div class="out mxt">${mxFmt(t)}</div>`;const j=t.indexOf("\n",i);
   return`<div class="mxsol"><b>Nouvel exercice</b><div class="mxt">${mxFmt(t.slice(0,i))}</div></div><details class="mxsol"><summary><b>Voir le corrigé</b></summary><div class="mxt">${mxFmt(j<0?"":t.slice(j+1))}</div></details>`}
-function mxSummary(){if(!MXI&&!mxLoad.idx&&!V.mxErr)mxIndex();const ok=mxTotal();
+function mxSummary(){if(!MXI)mxIndex();const ok=mxTotal();
   return MXI?[`${ok}`,`exercice${ok>1?"s":""} réussi${ok>1?"s":""} · leçons Terminale → licence`]:["Maths","leçons et exercices"]}
 
 /* ================================================================
@@ -2914,7 +2917,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.4.0";
+const APP_VERSION="1.4.2";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -3472,6 +3475,7 @@ document.addEventListener("click",e=>{
   if(d.cgk){V.cgk=d.cgk;render(true);return window.scrollTo(0,0)}
   if(d.cgplus)return cgPlus();
   /* maths */
+  if(d.mxretry){mxFail={};V.mxErr="";return render(true)}
   if(d.mxp){V.mxp=d.mxp;return render(true)}
   if(d.mxc){V.mxc=d.mxc;V.mxt="cours";V.mxlv=0;render(true);return window.scrollTo(0,0)}
   if(d.mxback){V.mxc=null;render(true);return window.scrollTo(0,0)}
