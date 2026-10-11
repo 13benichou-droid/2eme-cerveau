@@ -420,6 +420,41 @@ details.aide code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8
 @media (max-width:460px){.plan{grid-template-columns:1fr}.snap{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
+/* suggestions, modules, culture générale */
+:root{--idee:#5b6b82;--cg:#b8572c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--idee:#7085ab;--cg:#ec8a5e}}
+:root[data-theme="dark"]{--idee:#7085ab;--cg:#ec8a5e}
+.topb{display:flex;gap:6px}
+.sgform{flex-direction:row;flex-wrap:nowrap;align-items:center}
+.sgres{display:flex;flex-direction:column;gap:10px;background:color-mix(in srgb,var(--c) 7%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 35%,var(--line));border-radius:14px;padding:12px 14px}
+.sgres.ok{border-color:var(--up)}
+.sgl{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.sgl li{font-weight:600;overflow-wrap:anywhere}
+.sgfx{display:flex;flex-direction:column;gap:4px;font-size:.92rem}
+.sgex .chip{font-weight:500}
+.sgw{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;font-size:.9rem;padding:3px 0}
+.sgw b{color:var(--c)}
+.modrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0}
+.modrow>div:first-child{display:flex;flex-direction:column;gap:2px;min-width:0;overflow-wrap:anywhere}
+.modill{position:absolute;right:10px;top:8px;font-size:2.4rem;line-height:1}
+.modico{font-size:2.4rem;line-height:1;flex:none}
+.cgcat{font-size:.8rem;font-weight:700;color:var(--c);background:color-mix(in srgb,var(--c) 12%,var(--surface));border-radius:999px;padding:4px 10px}
+.cgt{font-size:1.4rem;line-height:1.2}
+.cgx{line-height:1.65}
+.cgfact{background:color-mix(in srgb,var(--c) 9%,var(--surface));border-radius:12px;padding:10px 12px;font-size:.93rem}
+.cgo{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:11px 14px;font-weight:600;color:var(--ink)}
+.cgo.ok{border-color:var(--up);background:color-mix(in srgb,var(--up) 13%,var(--surface))}
+.cgo.ko{border-color:var(--down);background:color-mix(in srgb,var(--down) 11%,var(--surface))}
+.cgo:disabled{cursor:default}
+.cgo:disabled:not(.ok):not(.ko){opacity:.55}
+.cgh{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border:0;background:none;text-align:left;padding:10px 0;color:var(--ink)}
+.cgh span:first-child{min-width:0;overflow-wrap:anywhere}
+.cgh span:last-child{white-space:nowrap}
+.cgbig{display:block;font-size:1.02rem;line-height:1.25}
+.objw{display:flex;flex-direction:column;gap:4px;font-size:.9rem}
+.tiles>.tile:last-child:nth-child(even){grid-column:1/-1;min-height:136px}
+.sgres .seg{display:flex}
+.sgres .seg button{flex:1}
 </style>
 <script src="config.js"></script>
 </head>
@@ -429,7 +464,7 @@ details.aide code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.8
 /* ================================================================
    DONNÉES FIXES
    ================================================================ */
-const COL={pron:"--pron",jour:"--jour",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",obj:"--obj"};
+const COL={cg:"--cg",idees:"--idee",pron:"--pron",jour:"--jour",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",obj:"--obj"};
 const JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 
@@ -443,7 +478,10 @@ const PLAN={1:["piano","mspe","fsci","fphi","fses","fhis"],2:["piano","mspe","me
 /* anciens plannings : les jours passés gardent leur liste */
 const PLAN_V2={1:["sport","piano","mspe","fsci","fphi","fses","fhis"],2:["piano","mspe","mexp"],3:["fsci","fses","mexp","piano"],4:["maths","fses","sport","piano"],5:["piano"],6:WE,0:WE};
 const PLAN0={...PLAN_V2,4:["maths","fses"],5:["sport"]};
-const planOf=d=>{const k=dkey(d);return(k<"2026-10-09"?PLAN0:k<"2026-10-11"?PLAN_V2:PLAN)[d.getDay()]||[]};
+/* emploi du temps de base : versions datées créées par tes suggestions (les jours passés gardent la leur) */
+const planBase=(k,wd)=>{const vs=((((S.params||{}).edt)||{}).v||[]).filter(v=>v&&v.from<=k&&v.p).sort((a,b)=>a.from<b.from?-1:1);if(vs.length){const p=vs[vs.length-1].p[wd];return Array.isArray(p)?p:[]}return(k<"2026-10-09"?PLAN0:k<"2026-10-11"?PLAN_V2:PLAN)[wd]||[]};
+/* un jour peut avoir son propre planning (« juste cette fois ») */
+const planOf=d=>{const k=dkey(d),o=((S.jours||{})[k]||{}).plan;return Array.isArray(o)?o:planBase(k,d.getDay())};
 
 const AXES=["Identités et échanges","Espace privé et espace public","Art et pouvoir","Citoyenneté et mondes virtuels","Fictions et réalités","Innovations scientifiques et responsabilité","Diversité et inclusion","Territoire et mémoire"];
 const SESA_SPE="https://manuel.sesamath.net/numerique/?ouvrage=mstsspe_2020";
@@ -1090,6 +1128,8 @@ const ILL={
  pron:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="14" width="56" height="58" rx="11" fill="var(--pron)" opacity=".2"/><rect x="14" y="14" width="56" height="17" rx="8.5" fill="var(--pron)"/><path d="M27 45h30M27 56h18" stroke="var(--pron)" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="61" r="11" fill="var(--pron)"/><path d="M55 61l3.4 3.4 6.4-7" stroke="#fff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  jour:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="12" y="18" width="50" height="48" rx="9" fill="var(--jour)" opacity=".2"/><rect x="12" y="18" width="50" height="13" rx="6.5" fill="var(--jour)"/><path d="M22 40h14M22 49h20M22 58h10" stroke="var(--jour)" stroke-width="4" stroke-linecap="round"/><circle cx="58" cy="56" r="15" fill="var(--surface)" stroke="var(--jour)" stroke-width="4"/><path d="M58 48v8l5 4" stroke="var(--jour)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  obj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M28 16h28v15a14 14 0 0 1-28 0z" fill="var(--obj)"/><path d="M28 21h-8a8 8 0 0 0 8 12M56 21h8a8 8 0 0 1-8 12" fill="none" stroke="var(--obj)" stroke-width="4" stroke-linecap="round"/><rect x="38" y="44" width="8" height="11" fill="var(--obj)" opacity=".55"/><rect x="27" y="55" width="30" height="9" rx="3" fill="var(--obj)"/><path d="M42 21.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8-4.3-2.3-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z" fill="#fff" opacity=".92"/></svg>`,
+ cg:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="40" cy="44" r="24" fill="var(--cg)" opacity=".2"/><circle cx="40" cy="44" r="24" fill="none" stroke="var(--cg)" stroke-width="4"/><ellipse cx="40" cy="44" rx="10" ry="24" fill="none" stroke="var(--cg)" stroke-width="3.5"/><path d="M17 44h46M21 32h38M21 56h38" stroke="var(--cg)" stroke-width="3" stroke-linecap="round"/><path d="M67 10l2.6 5.4 5.4 2.6-5.4 2.6-2.6 5.4-2.6-5.4-5.4-2.6 5.4-2.6z" fill="var(--cg)"/></svg>`,
+ idees:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="34" r="20" fill="var(--idee)" opacity=".2"/><path d="M42 14a20 20 0 0 0-11 36.7V58h22v-7.3A20 20 0 0 0 42 14z" fill="none" stroke="var(--idee)" stroke-width="4" stroke-linejoin="round"/><path d="M34 65h16M37 71h10" stroke="var(--idee)" stroke-width="4" stroke-linecap="round"/><path d="M35 44l4-6 3 5 3-5 4 6" stroke="var(--idee)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  hab:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="18" width="52" height="50" rx="10" fill="var(--hab)" opacity=".2"/><rect x="14" y="18" width="52" height="13" rx="6" fill="var(--hab)"/><circle cx="28" cy="46" r="5" fill="var(--hab)"/><circle cx="40" cy="46" r="5" fill="var(--hab)"/><circle cx="52" cy="46" r="5" fill="var(--hab)" opacity=".35"/><circle cx="28" cy="58" r="5" fill="var(--hab)" opacity=".35"/><path d="M36 58l3 3 6-7" stroke="var(--hab)" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`,
  proj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M60 14C38 18 24 36 22 62l6-2c4-16 14-28 26-36-10 10-16 22-18 34 16-6 26-24 24-44z" fill="var(--proj)"/><path d="M22 62l-6 8" stroke="var(--proj)" stroke-width="3" stroke-linecap="round"/><circle cx="62" cy="62" r="8" fill="var(--proj)" opacity=".25"/></svg>`,
  fin:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="20" width="56" height="44" rx="8" fill="var(--fin)" opacity=".18"/><path d="M20 54l12-12 9 7 17-19" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 30h9v9" fill="none" stroke="var(--fin)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -1100,7 +1140,7 @@ const ILL={
 /* ================================================================
    STOCKAGE (base partagée de l'appli, sinon ce navigateur)
    ================================================================ */
-const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu","pronote","objectif","params"];
+const C=["jours","projets","notes","livres","cours","quiz","gen","fiches","chats","muscu","seances","presse","marche","jeu","pronote","objectif","params","cg","perso"];
 let S={};C.forEach(c=>S[c]={});
 let db=null, DL=null, SAMPLE=null, SAMPLE_ST="none", TOOLS_OK=false, syncTxt="Sur cet appareil";
 function localLoad(){try{const x=JSON.parse(localStorage.getItem("cerveau")||"{}");C.forEach(c=>S[c]=x[c]||{})}catch(e){}}
@@ -1119,7 +1159,7 @@ async function del(col,id){
    ================================================================ */
 let V={page:"home",day:today(),range:12,subj:"mspe",chap:null,proj:null,ptab:"journal",emoji:"🪶",confirm:null,nf:null,note:null,ndraft:null,nq:"",newf:false,renf:false,
   lang:"fr",trDir:"en-fr",gi:0,gflip:false,defi:0,
-  rev:{},ans:{},out:{},busy:{},jd:{},jpoids:{},vt:"",vtProj:"",trIn:"",ctab:"cours",tier:"complex",lvl:0,live:{},ctl:{},ci:{},ftab:"jeu",g:null,gin:"",dataMsg:"",imp:null};
+  rev:{},ans:{},out:{},busy:{},jd:{},jpoids:{},vt:"",vtProj:"",trIn:"",ctab:"cours",tier:"complex",lvl:0,live:{},ctl:{},ci:{},ftab:"jeu",g:null,gin:"",dataMsg:"",imp:null,sg:{},cgk:null};
 try{const p=JSON.parse(localStorage.getItem("cerveau-v")||"{}");if(p.page)V.page=p.page;if(p.lang)V.lang=p.lang;if(p.subj)V.subj=p.subj;if(p.tier)V.tier=p.tier;if(p.ftab)V.ftab=p.ftab}catch(e){}
 function saveV(){try{localStorage.setItem("cerveau-v",JSON.stringify({page:V.page,lang:V.lang,subj:V.subj,tier:V.tier,ftab:V.ftab}))}catch(e){}}
 V.defi=Math.floor(Math.random()*DEFIS.length);V.gi=Math.floor(Math.random()*GLOSS.length);
@@ -1173,7 +1213,7 @@ function pageHab(){
       <div class="dayname"><b>${isT?"Aujourd'hui":JOURS[d.getDay()]}</b><small>${JOURS[d.getDay()].toLowerCase()} ${d.getDate()} ${MOIS[d.getMonth()]}</small></div>
       <button data-a="next" aria-label="Jour suivant" ${isT?"disabled":""}>›</button></div>
     <div class="row" style="gap:14px">${ring(t?n/t:0,"--hab")}<div><b style="font-family:var(--display);font-size:1.4rem" class="num">${n} / ${t}</b><div class="muted">${n===t?"Journée bouclée":(t-n)+" à faire"}</div></div></div>
-    <ul class="list">${plan.map(h=>`<li><label class="chk"><input type="checkbox" id="hab-${h}" data-hab="${h}" ${k[h]?"checked":""}><span class="box">${tick}</span><span class="t">${HABITS[h][0]}</span><span class="tag">${HABITS[h][1]}</span></label></li>`).join("")}${pnTasks(d).map(x=>`<li><label class="chk"><input type="checkbox" id="hab-pn-${sid(x.id)}" data-pnd="${esc(x.id)}|${dkey(d)}" ${x.fait||k["pn:"+x.id]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.m||"Devoir")}<small class="pnhw">${esc(String(x.txt||"").slice(0,140))}</small></span><span class="tag">Devoir</span></label></li>`).join("")}${((S.jours[dkey(d)]||{}).extra||[]).map(x=>`<li><label class="chk"><input type="checkbox" id="hab-x-${x.id}" data-jt="x|${x.id}|${dkey(d)}" ${x.ok?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.t)}</span><span class="tag">${x.min} min</span></label></li>`).join("")}</ul>
+    <ul class="list">${plan.map(h=>`<li><label class="chk"><input type="checkbox" id="hab-${h}" data-hab="${h}" ${k[h]?"checked":""}><span class="box">${tick}</span><span class="t">${habN(h)}</span><span class="tag">${(HABITS[h]||[])[1]||""}</span></label></li>`).join("")}${pnTasks(d).map(x=>`<li><label class="chk"><input type="checkbox" id="hab-pn-${sid(x.id)}" data-pnd="${esc(x.id)}|${dkey(d)}" ${x.fait||k["pn:"+x.id]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.m||"Devoir")}<small class="pnhw">${esc(String(x.txt||"").slice(0,140))}</small></span><span class="tag">Devoir</span></label></li>`).join("")}${((S.jours[dkey(d)]||{}).extra||[]).map(x=>`<li><label class="chk"><input type="checkbox" id="hab-x-${x.id}" data-jt="x|${x.id}|${dkey(d)}" ${x.ok?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.t)}</span><span class="tag">${x.min} min</span></label></li>`).join("")}</ul>
     <form class="row" data-f="jadd" data-dk="${dkey(d)}" style="flex-direction:row;flex-wrap:nowrap"><input class="field" id="hab-add" name="t" placeholder="+ Ajouter une tâche pour ce jour" autocomplete="off" required><input type="hidden" name="min" value="30"><button class="ghost on" aria-label="Ajouter">Ajouter</button></form>
   </div>
   <div><p class="label">Cette semaine</p><div class="week">${week}</div></div>
@@ -1896,7 +1936,7 @@ function setPage(id,v){const b=S.livres[id];if(!b)return;v=Math.max(0,Math.min(b
 const JDEF={trajet:35,pause:35,diner:"20:00",dinerDur:45,stop:"22:00",debutWE:"9:30",dejWE:"12:30",libreWE:"17:30",sportTrajet:40,sportDur:75,devoir:30};
 const JDUR={mspe:60,mexp:60,maths:60,fsci:25,fphi:25,fses:25,fhis:25,esp:25,ang:25,piano:30};
 const JORD={mspe:1,mexp:2,maths:1,fsci:4,fses:4,fphi:5,fhis:5,esp:6,ang:6,piano:8};
-function jParams(){return{...JDEF,...((S.params||{}).planning||{})}}
+function jParams(dk){const o=dk&&S.jours&&(S.jours[dk]||{}).par;return{...JDEF,...((S.params||{}).planning||{}),...(o||{})}}
 /* durées réelles apprises : moyenne des 5 dernières fois (dès 2 mesures) */
 function jLearn(){return((S.params||{}).durees)||{}}
 function jDur(ref,def){const a=jLearn()[ref];if(!Array.isArray(a)||a.length<2)return def;const m=a.reduce((x,y)=>x+y,0)/a.length;return Math.max(10,Math.min(300,Math.round(m/5)*5))}
@@ -1914,18 +1954,18 @@ function jLessons(dk){const p=S.pronote&&S.pronote.data;return((p&&p.edt)||[]).f
 function jHwDone(x){const k=pnHwDay(x);return!!(x.fait||((S.jours[k]||{}).done||{})["pn:"+x.id])}
 /* tout ce qu'il y a à faire ce jour-là, par ordre de priorité */
 function jTasks(d){
-  const P=jParams(),dk=dkey(d),done=(S.jours[dk]||{}).done||{},out=[];
+  const dk=dkey(d),P=jParams(dk),done=(S.jours[dk]||{}).done||{},od=(S.jours[dk]||{}).dur||{},out=[];
   const rp=(S.jours[dk]||{}).report||{};
   jExtras(dk).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,l:x.t,min:x.min||30,p:0,tag:"Ajouté"}));
   pnTasks(d).filter(x=>!jHwDone(x)&&!rp["pn|"+x.id]).forEach(x=>out.push({k:"pn",ref:x.id,l:`${x.m||"Devoir"} : ${String(x.txt||"devoir").split("\n")[0].slice(0,70)}`,min:jDur("devoir",P.devoir),p:1,tag:"Devoir pour demain"}));
   planOf(d).filter(h=>!done[h]&&!rp["hab|"+h]).forEach(h=>out.push(h==="sport"?{k:"hab",ref:h,l:"Sport (trajets compris)",min:jDur("sport",P.sportTrajet+P.sportDur),p:0.5,tag:`${P.sportDur} min + ${P.sportTrajet} min de trajets`}
-    :{k:"hab",ref:h,l:HABITS[h][0]+(HABITS[h][1]==="fiche"?" (fiche)":""),min:jDur(h,JDUR[h]||30),p:1+(JORD[h]||5)/10,tag:(jLearn()[h]||[]).length>=2?"ton temps réel":""}));
+    :{k:"hab",ref:h,l:habL(h),min:od[h]||jDur(h,jBase(h)),p:1+(JORD[h]||5)/10,tag:od[h]?"juste aujourd'hui":(jLearn()[h]||[]).length>=2?"ton temps réel":""}));
   /* devoirs des 2 jours suivants : à avancer s'il reste du temps */
   for(let i=1;i<=2;i++)pnTasks(add(d,i)).filter(x=>!jHwDone(x)).forEach(x=>out.push({k:"pn",ref:x.id,dk:dkey(add(d,i)),l:`Avancer ${x.m||"un devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`,min:jDur("devoir",P.devoir),p:3+i,tag:"À avancer"}));
   return out.sort((a,b)=>a.p-b.p);
 }
 function planDay(d){
-  const P=jParams(),dk=dkey(d),isT=dk===dkey(today()),nowM=new Date().getHours()*60+new Date().getMinutes();
+  const dk=dkey(d),P=jParams(dk),isT=dk===dkey(today()),nowM=new Date().getHours()*60+new Date().getMinutes();
   const L=jLessons(dk),school=L.length>0,steps=[];let t;
   if(school){
     const a=Math.min(...L.map(c=>wallMin(c.d))),b=Math.max(...L.map(c=>wallMin(c.f))),tr=V.jTrajet||P.trajet,arr=b+tr,lunch=arr<14*60,rest=lunch?Math.max(P.pause,45):P.pause;
@@ -1988,6 +2028,7 @@ function pageJour(){
   <div class="card stack" style="gap:10px"><p class="small muted" style="margin:0">${sched}${pl.live?" Le plan part de maintenant et se recalcule tout seul quand tu coches.":""}</p>${tr}
     ${list.length?`<ol class="jlist">${list.map((s,i)=>jStep(s,i,isT)).join("")}</ol>`:`<p>Rien à planifier : tout est fait. 🎉</p>`}
     ${pl.reste.length?`<div class="jreste"><b>Ne rentre pas avant ${fmin(pl.stop)} :</b> ${pl.reste.map(x=>esc(x.l)+" ("+fdur(x.min)+")").join(", ")}. Garde-les pour demain, ou réduis une tâche.</div>`:""}</div>
+  ${sgCard("jour")}
   <div class="card stack" style="gap:10px"><p class="label" style="margin:0">Tâches en plus pour ${isT?"aujourd'hui":"demain"}</p>
     <p class="muted small" style="margin:0">Pour un devoir qui n'est pas sur Pronote, un contrôle à réviser… Il s'ajoute aussi à ton suivi d'habitudes.</p>
     ${xs.length?`<ul class="list">${xs.map(x=>`<li class="row" style="justify-content:space-between;flex-wrap:nowrap;padding:8px 0"><span>${x.ok?"✓ ":""}${esc(x.t)} <span class="muted small">· ${x.min} min</span></span><button class="ghost" data-jdel="${x.id}" aria-label="Supprimer">✕</button></li>`).join("")}</ul>`:""}${add_}</div>
@@ -2005,7 +2046,7 @@ function pageJour(){
       <div><button class="ghost" data-jreset="1">${V.confirm==="jreset"?"Confirmer : tout oublier":"Oublier ces durées"}</button></div></div>`:`<p class="muted small" style="margin-top:12px">Appuie sur ▶ Commencer avant une tâche : l'appli apprend combien de temps tu mets vraiment, et ton plan devient plus juste.</p>`}</details>`;
 }
 function jourIA(){
-  const d=V.jdk?(([y,m,dd])=>new Date(y,m-1,dd))(V.jdk.split("-").map(Number)):today(),P=jParams(),pl=planDay(d),dk=dkey(d);
+  const d=V.jdk?(([y,m,dd])=>new Date(y,m-1,dd))(V.jdk.split("-").map(Number)):today(),P=jParams(dkey(d)),pl=planDay(d),dk=dkey(d);
   const L=jLessons(dk).map(c=>`${String(c.d).slice(11,16)}-${String(c.f).slice(11,16)} ${c.m}`).join(" ; ")||"pas de cours";
   const soon=[];for(let i=1;i<=4;i++)jLessons(dkey(add(d,i))).filter(c=>c.test).forEach(c=>soon.push(`${fdate(dkey(add(d,i)))} : ${c.m}`));
   const hw=(((S.pronote||{}).data||{}).devoirs||[]).filter(x=>String(x.pour)>=dk&&!jHwDone(x)).slice(0,10).map(x=>`- pour le ${fdate(String(x.pour).slice(0,10))} : ${x.m} : ${String(x.txt||"").slice(0,160)}`).join("\n")||"aucun";
@@ -2052,7 +2093,8 @@ setInterval(()=>{if(V.page==="jour"||V.page==="home")render()},60000);
    Indice de progression (pas une probabilité d'admission) :
    notes Pronote 50 %, régularité du suivi d'habitudes 30 %, entraînement finance 20 %.
    ================================================================ */
-const OBJ_W={n:50,h:30,f:20},OBJ_CIBLE=17;
+const OBJ_W0={n:50,h:30,f:20};let OBJ_W={...OBJ_W0},OBJ_CIBLE=17;
+function objCfg(){const t=((S.params||{}).top3)||{},w=t.w;OBJ_W=w&&(+w.n)+(+w.h)+(+w.f)===100?{n:+w.n,h:+w.h,f:+w.f}:{...OBJ_W0};OBJ_CIBLE=t.cible>=10&&t.cible<=20?+t.cible:17}
 const OBJ_Q={
  notes:[["Vingt fois sur le métier remettez votre ouvrage.","Nicolas Boileau"],
   ["Le génie est fait d'un pour cent d'inspiration et de quatre-vingt-dix-neuf pour cent de transpiration.","Thomas Edison"],
@@ -2073,7 +2115,7 @@ const clamp01=x=>Math.max(0,Math.min(1,x));
 const pct1=x=>(Math.round(x*10)/10).toLocaleString("fr-FR",{minimumFractionDigits:1,maximumFractionDigits:1});
 /* premier jour suivi (au plus 28 jours en arrière) */
 function objStart(){
-  const ks=[...Object.keys(S.jours||{}),...Object.keys(prog().days||{})].filter(k=>/^\d{4}-\d\d-\d\d$/.test(k)).sort();
+  const ks=[...Object.keys(S.jours||{}),...Object.keys(prog().days||{})].filter(k=>/^\d{4}-\d\d-\d\d$/.test(k)&&k<=dkey(today())).sort();
   const t=today(),min=add(t,-27),first=ks.length?(([y,m,d])=>new Date(y,m-1,d))(ks[0].split("-").map(Number)):t;
   return first<min?min:first;
 }
@@ -2088,9 +2130,12 @@ function objNotes(){
   return{g,maths,s:0.7*sg+0.3*sm,low,periode:n.periode||""};
 }
 /* score de régularité : tâches faites / prévues depuis le début (28 jours max), + série de jours parfaits */
-function objHab(extraToday){
+/* chaque tâche pèse selon son importance pour l'objectif (réglable par suggestion) */
+function dayW(d){const j=S.jours[dkey(d)]||{},k=j.done||{};let n=0,t=0;planOf(d).forEach(h=>{const w=tW(h);t+=w;if(k[h])n+=w});
+  pnTasks(d).forEach(x=>{const w=tW("devoir");t+=w;if(x.fait||k["pn:"+x.id])n+=w});(j.extra||[]).forEach(x=>{t+=1;if(x.ok)n+=1});return{n,t}}
+function objHab(all){
   const t=today();let n=0,tt=0;
-  for(let d=objStart();d<=t;d=add(d,1)){const s=dayStats(d);tt+=s.t;n+=s.n;if(+d===+t&&extraToday)n=Math.min(tt,n+extraToday)}
+  for(let d=objStart();d<=t;d=add(d,1)){const s=dayW(d);tt+=s.t;n+=(+d===+t&&all)?s.t:s.n}
   const rate=tt?n/tt:0,st=streak();
   return{rate,streak:st,s:0.85*rate+0.15*Math.min(st/14,1)};
 }
@@ -2109,7 +2154,7 @@ function objFin(sim){
   return{reg,lvl,done,nd,xp,s:0.7*reg+0.3*lvl};
 }
 function objScore(o){
-  o=o||{};const N=objNotes(),H=objHab(o.hab||0),F=objFin(o);
+  o=o||{};objCfg();const N=objNotes(),H=objHab(o.hab||0),F=objFin(o);
   const total=OBJ_W.n*(N?N.s:0)+OBJ_W.h*H.s+OBJ_W.f*F.s;
   return{total,N,H,F};
 }
@@ -2164,20 +2209,527 @@ function pageObj(){
   <div class="card objq"><p>« ${esc(q[0])} »</p><span class="muted small">${esc(q[1])}</span></div>
   <div class="card stack" style="gap:14px"><p class="label" style="margin:0">Tes 3 piliers</p>
     ${bar("Notes",OBJ_W.n,N?N.s:0,N?`Moyenne générale ${pct1(N.g)}${N.maths!=null?` · maths ${pct1(N.maths)}`:""} · repère visé : ${OBJ_CIBLE}${N.periode?" · "+esc(N.periode):""}`:"Relie Pronote pour compter tes notes.","pron")}
-    ${bar("Régularité",OBJ_W.h,H.s,`${Math.round(H.rate*100)} % de tes tâches faites depuis le début · série de ${H.streak} jour${H.streak>1?"s":""} parfait${H.streak>1?"s":""}`,"hab")}
+    ${bar("Régularité",OBJ_W.h,H.s,`${Math.round(H.rate*100)} % de ton travail prévu fait depuis le début · série de ${H.streak} jour${H.streak>1?"s":""} parfait${H.streak>1?"s":""}`,"hab")}
     ${bar("Finance",OBJ_W.f,F.s,`${F.done} défi${F.done>1?"s":""} sur ${F.nd} jour${F.nd>1?"s":""} · ${esc(lv.name)} (${F.xp} XP)`,"fin")}</div>
+  <div class="card stack" style="gap:8px"><p class="label" style="margin:0">Comment ton % est calculé</p><div class="objw"><span>Notes ${OBJ_W.n} % · régularité ${OBJ_W.h} % · finance ${OBJ_W.f} % · moyenne visée ${pct1(OBJ_CIBLE)}</span><span class="muted">Dans la régularité : ${esc(objWTxt())}.</span></div><div><button class="ghost on" data-page="idees">💡 Changer avec une suggestion</button></div></div>
   <div class="card"><p class="label">Ta progression</p><div class="chart">${objChart()}</div></div>
-  <p class="muted small">C'est un indice de progression calculé par l'appli, pas une probabilité d'admission. Pour HEC, ESSEC et ESCP, la voie classique est une prépa ECG puis les concours. Un très bon dossier (repère : ${OBJ_CIBLE} de moyenne, maths solides) et de la régularité aident à intégrer une prépa de haut niveau.</p>`;
+  <p class="muted small">C'est un indice de progression calculé par l'appli, pas une probabilité d'admission. Ta voie vers HEC, ESSEC ou ESCP : une licence de maths, puis l'admission sur titre (dossier, tests comme le TAGE MAGE ou le GMAT, test d'anglais, puis oraux). Un très bon dossier (repère : ${pct1(OBJ_CIBLE)} de moyenne, maths solides) et de la régularité t'ouvrent les meilleures licences, puis ces concours.</p>`;
 }
+
+/* ================================================================
+   💡 SUGGESTIONS
+   Tu écris une idée comme tu la dirais. L'appli change ton emploi du temps de base, les durées,
+   ton objectif Top 3, les tuiles ou l'apparence… ou l'IA crée un module. Tout s'annule en un geste.
+   ================================================================ */
+const edtP=()=>((S.params||{}).edt)||{};
+const appP=()=>((S.params||{}).appli)||{};
+function habSync(){Object.entries(edtP().custom||{}).forEach(([k,v])=>{if(v&&v.n){HABITS[k]=[v.n,""];if(!JORD[k])JORD[k]=5}})}
+const habN=h=>(HABITS[h]||[String(h)])[0];
+const habL=h=>habN(h)+(((HABITS[h]||[])[1])==="fiche"?" (fiche)":"");
+function jBase(h){const d=(edtP().dur||{})[h];if(d>0)return d;const c=(edtP().custom||{})[h];return(c&&c.min)||JDUR[h]||30}
+function themeSync(){const t=appP().theme,r=document.documentElement;if(t==="light"||t==="dark")r.dataset.theme=t;else delete r.dataset.theme}
+/* tuiles de l'accueil : ordre, noms et tuiles cachées viennent de tes suggestions */
+function sects(all){const ap=appP(),base=[...SECT,...MOD.tiles.map(t=>[t.k,t.nom])],ord=ap.order||[];
+  const L=[...ord.map(k=>base.find(s=>s[0]===k)).filter(Boolean),...base.filter(s=>!ord.includes(s[0]))].map(([k,n])=>[k,(ap.nom||{})[k]||n]);
+  return all?L:L.filter(s=>!(ap.hide||[]).includes(s[0]))}
+function sectName(k){const s=sects(true).find(x=>x[0]===k);return s?s[1]:k==="aide"?"Dépannage":k==="idees"?"Suggestions":"Réglages"}
+
+const SG_JN=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+const SG_PL={trajet:"Trajet du retour",pause:"Pause en rentrant",dinerDur:"Durée du dîner",sportTrajet:"Trajets salle de sport",sportDur:"Séance de sport",devoir:"Temps par devoir Pronote",
+  stop:"Fin du travail",diner:"Heure du dîner",debutWE:"Début le week-end",dejWE:"Déjeuner le week-end",libreWE:"Libre le week-end à partir de"};
+const SG_CLK=["stop","diner","debutWE","dejWE","libreWE"];
+const SG_DURK={devoir:"devoir",trajet:"trajet",pause:"pause",dinerDur:"dinerDur",sportTrajet:"sportTrajet",sport:"sportDur",sportDur:"sportDur"};
+const SG_EXJ=["Remplace la philo par l'anglais le lundi","La fiche de SES me prend 15 min","Plus de piano le vendredi","Ajoute de l'espagnol le mardi","Ce soir j'arrête de travailler à 21 h"];
+const SG_EXA=["Cache la tuile Pronote","Mets Ma journée en premier","Passe l'appli en mode sombre","Les maths comptent triple dans mon objectif","Je vise 16 de moyenne","Ajoute une rubrique pour suivre mon sommeil"];
+function sgDaysTxt(ds){ds=[1,2,3,4,5,6,0].filter(x=>ds.includes(x));if(ds.length===7)return"Tous les jours";
+  if(ds.length===5&&!ds.includes(0)&&!ds.includes(6))return"Du lundi au vendredi";if(ds.length===2&&ds.includes(0)&&ds.includes(6))return"Le week-end";
+  if(ds.length===1)return"Chaque "+SG_JN[ds[0]];const n=ds.map(x=>SG_JN[x]+"s");return"Les "+n.slice(0,-1).join(", ")+" et "+n[n.length-1]}
+const W_DEF={mspe:2,mexp:2,maths:2,fses:1.5,ang:1.5,devoir:1.5};
+function tW(ref){const p=((S.params||{}).top3||{}).p||{};return p[ref]!=null?+p[ref]:W_DEF[ref]!=null?W_DEF[ref]:1}
+const wTxt=w=>w===0?"ne compte pas":"×"+String(w).replace(".",",");
+function objWTxt(){const m={};Object.keys(HABITS).forEach(h=>{const w=tW(h);if(w!==1)(m[w]=m[w]||[]).push(habN(h))});const wd=tW("devoir");if(wd!==1)(m[wd]=m[wd]||[]).push("devoirs Pronote");
+  const L=Object.entries(m).sort((a,b)=>b[0]-a[0]).map(([w,l])=>`${l.join(", ")} ${wTxt(+w)}`);return L.length?L.join(" · "):"toutes les tâches comptent pareil"}
+
+/* ---- calcul des changements (sans rien enregistrer : sert aussi à l'aperçu) ---- */
+function sgCompute(ops,scope){
+  const tk=dkey(today()),P=S.params||{},cl=o=>JSON.parse(JSON.stringify(o||{})),once=scope==="once",tdy=today().getDay();
+  const D={edt:cl(P.edt),planning:cl(P.planning),top3:cl(P.top3),appli:cl(P.appli),durees:cl(P.durees)},J={},lines=[],notes=[],pw={},e=D.edt;
+  e.v=Array.isArray(e.v)?e.v:[];let ver=e.v.find(v=>v.from===tk);
+  const dateOf=wd=>{for(let i=0;i<7;i++){const x=add(today(),i);if(x.getDay()===wd)return x}return today()};
+  const jd=k=>{if(!J[k]){const j=S.jours[k]||{};J[k]={...j,date:k,done:j.done||{}}}return J[k]};
+  const list=wd=>{if(once){const x=dateOf(wd),j=jd(dkey(x));if(!Array.isArray(j.plan))j.plan=planOf(x).slice();return j.plan}
+    if(!ver){ver={from:tk,p:{}};for(let i=0;i<7;i++)ver.p[i]=planBase(tk,i).slice();e.v.push(ver)}return ver.p[wd]};
+  const cur=wd=>once?planOf(dateOf(wd)):planBase(tk,wd);
+  const days=(o,need)=>Array.isArray(o.days)&&o.days.length?o.days:once?[tdy]:need?[0,1,2,3,4,5,6].filter(w=>cur(w).includes(need)):[tdy];
+  const when=ds=>once?ds.map(w=>{const x=dateOf(w);return+x===+today()?"Aujourd'hui":+x===+add(today(),1)?"Demain":"Ce "+SG_JN[w]+" "+fdate(dkey(x))}).join(", "):sgDaysTxt(ds);
+  for(const o of ops){
+    if(o.t==="rep"){const ok=[];days(o,o.a).forEach(w=>{const L=list(w),i=L.indexOf(o.a);if(i<0)return;if(L.includes(o.b))L.splice(i,1);else L[i]=o.b;ok.push(w)});
+      if(ok.length)lines.push(`${when(ok)} : ${habL(o.a)} → ${habL(o.b)}`);else notes.push(`${habL(o.a)} n'est pas prévu${o.days&&o.days.length?" "+sgDaysTxt(o.days).toLowerCase():""}.`)}
+    else if(o.t==="del"){const ok=[];days(o,o.a).forEach(w=>{const L=list(w),i=L.indexOf(o.a);if(i>=0){L.splice(i,1);ok.push(w)}});
+      if(ok.length)lines.push(`${when(ok)} : − ${habL(o.a)}`);else notes.push(`${habL(o.a)} n'était déjà pas prévu.`)}
+    else if(o.t==="add"||o.t==="new"){let a=o.a;
+      if(o.t==="new"){a="c_"+(SG_N(o.n).replace(/[^a-z0-9]+/g,"").slice(0,14)||uid());const m=Math.max(5,Math.min(300,Math.round(+o.min||30)));
+        e.custom={...(e.custom||{}),[a]:{n:String(o.n).slice(0,40),min:m}};if(!HABITS[a])HABITS[a]=[e.custom[a].n,""];lines.push(`Nouvelle habitude : ${e.custom[a].n} (${fdur(m)})`)}
+      const ok=[];days(o,null).forEach(w=>{const L=list(w);if(!L.includes(a)){L.push(a);ok.push(w)}});
+      if(ok.length)lines.push(`${when(ok)} : + ${habL(a)}`);else if(o.t==="add")notes.push(`${habL(a)} est déjà prévu ce jour-là.`)}
+    else if(o.t==="dur"){const pk=SG_DURK[o.a],isH=!pk&&!!HABITS[o.a];if(!pk&&!isH)continue;
+      const now=pk?jParams()[pk]:jDur(o.a,jBase(o.a));let m=Math.round(+o.min||0);
+      if(!m&&o.rel)m=Math.max(10,Math.round(now*(o.rel<0?.75:1.25)/5)*5);m=Math.max(5,Math.min(300,m));if(!m||m===now){notes.push(`${pk?SG_PL[pk]:habL(o.a)} : c'est déjà ${fdur(now)}.`);continue}
+      if(once){const ds=Array.isArray(o.days)&&o.days.length?o.days:[tdy];ds.forEach(w=>{const j=jd(dkey(dateOf(w)));if(pk)j.par={...(j.par||{}),[pk]:m};else j.dur={...(j.dur||{}),[o.a]:m}});
+        lines.push(`${when(ds)} : ${pk?SG_PL[pk]:habL(o.a)} ${fdur(now)} → ${fdur(m)}`);continue}
+      if(pk){D.planning[pk]=m;if(o.a==="sport"||o.a==="sportDur")delete D.durees.sport;if(pk==="devoir")delete D.durees.devoir}
+      else{e.dur={...(e.dur||{}),[o.a]:m};if(e.custom&&e.custom[o.a])e.custom[o.a].min=m;delete D.durees[o.a]}
+      lines.push(`${pk?SG_PL[pk]:habL(o.a)} : ${fdur(now)} → ${fdur(m)}`)}
+    else if(o.t==="par"){if(!SG_CLK.includes(o.k)||!/^\d{1,2}:\d{2}$/.test(String(o.v)))continue;const v=String(o.v).padStart(5,"0"),now=String(jParams()[o.k]).padStart(5,"0");
+      if(once){const ds=Array.isArray(o.days)&&o.days.length?o.days:[tdy];ds.forEach(w=>{const j=jd(dkey(dateOf(w)));j.par={...(j.par||{}),[o.k]:v}});lines.push(`${when(ds)} : ${SG_PL[o.k]} ${now} → ${v}`)}
+      else{D.planning[o.k]=v;lines.push(`${SG_PL[o.k]} : ${now} → ${v}`)}}
+    else if(o.t==="obj"){const t=D.top3;
+      if(o.cible>=10&&o.cible<=20){const c=Math.round(o.cible*10)/10;lines.push(`Moyenne visée : ${pct1(t.cible||OBJ_CIBLE)} → ${pct1(c)}`);t.cible=c}
+      if(o.w&&typeof o.w==="object"){const w0=t.w||{...OBJ_W0},K=["n","h","f"],fx=K.filter(k=>o.w[k]!=null&&!isNaN(+o.w[k])),fr=K.filter(k=>!fx.includes(k)),w={};
+        fx.forEach(k=>w[k]=Math.max(0,Math.min(100,Math.round(+o.w[k]))));const used=fx.reduce((s,k)=>s+w[k],0);
+        if(fr.length){const rest=100-used,fs=fr.reduce((s,k)=>s+w0[k],0);if(rest<0){notes.push("Les poids dépassent 100 %.");continue}fr.forEach(k=>w[k]=Math.round(fs?rest*w0[k]/fs:rest/fr.length));w[fr[0]]+=100-(w.n+w.h+w.f)}
+        else if(used>0&&used!==100){K.forEach(k=>w[k]=Math.round(w[k]*100/used));w.n+=100-(w.n+w.h+w.f)}
+        if(w.n+w.h+w.f===100){t.w=w;lines.push(`Calcul de l'objectif : notes ${w.n} %, régularité ${w.h} %, finance ${w.f} %`)}}}
+    else if(o.t==="poids"){const w=Math.max(0,Math.min(3,Math.round(+o.w*2)/2));if(isNaN(w))continue;D.top3.p={...(D.top3.p||{}),[o.a]:w};
+      (pw[w]=pw[w]||[]).push(o.a==="devoir"?"les devoirs Pronote":habN(o.a))}
+    else if(o.t==="tuile"){const a=D.appli,nm=sectName(o.k);
+      if(o.hide!=null){a.hide=(a.hide||[]).filter(k=>k!==o.k);if(o.hide)a.hide.push(o.k);lines.push(`Tuile « ${nm} » ${o.hide?"cachée":"affichée"}`)}
+      if(o.nom){a.nom={...(a.nom||{}),[o.k]:String(o.nom).slice(0,30)};lines.push(`Tuile « ${nm} » renommée « ${a.nom[o.k]} »`)}
+      if(o.pos){const ks=sects(true).map(s=>s[0]).filter(k=>k!==o.k);if(o.pos==="first")ks.unshift(o.k);else ks.push(o.k);a.order=ks;lines.push(`Tuile « ${nm} » ${o.pos==="first"?"en premier":"en dernier"}`)}}
+    else if(o.t==="theme"){D.appli.theme=o.v;lines.push(`Apparence : ${{light:"claire",dark:"sombre",auto:"comme ton téléphone"}[o.v]||o.v}`)}
+  }
+  Object.entries(pw).forEach(([w,l])=>{w=+w;const pl=l.length>1;lines.push(`Objectif Top 3 : ${l.join(", ")} ${w===0?(pl?"ne comptent plus":"ne compte plus"):(pl?"comptent ":"compte ")+wTxt(w)} dans la régularité`)});
+  return{docs:D,jours:J,lines,notes}
+}
+/* effets : on simule le changement, on compare */
+function sgSim(r,fn){const P0=S.params,J0=S.jours;S.params={...P0,...r.docs};S.jours={...J0,...r.jours};try{return fn()}finally{S.params=P0;S.jours=J0}}
+function sgEffects(r){const m=()=>{const pl=planDay(today());return{s:objScore().total,p:objScore({hab:true}).total,f:pl.plan.length?pl.fin:null,r:pl.reste.length}};const a=m(),b=sgSim(r,m);return{a,b}}
+function sgFx(x,plan){const out=[],d=x.b.s-x.a.s,dp=x.b.p-x.a.p;
+  out.push(`🎯 Objectif Top 3 : <b class="num">${pct1(x.a.s)} %</b> → <b class="num">${pct1(x.b.s)} %</b>${Math.abs(d)>=0.05?` <span class="${d>0?"up":"down"}">(${d>0?"+":"−"}${pct1(Math.abs(d))})</span>`:""}`);
+  if(Math.abs(dp)>=0.05)out.push(`<span class="muted">Si tu fais tout aujourd'hui : ${pct1(x.a.p)} % → ${pct1(x.b.p)} %${d<=-0.05&&dp>0?" : ça baisse un peu tant que ce n'est pas fait, mais ça rapporte plus une fois fait":""}</span>`);
+  if(plan&&x.a.f!=null&&x.b.f!=null&&Math.round(x.a.f)!==Math.round(x.b.f))out.push(`🕒 Aujourd'hui, ton travail finit à <b>${fmin(x.b.f)}</b> au lieu de ${fmin(x.a.f)}`);
+  if(plan&&x.b.r!==x.a.r){const n=Math.abs(x.b.r-x.a.r),s=n>1;out.push(x.b.r<x.a.r?`✓ ${n} tâche${s?"s":""} de plus rentre${s?"nt":""} dans ta journée`:`⚠️ ${n} tâche${s?"s":""} ne rentre${s?"nt":""} plus aujourd'hui`)}
+  return out}
+
+/* ---- comprendre la phrase : règles simples d'abord, l'IA si besoin ---- */
+const SG_N=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[’'`]/g," ").replace(/[^a-z0-9:%.,;→>\-\/\s]/g," ").replace(/\s+/g," ").trim();
+const SG_SUBJ=[["mexp",/\bmaths? expert\w*|\bexpertes?\b|\bmexp\b/g],["mspe",/\bmaths? (de )?spe\w*|\bspe maths?\b|\bspecialite maths?\b|\bmspe\b/g],["fses",/\bses\b|\bsciences? eco\w*|\beco(nomie)?\b/g],
+  ["fphi",/\bphilo\w*/g],["fhis",/\bhistoire\w*|\bhg\b|\bgeo(graphie)?\b|\bhggsp\b/g],["fsci",/\bsciences?\b|\bens\b|\benseignement scientifique\b|\bphysique\b|\bsvt\b/g],
+  ["esp",/\bespagnol\b|\besp\b/g],["ang",/\banglais\b|\bang\b|\benglish\b/g],["piano",/\bpiano\b/g],["sport",/\bsport\b|\bsalle\b|\bmuscu\w*/g],["maths",/\bmaths?\b|\bmathematiques?\b/g]];
+const SG_TILE=[["jour",/\bma journee\b|\bjournee\b|\bplanning\b|\bplanificateur\b/],["hab",/\bhabitudes?\b/],["pron",/\bpronote\b/],["proj",/\bplume\b|\bnotes perso\b|\bprojets?\b/],
+  ["fin",/\bfinance\b|\btrading\b|\bbourse\b/],["obj",/\bobjectif\b|\btop ?3\b/],["cours",/\bcours\b/],["cg",/\bculture\b/]];
+const SG_RX=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+function sgSubj(t){const hits=[],cu=Object.entries(edtP().custom||{}).map(([k,v])=>[k,new RegExp("\\b"+SG_RX(SG_N(v.n))+"\\b","g")]);
+  [...cu,...SG_SUBJ].forEach(([id,re])=>{re.lastIndex=0;let m;while((m=re.exec(t))){const a=m.index,b=a+m[0].length;if(!hits.some(h=>a<h.b&&b>h.a))hits.push({id,a,b});if(!m[0].length)re.lastIndex++}});
+  return hits.sort((x,y)=>x.a-y.a)}
+function sgTile(t){for(const m of MOD.tiles)if(new RegExp("\\b"+SG_RX(SG_N(m.nom))+"\\b").test(t))return m.k;const ap=appP().nom||{};for(const k in ap)if(new RegExp("\\b"+SG_RX(SG_N(ap[k]))+"\\b").test(t))return k;const f=SG_TILE.find(([,re])=>re.test(t));return f?f[0]:null}
+function sgDays(t){if(/tous les jours|tout les jours|chaque jour|toute la semaine|tous les soirs/.test(t))return[0,1,2,3,4,5,6];const o=[];
+  if(/en semaine/.test(t))o.push(1,2,3,4,5);if(/week ?-?end/.test(t))o.push(6,0);
+  SG_JN.forEach((n,i)=>{if(new RegExp("\\b"+n+"s?\\b").test(t))o.push(i)});
+  if(/aujourd hui|ce soir|ce matin|cet apres/.test(t))o.push(today().getDay());if(/\bdemain\b/.test(t))o.push(add(today(),1).getDay());return[...new Set(o)]}
+function sgClock(t){const m=t.match(/(?:\ba|\bvers|\bdes|\bjusqu a|\bavant|\bpour)\s+(\d{1,2})\s*(?:h|heures?|:)\s*(\d{2})?(?!\s*(?:min|\d))/);if(!m)return null;const h=+m[1],mi=+(m[2]||0);
+  return h<=23&&mi<=59?String(h).padStart(2,"0")+":"+String(mi).padStart(2,"0"):null}
+function sgDur(t){if(/trois quarts? d heure/.test(t))return 45;if(/une heure et demie/.test(t))return 90;if(/demi ?-?heure/.test(t))return 30;if(/quart d heure/.test(t))return 15;
+  const c=t.replace(/(?:\ba|\bvers|\bdes|\bjusqu a|\bavant)\s+\d{1,2}\s*(?:h|heures?|:)\s*\d{0,2}/g," ");
+  let m=c.match(/(\d+(?:[.,]5)?)\s*(?:h|heures?)\s*(\d{1,2})?\b/);if(m)return Math.round(parseFloat(m[1].replace(",","."))*60)+(+(m[2]||0));
+  m=c.match(/(\d+)\s*(?:min|minutes?|mn)\b/);if(m)return+m[1];if(/\bune heure\b/.test(c))return 60;return null}
+function sgRz(id,ds){if(id!=="maths")return id;const tk=dkey(today()),has=x=>(ds.length?ds:[0,1,2,3,4,5,6]).some(w=>planBase(tk,w).includes(x));return ds.length&&has("maths")?"maths":"mspe"}
+const SG_ALLM=["mspe","mexp","maths"];
+const SG_CODE=/\b(rubrique|page|fonction\w*|bouton|graphique|courbe|onglet|module|ecran|notification|rappel|alarme|widget|compteur|tableau|calendrier|jeu|minuteur|chrono\w*)\b/;
+function sgClause(c,raw){
+  const H=re=>re.test(c),S_=sgSubj(c),ds=sgDays(c),du=sgDur(c),ck=sgClock(c),one=x=>[x];let m;
+  /* apparence */
+  if(H(/\b(mode|theme|fond|apparence|couleurs?)\b/)){if(H(/sombre|noir|dark|nuit/))return one({t:"theme",v:"dark"});if(H(/clair|blanc|light/))return one({t:"theme",v:"light"});if(H(/\bauto/))return one({t:"theme",v:"auto"})}
+  /* tuiles de l'accueil */
+  const tk=sgTile(c);
+  if(tk&&H(/\b(tuile|rubrique|case|bloc|accueil|icone)\b|en premier|en haut|en dernier|en bas|au debut|a la fin|renomm/)){
+    if(H(/renomm/)&&(m=String(raw).match(/\ben\s+[«"“]?\s*([^»"”]{1,30}?)\s*[»"”]?\s*\.?$/i)))return one({t:"tuile",k:tk,nom:m[1].trim()});
+    if(H(/cache|masque|enleve|supprime|retire|vire|efface/))return one({t:"tuile",k:tk,hide:true});
+    if(H(/affiche|remet|montre|reaffiche|fais revenir/))return one({t:"tuile",k:tk,hide:false});
+    if(H(/en premier|en haut|au debut|en 1er|tout en haut/))return one({t:"tuile",k:tk,pos:"first"});
+    if(H(/en dernier|en bas|a la fin|tout en bas/))return one({t:"tuile",k:tk,pos:"last"})}
+  /* objectif Top 3 : moyenne visée, poids des piliers, poids d'une matière */
+  if(H(/objectif|top ?3|\bvise\w*|\bcible|\brepere/)&&H(/moyenne|\/ ?20|sur 20|\bvise\w*|cible|repere/)&&(m=c.match(/\b(1\d|20)(?:[.,](\d))?\b/))&&!H(/%/))return one({t:"obj",cible:+(m[1]+"."+(m[2]||0))});
+  if(H(/%/)&&H(/notes?|regularite|habitudes?|finance/)&&H(/objectif|top ?3|compte|poids|pese/)){const w={},g=re=>{const x=c.match(re);return x?+x[1]:null};
+    const n=g(/\bnotes?\D{0,25}?(\d{1,3})\s*%/),h=g(/(?:regularite|habitudes?)\D{0,25}?(\d{1,3})\s*%/),f=g(/finance\D{0,25}?(\d{1,3})\s*%/);
+    if(n!=null)w.n=n;if(h!=null)w.h=h;if(f!=null)w.f=f;if(Object.keys(w).length)return one({t:"obj",w})}
+  if(H(/\bcompt\w*|\bpoids\b|\bpese\w*|\bvaut\b|\bvalent\b/)&&(S_.length||H(/devoirs?/))){
+    const v=H(/ne \w* ?(compt|pese)\w* (plus|pas|rien)|\bpas\b|\brien\b|\bzero\b|\baucun/)?0:H(/triple|x ?3|fois 3/)?3:H(/double|x ?2|fois 2|deux fois/)?2:H(/normal|pareil|comme les autres|x ?1\b/)?1:H(/moitie|moins/)?0.5:H(/\bplus\b/)?2.5:null;
+    if(v!=null){const ids=[...S_.flatMap(x=>x.id==="maths"?SG_ALLM:[x.id]),...(H(/devoirs?/)?["devoir"]:[])];return[...new Set(ids)].map(a=>({t:"poids",a,w:v}))}}
+  /* réglages de la journée */
+  if(ck&&!S_.length){
+    if(H(/\barret\w*|\bfini\w*|\btermin\w*|\bstop\w*|travaill\w* jusqu|\bposer le stylo/))return one({t:"par",k:"stop",v:ck,days:ds});
+    if(H(/\bdin\w*|repas du soir|\bsoupe\w*/))return one({t:"par",k:"diner",v:ck,days:ds});
+    if(H(/\bdejeun\w*|\bdej\b|\bmidi\b/))return one({t:"par",k:"dejWE",v:ck,days:ds});
+    if(H(/\bmange\w*|\brepas\b/))return one({t:"par",k:+ck.slice(0,2)>=16?"diner":"dejWE",v:ck,days:ds});
+    if(H(/\blibre\b/))return one({t:"par",k:"libreWE",v:ck,days:ds});
+    if(H(/commence\w*|\bdebut\w*|\bleve\w*|\bdemarr\w*/))return one({t:"par",k:"debutWE",v:ck,days:ds})}
+  const less=H(/moins de temps|moins long|plus court|plus vite|plus rapide|moins longtemps|trop long/),more=H(/plus de temps|plus long|plus longtemps|plus lent|pas assez de temps/);
+  if(!S_.length&&(du||less||more)){const rel=du?0:less?-1:1,o=a=>one({t:"dur",a,min:du||0,rel,days:ds});
+    if(H(/\bdin\w*|\brepas/))return o("dinerDur");if(H(/\btrajet|\brentrer|\bretour|\brentre/))return o("trajet");if(H(/\bpause|me poser|souffler/))return o("pause");if(H(/\bdevoirs?\b/))return o("devoir")}
+  /* durée d'une matière */
+  if(S_.length&&(du||less||more)&&!H(/remplac|a la place|au lieu|echang/)){
+    if(S_.some(x=>x.id==="sport")&&H(/\btrajet/))return du?one({t:"dur",a:"sportTrajet",min:du}):null;
+    const rel=du?0:less?-1:1;return[...new Set(S_.flatMap(x=>x.id==="maths"&&!ds.length?SG_ALLM:[sgRz(x.id,ds)]))].map(a=>({t:"dur",a:a==="sport"?"sport":a,min:du||0,rel,days:ds}))}
+  /* remplacer */
+  if(S_.length>=2&&H(/remplac|echang|a la place|au lieu|plutot|prefer\w*|\bchang\w*|substitu|→|->|transform|\bpar\b/)){let a=S_[0].id,b=S_[1].id;
+    const p=c.search(H(/prefer|plutot/)?/a la place d|au lieu d|plutot que|\bque\b|\bqu /:/a la place d|au lieu d|plutot que/);if(p>=0){const af=S_.find(x=>x.a>p),bf=[...S_].reverse().find(x=>x.a<p);if(af&&bf){a=af.id;b=bf.id}}
+    return one({t:"rep",a:sgRz(a,ds),b:sgRz(b,ds),days:ds})}
+  /* déplacer d'un jour à un autre */
+  if(S_.length===1&&H(/deplac|decal|bouge|\bpasse|transfer|\bmets?\b|\bmet\b/)&&(m=c.match(/\b(?:du|le)\s+(dimanche|lundi|mardi|mercredi|jeudi|vendredi|samedi)s?\s+(?:au|a|le|vers|pour le)\s+(dimanche|lundi|mardi|mercredi|jeudi|vendredi|samedi)/))){
+    const a=sgRz(S_[0].id,[SG_JN.indexOf(m[1])]);return[{t:"del",a,days:[SG_JN.indexOf(m[1])]},{t:"add",a,days:[SG_JN.indexOf(m[2])]}]}
+  /* enlever */
+  if(S_.length&&H(/enleve|supprime|retire|\bplus de\b|\bpas de\b|\barret\w*|\bsans\b|\bvire|annule|zappe|\bsaute|ne fais plus|ne fais pas|\benlever/))return S_.map(x=>({t:"del",a:sgRz(x.id,ds),days:ds,weak:S_.length>1}));
+  /* ajouter */
+  if(S_.length&&H(/ajout\w*|rajout\w*|\bmets?\b|\bmet\b|\bfai[st]?\b|\bfaire\b|prevoi\w*|program\w*|planifi\w*|\bveux\b|voudrais|\bcase\b|\bcaler\b|\bcale\b/))return S_.map(x=>({t:"add",a:sgRz(x.id,ds),days:ds,weak:S_.length>1}));
+  /* nouvelle fonction de l'appli : pour l'IA ou la boîte à idées */
+  if(SG_CODE.test(c)||H(/\bappli\b|\bapplication\b/))return one({t:"code"});
+  /* nouvelle habitude */
+  if(!S_.length&&H(/\bajout\w*|\brajout\w*|\bcree\w*|\bnouvelle\b|\bnouveau\b/)){
+    let n=String(raw).replace(/^.*?\b(ajoute[rsz]?|rajoute[rsz]?|crée[rsz]?|cree[rsz]?|nouvelle|nouveau)\b\s*/i,"").replace(/^(une?|des|du|de la|de l'|d')\s*/i,"").replace(/^(tâche|tache|habitude|activité|activite)\s*(de |d'|:)?\s*/i,"").replace(/^(une?|des|du|de la|de l'|d')\s*/i,"");
+    n=n.replace(/\s*(\b(le|les|chaque|tous|toutes|tout|pendant|en|pour|de|à|a|le soir|ce soir|demain|aujourd'hui)\b\s*)?(\d.*|\b(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|semaine|week-end|soir|jours?|matin)\b.*)$/i,"").replace(/[.,;!]+$/,"").trim();
+    if(n.length>=2&&n.length<=30)return one({t:"new",n:n[0].toUpperCase()+n.slice(1),min:du||30,days:ds})}
+  return null}
+function sgLocal(txt){
+  const parts=String(txt).split(/[;\n]+|\.\s+|\s+puis\s+|,?\s+et\s+(?=(?:remplace|ajoute|rajoute|enl[eè]ve|supprime|mets|met|retire|cache|j['’ ]|je |la |le |les |l['’]|plus de|pas de|ce soir|demain))/i).map(s=>s.trim()).filter(Boolean),ops=[];
+  for(const raw of parts){const r=sgClause(SG_N(raw),raw);if(!r)return null;ops.push(...r)}
+  if(!ops.length)return null;const n=SG_N(txt);
+  if(ops.some(o=>o.t==="code"))return ops.every(o=>o.t==="code")?{ops:[],code:true,idee:String(txt).trim(),via:"local"}:null;
+  return{ops,weak:ops.some(o=>o.weak),scope:/aujourd hui|ce soir|ce matin|cet apres|pour une fois|cette fois|cette semaine|\bdemain\b|exceptionnel/.test(n)?"once":"always",via:"local"}}
+async function sgAI(txt){
+  const tk=dkey(today()),P=jParams(),hb=Object.keys(HABITS).map(h=>`${h} = ${habL(h)} (${fdur(jDur(h,jBase(h)))}, compte ${wTxt(tW(h))})`).join(" ; "),
+    wk=[1,2,3,4,5,6,0].map(w=>`${w} ${SG_JN[w]} : ${planBase(tk,w).join(", ")||"rien"}`).join("\n"),tiles=sects(true).map(([k,n])=>`${k} = ${n}`).join(" ; ");
+  const o=await aiSample.json(`Tu transformes une suggestion de Nathan pour son appli d'organisation en opérations JSON.
+Aujourd'hui : ${JOURS[today().getDay()].toLowerCase()} ${fdate(tk)} (jour n° ${today().getDay()} ; 0 = dimanche, 1 = lundi … 6 = samedi).
+Habitudes (id = nom) : ${hb}.
+Emploi du temps de base (ids par jour) :
+${wk}
+Réglages de journée : trajet ${P.trajet} min, pause en rentrant ${P.pause} min, dîner ${P.diner} (${P.dinerDur} min), fin du travail ${P.stop}, week-end : début ${P.debutWE}, déjeuner ${P.dejWE}, libre à ${P.libreWE} ; sport ${P.sportDur} min + ${P.sportTrajet} min de trajets ; ${P.devoir} min par devoir.
+Objectif Top 3 : notes ${OBJ_W.n} %, régularité ${OBJ_W.h} %, finance ${OBJ_W.f} %, moyenne visée ${OBJ_CIBLE}.
+Tuiles de l'accueil (clé = nom) : ${tiles}.
+Opérations possibles (champ "t") :
+{"t":"rep","a":id,"b":id,"days":[n…]} remplace a par b (days vide = tous les jours où a est prévu)
+{"t":"del","a":id,"days":[…]} enlève ; {"t":"add","a":id,"days":[…]} ajoute
+{"t":"new","n":"Nom court","min":30,"days":[…]} nouvelle habitude qui n'existe pas dans la liste
+{"t":"dur","a":id ou "devoir"|"sport"|"sportTrajet"|"trajet"|"pause"|"dinerDur","min":minutes} ou avec "rel":-1 (moins de temps) / 1 (plus de temps) si aucun chiffre n'est donné
+{"t":"par","k":"stop"|"diner"|"debutWE"|"dejWE"|"libreWE","v":"HH:MM"}
+{"t":"obj","cible":16} et/ou {"t":"obj","w":{"n":60,"h":25,"f":15}} (somme 100)
+{"t":"poids","a":id ou "devoir","w":0 à 3} combien une tâche compte dans la régularité de l'objectif
+{"t":"tuile","k":clé,"hide":true|false} ; {"t":"tuile","k":clé,"pos":"first"|"last"} ; {"t":"tuile","k":clé,"nom":"Nouveau nom"}
+{"t":"theme","v":"light"|"dark"|"auto"}
+Réponds UNIQUEMENT en JSON : {"ops":[…],"scope":"always" ou "once","resume":"une phrase courte en français (tutoiement) qui dit ce que tu as compris","code":true|false,"idee":"si code est true : l'idée reformulée clairement"}
+"scope" vaut "once" seulement si Nathan dit que c'est pour aujourd'hui, ce soir, demain ou une seule fois.
+"code" vaut true si la suggestion demande une nouvelle fonction de l'appli qu'aucune opération ne permet (nouvelle rubrique, graphique, bouton, rappel…).
+Suggestion de Nathan : « ${String(txt).slice(0,600)} »`);
+  return sgValid(o)}
+function sgValid(o){if(!o||typeof o!=="object")throw{code:"invalid_json"};
+  const H=h=>!!HABITS[h],D=a=>Array.isArray(a)?[...new Set(a.map(Number).filter(x=>Number.isInteger(x)&&x>=0&&x<=6))]:[],ops=[];
+  (Array.isArray(o.ops)?o.ops:[]).forEach(x=>{if(!x||typeof x!=="object")return;const t=x.t;
+    if(t==="rep"&&H(x.a)&&H(x.b)&&x.a!==x.b)ops.push({t,a:x.a,b:x.b,days:D(x.days)});
+    else if((t==="del"||t==="add")&&H(x.a))ops.push({t,a:x.a,days:D(x.days)});
+    else if(t==="new"&&typeof x.n==="string"&&x.n.trim())ops.push({t,n:x.n.trim().slice(0,40),min:+x.min||30,days:D(x.days)});
+    else if(t==="dur"&&(H(x.a)||SG_DURK[x.a])&&(+x.min>0||x.rel))ops.push({t,a:x.a,min:+x.min||0,rel:x.rel<0?-1:x.rel>0?1:0});
+    else if(t==="par"&&SG_CLK.includes(x.k)&&/^\d{1,2}:\d{2}$/.test(String(x.v)))ops.push({t,k:x.k,v:String(x.v)});
+    else if(t==="obj"&&(x.cible||x.w))ops.push({t,cible:+x.cible||undefined,w:x.w&&typeof x.w==="object"?x.w:undefined});
+    else if(t==="poids"&&(H(x.a)||x.a==="devoir")&&x.w!=null&&!isNaN(+x.w))ops.push({t,a:x.a,w:+x.w});
+    else if(t==="tuile"&&sects(true).some(s=>s[0]===x.k))ops.push({t,k:x.k,hide:typeof x.hide==="boolean"?x.hide:undefined,pos:["first","last"].includes(x.pos)?x.pos:undefined,nom:typeof x.nom==="string"&&x.nom.trim()?x.nom.trim():undefined});
+    else if(t==="theme"&&["light","dark","auto"].includes(x.v))ops.push({t,v:x.v})});
+  return{ops,scope:o.scope==="once"?"once":"always",resume:String(o.resume||"").slice(0,300),code:!!o.code,idee:String(o.idee||"").slice(0,400),via:"ia"}}
+
+/* ---- historique et boîte à idées (synchronisés) ---- */
+const sgList=()=>(((S.params||{}).idees)||{}).list||[];
+function sgSave(L){return put("params","idees",{list:L.slice(0,80)},true)}
+function sgLog(x){sgSave([x,...sgList()])}
+function sgCommit(r,txt,scope){const P=S.params||{},before={},jb={};
+  Object.entries(r.docs).forEach(([k,v])=>{if(JSON.stringify(v)!==JSON.stringify(P[k]||{}))before[k]=P[k]===undefined?null:P[k]});
+  Object.keys(r.jours).forEach(k=>jb[k]=S.jours[k]===undefined?null:S.jours[k]);
+  Object.keys(before).forEach(k=>put("params",k,r.docs[k],true));Object.entries(r.jours).forEach(([k,v])=>put("jours",k,v,true));
+  const id=uid();sgLog({id,ts:Date.now(),txt:String(txt).slice(0,300),lines:r.lines,etat:"ok",scope,before,jb});return id}
+function sgUndo(id){const L=sgList(),x=L.find(y=>y.id===id);if(!x||x.etat!=="ok")return;
+  Object.entries(x.before||{}).forEach(([k,v])=>v==null?del("params",k):put("params",k,v,true));
+  Object.entries(x.jb||{}).forEach(([k,v])=>v==null?del("jours",k):put("jours",k,v,true));
+  sgSave(L.map(y=>y.id===id?{id:y.id,ts:y.ts,txt:y.txt,lines:y.lines,etat:"annule"}:y));
+  Object.keys(V.sg).forEach(p=>{if(V.sg[p]&&V.sg[p].logId===id)V.sg[p]={done:"↩︎ Annulé : tout est revenu comme avant."}});render(true)}
+/* un changement direct, sans aperçu (bouton « Afficher », retour au planning de départ…) */
+function sgQuick(ops,txt){const r=sgCompute(ops,"always");if(r.lines.length)sgCommit(r,txt,"always");render(true)}
+function sgResetPlan(){const tk=dkey(today()),e=JSON.parse(JSON.stringify(edtP())),p={};for(let i=0;i<7;i++)p[i]=(PLAN[i]||[]).slice();
+  e.v=(Array.isArray(e.v)?e.v:[]).filter(v=>v.from<tk);e.v.push({from:tk,p});e.dur={};
+  const id=sgCommit({docs:{edt:e},jours:{},lines:["Emploi du temps et durées de départ"],notes:[]},"Revenir au planning de départ","always");
+  V.sg.idees={done:"✓ Ton emploi du temps de départ est revenu (à partir d'aujourd'hui).",logId:id};render(true)}
+
+/* ---- envoyer une suggestion ---- */
+async function sgSubmit(place,txt){
+  txt=String(txt||"").trim();if(!txt)return;const st=V.sg[place]={txt,busy:true};render(true);
+  let p=sgLocal(txt);
+  if((!p||p.code||p.weak)&&SAMPLE){try{const q=await sgAI(txt);if(q.ops.length||q.code||!p)p=q}catch(e){if(!p)st.err=ERR(e.code)}}
+  st.busy=false;
+  if(p&&p.ops.length){st.p=p;st.scope=p.scope;st.res=sgCompute(p.ops,st.scope);st.eff=sgEffects(st.res)}else st.p=p||null;
+  if(V.sg[place]===st)render(true)}
+function sgRecalc(place,scope){const st=V.sg[place];if(!st||!st.p)return;st.scope=scope;st.res=sgCompute(st.p.ops,scope);st.eff=sgEffects(st.res);render(true)}
+function sgApply(place){const st=V.sg[place];if(!st||!st.p)return;const r=sgCompute(st.p.ops,st.scope);if(!r.lines.length){V.sg[place]=null;return render(true)}
+  const id=sgCommit(r,st.txt,st.scope);V.sg[place]={done:"✓ C'est fait. "+r.lines.join(" · "),logId:id};render(true)}
+function sgIdee(place){const st=V.sg[place];if(!st)return;sgLog({id:uid(),ts:Date.now(),txt:st.txt,idee:(st.p&&st.p.idee)||st.txt,etat:"idee"});
+  V.sg[place]={done:"💡 Idée gardée dans ta boîte à idées (page 💡 Suggestions)."};render(true)}
+function sgPlan(p){return p.ops.some(o=>["rep","del","add","new","dur","par"].includes(o.t))}
+function sgResult(place){const st=V.sg[place];
+  if(st.busy)return`<p class="muted small">Je lis ta suggestion…</p>`;
+  if(st.done)return`<div class="sgres ok"><p>${esc(st.done)}</p><div class="row">${st.logId&&sgList().find(x=>x.id===st.logId&&x.etat==="ok")?`<button class="ghost" data-sgundo="${st.logId}">↩︎ Annuler</button>`:""}<button class="ghost on" data-sgno="${place}">OK</button></div></div>`;
+  const p=st.p,r=st.res;
+  if(p&&r&&r.lines.length){const plan=sgPlan(p);
+    return`<div class="sgres"><p class="small muted">« ${esc(st.txt)} »</p>${p.resume?`<p>${esc(p.resume)}</p>`:""}
+      <ul class="sgl">${r.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>${r.notes.length?`<p class="small muted">${esc(r.notes.join(" "))}</p>`:""}
+      <div class="sgfx">${sgFx(st.eff,plan).map(x=>`<p>${x}</p>`).join("")}</div>
+      ${plan?`<div class="seg" role="group" aria-label="Pour quand ?"><button data-sgscope="${place}|always" aria-pressed="${st.scope!=="once"}">Chaque semaine</button><button data-sgscope="${place}|once" aria-pressed="${st.scope==="once"}">Juste cette fois</button></div>`:""}
+      <div class="row"><button class="btn" data-sgok="${place}">✓ Appliquer</button><button class="ghost" data-sgno="${place}">Annuler</button></div></div>`}
+  const code=p&&p.code;
+  return`<div class="sgres"><p class="small muted">« ${esc(st.txt)} »</p>
+    <p>${code?`C'est une nouvelle fonction pour l'appli${p.idee&&p.idee!==st.txt?` : <b>${esc(p.idee)}</b>`:""}. ${SAMPLE?"L'IA peut essayer de la créer tout de suite, sans risque : tu gardes le résultat seulement s'il te plaît.":"Ajoute ta clé d'IA dans ⚙️ Réglages pour que l'appli puisse la créer. En attendant, garde-la dans ta boîte à idées."}`
+      :r&&r.notes.length?esc(r.notes.join(" ")):st.err?esc(st.err)+" Tu peux aussi l'écrire comme un des exemples.":SAMPLE?"Je n'ai pas compris quoi changer. Reformule (comme les exemples), ou garde l'idée pour plus tard.":"Je n'ai pas compris quoi changer. Écris-la comme un des exemples, ou ajoute ta clé d'IA dans ⚙️ Réglages pour que l'appli comprenne toutes tes phrases."}</p>
+    <div class="row">${code&&SAMPLE?`<button class="btn" data-modgen="${place}">✨ Créer avec l'IA</button>`:""}<button class="ghost on" data-sgidee="${place}">💡 Garder l'idée</button><button class="ghost" data-sgno="${place}">Annuler</button></div></div>`}
+function sgCard(place){const st=V.sg[place],ex=place==="jour"?SG_EXJ:SG_EXA,jr=place==="jour",busy=st&&st.busy;
+  return`<div class="card stack sgcard" style="gap:10px"><p class="label" style="margin:0">💡 ${jr?"Une suggestion pour ton emploi du temps ?":"Ton idée pour l'appli"}</p>
+    <p class="muted small" style="margin:0">${jr?"Écris-la comme tu la dirais. L'appli change ton planning de base et tes durées, et ton % Objectif Top 3 suit.":"Planning, durées, objectif Top 3, tuiles, apparence : l'appli fait le changement tout de suite. Pour une nouvelle fonction, l'IA peut créer un module."}</p>
+    <form data-f="sugg" data-place="${place}" class="${jr?"row sgform":"stack"}" style="gap:8px">${jr?`<input class="field" name="t" id="sg-${place}" autocomplete="off" placeholder="Ex. : ${esc(ex[0])}" required>`:`<textarea class="field" name="t" id="sg-${place}" rows="3" placeholder="Ex. : ${esc(ex[0])}" required></textarea>`}
+      <div><button class="btn" ${busy?"disabled":""}>${busy?"…":jr?"OK":"Envoyer"}</button></div></form>
+    ${st?sgResult(place):`<div class="chips sgex">${ex.map(x=>`<button type="button" class="chip" data-sgex="${place}|${esc(x)}">${esc(x)}</button>`).join("")}</div>`}</div>`}
+function sgWeek(){const tk=dkey(today()),seen=new Set();
+  const rows=[1,2,3,4,5,6,0].map(w=>{const L=planBase(tk,w);L.forEach(h=>seen.add(h));return`<div class="sgw"><b>${JOURS[w].slice(0,3)}.</b><span>${L.map(h=>esc(habN(h))).join(" · ")||"—"}</span></div>`}).join("");
+  return rows+`<p class="small muted" style="margin-top:6px">Durées : ${[...seen].filter(h=>h!=="sport").map(h=>`${esc(habL(h))} ${fdur(jDur(h,jBase(h)))}`).join(" · ")}${seen.has("sport")?` · Sport ${fdur(jParams().sportDur)} + ${fdur(jParams().sportTrajet)} de trajets`:""}</p>`}
+function sgClaude(){const L=sgList().filter(x=>x.etat==="idee"),g=aideLinks().gh;
+  return`Bonjour Claude ! J'ai une appli web « 2ème cerveau » : un seul fichier index.html, hébergé sur GitHub Pages (${g}), version ${APP_VERSION}.
+Voici des idées pour l'améliorer que je n'ai pas pu faire directement dans l'appli :
+${L.map((x,i)=>`${i+1}. ${x.idee||x.txt}`).join("\n")}
+Peux-tu modifier index.html pour les ajouter, puis me donner le nouveau fichier et les étapes pour le mettre sur GitHub ? Explique-moi simplement, étape par étape.`}
+function pageIdees(){const L=sgList(),ideas=L.filter(x=>x.etat==="idee"),hist=L.filter(x=>x.etat!=="idee").slice(0,15),last=L.find(x=>x.etat==="ok"),hid=appP().hide||[];
+  const et={ok:"✓ appliquée",annule:"↩︎ annulée",fait:"🧩 module créé"};
+  return`${sgCard("idees")}${modCard()}
+  ${ideas.length?`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">💡 Ma boîte à idées</p><ul class="list">${ideas.map(x=>`<li class="modrow"><div><span>${esc(x.idee||x.txt)}</span><span class="muted small">${fts(x.ts)}</span></div><div class="row" style="flex-wrap:nowrap">${SAMPLE?`<button class="ghost on" data-modgen="i:${x.id}" aria-label="Créer avec l'IA">✨</button>`:""}<button class="ghost" data-sgdel="${x.id}" aria-label="Supprimer">✕</button></div></li>`).join("")}</ul>
+    <p class="muted small">Une idée trop grosse pour l'IA de l'appli ? Copie la liste et colle-la dans une conversation avec Claude : il te renverra la nouvelle version de l'appli.</p>
+    <div class="row"><button class="ghost on" data-sgclaude="1">📋 Copier pour Claude</button></div>${V.sgCopy?`<textarea class="field" rows="6" readonly onfocus="this.select()">${esc(V.sgCopy)}</textarea>`:""}${V.sgMsg?`<p class="small">${esc(V.sgMsg)}</p>`:""}</div>`:""}
+  <div class="card stack" style="gap:6px"><p class="label" style="margin:0">🗓️ Ton emploi du temps de base</p>${sgWeek()}
+    <p class="muted small">Il change à chaque suggestion validée. Les jours passés gardent leur planning : ton historique et ton % restent justes.</p>
+    <div class="row"><button class="ghost" data-sgreset="1">${V.confirm==="sgreset"?"Confirmer : revenir au planning de départ":"Revenir au planning de départ"}</button></div></div>
+  ${hid.length?`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">Tuiles cachées</p><div class="row">${hid.map(k=>`<button class="ghost on" data-sgshow="${esc(k)}">Afficher « ${esc(sectName(k))} »</button>`).join("")}</div></div>`:""}
+  ${hist.length?`<div class="card stack" style="gap:6px"><p class="label" style="margin:0">🕘 Historique</p><ul class="list">${hist.map(x=>`<li class="modrow"><div><span>${esc(x.txt)}</span><span class="muted small">${fts(x.ts)} · ${et[x.etat]||""}${x.lines&&x.lines.length?" · "+esc(x.lines.join(" · ")):""}</span></div>${last&&x.id===last.id?`<button class="ghost" data-sgundo="${x.id}">↩︎ Annuler</button>`:""}</li>`).join("")}</ul></div>`:""}`}
+
+/* ================================================================
+   🧩 MODULES : l'IA écrit un petit morceau d'appli (une tuile, un bloc sur une page, du style).
+   Il est essayé avant d'être gardé, se met en pause ou se supprime d'un geste.
+   Si un module empêche l'appli de démarrer, elle repart en « mode sans échec » (ou adresse + ?sans-modules).
+   ================================================================ */
+let MOD={sig:null,tiles:[],adds:{},clicks:{},submits:{},err:{}};
+let modSafe=(()=>{try{const b=localStorage.getItem("cerveau-modboot");return b==="1"||b==="2"||/[?&]sans-modules/.test(location.search)}catch(e){return false}})();
+const modList=()=>(((S.params||{}).modules||{}).list)||[];
+const modSig=()=>modSafe?"safe":modList().map(m=>m.id+":"+m.ts+":"+(m.on?1:0)).join(",")+"|"+(V.modTry?V.modTry.ts:"");
+function modApi(m){const id=m.id;return{
+  tuile:o=>{if(!o||!o.k||typeof o.page!=="function")throw new Error("C.tuile a besoin de k et de page");MOD.tiles.push({k:"m_"+String(o.k).replace(/[^a-z0-9_-]/gi,"").slice(0,20),id,nom:String(o.nom||o.k).slice(0,30),emoji:String(o.emoji||"🧩").slice(0,4),couleur:/^#[0-9a-f]{3,8}$/i.test(o.couleur||"")?o.couleur:"#5b6b82",resume:typeof o.resume==="function"?o.resume:null,page:o.page})},
+  ajoute:(p,fn,pos)=>{if(typeof fn!=="function")throw new Error("C.ajoute a besoin d'une fonction");(MOD.adds[p]=MOD.adds[p]||[]).push({id,fn,pos:pos==="haut"?"haut":"bas"})},
+  clic:(n,fn)=>{MOD.clicks[n]={id,fn}},envoi:(n,fn)=>{MOD.submits[n]={id,fn}},
+  data:()=>JSON.parse(JSON.stringify(S.perso[id]||{})),save:o=>put("perso",id,o&&typeof o==="object"?JSON.parse(JSON.stringify(o)):{}),
+  lire:c=>JSON.parse(JSON.stringify(S[c]||{})),esc,aujourdhui:()=>dkey(today()),date:s=>fdate(s),rendu:()=>render(true),va:p=>go(p),
+  ia:p=>SAMPLE?SAMPLE(String(p),{}).then(r=>r.text):Promise.reject(new Error("IA non configurée"))}}
+function modDrop(id){MOD.tiles=MOD.tiles.filter(t=>t.id!==id);Object.keys(MOD.adds).forEach(p=>MOD.adds[p]=MOD.adds[p].filter(x=>x.id!==id));["clicks","submits"].forEach(k=>Object.keys(MOD[k]).forEach(n=>{if(MOD[k][n].id===id)delete MOD[k][n]}))}
+function modLoad(){MOD={sig:modSig(),tiles:[],adds:{},clicks:{},submits:{},err:{}};let css="";
+  if(!modSafe){const L=modList().filter(m=>m.on);if(V.modTry)L.push(V.modTry);
+    L.forEach(m=>{try{new Function("C",String(m.js||""))(modApi(m));css+="\n"+String(m.css||"").replace(/<\/?style[^>]*>/gi,"")}catch(e){MOD.err[m.id]=String(e&&e.message||e).slice(0,200);modDrop(m.id)}})}
+  let st=document.getElementById("modcss");if(!st){st=document.createElement("style");st.id="modcss";document.head.appendChild(st)}st.textContent=css}
+function modFail(id,e){MOD.err[id]=String(e&&e.message||e).slice(0,200)}
+function modName(id){return(modList().find(m=>m.id===id)||(V.modTry&&V.modTry.id===id?V.modTry:{})).nom||"?"}
+function modHtml(id,fn){try{const h=fn();return h==null?"":String(h)}catch(e){modFail(id,e);return`<div class="card stack" style="gap:8px"><p class="small">⚠️ Le module « ${esc(modName(id))} » a un problème : ${esc(MOD.err[id])}</p><div><button class="ghost" data-page="idees">Voir dans 💡 Suggestions</button></div></div>`}}
+function modWrap(p,html){const a=MOD.adds[p];if(!a||!a.length)return html;const f=pos=>a.filter(x=>x.pos===pos).map(x=>modHtml(x.id,x.fn)).join("");return f("haut")+html+f("bas")}
+function modSum(t){try{const r=t.resume?t.resume():["",""];return[esc(String((r||[])[0]??"")),esc(String((r||[])[1]??""))]}catch(e){modFail(t.id,e);return["⚠️","module en panne"]}}
+function modTarget(id){const t=MOD.tiles.find(x=>x.id===id);if(t)return t.k;return Object.keys(MOD.adds).find(p=>MOD.adds[p].some(x=>x.id===id))||null}
+function modCheck(id){
+  MOD.tiles.filter(t=>t.id===id).forEach(t=>{modHtml(id,t.page);modSum(t)});
+  Object.values(MOD.adds).forEach(a=>a.filter(x=>x.id===id).forEach(x=>modHtml(id,x.fn)));
+  if(MOD.err[id])return MOD.err[id];
+  if(!MOD.tiles.some(t=>t.id===id)&&!modTarget(id)&&!(V.modTry&&String(V.modTry.css||"").trim()))return"le module n'ajoute rien de visible (ni tuile, ni bloc, ni style)";
+  return""}
+const MOD_EX=`C.tuile({k:"eau",nom:"Eau",emoji:"💧",couleur:"#2d7ff0",
+  resume:()=>{const n=C.data()[C.aujourdhui()]||0;return[n+" / 8","verres d'eau aujourd'hui"]},
+  page:()=>{const d=C.data(),n=d[C.aujourdhui()]||0;
+    return \`<div class="card stack"><p class="label">Aujourd'hui</p><b class="num" style="font-size:2rem">\${n} / 8</b>
+      <div class="bar"><i style="width:\${Math.min(100,n/8*100)}%"></i></div>
+      <div class="row"><button class="btn" data-act="eau-plus">+1 verre</button><button class="ghost" data-act="eau-moins">−1</button></div></div>
+      <div class="card"><form data-f="mod:eau-note" class="row"><input class="field" name="txt" placeholder="Une remarque"><button class="btn">OK</button></form>
+      <p class="muted small">\${C.esc(d.note||"")}</p></div>\`}});
+C.clic("eau-plus",()=>{const d=C.data(),k=C.aujourdhui();d[k]=(d[k]||0)+1;C.save(d)});
+C.clic("eau-moins",()=>{const d=C.data(),k=C.aujourdhui();d[k]=Math.max(0,(d[k]||0)-1);C.save(d)});
+C.envoi("eau-note",v=>{const d=C.data();d.note=String(v.txt||"").slice(0,200);C.save(d)});`;
+function modPrompt(idee,fix){return`Tu écris un petit module JavaScript pour « 2ème cerveau », l'appli web personnelle de Nathan (élève de Terminale, en français, tutoiement, style épuré).
+Le module est le CORPS d'une fonction qui reçoit l'objet C. N'utilise que C et du JavaScript standard : pas de bibliothèque, pas de fetch, pas de localStorage, pas de setInterval, pas d'eval, pas de innerHTML direct.
+API de C :
+- C.tuile({k:"id-court", nom:"Nom", emoji:"😴", couleur:"#5b6cff", resume:()=>["gros texte","petit texte"], page:()=>"HTML de la page"}) : ajoute une tuile sur l'accueil et sa page.
+- C.ajoute(page, ()=>"HTML", "haut" ou "bas") : ajoute un bloc sur une page existante. Pages : accueil, jour (Ma journée), hab (habitudes), pron (Pronote), fin (finance), obj (Objectif Top 3), cours, cg (culture générale).
+- C.clic("nom", (bouton)=>{…}) : appelé quand on touche <button data-act="nom" data-v="…"> ; bouton.dataset.v donne la valeur.
+- C.envoi("nom", (valeurs)=>{…}) : appelé quand on valide <form data-f="mod:nom"> ; valeurs = {name du champ : valeur}.
+- C.data() : copie de l'objet de données du module (sauvegardé et synchronisé téléphone/ordi). C.save(objet) : enregistre puis réaffiche.
+- C.lire(collection) : copie en lecture seule des données de l'appli. "jours" : {"AAAA-MM-JJ": {done:{idHabitude:true}, extra:[{t,min,ok}]}} ; "pronote" : pronote.data.notes.matieres [{m, eleve, sur}] et pronote.data.notes.moyenne, pronote.data.devoirs [{m, txt, pour, fait}], pronote.data.edt [{m, d, f}] (dates ISO).
+- C.esc(texte) : échappe un texte avant de le mettre dans du HTML (obligatoire pour tout texte tapé par Nathan ou lu dans les données).
+- C.aujourdhui() → "AAAA-MM-JJ" ; C.date("AAAA-MM-JJ") → « 11 octobre » ; C.rendu() réaffiche ; C.va(page) ouvre une page.
+- C.ia(texte) → Promise du texte répondu par l'IA (seulement si Nathan le demande).
+Classes CSS de l'appli : card (carte), stack (colonne espacée), row (ligne), btn (bouton principal), ghost (bouton secondaire), field (champ de saisie), label (petit titre), muted, small, list (liste), chip, bar avec <i style="width:…%"> (barre de progression), num (chiffres). La couleur de la page est var(--c). Si tu écris du CSS, préfixe tes classes par m-.
+Exemple complet (un compteur de verres d'eau) :
+${MOD_EX}
+${fix?`Ta version précédente ne marche pas. Erreur : ${fix.err}
+Code précédent :
+${String(fix.code).slice(0,6000)}
+Corrige-la.
+`:""}Idée de Nathan : « ${String(idee).slice(0,800)} »
+Réponds UNIQUEMENT avec un objet JSON : {"nom":"nom court","description":"ce que fait le module, en une phrase","js":"le code","css":"le CSS, ou une chaîne vide"}`}
+async function modGen(idee,fix){
+  if(!SAMPLE){V.mod={msg:ERR("no_key")};return render(true)}
+  V.modTry=null;modLoad();V.mod={busy:true,idee};render(true);
+  try{const o=await aiSample.json(modPrompt(idee,fix));
+    if(!o||typeof o.js!=="string"||!o.js.trim())throw{code:"invalid_json"};
+    V.modTry={id:"essai",nom:String(o.nom||"Mon module").slice(0,40),description:String(o.description||"").slice(0,240),js:o.js,css:typeof o.css==="string"?o.css:"",on:true,ts:Date.now(),idee};
+    modLoad();const err=modCheck("essai");
+    if(err&&!fix)return modGen(idee,{code:o.js,err});
+    V.mod={idee,err}}
+  catch(e){V.mod={idee,msg:ERR(e.code)+(e.message?" "+String(e.message).slice(0,160):"")}}
+  render(true)}
+function modKeep(){const t=V.modTry;if(!t)return;const id="m"+uid();
+  put("params","modules",{list:[...modList(),{id,nom:t.nom,description:t.description,js:t.js,css:t.css,on:true,ts:Date.now(),idee:t.idee}]},true);
+  if(S.perso.essai){put("perso",id,S.perso.essai,true);del("perso","essai")}
+  const L=sgList(),fi=V.modFrom&&L.find(x=>x.id===V.modFrom);
+  if(fi)sgSave(L.map(x=>x.id===fi.id?{...x,etat:"fait",lines:["Module : "+t.nom]}:x));else sgLog({id:uid(),ts:Date.now(),txt:t.idee,lines:["Module : "+t.nom],etat:"fait"});
+  V.modTry=null;V.modFrom=null;V.mod={msg:`✓ Module « ${t.nom} » ajouté. Tu peux le mettre en pause ou le supprimer juste en dessous.`};render(true)}
+function modJeter(){V.modTry=null;V.mod=null;if(S.perso.essai)del("perso","essai");render(true)}
+function modCard(){const L=modList(),t=V.modTry,m=V.mod||{};let h="";
+  if(modSafe)h+=`<div class="card stack" style="gap:8px;border-color:var(--down)"><p><b>Mode sans échec.</b> Un module a peut-être empêché l'appli de démarrer : ils sont tous en pause.</p><div><button class="ghost on" data-modsafe="1">Réactiver les modules</button></div></div>`;
+  if(m.busy)h+=`<div class="card stack" style="gap:6px"><p>✨ L'IA écrit ton module… (20 à 40 secondes)</p><p class="muted small">« ${esc(m.idee)} »</p></div>`;
+  else if(t)h+=`<div class="card stack" style="gap:10px;border-color:var(--c)"><p class="label" style="margin:0">✨ Module à l'essai</p><b>${esc(t.nom)}</b><p class="small">${esc(t.description)}</p>
+    ${m.err?`<p class="small" style="color:var(--down)">⚠️ Il ne marche pas encore : ${esc(m.err)}</p>`:`<p class="small muted">Il marche déjà${MOD.tiles.some(x=>x.id==="essai")?" : sa tuile est sur l'accueil":""}. Essaie-le, puis garde-le ou jette-le.</p>`}
+    <div class="row">${!m.err&&modTarget("essai")?`<button class="ghost on" data-modvoir="essai">Essayer</button>`:""}${m.err?`<button class="btn" data-modfix="1">🔧 Corriger avec l'IA</button>`:`<button class="btn" data-modkeep="1">✓ Garder</button>`}<button class="ghost" data-modjeter="1">✕ Jeter</button></div></div>`;
+  else if(m.msg)h+=`<div class="card"><p class="small">${esc(m.msg)}</p></div>`;
+  if(L.length)h+=`<div class="card stack" style="gap:6px"><p class="label" style="margin:0">🧩 Mes modules</p><ul class="list">${L.map(x=>`<li class="modrow"><div><b>${esc(x.nom)}</b><span class="muted small">${esc(x.description||"")}${MOD.err[x.id]?` · ⚠️ ${esc(MOD.err[x.id])}`:""}</span></div><div class="row" style="flex-wrap:nowrap">${x.on&&!modSafe&&modTarget(x.id)?`<button class="ghost" data-modvoir="${x.id}" aria-label="Ouvrir">↗</button>`:""}<button class="ghost ${x.on?"on":""}" data-modon="${x.id}">${x.on?"Activé":"En pause"}</button><button class="ghost" data-moddel="${x.id}">${V.confirm==="mod"+x.id?"Supprimer ?":"✕"}</button></div></li>`).join("")}</ul></div>`;
+  return h}
+
+/* ================================================================
+   CULTURE GÉNÉRALE : une notion nouvelle chaque jour
+   D'abord une base écrite à la main (fiable, marche sans IA), ensuite des notions inédites créées par l'IA.
+   La notion du jour est enregistrée : la même sur le téléphone et sur l'ordi.
+   ================================================================ */
+const CG_CAT={"Économie":"📈","Histoire":"🏛️","Sciences":"🔬","Philosophie":"🤔","Maths":"➗","Arts et lettres":"🎨","Géopolitique":"🌍","Finance":"💶","Langue française":"🗣️","Psychologie":"🧠"};
+const CG=[
+{c:"Économie",t:"La destruction créatrice",x:"L'idée vient de l'économiste autrichien Joseph Schumpeter, en 1942 : le capitalisme avance par vagues d'innovations qui détruisent les anciennes activités tout en en créant de nouvelles. Le smartphone a fait disparaître les baladeurs, les GPS de voiture et une bonne partie des appareils photo compacts, mais il a créé des millions d'emplois dans les applis. Pour Schumpeter, le héros de l'économie est l'entrepreneur, qui ose combiner autrement les moyens de production. Revers de la médaille : les travailleurs des secteurs qui disparaissent paient le prix de la transition. C'est un concept clé en SES quand on parle de croissance et de progrès technique.",
+ s:"Kodak a inventé le premier appareil photo numérique dès 1975… et a fait faillite en 2012, balayé par la photo numérique.",q:"Quel économiste a popularisé l'expression « destruction créatrice » ?",o:["Joseph Schumpeter","John Maynard Keynes","Adam Smith"],a:0,e:"Schumpeter l'a rendue célèbre dans « Capitalisme, socialisme et démocratie » (1942)."},
+{c:"Maths",t:"Le paradoxe des anniversaires",x:"Dans un groupe de seulement 23 personnes, il y a plus d'une chance sur deux que deux d'entre elles aient le même anniversaire. Ça paraît fou, car on pense à « quelqu'un qui a MON anniversaire », alors que la question porte sur toutes les paires possibles : avec 23 personnes, il y en a 253. Le calcul passe par l'événement contraire : la probabilité que tous les anniversaires soient différents vaut 365/365 × 364/365 × … × 343/365, soit environ 0,49. La probabilité d'au moins une coïncidence est donc d'environ 0,51. C'est exactement la méthode de l'événement contraire de ton cours de probas.",
+ s:"Avec 70 personnes, la probabilité dépasse 99,9 %.",q:"À partir de combien de personnes la probabilité d'un anniversaire commun dépasse-t-elle 50 % ?",o:["23","183","365"],a:0,e:"Dès 23 personnes : 253 paires possibles, c'est beaucoup plus qu'on ne l'imagine."},
+{c:"Histoire",t:"La chute du mur de Berlin",x:"Le mur de Berlin est construit dans la nuit du 13 août 1961 par la RDA, l'Allemagne de l'Est communiste, pour empêcher ses habitants de fuir vers l'Ouest. Pendant 28 ans, il coupe la ville en deux et devient le symbole de la guerre froide. Le 9 novembre 1989, un porte-parole du régime, Günter Schabowski, annonce par erreur en conférence de presse que les voyages sont autorisés « immédiatement ». Des milliers de Berlinois se ruent aux postes-frontières, que les gardes finissent par ouvrir. L'Allemagne est réunifiée moins d'un an plus tard, le 3 octobre 1990.",
+ s:"Le 3 octobre, jour de la réunification, est aujourd'hui la fête nationale allemande.",q:"En quelle année le mur de Berlin a-t-il été construit ?",o:["1961","1949","1975"],a:0,e:"En août 1961 ; il est tombé le 9 novembre 1989, après 28 ans."},
+{c:"Psychologie",t:"L'aversion à la perte",x:"Perdre 100 € nous fait environ deux fois plus mal que gagner 100 € ne nous fait plaisir. C'est l'aversion à la perte, mise en évidence par les psychologues Daniel Kahneman et Amos Tversky dans leur théorie des perspectives (1979). Elle explique un piège classique des investisseurs : garder trop longtemps une action qui baisse pour ne pas « encaisser » la perte, et vendre trop vite celles qui montent. Les bons traders fixent donc à l'avance leur stop-loss, pour que l'émotion ne décide pas à leur place. Ces travaux ont fondé la finance comportementale.",
+ s:"Tversky, mort en 1996, n'a pas pu partager le prix Nobel : il n'est jamais attribué après la mort.",q:"Qui a reçu le prix Nobel d'économie en 2002 pour ces travaux ?",o:["Daniel Kahneman","Milton Friedman","Paul Krugman"],a:0,e:"Kahneman, un psychologue, a reçu le prix Nobel d'économie 2002."},
+{c:"Philosophie",t:"L'allégorie de la caverne",x:"Dans « La République » (livre VII), Platon imagine des prisonniers enchaînés depuis l'enfance au fond d'une caverne : ils ne voient que des ombres projetées sur le mur et les prennent pour la réalité. L'un d'eux est libéré : la lumière l'éblouit d'abord, puis il découvre les vrais objets, et enfin le soleil. Quand il redescend pour libérer les autres, ils se moquent de lui et refusent de le suivre. Pour Platon, les ombres sont les opinions, le soleil est la vérité, et la sortie de la caverne représente l'éducation : un chemin difficile mais libérateur. C'est un classique du bac de philo, sur la vérité, la connaissance ou la liberté.",
+ s:"Beaucoup voient dans la caverne l'ancêtre du cinéma… ou des écrans d'aujourd'hui.",q:"Dans quel ouvrage de Platon se trouve l'allégorie de la caverne ?",o:["La République","Le Banquet","Les Lois"],a:0,e:"Au début du livre VII de « La République »."},
+{c:"Géopolitique",t:"Le détroit d'Ormuz",x:"Le détroit d'Ormuz relie le golfe Persique à l'océan Indien, entre l'Iran au nord et Oman au sud. Large d'environ 33 km à son point le plus étroit, il voit passer environ un cinquième du pétrole consommé dans le monde, venu d'Arabie saoudite, d'Irak, du Koweït ou des Émirats, ainsi qu'une grande partie du gaz naturel liquéfié du Qatar. Dès que les tensions montent dans la région, les marchés craignent un blocage et le prix du baril grimpe. C'est l'un des points de passage les plus surveillés de la planète, avec le canal de Suez et le détroit de Malacca. Pense à lui quand tu vois bouger le cours du pétrole dans la rubrique Finance.",
+ s:"Pour contourner le détroit, l'Arabie saoudite a construit un oléoduc qui traverse tout le pays jusqu'à la mer Rouge.",q:"Entre quels pays se trouve le détroit d'Ormuz ?",o:["L'Iran et Oman","L'Iran et l'Irak","L'Arabie saoudite et l'Égypte"],a:0,e:"L'Iran au nord, Oman (la péninsule de Musandam) au sud."},
+{c:"Sciences",t:"L'entropie, la flèche du temps",x:"Le second principe de la thermodynamique dit que, dans un système isolé, l'entropie (en gros, le désordre) ne peut pas diminuer. C'est pour ça que la chaleur passe toujours du chaud vers le froid, qu'un sucre se dissout dans le café sans jamais se reformer, et qu'un œuf cassé ne se recolle pas. Ce principe donne un sens au temps : les lois de la mécanique marchent aussi bien à l'endroit qu'à l'envers, mais l'entropie, elle, ne fait qu'augmenter. Le physicien Ludwig Boltzmann l'a reliée au nombre de façons d'arranger les particules : S = k log W.",
+ s:"La formule S = k log W est gravée sur la tombe de Boltzmann, à Vienne.",q:"Que dit le second principe de la thermodynamique ?",o:["L'entropie d'un système isolé ne peut pas diminuer","L'énergie peut être créée à partir de rien","La chaleur va spontanément du froid vers le chaud"],a:0,e:"Le désordre d'un système isolé augmente ou reste stable : il ne baisse jamais tout seul."},
+{c:"Finance",t:"Les intérêts composés et la règle de 72",x:"Avec les intérêts composés, tu gagnes des intérêts sur tes intérêts : chaque année, le capital est multiplié par (1 + taux). C'est une suite géométrique, comme dans ton cours de maths. 1 000 € placés à 7 % par an deviennent environ 7 600 € en 30 ans, sans rien ajouter. Pour estimer vite le temps de doublement, les financiers utilisent la règle de 72 : on divise 72 par le taux en pourcentage. À 6 %, l'argent double en environ 72 ÷ 6 = 12 ans.",
+ s:"72 est choisi parce qu'il est proche de 100 × ln 2 ≈ 69, et qu'il se divise par 2, 3, 4, 6, 8, 9 et 12 : parfait pour le calcul mental.",q:"Avec la règle de 72, en combien de temps un placement à 6 % par an double-t-il ?",o:["Environ 12 ans","Environ 6 ans","Environ 20 ans"],a:0,e:"72 ÷ 6 = 12 ; le calcul exact (ln 2 ÷ ln 1,06) donne 11,9 ans."},
+{c:"Langue française",t:"Tirer les marrons du feu",x:"Aujourd'hui, on dit souvent « tirer les marrons du feu » pour « profiter d'une situation ». Mais le sens d'origine est presque l'inverse ! L'expression vient de la fable de La Fontaine « Le Singe et le Chat » : le singe Bertrand convainc le chat Raton de sortir des marrons qui grillent dans la cheminée. Raton se brûle les pattes pour les attraper, et Bertrand les croque au fur et à mesure. Tirer les marrons du feu, c'est donc prendre des risques pour le profit d'un autre. Garde le sens d'origine en tête pour briller à l'oral.",
+ s:"« La part du lion » vient aussi de La Fontaine : dans une fable du livre I, le lion garde tout le butin pour lui.",q:"Dans la fable, qui se brûle pour tirer les marrons du feu ?",o:["Le chat Raton","Le singe Bertrand","Le renard"],a:0,e:"Raton se brûle les pattes, et c'est Bertrand qui mange les marrons."},
+{c:"Arts et lettres",t:"Guernica, de Picasso",x:"Le 26 avril 1937, pendant la guerre d'Espagne, la petite ville basque de Guernica est bombardée par l'aviation allemande et italienne, venue soutenir le camp du général Franco. Picasso, qui doit réaliser une grande toile pour le pavillon espagnol de l'Exposition universelle de Paris, peint en quelques semaines « Guernica » : près de 8 mètres de large, uniquement en noir, blanc et gris. On y voit un cheval hurlant, une mère tenant son enfant mort, un taureau, des corps brisés. Picasso refuse que le tableau aille en Espagne tant que le pays n'est pas une démocratie : il n'y arrive qu'en 1981, après la mort de Franco. Il est aujourd'hui au musée Reina Sofía, à Madrid.",
+ s:"Selon une anecdote célèbre, un officier allemand aurait demandé à Picasso devant une photo du tableau : « C'est vous qui avez fait ça ? » Il aurait répondu : « Non, c'est vous. »",q:"Quel événement le tableau dénonce-t-il ?",o:["Le bombardement d'une ville pendant la guerre d'Espagne","Une bataille de la Première Guerre mondiale","La prise de la Bastille"],a:0,e:"Guernica a été bombardée le 26 avril 1937, pendant la guerre civile espagnole."},
+{c:"Économie",t:"L'avantage comparatif de Ricardo",x:"En 1817, l'économiste anglais David Ricardo montre une idée contre-intuitive : même si un pays est meilleur que l'autre pour tout produire, les deux ont intérêt à échanger. Il prend l'exemple de l'Angleterre et du Portugal, qui produisent du drap et du vin. Le Portugal est plus efficace pour les deux, mais il l'est relativement plus pour le vin : il a donc intérêt à se spécialiser dans le vin et à acheter le drap anglais. Chacun se concentre sur ce qu'il fait le mieux, en relatif, et la production totale augmente. C'est la base de la théorie du libre-échange, au programme de SES.",
+ s:"C'est comme un grand chef qui coupe les légumes plus vite que son commis : il a quand même intérêt à le laisser faire et à se concentrer sur la cuisine.",q:"Quels produits Ricardo utilise-t-il dans son célèbre exemple ?",o:["Le vin et le drap","Le blé et l'acier","Le thé et le coton"],a:0,e:"Le Portugal se spécialise dans le vin, l'Angleterre dans le drap."},
+{c:"Maths",t:"Il y a une infinité de nombres premiers",x:"Vers 300 avant J.-C., Euclide prouve dans ses « Éléments » qu'il existe une infinité de nombres premiers, avec un raisonnement par l'absurde très élégant. Suppose qu'il n'y en ait qu'un nombre fini : p₁, p₂, …, pₙ. Considère N = p₁ × p₂ × … × pₙ + 1. Divisé par n'importe lequel de ces nombres premiers, N donne un reste de 1 : aucun ne le divise. Or N a forcément un diviseur premier, qui n'est donc pas dans la liste : c'est une contradiction. Ce raisonnement est au programme de maths expertes.",
+ s:"Attention : N n'est pas forcément premier lui-même. 2 × 3 × 5 × 7 × 11 × 13 + 1 = 30 031 = 59 × 509.",q:"Dans la preuve d'Euclide, pourquoi aucun nombre premier de la liste ne divise N ?",o:["Parce que la division de N par chacun donne un reste de 1","Parce que N est forcément premier","Parce que N est pair"],a:0,e:"N = (produit des pᵢ) + 1 : le reste de la division par chaque pᵢ vaut 1."},
+{c:"Histoire",t:"Bretton Woods et la fin de l'étalon-or",x:"En juillet 1944, avant même la fin de la guerre, 44 pays se réunissent à Bretton Woods, aux États-Unis, pour reconstruire le système monétaire mondial. Le dollar devient la monnaie centrale : il est convertible en or à 35 dollars l'once, et les autres monnaies ont un taux fixe par rapport au dollar. Ces accords créent aussi le FMI et la Banque mondiale. Mais en 1971, les États-Unis n'ont plus assez d'or pour couvrir tous les dollars en circulation : le président Nixon suspend la convertibilité. Depuis 1973, les grandes monnaies flottent : leur valeur varie chaque jour sur le marché des changes, le Forex, le plus grand marché financier du monde.",
+ s:"La décision de Nixon, annoncée le 15 août 1971, a pris le monde entier par surprise : on parle du « choc Nixon ».",q:"En 1971, quel président américain met fin à la convertibilité du dollar en or ?",o:["Richard Nixon","John F. Kennedy","Ronald Reagan"],a:0,e:"Nixon l'annonce le 15 août 1971."},
+{c:"Psychologie",t:"Le biais de confirmation",x:"Le biais de confirmation, c'est notre tendance à chercher, retenir et croire surtout les informations qui confirment ce que l'on pense déjà. En 1960, le psychologue Peter Wason donne la suite 2, 4, 6 et demande de trouver la règle en proposant d'autres suites. La plupart des gens testent 8, 10, 12 ou 20, 22, 24, s'entendent répondre « oui » et sont sûrs d'avoir trouvé « des nombres pairs qui se suivent ». La vraie règle était simplement « trois nombres croissants » : il fallait tester des suites qui pouvaient contredire son idée, comme 1, 2, 3. En trading, c'est un piège redoutable : ne lire que les avis qui donnent raison à sa position.",
+ s:"Le meilleur antidote : chercher exprès l'argument contraire, comme un « avocat du diable ».",q:"Dans l'expérience 2-4-6 de Wason, quelle était la vraie règle ?",o:["Trois nombres croissants","Trois nombres pairs qui se suivent","Trois multiples de 2"],a:0,e:"Il suffisait que les nombres soient croissants : 1, 2, 3 marchait aussi."},
+{c:"Philosophie",t:"Le pari de Pascal",x:"Dans ses « Pensées », publiées en 1670 après sa mort, Blaise Pascal propose un raisonnement célèbre sur la croyance en Dieu. On ne peut prouver ni que Dieu existe ni qu'il n'existe pas : il faut pourtant « parier ». Si tu crois et que Dieu existe, tu gagnes un bonheur infini ; s'il n'existe pas, tu perds peu. Si tu ne crois pas, tu risques de tout perdre. Pour Pascal, le pari raisonnable est donc de croire. Au-delà de la religion, c'est l'un des premiers raisonnements de décision dans l'incertitude, qui compare des gains pondérés par des probabilités.",
+ s:"Pascal est aussi l'un des pères du calcul des probabilités, grâce à ses lettres avec Fermat sur les jeux de hasard, en 1654.",q:"Sur quelle notion de maths le pari de Pascal repose-t-il ?",o:["L'espérance (le gain moyen attendu)","La dérivée","Le PGCD"],a:0,e:"On compare des gains pondérés par leurs probabilités : c'est l'idée de l'espérance."},
+{c:"Finance",t:"Pourquoi les obligations baissent quand les taux montent",x:"Une obligation, c'est un prêt découpé en titres : un État ou une entreprise emprunte et verse chaque année un intérêt fixe, le coupon. Imagine une obligation de 1 000 € qui rapporte 3 % par an. Si les taux du marché montent à 5 %, plus personne ne voudra payer 1 000 € pour toucher 3 % : son prix baisse, jusqu'à ce que son rendement redevienne intéressant. À l'inverse, si les taux baissent, les anciennes obligations, qui rapportent plus, prennent de la valeur. Retiens : le prix des obligations et les taux d'intérêt évoluent en sens inverse. C'est pour ça que les annonces des banques centrales font tant bouger les marchés.",
+ s:"Plus une obligation est longue (10 ou 30 ans), plus son prix réagit fortement aux taux : on mesure cette sensibilité avec la « duration ».",q:"Si les taux d'intérêt montent, le prix des obligations déjà émises…",o:["baisse","monte","ne change pas"],a:0,e:"Leur coupon fixe devient moins attractif que les nouveaux taux, donc leur prix baisse."},
+{c:"Sciences",t:"La double hélice de l'ADN",x:"En 1953, James Watson et Francis Crick publient la structure de l'ADN : deux brins enroulés en double hélice, reliés par des paires de bases. Il n'existe que quatre bases : A (adénine), T (thymine), C (cytosine) et G (guanine), et elles s'associent toujours de la même façon : A avec T, C avec G. Cette règle explique comment l'ADN se copie : chaque brin sert de modèle pour fabriquer l'autre. La découverte s'appuie sur une image aux rayons X, la « photo 51 », obtenue dans le laboratoire de Rosalind Franklin. Morte en 1958, elle n'a pas partagé le prix Nobel de 1962.",
+ s:"Ton ADN compte environ 3 milliards de paires de bases ; déroulé, celui d'une seule de tes cellules mesurerait environ 2 mètres.",q:"Comment les bases de l'ADN s'associent-elles ?",o:["A avec T, et C avec G","A avec C, et T avec G","A avec G, et C avec T"],a:0,e:"Adénine avec thymine, cytosine avec guanine : c'est la complémentarité des bases."},
+{c:"Géopolitique",t:"L'OPEP, le club du pétrole",x:"L'Organisation des pays exportateurs de pétrole (OPEP) est fondée en septembre 1960 à Bagdad par l'Iran, l'Irak, le Koweït, l'Arabie saoudite et le Venezuela. Son but : s'entendre sur la production de pétrole pour peser sur les prix, un peu comme un cartel. En 1973, pendant la guerre du Kippour, les pays arabes producteurs réduisent leur production et imposent un embargo à plusieurs pays occidentaux : le prix du baril est multiplié par quatre, c'est le premier choc pétrolier. Depuis 2016, l'OPEP coopère avec d'autres producteurs, dont la Russie, dans un groupe appelé « OPEP+ ». Ses réunions sont scrutées par tous les traders de matières premières.",
+ s:"Le siège de l'OPEP n'est pas au Moyen-Orient mais à Vienne, en Autriche.",q:"Dans quelle ville l'OPEP a-t-elle été fondée ?",o:["Bagdad","Riyad","Vienne"],a:0,e:"Fondée à Bagdad en 1960 ; Vienne est son siège depuis 1965."},
+{c:"Arts et lettres",t:"Le procès des Fleurs du mal",x:"En 1857, Charles Baudelaire publie « Les Fleurs du mal ». Quelques semaines plus tard, il est poursuivi pour « outrage à la morale publique » : la justice le condamne à une amende et fait retirer six poèmes du recueil. La même année, Flaubert avait lui aussi été jugé pour « Madame Bovary », mais il avait été acquitté. Baudelaire réorganise son livre et en publie une nouvelle édition en 1861. Le recueil est aujourd'hui considéré comme un sommet de la poésie française, qui ouvre la voie à la poésie moderne.",
+ s:"La condamnation de Baudelaire n'a été annulée par la Cour de cassation qu'en 1949, près d'un siècle plus tard.",q:"En quelle année la condamnation des Fleurs du mal a-t-elle été annulée ?",o:["1949","1861","1900"],a:0,e:"La Cour de cassation l'a annulée le 31 mai 1949."},
+{c:"Maths",t:"La loi des grands nombres",x:"Si tu lances une pièce équilibrée des milliers de fois, la proportion de « pile » se rapproche de 50 % : c'est la loi des grands nombres. Plus généralement, la moyenne d'un grand nombre d'expériences indépendantes se rapproche de l'espérance. C'est pour ça qu'un casino gagne toujours sur le long terme, et qu'une assurance peut prévoir ses dépenses. Mais attention à l'erreur du joueur : la pièce n'a pas de mémoire. Après cinq « pile » de suite, le sixième lancer a toujours une chance sur deux de donner « pile ». Tu retrouves cette loi en Terminale, avec l'inégalité de Bienaymé-Tchebychev.",
+ s:"En 1913, au casino de Monte-Carlo, la bille de la roulette est tombée 26 fois de suite sur le noir : des joueurs ont perdu des fortunes en misant sur le rouge.",q:"Après 5 « pile » de suite avec une pièce équilibrée, quelle est la probabilité d'obtenir « pile » au lancer suivant ?",o:["1/2","Moins de 1/2","Plus de 1/2"],a:0,e:"Les lancers sont indépendants : la pièce ne se souvient pas des résultats d'avant."},
+{c:"Économie",t:"L'inflation et le rendement réel",x:"L'inflation, c'est la hausse générale et durable des prix : avec la même somme, tu peux acheter moins de choses. En France, l'Insee la mesure chaque mois avec l'indice des prix à la consommation, calculé sur un grand panier de biens et de services. Ce qui compte pour un épargnant, c'est le rendement réel, à peu près égal au taux d'intérêt moins l'inflation. Un placement à 3 % avec 2 % d'inflation ne rapporte en réalité qu'environ 1 % de pouvoir d'achat. La Banque centrale européenne vise une inflation de 2 % par an à moyen terme.",
+ s:"En novembre 1923, en Allemagne, un dollar valait environ 4 200 milliards de marks : des familles se chauffaient en brûlant des billets.",q:"Un placement rapporte 4 % alors que l'inflation est de 5 %. Ton gain réel est d'environ :",o:["−1 %","+9 %","+4 %"],a:0,e:"Rendement réel ≈ 4 % − 5 % = −1 % : ton pouvoir d'achat baisse."},
+{c:"Histoire",t:"Le krach de 1929",x:"Le jeudi 24 octobre 1929, le « jeudi noir », la Bourse de New York s'effondre après des années de spéculation, souvent faite avec de l'argent emprunté. Les jours suivants, la panique continue. La crise financière devient une crise économique mondiale, la Grande Dépression : des milliers de banques font faillite et, en 1933, environ un quart des actifs américains sont au chômage. Pour en sortir, le président Roosevelt lance le New Deal, et l'économiste Keynes théorise le rôle de l'État pour relancer la demande. Cette crise a beaucoup inspiré les règles financières d'aujourd'hui.",
+ s:"L'indice Dow Jones a perdu près de 90 % entre 1929 et 1932, et n'a retrouvé son sommet de 1929 qu'en 1954.",q:"Combien de temps a-t-il fallu au Dow Jones pour retrouver son sommet de 1929 ?",o:["Environ 25 ans","Environ 2 ans","Environ 10 ans"],a:0,e:"Il n'a retrouvé son niveau de septembre 1929 qu'en novembre 1954."},
+{c:"Sciences",t:"La relativité dans ton GPS",x:"En 1905, Albert Einstein publie la relativité restreinte : le temps n'est pas le même pour tout le monde, il ralentit quand on va très vite. Dix ans plus tard, la relativité générale ajoute que le temps s'écoule plus vite là où la gravité est plus faible, donc en altitude. Les satellites GPS combinent les deux effets : leurs horloges avancent d'environ 38 microsecondes par jour par rapport aux nôtres. Ça paraît minuscule, mais sans correction, la position donnée par ton téléphone dériverait d'une dizaine de kilomètres par jour. Sans Einstein, pas de GPS fiable !",
+ s:"La formule la plus célèbre du monde, E = mc², date aussi de 1905, l'« année miraculeuse » d'Einstein.",q:"Quel objet du quotidien doit tenir compte de la relativité pour fonctionner ?",o:["Le GPS","Le four à micro-ondes","La calculatrice"],a:0,e:"Les horloges des satellites GPS sont corrigées des effets de la relativité."},
+{c:"Finance",t:"La diversification selon Markowitz",x:"« Ne mets pas tous tes œufs dans le même panier » : en 1952, l'économiste Harry Markowitz a transformé ce proverbe en théorie mathématique. Il montre qu'en combinant des actifs qui ne bougent pas exactement ensemble, on réduit le risque d'un portefeuille sans forcément réduire son rendement moyen. Tout se joue dans la covariance : Var(X + Y) = Var(X) + Var(Y) + 2 Cov(X, Y). Si deux actions sont peu corrélées, voire varient en sens opposé, leurs variations se compensent en partie. C'est la base de la gestion de portefeuille moderne, et un outil quotidien des quants.",
+ s:"Markowitz a reçu le prix Nobel d'économie en 1990 pour ce travail, commencé pendant ses études.",q:"La diversification réduit surtout le risque si les actifs sont…",o:["peu corrélés entre eux","très corrélés entre eux","tous du même secteur"],a:0,e:"Quand les actifs ne varient pas ensemble, leurs hausses et leurs baisses se compensent en partie."},
+{c:"Philosophie",t:"Le rasoir d'Ockham",x:"Guillaume d'Ockham, un moine franciscain anglais du XIVe siècle, a laissé son nom à un principe de bon sens : il ne faut pas multiplier les hypothèses sans nécessité. Entre deux explications qui rendent compte des mêmes faits, on préfère la plus simple. Si ta lampe ne s'allume plus, une ampoule grillée est plus probable qu'une panne de toute la ville. En science, ce « rasoir » sert à trier les théories. En statistiques et en finance quantitative, il rappelle qu'un modèle trop compliqué colle parfaitement aux données passées mais prédit mal l'avenir : c'est le surapprentissage.",
+ s:"On parle de « rasoir » parce que le principe « rase » les hypothèses inutiles.",q:"Que conseille le rasoir d'Ockham ?",o:["Préférer l'explication la plus simple qui rend compte des faits","Douter de tout, même de sa propre existence","Toujours choisir l'hypothèse la plus détaillée"],a:0,e:"On ne multiplie pas les hypothèses sans nécessité."},
+{c:"Géopolitique",t:"Le Conseil de sécurité de l'ONU",x:"L'ONU est créée en 1945, à la fin de la Seconde Guerre mondiale, pour maintenir la paix. Son organe le plus puissant est le Conseil de sécurité : 15 membres, dont 5 permanents (la Chine, les États-Unis, la France, le Royaume-Uni et la Russie), qui sont les grands vainqueurs de 1945. Les 10 autres membres sont élus pour deux ans. Chaque membre permanent a un droit de veto : il peut bloquer à lui seul une résolution. C'est pour ça que le Conseil est souvent paralysé lors des grandes crises, et que des pays comme l'Inde ou le Brésil réclament une réforme.",
+ s:"La Charte des Nations unies a été signée à San Francisco le 26 juin 1945.",q:"Combien de membres permanents compte le Conseil de sécurité ?",o:["5","10","15"],a:0,e:"Chine, États-Unis, France, Royaume-Uni et Russie, chacun avec un droit de veto."},
+{c:"Langue française",t:"D'où vient « OK » ?",x:"« OK » est sans doute le mot le plus utilisé au monde, et il est né d'une blague de journalistes. En 1839, à Boston, la mode est aux abréviations de mots volontairement mal écrits. Le Boston Morning Post écrit « O.K. » pour « oll korrect », une façon farfelue d'écrire « all correct » (tout est correct). La blague aurait pu disparaître, mais en 1840 le président Martin Van Buren, surnommé « Old Kinderhook » d'après sa ville natale, se présente à sa réélection : ses partisans créent des « OK Clubs », et le mot devient célèbre. Cette origine a été démontrée par le linguiste Allen Walker Read dans les années 1960.",
+ s:"Le 23 mars est parfois présenté comme l'anniversaire de « OK » : c'est la date de l'article de 1839.",q:"D'où vient l'expression « OK » ?",o:["D'une blague de journal à Boston, en 1839","D'un mot grec qui veut dire « tout va bien »","D'un code militaire de la Seconde Guerre mondiale"],a:0,e:"« O.K. » abrégeait « oll korrect », une façon volontairement fautive d'écrire « all correct »."},
+{c:"Arts et lettres",t:"Le vol de la Joconde",x:"Le 21 août 1911, la Joconde disparaît du Louvre. Le voleur, Vincenzo Peruggia, est un vitrier italien qui avait travaillé au musée : il s'est caché à l'intérieur, a décroché le tableau, l'a sorti de son cadre et est reparti avec, sous sa blouse. Pendant plus de deux ans, l'enquête piétine : le poète Guillaume Apollinaire est même arrêté quelques jours, et Picasso interrogé. En décembre 1913, Peruggia tente de vendre le tableau à un antiquaire de Florence, qui prévient la police. Ce vol, raconté pendant des mois par les journaux du monde entier, a fait de la Joconde le tableau le plus célèbre du monde.",
+ s:"Peruggia disait avoir voulu « rendre » la Joconde à l'Italie, le pays de Léonard de Vinci.",q:"Qui a volé la Joconde en 1911 ?",o:["Un vitrier italien qui avait travaillé au Louvre","Le poète Guillaume Apollinaire","Pablo Picasso"],a:0,e:"Vincenzo Peruggia ; Apollinaire et Picasso ont été soupçonnés à tort."},
+{c:"Psychologie",t:"L'effet de halo",x:"En 1920, le psychologue américain Edward Thorndike remarque que des officiers qui notent leurs soldats donnent des notes étrangement cohérentes : un soldat jugé beau et bien tenu est aussi jugé plus intelligent et plus loyal. C'est l'effet de halo : une qualité très visible « éclaire » tout le reste et déforme notre jugement. On le retrouve partout : une copie bien présentée paraît meilleure, une marque prestigieuse semble plus fiable, un candidat sûr de lui paraît plus compétent. À un oral d'admission, la première impression compte donc vraiment… et méfie-toi aussi de tes propres premières impressions.",
+ s:"L'effet inverse existe : un seul défaut visible peut faire mal juger tout le reste. On parle parfois d'« effet de corne ».",q:"Qui a décrit l'effet de halo ?",o:["Edward Thorndike","Sigmund Freud","Ivan Pavlov"],a:0,e:"Thorndike l'a décrit en 1920, à partir des notes données par des officiers."},
+{c:"Économie",t:"Le dilemme du prisonnier",x:"Deux complices sont interrogés séparément. Si aucun ne parle, ils prennent chacun 1 an de prison. Si un seul dénonce l'autre, il est libéré et l'autre prend 10 ans. Si les deux se dénoncent, ils prennent 5 ans chacun. Quoi que fasse l'autre, chacun a intérêt à dénoncer : résultat, les deux parlent et prennent 5 ans, alors qu'en se taisant ils n'auraient eu qu'un an. C'est un équilibre de Nash, du nom du mathématicien John Nash. Ce jeu explique pourquoi la coopération est fragile : entre entreprises qui se font une guerre des prix, ou entre pays de l'OPEP qui produisent plus que prévu.",
+ s:"La vie de John Nash, prix Nobel d'économie 1994, a inspiré le film « Un homme d'exception ».",q:"Dans le dilemme du prisonnier, que font les deux joueurs à l'équilibre de Nash ?",o:["Ils se dénoncent tous les deux","Ils se taisent tous les deux","L'un parle, l'autre se tait"],a:0,e:"Dénoncer est la meilleure réponse quoi que fasse l'autre, même si les deux y perdent."},
+{c:"Maths",t:"Le nombre e et les intérêts",x:"En 1683, Jacob Bernoulli se pose une question de banquier : avec 100 % d'intérêts par an, combien devient 1 € ? Versés en une fois : 2 €. En deux fois (50 % tous les six mois) : 1,5² = 2,25 €. Tous les mois : (1 + 1/12)¹² ≈ 2,61 €. Et si on verse les intérêts à chaque instant ? (1 + 1/n)ⁿ se rapproche d'un nombre limite : e ≈ 2,718. C'est le même e que dans ton chapitre sur la fonction exponentielle. Les traders quantitatifs l'utilisent tous les jours pour les intérêts « composés en continu ».",
+ s:"C'est Euler qui a donné la lettre e à ce nombre, au XVIIIe siècle.",q:"Avec 100 % d'intérêts par an composés en continu, 1 € devient au bout d'un an…",o:["environ 2,72 €","exactement 2 €","une somme infinie"],a:0,e:"La limite de (1 + 1/n)ⁿ est e ≈ 2,718 : ça ne devient pas infini."},
+{c:"Histoire",t:"De Maastricht à l'euro",x:"Signé le 7 février 1992, le traité de Maastricht transforme la Communauté européenne en Union européenne et prévoit une monnaie unique. Pour y entrer, les pays doivent respecter des « critères de convergence », par exemple un déficit public inférieur à 3 % du PIB et une dette inférieure à 60 % du PIB. L'euro naît le 1er janvier 1999, d'abord seulement pour les banques et les marchés financiers. Les pièces et les billets arrivent dans les porte-monnaie le 1er janvier 2002. Sa valeur est gérée par la Banque centrale européenne, installée à Francfort.",
+ s:"En France, le référendum sur Maastricht a été très serré : le « oui » l'a emporté avec à peine plus de 51 % des voix.",q:"En quelle année les pièces et les billets en euros sont-ils arrivés ?",o:["2002","1999","1992"],a:0,e:"L'euro existe depuis 1999, mais les pièces et les billets n'arrivent que le 1er janvier 2002."}
+];
+const cgDocs=()=>Object.entries(S.cg||{}).filter(([k,v])=>v&&/^\d{4}-\d\d-\d\d/.test(k)).sort((a,b)=>a[0].localeCompare(b[0]));
+const cgNotion=v=>v?(v.src==="ia"?v.n:CG[v.i]):null;
+const cgKeys=dk=>Object.keys(S.cg||{}).filter(k=>k===dk||k.startsWith(dk+"~")).sort((a,b)=>a.length-b.length||a.localeCompare(b));
+function cgNext(){const seen=new Set(cgDocs().filter(([,v])=>v.src==="base").map(([,v])=>v.i));for(let i=0;i<CG.length;i++)if(!seen.has(i))return i;return-1}
+function cgLeast(){const last={};cgDocs().forEach(([k,v])=>{if(v.src==="base")last[v.i]=k});let b=0;CG.forEach((_,i)=>{if((last[i]||"")<(last[b]||""))b=i});return b}
+function cgPickSync(k){const i=cgNext();if(i>=0||!SAMPLE){put("cg",k,{src:"base",i:i>=0?i:cgLeast(),ts:Date.now()},true);return true}return false}
+function cgEnsure(k){if(S.cg[k]||V.cgBusy)return;if(!cgPickSync(k))setTimeout(()=>cgGenFor(k),0)}
+async function cgGenFor(k){if(V.cgBusy||S.cg[k])return;V.cgBusy=true;V.cgMsg="";render(true);
+  try{put("cg",k,{src:"ia",n:await cgGen(),ts:Date.now()},true)}catch(e){V.cgMsg=ERR(e.code);put("cg",k,{src:"base",i:cgLeast(),ts:Date.now()},true)}
+  V.cgBusy=false;V.cgk=k;render(true)}
+async function cgGen(){
+  const cats=Object.keys(CG_CAT),seen=cgDocs().map(([,v])=>cgNotion(v)).filter(Boolean),cat=cats[seen.length%cats.length],titles=seen.slice(-90).map(n=>n.t).join(" ; ");
+  const o=await aiSample.json(`Tu es un professeur de culture générale passionnant. Écris la notion du jour pour Nathan, élève de Terminale (spé maths, maths expertes, SES) qui vise HEC, ESSEC ou ESCP et veut devenir trader quantitatif.
+Catégorie : ${cat}.
+Sujets déjà vus, à ne pas reprendre : ${titles||"aucun"}.
+Choisis un fait ou un concept solide et vérifiable, qui sert pour la culture générale d'un futur étudiant d'école de commerce (pas d'actualité récente, pas de chiffre douteux). Écris en français simple et tutoie Nathan.
+Réponds UNIQUEMENT avec ce JSON :
+{"c":"${cat}","t":"titre court (7 mots maximum)","x":"explication claire en 4 à 6 phrases, avec un exemple concret","s":"un fait étonnant en une phrase","q":"une question pour vérifier qu'il a retenu","o":["la bonne réponse","une réponse fausse mais plausible","une autre réponse fausse mais plausible"],"a":0,"e":"pourquoi c'est la bonne réponse, en une phrase"}`);
+  const s=x=>typeof x==="string"&&x.trim()?x.trim():null,op=Array.isArray(o&&o.o)?o.o.map(s).filter(Boolean).slice(0,4):[];
+  if(!o||!s(o.t)||!s(o.x)||!s(o.q)||op.length<2)throw{code:"invalid_json"};const a=Number.isInteger(o.a)&&o.a>=0&&o.a<op.length?o.a:0;
+  return{c:cats.includes(o.c)?o.c:cat,t:s(o.t).slice(0,80),x:s(o.x).slice(0,1400),s:(s(o.s)||"").slice(0,400),q:s(o.q).slice(0,240),o:op,a,e:(s(o.e)||"").slice(0,300)}}
+function cgStats(){const D=cgDocs(),days=new Set(D.map(([k])=>k.slice(0,10)));let q=0,ok=0;D.forEach(([,v])=>{if(v.rep!=null){q++;if(v.ok)ok++}});
+  let d=today(),serie=0;if(!days.has(dkey(d)))d=add(d,-1);while(days.has(dkey(d))){serie++;d=add(d,-1)}return{n:D.length,q,ok,serie}}
+function cgCard(k,v,n,past){const ord=shuffle(rngOf(hashStr(k+n.t)),n.o.map((_,i)=>i)),ans=v.rep!=null;
+  return`<article class="card stack cgcard"><div class="row" style="justify-content:space-between"><span class="cgcat">${CG_CAT[n.c]||"💡"} ${esc(n.c)}</span><span class="muted small">${past?fdate(k.slice(0,10)):k.includes("~")?"Bonus du jour":"Notion du jour"}</span></div>
+    <h2 class="cgt">${esc(n.t)}</h2><p class="cgx">${esc(n.x)}</p>${n.s?`<div class="cgfact"><b>Le savais-tu ?</b> ${esc(n.s)}</div>`:""}</article>
+  <div class="card stack cgquiz"><p class="label" style="margin:0">Vérifie que tu as retenu</p><p><b>${esc(n.q)}</b></p>
+    <div class="stack" style="gap:8px">${ord.map(i=>`<button class="cgo ${ans?(i===n.a?"ok":i===v.rep?"ko":""):""}" data-cga="${k}|${i}" ${ans?"disabled":""}>${esc(n.o[i])}</button>`).join("")}</div>
+    ${ans?`<p class="small">${v.ok?"✓ Bravo !":"✗ Pas tout à fait."} ${esc(n.e||"")}</p>`:""}</div>`}
+function pageCg(){
+  const dk=dkey(today());cgEnsure(dk);
+  const k=V.cgk&&S.cg[V.cgk]?V.cgk:dk,v=S.cg[k],n=cgNotion(v),past=k.slice(0,10)!==dk,tk=cgKeys(dk),st=cgStats();
+  const hist=cgDocs().filter(([x])=>x.slice(0,10)!==dk).reverse().slice(0,40);
+  const tabs=!past&&tk.length>1?`<div class="seg" role="group" aria-label="Notions du jour">${tk.map((x,i)=>`<button data-cgk="${x}" aria-pressed="${x===k}">${i?"Bonus "+i:"Notion du jour"}</button>`).join("")}</div>`:"";
+  return`${past?`<div><button class="ghost on" data-cgk="${dk}">‹ Retour à aujourd'hui</button></div>`:tabs}
+  ${n?cgCard(k,v,n,past):`<div class="card"><p>${V.cgBusy?"✨ Ta notion du jour se prépare…":esc(V.cgMsg||"Ta notion du jour arrive…")}</p></div>`}
+  ${!past&&n?`<div class="row"><button class="ghost on" data-cgplus="1" ${V.cgBusy?"disabled":""}>${V.cgBusy?"Préparation…":"✨ Encore une notion"}</button>${V.cgMsg?`<span class="muted small">${esc(V.cgMsg)}</span>`:""}</div>`:""}
+  <div class="stats"><div class="stat"><b>${st.n}</b><span>notion${st.n>1?"s":""} découverte${st.n>1?"s":""}</span></div><div class="stat"><b>${st.q?Math.round(st.ok/st.q*100)+" %":"—"}</b><span>bonnes réponses</span></div><div class="stat"><b>${st.serie}</b><span>jour${st.serie>1?"s":""} d'affilée</span></div></div>
+  ${hist.length?`<div class="card stack" style="gap:4px"><p class="label" style="margin:0">Déjà découvertes</p><ul class="list">${hist.map(([x,w])=>{const m=cgNotion(w);return m?`<li><button class="cgh" data-cgk="${x}"><span>${CG_CAT[m.c]||"💡"} ${esc(m.t)}</span><span class="muted small">${fdate(x.slice(0,10))}${w.rep!=null?(w.ok?" · ✓":" · ✗"):""}</span></button></li>`:""}).join("")}</ul></div>`:""}
+  <p class="muted small">Les ${CG.length} premières notions ont été écrites et vérifiées à la main. Ensuite, l'IA en crée une nouvelle chaque jour${SAMPLE?"":" (ajoute ta clé d'IA dans ⚙️ Réglages ; sans elle, les notions reviennent dans l'ordre)"}.</p>`}
+function cgPlus(){const dk=dkey(today()),k=dk+"~"+(cgKeys(dk).length+1);V.cgk=k;if(!cgPickSync(k))cgGenFor(k);else render(true)}
+function cgSummary(){const v=S.cg[dkey(today())],n=cgNotion(v);
+  return n?[`<span class="cgbig">${esc(n.t)}</span>`,v.rep!=null?(v.ok?"✓ quiz réussi":"quiz fait · "+esc(n.c)):`${CG_CAT[n.c]||""} ${esc(n.c)} · quiz à faire`]:["À découvrir","ta notion du jour (2 min)"]}
 
 /* ================================================================
    ACCUEIL
    ================================================================ */
-const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["cours","Cours"]];
+const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["cours","Cours"],["cg","Culture G"]];
 function summary(k){
   const t=today();
   if(k==="pron")return pnSummary();
   if(k==="jour")return jourSummary();
+  if(k==="cg")return cgSummary();
   if(k==="hab"){const s=dayStats(t);return[`${s.n}/${s.t}`,"tâches faites aujourd'hui"]}
   if(k==="proj"){const a=nIn("all");return a.length?[`${a.length}`,`note${a.length>1?"s":""} · ${esc(nTitle(a[0][1]))}`]:["Notes","écris ce qui te trotte dans la tête"]}
   if(k==="fin"){const dg=dailyGame(t),r=prog().days[dkey(t)];return r?[`✓ ${r.s}/${r.m}`,`défi du jour : ${dg.n} · ${levelOf(prog().xp).name}`]:[`${dg.e} Défi`,`du jour : ${dg.n} · actu FR/EN`]}
@@ -2186,8 +2738,8 @@ function summary(k){
 }
 function pageHome(){
   const t=today(),h=new Date().getHours();
-  return`<div class="top"><div><h1>2ème cerveau 🧠</h1><p>${h<18?"Bonjour":"Bonsoir"} · ${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p></div><div class="topr"><button class="gear" data-page="reglages" aria-label="Réglages">⚙️</button><div class="sync" id="sync">${syncTxt}</div></div></div>
-  <div class="tiles">${SECT.map(([k,n])=>{const[b,s]=summary(k);return`<button class="tile" style="--c:var(${COL[k]})" data-page="${k}">${ILL[k]}<h2>${n}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>
+  return`<div class="top"><div><h1>2ème cerveau 🧠</h1><p>${h<18?"Bonjour":"Bonsoir"} · ${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p></div><div class="topr"><div class="topb"><button class="gear" data-page="idees" aria-label="Suggestions">💡</button><button class="gear" data-page="reglages" aria-label="Réglages">⚙️</button></div><div class="sync" id="sync">${syncTxt}</div></div></div>
+  <div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>${modWrap("accueil","")}
   <div class="card stack" style="margin-top:16px"><p class="label" style="margin:0">💾 Mes données</p>
     <p class="muted small">Tout s'enregistre d'abord sur cet appareil, puis se synchronise avec ton compte (⚙️ Réglages). Garde aussi un fichier de sauvegarde de temps en temps.</p>
     <div class="row">${DL?`<button class="ghost on" data-export="1">Sauvegarder dans un fichier</button>`:""}<label class="ghost on" for="imp" style="cursor:pointer">Restaurer un fichier</label><button class="ghost" data-page="aide">🛟 Dépannage</button><input type="file" id="imp" data-imp="1" accept=".json,application/json" hidden></div>
@@ -2219,7 +2771,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.2.0";
+const APP_VERSION="1.3.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -2702,6 +3254,12 @@ function pageAide(){
       <li>⚙️ Réglages → <b>Se connecter</b>, avec le même e-mail et le même mot de passe. Tout revient tout seul, Pronote compris.</li>
       <li>⚙️ Réglages → Intelligence artificielle → colle ta clé Gemini.</li></ol></details>
 
+  <details class="card aide" ${o("modules")}><summary>🧩 Une suggestion ou un module a cassé quelque chose</summary>
+    <ol class="aidesteps"><li>Ouvre <b>💡 Suggestions</b> (en haut de l'accueil). Dans l'<b>Historique</b>, appuie sur <b>↩︎ Annuler</b> : ton dernier changement disparaît. Recommence pour le précédent.</li>
+      <li>Pour un module : 💡 Suggestions → <b>Mes modules</b> → <b>En pause</b> (ou ✕ pour le supprimer).</li>
+      <li>Ton emploi du temps est bizarre ? 💡 Suggestions → <b>Revenir au planning de départ</b>.</li>
+      <li>L'appli ne s'ouvre plus du tout : ouvre ${A(L.app+"?sans-modules","l'appli en mode sans échec")}. Les modules sont mis en pause : supprime celui qui pose problème, puis appuie sur <b>Réactiver les modules</b>.</li></ol></details>
+
   <div class="card stack"><p class="label" style="margin:0">Toujours bloqué ?</p>
     <p class="small">Copie les infos de ton appli et colle-les dans une IA gratuite (Claude, Gemini, ChatGPT…) avec une capture du message d'erreur : elle aura tout ce qu'il faut pour t'aider. Ces infos ne contiennent ni mot de passe ni clé.</p>
     <div><button class="btn" data-aidecopy="1">📋 Copier les infos pour demander de l'aide</button></div>
@@ -2719,17 +3277,18 @@ document.addEventListener("click",e=>{
 /* ================================================================
    RENDU
    ================================================================ */
-const PAGES={reglages:pageReglages,aide:pageAide,pron:pagePron,jour:pageJour,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
+const PAGES={idees:pageIdees,cg:pageCg,reglages:pageReglages,aide:pageAide,pron:pagePron,jour:pageJour,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
 let pending=false;
 function render(force){
   const a=document.activeElement;
   if(!force&&a&&a.matches&&a.matches("input:not([type=checkbox]),select,textarea,[contenteditable]")&&a.closest("#app")){pending=true;return}
   pending=false;
-  const app=document.getElementById("app");
-  if(V.page==="home"||!PAGES[V.page]){app.innerHTML=pageHome();return}
+  habSync();objCfg();themeSync();if(MOD.sig!==modSig())modLoad();
+  const app=document.getElementById("app"),mt=MOD.tiles.find(t=>t.k===V.page);
+  if(V.page==="home"||(!PAGES[V.page]&&!mt)){app.innerHTML=pageHome();return}
   if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
-  const n=(SECT.find(s=>s[0]===V.page)||[0,V.page==="aide"?"Dépannage":"Réglages"])[1];
-  app.innerHTML=`<div class="sec" style="--c:var(${COL[V.page]||"--proj"})"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${n}</h1>${(ILL[V.page]||"").replace('class="ill"',"")}</div>${PAGES[V.page]()}</div>`;
+  const body=mt?modHtml(mt.id,mt.page):modWrap(V.page,PAGES[V.page]());
+  app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${esc(sectName(V.page))}</h1>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
 }
 /* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
 document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},350));
@@ -2742,6 +3301,32 @@ function confirmOr(id,fn){if(V.confirm===id){V.confirm=null;return fn()}V.confir
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;const d=b.dataset;
   if(d.page!==undefined)return go(d.page);
+  if(d.act!==undefined){const h=MOD.clicks[d.act];if(h){try{h.fn(b)}catch(err){modFail(h.id,err);render(true)}}return}
+  /* suggestions */
+  if(d.sgex){const i=d.sgex.indexOf("|"),el=document.getElementById("sg-"+d.sgex.slice(0,i));if(el){el.value=d.sgex.slice(i+1);el.focus()}return}
+  if(d.sgok)return sgApply(d.sgok);
+  if(d.sgno){V.sg[d.sgno]=null;return render(true)}
+  if(d.sgscope){const[p,s]=d.sgscope.split("|");return sgRecalc(p,s)}
+  if(d.sgundo)return sgUndo(d.sgundo);
+  if(d.sgidee)return sgIdee(d.sgidee);
+  if(d.sgdel){sgSave(sgList().filter(x=>x.id!==d.sgdel));return render(true)}
+  if(d.sgshow)return sgQuick([{t:"tuile",k:d.sgshow,hide:false}],"Afficher la tuile « "+sectName(d.sgshow)+" »");
+  if(d.sgreset)return confirmOr("sgreset",sgResetPlan);
+  if(d.sgclaude){const t=sgClaude();V.sgCopy="";(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{V.sgMsg="✓ Copié : colle-le dans une conversation avec Claude."}).catch(()=>{V.sgMsg="Sélectionne le texte ci-dessous et copie-le.";V.sgCopy=t}).finally(()=>render(true));return}
+  /* modules */
+  if(d.modgen){let idee="",from=null;if(d.modgen.startsWith("i:")){const x=sgList().find(y=>y.id===d.modgen.slice(2));if(!x)return;idee=x.idee||x.txt;from=x.id}else{const st=V.sg[d.modgen];if(!st)return;idee=(st.p&&st.p.idee)||st.txt;V.sg[d.modgen]=null}
+    V.modFrom=from;if(V.page!=="idees")go("idees");window.scrollTo(0,0);return modGen(idee)}
+  if(d.modfix&&V.modTry)return modGen(V.modTry.idee,{code:V.modTry.js,err:(V.mod||{}).err||""});
+  if(d.modkeep)return modKeep();
+  if(d.modjeter)return modJeter();
+  if(d.modvoir){const p=modTarget(d.modvoir);if(p)return go(p);return}
+  if(d.modon){put("params","modules",{list:modList().map(m=>m.id===d.modon?{...m,on:!m.on,ts:Date.now()}:m)},true);return render(true)}
+  if(d.moddel){const id=d.moddel;return confirmOr("mod"+id,()=>{put("params","modules",{list:modList().filter(m=>m.id!==id)},true);if(S.perso[id])del("perso",id);render(true)})}
+  if(d.modsafe){modSafe=false;try{localStorage.setItem("cerveau-modboot","0")}catch(e){}modLoad();return render(true)}
+  /* culture générale */
+  if(d.cga){const i=d.cga.lastIndexOf("|"),k=d.cga.slice(0,i),v=S.cg[k],n=cgNotion(v);if(!v||!n||v.rep!=null)return;const r=+d.cga.slice(i+1);return put("cg",k,{...v,rep:r,ok:r===n.a})}
+  if(d.cgk){V.cgk=d.cgk;render(true);return window.scrollTo(0,0)}
+  if(d.cgplus)return cgPlus();
   if(d.aiprov){const a=aiCfg();a.provider=d.aiprov;lsSet("cerveau-ai",a);setupAI();V.aiMsg="";return render(true)}
   if(d.syncnow){setSync("Synchronisation…");render(true);return fullSync(false).then(()=>render(true))}
   if(d.logout){saveSession(null);lsSet("cerveau-lastpull",null);setSync("Non connecté");return render(true)}
@@ -2838,6 +3423,8 @@ document.addEventListener("change",e=>{
 document.addEventListener("submit",e=>{
   e.preventDefault();const f=e.target,x=Object.fromEntries(new FormData(f));
   const k=f.dataset.f;
+  if(k&&k.slice(0,4)==="mod:"){const h=MOD.submits[k.slice(4)];if(h){try{h.fn(x,f)}catch(err){modFail(h.id,err);render(true)}}return}
+  if(k==="sugg"){document.activeElement&&document.activeElement.blur();return sgSubmit(f.dataset.place,x.t)}
   if(k==="cfg"){const u=String(x.url||"").trim(),key=String(x.key||"").trim();if(!/^https:\/\/.+/.test(u)||!key){return}lsSet("cerveau-cfg",{supabaseUrl:u,supabaseKey:key});setSync("Non connecté");return render(true)}
   if(k==="login"){const act=(e.submitter&&e.submitter.value)||"in",em=String(x.email||"").trim(),pw=String(x.pw||"");V.authBusy=true;V.authMsg="";render(true);
     (act==="up"?signUp(em,pw).then(r=>{V.authMsg=r==="ok"?"Compte créé, tu es connecté.":"Compte créé ! Ouvre le mail de confirmation, puis reviens te connecter ici."}):signIn(em,pw).then(()=>{V.authMsg=""}))
@@ -2866,7 +3453,9 @@ ${txt.slice(0,6000)}`)}
 localLoad();setupAI();
 DL={save:({filename,data})=>{const b=new Blob([data],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=filename;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000);return Promise.resolve()}};
 setSync(!cfgOk()?"Sur cet appareil":SESSION?"Synchronisation…":"Non connecté");
+try{localStorage.setItem("cerveau-modboot",modSafe?"2":"1")}catch(e){}
 render(true);
+try{if(!modSafe)localStorage.setItem("cerveau-modboot","0")}catch(e){}
 loadNews();handleAuthHash();
 if(SESSION)fullSync(!lsGet("cerveau-lastpull",null)).then(pnAuto);
 setInterval(()=>{if(document.visibilityState==="visible"&&SESSION)pull(false).then(flush)},20000);
