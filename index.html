@@ -1994,6 +1994,7 @@ function jTasks(d){
     :{k:"hab",ref:h,l:habL(h),min:od[h]||jDur(h,jBase(h)),p:1+(JORD[h]||5)/10,tag:od[h]?"juste aujourd'hui":(jLearn()[h]||[]).length>=2?"ton temps réel":""}));
   /* devoirs des 2 jours suivants : à avancer s'il reste du temps */
   for(let i=1;i<=2;i++)pnTasks(add(d,i)).filter(x=>!jHwDone(x)).forEach(x=>out.push({k:"pn",ref:x.id,dk:dkey(add(d,i)),l:`Avancer ${x.m||"un devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`,min:jDur("devoir",P.devoir),p:3+i,tag:"À avancer"}));
+  const pr=(S.jours[dk]||{}).prio||[];if(pr.length)out.forEach(x=>{const i=pr.indexOf(jKey(x));if(i>=0)x.p=-1+i*0.01});
   return out.sort((a,b)=>a.p-b.p);
 }
 function planDay(d){
@@ -2057,17 +2058,13 @@ function pageJour(){
     <select class="field" name="min" style="flex:0 0 92px">${[15,20,30,45,60,90].map(m=>`<option value="${m}" ${m===30?"selected":""}>${m} min</option>`).join("")}</select><button class="btn" aria-label="Ajouter">+</button></form>`;
   const xs=jExtras(V.jdk);
   return`${head}${now}
+  ${sgCard("jour")}
   <div class="card stack" style="gap:10px"><p class="small muted" style="margin:0">${sched}${pl.live?" Le plan part de maintenant et se recalcule tout seul quand tu coches.":""}</p>${tr}
     ${list.length?`<ol class="jlist">${list.map((s,i)=>jStep(s,i,isT)).join("")}</ol>`:`<p>Rien à planifier : tout est fait. 🎉</p>`}
     ${pl.reste.length?`<div class="jreste"><b>Ne rentre pas avant ${fmin(pl.stop)} :</b> ${pl.reste.map(x=>esc(x.l)+" ("+fdur(x.min)+")").join(", ")}. Garde-les pour demain, ou réduis une tâche.</div>`:""}</div>
-  ${sgCard("jour")}
   <div class="card stack" style="gap:10px"><p class="label" style="margin:0">Tâches en plus pour ${isT?"aujourd'hui":"demain"}</p>
     <p class="muted small" style="margin:0">Pour un devoir qui n'est pas sur Pronote, un contrôle à réviser… Il s'ajoute aussi à ton suivi d'habitudes.</p>
     ${xs.length?`<ul class="list">${xs.map(x=>`<li class="row" style="justify-content:space-between;flex-wrap:nowrap;padding:8px 0"><span>${x.ok?"✓ ":""}${esc(x.t)} <span class="muted small">· ${x.min} min</span></span><button class="ghost" data-jdel="${x.id}" aria-label="Supprimer">✕</button></li>`).join("")}</ul>`:""}${add_}</div>
-  <div class="card stack" style="gap:10px"><p class="label" style="margin:0">✨ Coach IA</p>
-    <p class="muted small" style="margin:0">Dis-lui ce qui se passe (contrôle, fatigue, sortie…) : il t'organise la journée étape par étape à partir de ton emploi du temps, de tes habitudes et de tes devoirs.</p>
-    <textarea class="field" id="jnote" data-jnote="1" rows="2" placeholder="Ex. : contrôle de maths jeudi, je suis crevé, je sors à 19 h…">${esc(V.jnote||"")}</textarea>
-    <div><button class="btn" data-jia="1" ${V.busy["jour-ia"]?"disabled":""}>${V.busy["jour-ia"]?"Le coach réfléchit…":"Organiser ma journée"}</button></div>${outBox("jour-ia")}</div>
   <details class="card"><summary class="label" style="margin:0;cursor:pointer">⚙️ Mes réglages de journée</summary>
     <form data-f="jparams" class="stack" style="gap:8px;margin-top:10px">
     ${[["trajet","Retour des cours (min)","number"],["pause","Pause en rentrant (min)","number"],["diner","Heure du dîner","time"],["dinerDur","Durée du dîner (min)","number"],["stop","J'arrête de travailler à","time"],["debutWE","Le week-end, je commence à","time"],["dejWE","Déjeuner le week-end","time"],["libreWE","Le week-end, libre à partir de","time"],["sportTrajet","Trajets salle de sport, aller + retour (min)","number"],["sportDur","Séance de sport (min)","number"],["devoir","Temps par devoir Pronote (min)","number"]]
@@ -2271,7 +2268,7 @@ const SG_PL={trajet:"Trajet du retour",pause:"Pause en rentrant",dinerDur:"Duré
   stop:"Fin du travail",diner:"Heure du dîner",debutWE:"Début le week-end",dejWE:"Déjeuner le week-end",libreWE:"Libre le week-end à partir de"};
 const SG_CLK=["stop","diner","debutWE","dejWE","libreWE"];
 const SG_DURK={devoir:"devoir",trajet:"trajet",pause:"pause",dinerDur:"dinerDur",sportTrajet:"sportTrajet",sport:"sportDur",sportDur:"sportDur"};
-const SG_EXJ=["Remplace la philo par l'anglais le lundi","La fiche de SES me prend 15 min","Plus de piano le vendredi","Ajoute de l'espagnol le mardi","Ce soir j'arrête de travailler à 21 h"];
+const SG_EXJ=["Remplace la philo par l'anglais","Je suis crevé, je finis à 21 h","Commence par les maths","Le piano demain","Contrôle de maths jeudi","La fiche de SES me prend 15 min","Plus de piano le vendredi"];
 const SG_EXA=["Cache la tuile Pronote","Mets Ma journée en premier","Passe l'appli en mode sombre","Les maths comptent triple dans mon objectif","Je vise 16 de moyenne","Ajoute une rubrique pour suivre mon sommeil"];
 function sgDaysTxt(ds){ds=[1,2,3,4,5,6,0].filter(x=>ds.includes(x));if(ds.length===7)return"Tous les jours";
   if(ds.length===5&&!ds.includes(0)&&!ds.includes(6))return"Du lundi au vendredi";if(ds.length===2&&ds.includes(0)&&ds.includes(6))return"Le week-end";
@@ -2283,8 +2280,11 @@ function objWTxt(){const m={};Object.keys(HABITS).forEach(h=>{const w=tW(h);if(w
   const L=Object.entries(m).sort((a,b)=>b[0]-a[0]).map(([w,l])=>`${l.join(", ")} ${wTxt(+w)}`);return L.length?L.join(" · "):"toutes les tâches comptent pareil"}
 
 /* ---- calcul des changements (sans rien enregistrer : sert aussi à l'aperçu) ---- */
+/* portée d'un changement : juste ce jour-là (« once ») ou l'emploi du temps de chaque semaine (« always ») */
+const SG_SCOPED=["rep","del","add","new","dur","par"];
+function sgSc(o,scope){if(!SG_SCOPED.includes(o.t))return"once";if(scope==="once"||scope==="always")return scope;return o.sc||(scope==="autoA"||o.t==="dur"||o.t==="new"?"always":"once")}
 function sgCompute(ops,scope){
-  const tk=dkey(today()),P=S.params||{},cl=o=>JSON.parse(JSON.stringify(o||{})),once=scope==="once",tdy=today().getDay();
+  const tk=dkey(today()),P=S.params||{},cl=o=>JSON.parse(JSON.stringify(o||{})),tdy=today().getDay();let once=false;
   const D={edt:cl(P.edt),planning:cl(P.planning),top3:cl(P.top3),appli:cl(P.appli),durees:cl(P.durees)},J={},lines=[],notes=[],pw={},e=D.edt;
   e.v=Array.isArray(e.v)?e.v:[];let ver=e.v.find(v=>v.from===tk);
   const dateOf=wd=>{for(let i=0;i<7;i++){const x=add(today(),i);if(x.getDay()===wd)return x}return today()};
@@ -2294,7 +2294,8 @@ function sgCompute(ops,scope){
   const cur=wd=>once?planOf(dateOf(wd)):planBase(tk,wd);
   const days=(o,need)=>Array.isArray(o.days)&&o.days.length?o.days:once?[tdy]:need?[0,1,2,3,4,5,6].filter(w=>cur(w).includes(need)):[tdy];
   const when=ds=>once?ds.map(w=>{const x=dateOf(w);return+x===+today()?"Aujourd'hui":+x===+add(today(),1)?"Demain":"Ce "+SG_JN[w]+" "+fdate(dkey(x))}).join(", "):sgDaysTxt(ds);
-  for(const o of ops){
+  const whenD=ds=>ds.map(w=>{const x=dateOf(w);return+x===+today()?"Aujourd'hui":+x===+add(today(),1)?"Demain":"Ce "+SG_JN[w]+" "+fdate(dkey(x))}).join(", ");
+  for(const o of ops){once=sgSc(o,scope)==="once";
     if(o.t==="rep"){const ok=[];days(o,o.a).forEach(w=>{const L=list(w),i=L.indexOf(o.a);if(i<0)return;if(L.includes(o.b))L.splice(i,1);else L[i]=o.b;ok.push(w)});
       if(ok.length)lines.push(`${when(ok)} : ${habL(o.a)} → ${habL(o.b)}`);else notes.push(`${habL(o.a)} n'est pas prévu${o.days&&o.days.length?" "+sgDaysTxt(o.days).toLowerCase():""}.`)}
     else if(o.t==="del"){const ok=[];days(o,o.a).forEach(w=>{const L=list(w),i=L.indexOf(o.a);if(i>=0){L.splice(i,1);ok.push(w)}});
@@ -2315,6 +2316,18 @@ function sgCompute(ops,scope){
     else if(o.t==="par"){if(!SG_CLK.includes(o.k)||!/^\d{1,2}:\d{2}$/.test(String(o.v)))continue;const v=String(o.v).padStart(5,"0"),now=String(jParams()[o.k]).padStart(5,"0");
       if(once){const ds=Array.isArray(o.days)&&o.days.length?o.days:[tdy];ds.forEach(w=>{const j=jd(dkey(dateOf(w)));j.par={...(j.par||{}),[o.k]:v}});lines.push(`${when(ds)} : ${SG_PL[o.k]} ${now} → ${v}`)}
       else{D.planning[o.k]=v;lines.push(`${SG_PL[o.k]} : ${now} → ${v}`)}}
+    else if(o.t==="tache"){const n=String(o.n||"").trim().slice(0,120),m=Math.max(5,Math.min(300,Math.round(+o.min||30)));if(!n)continue;
+      const ds=Array.isArray(o.days)&&o.days.length?o.days:[tdy];ds.forEach(w=>{const j=jd(dkey(dateOf(w)));j.extra=[...(j.extra||[]),{id:uid(),t:n,min:m,ok:false}]});
+      lines.push(`${whenD(ds)} : + ${n} (${fdur(m)})`)}
+    else if(o.t==="report"){const k=String(o.k||""),a=k.indexOf("|"),kind=k.slice(0,a),ref=k.slice(a+1),tm=add(today(),1),j=jd(tk),jt=jd(dkey(tm)),lb=sgLabel(k);
+      if(kind==="hab"){if(!Array.isArray(j.plan))j.plan=planOf(today()).slice();const i=j.plan.indexOf(ref);if(i<0){notes.push(`${lb} n'est pas prévu aujourd'hui.`);continue}
+        j.plan.splice(i,1);if(!Array.isArray(jt.plan))jt.plan=planOf(tm).slice();if(!jt.plan.includes(ref))jt.plan.push(ref)}
+      else if(kind==="pn")j.report={...(j.report||{}),[k]:true};
+      else if(kind==="x"){const x=(j.extra||[]).find(y=>y.id===ref);if(!x)continue;j.extra=j.extra.filter(y=>y.id!==ref);jt.extra=[...(jt.extra||[]),{...x,id:uid(),ok:false}]}
+      else continue;
+      lines.push(`${lb} : reporté à demain`)}
+    else if(o.t==="prio"){const ks=(Array.isArray(o.k)?o.k:[o.k]).map(String).filter(Boolean);if(!ks.length)continue;const j=jd(tk);
+      j.prio=[...ks,...(j.prio||[]).filter(x=>!ks.includes(x))];lines.push(`Aujourd'hui, en premier : ${ks.map(sgLabel).join(", ")}`)}
     else if(o.t==="obj"){const t=D.top3;
       if(o.cible>=10&&o.cible<=20){const c=Math.round(o.cible*10)/10;lines.push(`Moyenne visée : ${pct1(t.cible||OBJ_CIBLE)} → ${pct1(c)}`);t.cible=c}
       if(o.w&&typeof o.w==="object"){const w0=t.w||{...OBJ_W0},K=["n","h","f"],fx=K.filter(k=>o.w[k]!=null&&!isNaN(+o.w[k])),fr=K.filter(k=>!fx.includes(k)),w={};
@@ -2333,6 +2346,7 @@ function sgCompute(ops,scope){
   Object.entries(pw).forEach(([w,l])=>{w=+w;const pl=l.length>1;lines.push(`Objectif Top 3 : ${l.join(", ")} ${w===0?(pl?"ne comptent plus":"ne compte plus"):(pl?"comptent ":"compte ")+wTxt(w)} dans la régularité`)});
   return{docs:D,jours:J,lines,notes}
 }
+function sgLabel(k){const x=jTasks(today()).find(y=>jKey(y)===k);if(x)return x.l;const a=k.indexOf("|");return k.slice(0,a)==="hab"?habL(k.slice(a+1)):k}
 /* effets : on simule le changement, on compare */
 function sgSim(r,fn){const P0=S.params,J0=S.jours;S.params={...P0,...r.docs};S.jours={...J0,...r.jours};try{return fn()}finally{S.params=P0;S.jours=J0}}
 function sgEffects(r){const m=()=>{const pl=planDay(today());return{s:objScore().total,p:objScore({hab:true}).total,f:pl.plan.length?pl.fin:null,r:pl.reste.length}};const a=m(),b=sgSim(r,m);return{a,b}}
@@ -2403,6 +2417,12 @@ function sgClause(c,raw){
   if(S_.length&&(du||less||more)&&!H(/remplac|a la place|au lieu|echang/)){
     if(S_.some(x=>x.id==="sport")&&H(/\btrajet/))return du?one({t:"dur",a:"sportTrajet",min:du}):null;
     const rel=du?0:less?-1:1;return[...new Set(S_.flatMap(x=>x.id==="maths"&&!ds.length?SG_ALLM:[sgRz(x.id,ds)]))].map(a=>({t:"dur",a:a==="sport"?"sport":a,min:du||0,rel,days:ds}))}
+  /* passer en premier */
+  if((S_.length||H(/\bdevoirs?\b/))&&H(/commence\w* par|en premier|d abord|en priorite|priorit\w*|avant tout|en 1er/)){
+    const ks=[...S_.map(x=>"hab|"+sgToday(x.id)),...(H(/\bdevoirs?\b/)?jTasks(today()).filter(x=>x.k==="pn").map(jKey):[])];return ks.length?one({t:"prio",k:[...new Set(ks)]}):null}
+  /* reporter à demain */
+  if(S_.length&&H(/\breport\w*|\bdemain\b|plus tard|\bremets?\b a demain/)&&!H(/enleve|supprime|retire|\bpas de\b|\bplus de\b|ajout|rajout|remplac|\bmets?\b|\bmet\b|\bfai[st]?\b/))
+    return S_.map(x=>({t:"report",k:"hab|"+sgToday(x.id)}));
   /* remplacer */
   if(S_.length>=2&&H(/remplac|echang|a la place|au lieu|plutot|prefer\w*|\bchang\w*|substitu|→|->|transform|\bpar\b/)){let a=S_[0].id,b=S_[1].id;
     const p=c.search(H(/prefer|plutot/)?/a la place d|au lieu d|plutot que|\bque\b|\bqu /:/a la place d|au lieu d|plutot que/);if(p>=0){const af=S_.find(x=>x.a>p),bf=[...S_].reverse().find(x=>x.a<p);if(af&&bf){a=af.id;b=bf.id}}
@@ -2414,22 +2434,27 @@ function sgClause(c,raw){
   if(S_.length&&H(/enleve|supprime|retire|\bplus de\b|\bpas de\b|\barret\w*|\bsans\b|\bvire|annule|zappe|\bsaute|ne fais plus|ne fais pas|\benlever/))return S_.map(x=>({t:"del",a:sgRz(x.id,ds),days:ds,weak:S_.length>1}));
   /* ajouter */
   if(S_.length&&H(/ajout\w*|rajout\w*|\bmets?\b|\bmet\b|\bfai[st]?\b|\bfaire\b|prevoi\w*|program\w*|planifi\w*|\bveux\b|voudrais|\bcase\b|\bcaler\b|\bcale\b/))return S_.map(x=>({t:"add",a:sgRz(x.id,ds),days:ds,weak:S_.length>1}));
+  /* un contrôle, des révisions : une tâche pour aujourd'hui (l'IA fait mieux si elle est là) */
+  if(H(/\bcontrole|\brevis\w*|\binterro\w*|\bds\b|\bexamen|\bbac blanc|\bpartiel/))return one({t:"tache",n:String(raw).trim().replace(/[.!]+$/,"").slice(0,70),min:du||45,weak:true});
   /* nouvelle fonction de l'appli : pour l'IA ou la boîte à idées */
   if(SG_CODE.test(c)||H(/\bappli\b|\bapplication\b/))return one({t:"code"});
   /* nouvelle habitude */
   if(!S_.length&&H(/\bajout\w*|\brajout\w*|\bcree\w*|\bnouvelle\b|\bnouveau\b/)){
     let n=String(raw).replace(/^.*?\b(ajoute[rsz]?|rajoute[rsz]?|crée[rsz]?|cree[rsz]?|nouvelle|nouveau)\b\s*/i,"").replace(/^(une?|des|du|de la|de l'|d')\s*/i,"").replace(/^(tâche|tache|habitude|activité|activite)\s*(de |d'|:)?\s*/i,"").replace(/^(une?|des|du|de la|de l'|d')\s*/i,"");
     n=n.replace(/\s*(\b(le|les|chaque|tous|toutes|tout|pendant|en|pour|de|à|a|le soir|ce soir|demain|aujourd'hui)\b\s*)?(\d.*|\b(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|semaine|week-end|soir|jours?|matin)\b.*)$/i,"").replace(/[.,;!]+$/,"").trim();
-    if(n.length>=2&&n.length<=30)return one({t:"new",n:n[0].toUpperCase()+n.slice(1),min:du||30,days:ds})}
+    if(n.length>=2&&n.length<=60){n=n[0].toUpperCase()+n.slice(1);return one(SG_WK.test(c)&&n.length<=30?{t:"new",n,min:du||30,days:ds}:{t:"tache",n,min:du||30,days:SG_TD.test(c)?ds:[]})}}
   return null}
+const SG_TD=/aujourd hui|ce soir|ce matin|cet apres|\bdemain\b|cette fois|pour une fois|cette semaine|exceptionnel|\bce (lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)\b/;
+const SG_WK=/\b(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)s?\b|\bchaque\b|tous les|toutes les|week ?-?end|en semaine|desormais|dorenavant|toujours|d habitude|a partir de|en general|tout le temps/;
+function sgToday(id){if(id!=="maths")return id;const L=planOf(today());return["maths","mspe","mexp"].find(x=>L.includes(x))||"mspe"}
 function sgLocal(txt){
   const parts=String(txt).split(/[;\n]+|\.\s+|\s+puis\s+|,?\s+et\s+(?=(?:remplace|ajoute|rajoute|enl[eè]ve|supprime|mets|met|retire|cache|j['’ ]|je |la |le |les |l['’]|plus de|pas de|ce soir|demain))/i).map(s=>s.trim()).filter(Boolean),ops=[];
-  for(const raw of parts){const r=sgClause(SG_N(raw),raw);if(!r)return null;ops.push(...r)}
-  if(!ops.length)return null;const n=SG_N(txt);
+  for(const raw of parts){const c=SG_N(raw),r=sgClause(c,raw);if(!r)return null;const sc=SG_TD.test(c)?"once":SG_WK.test(c)?"always":null;r.forEach(o=>{if(sc&&!o.sc)o.sc=sc});ops.push(...r)}
+  if(!ops.length)return null;
   if(ops.some(o=>o.t==="code"))return ops.every(o=>o.t==="code")?{ops:[],code:true,idee:String(txt).trim(),via:"local"}:null;
-  return{ops,weak:ops.some(o=>o.weak),scope:/aujourd hui|ce soir|ce matin|cet apres|pour une fois|cette fois|cette semaine|\bdemain\b|exceptionnel/.test(n)?"once":"always",via:"local"}}
-async function sgAI(txt){
-  const tk=dkey(today()),P=jParams(),hb=Object.keys(HABITS).map(h=>`${h} = ${habL(h)} (${fdur(jDur(h,jBase(h)))}, compte ${wTxt(tW(h))})`).join(" ; "),
+  return{ops,weak:ops.some(o=>o.weak),via:"local"}}
+async function sgAI(txt,place){
+  const tk=dkey(today()),P=jParams(tk),jr=place==="jour",pl=jr?planDay(today()):null,hb=Object.keys(HABITS).map(h=>`${h} = ${habL(h)} (${fdur(jDur(h,jBase(h)))}, compte ${wTxt(tW(h))})`).join(" ; "),
     wk=[1,2,3,4,5,6,0].map(w=>`${w} ${SG_JN[w]} : ${planBase(tk,w).join(", ")||"rien"}`).join("\n"),tiles=sects(true).map(([k,n])=>`${k} = ${n}`).join(" ; ");
   const o=await aiSample.json(`Tu transformes une suggestion de Nathan pour son appli d'organisation en opérations JSON.
 Aujourd'hui : ${JOURS[today().getDay()].toLowerCase()} ${fdate(tk)} (jour n° ${today().getDay()} ; 0 = dimanche, 1 = lundi … 6 = samedi).
@@ -2452,10 +2477,22 @@ Opérations possibles (champ "t") :
 Réponds UNIQUEMENT en JSON : {"ops":[…],"scope":"always" ou "once","resume":"une phrase courte en français (tutoiement) qui dit ce que tu as compris","code":true|false,"idee":"si code est true : l'idée reformulée clairement"}
 "scope" vaut "once" seulement si Nathan dit que c'est pour aujourd'hui, ce soir, demain ou une seule fois.
 "code" vaut true si la suggestion demande une nouvelle fonction de l'appli qu'aucune opération ne permet (nouvelle rubrique, graphique, bouton, rappel…).
-Suggestion de Nathan : « ${String(txt).slice(0,600)} »`);
+${jr?`Il est ${fmin(nowMin())}. Planning calculé par l'appli pour aujourd'hui :
+${[...pl.steps,...pl.plan].map(x=>`${fmin(x.a)}-${fmin(x.b)} ${x.l}`).join("\n")||"(rien)"}${pl.reste.length?`\nNe rentre pas dans la journée : ${pl.reste.map(x=>x.l).join(", ")}`:""}
+Tâches d'aujourd'hui pas encore faites (clé = libellé) :
+${jTasks(today()).filter(x=>!x.dk).map(x=>`${jKey(x)} = ${x.l} (${x.min} min)`).join("\n")||"aucune"}
+${(()=>{const L=[];for(let i=1;i<=6;i++)jLessons(dkey(add(today(),i))).filter(c=>c.test).forEach(c=>L.push(`${fdate(dkey(add(today(),i)))} : ${c.m}`));return L.length?"Contrôles prévus bientôt (Pronote) : "+L.join(" ; "):""})()}
+Opérations pour la journée :
+{"t":"tache","n":"libellé court","min":30,"days":[n]} ajoute une tâche ponctuelle (days vide = aujourd'hui)
+{"t":"report","k":clé} reporte une tâche d'aujourd'hui à demain
+{"t":"prio","k":[clés]} fait passer ces tâches en premier aujourd'hui
+Ne réécris jamais la journée et ne fais pas d'emploi du temps en texte : donne seulement les changements à faire au planning de l'appli, qui se recalcule tout seul.
+Exemples : « je suis crevé » → avancer la fin du travail ("par" stop) et reporter la tâche la moins importante ; « contrôle de maths jeudi » → une tâche de révision aujourd'hui, en priorité ; « je sors à 19 h » → "par" stop à 19:00.
+Pour ce qui concerne seulement aujourd'hui, mets "scope":"once" ; pour une habitude ou un jour de la semaine, "scope":"always".
+`:""}Suggestion de Nathan : « ${String(txt).slice(0,600)} »`);
   return sgValid(o)}
 function sgValid(o){if(!o||typeof o!=="object")throw{code:"invalid_json"};
-  const H=h=>!!HABITS[h],D=a=>Array.isArray(a)?[...new Set(a.map(Number).filter(x=>Number.isInteger(x)&&x>=0&&x<=6))]:[],ops=[];
+  const TK=jTasks(today()).map(jKey),H=h=>!!HABITS[h],D=a=>Array.isArray(a)?[...new Set(a.map(Number).filter(x=>Number.isInteger(x)&&x>=0&&x<=6))]:[],ops=[];
   (Array.isArray(o.ops)?o.ops:[]).forEach(x=>{if(!x||typeof x!=="object")return;const t=x.t;
     if(t==="rep"&&H(x.a)&&H(x.b)&&x.a!==x.b)ops.push({t,a:x.a,b:x.b,days:D(x.days)});
     else if((t==="del"||t==="add")&&H(x.a))ops.push({t,a:x.a,days:D(x.days)});
@@ -2465,8 +2502,12 @@ function sgValid(o){if(!o||typeof o!=="object")throw{code:"invalid_json"};
     else if(t==="obj"&&(x.cible||x.w))ops.push({t,cible:+x.cible||undefined,w:x.w&&typeof x.w==="object"?x.w:undefined});
     else if(t==="poids"&&(H(x.a)||x.a==="devoir")&&x.w!=null&&!isNaN(+x.w))ops.push({t,a:x.a,w:+x.w});
     else if(t==="tuile"&&sects(true).some(s=>s[0]===x.k))ops.push({t,k:x.k,hide:typeof x.hide==="boolean"?x.hide:undefined,pos:["first","last"].includes(x.pos)?x.pos:undefined,nom:typeof x.nom==="string"&&x.nom.trim()?x.nom.trim():undefined});
-    else if(t==="theme"&&["light","dark","auto"].includes(x.v))ops.push({t,v:x.v})});
-  return{ops,scope:o.scope==="once"?"once":"always",resume:String(o.resume||"").slice(0,300),code:!!o.code,idee:String(o.idee||"").slice(0,400),via:"ia"}}
+    else if(t==="theme"&&["light","dark","auto"].includes(x.v))ops.push({t,v:x.v});
+    else if(t==="tache"&&typeof x.n==="string"&&x.n.trim())ops.push({t,n:x.n.trim().slice(0,120),min:+x.min||30,days:D(x.days)});
+    else if(t==="report"&&typeof x.k==="string"&&TK.includes(x.k))ops.push({t,k:x.k});
+    else if(t==="prio"){const ks=(Array.isArray(x.k)?x.k:[x.k]).filter(k=>typeof k==="string"&&TK.includes(k));if(ks.length)ops.push({t,k:ks})}});
+  const sc=o.scope==="once"||o.scope==="always"?o.scope:null;if(sc)ops.forEach(x=>{if(SG_SCOPED.includes(x.t))x.sc=sc});
+  return{ops,resume:String(o.resume||"").slice(0,300),code:!!o.code,idee:String(o.idee||"").slice(0,400),via:"ia"}}
 
 /* ---- historique et boîte à idées (synchronisés) ---- */
 const sgList=()=>(((S.params||{}).idees)||{}).list||[];
@@ -2477,50 +2518,55 @@ function sgCommit(r,txt,scope){const P=S.params||{},before={},jb={};
   Object.keys(r.jours).forEach(k=>jb[k]=S.jours[k]===undefined?null:S.jours[k]);
   Object.keys(before).forEach(k=>put("params",k,r.docs[k],true));Object.entries(r.jours).forEach(([k,v])=>put("jours",k,v,true));
   const id=uid();sgLog({id,ts:Date.now(),txt:String(txt).slice(0,300),lines:r.lines,etat:"ok",scope,before,jb});return id}
-function sgUndo(id){const L=sgList(),x=L.find(y=>y.id===id);if(!x||x.etat!=="ok")return;
+function sgUndo(id,quiet){const L=sgList(),x=L.find(y=>y.id===id);if(!x||x.etat!=="ok")return;
   Object.entries(x.before||{}).forEach(([k,v])=>v==null?del("params",k):put("params",k,v,true));
   Object.entries(x.jb||{}).forEach(([k,v])=>v==null?del("jours",k):put("jours",k,v,true));
   sgSave(L.map(y=>y.id===id?{id:y.id,ts:y.ts,txt:y.txt,lines:y.lines,etat:"annule"}:y));
-  Object.keys(V.sg).forEach(p=>{if(V.sg[p]&&V.sg[p].logId===id)V.sg[p]={done:"↩︎ Annulé : tout est revenu comme avant."}});render(true)}
+  if(quiet)return;Object.keys(V.sg).forEach(p=>{if(V.sg[p]&&V.sg[p].logId===id)V.sg[p]={msg:"↩︎ Annulé : ton planning est revenu comme avant."}});render(true)}
 /* un changement direct, sans aperçu (bouton « Afficher », retour au planning de départ…) */
 function sgQuick(ops,txt){const r=sgCompute(ops,"always");if(r.lines.length)sgCommit(r,txt,"always");render(true)}
 function sgResetPlan(){const tk=dkey(today()),e=JSON.parse(JSON.stringify(edtP())),p={};for(let i=0;i<7;i++)p[i]=(PLAN[i]||[]).slice();
   e.v=(Array.isArray(e.v)?e.v:[]).filter(v=>v.from<tk);e.v.push({from:tk,p});e.dur={};
   const id=sgCommit({docs:{edt:e},jours:{},lines:["Emploi du temps et durées de départ"],notes:[]},"Revenir au planning de départ","always");
-  V.sg.idees={done:"✓ Ton emploi du temps de départ est revenu (à partir d'aujourd'hui).",logId:id};render(true)}
+  V.sg.idees={msg:"✓ Ton emploi du temps de départ est revenu (à partir d'aujourd'hui).",logId:id};render(true)}
 
-/* ---- envoyer une suggestion ---- */
+/* ---- envoyer une suggestion : le planning change tout de suite, on peut annuler ---- */
+function sgSnap(){const pl=planDay(today());return{s:objScore().total,f:pl.plan.length?pl.fin:null,r:pl.reste.length}}
+function sgDo(st,scope){const before=sgSnap(),r=sgCompute(st.p.ops,scope);st.res=r;if(!r.lines.length){st.logId=null;return}
+  st.logId=sgCommit(r,st.txt,scope);st.scopes=[...new Set(st.p.ops.filter(o=>SG_SCOPED.includes(o.t)).map(o=>sgSc(o,scope)))];st.eff={a:before,b:sgSnap()}}
 async function sgSubmit(place,txt){
   txt=String(txt||"").trim();if(!txt)return;const st=V.sg[place]={txt,busy:true};render(true);
   let p=sgLocal(txt);
-  if((!p||p.code||p.weak)&&SAMPLE){try{const q=await sgAI(txt);if(q.ops.length||q.code||!p)p=q}catch(e){if(!p)st.err=ERR(e.code)}}
-  st.busy=false;
-  if(p&&p.ops.length){st.p=p;st.scope=p.scope;st.res=sgCompute(p.ops,st.scope);st.eff=sgEffects(st.res)}else st.p=p||null;
+  if((!p||p.code||p.weak)&&SAMPLE){try{const q=await sgAI(txt,place);if(q.ops.length||q.code||!p)p=q}catch(e){if(!p)st.err=ERR(e.code)}}
+  st.busy=false;st.p=p||null;
+  if(p&&p.ops.length)sgDo(st,place==="jour"?"auto":"autoA");
   if(V.sg[place]===st)render(true)}
-function sgRecalc(place,scope){const st=V.sg[place];if(!st||!st.p)return;st.scope=scope;st.res=sgCompute(st.p.ops,scope);st.eff=sgEffects(st.res);render(true)}
-function sgApply(place){const st=V.sg[place];if(!st||!st.p)return;const r=sgCompute(st.p.ops,st.scope);if(!r.lines.length){V.sg[place]=null;return render(true)}
-  const id=sgCommit(r,st.txt,st.scope);V.sg[place]={done:"✓ C'est fait. "+r.lines.join(" · "),logId:id};render(true)}
+/* « Plutôt chaque semaine » / « Plutôt juste aujourd'hui » : on annule puis on refait avec l'autre portée */
+function sgSwitch(place){const st=V.sg[place];if(!st||!st.p||!st.logId)return;const to=st.scopes.includes("once")?"always":"once";sgUndo(st.logId,true);sgDo(st,to);render(true)}
 function sgIdee(place){const st=V.sg[place];if(!st)return;sgLog({id:uid(),ts:Date.now(),txt:st.txt,idee:(st.p&&st.p.idee)||st.txt,etat:"idee"});
-  V.sg[place]={done:"💡 Idée gardée dans ta boîte à idées (page 💡 Suggestions)."};render(true)}
-function sgPlan(p){return p.ops.some(o=>["rep","del","add","new","dur","par"].includes(o.t))}
+  V.sg[place]={msg:"💡 Idée gardée dans ta boîte à idées (page 💡 Suggestions)."};render(true)}
+function sgFx(x){const out=[],d=x.b.s-x.a.s;
+  if(Math.abs(d)>=0.05)out.push(`🎯 Objectif Top 3 : ${pct1(x.a.s)} % → <b>${pct1(x.b.s)} %</b>`);
+  if(x.a.f!=null&&x.b.f!=null&&Math.round(x.a.f)!==Math.round(x.b.f))out.push(`🕒 Ton travail finit maintenant à <b>${fmin(x.b.f)}</b> (au lieu de ${fmin(x.a.f)})`);
+  if(x.b.r!==x.a.r){const n=Math.abs(x.b.r-x.a.r),pl=n>1;out.push(x.b.r<x.a.r?`✓ ${n} tâche${pl?"s":""} de plus rentre${pl?"nt":""} dans ta journée`:`⚠️ ${n} tâche${pl?"s":""} ne rentre${pl?"nt":""} plus aujourd'hui`)}
+  return out}
 function sgResult(place){const st=V.sg[place];
-  if(st.busy)return`<p class="muted small">Je lis ta suggestion…</p>`;
-  if(st.done)return`<div class="sgres ok"><p>${esc(st.done)}</p><div class="row">${st.logId&&sgList().find(x=>x.id===st.logId&&x.etat==="ok")?`<button class="ghost" data-sgundo="${st.logId}">↩︎ Annuler</button>`:""}<button class="ghost on" data-sgno="${place}">OK</button></div></div>`;
-  const p=st.p,r=st.res;
-  if(p&&r&&r.lines.length){const plan=sgPlan(p);
-    return`<div class="sgres"><p class="small muted">« ${esc(st.txt)} »</p>${p.resume?`<p>${esc(p.resume)}</p>`:""}
+  if(st.busy)return`<p class="muted small">Je modifie ton planning…</p>`;
+  if(st.msg)return`<div class="sgres ok"><p>${esc(st.msg)}</p><div class="row"><button class="ghost on" data-sgno="${place}">OK</button></div></div>`;
+  const p=st.p,r=st.res,live=st.logId&&sgList().some(x=>x.id===st.logId&&x.etat==="ok");
+  if(p&&r&&r.lines.length&&live){const sw=st.scopes.length===1&&(place==="jour"||st.scopes[0]==="once"),jr=place==="jour";
+    return`<div class="sgres ok"><p><b>✓ ${jr?"Ton planning est modifié":"C'est fait"}</b>${jr?" : regarde juste en dessous.":""}</p>
       <ul class="sgl">${r.lines.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>${r.notes.length?`<p class="small muted">${esc(r.notes.join(" "))}</p>`:""}
-      <div class="sgfx">${sgFx(st.eff,plan).map(x=>`<p>${x}</p>`).join("")}</div>
-      ${plan?`<div class="seg" role="group" aria-label="Pour quand ?"><button data-sgscope="${place}|always" aria-pressed="${st.scope!=="once"}">Chaque semaine</button><button data-sgscope="${place}|once" aria-pressed="${st.scope==="once"}">Juste cette fois</button></div>`:""}
-      <div class="row"><button class="btn" data-sgok="${place}">✓ Appliquer</button><button class="ghost" data-sgno="${place}">Annuler</button></div></div>`}
+      ${st.eff?`<div class="sgfx">${sgFx(st.eff).map(x=>`<p>${x}</p>`).join("")}</div>`:""}
+      <div class="row">${sw?`<button class="ghost on" data-sgswitch="${place}">${st.scopes[0]==="once"?"Plutôt chaque semaine":"Plutôt juste aujourd'hui"}</button>`:""}<button class="ghost" data-sgundo="${st.logId}">↩︎ Annuler</button><button class="ghost" data-sgno="${place}">OK</button></div></div>`}
   const code=p&&p.code;
   return`<div class="sgres"><p class="small muted">« ${esc(st.txt)} »</p>
     <p>${code?`C'est une nouvelle fonction pour l'appli${p.idee&&p.idee!==st.txt?` : <b>${esc(p.idee)}</b>`:""}. ${SAMPLE?"L'IA peut essayer de la créer tout de suite, sans risque : tu gardes le résultat seulement s'il te plaît.":"Ajoute ta clé d'IA dans ⚙️ Réglages pour que l'appli puisse la créer. En attendant, garde-la dans ta boîte à idées."}`
       :r&&r.notes.length?esc(r.notes.join(" ")):st.err?esc(st.err)+" Tu peux aussi l'écrire comme un des exemples.":SAMPLE?"Je n'ai pas compris quoi changer. Reformule (comme les exemples), ou garde l'idée pour plus tard.":"Je n'ai pas compris quoi changer. Écris-la comme un des exemples, ou ajoute ta clé d'IA dans ⚙️ Réglages pour que l'appli comprenne toutes tes phrases."}</p>
-    <div class="row">${code&&SAMPLE?`<button class="btn" data-modgen="${place}">✨ Créer avec l'IA</button>`:""}<button class="ghost on" data-sgidee="${place}">💡 Garder l'idée</button><button class="ghost" data-sgno="${place}">Annuler</button></div></div>`}
+    <div class="row">${code&&SAMPLE?`<button class="btn" data-modgen="${place}">✨ Créer avec l'IA</button>`:""}<button class="ghost on" data-sgidee="${place}">💡 Garder l'idée</button><button class="ghost" data-sgno="${place}">OK</button></div></div>`}
 function sgCard(place){const st=V.sg[place],ex=place==="jour"?SG_EXJ:SG_EXA,jr=place==="jour",busy=st&&st.busy;
-  return`<div class="card stack sgcard" style="gap:10px"><p class="label" style="margin:0">💡 ${jr?"Une suggestion pour ton emploi du temps ?":"Ton idée pour l'appli"}</p>
-    <p class="muted small" style="margin:0">${jr?"Écris-la comme tu la dirais. L'appli change ton planning de base et tes durées, et ton % Objectif Top 3 suit.":"Planning, durées, objectif Top 3, tuiles, apparence : l'appli fait le changement tout de suite. Pour une nouvelle fonction, l'IA peut créer un module."}</p>
+  return`<div class="card stack sgcard" style="gap:10px"><p class="label" style="margin:0">${jr?"💬 Quelque chose change ?":"💡 Ton idée pour l'appli"}</p>
+    <p class="muted small" style="margin:0">${jr?"Écris-le comme tu le dirais : ton planning juste en dessous se modifie tout de suite (et ton % Objectif Top 3 suit). Tu peux toujours annuler.":"Planning, durées, objectif Top 3, tuiles, apparence : l'appli fait le changement tout de suite, et tu peux l'annuler. Pour une nouvelle fonction, l'IA peut créer un module."}</p>
     <form data-f="sugg" data-place="${place}" class="${jr?"row sgform":"stack"}" style="gap:8px">${jr?`<input class="field" name="t" id="sg-${place}" autocomplete="off" placeholder="Ex. : ${esc(ex[0])}" required>`:`<textarea class="field" name="t" id="sg-${place}" rows="3" placeholder="Ex. : ${esc(ex[0])}" required></textarea>`}
       <div><button class="btn" ${busy?"disabled":""}>${busy?"…":jr?"OK":"Envoyer"}</button></div></form>
     ${st?sgResult(place):`<div class="chips sgex">${ex.map(x=>`<button type="button" class="chip" data-sgex="${place}|${esc(x)}">${esc(x)}</button>`).join("")}</div>`}</div>`}
@@ -2917,7 +2963,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.4.2";
+const APP_VERSION="1.4.3";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -3451,9 +3497,8 @@ document.addEventListener("click",e=>{
   if(d.act!==undefined){const h=MOD.clicks[d.act];if(h){try{h.fn(b)}catch(err){modFail(h.id,err);render(true)}}return}
   /* suggestions */
   if(d.sgex){const i=d.sgex.indexOf("|"),el=document.getElementById("sg-"+d.sgex.slice(0,i));if(el){el.value=d.sgex.slice(i+1);el.focus()}return}
-  if(d.sgok)return sgApply(d.sgok);
+  if(d.sgswitch)return sgSwitch(d.sgswitch);
   if(d.sgno){V.sg[d.sgno]=null;return render(true)}
-  if(d.sgscope){const[p,s]=d.sgscope.split("|");return sgRecalc(p,s)}
   if(d.sgundo)return sgUndo(d.sgundo);
   if(d.sgidee)return sgIdee(d.sgidee);
   if(d.sgdel){sgSave(sgList().filter(x=>x.id!==d.sgdel));return render(true)}
