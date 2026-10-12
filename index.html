@@ -743,6 +743,29 @@ details.egart>summary,details.egall>summary{cursor:pointer;display:flex;flex-dir
 .pyfb code{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere}
 .pyhint{background:color-mix(in srgb,var(--obj) 12%,var(--surface));border-radius:10px;padding:8px 10px;margin:0}
 .pyl{gap:12px}
+/* 1.9.1 : mon avenir en arbre */
+.trwrap{position:relative;padding:4px 0 8px}
+.trsvg{position:absolute;left:0;top:0;pointer-events:none;overflow:visible;z-index:0}
+.tred{fill:none;stroke:color-mix(in srgb,var(--muted) 32%,transparent);stroke-width:1.4}
+.tred.hi{stroke:var(--c);stroke-width:2.6}
+.tred.dim{opacity:.18}
+.trrl{position:relative;z-index:1;display:table;margin-left:auto!important;margin-right:auto!important;padding:2px 10px;border-radius:999px;background:var(--bg);text-align:center;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+.trrl:first-of-type{margin-top:0}
+.trrow{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 8px;margin-bottom:22px}
+.trn{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;width:104px;padding:8px 6px 7px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);text-align:center;line-height:1.15;box-shadow:0 1px 3px rgb(0 0 0 / .06);transition:opacity .15s,transform .1s}
+.trn:active{transform:scale(.97)}
+.trn b{font-size:.8rem;font-weight:650;overflow-wrap:anywhere}
+.trn small{font-size:.66rem;color:var(--muted);overflow-wrap:anywhere}
+.tre{font-size:1.25rem;line-height:1.1}
+.trn.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 11%,var(--surface))}
+.trn.sel{box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 45%,transparent)}
+.trn.dim{opacity:.32}
+.trb{position:absolute;top:-9px;right:-6px;font-size:.95rem;background:var(--surface);border-radius:999px;width:24px;height:24px;display:grid;place-items:center;box-shadow:0 1px 3px rgb(0 0 0 / .18)}
+.trsheet{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:45;max-width:600px;margin:0 auto;max-height:66vh;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:12px;box-shadow:0 14px 40px rgb(0 0 0 / .3)}
+.trst{font-size:1.05rem}
+.trspace{height:62vh}
+.trline{line-height:1.5}
+@media (min-width:600px){.trn{width:120px}}
 </style>
 <script src="config.js"></script>
 </head>
@@ -1416,7 +1439,7 @@ const ILL={
  pron:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="14" y="14" width="56" height="58" rx="11" fill="var(--pron)" opacity=".2"/><rect x="14" y="14" width="56" height="17" rx="8.5" fill="var(--pron)"/><path d="M27 45h30M27 56h18" stroke="var(--pron)" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="61" r="11" fill="var(--pron)"/><path d="M55 61l3.4 3.4 6.4-7" stroke="#fff" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  jour:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="12" y="18" width="50" height="48" rx="9" fill="var(--jour)" opacity=".2"/><rect x="12" y="18" width="50" height="13" rx="6.5" fill="var(--jour)"/><path d="M22 40h14M22 49h20M22 58h10" stroke="var(--jour)" stroke-width="4" stroke-linecap="round"/><circle cx="58" cy="56" r="15" fill="var(--surface)" stroke="var(--jour)" stroke-width="4"/><path d="M58 48v8l5 4" stroke="var(--jour)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  obj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M28 16h28v15a14 14 0 0 1-28 0z" fill="var(--obj)"/><path d="M28 21h-8a8 8 0 0 0 8 12M56 21h8a8 8 0 0 1-8 12" fill="none" stroke="var(--obj)" stroke-width="4" stroke-linecap="round"/><rect x="38" y="44" width="8" height="11" fill="var(--obj)" opacity=".55"/><rect x="27" y="55" width="30" height="9" rx="3" fill="var(--obj)"/><path d="M42 21.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8-4.3-2.3-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z" fill="#fff" opacity=".92"/></svg>`,
- ps:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M42 16 8 32l34 16 34-16z" fill="var(--ps)" opacity=".22"/><path d="M42 16 8 32l34 16 34-16z" fill="none" stroke="var(--ps)" stroke-width="4" stroke-linejoin="round"/><path d="M22 39v15c0 6 9 11 20 11s20-5 20-11V39" fill="none" stroke="var(--ps)" stroke-width="4" stroke-linecap="round"/><path d="M76 32v20" stroke="var(--ps)" stroke-width="4" stroke-linecap="round"/><circle cx="76" cy="56" r="4" fill="var(--ps)"/></svg>`,
+ ps:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="30" r="22" fill="var(--ps)" opacity=".2"/><path d="M42 74V40M42 52l-14-12M42 46l13-11" stroke="var(--ps)" stroke-width="4.5" stroke-linecap="round"/><circle cx="26" cy="36" r="6" fill="var(--ps)"/><circle cx="57" cy="32" r="6" fill="var(--ps)"/><circle cx="42" cy="18" r="6" fill="var(--ps)"/><path d="M30 74h24" stroke="var(--ps)" stroke-width="4" stroke-linecap="round"/></svg>`,
  py:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="10" y="16" width="64" height="50" rx="10" fill="var(--py)" opacity=".18"/><rect x="10" y="16" width="64" height="50" rx="10" fill="none" stroke="var(--py)" stroke-width="4"/><path d="M26 34l-8 7 8 7M58 34l8 7-8 7M46 30l-8 22" fill="none" stroke="var(--py)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  ent:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="46" r="26" fill="var(--ent)" opacity=".18"/><circle cx="42" cy="46" r="26" fill="none" stroke="var(--ent)" stroke-width="4"/><path d="M42 46V30M42 46l11 7" stroke="var(--ent)" stroke-width="4" stroke-linecap="round"/><path d="M34 12h16M42 12v8" stroke="var(--ent)" stroke-width="4" stroke-linecap="round"/><path d="M68 18l5-5" stroke="var(--ent)" stroke-width="4" stroke-linecap="round"/></svg>`,
  cg:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="40" cy="44" r="24" fill="var(--cg)" opacity=".2"/><circle cx="40" cy="44" r="24" fill="none" stroke="var(--cg)" stroke-width="4"/><ellipse cx="40" cy="44" rx="10" ry="24" fill="none" stroke="var(--cg)" stroke-width="3.5"/><path d="M17 44h46M21 32h38M21 56h38" stroke="var(--cg)" stroke-width="3" stroke-linecap="round"/><path d="M67 10l2.6 5.4 5.4 2.6-5.4 2.6-2.6 5.4-2.6-5.4-5.4-2.6 5.4-2.6z" fill="var(--cg)"/></svg>`,
@@ -2495,7 +2518,7 @@ function pageObj(){
   return`<div class="card objhero"><div class="objring">${objRing(sc.total)}<div><b class="num">${pct1(sc.total)} %</b></div></div>
     <div class="stack" style="gap:6px"><p class="label" style="margin:0">Objectif HEC · ESSEC · ESCP</p>
     <p>${dlt==null?"Premier jour de suivi : reviens demain pour voir ta progression.":dlt>=0.05?`<b class="up">+${pct1(dlt)} pt</b> depuis ${fdate(Object.keys(S.objectif).filter(x=>x<dkey(today())).sort().pop())}`:dlt<=-0.05?`<b class="down">−${pct1(-dlt)} pt</b> depuis la dernière fois : on remonte aujourd'hui.`:"Stable depuis la dernière fois."}</p></div></div>
-  <div class="row"><button class="ghost on" data-page="bilan">📊 Mon bilan de la semaine</button><button class="ghost on" data-page="ps">🎓 Parcoursup</button></div>
+  <div class="row"><button class="ghost on" data-page="bilan">📊 Mon bilan de la semaine</button><button class="ghost on" data-page="ps">🌳 Mon avenir</button></div>
   ${pilotCard()}
   <div class="card stack"><p class="label" style="margin:0">Ce qui te manque pour monter tout de suite</p>
     ${acts.length?`<ul class="objact">${acts.map(a=>`<li><button data-page="${a.p}"><span>${esc(a.t)}</span>${a.g!=null?`<b class="num">+${pct1(a.g)} %${a.per?"":""}</b>`:""}</button></li>`).join("")}</ul>`:`<p>Tout est fait pour aujourd'hui. Il ne reste qu'à recommencer demain. 💪</p>`}</div>
@@ -3855,21 +3878,10 @@ const psMap=id=>PS_MAP.find(x=>x.id===id);
 function psChemin(){return psDoc("chemin")}
 function psSetChemin(p){return put("ps","chemin",{...psChemin(),...p})}
 function psFacName(){const c=psChemin(),f=c.fac;if(!f)return null;if(f.startsWith("v:")){const v=(psDoc("voeux").list||[]).find(x=>x.id===f.slice(2));return v?v.nom:null}const x=psMap(f);return x?`${x.n} · ${x.u}`:null}
-function psChCard(){const c=psChemin(),fac=psFacName(),reb=(c.reb||[]).map(psMap).filter(Boolean),fin=(c.fin||[]).map(psMap).filter(Boolean);
-  const li=(n,l,v,empty)=>`<li><span class="psn">${n}</span><div><b>${l}</b><span>${v||`<i class="muted">${empty}</i>`}</span></div></li>`;
-  return`<div class="card stack" style="gap:10px"><p class="label" style="margin:0">🧭 Mon chemin</p><ol class="pschem">
-    ${li("1","L'an prochain (L1)",fac?esc(fac):"","Choisis ta fac plus bas : ⭐ Ma fac de l'an prochain")}
-    ${li("2","Rebond en L2 ou L3",reb.map(x=>esc(x.n)).join(" · "),"Touche 🎯 Je vise sur les rebonds qui te tentent")}
-    ${li("3","Ensuite",fin.map(x=>esc(x.n)).join(" · "),"Touche 🎯 Je vise : Top 3, master de marchés, master quant…")}
-    ${li("🎯","Métier visé","Trader quantitatif, ou la finance de haut niveau par le Top 3","")}</ol>
-    <p class="small" style="margin:0">La même licence de maths ouvre les deux portes : le Top 3 (admission sur titre) ou un master de maths financières (trader quant). Tu choisis en 3e année.</p></div>`}
-function psMapCard(x){const c=psChemin(),isFac=c.fac===x.id,aim=(x.st===2?c.reb:c.fin)||[],on=aim.includes(x.id);
+function psMapCard(x,open){const c=psChemin(),isFac=c.fac===x.id,aim=(x.st===2?c.reb:c.fin)||[],on=aim.includes(x.id);
   const inV=(psDoc("voeux").list||[]).some(v=>v.nom===x.n+" · "+x.u);
-  return`<details class="card pslic ${isFac||on?"pick":""}" ${V.psKeep===x.id?"open":""}><summary><b>${isFac?"⭐ ":on?"🎯 ":""}${esc(x.n)}</b><span class="muted small">${esc(x.u)}</span></summary><div class="stack" style="gap:6px;margin-top:10px"><p class="small"><b>${x.st===1?"Chiffres":"Comment y entrer"} :</b> ${esc(x.f)}</p><p class="small"><b>Pour toi :</b> ${esc(x.w)}</p>
+  return`<details class="card pslic ${isFac||on?"pick":""}" ${open||V.psKeep===x.id?"open":""}><summary><b>${isFac?"⭐ ":on?"🎯 ":""}${esc(x.n)}</b><span class="muted small">${esc(x.u)}</span></summary><div class="stack" style="gap:6px;margin-top:10px"><p class="small"><b>${x.st===1?"Chiffres":"Comment y entrer"} :</b> ${esc(x.f)}</p><p class="small"><b>Pour toi :</b> ${esc(x.w)}</p>
    <div class="row">${x.st===1?`<button class="ghost ${isFac?"on":""}" data-psfac="${x.id}">${isFac?"⭐ Ma fac de l'an prochain":"⭐ Ma fac de l'an prochain ?"}</button>${inV?`<span class="tag">✓ dans tes vœux</span>`:`<button class="ghost on" data-psadd="${x.id}">＋ Mes vœux</button>`}`:`<button class="ghost ${on?"on":""}" data-psaim="${x.id}">${on?"🎯 Je vise ✓":"🎯 Je vise"}</button>`}</div></div></details>`}
-function psMapHtml(){return PS_ST.map(([st,t])=>{const L=PS_MAP.filter(x=>x.st===st);
-  const body=st===1?Object.entries(PS_G).map(([g,gt])=>`<p class="psg">${esc(gt)}</p>${L.filter(x=>x.g===g).map(psMapCard).join("")}`).join(""):L.map(psMapCard).join("");
-  return`<div class="stack" style="gap:8px"><p class="label" style="margin:0">${esc(t)}</p>${body}${st===1?`<p class="muted small" style="margin:0">Sur la fiche Parcoursup de chaque formation, regarde le « taux d'accès » : plus il est haut, plus le vœu est sûr.</p>`:st===3?`<p class="small" style="margin:0">L'appli t'y prépare déjà : <button class="linkb" data-bilgo="ent|cm">calcul mental</button>, <button class="linkb" data-bilgo="ent|en">anglais</button> et l'actu éco dans Finance.</p>`:""}</div>`}).join("")}
 const PS_CHECK=[["notes","Soigner tes notes du 1er et du 2e trimestre, surtout en maths : les formations regardent ta progression"],["fiches","Lire les fiches des formations sur Parcoursup (dès le 17 décembre)"],["jpo","Aller aux journées portes ouvertes (Dauphine, Saclay, Sorbonne…)"],["insc","T'inscrire sur Parcoursup (dès le 19 janvier)"],["projet","Écrire un projet de formation motivé pour chaque vœu"],["activ","Remplir « activités et centres d'intérêt » (marchés financiers, presse éco, lecture…)"],["voeux","Formuler tes vœux avant le 12 mars (jusqu'à 10 vœux)"],["sco","Si un événement a perturbé tes épreuves de 1re : l'expliquer en quelques lignes dans « Éléments liés à ma scolarité » (facultatif)"],["confirm","Confirmer tes vœux avant le 1er avril"]];
 const PS_ETATS=[["etude","À l'étude"],["oui","Je postule"],["ok","Confirmé"]];
 const psDoc=k=>(S.ps||{})[k]||{};
@@ -3889,19 +3901,81 @@ Ce que l'on sait de lui : spécialités mathématiques et SES, option maths expe
 ${txt.trim()?`Son brouillon :\n${txt.slice(0,1500)}\n\nAméliore ce brouillon en gardant ses idées et sa façon de parler.`:"Il n'a pas encore de brouillon : propose une première version qu'il pourra personnaliser."}
 Règles : à la première personne, ton sincère et concret, pas de formules creuses. N'invente aucune expérience, aucune note et aucun chiffre : mets [entre crochets] ce qu'il doit compléter lui-même. Explique ce qui rend cette formation adaptée à son projet. Réponds uniquement avec le texte, 1 400 caractères maximum.`)}
 function psSummary(){const nx=psNext();return nx?[`J-${psDays(nx[0])}`,`${fdate(nx[0])} : ${nx[2]}`]:["✓","calendrier Parcoursup terminé"]}
-function pagePs(){const nx=psNext(),t=todayK(),ck=psDoc("check").done||{},vx=psDoc("voeux").list||[],nd=PS_CHECK.filter(([k])=>ck[k]).length;
-  return`<div class="card stack" style="gap:12px">${nx?`<p class="label" style="margin:0">⏳ Prochaine étape</p><div class="psnext"><span class="psj num">J-${psDays(nx[0])}</span><div><b>${fdate(nx[0])}</b><span>${esc(nx[1])}</span></div></div>`:`<p class="label" style="margin:0">Calendrier</p>`}
-    <ol class="pstl">${PS_DATES.map(([k,l])=>`<li class="${k<t?"past":nx&&k===nx[0]?"now":""}"><b>${fdate(k)}</b><span>${esc(l)}</span></li>`).join("")}</ol>
-    <p class="muted small" style="margin:0">Dates annoncées pour Parcoursup 2027 : vérifie-les sur parcoursup.gouv.fr dès décembre.</p></div>
-  ${psDosCard()}
-  ${psChCard()}
-  ${psMapHtml()}
-  <div class="card stack" style="gap:6px"><p class="label" style="margin:0">📋 Ta checklist · ${nd}/${PS_CHECK.length}</p><ul class="list">${PS_CHECK.map(([k,l])=>`<li><label class="chk"><input type="checkbox" id="psck-${k}" data-psck="${k}" ${ck[k]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(l)}</span></label></li>`).join("")}</ul></div>
-  <div class="card stack" style="gap:10px"><p class="label" style="margin:0">✍️ Mes vœux${vx.length?" · "+vx.length:""}</p>
-    ${vx.map(psVoeu).join("")||`<p class="muted small" style="margin:0">Ajoute une formation avec ＋ Mes vœux, ou écris son nom ici.</p>`}
+/* ---------- 🌳 MON AVENIR : tout est dans un arbre (touche une case pour les détails) ---------- */
+const TR_ROWS=[["now","Maintenant"],["l1","1re année de licence (Parcoursup)"],["reb","Rebondir en L2 / L3"],["post","Après la licence"],["job","Le métier"]];
+const TR_ALLREB=["dau2","sor2","mag","ing","stay"];
+const TR=[
+ {id:"moi",r:"now",e:"🎓",l:"Toi · Terminale",s:"ton dossier",nx:["gp","gr","gs"]},
+ {id:"psup",r:"now",e:"📅",l:"Parcoursup 2027",s:()=>{const n=psNext();return n?`J-${psDays(n[0])} · vœux, checklist`:"vœux, checklist"},nx:["gp","gr","gs"]},
+ {id:"gp",r:"l1",e:"🗼",l:"Paris",s:"très ambitieux",kids:["dau1","sor1","sac1","pc1","ors1"],nx:TR_ALLREB},
+ {id:"gr",r:"l1",e:"🧮",l:"Maths-éco en région",s:"ambitieux",kids:["dlr"],nx:TR_ALLREB},
+ {id:"gs",r:"l1",e:"☀️",l:"Région Sud",s:"plus sûr",kids:["amu1","amu2","uca1","tln1","avi1"],nx:TR_ALLREB},
+ {id:"dau2",r:"reb",e:"🏛️",l:"Dauphine",s:"en L2 ou L3",ref:"dau2",nx:["top3","mkt"]},
+ {id:"sor2",r:"reb",e:"🏛️",l:"Sorbonne",s:"en L2 ou L3",ref:"sor2",nx:["mkt","top3"]},
+ {id:"mag",r:"reb",e:"📊",l:"Magistères d'éco",s:"Paris 1 · AMSE",kids:["p1mag","amse"],nx:["top3","mkt"]},
+ {id:"ing",r:"reb",e:"⚙️",l:"Écoles d'ingé",s:"voie universitaire",ref:"ing",nx:["tq","qr","mk"]},
+ {id:"stay",r:"reb",e:"📚",l:"Finir ta licence",s:"dans ta fac",nx:["top3","mkt"]},
+ {id:"top3",r:"post",e:"🏆",l:"Top 3",s:"HEC · ESSEC · ESCP",kids:["hec","essec","escp"],nx:["ib","mk"]},
+ {id:"mkt",r:"post",e:"📈",l:"Masters marchés & quant",s:"203 · El Karoui · EDHEC",kids:["m203","elk","edhec"],nx:["tq","qr","mk"]},
+ {id:"tq",r:"job",e:"🎯",l:"Trader quantitatif",s:"ton objectif"},
+ {id:"qr",r:"job",e:"🧠",l:"Chercheur quant",s:"modèles mathématiques"},
+ {id:"mk",r:"job",e:"💹",l:"Marchés en banque",s:"trader, sales"},
+ {id:"ib",r:"job",e:"🤝",l:"Banque d'affaires",s:"et private equity"}];
+const TR_TXT={
+ gp:"Les licences les plus demandées de France. Avec ton dossier de 1re, ce sont des vœux très ambitieux pour la 1re année : mets-les quand même, un vœu ne coûte rien.",
+ gr:"Les doubles licences maths-éco hors de Paris : le même profil que toi, un peu moins de concurrence.",
+ gs:"Près de chez toi : des vœux plus sûrs pour faire une super 1re année, puis rebondir.",
+ mag:"Des magistères : 3 ans d'économie quantitative de haut niveau, de la L3 au master.",
+ stay:"Tu fais tes 3 années dans ta fac (par exemple à Nice : double diplôme avec l'EDHEC après la L3), puis tu candidates en master ou en admission sur titre au Top 3.",
+ top3:"L'admission sur titre : tu entres en master à HEC, l'ESSEC ou l'ESCP après ta licence, avec un test (GMAT, GRE ou TAGE MAGE), un test d'anglais et un entretien.",
+ mkt:"Les masters qui mènent directement aux métiers des marchés et du trading quantitatif.",
+ tq:"Il crée, teste et surveille des stratégies de trading avec des maths et du code, dans des sociétés de trading (Jane Street, Optiver, IMC…) ou des hedge funds. Les recrutements testent le calcul mental, les probabilités et la programmation (Python). Salaires très élevés, mais très sélectif : en Europe, environ 150 000 à 300 000 € la 1re année (estimations Tradermath, 2026).",
+ qr:"Il construit les modèles mathématiques des banques et des fonds (prix des produits, risques). La voie classique : un master de maths financières. En 2019, environ 1 quant sur 3 en France sortait du master El Karoui.",
+ mk:"Trader ou vendeur (sales) dans la salle de marché d'une banque. Accessible par le Top 3 ou par un master de marchés comme le 203 de Dauphine.",
+ ib:"Fusions-acquisitions, puis fonds d'investissement (private equity). En France, un analyste débutant touche 40 000 à 80 000 € de fixe, avec un bonus jusqu'à 100 % du fixe. Journées très longues. La voie royale : le Top 3."};
+const trNode=id=>TR.find(x=>x.id===id);
+function trEdges(){const E=[];TR.forEach(a=>(a.nx||[]).forEach(b=>E.push([a.id,b])));return E}
+function trReach(id,dir){const E=trEdges(),out=new Set,st=[id];while(st.length){const x=st.pop();E.forEach(([a,b])=>{const[f,t]=dir>0?[a,b]:[b,a];if(f===x&&!out.has(t)){out.add(t);st.push(t)}})}return out}
+/* ton chemin : ⭐ ta fac → 🎯 ton rebond → 🎯 ton master ou école → trader quantitatif */
+function trPathSet(){const c=psChemin(),S=new Set(["moi","tq"]),fac=c.fac;
+  if(fac){const g=TR.find(n=>(n.kids||[]).includes(fac));if(g)S.add(g.id)}
+  (c.reb||[]).forEach(r=>{const n=TR.find(x=>x.ref===r||(x.kids||[]).includes(r));if(n)S.add(n.id)});
+  (c.fin||[]).forEach(r=>{const n=TR.find(x=>(x.kids||[]).includes(r));if(n)S.add(n.id)});return S}
+function trBadge(n){const c=psChemin(),k=[...(n.kids||[]),n.ref].filter(Boolean);if(n.id==="tq")return"🎯";if(k.includes(c.fac))return"⭐";if(k.some(x=>(c.reb||[]).includes(x)||(c.fin||[]).includes(x)))return"🎯";return""}
+function trLine(){const c=psChemin(),fac=psFacName(),reb=(c.reb||[]).map(psMap).filter(Boolean),fin=(c.fin||[]).map(psMap).filter(Boolean);
+  if(!fac&&!reb.length&&!fin.length)return`<p class="small" style="margin:0">Touche une case pour voir les détails. Dans les cases, choisis <b>⭐ ta fac de l'an prochain</b> et <b>🎯 ce que tu vises</b> : ton chemin s'allume dans l'arbre.</p>`;
+  return`<p class="small trline" style="margin:0"><b>Ton chemin :</b> ${[fac?"⭐ "+esc(fac.split(" · ")[1]||fac):"",...reb.map(x=>"🎯 "+esc(x.n.split(" : ")[0])),...fin.map(x=>"🎯 "+esc(x.n)),"Trader quantitatif"].filter(Boolean).join(" → ")}</p>`}
+function trTree(){const sel=V.trSel,P=trPathSet(),up=sel?trReach(sel,-1):null,dn=sel?trReach(sel,1):null,rel=id=>!sel||id===sel||up.has(id)||dn.has(id);
+  return`<div class="trwrap" id="trwrap"><svg class="trsvg" id="trsvg" aria-hidden="true"></svg>${TR_ROWS.map(([r,l])=>`<p class="trrl">${esc(l)}</p><div class="trrow">${TR.filter(n=>n.r===r).map(n=>{const b=trBadge(n),s=typeof n.s==="function"?n.s():n.s;
+    return`<button class="trn ${P.has(n.id)?"on":""} ${sel===n.id?"sel":""} ${rel(n.id)?"":"dim"}" data-trn="${n.id}" aria-pressed="${sel===n.id}">${b?`<span class="trb">${b}</span>`:""}<span class="tre" aria-hidden="true">${n.e}</span><b>${esc(n.l)}</b><small>${esc(s)}</small></button>`}).join("")}</div>`).join("")}</div>`}
+/* les traits de l'arbre, dessinés une fois la page affichée */
+function psTreeDraw(){const w=document.getElementById("trwrap"),svg=document.getElementById("trsvg");if(!w||!svg)return;const R=w.getBoundingClientRect(),sel=V.trSel,P=trPathSet();
+  const up=sel?trReach(sel,-1):null,dn=sel?trReach(sel,1):null,pos={};w.querySelectorAll("[data-trn]").forEach(el=>{const r=el.getBoundingClientRect();pos[el.dataset.trn]={x:r.left-R.left+r.width/2,t:r.top-R.top,b:r.bottom-R.top}});
+  svg.setAttribute("width",R.width);svg.setAttribute("height",R.height);
+  svg.innerHTML=trEdges().map(([a,b])=>{const A=pos[a],B=pos[b];if(!A||!B)return"";const dy=Math.max(24,(B.t-A.b)/2);
+    const hi=sel?((a===sel||up.has(a))&&(b===sel||up.has(b)))||((a===sel||dn.has(a))&&(b===sel||dn.has(b))):P.has(a)&&P.has(b),dim=sel&&!hi;
+    return`<path class="tred ${hi?"hi":""} ${dim?"dim":""}" d="M${A.x},${A.b} C${A.x},${A.b+dy} ${B.x},${B.t-dy} ${B.x},${B.t}"/>`}).join("")}
+window.addEventListener("resize",()=>{if(V.page==="ps")psTreeDraw()});
+function psCalHtml(){const nx=psNext(),t=todayK();return`${nx?`<div class="psnext"><span class="psj num">J-${psDays(nx[0])}</span><div><b>${fdate(nx[0])}</b><span>${esc(nx[1])}</span></div></div>`:""}
+  <ol class="pstl">${PS_DATES.map(([k,l])=>`<li class="${k<t?"past":nx&&k===nx[0]?"now":""}"><b>${fdate(k)}</b><span>${esc(l)}</span></li>`).join("")}</ol>
+  <p class="muted small" style="margin:0">Dates annoncées pour Parcoursup 2027 : vérifie-les sur parcoursup.gouv.fr dès décembre.</p>`}
+function psCheckHtml(){const ck=psDoc("check").done||{},nd=PS_CHECK.filter(([k])=>ck[k]).length;return`<p class="label" style="margin:0">📋 Ta checklist · ${nd}/${PS_CHECK.length}</p><ul class="list">${PS_CHECK.map(([k,l])=>`<li><label class="chk"><input type="checkbox" id="psck-${k}" data-psck="${k}" ${ck[k]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(l)}</span></label></li>`).join("")}</ul>`}
+function psVoeuxHtml(){const vx=psDoc("voeux").list||[];return`<p class="label" style="margin:0">✍️ Mes vœux${vx.length?" · "+vx.length:""}</p>
+    ${vx.map(psVoeu).join("")||`<p class="muted small" style="margin:0">Ajoute une formation depuis l'arbre (＋ Mes vœux), ou écris son nom ici.</p>`}
     ${V.psMsg?`<p class="small" style="margin:0">${esc(V.psMsg)}</p>`:""}
-    <form data-f="psv" class="row" style="flex-direction:row;flex-wrap:nowrap"><input class="field" name="nom" placeholder="Nom de la formation" autocomplete="off" required><button class="btn">Ajouter</button></form></div>
-  <p class="muted small">Sources : rapport Parcoursup 2025 de Dauphine-PSL, pages d'admission en L2 et L3 de Dauphine, Sorbonne Université (candidatures L2-L3), Paris 1 (magistère d'économie), AMSE (magistère), Université Côte d'Azur (licence de maths), Dauphine (Master 203), Business Cool (master El Karoui), annuaire Thotis des licences de maths 2025, education.gouv.fr (épreuve anticipée de maths), Diplomeo (rubrique « Éléments liés à ma scolarité »), fiche de la double licence de Paris-Saclay, classement Thotis des licences de maths (mars 2026), guides Thotis des admissions sur titre HEC, ESSEC et ESCP, calendrier Parcoursup 2027 annoncé par Les Sherpas.</p>`}
+    <form data-f="psv" class="row" style="flex-direction:row;flex-wrap:nowrap"><input class="field" name="nom" placeholder="Nom de la formation" autocomplete="off" required><button class="btn">Ajouter</button></form>`}
+function trSheet(){const id=V.trSel,n=id&&trNode(id);if(!n)return"";let body="";
+  if(id==="moi")body=psDosCard();
+  else if(id==="psup")body=`<div class="stack" style="gap:10px">${psCalHtml()}</div><div class="stack" style="gap:6px">${psCheckHtml()}</div><div class="stack" style="gap:10px">${psVoeuxHtml()}</div>`;
+  else{const kids=(n.kids||[]).map(psMap).filter(Boolean),ref=n.ref&&psMap(n.ref);
+    body=`${TR_TXT[id]?`<p class="small" style="margin:0">${esc(TR_TXT[id])}</p>`:""}${ref?psMapCard(ref,true):""}${kids.length?`<div class="stack" style="gap:8px">${kids.map(x=>psMapCard(x)).join("")}</div>`:""}
+      ${n.nx&&n.nx.length?`<p class="small muted" style="margin:0">Ensuite : ${n.nx.map(x=>`<button class="linkb" data-trn="${x}">${esc(trNode(x).l)}</button>`).join(" · ")}</p>`:""}
+      ${n.r==="job"?`<p class="muted small" style="margin:0">Sources : Tradermath (salaires 2026), Business Cool (master El Karoui ; salaires en fusions-acquisitions), Hedgeweek / Reuters (Jane Street, 2026).</p>`:""}`}
+  return`<div class="trsheet card" role="dialog" aria-label="${esc(n.l)}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b class="trst">${n.e} ${esc(n.l)}</b><button class="ghost" data-trclose="1" aria-label="Fermer">✕</button></div>${body}</div><div class="trspace" aria-hidden="true"></div>`}
+function pagePs(){return`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">🌳 Ton arbre : de la Terminale au métier</p>${trLine()}</div>
+  ${trTree()}
+  <p class="muted small">Sources : rapport Parcoursup 2025 de Dauphine-PSL, pages d'admission en L2 et L3 de Dauphine, Sorbonne Université (candidatures L2-L3), Paris 1 (magistère d'économie), AMSE (magistère), Université Côte d'Azur (licence de maths), Dauphine (Master 203), Business Cool (master El Karoui), annuaire Thotis des licences de maths 2025, fiche de la double licence de Paris-Saclay, guides Thotis des admissions sur titre HEC, ESSEC et ESCP, calendrier Parcoursup 2027 annoncé par Les Sherpas.</p>
+  ${trSheet()}`}
 
 /* ---------- 4-5. ENTRAÎNEMENT ---------- */
 const drill=k=>(S.drill||{})[k]||{};
@@ -4376,7 +4450,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* ================================================================
    ACCUEIL
    ================================================================ */
-const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["ps","Parcoursup"],["ent","Entraîne­ment"],["py","Python"],["cours","Cours"],["mx","Maths"],["cg","Culture G"]];
+const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["ps","Mon avenir"],["ent","Entraîne­ment"],["py","Python"],["cours","Cours"],["mx","Maths"],["cg","Culture G"]];
 function summary(k){
   const t=today();
   if(k==="pron")return pnSummary();
@@ -4427,7 +4501,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.9.0";
+const APP_VERSION="1.9.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -4960,7 +5034,7 @@ function render(force){
   if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
   const body=mt?modHtml(mt.id,mt.page):modWrap(V.page,PAGES[V.page]());
   app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${esc(sectName(V.page))}</h1>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
-  if(V.page==="mx")mxTex();if(V.page==="jour")jAfter();setTimeout(()=>{nUi();micPlace()},0);if(CM&&V.page==="ent"){const ci=document.getElementById("cmin");if(ci&&document.activeElement!==ci)ci.focus({preventScroll:true})}
+  if(V.page==="mx")mxTex();if(V.page==="ps")requestAnimationFrame(psTreeDraw);if(V.page==="jour")jAfter();setTimeout(()=>{nUi();micPlace()},0);if(CM&&V.page==="ent"){const ci=document.getElementById("cmin");if(ci&&document.activeElement!==ci)ci.focus({preventScroll:true})}
 }
 /* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
 document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},350));
@@ -5004,6 +5078,8 @@ document.addEventListener("click",e=>{
   if(d.pilc)return pilCible(+d.pilc);
   if(d.pilrev)return pilRev(d.pilrev);
   if(d.psadd!==undefined){const x=psMap(d.psadd);if(x){V.psKeep=x.id;return psAddV(x.n+" · "+x.u)}return}
+  if(d.trn){const inS=!!b.closest(".trsheet");V.trSel=V.trSel===d.trn&&!inS?null:d.trn;V.psKeep=null;render(true);if(inS){const t=document.querySelector(".trsheet");if(t)t.scrollTop=0}return}
+  if(d.trclose){V.trSel=null;return render(true)}
   if(d.psfac){V.psKeep=d.psfac;const c=psChemin();return psSetChemin({fac:c.fac===d.psfac?null:d.psfac})}
   if(d.psaim){const x=psMap(d.psaim);if(!x)return;V.psKeep=x.id;const k=x.st===2?"reb":"fin",L=psChemin()[k]||[];return psSetChemin({[k]:L.includes(x.id)?L.filter(i=>i!==x.id):[...L,x.id]})}
   if(d.psv){V.psv=V.psv===d.psv?null:d.psv;V.psMsg="";return render(true)}
