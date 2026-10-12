@@ -691,6 +691,58 @@ h3.ent{font-size:1.08rem;line-height:1.35}
 .psn{width:28px;height:28px;border-radius:50%;background:color-mix(in srgb,var(--c) 15%,var(--surface));color:var(--c);display:grid;place-items:center;font-weight:700;font-size:.85rem}
 .psg{font-size:.8rem;font-weight:700;color:var(--c);margin:6px 2px 0}
 details.pslic.pick{border:1px solid color-mix(in srgb,var(--c) 55%,var(--line))}
+/* 1.9.0 : anglais débutant */
+:root{--py:#3572a5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--py:#7fb3e6}}
+:root[data-theme="dark"]{--py:#7fb3e6}
+.eglv{display:flex;flex-direction:column;gap:4px}
+.egstep{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.egstep>div{display:flex;flex-direction:column;min-width:0}
+.egstep.done b{color:var(--muted)}
+.egn{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;background:color-mix(in srgb,var(--c) 14%,var(--surface));color:var(--c)}
+.egstep.done .egn{background:var(--up);color:#fff}
+.egcard{gap:12px}
+.egflash{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:18px 8px;border-radius:14px;background:color-mix(in srgb,var(--c) 7%,var(--surface));min-height:150px;justify-content:center}
+.egen{font-family:var(--display);font-size:1.7rem;font-weight:700;line-height:1.2}
+.egfr{font-size:1.25rem;font-weight:600}
+.egbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.egbtns button{padding:12px 8px}
+.egko{border-color:var(--down);color:var(--down)}
+.egsay{border:1px solid var(--line);background:var(--surface);border-radius:999px;width:38px;height:38px;flex:none;display:inline-grid;place-items:center;padding:0;font-size:1.05rem}
+.egq{font-size:1.15rem;font-weight:600;line-height:1.4;margin:0}
+.egopts{display:flex;flex-direction:column;gap:8px}
+.egopt{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px 14px;font-weight:600;color:var(--ink);font-size:1.02rem}
+.egopt.ok{border-color:var(--up);background:color-mix(in srgb,var(--up) 13%,var(--surface))}
+.egopt.ko{border-color:var(--down);background:color-mix(in srgb,var(--down) 11%,var(--surface))}
+.egopt:disabled{cursor:default}
+.egfb{display:flex;flex-wrap:wrap;align-items:center;gap:6px;border-radius:12px;padding:10px 12px;font-size:.95rem}
+.egfb.ok{background:color-mix(in srgb,var(--up) 12%,var(--surface))}
+.egfb.mid{background:color-mix(in srgb,var(--obj) 14%,var(--surface))}
+.egfb.ko{background:color-mix(in srgb,var(--down) 10%,var(--surface))}
+.egx{display:flex;flex-direction:column;gap:6px;line-height:1.55}
+.egx p{margin:0}
+.egt,.pyt{font-size:1.25rem;line-height:1.25}
+.egex{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.egex li{display:flex;gap:10px;align-items:center}
+.egex li>div{display:flex;flex-direction:column;min-width:0}
+.egbig{font-family:var(--display);font-size:2.4rem;font-weight:700;color:var(--c);margin:0;line-height:1}
+.eglist{margin:8px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.eglist li.off{color:var(--muted)}
+details.egart>summary,details.egall>summary{cursor:pointer;display:flex;flex-direction:column;gap:2px}
+/* python */
+.pycode,.pyout{margin:0;background:var(--soft);border-radius:10px;padding:10px 12px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
+.pyout{background:#0f172a;color:#e2e8f0}
+.pyed{width:100%;font:15px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;border:1px solid var(--line);border-radius:12px;background:var(--soft);color:var(--ink);padding:10px 12px;resize:vertical;tab-size:4;white-space:pre;overflow-x:auto;-webkit-text-size-adjust:100%}
+.pyed:focus{outline:2px solid var(--c);outline-offset:0}
+.pykeys{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch}
+.pykeys button{flex:none;min-width:40px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--surface);font:600 15px ui-monospace,Menlo,Consolas,monospace;color:var(--ink);touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.pyq{font-weight:600;margin:0;line-height:1.45}
+.pyfb{display:flex;flex-direction:column;gap:4px;border-radius:12px;padding:10px 12px;font-size:.95rem}
+.pyfb.ok{background:color-mix(in srgb,var(--up) 13%,var(--surface))}
+.pyfb.ko{background:color-mix(in srgb,var(--down) 10%,var(--surface))}
+.pyfb code{font-size:.78rem;color:var(--muted);overflow-wrap:anywhere}
+.pyhint{background:color-mix(in srgb,var(--obj) 12%,var(--surface));border-radius:10px;padding:8px 10px;margin:0}
+.pyl{gap:12px}
 </style>
 <script src="config.js"></script>
 </head>
@@ -700,7 +752,7 @@ details.pslic.pick{border:1px solid color-mix(in srgb,var(--c) 55%,var(--line))}
 /* ================================================================
    DONNÉES FIXES
    ================================================================ */
-const COL={ps:"--ps",ent:"--ent",bilan:"--obj",mx:"--mx",cg:"--cg",idees:"--idee",pron:"--pron",jour:"--jour",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",obj:"--obj"};
+const COL={py:"--py",ps:"--ps",ent:"--ent",bilan:"--obj",mx:"--mx",cg:"--cg",idees:"--idee",pron:"--pron",jour:"--jour",hab:"--hab",proj:"--proj",fin:"--fin",lect:"--lect",cours:"--cours",obj:"--obj"};
 const JOURS=["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
 const MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 
@@ -1365,6 +1417,7 @@ const ILL={
  jour:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="12" y="18" width="50" height="48" rx="9" fill="var(--jour)" opacity=".2"/><rect x="12" y="18" width="50" height="13" rx="6.5" fill="var(--jour)"/><path d="M22 40h14M22 49h20M22 58h10" stroke="var(--jour)" stroke-width="4" stroke-linecap="round"/><circle cx="58" cy="56" r="15" fill="var(--surface)" stroke="var(--jour)" stroke-width="4"/><path d="M58 48v8l5 4" stroke="var(--jour)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  obj:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M28 16h28v15a14 14 0 0 1-28 0z" fill="var(--obj)"/><path d="M28 21h-8a8 8 0 0 0 8 12M56 21h8a8 8 0 0 1-8 12" fill="none" stroke="var(--obj)" stroke-width="4" stroke-linecap="round"/><rect x="38" y="44" width="8" height="11" fill="var(--obj)" opacity=".55"/><rect x="27" y="55" width="30" height="9" rx="3" fill="var(--obj)"/><path d="M42 21.5l2.2 4.4 4.8.7-3.5 3.4.8 4.8-4.3-2.3-4.3 2.3.8-4.8-3.5-3.4 4.8-.7z" fill="#fff" opacity=".92"/></svg>`,
  ps:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><path d="M42 16 8 32l34 16 34-16z" fill="var(--ps)" opacity=".22"/><path d="M42 16 8 32l34 16 34-16z" fill="none" stroke="var(--ps)" stroke-width="4" stroke-linejoin="round"/><path d="M22 39v15c0 6 9 11 20 11s20-5 20-11V39" fill="none" stroke="var(--ps)" stroke-width="4" stroke-linecap="round"/><path d="M76 32v20" stroke="var(--ps)" stroke-width="4" stroke-linecap="round"/><circle cx="76" cy="56" r="4" fill="var(--ps)"/></svg>`,
+ py:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><rect x="10" y="16" width="64" height="50" rx="10" fill="var(--py)" opacity=".18"/><rect x="10" y="16" width="64" height="50" rx="10" fill="none" stroke="var(--py)" stroke-width="4"/><path d="M26 34l-8 7 8 7M58 34l8 7-8 7M46 30l-8 22" fill="none" stroke="var(--py)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
  ent:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="46" r="26" fill="var(--ent)" opacity=".18"/><circle cx="42" cy="46" r="26" fill="none" stroke="var(--ent)" stroke-width="4"/><path d="M42 46V30M42 46l11 7" stroke="var(--ent)" stroke-width="4" stroke-linecap="round"/><path d="M34 12h16M42 12v8" stroke="var(--ent)" stroke-width="4" stroke-linecap="round"/><path d="M68 18l5-5" stroke="var(--ent)" stroke-width="4" stroke-linecap="round"/></svg>`,
  cg:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="40" cy="44" r="24" fill="var(--cg)" opacity=".2"/><circle cx="40" cy="44" r="24" fill="none" stroke="var(--cg)" stroke-width="4"/><ellipse cx="40" cy="44" rx="10" ry="24" fill="none" stroke="var(--cg)" stroke-width="3.5"/><path d="M17 44h46M21 32h38M21 56h38" stroke="var(--cg)" stroke-width="3" stroke-linecap="round"/><path d="M67 10l2.6 5.4 5.4 2.6-5.4 2.6-2.6 5.4-2.6-5.4-5.4-2.6 5.4-2.6z" fill="var(--cg)"/></svg>`,
  idees:`<svg class="ill" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="34" r="20" fill="var(--idee)" opacity=".2"/><path d="M42 14a20 20 0 0 0-11 36.7V58h22v-7.3A20 20 0 0 0 42 14z" fill="none" stroke="var(--idee)" stroke-width="4" stroke-linejoin="round"/><path d="M34 65h16M37 71h10" stroke="var(--idee)" stroke-width="4" stroke-linecap="round"/><path d="M35 44l4-6 3 5 3-5 4 6" stroke="var(--idee)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
@@ -3816,7 +3869,7 @@ function psMapCard(x){const c=psChemin(),isFac=c.fac===x.id,aim=(x.st===2?c.reb:
    <div class="row">${x.st===1?`<button class="ghost ${isFac?"on":""}" data-psfac="${x.id}">${isFac?"⭐ Ma fac de l'an prochain":"⭐ Ma fac de l'an prochain ?"}</button>${inV?`<span class="tag">✓ dans tes vœux</span>`:`<button class="ghost on" data-psadd="${x.id}">＋ Mes vœux</button>`}`:`<button class="ghost ${on?"on":""}" data-psaim="${x.id}">${on?"🎯 Je vise ✓":"🎯 Je vise"}</button>`}</div></div></details>`}
 function psMapHtml(){return PS_ST.map(([st,t])=>{const L=PS_MAP.filter(x=>x.st===st);
   const body=st===1?Object.entries(PS_G).map(([g,gt])=>`<p class="psg">${esc(gt)}</p>${L.filter(x=>x.g===g).map(psMapCard).join("")}`).join(""):L.map(psMapCard).join("");
-  return`<div class="stack" style="gap:8px"><p class="label" style="margin:0">${esc(t)}</p>${body}${st===1?`<p class="muted small" style="margin:0">Sur la fiche Parcoursup de chaque formation, regarde le « taux d'accès » : plus il est haut, plus le vœu est sûr.</p>`:st===3?`<p class="small" style="margin:0">L'appli t'y prépare déjà : <button class="linkb" data-bilgo="ent|cm">calcul mental</button>, <button class="linkb" data-bilgo="ent|en">anglais à l'oral</button> et l'actu éco dans Finance.</p>`:""}</div>`}).join("")}
+  return`<div class="stack" style="gap:8px"><p class="label" style="margin:0">${esc(t)}</p>${body}${st===1?`<p class="muted small" style="margin:0">Sur la fiche Parcoursup de chaque formation, regarde le « taux d'accès » : plus il est haut, plus le vœu est sûr.</p>`:st===3?`<p class="small" style="margin:0">L'appli t'y prépare déjà : <button class="linkb" data-bilgo="ent|cm">calcul mental</button>, <button class="linkb" data-bilgo="ent|en">anglais</button> et l'actu éco dans Finance.</p>`:""}</div>`}).join("")}
 const PS_CHECK=[["notes","Soigner tes notes du 1er et du 2e trimestre, surtout en maths : les formations regardent ta progression"],["fiches","Lire les fiches des formations sur Parcoursup (dès le 17 décembre)"],["jpo","Aller aux journées portes ouvertes (Dauphine, Saclay, Sorbonne…)"],["insc","T'inscrire sur Parcoursup (dès le 19 janvier)"],["projet","Écrire un projet de formation motivé pour chaque vœu"],["activ","Remplir « activités et centres d'intérêt » (marchés financiers, presse éco, lecture…)"],["voeux","Formuler tes vœux avant le 12 mars (jusqu'à 10 vœux)"],["sco","Si un événement a perturbé tes épreuves de 1re : l'expliquer en quelques lignes dans « Éléments liés à ma scolarité » (facultatif)"],["confirm","Confirmer tes vœux avant le 1er avril"]];
 const PS_ETATS=[["etude","À l'étude"],["oui","Je postule"],["ok","Confirmé"]];
 const psDoc=k=>(S.ps||{})[k]||{};
@@ -3906,9 +3959,9 @@ Reply ONLY with JSON: {"score": number from 0 to 10, "level": "A2" | "B1" | "B2"
     if(!r||typeof r!=="object")throw{code:"invalid_json"};V.enRes=r;drillAdd("en",{d:todayK(),score:+r.score||0,level:String(r.level||"").slice(0,3),w:enWords(txt),ts:Date.now()})}
   catch(e){V.enErr="La correction n'a pas marché ("+ERR(e&&e.code)+"). Réessaie."}
   V.busy.enfb=false;render(true)}
-function entSummary(){const t=todayK(),cm=(drill("cm").hist||[]).filter(x=>x.d===t),en=(drill("en").hist||[]).filter(x=>x.d===t),n=(cm.length?1:0)+(en.length?1:0);
-  return[`${n}/2`,n===2?"entraînements du jour faits 💪":cm.length?`calcul : ${Math.max(...cm.map(x=>x.s||0))} · reste l'anglais`:en.length?"anglais ✓ · reste le calcul mental":"calcul mental · anglais à l'oral"]}
-function pageEnt(){const t=V.entTab||"cm";return`<div class="tabs two" role="tablist"><button role="tab" data-enttab="cm" aria-selected="${t==="cm"}">🧮 Calcul mental</button><button role="tab" data-enttab="en" aria-selected="${t==="en"}">🎙️ Anglais à l'oral</button></div>`+(t==="cm"?entCm():entEn())}
+function entSummary(){const t=todayK(),cm=(drill("cm").hist||[]).filter(x=>x.d===t),et=egToday(),en=(drill("en").hist||[]).filter(x=>x.d===t).length||et.v||et.g||(et.o||0)>=3?[1]:[],n=(cm.length?1:0)+(en.length?1:0);
+  return[`${n}/2`,n===2?"entraînements du jour faits 💪":cm.length?`calcul : ${Math.max(...cm.map(x=>x.s||0))} · reste l'anglais`:en.length?"anglais ✓ · reste le calcul mental":"calcul mental · anglais"]}
+function pageEnt(){const t=V.entTab||"cm";return`<div class="tabs two" role="tablist"><button role="tab" data-enttab="cm" aria-selected="${t==="cm"}">🧮 Calcul mental</button><button role="tab" data-enttab="en" aria-selected="${t==="en"}">🇬🇧 Anglais</button></div>`+(t==="cm"?entCm():engPage())}
 
 /* ---------- 6. BILAN DU DIMANCHE ---------- */
 /* le dimanche : la semaine qui se termine ; les autres jours : la semaine d'avant */
@@ -3916,16 +3969,16 @@ function bilWeek(off){const t=today(),m=monday(t);return add(t.getDay()===0?m:ad
 function bilData(m){const k0=dkey(m),k6=dkey(add(m,6)),inW=k=>k>=k0&&k<=k6,per=[];let n=0,tt=0;
   for(let i=0;i<6;i++){const d=add(m,i);if(d>today())break;const s=dayStats(d);n+=s.n;tt+=s.t;per.push({l:i<5?"LMMJV"[i]:"WE",n:s.n,t:s.t})}
   const p=pnData(),L=((p&&p.notes&&p.notes.liste)||[]).filter(g=>n20(g.v,g.sur)!=null&&inW(pnDay(g.d)));
-  const cm=(drill("cm").hist||[]).filter(x=>inW(x.d)),en=(drill("en").hist||[]).filter(x=>inW(x.d));
+  const cm=(drill("cm").hist||[]).filter(x=>inW(x.d)),en=(drill("en").hist||[]).filter(x=>inW(x.d)),eg=Object.entries(egDoc().d||{}).filter(([k,v])=>inW(k)&&v&&(v.v||v.g||v.o)).length;
   const cg=Object.entries(S.cg||{}).filter(([k,v])=>v&&v.rep!=null&&inW(k.replace(/^p/,"").slice(0,10)));
   const ob=Object.entries(S.objectif||{}).filter(([k])=>/^\d{4}-/.test(k)).sort((a,b)=>a[0]<b[0]?-1:1),end=ob.filter(([k])=>k<=k6).pop(),beg=ob.filter(([k])=>k<k0).pop();
-  return{m,k0,k6,per,reg:tt?n/tt:null,L,cm,en,cg:{n:cg.length,ok:cg.filter(([,v])=>v.ok).length},fd:Object.keys(prog().days||{}).filter(inW).length,obj:end?end[1].p:null,obj0:beg?beg[1].p:null,
+  return{m,k0,k6,per,reg:tt?n/tt:null,L,cm,en,eg,cg:{n:cg.length,ok:cg.filter(([,v])=>v.ok).length},fd:Object.keys(prog().days||{}).filter(inW).length,obj:end?end[1].p:null,obj0:beg?beg[1].p:null,
     moy:p&&p.notes&&typeof p.notes.moyenne==="number"?p.notes.moyenne:null}}
 function bilActs(b){const out=[],P=pilData(),top=P&&P.rows.find(r=>r.A!=null&&r.A<P.T);
   if(top)out.push({t:`Réviser ${pilShort(top.m)} 30 min mardi et jeudi (${pct1(top.A)} aujourd'hui, cible ${pct1(P.T)})`,rev:top.m});
   if(b.reg!=null&&b.reg<0.7)out.push({t:`Tu as fait ${Math.round(b.reg*100)} % de ton planning : allège ta journée ou décale ce qui ne rentre pas.`,go:"jour",bt:"Ouvrir Ma journée"});
   if(b.cm.length<3)out.push({t:`Calcul mental : 2 minutes par jour (${b.cm.length} séance${b.cm.length>1?"s":""} cette semaine).`,go:"ent|cm",bt:"S'entraîner"});
-  if(b.en.length<3)out.push({t:`Anglais à l'oral : au moins 3 séances d'1 minute (${b.en.length} cette semaine).`,go:"ent|en",bt:"S'entraîner"});
+  if(b.eg<4)out.push({t:`Anglais : fais ton cycle du jour (mots, grammaire, oral) au moins 4 jours par semaine (${b.eg} cette semaine).`,go:"ent|en",bt:"S'entraîner"});
   const nx=psNext();if(nx&&psDays(nx[0])<=45)out.push({t:`Parcoursup : ${fdate(nx[0])}, ${nx[2]} (J-${psDays(nx[0])}).`,go:"ps",bt:"Voir"});
   if(!out.length)out.push({t:"Semaine solide : garde le même rythme et monte ta cible de notes d'un demi-point."});
   return out}
@@ -3945,7 +3998,7 @@ function pageBilan(){const off=V.bilOff||0,m=bilWeek(off),b=bilData(m),pb=bilDat
     ${P&&P.rows.find(r=>r.down)?`<p class="small" style="margin:0">⚠️ En baisse : ${P.rows.filter(r=>r.down).map(r=>esc(pilShort(r.m))).join(", ")}.</p>`:""}</div>
   <div class="card stack" style="gap:8px"><p class="label" style="margin:0">💪 Entraînement et culture</p><ul class="bilnotes">
     <li><span>🧮 Calcul mental</span><b>${b.cm.length} séance${b.cm.length>1?"s":""}${cmB?` · meilleur ${cmB}`:""}${cmB&&cmP?bilDelta(cmB,cmP):""}</b></li>
-    <li><span>🎙️ Anglais à l'oral</span><b>${b.en.length} séance${b.en.length>1?"s":""}${enA!=null?` · ${pct1(enA)}/10`:""}</b></li>
+    <li><span>🇬🇧 Anglais</span><b>${b.eg} jour${b.eg>1?"s":""} de cycle${b.en.length?` · ${b.en.length} oral${b.en.length>1?"s":""} d'article${enA!=null?` (${pct1(enA)}/10)`:""}`:""}</b></li>
     <li><span>🌍 Culture G</span><b>${b.cg.n?`${b.cg.ok}/${b.cg.n} bonnes réponses`:"—"}</b></li>
     <li><span>📈 Défis finance</span><b>${b.fd}</b></li>
     ${b.obj!=null?`<li><span>🎯 Objectif Top 3</span><b>${pct1(b.obj)} %${b.obj0!=null?bilDelta(b.obj,b.obj0," pts"):""}</b></li>`:""}</ul></div>
@@ -3960,7 +4013,7 @@ Sa semaine du ${fdate(b.k0)} au ${fdate(b.k6)} :
 - notes reçues : ${b.L.map(g=>pilShort(g.m)+" "+g.v+"/"+(g.sur||20)).join(", ")||"aucune"}
 - moyennes : ${P?P.rows.filter(r=>r.A!=null).map(r=>pilShort(r.m)+" "+pct1(r.A)).join(", ")+" (cible "+pct1(P.T)+")":"inconnues"}
 - calcul mental : ${b.cm.length} séance(s), meilleur score ${b.cm.reduce((x,y)=>Math.max(x,y.s||0),0)}
-- anglais à l'oral : ${b.en.length} séance(s)
+- anglais (débutant) : ${b.eg} jour(s) de cycle vocabulaire + grammaire + oral, ${b.en.length} oral(aux) sur un article
 - culture générale : ${b.cg.ok}/${b.cg.n} bonnes réponses
 - défis finance : ${b.fd}
 Réponds en français, sans titres markdown : 3 conseils concrets et courts (tirets) pour la semaine prochaine, du plus important au moins important, puis une phrase d'encouragement honnête.`)}
@@ -3968,9 +4021,362 @@ function bilHome(){const d=today().getDay();if(d!==0&&d!==1)return"";const m=bil
   return`<button class="card bilh" data-page="bilan"><span class="bilhi" aria-hidden="true">📊</span><span class="bilht"><b>Ton bilan de la semaine est prêt</b><small class="muted">${b.reg!=null?Math.round(b.reg*100)+" % de ton planning fait · ":""}ce qu'on change pour la semaine prochaine</small></span><span aria-hidden="true">›</span></button>`}
 
 /* ================================================================
+   🇬🇧 ANGLAIS POUR DÉBUTANT : un cycle chaque jour
+   ① des mots (répétition espacée, avec la prononciation) ② une leçon de grammaire + exercices ③ des phrases à dire au micro
+   puis ④ le défi : expliquer l'article du jour (quand tu seras prêt)
+   ================================================================ */
+const EG_VOC_RAW=[
+ ["Les bases","hello|bonjour;please|s'il te plaît;thank you|merci;yes|oui;no|non;sorry|désolé;friend|ami;family|famille;house|maison;school|école;day|jour;week|semaine;year|année;today|aujourd'hui;tomorrow|demain"],
+ ["Les verbes essentiels","to be|être;to have|avoir;to do|faire;to go|aller;to make|fabriquer, faire;to take|prendre;to get|obtenir;to want|vouloir;to need|avoir besoin de;to like|aimer;to know|savoir, connaître;to think|penser;to see|voir;to say|dire;to work|travailler"],
+ ["Le temps","time|le temps, l'heure;hour|une heure (durée);morning|matin;evening|soir;night|nuit;yesterday|hier;now|maintenant;later|plus tard;always|toujours;often|souvent;sometimes|parfois;never|jamais;early|tôt;late|tard, en retard;soon|bientôt"],
+ ["Les adjectifs courants","big|grand, gros;small|petit;good|bon;bad|mauvais;new|nouveau;old|vieux;easy|facile;difficult|difficile;important|important;high|haut, élevé;low|bas;fast|rapide;slow|lent;rich|riche;poor|pauvre"],
+ ["L'école et les études","student|élève, étudiant;teacher|professeur;lesson|leçon, cours;homework|devoirs;exam|examen;grade|note;to learn|apprendre;to study|étudier;to understand|comprendre;question|question;answer|réponse;university|université;degree|diplôme;subject|matière;mistake|erreur"],
+ ["L'argent","money|argent;price|prix;cheap|pas cher;expensive|cher;to buy|acheter;to sell|vendre;to pay|payer;to cost|coûter;to save|économiser;to spend|dépenser;bank|banque;account|compte;cash|espèces, liquide;loan|prêt, crédit;salary|salaire"],
+ ["L'entreprise","company|entreprise;job|emploi;boss|patron;employee|employé;customer|client;product|produit;sales|ventes;profit|bénéfice;loss|perte;growth|croissance;to hire|embaucher;meeting|réunion;goal|objectif;competitor|concurrent;revenue|chiffre d'affaires"],
+ ["La bourse et l'économie","stock market|bourse;share|action;investor|investisseur;to invest|investir;risk|risque;to rise|monter;to fall|baisser, chuter;trade|échange, transaction;trader|trader;interest rate|taux d'intérêt;inflation|inflation;debt|dette;forecast|prévision;earnings|résultats, bénéfices;central bank|banque centrale"],
+ ["Les mots de liaison","and|et;but|mais;or|ou;because|parce que;so|donc;then|ensuite;also|aussi;however|cependant;although|bien que;first|d'abord;finally|enfin;for example|par exemple;maybe|peut-être;really|vraiment;very|très"],
+ ["Donner son avis","I think that|je pense que;in my opinion|à mon avis;I agree|je suis d'accord;I disagree|je ne suis pas d'accord;I like|j'aime;I would like|je voudrais;I want to|je veux;I need to|j'ai besoin de;my goal is|mon objectif est;I'm interested in|je m'intéresse à;I'm good at|je suis bon en;it depends|ça dépend;I'm not sure|je ne suis pas sûr;that's true|c'est vrai;I don't know|je ne sais pas"]];
+const EG_VOC=EG_VOC_RAW.flatMap(([th,s],ti)=>s.split(";").map(x=>{const[en,fr]=x.split("|");return{en,fr,th,ti}}));
+const EG_NEW=8,EG_INT=[0,1,2,4,8,16];
+/* 14 leçons de grammaire, du tout début (A1) vers A2 */
+const EG_U=[
+ {t:"Le verbe « to be » (être)",x:"« To be » veut dire « être ». Au présent : I am (je suis), you are (tu es), he / she / it is (il / elle est), we are (nous sommes), they are (ils sont).\nÀ l'oral, on raccourcit : I'm, you're, he's, she's, it's, we're, they're.\nNégation : on ajoute not → I'm not, he isn't, they aren't.\nQuestion : on inverse → Are you ready? Is she French?",
+  ex:[["I am a student.","Je suis élève."],["She is my sister.","C'est ma sœur."],["We aren't tired.","Nous ne sommes pas fatigués."],["Are you ready?","Es-tu prêt ?"]],
+  q:[{q:"I ___ seventeen years old.",o:["am","is","are"],a:0,e:"Avec I, c'est toujours am."},{q:"My brother ___ at school.",o:["am","is","are"],a:1,e:"My brother = he → is."},{q:"They ___ very happy.",o:["is","are","am"],a:1,e:"They → are."},{q:"___ you ready?",o:["Is","Am","Are"],a:2,e:"Question avec you : Are you… ?"},{k:"txt",q:"Écris la forme courte de « I am » :",a:["i'm"],e:"I am → I'm."},{k:"txt",q:"Négation courte : « She is French » → She ___ French.",a:["isn't","is not"],e:"is + not → isn't."}],
+  o:[["Je suis élève.","I am a student."],["Elle est très gentille.","She is very nice."],["Nous ne sommes pas en retard.","We are not late."],["Es-tu prêt ?","Are you ready?"]]},
+ {t:"Le verbe « to have » (avoir)",x:"« To have » veut dire « avoir » : I have, you have, he / she / it has (attention : has avec he, she, it), we have, they have.\nNégation : I don't have, she doesn't have.\nQuestion : Do you have…? Does he have…?",
+  ex:[["I have a dog.","J'ai un chien."],["She has two brothers.","Elle a deux frères."],["We don't have time.","Nous n'avons pas le temps."],["Do you have a pen?","As-tu un stylo ?"]],
+  q:[{q:"He ___ a new phone.",o:["have","has"],a:1,e:"He → has."},{q:"I ___ a question.",o:["have","has"],a:0,e:"I → have."},{q:"My parents ___ a car.",o:["has","have"],a:1,e:"My parents = they → have."},{q:"___ she have a laptop?",o:["Do","Does"],a:1,e:"Question avec she : Does."},{k:"txt",q:"Traduis : « J'ai un frère. » → I ___ a brother.",a:["have"],e:"I have."},{k:"txt",q:"Négation : « We have money » → We ___ have money.",a:["don't","do not"],e:"we → don't have."}],
+  o:[["J'ai un ordinateur.","I have a computer."],["Elle a un chat.","She has a cat."],["Nous n'avons pas de devoirs.","We don't have homework."],["As-tu une question ?","Do you have a question?"]]},
+ {t:"Le présent simple (les habitudes)",x:"Le présent simple sert pour les habitudes : I work (je travaille).\nAvec he, she, it, on ajoute -s : she works, he plays.\nVerbes en -o, -sh, -ch, -x → -es : he goes, she watches. Consonne + y → -ies : he studies.\nalways (toujours), often (souvent), sometimes (parfois), never (jamais) se placent avant le verbe.",
+  ex:[["I play the piano every day.","Je joue du piano tous les jours."],["She works in a bank.","Elle travaille dans une banque."],["He goes to school by bus.","Il va à l'école en bus."],["We often watch the news.","Nous regardons souvent les infos."]],
+  q:[{q:"She ___ English.",o:["speak","speaks"],a:1,e:"She → verbe + s."},{q:"They ___ football on Sundays.",o:["play","plays"],a:0,e:"They → pas de s."},{q:"He ___ maths every evening.",o:["studys","studies","study"],a:1,e:"study → studies (consonne + y → ies)."},{q:"My father ___ to work by car.",o:["go","goes"],a:1,e:"go → goes avec he."},{k:"txt",q:"Conjugue « to watch » avec she : She ___ TV.",a:["watches"],e:"-ch → -es : watches."},{k:"txt",q:"Traduis : « Je travaille. » → I ___.",a:["work"],e:"I work."}],
+  o:[["Je joue du piano.","I play the piano."],["Il travaille beaucoup.","He works a lot."],["Elle étudie les maths.","She studies maths."],["Nous regardons souvent les infos.","We often watch the news."]]},
+ {t:"Questions et négations au présent (do / does)",x:"Au présent simple, on utilise un petit verbe d'aide : do (does avec he, she, it).\nNégation : I don't like, she doesn't like (après doesn't, le verbe perd son s).\nQuestion : Do you like…? Does he work…?\nRéponses courtes : Yes, I do. / No, she doesn't.",
+  ex:[["I don't like coffee.","Je n'aime pas le café."],["She doesn't play tennis.","Elle ne joue pas au tennis."],["Do you speak English?","Parles-tu anglais ?"],["Does he work here?","Est-ce qu'il travaille ici ?"]],
+  q:[{q:"___ you like music?",o:["Do","Does"],a:0,e:"you → Do."},{q:"___ your sister live in Paris?",o:["Do","Does"],a:1,e:"your sister = she → Does."},{q:"He doesn't ___ sport.",o:["like","likes"],a:0,e:"Après doesn't : verbe sans s."},{q:"I ___ understand.",o:["doesn't","don't"],a:1,e:"I → don't."},{k:"txt",q:"Réponse courte : « Do you play the piano? » → Yes, I ___.",a:["do"],e:"Yes, I do."},{k:"txt",q:"Négation : « She works on Monday » → She ___ work on Monday.",a:["doesn't","does not"],e:"she → doesn't + verbe sans s."}],
+  o:[["Je ne comprends pas.","I don't understand."],["Parles-tu anglais ?","Do you speak English?"],["Il n'aime pas le sport.","He doesn't like sport."],["Est-ce qu'elle travaille ici ?","Does she work here?"]]},
+ {t:"a / an / the et le pluriel",x:"a / an = un, une : a car, an apple (an devant un son de voyelle : an hour, an idea).\nthe = le, la, les (pour une chose précise).\nPluriel : + s (cars), + es après s, sh, ch, x (boxes), y → ies (company → companies).\nIrréguliers : man → men, woman → women, child → children, person → people.",
+  ex:[["I have an idea.","J'ai une idée."],["The market is open.","Le marché est ouvert."],["two companies","deux entreprises"],["many people","beaucoup de gens"]],
+  q:[{q:"___ apple",o:["a","an"],a:1,e:"Son de voyelle → an."},{q:"___ book",o:["a","an"],a:0,e:"Son de consonne → a."},{q:"one child, two ___",o:["childs","children"],a:1,e:"Pluriel irrégulier : children."},{q:"one company, three ___",o:["companys","companies"],a:1,e:"Consonne + y → ies."},{k:"txt",q:"Pluriel de « person » :",a:["people"],e:"person → people."},{k:"txt",q:"Complète : I have ___ hour. (a ou an)",a:["an"],e:"hour se prononce « aour » : son de voyelle → an."}],
+  o:[["J'ai une idée.","I have an idea."],["Le prix est bas.","The price is low."],["deux entreprises","two companies"],["Beaucoup de gens travaillent ici.","Many people work here."]]},
+ {t:"There is / there are, some / any",x:"There is = il y a (singulier) : There is a bank. There are = il y a (pluriel) : There are two banks.\nNégation : there isn't, there aren't. Question : Is there…? Are there…?\nsome = quelques, du (phrases positives). any = du, aucun (questions et négations) : There aren't any problems.",
+  ex:[["There is a problem.","Il y a un problème."],["There are three questions.","Il y a trois questions."],["Are there any risks?","Y a-t-il des risques ?"],["I have some money.","J'ai un peu d'argent."]],
+  q:[{q:"There ___ a bank near my house.",o:["is","are"],a:0,e:"a bank = singulier → is."},{q:"There ___ many students.",o:["is","are"],a:1,e:"Pluriel → are."},{q:"___ there a problem?",o:["Is","Are"],a:0,e:"a problem → Is there… ?"},{q:"I don't have ___ money.",o:["some","any"],a:1,e:"Négation → any."},{k:"txt",q:"« Il y a deux livres » : There ___ two books.",a:["are"],e:"Pluriel → are."},{k:"txt",q:"Complète : I want ___ water. (some ou any)",a:["some"],e:"Phrase positive → some."}],
+  o:[["Il y a un problème.","There is a problem."],["Il y a trois élèves.","There are three students."],["Y a-t-il une question ?","Is there a question?"],["Je n'ai pas d'argent.","I don't have any money."]]},
+ {t:"Le présent continu (en ce moment)",x:"Pour dire ce qui se passe maintenant : be + verbe-ing.\nI am working (je suis en train de travailler), she is reading, they are playing.\nNégation : I'm not working. Question : Are you listening?\nOrthographe : make → making, run → running.",
+  ex:[["I am studying now.","J'étudie en ce moment."],["She is reading the news.","Elle lit les infos."],["The price is going up.","Le prix est en train de monter."],["Are you listening?","Tu écoutes ?"]],
+  q:[{q:"Look! It ___ raining.",o:["is","are"],a:0,e:"It → is + -ing."},{q:"They ___ playing football now.",o:["is","are"],a:1,e:"They → are."},{q:"I am ___ a book.",o:["read","reading"],a:1,e:"be + verbe-ing."},{q:"She ___ working today.",o:["isn't","aren't"],a:0,e:"She → isn't."},{k:"txt",q:"Forme -ing de « make » :",a:["making"],e:"make → making (on enlève le e)."},{k:"txt",q:"« Je travaille en ce moment. » → I am ___ now.",a:["working"],e:"I am working."}],
+  o:[["J'étudie en ce moment.","I am studying now."],["Elle lit un livre.","She is reading a book."],["Le prix monte.","The price is going up."],["Est-ce que tu écoutes ?","Are you listening?"]]},
+ {t:"my, your, his, her… et le 's",x:"my (mon), your (ton), his (son, à lui), her (son, à elle), its (pour une chose), our (notre), their (leur).\nAttention : his et her dépendent du propriétaire : his mother = la mère de lui.\nLe 's montre à qui est quelque chose : Tom's car = la voiture de Tom ; the company's profits = les bénéfices de l'entreprise.",
+  ex:[["This is my phone.","C'est mon téléphone."],["Her brother is a trader.","Son frère (à elle) est trader."],["Tom's car is red.","La voiture de Tom est rouge."],["Their company is growing.","Leur entreprise grandit."]],
+  q:[{q:"Paul loves ___ sister.",o:["his","her"],a:0,e:"Le propriétaire est Paul → his."},{q:"Marie calls ___ father.",o:["his","her"],a:1,e:"Le propriétaire est Marie → her."},{q:"We like ___ school.",o:["our","their"],a:0,e:"We → our."},{q:"La voiture de Tom :",o:["Tom's car","the car of Tom's"],a:0,e:"On dit Tom's car."},{k:"txt",q:"Traduis « mon livre » :",a:["my book"],e:"my book."},{k:"txt",q:"« leur maison » : ___ house",a:["their"],e:"their = leur."}],
+  o:[["C'est mon téléphone.","This is my phone."],["Sa sœur (à lui) est grande.","His sister is tall."],["La voiture de Tom est rouge.","Tom's car is red."],["Leur entreprise grandit.","Their company is growing."]]},
+ {t:"Le passé de « to be » (was / were)",x:"I was, you were, he / she / it was, we were, they were.\nNégation : wasn't, weren't. Question : Were you at home? Was it difficult?\nMots utiles : yesterday (hier), last week (la semaine dernière), ago (il y a : two days ago).",
+  ex:[["I was tired yesterday.","J'étais fatigué hier."],["The exam was difficult.","L'examen était difficile."],["They were at home.","Ils étaient à la maison."],["Were you at school?","Étais-tu à l'école ?"]],
+  q:[{q:"I ___ at home yesterday.",o:["was","were"],a:0,e:"I → was."},{q:"They ___ happy.",o:["was","were"],a:1,e:"They → were."},{q:"___ you at the party?",o:["Was","Were"],a:1,e:"you → Were."},{q:"It ___ not easy.",o:["was","were"],a:0,e:"It → was."},{k:"txt",q:"Négation courte : « He was late » → He ___ late.",a:["wasn't","was not"],e:"was + not → wasn't."},{k:"txt",q:"« il y a deux jours » : two days ___",a:["ago"],e:"two days ago."}],
+  o:[["J'étais fatigué hier.","I was tired yesterday."],["L'examen était difficile.","The exam was difficult."],["Ils étaient à la maison.","They were at home."],["Étais-tu à l'école ?","Were you at school?"]]},
+ {t:"Le passé des verbes (-ed et irréguliers)",x:"Pour une action terminée : verbe + -ed : work → worked, play → played, study → studied.\nBeaucoup de verbes sont irréguliers, à apprendre : go → went, have → had, do → did, make → made, buy → bought, sell → sold, see → saw, take → took.\nNégation et question avec did : I didn't go, Did you see… ? (après did, le verbe reste à la base).",
+  ex:[["I worked yesterday.","J'ai travaillé hier."],["She went to London.","Elle est allée à Londres."],["He bought shares.","Il a acheté des actions."],["Did you see the news?","As-tu vu les infos ?"]],
+  q:[{q:"Yesterday I ___ football.",o:["play","played"],a:1,e:"Passé : played."},{q:"She ___ to Paris last week.",o:["goed","went"],a:1,e:"go → went (irrégulier)."},{q:"Did you ___ the film?",o:["see","saw"],a:0,e:"Après did : base verbale."},{q:"They ___ their car.",o:["selled","sold"],a:1,e:"sell → sold."},{k:"txt",q:"Passé de « buy » :",a:["bought"],e:"buy → bought."},{k:"txt",q:"Négation : « I went » → I ___ go.",a:["didn't","did not"],e:"didn't + base verbale."}],
+  o:[["J'ai travaillé hier.","I worked yesterday."],["Elle est allée à Londres.","She went to London."],["Il a acheté des actions.","He bought shares."],["As-tu vu les infos ?","Did you see the news?"]]},
+ {t:"Le futur (will / going to)",x:"will + verbe : une décision rapide ou une prédiction : I will help you, prices will rise. Forme courte : I'll ; won't = will not.\ngoing to + verbe : un projet déjà prévu : I'm going to study finance.\nQuestion : Will you come? Are you going to work tonight?",
+  ex:[["I will call you tomorrow.","Je t'appellerai demain."],["Prices will go up.","Les prix vont monter."],["I'm going to study maths.","Je vais étudier les maths."],["Will you come?","Tu viendras ?"]],
+  q:[{q:"I think it ___ rain tomorrow.",o:["will","is"],a:0,e:"Prédiction → will."},{q:"Next year I'm going ___ study at university.",o:["to","for"],a:0,e:"going to + verbe."},{q:"She ___ come. (= will not)",o:["won't","willn't"],a:0,e:"will not → won't."},{q:"___ you help me?",o:["Will","Do"],a:0,e:"Demande pour plus tard → Will you… ?"},{k:"txt",q:"Forme courte de « I will » :",a:["i'll"],e:"I will → I'll."},{k:"txt",q:"« Je vais travailler. » → I'm going ___ work.",a:["to"],e:"going to + verbe."}],
+  o:[["Je t'appellerai demain.","I will call you tomorrow."],["Les prix vont monter.","Prices will go up."],["Je vais étudier la finance.","I'm going to study finance."],["Est-ce que tu viendras ?","Will you come?"]]},
+ {t:"Comparer (cheaper than, the best)",x:"Mots courts : adjectif + -er + than : cheaper than (moins cher que), bigger than.\nLe plus : the + adjectif + -est : the cheapest.\nMots longs : more + adjectif : more expensive than, the most expensive.\nIrréguliers : good → better → the best ; bad → worse → the worst.",
+  ex:[["Apple is bigger than Tesla.","Apple est plus grosse que Tesla."],["Gold is more expensive than silver.","L'or est plus cher que l'argent."],["This is the best idea.","C'est la meilleure idée."],["Today is worse than yesterday.","Aujourd'hui est pire qu'hier."]],
+  q:[{q:"A car is ___ than a bike.",o:["faster","more fast"],a:0,e:"fast est court → faster."},{q:"This phone is ___ than that one.",o:["expensiver","more expensive"],a:1,e:"expensive est long → more expensive."},{q:"good → better → ___",o:["the goodest","the best"],a:1,e:"Irrégulier : the best."},{q:"This is the ___ day of my life!",o:["happiest","most happy"],a:0,e:"happy → the happiest."},{k:"txt",q:"Comparatif de « cheap » :",a:["cheaper"],e:"cheap → cheaper."},{k:"txt",q:"Comparatif de « bad » :",a:["worse"],e:"bad → worse."}],
+  o:[["L'or est plus cher que l'argent.","Gold is more expensive than silver."],["Mon frère est plus grand que moi.","My brother is taller than me."],["C'est la meilleure idée.","This is the best idea."],["Aujourd'hui est pire qu'hier.","Today is worse than yesterday."]]},
+ {t:"can, must, should",x:"can = pouvoir, savoir : I can swim. can't = ne pas pouvoir.\nmust = devoir (obligation forte) : You must stop.\nshould = devrais (un conseil) : You should study more.\nAprès can, must, should : verbe sans to et sans s : she can play.",
+  ex:[["I can speak a little English.","Je sais parler un peu anglais."],["You must be careful.","Tu dois faire attention."],["You should invest early.","Tu devrais investir tôt."],["She can't come today.","Elle ne peut pas venir aujourd'hui."]],
+  q:[{q:"She ___ play the piano.",o:["can","cans"],a:0,e:"can ne prend jamais de s."},{q:"You ___ study more. (un conseil)",o:["should","must to"],a:0,e:"Conseil → should."},{q:"I can ___ English.",o:["speak","to speak"],a:0,e:"Après can : verbe sans to."},{q:"You ___ stop at a red light. (obligation)",o:["must","should"],a:0,e:"Obligation forte → must."},{k:"txt",q:"Négation courte de « can » :",a:["can't","cannot","can not"],e:"can't = cannot."},{k:"txt",q:"« Tu devrais dormir. » → You ___ sleep.",a:["should"],e:"Conseil → should."}],
+  o:[["Je sais parler un peu anglais.","I can speak a little English."],["Tu dois faire attention.","You must be careful."],["Tu devrais investir tôt.","You should invest early."],["Elle ne peut pas venir.","She can't come."]]},
+ {t:"in, on, at (quand et où)",x:"at + heure : at 8 o'clock, at night.\non + jour ou date : on Monday, on 12 October.\nin + mois, année, saison, partie de la journée : in October, in 2027, in summer, in the morning.\nLieux : at school, at home ; in Paris, in France ; on the table.",
+  ex:[["The market opens at 9.","La bourse ouvre à 9 h."],["I have an exam on Monday.","J'ai un examen lundi."],["The company was created in 1976.","L'entreprise a été créée en 1976."],["She lives in Paris.","Elle habite à Paris."]],
+  q:[{q:"The meeting is ___ 10 o'clock.",o:["at","on","in"],a:0,e:"Heure → at."},{q:"I play football ___ Saturday.",o:["at","on","in"],a:1,e:"Jour → on."},{q:"My birthday is ___ June.",o:["at","on","in"],a:2,e:"Mois → in."},{q:"I study ___ the evening.",o:["at","on","in"],a:2,e:"Partie de la journée → in the evening."},{k:"txt",q:"Complète : I live ___ France.",a:["in"],e:"Pays → in."},{k:"txt",q:"Complète : I am ___ home.",a:["at"],e:"at home."}],
+  o:[["La bourse ouvre à neuf heures.","The market opens at nine."],["J'ai un examen lundi.","I have an exam on Monday."],["J'étudie le soir.","I study in the evening."],["Elle habite à Paris.","She lives in Paris."]]}];
+const EG_LV=["A1 · débutant","A1 · débutant","A1 · débutant","A1+","A1+","A1+","A1+","A2 · élémentaire","A2 · élémentaire","A2 · élémentaire","A2 · élémentaire","A2+","A2+","A2+","B1 · prêt pour l'article du jour"];
+
+/* ---- état ---- */
+const egDoc=()=>drill("eng");
+function egSave(p){put("drill","eng",{...egDoc(),...p},true)}
+function egDay(p){const k=todayK(),d=egDoc().d||{},cur=d[k]||{};const nd={...d,[k]:{...cur,...p}};const ks=Object.keys(nd).sort();while(ks.length>60)delete nd[ks.shift()];egSave({d:nd})}
+const egToday=()=>(egDoc().d||{})[todayK()]||{};
+function egStreak(){const d=egDoc().d||{};let s=0,x=today();if(!(d[dkey(x)]&&(d[dkey(x)].v||d[dkey(x)].g||d[dkey(x)].o)))x=add(x,-1);for(let i=0;i<400;i++){const k=dkey(x);if(d[k]&&(d[k].v||d[k].g||d[k].o)){s++;x=add(x,-1)}else break}return s}
+function say(t){try{if(!window.speechSynthesis)return;const u=new SpeechSynthesisUtterance(String(t));u.lang="en-US";u.rate=.85;const vs=speechSynthesis.getVoices().filter(v=>/^en(-|_)/i.test(v.lang));const v=vs.find(v=>/en(-|_)US/i.test(v.lang))||vs[0];if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+const egSay=t=>`<button type="button" class="egsay" data-egsay="${esc(t)}" aria-label="Écouter">🔊</button>`;
+/* comparer deux phrases sans tenir compte des majuscules, de la ponctuation et des formes courtes */
+const EG_NUM={zero:"0",one:"1",two:"2",three:"3",four:"4",five:"5",six:"6",seven:"7",eight:"8",nine:"9",ten:"10",eleven:"11",twelve:"12",twenty:"20"};
+function egNorm(s){return String(s||"").toLowerCase().replace(/[’`´]/g,"'").replace(/\bcan't\b/g,"cannot").replace(/\bwon't\b/g,"will not").replace(/n't\b/g," not").replace(/\bcan not\b/g,"cannot")
+  .replace(/\bi'm\b/g,"i am").replace(/'re\b/g," are").replace(/'ll\b/g," will").replace(/'ve\b/g," have").replace(/\b(he|she|it|that|there|what)'s\b/g,"$1 is").replace(/'d\b/g," would")
+  .replace(/[^a-z0-9' ]+/g," ").replace(/\s+/g," ").trim().split(" ").map(w=>EG_NUM[w]||w).join(" ")}
+function egScore(said,target){const a=egNorm(said).split(" ").filter(Boolean),b=egNorm(target).split(" ").filter(Boolean);if(!b.length)return 0;
+  const m=Array.from({length:a.length+1},()=>Array(b.length+1).fill(0));for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)m[i][j]=a[i-1]===b[j-1]?m[i-1][j-1]+1:Math.max(m[i-1][j],m[i][j-1]);
+  const l=m[a.length][b.length];return Math.min(l/b.length,l/Math.max(1,a.length)*1.15)}
+const egTxtOk=(said,acc)=>acc.some(x=>egNorm(x)===egNorm(said));
+
+/* ---- ① vocabulaire : répétition espacée ---- */
+function egQueue(){const v=egDoc().voc||{},t=todayK(),due=EG_VOC.filter(w=>v[w.en]&&v[w.en].due<=t).sort((a,b)=>(v[a.en].b-v[b.en].b)||(v[a.en].due<v[b.en].due?-1:1));
+  const introduced=EG_VOC.filter(w=>v[w.en]&&v[w.en].first===t).length,fresh=EG_VOC.filter(w=>!v[w.en]).slice(0,Math.max(0,EG_NEW-introduced));
+  return[...due,...fresh].map(w=>w.en)}
+function egVocStart(){const q=egQueue();V.eg={m:"voc",q,i:0,flip:false,ok:0,n:q.length};render(true)}
+function egVocAns(knew){const st=V.eg,en=st.q[st.i];if(!en)return;const v={...(egDoc().voc||{})},cur=v[en]||{b:0,first:todayK()},t=today();
+  if(knew){const b=Math.min(5,(cur.seen?cur.b+1:2));v[en]={...cur,b,seen:1,due:dkey(add(t,EG_INT[b]))};st.ok++}
+  else{v[en]={...cur,b:0,seen:1,due:todayK()};if(!st.again)st.again={};if(!st.again[en]){st.again[en]=1;st.q.push(en)}}
+  egSave({voc:v});st.i++;st.flip=false;if(st.i>=st.q.length){egDay({v:1});st.m="vocfin"}else{const nx=st.q[st.i];if(((v[nx]||{}).b||0)<2)say(nx)}render(true)}
+function egVocCard(){const st=V.eg,en=st.q[st.i],w=EG_VOC.find(x=>x.en===en),v=(egDoc().voc||{})[en]||{},rev=(v.b||0)>=2;if(!w)return"";
+  const front=rev?`<span class="egfr">${esc(w.fr)}</span><small class="muted">Comment on dit en anglais ?</small>`:`<span class="egen">${esc(w.en)}</span>${egSay(w.en)}<small class="muted">Qu'est-ce que ça veut dire ?</small>`;
+  const back=`<span class="egen">${esc(w.en)}</span>${egSay(w.en)}<span class="egfr">${esc(w.fr)}</span>`;
+  return`<div class="card stack egcard"><div class="row" style="justify-content:space-between"><span class="muted small">${esc(w.th)}${v.seen?"":" · nouveau mot"}</span><span class="muted small num">${st.i+1}/${st.q.length}</span></div>
+    <div class="egflash">${st.flip?back:front}</div>
+    ${st.flip?`<div class="egbtns"><button class="ghost egko" data-egv="0">✗ Je ne savais pas</button><button class="btn egok" data-egv="1">✓ Je savais</button></div>`:`<button class="btn" data-egflip="1">Voir la réponse</button>`}</div>`}
+
+/* ---- ② grammaire ---- */
+function egUnit(){return Math.min(EG_U.length-1,egDoc().u||0)}
+function egGramStart(i){V.eg={m:"lesson",u:i};render(true);window.scrollTo(0,0)}
+function egExStart(){const u=V.eg.u;V.eg={m:"ex",u,i:0,sc:0,ans:null};render(true)}
+function egExAns(val){const st=V.eg,q=EG_U[st.u].q[st.i];if(st.ans)return;const ok=q.k==="txt"?egTxtOk(val,q.a):+val===q.a;st.ans={ok,val};if(ok)st.sc++;render(true)}
+function egExNext(){const st=V.eg,U=EG_U[st.u];st.i++;st.ans=null;if(st.i>=U.q.length){const g={...(egDoc().g||{})},pass=st.sc>=4;g[st.u]={best:Math.max(st.sc,(g[st.u]||{}).best||0),ts:Date.now()};
+    egSave({g,u:pass&&st.u>=egUnit()?Math.min(EG_U.length,st.u+1):egDoc().u||0});egDay({g:1});st.m="exfin";st.pass=pass}render(true)}
+function egExCard(){const st=V.eg,U=EG_U[st.u],q=U.q[st.i],a=st.ans;
+  return`<div class="card stack egcard"><div class="row" style="justify-content:space-between"><span class="muted small">Leçon ${st.u+1} · exercice</span><span class="muted small num">${st.i+1}/${U.q.length}</span></div>
+    <p class="egq">${esc(q.q)}</p>
+    ${q.k==="txt"?`<form data-f="egtxt" class="row" style="flex-direction:row;flex-wrap:nowrap"><input class="field" name="r" autocomplete="off" autocapitalize="off" spellcheck="false" data-nomic="1" ${a?"disabled":""} value="${a?esc(a.val):""}" placeholder="Ta réponse"><button class="btn" ${a?"disabled":""}>Vérifier</button></form>`
+      :`<div class="egopts">${q.o.map((o,i)=>`<button class="egopt ${a?(i===q.a?"ok":+a.val===i?"ko":""):""}" data-egopt="${i}" ${a?"disabled":""}>${esc(o)}</button>`).join("")}</div>`}
+    ${a?`<div class="egfb ${a.ok?"ok":"ko"}"><b>${a.ok?"✓ Bravo !":"✗ Pas tout à fait."}</b> ${q.k==="txt"&&!a.ok?`Réponse : <b>${esc(q.a[0])}</b>. `:""}${esc(q.e)}</div><button class="btn" data-egnext="1">${st.i+1<U.q.length?"Suivant →":"Voir mon score"}</button>`:""}</div>`}
+function egLesson(){const U=EG_U[V.eg.u];
+  return`<div class="card stack egcard"><p class="label" style="margin:0">Leçon ${V.eg.u+1} / ${EG_U.length}</p><h3 class="egt">${esc(U.t)}</h3>
+    <div class="egx">${U.x.split("\n").map(l=>`<p>${esc(l)}</p>`).join("")}</div>
+    <p class="label" style="margin:4px 0 0">Exemples (touche 🔊 pour écouter)</p><ul class="egex">${U.ex.map(([en,fr])=>`<li>${egSay(en)}<div><b>${esc(en)}</b><span class="muted">${esc(fr)}</span></div></li>`).join("")}</ul>
+    <div class="row"><button class="btn" data-egexgo="1">Faire les ${U.q.length} exercices</button><button class="ghost" data-eghome="1">Retour</button></div></div>`}
+
+/* ---- ③ oral : dire des phrases ---- */
+function egOralStart(){const ks=Object.keys(egDoc().g||{}).map(Number),done=Math.min(EG_U.length-1,ks.length?Math.max(...ks):0),L=[...EG_U[done].o];if(done>0)L.push(...EG_U[done-1].o.slice(0,2));V.eg={m:"oral",L,i:0,res:null,ok:0};V.egSaid="";render(true)}
+function egOralCheck(){const st=V.eg,[fr,en]=st.L[st.i],said=String(V.egSaid||"").trim();if(!said)return;const s=egScore(said,en);st.res={s,said};if(s>=.8)st.ok++;if(typeof MIC!=="undefined"&&MIC)micStop();say(en);render(true)}
+function egOralNext(){const st=V.eg;st.i++;st.res=null;V.egSaid="";if(st.i>=st.L.length){egDay({o:(egToday().o||0)+st.L.length});st.m="oralfin"}render(true)}
+function egOralCard(){const st=V.eg,[fr,en]=st.L[st.i],r=st.res;
+  return`<div class="card stack egcard"><div class="row" style="justify-content:space-between"><span class="muted small">Dis-le en anglais</span><span class="muted small num">${st.i+1}/${st.L.length}</span></div>
+    <p class="egq">« ${esc(fr)} »</p>
+    <textarea class="field" id="egsaid" rows="2" data-miclang="en-US" data-egsaid="1" placeholder="Touche 🎙️ Parler, ou écris ta phrase" ${r?"disabled":""}>${esc(V.egSaid||"")}</textarea>
+    ${r?`<div class="egfb ${r.s>=.8?"ok":r.s>=.5?"mid":"ko"}"><b>${r.s>=.8?"✓ Parfait !":r.s>=.5?"Presque !":"✗ Pas encore."}</b> La phrase : <b>${esc(en)}</b> ${egSay(en)}</div><button class="btn" data-egonext="1">${st.i+1<st.L.length?"Suivant →":"Terminer"}</button>`
+      :`<div class="row"><button class="btn" data-egspeak="1">🎙️ Parler</button><button class="ghost on" data-egcheck="1">Vérifier</button><button class="ghost" data-egshow="1">Je ne sais pas</button></div>`}</div>`}
+
+/* ---- page ---- */
+function egHome(){const u=egUnit(),doc=egDoc(),td=egToday(),q=egQueue(),known=Object.values(doc.voc||{}).filter(x=>x.b>=3).length,lv=EG_LV[Math.min(EG_LV.length-1,doc.u||0)],steps=[td.v,td.g,(td.o||0)>=3].filter(Boolean).length,stk=egStreak();
+  const step=(n,ic,t,s,done,btn)=>`<div class="egstep ${done?"done":""}"><span class="egn">${done?"✓":n}</span><div><b>${ic} ${t}</b><small class="muted">${s}</small></div>${btn}</div>`;
+  return`<div class="card stack" style="gap:12px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">🇬🇧 Ton cycle du jour · ${steps}/3</p><span class="muted small">${stk?`🔥 ${stk} jour${stk>1?"s":""}`:""}</span></div>
+    <div class="eglv"><span>Niveau <b>${esc(lv)}</b></span><span class="muted small">${known} mots bien sus · leçon ${Math.min((doc.u||0)+1,EG_U.length)}/${EG_U.length}</span><div class="mxbar"><i style="width:${Math.round((doc.u||0)/EG_U.length*100)}%"></i></div></div>
+    ${step(1,"🔤","Vocabulaire",td.v&&!q.length?"Fini pour aujourd'hui":`${q.length} mot${q.length>1?"s":""} à voir (nouveaux + à revoir)`,td.v&&!q.length,q.length?`<button class="btn" data-egvoc="1">${td.v?"Continuer":"Commencer"}</button>`:"")}
+    ${step(2,"📘","Grammaire",`Leçon ${u+1} : ${EG_U[u].t}`,!!td.g,`<button class="${td.g?"ghost":"btn"}" data-eggram="${u}">${(doc.g||{})[u]?"Revoir":"Commencer"}</button>`)}
+    ${step(3,"🎙️","Oral","Dis des phrases de ta dernière leçon au micro",(td.o||0)>=3,`<button class="${(td.o||0)>=3?"ghost":"btn"}" data-egoral="1">${(td.o||0)>=3?"Refaire":"Commencer"}</button>`)}
+    <p class="muted small" style="margin:0">Environ 15 minutes. On commence vraiment par la base : chaque leçon validée (4/6) débloque la suivante.</p></div>
+  <details class="card egall"><summary><b>📚 Toutes les leçons</b></summary><ol class="eglist">${EG_U.map((U,i)=>{const g=(doc.g||{})[i],open=i<=(doc.u||0);return`<li class="${open?"":"off"}">${open?`<button class="linkb" data-eggram="${i}">${esc(U.t)}</button>`:`<span>🔒 ${esc(U.t)}</span>`}${g?` <span class="muted small">· ${g.best}/6</span>`:""}</li>`}).join("")}</ol></details>`}
+function engPage(){const st=V.eg||{m:"home"};let main="";
+  if(st.m==="voc")main=egVocCard();
+  else if(st.m==="vocfin")main=`<div class="card stack egcard"><p class="egbig">🎉</p><p><b>Vocabulaire fini pour aujourd'hui.</b> ${st.ok}/${st.n} mots sus du premier coup. Les mots ratés reviendront demain.</p><button class="btn" data-eghome="1">Continuer le cycle</button></div>`;
+  else if(st.m==="lesson")main=egLesson();
+  else if(st.m==="ex")main=egExCard();
+  else if(st.m==="exfin")main=`<div class="card stack egcard"><p class="egbig num">${st.sc}/${EG_U[st.u].q.length}</p><p>${st.pass?`<b>Leçon validée !</b> ${st.u+1<EG_U.length?"La leçon suivante est débloquée pour demain.":"Tu as fini toutes les leçons : passe au défi de l'article."}`:"<b>Il faut 4/6 pour valider.</b> Relis la leçon et refais les exercices : c'est en recommençant qu'on retient."}</p><div class="row"><button class="btn" data-eghome="1">Continuer le cycle</button>${st.pass?"":`<button class="ghost on" data-eggram="${st.u}">Relire la leçon</button>`}</div></div>`;
+  else if(st.m==="oral")main=egOralCard();
+  else if(st.m==="oralfin")main=`<div class="card stack egcard"><p class="egbig">🎙️</p><p><b>${st.ok}/${st.L.length} phrases parfaites.</b> Plus tu parles, plus ça devient facile.</p><button class="btn" data-eghome="1">Retour au cycle</button></div>`;
+  else main=egHome();
+  const u=egDoc().u||0;
+  return`${st.m!=="home"&&st.m?`<div><button class="ghost" data-eghome="1">‹ Mon cycle du jour</button></div>`:""}${main}
+  <details class="card egart" ${u>=EG_U.length||V.egArtOpen?"open":""}><summary><b>④ Défi : explique l'article du jour</b><span class="muted small">${u>=EG_U.length?"tu es prêt !":"niveau B1 : pour plus tard, mais tu peux essayer"}</span></summary><div class="stack" style="gap:12px;margin-top:10px">${entEn()}</div></details>`}
+
+/* ---- clics et saisie ---- */
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-egsay],[data-egvoc],[data-egflip],[data-egv],[data-eggram],[data-egexgo],[data-egopt],[data-egnext],[data-egoral],[data-egspeak],[data-egcheck],[data-egshow],[data-egonext],[data-eghome]");if(!b)return;const d=b.dataset;
+  if(d.egsay!==undefined)return say(d.egsay);
+  if(d.egvoc){egVocStart();const st=V.eg,en=st.q[0],w=EG_VOC.find(x=>x.en===en),v=(egDoc().voc||{})[en]||{};if(w&&(v.b||0)<2)say(en);return}
+  if(d.egflip){V.eg.flip=true;const en=V.eg.q[V.eg.i];render(true);return say(en)}
+  if(d.egv!==undefined)return egVocAns(d.egv==="1");
+  if(d.eggram!==undefined)return egGramStart(+d.eggram);
+  if(d.egexgo)return egExStart();
+  if(d.egopt!==undefined)return egExAns(d.egopt);
+  if(d.egnext)return egExNext();
+  if(d.egoral)return egOralStart();
+  if(d.egspeak){const el=document.getElementById("egsaid");if(el){el.focus({preventScroll:true});micToggle(el)}return}
+  if(d.egcheck)return egOralCheck();
+  if(d.egshow){V.egSaid=V.egSaid||"…";V.eg.res={s:0,said:""};const en=V.eg.L[V.eg.i][1];say(en);return render(true)}
+  if(d.egonext)return egOralNext();
+  if(d.eghome){V.eg={m:"home"};render(true);return window.scrollTo(0,0)}});
+document.addEventListener("input",e=>{const t=e.target;if(t&&t.dataset&&t.dataset.egsaid!==undefined)V.egSaid=t.value});
+document.addEventListener("submit",e=>{const f=e.target;if(f&&f.dataset&&f.dataset.f==="egtxt"){e.preventDefault();e.stopImmediatePropagation();const v=(f.querySelector("input")||{}).value||"";if(v.trim())egExAns(v)}},true);
+document.addEventListener("toggle",e=>{const t=e.target;if(t&&t.classList&&t.classList.contains("egart"))V.egArtOpen=t.open},true);
+
+/* ================================================================
+   🐍 PYTHON POUR DÉBUTANT : une petite leçon par jour, du vrai Python qui tourne dans l'appli
+   (Pyodide, chargé une seule fois, dans un « worker » : une boucle infinie est arrêtée au bout de 5 s)
+   ================================================================ */
+const PY_L=[
+ {t:"Afficher un message : print()",x:"Un programme, c'est une liste d'ordres que l'ordinateur exécute de haut en bas.\nprint() affiche ce qu'on met entre les parenthèses.\nUn texte s'écrit entre guillemets : \"Bonjour\". Un nombre s'écrit sans guillemets : 42.",
+  code:'print("Bonjour !")\nprint(42)',
+  ex:{q:"Affiche deux lignes : J'apprends Python, puis Objectif : trader",start:"# Écris ton code ici\n",sol:'print("J\'apprends Python")\nprint("Objectif : trader")',out:"J'apprends Python\nObjectif : trader",hint:"Un print() par ligne, et le texte entre guillemets \" \"."}},
+ {t:"Faire des calculs",x:"Python est une calculatrice : + (plus), - (moins), * (fois), / (divisé).\n** veut dire « puissance » : 2 ** 3 = 8.\n// donne la division entière et % le reste : 17 // 5 = 3 et 17 % 5 = 2.\nPython respecte les priorités : les * avant les +.",
+  code:"print(2 + 3)\nprint(10 / 4)\nprint(2 ** 10)\nprint(17 % 5)",
+  ex:{q:"Affiche le résultat de 17 fois 3, plus 4.",start:"",sol:"print(17 * 3 + 4)",out:"55",hint:"Écris le calcul directement dans print(), sans guillemets : le signe fois s'écrit *."}},
+ {t:"Les variables",x:"Une variable, c'est une boîte avec un nom, dans laquelle on range une valeur : prix = 120.\nLe signe = veut dire « ranger dans », pas « est égal à ».\nEnsuite, on utilise le nom à la place de la valeur : total = prix * 3.\nUn nom de variable s'écrit sans espace ni accent : capital_depart.",
+  code:"prix = 120\nquantite = 3\ntotal = prix * quantite\nprint(total)",
+  ex:{q:"Crée une variable capital qui vaut 1000 et une variable taux qui vaut 0.05. Affiche les intérêts d'une année : capital fois taux.",start:"",sol:"capital = 1000\ntaux = 0.05\nprint(capital * taux)",out:"50.0",test:'assert capital == 1000, "capital doit valoir 1000"\nassert taux == 0.05, "taux doit valoir 0.05"',hint:"Les nombres à virgule s'écrivent avec un point : 0.05."}},
+ {t:"Le texte et les f-strings",x:"Un texte (on dit une « chaîne ») s'écrit entre guillemets.\nOn colle deux textes avec + : \"Bon\" + \"jour\".\nLe plus pratique : la f-string. On met un f juste avant les guillemets, et les variables entre accolades { } : f\"Tu as {age} ans\".",
+  code:'action = "Apple"\nprix = 230\nprint(f"L\'action {action} vaut {prix} dollars")',
+  ex:{q:"Crée une variable ville qui vaut \"Londres\" et une variable jours qui vaut 3. Avec une f-string, affiche : Je pars à Londres pendant 3 jours",start:"",sol:'ville = "Londres"\njours = 3\nprint(f"Je pars à {ville} pendant {jours} jours")',out:"Je pars à Londres pendant 3 jours",test:'assert ville == "Londres", "ville doit valoir \\"Londres\\""\nassert jours == 3, "jours doit valoir 3 (un nombre, sans guillemets)"',hint:"N'oublie pas le f juste avant les guillemets, et les accolades autour des variables."}},
+ {t:"Nombre ou texte ?",x:"\"12\" (avec guillemets) est un texte ; 12 est un nombre entier ; 12.5 est un nombre à virgule.\nint(\"12\") transforme le texte en nombre. str(12) transforme le nombre en texte.\nAttention : \"12\" * 2 donne \"1212\" (le texte répété), pas 24 !",
+  code:'texte = "12"\nprint(texte * 2)\nprint(int(texte) * 2)',
+  ex:{q:"La variable texte vaut \"42\". Affiche le double de ce nombre (84).",start:'texte = "42"\n# Affiche le double du nombre\n',sol:'texte = "42"\nprint(int(texte) * 2)',out:"84",hint:"Transforme d'abord le texte en nombre avec int(texte)."}},
+ {t:"Les conditions : if / else",x:"if veut dire « si » : si la condition est vraie, Python exécute les lignes décalées en dessous. else veut dire « sinon ».\nTrès important : les deux-points : à la fin de la ligne, et les lignes du dessous décalées de 4 espaces (bouton ⇥).\nComparaisons : > plus grand, < plus petit, >= , <= , == égal, != différent.",
+  code:'note = 14\nif note >= 10:\n    print("Admis")\nelse:\n    print("Ajourné")',
+  ex:{q:"La variable cours vaut 105. Si cours est plus grand que 100, affiche Vendre, sinon affiche Garder.",start:"cours = 105\n",sol:'cours = 105\nif cours > 100:\n    print("Vendre")\nelse:\n    print("Garder")',out:"Vendre",hint:"if cours > 100: puis, à la ligne, 4 espaces avant le print."}},
+ {t:"Plusieurs cas : elif, and, or",x:"elif veut dire « sinon si » : on teste plusieurs cas à la suite, et Python s'arrête au premier cas vrai.\nand = et (les deux conditions doivent être vraies), or = ou (au moins une).",
+  code:'note = 15\nif note >= 16:\n    print("Très bien")\nelif note >= 14:\n    print("Bien")\nelse:\n    print("Pas de mention")',
+  ex:{q:"variation vaut -3 (en %). Affiche Forte hausse si variation >= 5, Hausse si variation > 0, Stable si variation == 0, et sinon Baisse.",start:"variation = -3\n",sol:'variation = -3\nif variation >= 5:\n    print("Forte hausse")\nelif variation > 0:\n    print("Hausse")\nelif variation == 0:\n    print("Stable")\nelse:\n    print("Baisse")',out:"Baisse",hint:"Dans l'ordre : if, puis elif, puis elif, puis else."}},
+ {t:"Répéter : la boucle for",x:"Une boucle répète des lignes plusieurs fois.\nfor i in range(5): répète 5 fois, avec i = 0, 1, 2, 3, 4.\nrange(1, 11) va de 1 à 10 : le dernier nombre n'est pas compris.\nComme pour if : deux-points, et les lignes du dessous décalées.",
+  code:"for i in range(1, 6):\n    print(i)",
+  ex:{q:"Affiche les nombres de 1 à 10, un par ligne.",start:"",sol:"for i in range(1, 11):\n    print(i)",out:"1\n2\n3\n4\n5\n6\n7\n8\n9\n10",hint:"range(1, 11) va de 1 à 10."}},
+ {t:"Additionner avec une boucle",x:"Pour faire une somme : on part d'une variable à 0, puis on ajoute à chaque tour : total = total + i (en plus court : total += i).\nOn affiche le résultat après la boucle, sur une ligne non décalée.",
+  code:"total = 0\nfor i in range(1, 101):\n    total += i\nprint(total)",
+  ex:{q:"Calcule la somme des carrés de 1 à 10 (1 + 4 + 9 + … + 100) et affiche-la.",start:"",sol:"total = 0\nfor i in range(1, 11):\n    total += i ** 2\nprint(total)",out:"385",hint:"i ** 2 donne le carré de i. Le print est après la boucle, sans décalage."}},
+ {t:"Tant que : la boucle while",x:"while veut dire « tant que » : Python répète tant que la condition est vraie.\nAttention : quelque chose doit changer dans la boucle, sinon elle ne s'arrête jamais (l'appli l'arrête au bout de 5 secondes).\nTrès utile en finance : combien d'années pour doubler mon argent ?",
+  code:"argent = 100\nannees = 0\nwhile argent < 200:\n    argent = argent * 1.10\n    annees += 1\nprint(annees)",
+  ex:{q:"Tu places 1000 € à 7 % par an. Combien d'années faut-il pour avoir au moins 2000 € ? Affiche ce nombre d'années.",start:"",sol:"capital = 1000\nannees = 0\nwhile capital < 2000:\n    capital = capital * 1.07\n    annees += 1\nprint(annees)",out:"11",hint:"Multiplier par 1.07, c'est ajouter 7 %. Compte les tours avec annees += 1."}},
+ {t:"Les listes",x:"Une liste range plusieurs valeurs : cours = [100, 102, 98].\ncours[0] est le premier élément (on compte à partir de 0), cours[-1] le dernier.\nlen() donne le nombre d'éléments, sum() la somme, max() et min() le plus grand et le plus petit.\ncours.append(105) ajoute un élément à la fin.",
+  code:"notes = [12, 15, 9]\nnotes.append(17)\nprint(len(notes))\nprint(max(notes))\nprint(sum(notes) / len(notes))",
+  ex:{q:"Voici les cours d'une action sur 4 jours. Affiche le plus haut cours, puis la moyenne.",start:"cours = [100, 102, 98, 105]\n",sol:"cours = [100, 102, 98, 105]\nprint(max(cours))\nprint(sum(cours) / len(cours))",out:"105\n101.25",hint:"max(cours), puis sum(cours) / len(cours)."}},
+ {t:"Parcourir une liste",x:"for x in liste: prend chaque élément de la liste, un par un.\nPour compter : on part de 0 et on ajoute 1 quand une condition est vraie.",
+  code:"variations = [1.2, -0.5, 0.8]\nfor v in variations:\n    print(v)",
+  ex:{q:"Voici les variations d'une action sur 5 jours (en %). Compte les jours de hausse (variation positive) et affiche ce nombre.",start:"variations = [1.2, -0.5, 0.8, -1.1, 2.0]\n",sol:"variations = [1.2, -0.5, 0.8, -1.1, 2.0]\nhausses = 0\nfor v in variations:\n    if v > 0:\n        hausses += 1\nprint(hausses)",out:"3",hint:"Un if à l'intérieur du for : la ligne hausses += 1 est décalée de 8 espaces."}},
+ {t:"Les fonctions",x:"Une fonction est une recette qu'on écrit une fois et qu'on réutilise.\ndef nom(paramètres): crée la fonction ; return renvoie le résultat.\nOn l'appelle ensuite avec des valeurs : carre(5) vaut 25.",
+  code:"def carre(x):\n    return x * x\n\nprint(carre(5))\nprint(carre(12))",
+  ex:{q:"Écris une fonction moyenne(liste) qui renvoie la moyenne des nombres de la liste.",start:"def moyenne(liste):\n    return 0  # remplace 0 par ton calcul\n",sol:"def moyenne(liste):\n    return sum(liste) / len(liste)",test:'assert moyenne([10, 20]) == 15, "moyenne([10, 20]) doit valoir 15"\nassert moyenne([12, 15, 9]) == 12, "moyenne([12, 15, 9]) doit valoir 12"',hint:"Une seule ligne suffit : return sum(liste) / len(liste)"}},
+ {t:"Les intérêts composés",x:"Une fonction peut avoir plusieurs paramètres : def f(a, b, c):\nIntérêts composés : chaque année, ton capital est multiplié par (1 + taux). Au bout de n années : capital * (1 + taux) ** n.\nround(x, 2) arrondit à 2 chiffres après la virgule.",
+  code:"def double(x):\n    return 2 * x\n\nprint(double(21))\nprint(round(1102.4999, 2))",
+  ex:{q:"Écris une fonction capital_final(capital, taux, annees) qui renvoie le capital après les intérêts composés, arrondi à 2 chiffres.",start:"def capital_final(capital, taux, annees):\n    return 0  # remplace 0 par ton calcul\n",sol:"def capital_final(capital, taux, annees):\n    return round(capital * (1 + taux) ** annees, 2)",test:'assert capital_final(1000, 0.05, 2) == 1102.5, "capital_final(1000, 0.05, 2) doit valoir 1102.5"\nassert capital_final(500, 0.1, 3) == 665.5, "capital_final(500, 0.1, 3) doit valoir 665.5"',hint:"return round(capital * (1 + taux) ** annees, 2)"}},
+ {t:"Calculer un rendement",x:"Le rendement d'un placement, en % : (prix de vente − prix d'achat) / prix d'achat × 100.\nUn rendement négatif est une perte.",
+  code:"achat = 50\nvente = 60\nprint((vente - achat) / achat * 100)",
+  ex:{q:"Écris une fonction rendement(achat, vente) qui renvoie le rendement en %, arrondi à 1 chiffre après la virgule.",start:"def rendement(achat, vente):\n    return 0  # remplace 0 par ton calcul\n",sol:"def rendement(achat, vente):\n    return round((vente - achat) / achat * 100, 1)",test:'assert rendement(50, 60) == 20.0, "rendement(50, 60) doit valoir 20.0"\nassert rendement(200, 150) == -25.0, "rendement(200, 150) doit valoir -25.0 (une perte)"\nassert rendement(300, 301) == 0.3, "rendement(300, 301) doit valoir 0.3"',hint:"Mets des parenthèses autour de (vente - achat) avant de diviser."}},
+ {t:"Les dictionnaires",x:"Un dictionnaire associe une clé à une valeur : prix = {\"AAPL\": 230, \"TSLA\": 250}.\nprix[\"AAPL\"] donne 230.\nfor cle in dico: parcourt les clés, et dico[cle] donne la valeur.",
+  code:'portefeuille = {"AAPL": 10, "TSLA": 5}\nfor action in portefeuille:\n    print(action, portefeuille[action])',
+  ex:{q:"Écris une fonction valeur(portefeuille, prix) qui renvoie la valeur totale : pour chaque action, le nombre d'actions × son prix.",start:"def valeur(portefeuille, prix):\n    return 0  # remplace 0 par ton calcul\n",sol:"def valeur(portefeuille, prix):\n    total = 0\n    for action in portefeuille:\n        total += portefeuille[action] * prix[action]\n    return total",test:'assert valeur({"AAPL": 10, "TSLA": 5}, {"AAPL": 230, "TSLA": 250}) == 3550, "10 × 230 + 5 × 250 = 3550"\nassert valeur({}, {}) == 0, "un portefeuille vide vaut 0"',hint:"total = 0, puis for action in portefeuille: total += portefeuille[action] * prix[action], et return total à la fin."}},
+ {t:"Le hasard avec random",x:"import random charge les outils du hasard.\nrandom.randint(1, 6) donne un entier au hasard entre 1 et 6, comme un dé.\nLes traders quantitatifs simulent des milliers de scénarios au hasard : c'est la méthode de Monte-Carlo.",
+  code:"import random\nprint(random.randint(1, 6))\nprint(random.randint(1, 6))",
+  ex:{q:"Écris une fonction pile(n) qui lance n fois une pièce (random.randint(0, 1), où 1 = pile) et renvoie le nombre de piles.",start:"import random\n\ndef pile(n):\n    return 0  # remplace 0 par ton calcul\n",sol:"import random\n\ndef pile(n):\n    total = 0\n    for i in range(n):\n        total += random.randint(0, 1)\n    return total",test:'r = pile(1000)\nassert 400 < r < 600, f"Sur 1000 lancers, on attend environ 500 piles (tu en as {r})"\nassert pile(0) == 0, "pile(0) doit valoir 0"',hint:"Une boucle for de n tours, et total += random.randint(0, 1) à chaque tour."}},
+ {t:"Mini-projet : la moyenne mobile",x:"La moyenne mobile sur n jours : chaque jour, la moyenne des n derniers cours. Les traders s'en servent pour voir la tendance.\nliste[a:b] prend les éléments de a à b (b non compris) : cours[0:3] donne les 3 premiers.",
+  code:"cours = [10, 11, 12, 13]\nprint(cours[0:3])\nprint(cours[1:4])",
+  ex:{q:"Écris moyenne_mobile(cours, n) qui renvoie la liste des moyennes des n derniers cours, à partir du n-ième jour.",start:"def moyenne_mobile(cours, n):\n    return []  # remplace [] par ta liste de moyennes\n",sol:"def moyenne_mobile(cours, n):\n    resultat = []\n    for i in range(n, len(cours) + 1):\n        fenetre = cours[i - n:i]\n        resultat.append(sum(fenetre) / n)\n    return resultat",test:'assert moyenne_mobile([1, 2, 3, 4, 5], 3) == [2.0, 3.0, 4.0], "moyenne_mobile([1, 2, 3, 4, 5], 3) doit donner [2.0, 3.0, 4.0]"\nassert moyenne_mobile([10, 20], 2) == [15.0], "moyenne_mobile([10, 20], 2) doit donner [15.0]"',hint:"for i in range(n, len(cours) + 1): la fenêtre est cours[i - n:i], et on ajoute sum(fenetre) / n au résultat."}}];
+
+/* ---- moteur : Pyodide dans un worker ---- */
+const PY_BASE=window.__PYBASE||"https://cdn.jsdelivr.net/pyodide/v0.26.4/full/";
+let PYW=null,PYQ={},pySeq=0,pyState="off";
+function pyWorker(){if(PYW)return PYW;pyState="loading";
+  const src=`importScripts(${JSON.stringify(PY_BASE+"pyodide.js")});
+let py=null;const ready=loadPyodide({indexURL:${JSON.stringify(PY_BASE)}}).then(p=>{py=p;postMessage({t:"ready"})}).catch(e=>postMessage({t:"fail",e:String(e&&e.message||e)}));
+onmessage=async e=>{const{id,code,test}=e.data;await ready;if(!py)return postMessage({t:"res",id,out:"",err:"Python n'a pas pu se charger."});let out="";
+  py.setStdout({batched:s=>{out+=s+"\\n"}});py.setStderr({batched:s=>{out+=s+"\\n"}});
+  const ns=py.globals.get("dict")();let err=null,terr=null;
+  try{await py.runPythonAsync(code,{globals:ns})}catch(x){err=String(x&&x.message||x)}
+  if(!err&&test){try{await py.runPythonAsync(test,{globals:ns})}catch(x){terr=String(x&&x.message||x)}}
+  try{py.runPython("import sys\\nsys.stdout.flush()")}catch(_){}try{ns.destroy()}catch(_){}
+  postMessage({t:"res",id,out,err,terr})}`;
+  try{PYW=new Worker(URL.createObjectURL(new Blob([src],{type:"text/javascript"})))}catch(e){pyState="fail";V.pyErr=String(e&&e.message||e);return null}
+  PYW.onmessage=e=>{const m=e.data;if(m.t==="ready"){pyState="ready";if(V.page==="py")pyStatus()}else if(m.t==="fail"){pyState="fail";V.pyErr=m.e;if(V.page==="py")render(true)}
+    else if(m.t==="res"){const r=PYQ[m.id];if(r){delete PYQ[m.id];clearTimeout(r.to);r.ok(m)}}};
+  PYW.onerror=e=>{pyState="fail";V.pyErr=String(e&&e.message||"erreur");if(V.page==="py")render(true)};return PYW}
+function pyStatus(){const el=document.getElementById("pystat");if(el)el.innerHTML=pyStatTxt()}
+const pyStatTxt=()=>pyState==="ready"?"🟢 Python est prêt":pyState==="loading"?"⏳ Python se télécharge (environ 10 Mo, une seule fois)…":pyState==="fail"?"🔴 Python n'a pas pu se charger : vérifie ta connexion, puis réessaie.":"";
+function pyRun(code,test){const w=pyWorker();if(!w)return Promise.resolve({err:"Ton navigateur ne peut pas lancer Python ici."});const id=++pySeq,lim=pyState==="ready"?5000:120000;
+  return new Promise(ok=>{const to=setTimeout(()=>{delete PYQ[id];try{w.terminate()}catch(_){}PYW=null;pyState="off";Object.values(PYQ).forEach(r=>{clearTimeout(r.to);r.ok({timeout:true,out:""})});PYQ={};ok({timeout:true,out:""})},lim);PYQ[id]={ok,to};w.postMessage({id,code,test})})}
+/* erreurs de Python expliquées simplement */
+function pyFriendly(err,inTest){const s=String(err||""),L=s.trim().split("\n"),last=L[L.length-1]||"",ms=[...s.matchAll(/File "<exec>", line (\d+)/g)],ln=!inTest&&ms.length?+ms[ms.length-1][1]:null,at=ln?` (ligne ${ln})`:"";
+  const m=last.match(/^(\w+)(?::\s*(.*))?$/),type=m?m[1]:"",msg=m?m[2]||"":last;
+  if(inTest&&type==="AssertionError")return"Pas encore : "+(msg||"le résultat n'est pas le bon.");
+  if(inTest&&type==="NameError"){const n=(msg.match(/'([^']+)'/)||[])[1];return`Il manque « ${n||"?"} » : crée-le avec exactement ce nom (attention aux majuscules et aux fautes de frappe).`}
+  if(/IndentationError|TabError/.test(type))return`Problème de décalage${at} : dans un if, un for, un while ou un def, les lignes du dessous doivent être décalées de 4 espaces, toutes pareil.`;
+  if(type==="SyntaxError")return`Erreur d'écriture${at} : vérifie les parenthèses ( ), les guillemets " " et les deux-points : à la fin des lignes if, for, while et def.`;
+  if(type==="NameError"){const n=(msg.match(/'([^']+)'/)||[])[1];return`Python ne connaît pas « ${n||"?"} »${at} : vérifie l'orthographe et les majuscules, ou crée la variable avant. Pour du texte, mets des guillemets.`}
+  if(type==="TypeError")return`Tu mélanges des types${at} (du texte et un nombre ?). Utilise int() ou str() pour convertir.`;
+  if(type==="ZeroDivisionError")return`Division par zéro${at}.`;
+  if(type==="IndexError")return`Élément introuvable dans la liste${at} : on compte à partir de 0.`;
+  if(type==="KeyError")return`Cette clé n'est pas dans le dictionnaire${at} : ${msg}.`;
+  if(type==="ValueError")return`Valeur impossible${at} : ${msg}.`;
+  return`Erreur${at} : ${last}`}
+const pyNorm=s=>String(s||"").replace(/\r/g,"").split("\n").map(l=>l.replace(/\s+$/,"")).join("\n").replace(/\n+$/,"");
+
+/* ---- progression ---- */
+const pyDoc=()=>drill("py");
+function pySave(p){put("drill","py",{...pyDoc(),...p},true)}
+const pyDone=i=>!!((pyDoc().done||{})[i]);
+function pyCur(){const d=pyDoc().done||{};let i=0;while(i<PY_L.length&&d[i])i++;return Math.min(i,PY_L.length-1)}
+function pyStreak(){const d=pyDoc().d||{};let s=0,x=today();if(!d[dkey(x)])x=add(x,-1);for(let i=0;i<400;i++){if(d[dkey(x)]){s++;x=add(x,-1)}else break}return s}
+function pyRevIdx(){const dn=Object.keys(pyDoc().done||{}).map(Number).filter(i=>i<PY_L.length);if(dn.length<3)return null;return dn.sort((a,b)=>a-b)[hashStr("py"+todayK())%dn.length]}
+function pyCode(i,rev){const c=(pyDoc().code||{})[rev?"r"+i:i];return c!=null?c:PY_L[i].ex.start}
+let pyCT=null;function pyKeep(i,rev,val){V.pyBuf={k:rev?"r"+i:i,val};clearTimeout(pyCT);pyCT=setTimeout(pyFlush,700)}
+function pyFlush(){clearTimeout(pyCT);const b=V.pyBuf;if(!b)return;V.pyBuf=null;pySave({code:{...(pyDoc().code||{}),[b.k]:String(b.val).slice(0,8000)}})}
+
+/* ---- exécuter, vérifier ---- */
+async function pyGo(mode){const L=PY_L[V.pyL],rev=!!V.pyRev,ed=document.getElementById("pyed");if(mode==="ex"){V.pyOut={busy:1,ex:1};pyPaint();const r=await pyRun(L.code);V.pyOut={...r,ex:1};return pyPaint()}
+  const code=ed?ed.value:pyCode(V.pyL,rev);pyKeep(V.pyL,rev,code);pyFlush();V.pyOut={busy:1};pyPaint();
+  const r=await pyRun(code,L.ex.test||null);let ok=false,why="";
+  if(r.timeout)why="Ton programme tourne sans s'arrêter (boucle infinie ?) : vérifie la condition de ton while, puis réessaie.";
+  else if(r.err)why=pyFriendly(r.err,false);
+  else{const okOut=L.ex.out==null||pyNorm(r.out)===pyNorm(L.ex.out);if(!okOut)why=`Ton programme affiche autre chose que ce qui est demandé. Il faut afficher :\n${L.ex.out}`;else if(r.terr)why=pyFriendly(r.terr,true);else ok=true}
+  V.pyTries=(V.pyTries||0)+(ok?0:1);V.pyOut={...r,ok,why};
+  if(ok){const d={...(pyDoc().done||{})},days={...(pyDoc().d||{})};if(!rev)d[V.pyL]=d[V.pyL]||todayK();days[todayK()]=1;pySave({done:d,d:days})}
+  pyPaint()}
+/* ne redessiner que la zone du résultat (le clavier reste ouvert) */
+function pyPaint(){const el=document.getElementById("pyres");if(el)el.innerHTML=pyResHtml();else render(true);if(V.pyOut&&V.pyOut.ok){const n=document.getElementById("pynext");if(n)n.hidden=false}}
+function pyResHtml(){const o=V.pyOut;if(!o)return"";if(o.busy)return`<p class="muted small" style="margin:0">${pyState==="ready"?"▶ Python exécute ton code…":"⏳ Python se télécharge (une seule fois), puis exécute ton code…"}</p>`;
+  const out=o.out?`<pre class="pyout">${esc(pyNorm(o.out))}</pre>`:"";
+  if(o.ex)return`<p class="label" style="margin:0">Ce que l'exemple affiche</p>${out||`<p class="muted small" style="margin:0">(rien)</p>`}${o.err?`<p class="small">${esc(pyFriendly(o.err))}</p>`:""}`;
+  return`${out?`<p class="label" style="margin:0">Ton programme affiche</p>${out}`:""}<div class="pyfb ${o.ok?"ok":"ko"}"><b>${o.ok?"✓ Bravo, c'est juste !":"✗ Pas encore"}</b>${o.ok?"":`<span>${esc(o.why).replace(/\n/g,"<br>")}</span>`}${o.err||o.terr?`<code>${esc(String(o.err||o.terr).trim().split("\n").pop())}</code>`:""}${!o.ok&&(V.pyTries||0)>=2&&!V.pySol?`<div><button class="ghost" data-pysol="1">Voir la solution</button></div>`:""}</div>`}
+/* ---- éditeur adapté au téléphone ---- */
+const PY_KEYS=[["⇥","    "],[":",":"],["(","("],[")",")"],["\"","\""],["[","["],["]","]"],["=","="],["+","+"],["*","*"],["<","<"],[">",">"],["#","#"]];
+function pyIns(t){const el=document.getElementById("pyed");if(!el)return;el.focus({preventScroll:true});const a=el.selectionStart,b=el.selectionEnd;el.setRangeText(t,a,b,"end");el.dispatchEvent(new Event("input",{bubbles:true}))}
+document.addEventListener("keydown",e=>{const el=e.target;if(!el||el.id!=="pyed")return;
+  if(e.key==="Tab"){e.preventDefault();return pyIns("    ")}
+  if(e.key==="Enter"&&!e.shiftKey){const v=el.value,a=el.selectionStart,ls=v.lastIndexOf("\n",a-1)+1,line=v.slice(ls,a),ind=(line.match(/^ */)||[""])[0].length+(/:\s*$/.test(line)?4:0);e.preventDefault();pyIns("\n"+" ".repeat(ind))}});
+document.addEventListener("input",e=>{const el=e.target;if(el&&el.id==="pyed")pyKeep(V.pyL,!!V.pyRev,el.value)});
+const pyKeepFocus=e=>{if(e.target.closest&&e.target.closest(".pykeys button")){e.preventDefault();if(e.type==="touchstart"||e.type==="mousedown")pyIns(e.target.closest("button").dataset.k)}};
+document.addEventListener("touchstart",pyKeepFocus,{passive:false,capture:true});document.addEventListener("mousedown",pyKeepFocus,true);
+document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest(".pykeys button")){e.preventDefault();e.stopPropagation();if(e.detail===0)pyIns(e.target.closest("button").dataset.k)}},true);
+
+/* ---- page ---- */
+function pyCodeHtml(c){return`<pre class="pycode">${esc(c)}</pre>`}
+function pyLesson(){const i=V.pyL,L=PY_L[i],rev=!!V.pyRev,done=pyDone(i),code=V.pyBuf&&V.pyBuf.k===(rev?"r"+i:i)?V.pyBuf.val:pyCode(i,rev);
+  return`<div class="card stack pyl"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">${rev?"🔁 Révision du jour · ":""}Leçon ${i+1} / ${PY_L.length}</p>${done&&!rev?`<span class="tag">✓ validée</span>`:""}</div>
+    <h3 class="pyt">${esc(L.t)}</h3>${rev?"":`<div class="egx">${L.x.split("\n").map(l=>`<p>${esc(l)}</p>`).join("")}</div>
+    <p class="label" style="margin:0">Exemple</p>${pyCodeHtml(L.code)}<div><button class="ghost on" data-pyex="1">▶ Lancer l'exemple</button></div>`}</div>
+  <div class="card stack pyl"><p class="label" style="margin:0">✏️ À toi</p><p class="pyq">${esc(L.ex.q)}</p>
+    <textarea class="pyed" id="pyed" rows="${Math.max(6,code.split("\n").length+2)}" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" data-nomic="1" aria-label="Ton code Python">${esc(code)}</textarea>
+    <div class="pykeys" aria-label="Touches utiles">${PY_KEYS.map(([l,k])=>`<button type="button" data-k="${esc(k)}" aria-label="${l==="⇥"?"4 espaces":"Insérer "+esc(l)}">${esc(l)}</button>`).join("")}</div>
+    <div class="row"><button class="btn" data-pyrun="1">▶ Exécuter et vérifier</button><button class="ghost" data-pyhint="1">💡 Indice</button>${(V.pyTries||0)>=2||done?`<button class="ghost" data-pysol="1">Voir la solution</button>`:""}<button class="ghost" data-pyreset="1">↺</button></div>
+    ${V.pyHint?`<p class="small pyhint">💡 ${esc(L.ex.hint)}</p>`:""}${V.pySol?`<p class="label" style="margin:0">Une solution</p>${pyCodeHtml(L.ex.sol)}`:""}
+    <div id="pyres" class="stack" style="gap:8px">${pyResHtml()}</div>
+    <div id="pynext" ${V.pyOut&&V.pyOut.ok?"":"hidden"} class="row"><button class="btn" data-pynav="${rev?"home":i+1<PY_L.length?i+1:"home"}">${rev?"Retour":i+1<PY_L.length?"Leçon suivante →":"🎉 Tu as fini le parcours !"}</button><span class="muted small">${rev?"":"Une leçon par jour suffit pour progresser."}</span></div></div>`}
+function pagePy(){if(pyState==="off")setTimeout(pyWorker,0);if(V.pyL==null)V.pyL=pyCur();
+  const dn=Object.keys(pyDoc().done||{}).length,stk=pyStreak(),td=!!(pyDoc().d||{})[todayK()],ri=pyRevIdx(),cur=pyCur();
+  return`<div class="card stack" style="gap:10px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">🐍 Ton parcours · ${dn}/${PY_L.length}</p><span class="muted small">${stk?`🔥 ${stk} jour${stk>1?"s":""}`:""}</span></div>
+    <div class="mxbar"><i style="width:${Math.round(dn/PY_L.length*100)}%"></i></div>
+    <p class="small" style="margin:0">${td?"✓ Ta pratique du jour est faite. Tu peux continuer si tu veux !":`Aujourd'hui : la leçon ${cur+1}, environ 10 minutes.`}</p>
+    <div class="row">${V.pyL!==cur||V.pyRev?`<button class="ghost on" data-pynav="${cur}">Leçon du jour</button>`:""}${ri!=null&&!V.pyRev?`<button class="ghost on" data-pyrev="${ri}">🔁 Révision du jour</button>`:""}</div>
+    <p class="muted small" id="pystat" style="margin:0">${pyStatTxt()}</p>${V.pyErr&&pyState==="fail"?`<p class="muted small" style="margin:0">${esc(V.pyErr).slice(0,160)}</p>`:""}</div>
+  ${pyLesson()}
+  <details class="card"><summary><b>📚 Toutes les leçons</b></summary><ol class="eglist">${PY_L.map((L,i)=>{const open=i<=cur||pyDone(i);return`<li class="${open?"":"off"}">${open?`<button class="linkb" data-pynav="${i}">${esc(L.t)}</button>`:`<span>🔒 ${esc(L.t)}</span>`}${pyDone(i)?" ✓":""}</li>`}).join("")}</ol></details>`}
+function pySummary(){const dn=Object.keys(pyDoc().done||{}).length,td=!!(pyDoc().d||{})[todayK()],stk=pyStreak();return[`${dn}/${PY_L.length}`,td?`pratique du jour faite${stk>1?" · 🔥 "+stk+" jours":""}`:`leçon du jour : ${PY_L[pyCur()].t.toLowerCase()}`]}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-pyex],[data-pyrun],[data-pyhint],[data-pysol],[data-pyreset],[data-pynav],[data-pyrev]");if(!b)return;const d=b.dataset;
+  if(d.pyex)return pyGo("ex");
+  if(d.pyrun){return pyGo("run")}
+  if(d.pyhint){V.pyHint=!V.pyHint;return render(true)}
+  if(d.pysol){V.pySol=!V.pySol;return render(true)}
+  if(d.pyreset){const k=V.pyRev?"r"+V.pyL:V.pyL,c={...(pyDoc().code||{})};delete c[k];V.pyBuf=null;pySave({code:c});V.pyOut=null;return render(true)}
+  const fresh=()=>{pyFlush();V.pyOut=null;V.pyHint=false;V.pySol=false;V.pyTries=0};
+  if(d.pynav!==undefined){fresh();V.pyRev=false;if(d.pynav!=="home")V.pyL=+d.pynav;else V.pyL=pyCur();render(true);return window.scrollTo(0,0)}
+  if(d.pyrev!==undefined){fresh();V.pyRev=true;V.pyL=+d.pyrev;const c={...(pyDoc().code||{})};delete c["r"+V.pyL];pySave({code:c});render(true);return window.scrollTo(0,0)}});
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
-const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["ps","Parcoursup"],["ent","Entraîne­ment"],["cours","Cours"],["mx","Maths"],["cg","Culture G"]];
+const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["ps","Parcoursup"],["ent","Entraîne­ment"],["py","Python"],["cours","Cours"],["mx","Maths"],["cg","Culture G"]];
 function summary(k){
   const t=today();
   if(k==="pron")return pnSummary();
@@ -3978,6 +4384,7 @@ function summary(k){
   if(k==="cg")return cgSummary();
   if(k==="ps")return psSummary();
   if(k==="ent")return entSummary();
+  if(k==="py")return pySummary();
   if(k==="mx")return mxSummary();
   if(k==="hab"){const s=dayStats(t);return[`${s.n}/${s.t}`,isWE(t)?"tâches du week-end":"tâches faites aujourd'hui"]}
   if(k==="proj"){const a=nIn("all");return a.length?[`${a.length}`,`note${a.length>1?"s":""} · ${esc(nTitle(a[0][1]))}`]:["Notes","écris ce qui te trotte dans la tête"]}
@@ -4020,7 +4427,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.8.2";
+const APP_VERSION="1.9.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -4540,7 +4947,7 @@ document.addEventListener("click",e=>{
 /* ================================================================
    RENDU
    ================================================================ */
-const PAGES={ps:pagePs,ent:pageEnt,bilan:pageBilan,idees:pageIdees,cg:pageCg,mx:pageMx,reglages:pageReglages,aide:pageAide,pron:pagePron,jour:pageJour,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
+const PAGES={py:pagePy,ps:pagePs,ent:pageEnt,bilan:pageBilan,idees:pageIdees,cg:pageCg,mx:pageMx,reglages:pageReglages,aide:pageAide,pron:pagePron,jour:pageJour,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
 let pending=false;
 function render(force){
   const a=document.activeElement;
