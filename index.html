@@ -675,6 +675,22 @@ h3.ent{font-size:1.08rem;line-height:1.35}
 /* tuiles aux noms longs */
 .tile[data-page="ps"] h2,.tile[data-page="ent"] h2{font-size:.95rem;padding-right:40px;-webkit-hyphens:manual;hyphens:manual}
 .tile[data-page="ps"] svg.ill,.tile[data-page="ent"] svg.ill{width:62px;height:62px;right:-2px;top:-2px}
+/* dossier de 1re */
+.psdf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.psdf label{display:flex;flex-direction:column;gap:4px;font-size:.82rem;color:var(--muted);min-width:0}
+.psdf .field{flex:none;width:100%}
+.psadv{margin:4px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.pil1{white-space:nowrap}
+.pilh .pil1+.pilv{margin-left:8px}
+.pilh .pil1{margin-left:auto}
+/* mon chemin + carte des voies */
+.pschem{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pschem li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:10px;align-items:start}
+.pschem li>div{display:flex;flex-direction:column;gap:1px;min-width:0;overflow-wrap:anywhere}
+.pschem li>div span{font-size:.92rem}
+.psn{width:28px;height:28px;border-radius:50%;background:color-mix(in srgb,var(--c) 15%,var(--surface));color:var(--c);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.psg{font-size:.8rem;font-weight:700;color:var(--c);margin:6px 2px 0}
+details.pslic.pick{border:1px solid color-mix(in srgb,var(--c) 55%,var(--line))}
 </style>
 <script src="config.js"></script>
 </head>
@@ -3704,7 +3720,8 @@ function pilData(){const p=pnData(),n=p&&p.notes;if(!n||!(n.matieres||[]).length
     const C=g.reduce((s,x)=>s+x.c,0);let need=null,k=1;
     if(A!=null){for(k=1;k<=4;k++){need=(T*(C+k)-A*C)/k;if(need<=20)break}if(k>4)k=4}
     const last=g.slice(-2).map(x=>x.v),down=A!=null&&g.length>=3&&((last.length===2&&last.every(v=>v<A-1))||last[last.length-1]<A-2.5);
-    return{m:a.m,A,C,need,k,down,last,math:/math/i.test(a.m||""),gap:A==null?-99:T-A}});
+    const D=psDos(),p1=PIL_SPE.test(a.m||"")?D.m1:PIL_SES.test(a.m||"")?D.s1:null;
+    return{m:a.m,A,C,need,k,down,last,p1,math:/math/i.test(a.m||""),gap:A==null?-99:T-A}});
   const pr=r=>r.gap+(r.math&&r.gap>0?1:0)+(r.down?0.5:0);rows.sort((x,y)=>pr(y)-pr(x));
   return{T,rows,periode:n.periode||""}}
 function pilRow(r,T){
@@ -3712,14 +3729,15 @@ function pilRow(r,T){
     :r.A>=T?(r.need<=0?"✓ Au-dessus de ta cible, avec de la marge.":`✓ Au-dessus de ta cible. Pour y rester : au moins <b>${pct1(r.need)}</b> au prochain contrôle.`)
     :r.need<=20?(r.k===1?`Il te faut <b>${pct1(Math.max(0,r.need))}</b> au prochain contrôle pour atteindre ${pct1(T)}.`:`Vise <b>${pct1(r.need)}</b> de moyenne sur tes ${r.k} prochains contrôles pour atteindre ${pct1(T)}.`)
     :`Ta cible est loin ce trimestre : vise d'abord ${pct1(Math.min(20,r.A+1))} (il te faut <b>${pct1(Math.min(20,(r.A+1)*(r.C+1)-r.A*r.C))}</b> au prochain contrôle).`;
-  return`<div class="pilr ${r.A!=null&&r.A<T?"lo":""}"><div class="pilh"><b>${esc(pilShort(r.m))}</b>${r.math?`<span class="tag">clé pour les licences de maths</span>`:""}${r.down?`<span class="tag warn">⚠️ en baisse</span>`:""}<span class="num pilv">${r.A==null?"—":pct1(r.A)}</span></div>
+  return`<div class="pilr ${r.A!=null&&r.A<T?"lo":""}"><div class="pilh"><b>${esc(pilShort(r.m))}</b>${r.math?`<span class="tag">clé pour les licences de maths</span>`:""}${r.down?`<span class="tag warn">⚠️ en baisse</span>`:""}${r.p1!=null?`<span class="muted small pil1">1re : ${pct1(r.p1)}${r.A!=null?bilDelta(r.A,r.p1):""}</span>`:""}<span class="num pilv">${r.A==null?"—":pct1(r.A)}</span></div>
     <div class="pilbar" style="--k:${pnCol(r.m)}"><i style="width:${r.A==null?0:Math.min(100,r.A*5)}%"></i><u style="left:${Math.min(100,T*5)}%" title="Ta cible"></u></div>
     <small>${msg}${r.down&&r.last.length?` Dernières notes : ${r.last.map(v=>pct1(v)).join(" puis ")}.`:""}</small></div>`}
 function pilotCard(){const P=pilData();
   if(!P)return`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">🎯 Pilote de notes</p><p class="muted small" style="margin:0">Relie Pronote : l'appli te dira, matière par matière, la note qu'il te faut au prochain contrôle pour atteindre ta cible.</p><div><button class="ghost on" data-page="pron">Relier Pronote</button></div></div>`;
-  const top=P.rows.find(r=>r.A!=null&&r.A<P.T);
+  const top=P.rows.find(r=>r.A!=null&&r.A<P.T),D=psDos(),pn=pnData(),gT=pn&&pn.notes&&typeof pn.notes.moyenne==="number"?pn.notes.moyenne:null;
   return`<div class="card stack pil" style="gap:12px"><div class="row" style="justify-content:space-between;gap:6px"><p class="label" style="margin:0">🎯 Pilote de notes${P.periode?" · "+esc(P.periode):""}</p>
       <span class="pilt"><button class="ghost" data-pilc="-0.5" aria-label="Baisser la cible">−</button><b class="num">cible ${pct1(P.T)}</b><button class="ghost" data-pilc="0.5" aria-label="Monter la cible">+</button></span></div>
+    ${D.g1!=null&&gT!=null?`<p class="small" style="margin:0">Moyenne générale : 1re ${pct1(D.g1)} → maintenant <b>${pct1(gT)}</b>${bilDelta(gT,D.g1)}. Parcoursup regarde cette progression.</p>`:""}
     ${P.rows.map(r=>pilRow(r,P.T)).join("")}
     ${top?`<div class="pilact"><span>Priorité de la semaine : <b>${esc(pilShort(top.m))}</b></span><button class="btn" data-pilrev="${esc(top.m)}">📅 Réviser 30 min mardi et jeudi</button></div>`:""}
     ${V.pilMsg?`<p class="small" style="margin:0">${esc(V.pilMsg)}</p>`:""}
@@ -3731,16 +3749,75 @@ function pilCible(dv){objCfg();const t=((S.params||{}).top3)||{},c=Math.max(10,M
 const PS_DATES=[["2026-12-17","Le site Parcoursup ouvre : découvre les formations et leurs fiches","ouverture du site"],["2027-01-19","Inscription et début des vœux","début des vœux"],["2027-03-12","Dernier jour pour formuler tes vœux","fin des vœux"],["2027-04-01","Dernier jour pour compléter tes dossiers et confirmer tes vœux","confirmation des vœux"],["2027-06-02","Premières réponses des formations","premières réponses"]];
 const psNext=()=>{const t=todayK();return PS_DATES.find(x=>x[0]>=t)||null};
 const psDays=k=>{const[y,m,d]=k.split("-").map(Number);return Math.round((new Date(y,m-1,d)-today())/864e5)};
-const PS_LIC=[
- {n:"Licence Mathématiques-Informatique (MIDO)",u:"Université Paris Dauphine-PSL",f:"160 places pour 5 513 candidats (2025). 28 des 170 admis avaient, comme toi, maths + SES.",c:"Tes notes de maths (essentiel), la progression de tes moyennes de la 1re à la Terminale, ta lettre de motivation.",w:"Une université tournée vers l'économie et la finance, à Paris : idéale pour les deux chemins."},
- {n:"Double licence Économie-Mathématiques",u:"Université Paris-Saclay",f:"Petite promo (environ 23 étudiants en 1re année). Maths expertes fortement conseillées, SES conseillées.",c:"Un très bon niveau en spécialité maths en 1re et en Terminale.",w:"Maths + économie : exactement ton profil. 3e année en partenariat avec l'ENSAE, et des voies réservées vers Polytechnique, l'ENSAE ou l'ENSAI."},
- {n:"Licence de Mathématiques (portail Mathématiques, Informatique)",u:"Sorbonne Université",f:"200 places pour 8 360 candidats (2025) : la licence de maths la plus demandée.",c:"Le niveau en maths avant tout.",w:"La porte naturelle vers le Master Probabilités et Finance de la même université, la référence pour devenir quant en France."},
- {n:"Doubles licences Mathématiques-Économie en région",u:"Strasbourg · Lyon 1 · Évry · Le Mans",f:"Strasbourg 40 places (1 163 candidats), Lyon 1 50 places (1 583), Évry 35 places (1 488) en 2025. Le Mans : parcours sciences actuarielles et financières.",c:"Les maths et les SES, et ta motivation pour l'économie.",w:"De très bons vœux de sécurité, avec le même double profil."},
- {n:"Licences de maths classiques",u:"Université Paris Cité · Paris-Saclay (Orsay)",f:"Paris Cité : 200 places (5 990 candidats en 2025). Orsay : portails Maths-Physique et Maths-Informatique.",c:"Le niveau en maths.",w:"Des bases très solides, et les mêmes portes ouvertes après la licence."}];
-const PS_AST=[["HEC Paris","GMAT ou GRE, un test d'anglais officiel (niveau proche de C1), CV, relevés de notes, lettre de recommandation, questionnaire écrit. Entretien souvent en anglais, avec des questions sur l'actualité économique."],
- ["ESSEC","TAGE MAGE, GMAT ou GRE (les admissibles ont souvent 370 à 380 ou plus au TAGE MAGE), anglais B2 minimum (C1, c'est mieux), un essai en anglais, un entretien d'environ 45 min. Environ 5 à 10 % d'admis."],
- ["ESCP","GMAT, GRE, CAT ou TAGE MAGE (environ 400 au TAGE MAGE renforce le dossier), anglais minimum (TOEIC 900, IELTS 6,5…), un entretien d'environ 30 min."]];
-const PS_CHECK=[["notes","Soigner tes notes du 1er et du 2e trimestre, surtout en maths : les formations regardent ta progression"],["fiches","Lire les fiches des formations sur Parcoursup (dès le 17 décembre)"],["jpo","Aller aux journées portes ouvertes (Dauphine, Saclay, Sorbonne…)"],["insc","T'inscrire sur Parcoursup (dès le 19 janvier)"],["projet","Écrire un projet de formation motivé pour chaque vœu"],["activ","Remplir « activités et centres d'intérêt » (marchés financiers, presse éco, lecture…)"],["voeux","Formuler tes vœux avant le 12 mars (jusqu'à 10 vœux)"],["confirm","Confirmer tes vœux avant le 1er avril"]];
+/* ton dossier de 1re : ce que les formations verront (enregistré sur ton compte, jamais dans le code de l'appli, qui est public) */
+const PIL_SPE=/math(?!.*expert)/i,PIL_SES=/econ|sociales|\bses\b/i;
+const PS_DF=[["g1","Moyenne générale de 1re","ex. 13,8"],["m1","Maths en 1re (moyenne de l'année)","ex. 12,3"],["s1","SES en 1re (moyenne de l'année)","ex. 13"],["x1","3e spécialité arrêtée (moyenne)","ex. 12"],["fe","Bac de français : écrit","sur 20"],["fo","Bac de français : oral","sur 20"],["ma","Épreuve anticipée de maths","sur 20"]];
+function psDos(){const D=psDoc("dossier"),v=k=>{const x=parseFloat(String(D[k]??"").replace(",","."));return isNaN(x)?null:x},o={D};PS_DF.forEach(([k])=>o[k]=v(k));o.filled=PS_DF.some(([k])=>o[k]!=null);return o}
+let psDT=null,psDP={};
+function psDfFlush(){clearTimeout(psDT);if(Object.keys(psDP).length){put("ps","dossier",{...psDoc("dossier"),...psDP},true);psDP={}}}
+function psDf(k,v){psDP[k]=String(v).slice(0,40);clearTimeout(psDT);psDT=setTimeout(psDfFlush,500)}
+function psAdvice(d,gT,mT){const o=[];
+  if(d.g1!=null&&d.g1<15)o.push(`Avec une 1re autour de ${pct1(d.g1)}, les licences les plus demandées (Dauphine, Saclay, Sorbonne) sont des vœux très ambitieux pour entrer en 1re année : mets-les quand même (un vœu ne coûte rien), mais garde des vœux sûrs.`);
+  if(gT!=null&&d.g1!=null)o.push(gT>d.g1?`Bonne nouvelle : tu es déjà à ${pct1(gT)} cette année, soit ${pct1(gT-d.g1)} point${gT-d.g1>=2?"s":""} de plus qu'en 1re. Les formations regardent cette progression jusqu'au 2e trimestre : c'est ta meilleure carte.`:`Ta meilleure carte : une vraie progression en Terminale (1er et 2e trimestres), surtout en maths.`);
+  if(mT!=null&&d.m1!=null&&mT>d.m1)o.push(`En maths, tu passes de ${pct1(d.m1)} à ${pct1(mT)} : mets-le en avant dans tes projets motivés.`);
+  if([d.fe,d.fo].some(x=>x!=null&&x<10)||(d.ma!=null&&d.ma<12))o.push("Tes épreuves anticipées sont dans ton dossier. Si un événement les a perturbées, explique-le en 2 à 6 lignes, de façon factuelle, dans la rubrique facultative « Éléments liés à ma scolarité » (onglet Ma scolarité de Parcoursup).");
+  o.push("Ta stratégie tient la route : une excellente 1re année dans une licence de maths, puis un rebond en L2 ou en L3 (Dauphine, Sorbonne, un magistère d'économie, une école d'ingénieurs par la voie universitaire…). Toutes les voies sont plus bas, étape par étape.");
+  return o.map(x=>`<li>${x}</li>`).join("")}
+function psDosCard(){const d=psDos(),P=pilData(),p=pnData(),gT=p&&p.notes&&typeof p.notes.moyenne==="number"?p.notes.moyenne:null,f=re=>{const x=P&&P.rows.find(r=>re.test(r.m||"")&&r.A!=null);return x?x.A:null},mT=f(PIL_SPE),sT=f(PIL_SES),ed=V.psDosEdit||!d.filled;
+  const cmp=(l,a,b)=>a==null?"":`<li><span>${l}</span><b class="num">${pct1(a)}${b!=null?` → ${pct1(b)}${bilDelta(b,a)}`:""}</b></li>`;
+  return`<div class="card stack" style="gap:10px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">📁 Mon dossier : 1re → Terminale</p>${d.filled&&!ed?`<button class="ghost" data-psdos="1">Modifier</button>`:""}</div>
+   ${ed?`<p class="muted small" style="margin:0">Ce que les formations verront de ta 1re. À remplir une fois : c'est enregistré sur ton compte, pas dans le code de l'appli.</p>
+    <div class="psdf">${PS_DF.map(([k,l,ph])=>`<label><span>${l}</span><input class="field" inputmode="decimal" data-psdf="${k}" value="${esc(d.D[k]??"")}" placeholder="${ph}" autocomplete="off"></label>`).join("")}<label><span>Nom de la 3e spécialité</span><input class="field" data-psdf="x1n" data-nomic="1" value="${esc(d.D.x1n??"")}" placeholder="ex. Physique-chimie" autocomplete="off"></label></div>
+    <div><button class="btn" data-psdos="0">✓ C'est rempli</button></div>`
+   :`<ul class="bilnotes">${cmp("Moyenne générale",d.g1,gT)}${cmp("Maths (spécialité)",d.m1,mT)}${cmp("SES",d.s1,sT)}${d.x1!=null?`<li><span>${esc(d.D.x1n||"3e spécialité")} (arrêtée)</span><b class="num">${pct1(d.x1)}</b></li>`:""}${d.fe!=null||d.fo!=null?`<li><span>Bac de français (écrit · oral)</span><b class="num">${d.fe!=null?pct1(d.fe):"—"} · ${d.fo!=null?pct1(d.fo):"—"}</b></li>`:""}${d.ma!=null?`<li><span>Épreuve anticipée de maths (coef. 2)</span><b class="num">${pct1(d.ma)}</b></li>`:""}</ul>
+    <p class="muted small" style="margin:0">La flèche montre ta moyenne actuelle (Pronote).</p>
+    <div class="psway"><b>Ce que ça veut dire pour toi</b><ul class="psadv">${psAdvice(d,gT,mT)}</ul></div>`}</div>`}
+/* toutes les voies : 1. ta 1re année (Parcoursup) → 2. rebondir en L2 / L3 → 3. après la licence */
+const PS_ST=[[1,"1 · Ta 1re année de licence (Parcoursup)"],[2,"2 · Rebondir en L2 ou en L3 si tu as de super résultats"],[3,"3 · Après la licence : master ou grande école"]];
+const PS_G={paris:"Les plus demandées (Paris) : vœux très ambitieux pour toi en 1re année",region:"Doubles licences maths-éco en région : ambitieuses",sud:"En Région Sud (Aix-Marseille, Nice, Toulon, Avignon) : vœux plus sûrs pour faire une super L1"};
+const PS_MAP=[
+ {id:"dau1",st:1,g:"paris",n:"Licence Mathématiques-Informatique (MIDO)",u:"Dauphine-PSL · Paris",f:"160 places pour 5 513 candidats (2025). 165 des 167 admis venant d'un bac général avaient une mention Bien ou Très bien.",w:"La meilleure porte vers la finance. Très ambitieuse en 1re année avec ton dossier : mets-la en vœu, et vise-la surtout en L2 ou en L3."},
+ {id:"sor1",st:1,g:"paris",n:"Licence de Mathématiques (portail Maths-Informatique)",u:"Sorbonne Université · Paris",f:"200 places pour 8 360 candidats (2025) : la licence de maths la plus demandée.",w:"Mène au Master Probabilités et Finance, la référence pour devenir quant en France."},
+ {id:"sac1",st:1,g:"paris",n:"Double licence Économie-Mathématiques",u:"Université Paris-Saclay",f:"Petite promo (environ 23 étudiants en 1re année). Maths expertes fortement conseillées, SES conseillées.",w:"Maths + éco comme toi. 3e année en partenariat avec l'ENSAE, et des voies réservées vers Polytechnique, l'ENSAE, l'ENSAI ou l'ISUP."},
+ {id:"pc1",st:1,g:"paris",n:"Licence de Mathématiques",u:"Université Paris Cité · Paris",f:"Portail Maths-Informatique : 200 places pour 5 990 candidats. Maths fondamentales et appliquées : 63 places pour 3 153 candidats (2025).",w:"Une grande fac de maths parisienne, pour rebondir ensuite vers Dauphine ou la Sorbonne."},
+ {id:"ors1",st:1,g:"paris",n:"Licence de Mathématiques (portails Maths-Info et Maths-Physique)",u:"Université Paris-Saclay · Orsay",f:"Maths-Informatique : 75 places pour 3 591 candidats. Maths-Physique : 105 places pour 5 616 candidats (2025).",w:"Des maths de très bon niveau, dans l'université de la double licence avec l'ENSAE."},
+ {id:"dlr",st:1,g:"region",n:"Doubles licences Mathématiques-Économie",u:"Strasbourg · Lyon 1 · Évry · Angers · Le Mans",f:"Strasbourg 40 places (1 163 candidats), Lyon 1 50 places (1 583), Évry 35 places (1 488), Angers 25 places (609) en 2025. Le Mans : parcours sciences actuarielles et financières.",w:"Ton double profil maths + éco, avec moins de concurrence qu'à Paris."},
+ {id:"amu1",st:1,g:"sud",n:"Licence de Mathématiques (portail René Descartes)",u:"Aix-Marseille Université · Aix, Saint-Charles, Luminy",f:"Aix : 40 places pour 1 790 candidats. Saint-Charles : 55 places pour 1 890. Luminy : 20 places pour 1 898 (2025).",w:"La grande fac de maths de la région. Dans la même université, l'AMSE recrute en L3 pour son magistère Économie, data science et finance."},
+ {id:"amu2",st:1,g:"sud",n:"Licence MIASHS (maths appliquées aux sciences humaines et sociales)",u:"Aix-Marseille Université · Aix (faculté d'économie)",f:"Maths appliquées, statistiques et économie.",w:"Après une L2 MIASHS, tu peux viser le magistère de l'AMSE à Aix-Marseille ou celui de Paris 1."},
+ {id:"uca1",st:1,g:"sud",n:"Licence de Mathématiques",u:"Université Côte d'Azur · Nice",f:"Portail Mathématiques : 70 places pour 1 786 candidats (2025). En L3, parcours Ingénierie mathématique.",w:"Après la L3, un double diplôme avec l'EDHEC (master de maths + MIM « Financial Economics »)."},
+ {id:"tln1",st:1,g:"sud",n:"Licence de Mathématiques",u:"Université de Toulon",f:"90 places pour 880 candidats (2025).",w:"Un vœu plus sûr pour faire une super L1, puis rebondir."},
+ {id:"avi1",st:1,g:"sud",n:"Licence Mathématiques et Interactions",u:"Avignon Université",f:"120 places pour 694 candidats (2025).",w:"Un vœu plus sûr pour faire une super L1, puis rebondir."},
+ {id:"dau2",st:2,n:"Dauphine-PSL : L2 ou L3 Mathématiques appliquées",u:"Paris",f:"L2 après 60 crédits validés, L3 après 120 crédits. Sur dossier, via MyCandidature (en L3, aussi par le concours BECEAS).",w:"Le rebond le plus direct vers la finance (et le Master 203 ensuite)."},
+ {id:"sor2",st:2,n:"Sorbonne Université : L2 ou L3 de Mathématiques",u:"Paris",f:"Candidature sur eCandidat. Les conditions dépendent de ton profil : renseigne-toi auprès du département de maths.",w:"Mène au Master Probabilités et Finance (trader quant)."},
+ {id:"p1mag",st:2,n:"Magistère d'économie",u:"Paris 1 Panthéon-Sorbonne · de la L3 au M2",f:"Entrée en L3 après un Bac+2 (économie, MIASHS ou prépa), sur dossier et parfois entretien, via eCandidat. Les notes dans les matières quantitatives comptent beaucoup.",w:"3 ans d'économie quantitative de haut niveau, puis finance, banque, conseil."},
+ {id:"amse",st:2,n:"Magistère Économie, data science et finance (AMSE)",u:"Aix-Marseille · de la L3 au M2",f:"Entrée après un Bac+2 (économie, MIASHS) ou une prépa, avec de bonnes capacités quantitatives. Sur dossier, parfois entretien.",w:"Finance et data science, des cours de plus en plus en anglais et un semestre à l'étranger : un vrai tremplin près de chez toi."},
+ {id:"ing",st:2,n:"Écoles d'ingénieurs par la voie universitaire",u:"Polytechnique · ENSAE · ENSAI · ISUP",f:"Ces écoles ont des voies d'admission réservées aux étudiants de licence, avec un excellent niveau en maths exigé.",w:"L'ENSAE forme à la finance, à l'actuariat et à la data science : une autre route vers le trading quantitatif."},
+ {id:"hec",st:3,n:"HEC Paris (admission sur titre)",u:"Programme Grande École",f:"GMAT ou GRE, un test d'anglais officiel (niveau proche de C1), CV, relevés de notes, lettre de recommandation, questionnaire écrit. Entretien souvent en anglais, avec des questions sur l'actualité économique.",w:"Le Top 3 : banque d'affaires, private equity, marchés."},
+ {id:"essec",st:3,n:"ESSEC (admission sur titre)",u:"Programme Grande École",f:"TAGE MAGE, GMAT ou GRE (les admissibles ont souvent 370 à 380 ou plus au TAGE MAGE), anglais B2 minimum (C1, c'est mieux), un essai en anglais, un entretien d'environ 45 min. Environ 5 à 10 % d'admis.",w:"Le Top 3 : banque d'affaires, private equity, marchés."},
+ {id:"escp",st:3,n:"ESCP (admission sur titre)",u:"Programme Grande École",f:"GMAT, GRE, CAT ou TAGE MAGE (environ 400 au TAGE MAGE renforce le dossier), anglais minimum (TOEIC 900, IELTS 6,5…), un entretien d'environ 30 min.",w:"Le Top 3 : banque d'affaires, private equity, marchés."},
+ {id:"m203",st:3,n:"Master 203 « Financial Markets »",u:"Dauphine-PSL",f:"Ouvert après une licence d'économie, de gestion ou de maths. TOEFL obligatoire, GMAT ou GRE fortement recommandé. Dossier puis entretien, via MyCandidature.",w:"Le master de Dauphine consacré aux marchés financiers."},
+ {id:"elk",st:3,n:"Master Probabilités et Finance (« master El Karoui »)",u:"Sorbonne Université · Polytechnique",f:"Sélection sur dossier. Profil scientifique solide en probabilités et en programmation (C++).",w:"Débouchés : quant, trader quantitatif, trading haute fréquence. En 2019, environ 1 quant sur 3 en France en sortait."},
+ {id:"edhec",st:3,n:"Double diplôme Université Côte d'Azur – EDHEC",u:"Nice",f:"Après une L3 de maths : master Mathématiques et applications + MIM « Financial Economics » de l'EDHEC.",w:"Une grande école de commerce et des maths financières, depuis Nice."}];
+const psMap=id=>PS_MAP.find(x=>x.id===id);
+function psChemin(){return psDoc("chemin")}
+function psSetChemin(p){return put("ps","chemin",{...psChemin(),...p})}
+function psFacName(){const c=psChemin(),f=c.fac;if(!f)return null;if(f.startsWith("v:")){const v=(psDoc("voeux").list||[]).find(x=>x.id===f.slice(2));return v?v.nom:null}const x=psMap(f);return x?`${x.n} · ${x.u}`:null}
+function psChCard(){const c=psChemin(),fac=psFacName(),reb=(c.reb||[]).map(psMap).filter(Boolean),fin=(c.fin||[]).map(psMap).filter(Boolean);
+  const li=(n,l,v,empty)=>`<li><span class="psn">${n}</span><div><b>${l}</b><span>${v||`<i class="muted">${empty}</i>`}</span></div></li>`;
+  return`<div class="card stack" style="gap:10px"><p class="label" style="margin:0">🧭 Mon chemin</p><ol class="pschem">
+    ${li("1","L'an prochain (L1)",fac?esc(fac):"","Choisis ta fac plus bas : ⭐ Ma fac de l'an prochain")}
+    ${li("2","Rebond en L2 ou L3",reb.map(x=>esc(x.n)).join(" · "),"Touche 🎯 Je vise sur les rebonds qui te tentent")}
+    ${li("3","Ensuite",fin.map(x=>esc(x.n)).join(" · "),"Touche 🎯 Je vise : Top 3, master de marchés, master quant…")}
+    ${li("🎯","Métier visé","Trader quantitatif, ou la finance de haut niveau par le Top 3","")}</ol>
+    <p class="small" style="margin:0">La même licence de maths ouvre les deux portes : le Top 3 (admission sur titre) ou un master de maths financières (trader quant). Tu choisis en 3e année.</p></div>`}
+function psMapCard(x){const c=psChemin(),isFac=c.fac===x.id,aim=(x.st===2?c.reb:c.fin)||[],on=aim.includes(x.id);
+  const inV=(psDoc("voeux").list||[]).some(v=>v.nom===x.n+" · "+x.u);
+  return`<details class="card pslic ${isFac||on?"pick":""}" ${V.psKeep===x.id?"open":""}><summary><b>${isFac?"⭐ ":on?"🎯 ":""}${esc(x.n)}</b><span class="muted small">${esc(x.u)}</span></summary><div class="stack" style="gap:6px;margin-top:10px"><p class="small"><b>${x.st===1?"Chiffres":"Comment y entrer"} :</b> ${esc(x.f)}</p><p class="small"><b>Pour toi :</b> ${esc(x.w)}</p>
+   <div class="row">${x.st===1?`<button class="ghost ${isFac?"on":""}" data-psfac="${x.id}">${isFac?"⭐ Ma fac de l'an prochain":"⭐ Ma fac de l'an prochain ?"}</button>${inV?`<span class="tag">✓ dans tes vœux</span>`:`<button class="ghost on" data-psadd="${x.id}">＋ Mes vœux</button>`}`:`<button class="ghost ${on?"on":""}" data-psaim="${x.id}">${on?"🎯 Je vise ✓":"🎯 Je vise"}</button>`}</div></div></details>`}
+function psMapHtml(){return PS_ST.map(([st,t])=>{const L=PS_MAP.filter(x=>x.st===st);
+  const body=st===1?Object.entries(PS_G).map(([g,gt])=>`<p class="psg">${esc(gt)}</p>${L.filter(x=>x.g===g).map(psMapCard).join("")}`).join(""):L.map(psMapCard).join("");
+  return`<div class="stack" style="gap:8px"><p class="label" style="margin:0">${esc(t)}</p>${body}${st===1?`<p class="muted small" style="margin:0">Sur la fiche Parcoursup de chaque formation, regarde le « taux d'accès » : plus il est haut, plus le vœu est sûr.</p>`:st===3?`<p class="small" style="margin:0">L'appli t'y prépare déjà : <button class="linkb" data-bilgo="ent|cm">calcul mental</button>, <button class="linkb" data-bilgo="ent|en">anglais à l'oral</button> et l'actu éco dans Finance.</p>`:""}</div>`}).join("")}
+const PS_CHECK=[["notes","Soigner tes notes du 1er et du 2e trimestre, surtout en maths : les formations regardent ta progression"],["fiches","Lire les fiches des formations sur Parcoursup (dès le 17 décembre)"],["jpo","Aller aux journées portes ouvertes (Dauphine, Saclay, Sorbonne…)"],["insc","T'inscrire sur Parcoursup (dès le 19 janvier)"],["projet","Écrire un projet de formation motivé pour chaque vœu"],["activ","Remplir « activités et centres d'intérêt » (marchés financiers, presse éco, lecture…)"],["voeux","Formuler tes vœux avant le 12 mars (jusqu'à 10 vœux)"],["sco","Si un événement a perturbé tes épreuves de 1re : l'expliquer en quelques lignes dans « Éléments liés à ma scolarité » (facultatif)"],["confirm","Confirmer tes vœux avant le 1er avril"]];
 const PS_ETATS=[["etude","À l'étude"],["oui","Je postule"],["ok","Confirmé"]];
 const psDoc=k=>(S.ps||{})[k]||{};
 function psSetV(id,p,quiet){return put("ps","voeux",{list:(psDoc("voeux").list||[]).map(v=>v.id===id?{...v,...p}:v)},quiet)}
@@ -3751,7 +3828,7 @@ function psVoeu(v){const o=V.psv===v.id,len=(v.txt||"").length,k="psia|"+v.id;
   return`<div class="psv"><button class="psvh" data-psv="${esc(v.id)}" aria-expanded="${o}"><b>${esc(v.nom)}</b><small class="muted">${(PS_ETATS.find(e=>e[0]===v.etat)||PS_ETATS[0])[1]} · ${len?"projet "+len+"/1500":"projet à écrire"} ${o?"▲":"▼"}</small></button>
    ${o?`<div class="stack" style="gap:8px"><div class="seg" role="group" aria-label="Où j'en suis">${PS_ETATS.map(([e,l])=>`<button data-psetat="${esc(v.id)}|${e}" aria-pressed="${(v.etat||"etude")===e}">${l}</button>`).join("")}</div>
     <textarea class="field" rows="7" maxlength="1500" data-pstxt="${esc(v.id)}" placeholder="Ton projet de formation motivé (1 500 caractères maximum). Tu peux le dicter avec 🎤.">${esc(v.txt||"")}</textarea>
-    <div class="row" style="justify-content:space-between"><span class="muted small" id="psn-${esc(v.id)}">${len}/1500</span><span class="row" style="gap:6px">${SAMPLE_ST!=="none"?`<button class="ghost on" data-psia="${esc(v.id)}" ${V.busy[k]?"disabled":""}>${V.busy[k]?"L'IA écrit…":"✨ L'IA m'aide"}</button>`:""}<button class="ghost danger" data-psdel="${esc(v.id)}">${V.confirm==="psdel"+v.id?"Supprimer ?":"Supprimer"}</button></span></div>
+    <div class="row" style="justify-content:space-between"><span class="muted small" id="psn-${esc(v.id)}">${len}/1500</span><span class="row" style="gap:6px">${SAMPLE_ST!=="none"?`<button class="ghost on" data-psia="${esc(v.id)}" ${V.busy[k]?"disabled":""}>${V.busy[k]?"L'IA écrit…":"✨ L'IA m'aide"}</button>`:""}<button class="ghost ${psChemin().fac==="v:"+v.id?"on":""}" data-psfac="v:${esc(v.id)}">⭐ Ma fac</button><button class="ghost danger" data-psdel="${esc(v.id)}">${V.confirm==="psdel"+v.id?"Supprimer ?":"Supprimer"}</button></span></div>
     ${outBox(k)}${V.out[k]&&!V.busy[k]?`<div><button class="ghost on" data-psuse="${esc(v.id)}">Utiliser ce texte</button></div>`:""}</div>`:""}</div>`}
 function psIA(id){const v=(psDoc("voeux").list||[]).find(x=>x.id===id);if(!v)return;const el=document.querySelector(`[data-pstxt="${id}"]`),txt=el?el.value:(v.txt||"");if(el)psSetV(id,{txt:txt.slice(0,1500)},true);
   stream("psia|"+id,`Tu aides un lycéen de Terminale à écrire son « projet de formation motivé » pour Parcoursup (1 500 caractères maximum, espaces compris), pour la formation : « ${v.nom} ».
@@ -3763,21 +3840,15 @@ function pagePs(){const nx=psNext(),t=todayK(),ck=psDoc("check").done||{},vx=psD
   return`<div class="card stack" style="gap:12px">${nx?`<p class="label" style="margin:0">⏳ Prochaine étape</p><div class="psnext"><span class="psj num">J-${psDays(nx[0])}</span><div><b>${fdate(nx[0])}</b><span>${esc(nx[1])}</span></div></div>`:`<p class="label" style="margin:0">Calendrier</p>`}
     <ol class="pstl">${PS_DATES.map(([k,l])=>`<li class="${k<t?"past":nx&&k===nx[0]?"now":""}"><b>${fdate(k)}</b><span>${esc(l)}</span></li>`).join("")}</ol>
     <p class="muted small" style="margin:0">Dates annoncées pour Parcoursup 2027 : vérifie-les sur parcoursup.gouv.fr dès décembre.</p></div>
-  <div class="card stack" style="gap:10px"><p class="label" style="margin:0">🧭 Tes deux chemins</p>
-    <div class="psway"><b>A · Le Top 3</b><span>Licence de maths → admission sur titre en master à HEC, ESSEC ou ESCP → banque d'affaires, private equity, marchés financiers.</span></div>
-    <div class="psway"><b>B · Trader quant</b><span>Licence de maths → master de maths financières (par exemple le Master Probabilités et Finance de Sorbonne Université et Polytechnique) → trader ou chercheur quantitatif.</span></div>
-    <p class="small" style="margin:0">La même licence ouvre les deux portes : tu choisis en 3e année.</p></div>
-  <div class="stack" style="gap:10px"><p class="label" style="margin:0">🎓 Les licences qui y mènent</p>
-    ${PS_LIC.map((x,i)=>`<details class="card pslic"><summary><b>${esc(x.n)}</b><span class="muted small">${esc(x.u)}</span></summary><div class="stack" style="gap:6px;margin-top:10px"><p class="small"><b>Chiffres :</b> ${esc(x.f)}</p><p class="small"><b>Ce qui compte :</b> ${esc(x.c)}</p><p class="small"><b>Pourquoi pour toi :</b> ${esc(x.w)}</p><div><button class="ghost on" data-psadd="${i}">＋ Ajouter à mes vœux</button></div></div></details>`).join("")}
-    <p class="muted small" style="margin:0">Mélange des vœux très sélectifs et des vœux plus sûrs.</p></div>
-  <div class="card stack" style="gap:10px"><p class="label" style="margin:0">🏆 Après la licence : le Top 3 en admission sur titre</p>${PS_AST.map(([n,x])=>`<div class="psway"><b>${n}</b><span>${esc(x)}</span></div>`).join("")}
-    <p class="small" style="margin:0">L'appli t'y prépare déjà : <button class="linkb" data-bilgo="ent|cm">calcul mental</button>, <button class="linkb" data-bilgo="ent|en">anglais à l'oral</button> et l'actu éco dans Finance.</p></div>
+  ${psDosCard()}
+  ${psChCard()}
+  ${psMapHtml()}
   <div class="card stack" style="gap:6px"><p class="label" style="margin:0">📋 Ta checklist · ${nd}/${PS_CHECK.length}</p><ul class="list">${PS_CHECK.map(([k,l])=>`<li><label class="chk"><input type="checkbox" id="psck-${k}" data-psck="${k}" ${ck[k]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(l)}</span></label></li>`).join("")}</ul></div>
   <div class="card stack" style="gap:10px"><p class="label" style="margin:0">✍️ Mes vœux${vx.length?" · "+vx.length:""}</p>
-    ${vx.map(psVoeu).join("")||`<p class="muted small" style="margin:0">Ajoute une licence depuis la liste au-dessus, ou écris son nom ici.</p>`}
+    ${vx.map(psVoeu).join("")||`<p class="muted small" style="margin:0">Ajoute une formation avec ＋ Mes vœux, ou écris son nom ici.</p>`}
     ${V.psMsg?`<p class="small" style="margin:0">${esc(V.psMsg)}</p>`:""}
     <form data-f="psv" class="row" style="flex-direction:row;flex-wrap:nowrap"><input class="field" name="nom" placeholder="Nom de la formation" autocomplete="off" required><button class="btn">Ajouter</button></form></div>
-  <p class="muted small">Sources : rapport Parcoursup 2025 de Dauphine-PSL, fiche de la double licence de Paris-Saclay, classement Thotis des licences de maths (mars 2026), guides Thotis des admissions sur titre HEC, ESSEC et ESCP, calendrier Parcoursup 2027 annoncé par Les Sherpas.</p>`}
+  <p class="muted small">Sources : rapport Parcoursup 2025 de Dauphine-PSL, pages d'admission en L2 et L3 de Dauphine, Sorbonne Université (candidatures L2-L3), Paris 1 (magistère d'économie), AMSE (magistère), Université Côte d'Azur (licence de maths), Dauphine (Master 203), Business Cool (master El Karoui), annuaire Thotis des licences de maths 2025, education.gouv.fr (épreuve anticipée de maths), Diplomeo (rubrique « Éléments liés à ma scolarité »), fiche de la double licence de Paris-Saclay, classement Thotis des licences de maths (mars 2026), guides Thotis des admissions sur titre HEC, ESSEC et ESCP, calendrier Parcoursup 2027 annoncé par Les Sherpas.</p>`}
 
 /* ---------- 4-5. ENTRAÎNEMENT ---------- */
 const drill=k=>(S.drill||{})[k]||{};
@@ -3949,7 +4020,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.8.0";
+const APP_VERSION="1.8.2";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -4525,11 +4596,14 @@ document.addEventListener("click",e=>{
   /* objectif top 3 */
   if(d.pilc)return pilCible(+d.pilc);
   if(d.pilrev)return pilRev(d.pilrev);
-  if(d.psadd!==undefined){const x=PS_LIC[+d.psadd];if(x)return psAddV(x.n+" · "+x.u);return}
+  if(d.psadd!==undefined){const x=psMap(d.psadd);if(x){V.psKeep=x.id;return psAddV(x.n+" · "+x.u)}return}
+  if(d.psfac){V.psKeep=d.psfac;const c=psChemin();return psSetChemin({fac:c.fac===d.psfac?null:d.psfac})}
+  if(d.psaim){const x=psMap(d.psaim);if(!x)return;V.psKeep=x.id;const k=x.st===2?"reb":"fin",L=psChemin()[k]||[];return psSetChemin({[k]:L.includes(x.id)?L.filter(i=>i!==x.id):[...L,x.id]})}
   if(d.psv){V.psv=V.psv===d.psv?null:d.psv;V.psMsg="";return render(true)}
   if(d.psetat){const i=d.psetat.lastIndexOf("|");return psSetV(d.psetat.slice(0,i),{etat:d.psetat.slice(i+1)})}
   if(d.psdel){const id=d.psdel;return confirmOr("psdel"+id,()=>put("ps","voeux",{list:(psDoc("voeux").list||[]).filter(v=>v.id!==id)}))}
   if(d.psia)return psIA(d.psia);
+  if(d.psdos!==undefined){psDfFlush();V.psDosEdit=d.psdos==="1";return render(true)}
   if(d.psuse){const k="psia|"+d.psuse,tx=String(V.out[k]||"").trim();V.out[k]="";return psSetV(d.psuse,{txt:tx.slice(0,1500)})}
   if(d.enttab){V.entTab=d.enttab;return render(true)}
   if(d.cmgo)return cmStart();
@@ -4635,6 +4709,7 @@ document.addEventListener("input",e=>{
   if(d.mxa!==undefined)V.mxa[d.mxa]=t.value;
   if(t.id==="cmin")return cmIn(t);
   if(d.pstxt!==undefined)psTxt(d.pstxt,t.value);
+  if(d.psdf!==undefined)psDf(d.psdf,t.value);
   if(d.entxt!==undefined){V.enTxt=t.value;const w=document.getElementById("enw");if(w)w.textContent=enWords(t.value)+" mots"}
   if(d.nq!==undefined){V.nq=t.value;nFilter()}
   if(d.trin)V.trIn=t.value;
