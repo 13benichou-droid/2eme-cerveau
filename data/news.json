@@ -1,61 +1,91 @@
 {
- "updated": "2026-10-09T05:52:30.062Z",
+ "updated": "2026-10-12T05:53:51.766Z",
  "snap": {
-  "date": "2026-10-08",
+  "date": "2026-10-09",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 730",
-    "c": "−0,51 %"
+    "v": "7 803",
+    "c": "+0,95 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 765",
-    "c": "−0,47 %"
+    "v": "7 812",
+    "c": "+0,59 %"
    },
    {
     "n": "Nasdaq",
-    "v": "27 193",
-    "c": "−1,25 %"
+    "v": "27 366",
+    "c": "+0,64 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "15,41",
-    "c": "+2,19 %"
+    "v": "14,84",
+    "c": "−3,70 %"
    },
    {
     "n": "Brent",
-    "v": "102,8 $",
-    "c": "−1,42 %"
+    "v": "103,8 $",
+    "c": "−0,84 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "90,3 $",
-    "c": "−1,36 %"
+    "v": "90,7 $",
+    "c": "−1,30 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 227 $",
-    "c": "+1,69 %"
+    "v": "4 211 $",
+    "c": "−0,12 %"
    },
    {
     "n": "Bitcoin",
-    "v": "82 316 $",
-    "c": "−1,15 %"
+    "v": "83 932 $",
+    "c": "+1,23 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,23 %",
-    "c": "−0,05 pt"
+    "v": "5,24 %",
+    "c": "+0,01 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,124",
-    "c": "+0,34 %"
+    "v": "1,121",
+    "c": "−0,06 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-12-compte-a-terme-ou-livret-bancaire-quel-e",
+   "src": "Le Monde",
+   "date": "2026-10-12",
+   "url": "https://www.lemonde.fr/argent/article/2026/10/12/compte-a-terme-ou-livret-bancaire-quel-est-le-meilleur-choix-apres-la-hausse-des-taux_6792423_1657007.html",
+   "t": {
+    "fr": "Compte à terme ou livret bancaire, quel est le meilleur choix après la hausse des taux ?",
+    "en": "Compte à terme ou livret bancaire, quel est le meilleur choix après la hausse des taux ?"
+   }
+  },
+  {
+   "id": "2026-10-12-le-commissaire-europeen-au-climat-compte",
+   "src": "Le Monde",
+   "date": "2026-10-12",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/12/le-commissaire-europeen-au-climat-compte-sur-le-made-in-europe-et-le-nucleaire-pour-reduire-les-emissions-de-carbone_6792422_3234.html",
+   "t": {
+    "fr": "Le commissaire européen au climat compte sur le « made in Europe » et le nucléaire pour réduire les émissions de carbone",
+    "en": "Le commissaire européen au climat compte sur le « made in Europe » et le nucléaire pour réduire les émissions de carbone"
+   }
+  },
+  {
+   "id": "2026-10-12-face-a-la-chine-la-france-et-l-espagne-d",
+   "src": "Le Monde",
+   "date": "2026-10-12",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/12/face-a-la-chine-la-france-et-l-espagne-defendent-des-strategies-differentes_6792345_3234.html",
+   "t": {
+    "fr": "Face à la Chine, la France et l’Espagne défendent des stratégies différentes",
+    "en": "Face à la Chine, la France et l’Espagne défendent des stratégies différentes"
+   }
+  },
   {
    "id": "2026-10-09-deception-sur-les-revenus-d-openai-wall-",
    "src": "Le Monde",
@@ -481,146 +511,6 @@
     "fr": "Les obligations d'État servent de référence pour le coût de l'argent à long terme. Lorsque leur rendement augmente, les banques répercutent cette hausse de coût sur les crédits qu'elles accordent aux ménages pour maintenir leurs marges.",
     "en": "Government bonds serve as a benchmark for the long-term cost of money. When their yield rises, banks pass this increased cost onto the loans they grant to households to maintain their margins."
    }
-  },
-  {
-   "id": "2026-10-08-diversification-agricole-face-a-l-insecu",
-   "src": "Financial Times",
-   "date": "2026-10-08",
-   "url": "https://www.ft.com/content/3f0d45e0-18a5-420d-8db4-d8224d87b8e6?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Diversification agricole face à l'insécurité au Mexique",
-    "en": "Agricultural Diversification Amid Insecurity in Mexico"
-   },
-   "s": {
-    "fr": "Le géant de l'avocat Mission Produce s'appuie désormais sur des plantations situées en dehors du Mexique pour approvisionner le marché américain. L'entreprise développe ses cultures au Pérou et au Guatemala afin de compenser les difficultés d'importation liées aux violences dans les régions productrices mexicaines. Cette stratégie permet de sécuriser les volumes de livraison malgré les crises locales.",
-    "en": "Avocado giant Mission Produce is now relying on orchards outside of Mexico to supply the US market. The company is expanding its farming in Peru and Guatemala to offset import difficulties caused by violence in Mexican growing regions. This strategy helps secure delivery volumes despite local crises."
-   },
-   "d": {
-    "fr": "En bourse, la gestion des risques opérationnels est un facteur clé pour évaluer la résilience d'une entreprise face aux imprévus. Un producteur qui diversifie ses sources géographiques évite de dépendre d'un seul pays et protège ainsi ses revenus contre les chocs géopolitiques ou climatiques.",
-    "en": "In stock trading, managing operational risks is a key factor in assessing a company's resilience to unexpected events. A producer that diversifies its geographical sources avoids relying on a single country, thereby protecting its revenues from geopolitical or climatic shocks."
-   },
-   "v": [
-    [
-     "gestion des risques",
-     "risk management"
-    ],
-    [
-     "sécuriser l'approvisionnement",
-     "securing supply"
-    ],
-    [
-     "diversification géographique",
-     "geographical diversification"
-    ],
-    [
-     "matières premières agricoles",
-     "agricultural commodities"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi la diversification géographique est-elle une stratégie payante pour une entreprise cotée ?",
-    "en": "Why is geographical diversification a winning strategy for a listed company?"
-   },
-   "r": {
-    "fr": "Elle permet de lisser les risques : si une catastrophe ou un conflit bloque la production dans un pays, les autres régions prennent le relais. Cela rassure les investisseurs car les bénéfices de l'entreprise deviennent plus stables et prévisibles.",
-    "en": "It helps mitigate risks: if a disaster or conflict halts production in one country, other regions can step in. This reassures investors because the company's profits become more stable and predictable."
-   }
-  },
-  {
-   "d": {
-    "en": "When bond yields rise, bonds pay more and stocks look less attractive. Always look at sectors: on that day banks fell sharply while carmakers rose. An index going down does not stop some stocks from going up.",
-    "fr": "Quand les taux d'emprunt montent, les obligations rapportent davantage et les actions deviennent moins attirantes. Regarde toujours les secteurs : ce jour-là les banques baissent fort alors que l'automobile monte. Un indice qui recule n'empêche pas certaines actions de gagner."
-   },
-   "date": "2026-10-07",
-   "q": {
-    "en": "Why can more expensive oil push stock prices down?",
-    "fr": "Pourquoi un pétrole plus cher peut-il faire baisser les actions ?"
-   },
-   "r": {
-    "en": "Expensive oil pushes inflation up. Central banks then keep rates high or raise them: companies pay more to borrow, and their future profits are worth less to investors.",
-    "fr": "Le pétrole cher relance l'inflation. Les banques centrales gardent alors des taux élevés, voire les montent : les entreprises empruntent plus cher et leurs profits futurs valent moins aux yeux des investisseurs."
-   },
-   "s": {
-    "en": "The Paris stock market ended Wednesday's session at 7,769 points. Two heavy weights pulled it down: rising borrowing costs, with France's 10-year bond yield close to 4.9%, and Brent crude back above $100. Banks were hit hardest (Société Générale −5%, BNP Paribas −3.9%), while Renault (+3.7%) and Stellantis (+1.6%) rose on rumours that rules on combustion engines could be relaxed. Paris still held up better than Frankfurt and Milan.",
-    "fr": "La Bourse de Paris a fini la séance de mercredi à 7 769 points. Deux poids lourds ont pesé : la hausse des taux d'emprunt, avec l'OAT française à 10 ans proche de 4,9 %, et un Brent revenu au-dessus de 100 dollars. Les banques ont le plus souffert (Société Générale −5 %, BNP Paribas −3,9 %), tandis que Renault (+3,7 %) et Stellantis (+1,6 %) ont monté sur des rumeurs d'assouplissement des règles sur les moteurs thermiques. Paris a quand même mieux résisté que Francfort et Milan."
-   },
-   "src": "BFM Bourse",
-   "t": {
-    "en": "CAC 40 slides 1.2%, dragged down by bond yields and oil",
-    "fr": "Le CAC 40 recule de 1,2 %, plombé par les taux et le pétrole"
-   },
-   "url": "https://www.tradingsat.com/cac-40-FR0003500008/actualites/cac-40-rattrape-par-les-tensions-sur-le-marche-obligataire-et-la-progression-des-cours-du-petrole-le-cac-40-abandonne-plus-de-12-1171417.html",
-   "v": [
-    [
-     "clôturer",
-     "to close"
-    ],
-    [
-     "le rendement",
-     "the yield"
-    ],
-    [
-     "peser sur",
-     "to weigh on"
-    ],
-    [
-     "les poids lourds de la cote",
-     "heavyweights"
-    ],
-    [
-     "résister",
-     "to hold up"
-    ]
-   ],
-   "id": "2026-10-07-cac"
-  },
-  {
-   "d": {
-    "en": "Bitcoin often behaves like a risk asset: when yields rise, it falls along with tech stocks. Gold tends to act as a safe haven. Comparing the two on the same day tells you a lot about investors' risk appetite.",
-    "fr": "Le bitcoin se comporte souvent comme un actif risqué : quand les taux montent, il baisse avec les valeurs technologiques. L'or joue plutôt le rôle de valeur refuge. Comparer les deux le même jour dit beaucoup sur l'appétit pour le risque des investisseurs."
-   },
-   "date": "2026-10-07",
-   "q": {
-    "en": "Why does Coinbase stock fall when bitcoin drops?",
-    "fr": "Pourquoi l'action Coinbase baisse-t-elle quand le bitcoin chute ?"
-   },
-   "r": {
-    "en": "Coinbase makes money on crypto trading. When prices fall, volumes and enthusiasm often drop too, and so do its future revenues: investors sell the stock.",
-    "fr": "Coinbase gagne de l'argent sur les échanges de cryptomonnaies. Quand les prix chutent, les volumes et l'enthousiasme baissent souvent, donc ses revenus futurs aussi : les investisseurs vendent l'action."
-   },
-   "s": {
-    "en": "Bitcoin fell below the $83,000 mark on Wednesday, weighing on crypto-linked stocks such as Coinbase, Robinhood and Strategy. The same day, broker Webull dropped about 20% after a US congressional report flagged its ties to the Chinese government, which the company disputes. Gold held steady around $4,130 an ounce.",
-    "fr": "Le bitcoin est tombé sous la barre des 83 000 dollars mercredi, ce qui a pesé sur les actions liées aux cryptomonnaies comme Coinbase, Robinhood et Strategy. Le même jour, le courtier Webull a chuté d'environ 20 % après un rapport parlementaire américain pointant ses liens avec le gouvernement chinois, ce que l'entreprise conteste. L'or, lui, est resté stable autour de 4 130 dollars l'once."
-   },
-   "src": "Yahoo Finance",
-   "t": {
-    "en": "Bitcoin drops below $83,000, dragging crypto stocks down",
-    "fr": "Le bitcoin repasse sous 83 000 dollars et entraîne les valeurs crypto"
-   },
-   "url": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-october-7-dow-sp-500-nasdaq-080241833.html",
-   "v": [
-    [
-     "un actif risqué",
-     "a risk asset"
-    ],
-    [
-     "une valeur refuge",
-     "a safe haven"
-    ],
-    [
-     "un courtier",
-     "a broker"
-    ],
-    [
-     "une once",
-     "an ounce"
-    ],
-    [
-     "l'appétit pour le risque",
-     "risk appetite"
-    ]
-   ],
-   "id": "2026-10-07-crypto"
   }
  ],
  "actu": {
