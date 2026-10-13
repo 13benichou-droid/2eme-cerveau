@@ -3923,7 +3923,7 @@ const AV_STAY={id:"stay",st:2,n:"Finir ta licence dans ta fac",u:"puis un master
 const AV_LEAD={hec:["ib","mk"],essec:["ib","mk"],escp:["ib","mk"],m203:["mk","tq"],elk:["tq","qr","mk"],edhec:["mk","tq"],ing:["tq","qr","mk"]};
 const AV_STEPS=[
  {k:1,t:"L'an prochain : ta 1re année de licence",sub:"Parcoursup",groups:[["gp","🗼 Paris","très ambitieux pour toi"],["gr","🧮 Maths-éco en région","ambitieux"],["gs","☀️ Région Sud","plus sûr, près de chez toi"]]},
- {k:2,t:"Rebondir en L2 ou en L3",sub:"si tu as de super résultats"},
+ {k:2,t:"Rebondir en L2 ou en L3",sub:"si tu as de super résultats (sinon, tu restes dans ta fac)"},
  {k:3,t:"Après la licence",sub:"master ou grande école"},
  {k:4,t:"Le métier",sub:"ce que tu vises"}];
 const AV_G={gp:["dau1","sor1","sac1","pc1","ors1"],gr:["dlr"],gs:["amu1","amu2","uca1","tln1","avi1"]};
@@ -3931,9 +3931,11 @@ const avItem=id=>id==="stay"?AV_STAY:AV_JOBS.find(j=>j.id===id)||psMap(id);
 const avJob=()=>psChemin().job||"tq";
 function avChosen(k){const c=psChemin();return k===1?(c.fac?[c.fac]:[]):k===2?(c.reb||[]):k===3?(c.fin||[]):[avJob()]}
 function avItems(k){return k===1?Object.values(AV_G).flat():k===2?["dau2","sor2","p1mag","amse","ing","stay"]:k===3?["hec","essec","escp","m203","elk","edhec"]:AV_JOBS.map(j=>j.id)}
-function avTag(id,k){const j=avJob(),jn=(AV_JOBS.find(x=>x.id===j)||{}).n||"";
-  if(k===3||id==="ing"){const L=AV_LEAD[id]||[];return L.includes(j)?`<span class="avtag ok">✓ mène à : ${esc(jn.split(" (")[0])}</span>`:`<span class="avtag">autre voie</span>`}
-  if(k===2)return`<span class="avtag">→ master ou Top 3</span>`;return""}
+function avTag(id,k){const j=avJob(),jn=esc(((AV_JOBS.find(x=>x.id===j)||{}).n||"").split(" (")[0]);
+  /* étape 3, et les écoles d'ingé (le diplôme d'école suffit) : mène directement au métier ou non */
+  if(k===3||id==="ing"){const L=AV_LEAD[id]||[];return L.includes(j)?`<span class="avtag ok">✓ mène à : ${jn}${id==="ing"?" · directement":""}</span>`:`<span class="avtag">autre voie</span>`}
+  /* étape 2 : tous ces rebonds mènent au métier, en passant par un master ou une école de l'étape 3 */
+  if(k===2){const via=Object.keys(AV_LEAD).filter(x=>x!=="ing"&&AV_LEAD[x].includes(j)).length;return via?`<span class="avtag ok">✓ mène à : ${jn} · après un master</span>`:`<span class="avtag">autre voie</span>`}return""}
 function avBranch(id,k){const x=avItem(id);if(!x)return"";const ch=avChosen(k).includes(id),fac=psFacName();
   const nm=id.startsWith&&id.startsWith("v:")?fac:x.n;
   return`<button class="avb ${ch?"on":""} ${V.avSel===id?"sel":""}" data-avn="${esc(id)}"><span class="avbt"><b>${ch?(k===1?"⭐ ":"🎯 "):""}${esc(nm)}</b><small>${esc(x.u||"")}</small></span>${avTag(id,k)}<span class="avgo" aria-hidden="true">›</span></button>`}
@@ -4499,7 +4501,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.9.2";
+const APP_VERSION="1.9.3";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
