@@ -2448,11 +2448,11 @@ function objNotes(){
   const n=S.pronote&&S.pronote.data&&S.pronote.data.notes;if(!n)return null;
   const mats=(n.matieres||[]).filter(a=>typeof a.eleve==="number");
   let g=typeof n.moyenne==="number"?n.moyenne:(mats.length?mats.reduce((s,a)=>s+a.eleve/(a.sur||20)*20,0)/mats.length:null);
-  if(g==null)return null;
+  if(g==null)return null;const gw=pilWAvg(mats);
   const mm=mats.filter(a=>/math/i.test(a.m||"")),maths=mm.length?mm.reduce((s,a)=>s+a.eleve/(a.sur||20)*20,0)/mm.length:null;
-  const sg=clamp01((g-10)/(OBJ_CIBLE-10)),sm=maths==null?sg:clamp01((maths-10)/(OBJ_CIBLE-10));
+  const sg=clamp01(((gw!=null?gw:g)-10)/(OBJ_CIBLE-10)),sm=maths==null?sg:clamp01((maths-10)/(OBJ_CIBLE-10));
   const low=mats.map(a=>({m:a.m,v:a.eleve/(a.sur||20)*20})).sort((a,b)=>a.v-b.v)[0]||null;
-  return{g,maths,s:0.7*sg+0.3*sm,low,periode:n.periode||""};
+  return{g,gw,maths,s:0.7*sg+0.3*sm,low,periode:n.periode||""};
 }
 /* score de régularité : tâches faites / prévues depuis le début (28 jours max), + série de jours parfaits */
 /* chaque tâche pèse selon son importance pour l'objectif (réglable par suggestion) ; la version week-end est dans we.js */
@@ -2535,7 +2535,7 @@ function pageObj(){
     ${acts.length?`<ul class="objact">${acts.map(a=>`<li><button data-page="${a.p}"><span>${esc(a.t)}</span>${a.g!=null?`<b class="num">+${pct1(a.g)} %${a.per?"":""}</b>`:""}</button></li>`).join("")}</ul>`:`<p>Tout est fait pour aujourd'hui. Il ne reste qu'à recommencer demain. 💪</p>`}</div>
   <div class="card objq"><p>« ${esc(q[0])} »</p><span class="muted small">${esc(q[1])}</span></div>
   <div class="card stack" style="gap:14px"><p class="label" style="margin:0">Tes 3 piliers</p>
-    ${bar("Notes",OBJ_W.n,N?N.s:0,N?`Moyenne générale ${pct1(N.g)}${N.maths!=null?` · maths ${pct1(N.maths)}`:""} · repère visé : ${OBJ_CIBLE}${N.periode?" · "+esc(N.periode):""}`:"Relie Pronote pour compter tes notes.","pron")}
+    ${bar("Notes",OBJ_W.n,N?N.s:0,N?`Moyenne générale ${pct1(N.g)}${N.gw!=null?` · pondérée comme au bac ${pct1(N.gw)}`:""}${N.maths!=null?` · maths ${pct1(N.maths)}`:""} · repère visé : ${OBJ_CIBLE}${N.periode?" · "+esc(N.periode):""}`:"Relie Pronote pour compter tes notes.","pron")}
     ${bar("Régularité",OBJ_W.h,H.s,`${Math.round(H.rate*100)} % de ton travail prévu fait depuis le début · série de ${H.streak} jour${H.streak>1?"s":""} parfait${H.streak>1?"s":""}`,"hab")}
     ${bar("Finance",OBJ_W.f,F.s,`${F.done} défi${F.done>1?"s":""} sur ${F.nd} jour${F.nd>1?"s":""} · ${esc(lv.name)} (${F.xp} XP)`,"fin")}</div>
   <div class="card stack" style="gap:8px"><p class="label" style="margin:0">Comment ton % est calculé</p><div class="objw"><span>Notes ${OBJ_W.n} % · régularité ${OBJ_W.h} % · finance ${OBJ_W.f} % · moyenne visée ${pct1(OBJ_CIBLE)}</span><span class="muted">Dans la régularité : ${esc(objWTxt())}.</span></div><div><button class="ghost on" data-page="idees">💡 Changer avec une suggestion</button></div></div>
@@ -3797,6 +3797,10 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
    6. Bilan du dimanche : ta semaine en chiffres et ce qu'on change
    ================================================================ */
 const todayK=()=>dkey(today());
+/* poids d'une matière au bac 2027 (source : L'Étudiant) : spécialités 16, philo 8, EPS 6, histoire-géo, langues et enseignement scientifique 3, EMC 1, options (maths expertes) 2 */
+function pilCoef(m){const s=String(m||"").toLowerCase();if(/expert/.test(s))return 2;if(/math/.test(s))return 16;if(/econ|sociales|\bses\b/.test(s))return 16;if(/philo/.test(s))return 8;if(/eps|sport|physique et sportive/.test(s))return 6;if(/emc|morale et civique/.test(s))return 1;return 3}
+/* moyenne pondérée comme au bac (les spécialités comptent le plus) */
+function pilWAvg(mats){let a=0,c=0;(mats||[]).forEach(x=>{const v=(x.eleve==null||isNaN(x.eleve))?null:(+x.eleve)/((+x.sur)||20)*20;if(v==null)return;const k=pilCoef(x.m);a+=v*k;c+=k});return c?a/c:null}
 const n20=(v,sur)=>v==null||v===""||isNaN(v)?null:(+v)/((+sur)||20)*20;
 const pilShort=s=>{const t=String(s||"").toLowerCase().replace(/\s+/g," ").trim();return t.charAt(0).toUpperCase()+t.slice(1)};
 
@@ -3808,15 +3812,16 @@ function pilData(){const p=pnData(),n=p&&p.notes;if(!n||!(n.matieres||[]).length
     if(A!=null){for(k=1;k<=4;k++){need=(T*(C+k)-A*C)/k;if(need<=20)break}if(k>4)k=4}
     const last=g.slice(-2).map(x=>x.v),down=A!=null&&g.length>=3&&((last.length===2&&last.every(v=>v<A-1))||last[last.length-1]<A-2.5);
     const D=psDos(),p1=PIL_SPE.test(a.m||"")?D.m1:PIL_SES.test(a.m||"")?D.s1:null;
-    return{m:a.m,A,C,need,k,down,last,p1,math:/math/i.test(a.m||""),gap:A==null?-99:T-A}});
-  const pr=r=>r.gap+(r.math&&r.gap>0?1:0)+(r.down?0.5:0);rows.sort((x,y)=>pr(y)-pr(x));
+    const coef=pilCoef(a.m),spe=coef===16;
+    return{m:a.m,A,C,need,k,down,last,p1,coef,spe,math:/math/i.test(a.m||"")&&!/expert/i.test(a.m||""),gap:A==null?-99:T-A}});
+  const pr=r=>r.A==null?-1e9:r.gap>0?r.gap*r.coef*(r.math?1.25:1)+(r.down?4:0):r.gap;rows.sort((x,y)=>pr(y)-pr(x));
   return{T,rows,periode:n.periode||""}}
 function pilRow(r,T){
   const msg=r.A==null?"Pas encore de note ce trimestre."
     :r.A>=T?(r.need<=0?"✓ Au-dessus de ta cible, avec de la marge.":`✓ Au-dessus de ta cible. Pour y rester : au moins <b>${pct1(r.need)}</b> au prochain contrôle.`)
     :r.need<=20?(r.k===1?`Il te faut <b>${pct1(Math.max(0,r.need))}</b> au prochain contrôle pour atteindre ${pct1(T)}.`:`Vise <b>${pct1(r.need)}</b> de moyenne sur tes ${r.k} prochains contrôles pour atteindre ${pct1(T)}.`)
     :`Ta cible est loin ce trimestre : vise d'abord ${pct1(Math.min(20,r.A+1))} (il te faut <b>${pct1(Math.min(20,(r.A+1)*(r.C+1)-r.A*r.C))}</b> au prochain contrôle).`;
-  return`<div class="pilr ${r.A!=null&&r.A<T?"lo":""}"><div class="pilh"><b>${esc(pilShort(r.m))}</b>${r.math?`<span class="tag">clé pour les licences de maths</span>`:""}${r.down?`<span class="tag warn">⚠️ en baisse</span>`:""}${r.p1!=null?`<span class="muted small pil1">1re : ${pct1(r.p1)}${r.A!=null?bilDelta(r.A,r.p1):""}</span>`:""}<span class="num pilv">${r.A==null?"—":pct1(r.A)}</span></div>
+  return`<div class="pilr ${r.A!=null&&r.A<T?"lo":""}"><div class="pilh"><b>${esc(pilShort(r.m))}</b>${r.spe?`<span class="tag">spécialité · coef. 16 au bac</span>`:r.coef===8?`<span class="tag">coef. 8 au bac</span>`:""}${r.math?`<span class="tag">clé pour les licences de maths</span>`:""}${r.down?`<span class="tag warn">⚠️ en baisse</span>`:""}${r.p1!=null?`<span class="muted small pil1">1re : ${pct1(r.p1)}${r.A!=null?bilDelta(r.A,r.p1):""}</span>`:""}<span class="num pilv">${r.A==null?"—":pct1(r.A)}</span></div>
     <div class="pilbar" style="--k:${pnCol(r.m)}"><i style="width:${r.A==null?0:Math.min(100,r.A*5)}%"></i><u style="left:${Math.min(100,T*5)}%" title="Ta cible"></u></div>
     <small>${msg}${r.down&&r.last.length?` Dernières notes : ${r.last.map(v=>pct1(v)).join(" puis ")}.`:""}</small></div>`}
 function pilotCard(){const P=pilData();
@@ -3828,7 +3833,7 @@ function pilotCard(){const P=pilData();
     ${P.rows.map(r=>pilRow(r,P.T)).join("")}
     ${top?`<div class="pilact"><span>Priorité de la semaine : <b>${esc(pilShort(top.m))}</b></span><button class="btn" data-pilrev="${esc(top.m)}">📅 Réviser 30 min mardi et jeudi</button></div>`:""}
     ${V.pilMsg?`<p class="small" style="margin:0">${esc(V.pilMsg)}</p>`:""}
-    <p class="muted small" style="margin:0">Calcul fait pour un contrôle de coefficient 1. Les licences de maths sélectives regardent d'abord tes notes de maths et la progression de tes moyennes.</p></div>`}
+    <p class="muted small" style="margin:0">Les matières sont classées selon les points de bac que tu peux gagner : un point en spécialité (maths, SES) compte 2 fois plus qu'en philo et 5 fois plus qu'en histoire-géo. Calcul fait pour un contrôle de coefficient 1. Les licences de maths regardent d'abord tes notes de maths.</p></div>`}
 function pilRev(m){const n="Réviser "+pilShort(m);sgQuick([{t:"tache",n,min:30,days:[2,4]}],"Pilote de notes : "+n+" mardi et jeudi");V.pilMsg="✓ « "+n+" » ajouté mardi et jeudi dans Ma journée (tu peux annuler dans 💡 Suggestions).";render(true)}
 function pilCible(dv){objCfg();const t=((S.params||{}).top3)||{},c=Math.max(10,Math.min(20,OBJ_CIBLE+dv));put("params","top3",{...t,cible:c},true);objCfg();render(true)}
 
@@ -3933,7 +3938,7 @@ function avChosen(k){const c=psChemin();return k===1?(c.fac?[c.fac]:[]):k===2?(c
 function avItems(k){return k===1?Object.values(AV_G).flat():k===2?["dau2","sor2","p1mag","amse","ing","stay"]:k===3?["hec","essec","escp","m203","elk","edhec"]:AV_JOBS.map(j=>j.id)}
 function avTag(id,k){const j=avJob(),jn=esc(((AV_JOBS.find(x=>x.id===j)||{}).n||"").split(" (")[0]);
   /* étape 3, et les écoles d'ingé (le diplôme d'école suffit) : mène directement au métier ou non */
-  if(k===3||id==="ing"){const L=AV_LEAD[id]||[];return L.includes(j)?`<span class="avtag ok">✓ mène à : ${jn}${id==="ing"?" · directement":""}</span>`:`<span class="avtag">autre voie</span>`}
+  if(k===3||id==="ing"){const L=AV_LEAD[id]||[];return L.includes(j)?`<span class="avtag ok">✓ mène à : ${jn}${id==="ing"?" · sans master en plus":""}</span>`:`<span class="avtag">autre voie</span>`}
   /* étape 2 : tous ces rebonds mènent au métier, en passant par un master ou une école de l'étape 3 */
   if(k===2){const via=Object.keys(AV_LEAD).filter(x=>x!=="ing"&&AV_LEAD[x].includes(j)).length;return via?`<span class="avtag ok">✓ mène à : ${jn} · après un master</span>`:`<span class="avtag">autre voie</span>`}return""}
 function avBranch(id,k){const x=avItem(id);if(!x)return"";const ch=avChosen(k).includes(id),fac=psFacName();
@@ -4501,7 +4506,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.9.3";
+const APP_VERSION="1.9.4";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
