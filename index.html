@@ -2566,7 +2566,7 @@ function themeCard(){const t=appP().theme||"auto";return`<div class="card stack"
   <p class="muted small" style="margin:0">${t==="black"?"Noir pur : plus reposant le soir et ça économise la batterie de l'iPhone.":t==="auto"?"Clair le jour, sombre quand ton téléphone passe en mode sombre.":"Le choix vaut aussi sur ton autre appareil (après synchronisation)."}</p></div>`}
 /* tuiles de l'accueil : ordre, noms et tuiles cachées viennent de tes suggestions */
 /* tuiles cachées : celles que tu as cachées + Maths (cachée par défaut depuis la 1.6.0, « Afficher » la fait revenir) */
-const TILE_OFF=["mx"];
+const TILE_OFF=["mx","ps"];
 function tilesHidden(){const ap=appP();return[...new Set([...(ap.hide||[]),...TILE_OFF.filter(k=>!(ap.show||[]).includes(k))])]}
 function sects(all){const ap=appP(),base=[...SECT,...MOD.tiles.map(t=>[t.k,t.nom])],ord=ap.order||[];
   const L=[...ord.map(k=>base.find(s=>s[0]===k)).filter(Boolean),...base.filter(s=>!ord.includes(s[0]))].map(([k,n])=>[k,(ap.nom||{})[k]||n]);
@@ -4506,7 +4506,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.9.4";
+const APP_VERSION="1.9.5";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
