@@ -1,61 +1,91 @@
 {
- "updated": "2026-10-12T05:53:51.766Z",
+ "updated": "2026-10-13T05:54:00.333Z",
  "snap": {
-  "date": "2026-10-09",
+  "date": "2026-10-12",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 803",
-    "c": "+0,95 %"
+    "v": "7 833",
+    "c": "+0,38 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 812",
-    "c": "+0,59 %"
+    "v": "7 807",
+    "c": "−0,06 %"
    },
    {
     "n": "Nasdaq",
-    "v": "27 366",
-    "c": "+0,64 %"
+    "v": "27 246",
+    "c": "−0,44 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "14,84",
-    "c": "−3,70 %"
+    "v": "15,21",
+    "c": "+2,49 %"
    },
    {
     "n": "Brent",
-    "v": "103,8 $",
-    "c": "−0,84 %"
+    "v": "105,6 $",
+    "c": "−0,98 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "90,7 $",
-    "c": "−1,30 %"
+    "v": "92,7 $",
+    "c": "−1,16 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 211 $",
-    "c": "−0,12 %"
+    "v": "4 216 $",
+    "c": "+0,60 %"
    },
    {
     "n": "Bitcoin",
-    "v": "83 932 $",
-    "c": "+1,23 %"
+    "v": "83 597 $",
+    "c": "−0,10 %"
    },
    {
     "n": "US 10 ans",
     "v": "5,24 %",
-    "c": "+0,01 pt"
+    "c": "−0,00 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,121",
-    "c": "−0,06 %"
+    "v": "1,118",
+    "c": "−0,29 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-13-des-epargnants-contraints-de-s-adapter-e",
+   "src": "Le Monde",
+   "date": "2026-10-13",
+   "url": "https://www.lemonde.fr/argent/article/2026/10/13/des-epargnants-contraints-de-s-adapter-en-permanence-a-de-nouvelles-regles-fiscales_6793056_1657007.html",
+   "t": {
+    "fr": "Des épargnants contraints de s’adapter en permanence à de nouvelles règles fiscales",
+    "en": "Des épargnants contraints de s’adapter en permanence à de nouvelles règles fiscales"
+   }
+  },
+  {
+   "id": "2026-10-13-dette-l-inquietante-envolee-des-taux-d-i",
+   "src": "Le Monde",
+   "date": "2026-10-13",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/13/dette-l-inquietante-envolee-des-taux-d-interet-en-16-dates_6793053_3234.html",
+   "t": {
+    "fr": "Dette : l’inquiétante envolée des taux d’intérêt en 16 dates",
+    "en": "Dette : l’inquiétante envolée des taux d’intérêt en 16 dates"
+   }
+  },
+  {
+   "id": "2026-10-13-a-beauvais-avec-les-passagers-de-ryanair",
+   "src": "Le Monde",
+   "date": "2026-10-13",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/13/a-beauvais-avec-les-passagers-de-ryanair-plongee-dans-l-univers-des-vols-ultra-low-cost-je-paie-35-euros-pour-l-aller-retour-mais-c-est-parce-que-je-n-emporte-qu-un-tout-petit-sac-a-dos_6793049_3234.html",
+   "t": {
+    "fr": "A Beauvais, avec les passagers de Ryanair, plongée dans l’univers des vols ultra-low cost : « Je paie 35 euros pour l’aller-retour, mais c’est parce que je n’emporte qu’un tout petit sac à dos »",
+    "en": "A Beauvais, avec les passagers de Ryanair, plongée dans l’univers des vols ultra-low cost : « Je paie 35 euros pour l’aller-retour, mais c’est parce que je n’emporte qu’un tout petit sac à dos »"
+   }
+  },
   {
    "id": "2026-10-12-compte-a-terme-ou-livret-bancaire-quel-e",
    "src": "Le Monde",
@@ -378,138 +408,6 @@
    "r": {
     "fr": "Si les investissements dans l'IA ne génèrent pas rapidement les profits espérés, l'entreprise aura des difficultés à rembourser ses créanciers.",
     "en": "If AI investments do not quickly generate the expected profits, the company will struggle to repay its creditors."
-   }
-  },
-  {
-   "id": "2026-10-08-paul-krugman-s-inquiete-de-la-trajectoir",
-   "src": "Le Figaro",
-   "date": "2026-10-08",
-   "url": "https://www.lefigaro.fr/conjoncture/une-trajectoire-budgetaire-insoutenable-l-alerte-de-paul-krugman-ancien-prix-nobel-d-economie-sur-la-dette-de-la-france-20261008",
-   "t": {
-    "fr": "Paul Krugman s'inquiète de la trajectoire de la dette française",
-    "en": "Paul Krugman worries about France's debt trajectory"
-   },
-   "s": {
-    "fr": "L'économiste et prix Nobel Paul Krugman qualifie la France d'homme malade du monde occidental en raison de sa dette. Selon lui, la trajectoire budgétaire du pays est devenue intenable à long terme. Il pointe particulièrement du doigt le coût élevé et le fonctionnement du système de retraite français.",
-    "en": "Economist and Nobel laureate Paul Krugman calls France the sick man of the Western world due to its debt. According to him, the country's fiscal trajectory has become unsustainable in the long run. He particularly points to the high cost and structure of the French pension system."
-   },
-   "d": {
-    "fr": "La notation de la dette d'un pays influence directement la confiance des investisseurs internationaux. Si la dette est jugée insoutenable, les taux d'intérêt pour emprunter vont augmenter, ce qui pèse sur l'économie nationale et la monnaie.",
-    "en": "A country's debt rating directly influences international investor confidence. If debt is deemed unsustainable, borrowing interest rates will rise, weighing on the national economy and currency."
-   },
-   "v": [
-    [
-     "trajectoire budgétaire",
-     "fiscal trajectory"
-    ],
-    [
-     "dette souveraine",
-     "sovereign debt"
-    ],
-    [
-     "taux d'intérêt",
-     "interest rate"
-    ],
-    [
-     "système de retraite",
-     "pension system"
-    ]
-   ],
-   "q": {
-    "fr": "Comment la hausse des taux d'intérêt affecte-t-elle le budget d'un État ?",
-    "en": "How does rising interest rates affect a government's budget?"
-   },
-   "r": {
-    "fr": "Elle augmente le coût du remboursement des intérêts de la dette, ce qui réduit l'argent disponible pour les services publics.",
-    "en": "It increases the cost of debt interest payments, which reduces the money available for public services."
-   }
-  },
-  {
-   "id": "2026-10-08-tensions-geopolitiques-et-flambee-des-co",
-   "src": "Financial Times",
-   "date": "2026-10-08",
-   "url": "https://www.ft.com/content/ec860f96-5a2b-461a-a897-a957860c3dba?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Tensions géopolitiques et flambée des cours du pétrole",
-    "en": "Geopolitical Tensions and Surging Oil Prices"
-   },
-   "s": {
-    "fr": "Les prix du pétrole brut ont fortement augmenté suite à des attaques contre des navires pétroliers. Le passage du brut par le détroit d'Hormuz, une voie maritime essentielle, a chuté brutalement après avoir presque retrouvé son niveau d'avant-guerre. Cette perturbation de l'approvisionnement inquiète fortement les marchés énergétiques mondiaux.",
-    "en": "Crude oil prices have risen sharply following attacks on oil tankers. Transit through the Strait of Hormuz, a critical maritime route, fell abruptly after briefly recovering to near pre-war levels. This supply disruption is causing significant concern across global energy markets."
-   },
-   "d": {
-    "fr": "En trading, les matières premières comme le pétrole sont extrêmement sensibles aux risques géopolitiques qui menacent le transport physique. Une baisse de l'offre disponible face à une demande constante provoque mécaniquement une hausse rapide des prix.",
-    "en": "In trading, commodities like oil are highly sensitive to geopolitical risks that threaten physical transportation. A reduction in available supply while demand remains constant mechanically triggers a rapid increase in prices."
-   },
-   "v": [
-    [
-     "matières premières",
-     "commodities"
-    ],
-    [
-     "offre et demande",
-     "supply and demand"
-    ],
-    [
-     "cours du pétrole",
-     "oil prices"
-    ],
-    [
-     "chaîne d'approvisionnement",
-     "supply chain"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi un conflit dans une zone comme le détroit d'Hormuz a-t-il un impact immédiat sur le prix de l'essence à la pompe ?",
-    "en": "Why does a conflict in an area like the Strait of Hormuz have an immediate impact on fuel prices at the pump?"
-   },
-   "r": {
-    "fr": "Le détroit d'Hormuz est un point de passage stratégique pour une grande partie du pétrole mondial. Si le transit y est perturbé, les traders anticipent une pénurie globale, ce qui fait grimper instantanément les cours du brut et se répercute ensuite sur les carburants raffinés.",
-    "en": "The Strait of Hormuz is a strategic transit point for a large portion of global oil. If transit is disrupted, traders anticipate a global shortage, which instantly drives up crude prices and subsequently affects refined fuels."
-   }
-  },
-  {
-   "id": "2026-10-08-les-taux-immobiliers-americains-au-plus-",
-   "src": "Financial Times",
-   "date": "2026-10-08",
-   "url": "https://www.ft.com/content/04d6ae65-5d5f-4ed6-9c15-16aa0f4d0713?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Les taux immobiliers américains au plus haut depuis 2023",
-    "en": "US Mortgage Rates Reach Highest Level Since 2023"
-   },
-   "s": {
-    "fr": "Aux États-Unis, les taux des prêts immobiliers ont progressé pour la septième semaine consécutive. Cette hausse s'explique par la progression des rendements des obligations d'État, la cherté de l'énergie et les anticipations d'un durcissement monétaire de la Réserve fédérale. Les coûts d'emprunt atteignent désormais des sommets inédits depuis 2023.",
-    "en": "In the United States, mortgage rates have risen for the seventh consecutive week. This increase is driven by rising Treasury yields, high energy prices, and expectations of monetary tightening by the Federal Reserve. Borrowing costs have now reached levels not seen since 2023."
-   },
-   "d": {
-    "fr": "Pour un trader, suivre les taux d'intérêt est crucial car ils déterminent le coût de l'argent dans toute l'économie. Quand la banque centrale durcit sa politique pour lutter contre l'inflation, les taux d'emprunt augmentent, ce qui ralentit généralement le secteur immobilier et la consommation.",
-    "en": "For a trader, tracking interest rates is crucial because they determine the cost of money throughout the economy. When the central bank tightens policy to fight inflation, borrowing rates rise, which typically slows down the real estate sector and consumer spending."
-   },
-   "v": [
-    [
-     "taux d'intérêt hypothécaire",
-     "mortgage rate"
-    ],
-    [
-     "obligations du Trésor",
-     "Treasury yields"
-    ],
-    [
-     "durcissement monétaire",
-     "monetary tightening"
-    ],
-    [
-     "coût de l'emprunt",
-     "borrowing cost"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est le lien entre le rendement des obligations d'État et les taux d'intérêt des crédits aux particuliers ?",
-    "en": "What is the link between government bond yields and consumer loan interest rates?"
-   },
-   "r": {
-    "fr": "Les obligations d'État servent de référence pour le coût de l'argent à long terme. Lorsque leur rendement augmente, les banques répercutent cette hausse de coût sur les crédits qu'elles accordent aux ménages pour maintenir leurs marges.",
-    "en": "Government bonds serve as a benchmark for the long-term cost of money. When their yield rises, banks pass this increased cost onto the loans they grant to households to maintain their margins."
    }
   }
  ],
