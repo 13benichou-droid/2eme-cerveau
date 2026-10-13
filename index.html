@@ -777,6 +777,47 @@ details.egart>summary,details.egall>summary{cursor:pointer;display:flex;flex-dir
 .avgrp.open{border-color:color-mix(in srgb,var(--c) 45%,var(--line))}
 .avsub{margin:8px 0 0 18px;padding-left:16px;border-left:2px solid color-mix(in srgb,var(--muted) 40%,transparent)}
 .avsub .avb::before{left:-16px;width:16px}
+
+/* ---- accueil en widgets (2.0.0) ---- */
+.wgdate{color:var(--muted);font-size:.92rem;margin:0}
+.wgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;grid-auto-flow:dense}
+.wg{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:22px;padding:14px;min-height:124px;cursor:pointer;overflow:hidden;-webkit-tap-highlight-color:transparent;transition:transform .15s}
+.wg:active{transform:scale(.98)}
+.wg:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+.wg.w2{grid-column:span 2;min-height:0}
+.wgl{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:color-mix(in srgb,var(--c) 78%,var(--ink))}
+.wgbig{font-family:var(--display);font-size:2rem;font-weight:800;line-height:1.08;letter-spacing:-.02em}
+.wgmid{font-family:var(--display);font-size:1.25rem;font-weight:700;line-height:1.2}
+.wgtitle{font-family:var(--display);font-size:1.15rem;font-weight:700;line-height:1.25;letter-spacing:-.01em}
+.wg small{color:var(--muted);font-size:.8rem;line-height:1.3}
+.wgt{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.wgspark{display:block;width:100%;height:28px;margin-top:auto;padding-top:4px}
+.wgbar{display:flex;gap:3px;width:100%;height:8px;margin-top:8px}
+.wgbar i{display:block;border-radius:3px;min-width:4px}
+.wgaxis{display:flex;justify-content:space-between;width:100%;font-size:.72rem;color:var(--muted)}
+.wgprog{display:block;width:100%;height:6px;border-radius:3px;background:var(--soft);overflow:hidden;margin:5px 0 2px}
+.wgprog i{display:block;height:100%;background:var(--c);border-radius:3px}
+.wg.wgrow{flex-direction:row;align-items:center;gap:10px}
+.wgring{position:relative;width:52px;height:52px;flex:none}
+.wgring svg{display:block;width:52px;height:52px}
+.wgring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.95rem}
+.wgcol{display:flex;flex-direction:column;gap:2px;min-width:0}
+.wgpill{margin-top:auto;display:inline-block;padding:6px 12px;border-radius:999px;background:var(--c);color:var(--bg);font-size:.8rem;font-weight:700}
+.wgdots{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:4px}
+.wgdots i{display:block;width:13px;height:13px;border-radius:50%;border:2px solid color-mix(in srgb,var(--c) 40%,transparent)}
+.wgdots i.on{background:var(--c);border-color:var(--c)}
+.wgticks{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:4px}
+.wgtick{font-size:.78rem;color:var(--muted)}
+.wgtick b{color:var(--ink);font-weight:700}
+.wgtick em{font-style:normal;font-weight:700}
+.wgtick .up{color:var(--up)}.wgtick .down{color:var(--down)}
+.wgh{margin:22px 0 10px}
+.rubs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.rub{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:10px 4px;border-radius:16px;background:var(--surface);border:1px solid var(--line);color:var(--ink);cursor:pointer;min-height:86px}
+.rubi{width:42px;height:42px;border-radius:13px;background:color-mix(in srgb,var(--c) var(--tint),transparent);display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden}
+.rubi svg{display:block;width:42px;height:42px}
+.rubn{font-size:.72rem;font-weight:600;line-height:1.2;text-align:center;overflow-wrap:anywhere;hyphens:auto}
+@media (min-width:560px){.rubs{grid-template-columns:repeat(6,minmax(0,1fr))}}
 </style>
 <script src="config.js"></script>
 </head>
@@ -4453,6 +4494,88 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(d.pyrev!==undefined){fresh();V.pyRev=true;V.pyL=+d.pyrev;const c={...(pyDoc().code||{})};delete c["r"+V.pyL];pySave({code:c});render(true);return window.scrollTo(0,0)}});
 
 /* ================================================================
+   ACCUEIL EN WIDGETS (2.0.0)
+   Un cadre = un chiffre clé, et un toucher ouvre la rubrique.
+   Toutes les rubriques restent en bas ; l'ancien accueil en tuiles
+   se remet dans ⚙️ Réglages → Accueil.
+   ================================================================ */
+const homeMode=()=>appP().home==="tuiles"?"tuiles":"widgets";
+/* un widget disparaît seulement si tu as caché sa rubrique toi-même */
+const wgOff=k=>(appP().hide||[]).includes(k);
+const wgDur=m=>{m=Math.max(0,Math.round(m));return m<60?m+" min":Math.floor(m/60)+" h"+(m%60?" "+String(m%60).padStart(2,"0"):"")};
+const wgCap=s=>String(s||"").charAt(0).toUpperCase()+String(s||"").slice(1);
+const wgSafe=f=>{try{return f()}catch(e){try{console.warn("widget",e)}catch(_){}return""}};
+function wgBtn(go,col,cls,inner){return`<button class="wg ${cls||""}" style="--c:var(${col})" data-wgo="${go}">${inner}</button>`}
+function wgSpark(vals){if(vals.length<2)return"";const W=140,H=30,mn=Math.min(...vals),mx=Math.max(...vals),r=(mx-mn)||1;
+  return`<svg class="wgspark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><polyline points="${vals.map((v,i)=>(i*W/(vals.length-1)).toFixed(1)+","+(H-3-(v-mn)/r*(H-6)).toFixed(1)).join(" ")}" fill="none" stroke="var(--c)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>`}
+
+/* ---- Ma journée : l'étape en cours et le reste de la journée en une barre ---- */
+function wgJour(){const pl=planDay(today()),{cur,next}=jCurrent(pl),now=new Date(),nm=now.getHours()*60+now.getMinutes();
+  let big,sub;
+  if(cur){big=`${fmin(cur.a)} · ${esc(cur.l)}`;sub=`encore ${wgDur(cur.b-nm)}${next?` · ensuite ${fmin(next.a)} ${esc(next.l)}`:""}`}
+  else if(next){big=`${fmin(next.a)} · ${esc(next.l)}`;sub=`dans ${wgDur(next.a-nm)}`}
+  else{const ds=dayStats(today()),r=ds.t-ds.n;big=r>0?"Plus rien au planning":"Journée bouclée ✓";sub=r>0?`${r} tâche${r>1?"s":""} pas encore cochée${r>1?"s":""} aujourd'hui`:"tout est fait pour aujourd'hui"}
+  const rest=[...pl.steps,...pl.plan].filter(s=>s&&s.b>nm&&s.b>s.a).sort((a,b)=>a.a-b.a).slice(0,14);
+  const bar=rest.length?`<span class="wgbar" aria-hidden="true">${rest.map(s=>`<i style="flex:${Math.max(6,s.b-Math.max(s.a,nm))} 1 0;background:${jCol(s)}${s.done?";opacity:.35":""}"></i>`).join("")}</span><span class="wgaxis" aria-hidden="true"><span>${fmin(Math.max(rest[0].a,nm))}</span><span>${fmin(rest[rest.length-1].b)}</span></span>`:"";
+  return wgBtn("jour","--jour","w2",`<span class="wgl">${esc(sectName("jour"))}</span><span class="wgtitle">${big}</span><small>${sub}</small>${bar}`)}
+
+/* ---- Objectif Top 3 : le pourcentage et sa courbe sur 30 jours ---- */
+function wgObj(sc){const lim=dkey(add(today(),-30)),pts=Object.entries(S.objectif||{}).filter(([k,v])=>/^\d{4}-/.test(k)&&k>=lim&&v&&typeof v.p==="number").sort((a,b)=>a[0].localeCompare(b[0])).map(p=>p[1].p);
+  const d=pts.length>=2?sc.total-pts[0]:null,N=sc.N,mo=N?(N.gw!=null?N.gw:N.g):null;
+  const l1=d!=null&&Math.abs(d)>=0.05?`${d>0?"+":"−"}${pct1(Math.abs(d))} pt${Math.abs(d)>=2?"s":""} en 30 jours`:"HEC · ESSEC · ESCP";
+  return wgBtn("obj","--obj","",`<span class="wgl">${esc(sectName("obj"))}</span><span class="wgbig num">${pct1(sc.total)} %</span><small>${l1}</small>${mo!=null?`<small>moyenne bac ${pct1(mo)}</small>`:`<small>relie Pronote pour tes notes</small>`}${wgSpark(pts)}`)}
+
+/* ---- Parcoursup : la prochaine date et la checklist ---- */
+function wgPs(){const nx=psNext(),ck=psDoc("check").done||{},nd=PS_CHECK.filter(([k])=>ck[k]).length,j=nx?psDays(nx[0]):0;
+  return wgBtn("ps","--ps","",`<span class="wgl">Parcoursup</span>${nx?`<span class="wgbig num">${j?"J-"+j:"Aujourd'hui"}</span><small class="wgt">${esc(wgCap(nx[2]))} le ${fdate(nx[0])}</small>`:`<span class="wgbig">✓</span><small>calendrier terminé</small>`}<small>checklist : ${nd}/${PS_CHECK.length}</small><span class="wgprog" aria-hidden="true"><i style="width:${Math.round(nd/PS_CHECK.length*100)}%"></i></span>`)}
+
+/* ---- Anglais : le niveau en anneau et la série ---- */
+function wgEng(){const doc=egDoc(),n=EG_LV.length-1,i=Math.min(n,doc.u||0),sh=EG_LV[i].split(" · ")[0],p=n?i/n:0,stk=egStreak(),td=egToday(),st=[td.v,td.g,(td.o||0)>=3].filter(Boolean).length,C=138.2;
+  return wgBtn("ent|en","--ent","wgrow",`<span class="wgring" role="img" aria-label="Niveau ${esc(sh)}"><svg viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="22" fill="none" stroke="var(--soft)" stroke-width="7"/><circle cx="29" cy="29" r="22" fill="none" stroke="var(--c)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${Math.max(2,p*C).toFixed(1)} ${C}" transform="rotate(-90 29 29)"/></svg><b>${esc(sh)}</b></span><span class="wgcol"><span class="wgl">Anglais</span><span class="wgmid num">${stk?stk+" jour"+(stk>1?"s":""):"0 jour"}</span><small>${stk?"de série":"lance ta série"}</small><small>étapes : ${st}/3</small></span>`)}
+
+/* ---- Python : leçons faites et la prochaine ---- */
+function wgPy(){const pd=pyDoc(),dn=Object.keys(pd.done||{}).filter(k=>+k<PY_L.length).length,N=PY_L.length,td=!!(pd.d||{})[todayK()],stk=pyStreak();
+  return wgBtn("py","--py","",`<span class="wgl">${esc(sectName("py"))}</span><span class="wgbig num">${dn} / ${N}</span><span class="wgprog" aria-hidden="true"><i style="width:${Math.round(dn/N*100)}%"></i></span><small class="wgt">${dn>=N?"toutes les leçons faites ✓":td?`fait aujourd'hui${stk>1?" · "+stk+" jours de suite":""}`:`Prochaine : ${esc(PY_L[pyCur()].t)}`}</small>`)}
+
+/* ---- Calcul mental : le record à battre ---- */
+function wgCm(){const st=cmStats();
+  return wgBtn("ent|cm","--mx","",`<span class="wgl">Calcul mental</span><span class="wgbig num">${st.best||"–"}</span><small>${st.best?"ton record en 2 min":"pas encore d'essai"}${st.tb?` · aujourd'hui ${st.tb}`:""}</small><span class="wgpill">${st.best?"Battre le record":"Premier essai"}</span>`)}
+
+/* ---- Habitudes : les tâches du jour en pastilles ---- */
+function wgHab(){const s=dayStats(today());
+  const vis=s.t&&s.t<=10?`<span class="wgdots" aria-hidden="true">${Array.from({length:s.t},(_,i)=>`<i class="${i<s.n?"on":""}"></i>`).join("")}</span>`:s.t?`<span class="wgprog" aria-hidden="true"><i style="width:${Math.round(s.n/s.t*100)}%"></i></span>`:"";
+  return wgBtn("hab","--hab","",`<span class="wgl">${esc(sectName("hab"))}</span><span class="wgbig num">${s.t?s.n+" / "+s.t:"–"}</span><small>${s.t?(s.n>=s.t?"tout est fait ✓":"tâches faites aujourd'hui"):"rien de prévu aujourd'hui"}</small>${vis}`)}
+
+/* ---- Finance : le dernier article, les marchés et le défi du jour ---- */
+function wgFin(){const all=Object.values(S.presse||{}).filter(a=>a&&a.t&&(a.t.fr||a.t.en)).sort((a,b)=>String(b.date).localeCompare(String(a.date))),a=all[0],r=prog().days[dkey(today())],snap=(S.marche||{}).snap;
+  const ticks=snap&&Array.isArray(snap.items)&&snap.items.length?`<span class="wgticks">${snap.items.slice(0,3).map(x=>`<span class="wgtick">${esc(x.n)} <b class="num">${esc(x.v)}</b>${x.c?` <em class="${/^[−-]/.test(String(x.c))?"down":"up"}">${esc(x.c)}</em>`:""}</span>`).join("")}</span>`:"";
+  return wgBtn("fin|actu","--fin","w2",`<span class="wgl">${esc(sectName("fin"))}${a?" · à lire":""}</span><span class="wgtitle wgt">${a?esc(a.t.fr||a.t.en):"Les articles arrivent chaque matin en semaine"}</span><small>${a?`${esc(a.src||"")}${a.src?" · ":""}${fdate(a.date)} · `:""}${r?`défi du jour réussi ${r.s}/${r.m} ✓`:"défi du jour à faire"}</small>${ticks}`)}
+
+/* ---- toutes les rubriques, en petit ---- */
+function wgRubs(){return`<p class="label wgh">Toutes les rubriques</p><div class="rubs">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),nm=k==="proj"&&n==="🪶"?"Notes":n;
+    return`<button class="rub" style="--c:${mt?mt.couleur:`var(${COL[k]||"--proj"})`}" data-page="${k}"><span class="rubi" aria-hidden="true">${mt?esc(mt.emoji):(ILL[k]||"").replace('class="ill"','class="rubsvg"')}</span><span class="rubn">${esc(nm)}</span></button>`}).join("")}</div>`}
+
+function wgHome(){const sc=wgSafe(()=>{const s=objScore();objSnap(s);return s});const out=[];
+  if(!wgOff("jour"))out.push(wgSafe(wgJour));
+  if(!wgOff("obj")&&sc)out.push(wgSafe(()=>wgObj(sc)));
+  if(!wgOff("ps"))out.push(wgSafe(wgPs));
+  if(!wgOff("ent"))out.push(wgSafe(wgEng));
+  if(!wgOff("py"))out.push(wgSafe(wgPy));
+  if(!wgOff("ent"))out.push(wgSafe(wgCm));
+  if(!wgOff("hab"))out.push(wgSafe(wgHab));
+  if(!wgOff("fin"))out.push(wgSafe(wgFin));
+  return`<div class="wgs">${out.join("")}</div>${wgRubs()}`}
+
+/* ---- réglage : widgets ou tuiles ---- */
+function homeCard(){const m=homeMode();return`<div class="card stack" style="gap:10px"><p class="label" style="margin:0">🏠 Accueil</p>
+  <div class="seg" role="group" aria-label="Accueil"><button data-homeset="widgets" aria-pressed="${m==="widgets"}">Widgets</button><button data-homeset="tuiles" aria-pressed="${m==="tuiles"}">Tuiles (ancien)</button></div>
+  <p class="muted small" style="margin:0">${m==="widgets"?"Un chiffre clé par cadre. Toutes les rubriques restent en bas de l'accueil.":"L'accueil d'avant : une grande tuile par rubrique."}</p></div>`}
+
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-wgo],[data-homeset]");if(!b)return;const d=b.dataset;
+  if(d.homeset){put("params","appli",{...appP(),home:d.homeset},true);return render(true)}
+  const[p,tb]=d.wgo.split("|");if(p==="ent"&&tb)V.entTab=tb;if(p==="fin"&&tb)V.ftab=tb;go(p)});
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
 const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["ps","Mon avenir"],["ent","Entraîne­ment"],["py","Python"],["cours","Cours"],["mx","Maths"],["cg","Culture G"]];
@@ -4473,8 +4596,9 @@ function summary(k){
 }
 function pageHome(){
   const t=today(),h=new Date().getHours();
-  return`<div class="top"><div><h1>2ème cerveau 🧠</h1><p>${h<18?"Bonjour":"Bonsoir"} · ${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p></div><div class="topr"><div class="topb"><button class="gear" data-page="idees" aria-label="Suggestions">💡</button><button class="gear" data-page="reglages" aria-label="Réglages">⚙️</button></div><div class="sync" id="sync">${syncTxt}</div></div></div>
-  ${bilHome()}<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>${modWrap("accueil","")}${citCard()}
+  const W=homeMode()==="widgets";
+  return`<div class="top">${W?`<div><p class="wgdate">${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p><h1>${h<18?"Bonjour":"Bonsoir"}</h1></div>`:`<div><h1>2ème cerveau 🧠</h1><p>${h<18?"Bonjour":"Bonsoir"} · ${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p></div>`}<div class="topr"><div class="topb"><button class="gear" data-page="idees" aria-label="Suggestions">💡</button><button class="gear" data-page="reglages" aria-label="Réglages">⚙️</button></div><div class="sync" id="sync">${syncTxt}</div></div></div>
+  ${bilHome()}${W?wgHome():`<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>`}${modWrap("accueil","")}${citCard()}
   <div class="card stack" style="margin-top:16px"><p class="label" style="margin:0">💾 Mes données</p>
     <p class="muted small">Tout s'enregistre d'abord sur cet appareil, puis se synchronise avec ton compte (⚙️ Réglages). Garde aussi un fichier de sauvegarde de temps en temps.</p>
     <div class="row">${DL?`<button class="ghost on" data-export="1">Sauvegarder dans un fichier</button>`:""}<label class="ghost on" for="imp" style="cursor:pointer">Restaurer un fichier</label><button class="ghost" data-page="aide">🛟 Dépannage</button><input type="file" id="imp" data-imp="1" accept=".json,application/json" hidden></div>
@@ -4506,7 +4630,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="1.9.5";
+const APP_VERSION="2.0.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -4698,7 +4822,7 @@ function pageReglages(){
   const inst=`<div class="card stack"><p class="label" style="margin:0">Installer l'appli</p>${isStandalone()?`<p>✓ L'appli est installée sur cet appareil.</p>`:`${INSTALL_EVT?`<div><button class="btn" data-install="1">Installer sur cet appareil</button></div>`:""}
     <p class="small"><b>iPhone</b> : dans Safari, bouton Partager puis « Sur l'écran d'accueil ».<br><b>Android</b> : menu ⋮ de Chrome puis « Installer l'application ».<br><b>Ordinateur</b> : dans Chrome ou Edge, icône d'installation à droite de la barre d'adresse.</p>`}</div>`;
   const aide=`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">Un problème ?</p><p class="muted small">Pronote, IA, synchronisation, actu : un mode d'emploi pas à pas pour chaque panne.</p><div><button class="btn" data-page="aide">🛟 Ouvrir le dépannage</button></div></div>`;
-  return themeCard()+aide+sync+pnReglages()+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
+  return themeCard()+homeCard()+aide+sync+pnReglages()+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
 }
 async function testOllama(){V.aiMsg2="Test d'Ollama…";render(true);
   try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.",{_prov:"ollama"});V.aiMsg2="✓ Ollama répond : "+r.text.trim().slice(0,80)}
