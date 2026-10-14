@@ -820,6 +820,50 @@ details.egart>summary,details.egall>summary{cursor:pointer;display:flex;flex-dir
 .rubi svg{display:block;width:42px;height:42px}
 .rubn{font-size:.72rem;font-weight:600;line-height:1.2;text-align:center;overflow-wrap:anywhere;hyphens:auto}
 @media (min-width:560px){.rubs{grid-template-columns:repeat(6,minmax(0,1fr))}}
+
+/* ---- cartes à la Anki (2.1.0) ---- */
+.srsN{color:var(--cours)}.srsL{color:var(--down)}.srsR{color:var(--up)}
+.srscard{gap:14px}
+.srshead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.srsdeck{font-weight:700}
+.srscnt{display:inline-flex;gap:10px;font-weight:800;font-size:.95rem}
+.srsface{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding:16px 6px;min-height:170px}
+.srsq{font-family:var(--display);font-size:1.6rem;font-weight:700;line-height:1.25;overflow-wrap:anywhere}
+.srsa{font-family:var(--display);font-size:1.35rem;font-weight:700;line-height:1.3;color:color-mix(in srgb,var(--c) 75%,var(--ink));overflow-wrap:anywhere}
+.srsx{color:var(--muted);font-style:italic;font-size:.92rem}
+.srshr{width:100%;border:0;border-top:1px solid var(--line);margin:8px 0}
+.srstag{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;border-radius:6px;padding:2px 7px}
+.srstag.new{background:color-mix(in srgb,var(--cours) 15%,transparent);color:var(--cours)}
+.srstag.lrn{background:color-mix(in srgb,var(--down) 15%,transparent);color:var(--down)}
+.srsbtns{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.srsb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 2px;min-height:60px;border-radius:14px;border:1px solid var(--line);background:var(--soft);color:var(--ink);cursor:pointer}
+.srsb b{font-size:.84rem}.srsb small{font-size:.76rem;color:var(--muted)}
+.srsb.again b{color:var(--down)}.srsb.good b{color:var(--up)}.srsb.easy b{color:var(--cours)}
+.srsb:active{transform:scale(.97)}
+.srsshow{width:100%;min-height:52px}
+.srsfoot{justify-content:space-between;gap:12px}
+.srsrows{display:flex;flex-direction:column}
+.srsrow{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.srsrows>.srsrow:first-child{border-top:0}
+.srsname{flex:1;display:flex;align-items:center;gap:10px;min-width:0;min-height:44px;background:none;border:0;padding:0;text-align:left;cursor:pointer;color:var(--ink)}
+.srsname>span:last-child{display:flex;flex-direction:column;min-width:0}
+.srse{font-size:1.4rem;flex:none}
+.srsgo{padding:8px 14px;flex:none}
+.srsok{color:var(--up);font-weight:800;width:44px;text-align:center;flex:none}
+.srsleg{display:flex;gap:14px;flex-wrap:wrap}
+.srsleg i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;background:currentColor}
+.srspanel{padding:2px 0 14px;gap:10px}
+.srsopt{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.srsopt label{display:flex;align-items:center;gap:8px}
+.srsopt input[type=number]{width:76px;margin:0}
+.srslist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;max-height:380px;overflow:auto}
+.srslist li{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.srslist li>div{display:flex;flex-direction:column;min-width:0;overflow-wrap:anywhere}
+.srsact{display:flex;gap:4px 10px;flex-wrap:wrap;justify-content:flex-end;flex:none;max-width:48%}
+.srschk{display:flex;gap:8px;align-items:flex-start}
+.srschk input{margin-top:3px;width:18px;height:18px;flex:none}
+.srsnew{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--line)}.srsnew input{flex:1 1 auto;width:auto;min-width:0;margin:0}.srsnew button{flex:none}
+.srsart{margin-top:10px}
 </style>
 <script src="config.js"></script>
 </head>
@@ -1811,7 +1855,7 @@ function actuUI(){
     <h3>${esc(a.t[L]||a.t.fr||a.t.en)}</h3>
     ${a.s&&a.s[L]?`<p>${esc(a.s[L])}</p>`:""}
     ${a.d&&a.d[L]?`<div class="take"><b>${t.take}</b>${esc(a.d[L])}</div>`:""}
-    ${a.v&&a.v.length?`<div><p class="label" style="margin-bottom:6px">${t.voc}</p><div class="voc">${a.v.map(([f,e])=>`<span>${esc(L==="fr"?f:e)} <i>→ ${esc(L==="fr"?e:f)}</i></span>`).join("")}</div></div>`:""}
+    ${a.v&&a.v.length?`<div><p class="label" style="margin-bottom:6px">${t.voc}</p><div class="voc">${a.v.map(([f,e])=>`<span>${esc(L==="fr"?f:e)} <i>→ ${esc(L==="fr"?e:f)}</i></span>`).join("")}</div>${srsArtBtn(id,a)}</div>`:""}
     ${a.q&&a.q[L]?`<div class="stack" style="gap:8px"><p><b>${t.you} :</b> ${esc(a.q[L])}</p><div><button class="ghost ${V.rev[rk]?"on":""}" data-rev="${rk}">${V.rev[rk]?t.hide:t.show}</button></div>${V.rev[rk]?`<div class="corr">${esc(a.r[L])}</div>`:""}</div>`:""}
     <a href="${esc(a.url)}" target="_blank" rel="noopener">${t.read} ↗</a>
   </article>`},arts.length?arts.map(ac).join(""):`<div class="empty">${his.length?"Pas encore d'article cette semaine : les plus anciens sont dans l'Historique.":"Les articles arrivent chaque matin en semaine."}</div>`)}</div>
@@ -4083,7 +4127,7 @@ Reply ONLY with JSON: {"score": number from 0 to 10, "level": "A2" | "B1" | "B2"
   V.busy.enfb=false;render(true)}
 function entSummary(){const t=todayK(),cm=(drill("cm").hist||[]).filter(x=>x.d===t),et=egToday(),en=(drill("en").hist||[]).filter(x=>x.d===t).length||et.v||et.g||(et.o||0)>=3?[1]:[],n=(cm.length?1:0)+(en.length?1:0);
   return[`${n}/2`,n===2?"entraînements du jour faits 💪":cm.length?`calcul : ${Math.max(...cm.map(x=>x.s||0))} · reste l'anglais`:en.length?"anglais ✓ · reste le calcul mental":"calcul mental · anglais"]}
-function pageEnt(){const t=V.entTab||"cm";return`<div class="tabs two" role="tablist"><button role="tab" data-enttab="cm" aria-selected="${t==="cm"}">🧮 Calcul mental</button><button role="tab" data-enttab="en" aria-selected="${t==="en"}">🇬🇧 Anglais</button></div>`+(t==="cm"?entCm():engPage())}
+function pageEnt(){const t=V.entTab||"cm";return`<div class="tabs" role="tablist"><button role="tab" data-enttab="cm" aria-selected="${t==="cm"}">🧮 Calcul</button><button role="tab" data-enttab="en" aria-selected="${t==="en"}">🇬🇧 Anglais</button><button role="tab" data-enttab="cards" aria-selected="${t==="cards"}">🗂️ Cartes</button></div>`+(t==="cm"?entCm():t==="cards"?srsPage():engPage())}
 
 /* ---------- 6. BILAN DU DIMANCHE ---------- */
 /* le dimanche : la semaine qui se termine ; les autres jours : la semaine d'avant */
@@ -4144,7 +4188,7 @@ function bilHome(){const d=today().getDay();if(d!==0&&d!==1)return"";const m=bil
 
 /* ================================================================
    🇬🇧 ANGLAIS POUR DÉBUTANT : un cycle chaque jour
-   ① des mots (répétition espacée, avec la prononciation) ② une leçon de grammaire + exercices ③ des phrases à dire au micro
+   ① des mots en cartes à la Anki (srs.js, avec la prononciation) ② une leçon de grammaire + exercices ③ des phrases à dire au micro
    puis ④ le défi : expliquer l'article du jour (quand tu seras prêt)
    ================================================================ */
 const EG_VOC_RAW=[
@@ -4159,7 +4203,7 @@ const EG_VOC_RAW=[
  ["Les mots de liaison","and|et;but|mais;or|ou;because|parce que;so|donc;then|ensuite;also|aussi;however|cependant;although|bien que;first|d'abord;finally|enfin;for example|par exemple;maybe|peut-être;really|vraiment;very|très"],
  ["Donner son avis","I think that|je pense que;in my opinion|à mon avis;I agree|je suis d'accord;I disagree|je ne suis pas d'accord;I like|j'aime;I would like|je voudrais;I want to|je veux;I need to|j'ai besoin de;my goal is|mon objectif est;I'm interested in|je m'intéresse à;I'm good at|je suis bon en;it depends|ça dépend;I'm not sure|je ne suis pas sûr;that's true|c'est vrai;I don't know|je ne sais pas"]];
 const EG_VOC=EG_VOC_RAW.flatMap(([th,s],ti)=>s.split(";").map(x=>{const[en,fr]=x.split("|");return{en,fr,th,ti}}));
-const EG_NEW=8,EG_INT=[0,1,2,4,8,16];
+const EG_INT=[0,1,2,4,8,16];/* anciens intervalles : servent à reprendre ta progression dans les cartes Anki */
 /* 14 leçons de grammaire, du tout début (A1) vers A2 */
 const EG_U=[
  {t:"Le verbe « to be » (être)",x:"« To be » veut dire « être ». Au présent : I am (je suis), you are (tu es), he / she / it is (il / elle est), we are (nous sommes), they are (ils sont).\nÀ l'oral, on raccourcit : I'm, you're, he's, she's, it's, we're, they're.\nNégation : on ajoute not → I'm not, he isn't, they aren't.\nQuestion : on inverse → Are you ready? Is she French?",
@@ -4238,21 +4282,7 @@ function egScore(said,target){const a=egNorm(said).split(" ").filter(Boolean),b=
   const l=m[a.length][b.length];return Math.min(l/b.length,l/Math.max(1,a.length)*1.15)}
 const egTxtOk=(said,acc)=>acc.some(x=>egNorm(x)===egNorm(said));
 
-/* ---- ① vocabulaire : répétition espacée ---- */
-function egQueue(){const v=egDoc().voc||{},t=todayK(),due=EG_VOC.filter(w=>v[w.en]&&v[w.en].due<=t).sort((a,b)=>(v[a.en].b-v[b.en].b)||(v[a.en].due<v[b.en].due?-1:1));
-  const introduced=EG_VOC.filter(w=>v[w.en]&&v[w.en].first===t).length,fresh=EG_VOC.filter(w=>!v[w.en]).slice(0,Math.max(0,EG_NEW-introduced));
-  return[...due,...fresh].map(w=>w.en)}
-function egVocStart(){const q=egQueue();V.eg={m:"voc",q,i:0,flip:false,ok:0,n:q.length};render(true)}
-function egVocAns(knew){const st=V.eg,en=st.q[st.i];if(!en)return;const v={...(egDoc().voc||{})},cur=v[en]||{b:0,first:todayK()},t=today();
-  if(knew){const b=Math.min(5,(cur.seen?cur.b+1:2));v[en]={...cur,b,seen:1,due:dkey(add(t,EG_INT[b]))};st.ok++}
-  else{v[en]={...cur,b:0,seen:1,due:todayK()};if(!st.again)st.again={};if(!st.again[en]){st.again[en]=1;st.q.push(en)}}
-  egSave({voc:v});st.i++;st.flip=false;if(st.i>=st.q.length){egDay({v:1});st.m="vocfin"}else{const nx=st.q[st.i];if(((v[nx]||{}).b||0)<2)say(nx)}render(true)}
-function egVocCard(){const st=V.eg,en=st.q[st.i],w=EG_VOC.find(x=>x.en===en),v=(egDoc().voc||{})[en]||{},rev=(v.b||0)>=2;if(!w)return"";
-  const front=rev?`<span class="egfr">${esc(w.fr)}</span><small class="muted">Comment on dit en anglais ?</small>`:`<span class="egen">${esc(w.en)}</span>${egSay(w.en)}<small class="muted">Qu'est-ce que ça veut dire ?</small>`;
-  const back=`<span class="egen">${esc(w.en)}</span>${egSay(w.en)}<span class="egfr">${esc(w.fr)}</span>`;
-  return`<div class="card stack egcard"><div class="row" style="justify-content:space-between"><span class="muted small">${esc(w.th)}${v.seen?"":" · nouveau mot"}</span><span class="muted small num">${st.i+1}/${st.q.length}</span></div>
-    <div class="egflash">${st.flip?back:front}</div>
-    ${st.flip?`<div class="egbtns"><button class="ghost egko" data-egv="0">✗ Je ne savais pas</button><button class="btn egok" data-egv="1">✓ Je savais</button></div>`:`<button class="btn" data-egflip="1">Voir la réponse</button>`}</div>`}
+/* ---- ① vocabulaire : les cartes à la Anki sont dans srs.js (paquet « Anglais ») ---- */
 
 /* ---- ② grammaire ---- */
 function egUnit(){return Math.min(EG_U.length-1,egDoc().u||0)}
@@ -4285,18 +4315,17 @@ function egOralCard(){const st=V.eg,[fr,en]=st.L[st.i],r=st.res;
       :`<div class="row"><button class="btn" data-egspeak="1">🎙️ Parler</button><button class="ghost on" data-egcheck="1">Vérifier</button><button class="ghost" data-egshow="1">Je ne sais pas</button></div>`}</div>`}
 
 /* ---- page ---- */
-function egHome(){const u=egUnit(),doc=egDoc(),td=egToday(),q=egQueue(),known=Object.values(doc.voc||{}).filter(x=>x.b>=3).length,lv=EG_LV[Math.min(EG_LV.length-1,doc.u||0)],steps=[td.v,td.g,(td.o||0)>=3].filter(Boolean).length,stk=egStreak();
+function egHome(){const u=egUnit(),doc=egDoc(),td=egToday(),c=srsCount("en"),todo=c.n+c.l+c.r,known=c.known,lv=EG_LV[Math.min(EG_LV.length-1,doc.u||0)],steps=[td.v,td.g,(td.o||0)>=3].filter(Boolean).length,stk=egStreak();
   const step=(n,ic,t,s,done,btn)=>`<div class="egstep ${done?"done":""}"><span class="egn">${done?"✓":n}</span><div><b>${ic} ${t}</b><small class="muted">${s}</small></div>${btn}</div>`;
   return`<div class="card stack" style="gap:12px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">🇬🇧 Ton cycle du jour · ${steps}/3</p><span class="muted small">${stk?`🔥 ${stk} jour${stk>1?"s":""}`:""}</span></div>
-    <div class="eglv"><span>Niveau <b>${esc(lv)}</b></span><span class="muted small">${known} mots bien sus · leçon ${Math.min((doc.u||0)+1,EG_U.length)}/${EG_U.length}</span><div class="mxbar"><i style="width:${Math.round((doc.u||0)/EG_U.length*100)}%"></i></div></div>
-    ${step(1,"🔤","Vocabulaire",td.v&&!q.length?"Fini pour aujourd'hui":`${q.length} mot${q.length>1?"s":""} à voir (nouveaux + à revoir)`,td.v&&!q.length,q.length?`<button class="btn" data-egvoc="1">${td.v?"Continuer":"Commencer"}</button>`:"")}
+    <div class="eglv"><span>Niveau <b>${esc(lv)}</b></span><span class="muted small">${known} carte${known>1?"s":""} bien sue${known>1?"s":""} · leçon ${Math.min((doc.u||0)+1,EG_U.length)}/${EG_U.length}</span><div class="mxbar"><i style="width:${Math.round((doc.u||0)/EG_U.length*100)}%"></i></div></div>
+    ${step(1,"🗂️","Cartes de vocabulaire",todo?`${c.n} nouvelle${c.n>1?"s":""} · ${c.l+c.r} à revoir · méthode Anki`:"Fini pour aujourd'hui",td.v&&!todo,todo?`<button class="btn" data-srsgo="en|en">${td.v?"Continuer":"Commencer"}</button>`:"")}
     ${step(2,"📘","Grammaire",`Leçon ${u+1} : ${EG_U[u].t}`,!!td.g,`<button class="${td.g?"ghost":"btn"}" data-eggram="${u}">${(doc.g||{})[u]?"Revoir":"Commencer"}</button>`)}
     ${step(3,"🎙️","Oral","Dis des phrases de ta dernière leçon au micro",(td.o||0)>=3,`<button class="${(td.o||0)>=3?"ghost":"btn"}" data-egoral="1">${(td.o||0)>=3?"Refaire":"Commencer"}</button>`)}
     <p class="muted small" style="margin:0">Environ 15 minutes. On commence vraiment par la base : chaque leçon validée (4/6) débloque la suivante.</p></div>
   <details class="card egall"><summary><b>📚 Toutes les leçons</b></summary><ol class="eglist">${EG_U.map((U,i)=>{const g=(doc.g||{})[i],open=i<=(doc.u||0);return`<li class="${open?"":"off"}">${open?`<button class="linkb" data-eggram="${i}">${esc(U.t)}</button>`:`<span>🔒 ${esc(U.t)}</span>`}${g?` <span class="muted small">· ${g.best}/6</span>`:""}</li>`}).join("")}</ol></details>`}
-function engPage(){const st=V.eg||{m:"home"};let main="";
-  if(st.m==="voc")main=egVocCard();
-  else if(st.m==="vocfin")main=`<div class="card stack egcard"><p class="egbig">🎉</p><p><b>Vocabulaire fini pour aujourd'hui.</b> ${st.ok}/${st.n} mots sus du premier coup. Les mots ratés reviendront demain.</p><button class="btn" data-eghome="1">Continuer le cycle</button></div>`;
+function engPage(){const sr=V.srs&&V.srs.tab==="en",st=sr?{m:"srs"}:V.eg||{m:"home"};let main="";
+  if(sr)main=srsView();
   else if(st.m==="lesson")main=egLesson();
   else if(st.m==="ex")main=egExCard();
   else if(st.m==="exfin")main=`<div class="card stack egcard"><p class="egbig num">${st.sc}/${EG_U[st.u].q.length}</p><p>${st.pass?`<b>Leçon validée !</b> ${st.u+1<EG_U.length?"La leçon suivante est débloquée pour demain.":"Tu as fini toutes les leçons : passe au défi de l'article."}`:"<b>Il faut 4/6 pour valider.</b> Relis la leçon et refais les exercices : c'est en recommençant qu'on retient."}</p><div class="row"><button class="btn" data-eghome="1">Continuer le cycle</button>${st.pass?"":`<button class="ghost on" data-eggram="${st.u}">Relire la leçon</button>`}</div></div>`;
@@ -4308,11 +4337,8 @@ function engPage(){const st=V.eg||{m:"home"};let main="";
   <details class="card egart" ${u>=EG_U.length||V.egArtOpen?"open":""}><summary><b>④ Défi : explique l'article du jour</b><span class="muted small">${u>=EG_U.length?"tu es prêt !":"niveau B1 : pour plus tard, mais tu peux essayer"}</span></summary><div class="stack" style="gap:12px;margin-top:10px">${entEn()}</div></details>`}
 
 /* ---- clics et saisie ---- */
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-egsay],[data-egvoc],[data-egflip],[data-egv],[data-eggram],[data-egexgo],[data-egopt],[data-egnext],[data-egoral],[data-egspeak],[data-egcheck],[data-egshow],[data-egonext],[data-eghome]");if(!b)return;const d=b.dataset;
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-egsay],[data-eggram],[data-egexgo],[data-egopt],[data-egnext],[data-egoral],[data-egspeak],[data-egcheck],[data-egshow],[data-egonext],[data-eghome]");if(!b)return;const d=b.dataset;
   if(d.egsay!==undefined)return say(d.egsay);
-  if(d.egvoc){egVocStart();const st=V.eg,en=st.q[0],w=EG_VOC.find(x=>x.en===en),v=(egDoc().voc||{})[en]||{};if(w&&(v.b||0)<2)say(en);return}
-  if(d.egflip){V.eg.flip=true;const en=V.eg.q[V.eg.i];render(true);return say(en)}
-  if(d.egv!==undefined)return egVocAns(d.egv==="1");
   if(d.eggram!==undefined)return egGramStart(+d.eggram);
   if(d.egexgo)return egExStart();
   if(d.egopt!==undefined)return egExAns(d.egopt);
@@ -4322,10 +4348,229 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(d.egcheck)return egOralCheck();
   if(d.egshow){V.egSaid=V.egSaid||"…";V.eg.res={s:0,said:""};const en=V.eg.L[V.eg.i][1];say(en);return render(true)}
   if(d.egonext)return egOralNext();
-  if(d.eghome){V.eg={m:"home"};render(true);return window.scrollTo(0,0)}});
+  if(d.eghome){V.eg={m:"home"};V.srs=null;render(true);return window.scrollTo(0,0)}});
 document.addEventListener("input",e=>{const t=e.target;if(t&&t.dataset&&t.dataset.egsaid!==undefined)V.egSaid=t.value});
 document.addEventListener("submit",e=>{const f=e.target;if(f&&f.dataset&&f.dataset.f==="egtxt"){e.preventDefault();e.stopImmediatePropagation();const v=(f.querySelector("input")||{}).value||"";if(v.trim())egExAns(v)}},true);
 document.addEventListener("toggle",e=>{const t=e.target;if(t&&t.classList&&t.classList.contains("egart"))V.egArtOpen=t.open},true);
+
+/* ================================================================
+   🗂️ CARTES DE RÉVISION À LA ANKI (2.1.0)
+   Répétition espacée avec l'algorithme d'Anki (SM-2) : chaque carte revient
+   juste avant que tu l'oublies. Quatre réponses : À revoir · Difficile · Correct · Facile.
+   Paquet Anglais (les mots du cours + tes mots) et un paquet par matière.
+   ================================================================ */
+const SRS_STEPS=[1,10],SRS_RESTEPS=[10],SRS_GRAD=1,SRS_EASY=4,SRS_EF0=2500,SRS_EFMIN=1300,SRS_AHEAD=20,SRS_MAXREV=200,SRS_MIN=60000;
+const SRS_DECKS0={en:{n:"Anglais",e:"🇬🇧",both:1,nd:10},maths:{n:"Maths",e:"📐",both:0,nd:10},ses:{n:"SES",e:"📊",both:0,nd:10},philo:{n:"Philo",e:"🤔",both:0,nd:10},cg:{n:"Culture G",e:"🌍",both:0,nd:10}};
+const EG_VMAP=new Map(EG_VOC.map(w=>["v:"+w.en,w]));
+const srsDoc=()=>drill("srs");
+function srsSave(p){put("drill","srs",{...srsDoc(),...p},true)}
+function srsDecks(){const d=srsDoc().decks||{},o={};Object.entries(SRS_DECKS0).forEach(([k,v])=>{o[k]={...v,...(d[k]||{}),def:1}});
+  Object.entries(d).forEach(([k,v])=>{if(!o[k]&&v&&v.n&&!v.del)o[k]={e:"🗂️",both:0,nd:10,...v}});return o}
+/* tes mots appris avant la 2.1 gardent leur progression (repris tant que tu n'as pas répondu à une carte) */
+function srsCards(){const d=srsDoc(),C=d.cards||{};if(d.mig)return C;const voc=egDoc().voc||{},m={};
+  Object.entries(voc).forEach(([en,v])=>{if(!v||!EG_VMAP.has("v:"+en)||(!v.seen&&!v.b))return;const b=v.b||0;
+    m["v:"+en+">0"]={s:2,ivl:Math.max(1,EG_INT[b]||1),ef:SRS_EF0,dd:v.due||todayK(),r:Math.max(1,b),l:0,last:v.first||""}});
+  return{...m,...C}}
+function srsNote(id){if(id.startsWith("v:")){const w=EG_VMAP.get(id);return w?{id,d:"en",f:w.en,b:w.fr,th:w.th,bi:1}:null}
+  const n=(srsDoc().notes||{})[id];return n&&!n.del?{id,...n}:null}
+/* tes cartes d'abord (dans l'ordre où tu les as ajoutées), puis les mots du cours */
+function srsNotes(deck){const N=Object.entries(srsDoc().notes||{}).filter(([,n])=>n&&!n.del&&n.d===deck).sort((a,b)=>(a[1].ts||0)-(b[1].ts||0)).map(([id,n])=>({id,...n}));
+  if(deck==="en")EG_VOC.forEach(w=>N.push({id:"v:"+w.en,d:"en",f:w.en,b:w.fr,th:w.th,bi:1}));return N}
+const srsCids=(n,D)=>n.bi||n.r===1||(n.r==null&&D&&D.both)?[n.id+">0",n.id+">1"]:[n.id+">0"];
+const srsIsNew=c=>!c||!c.s;
+/* le sens inverse (français → anglais) arrive seulement quand le premier sens est appris, et pas le même jour */
+function srsNewOk(cid,C){if(cid.endsWith(">0"))return true;const s=C[cid.slice(0,-1)+"0"];return!!(s&&s.s===2&&s.last!==todayK())}
+function srsLog(dk){const r=(srsDoc().rev||{})[todayK()]||{};return r[dk]||{n:0,r:0,a:0,ok:0}}
+function srsScan(deck){const D=srsDecks()[deck],learn=[],rev=[],fresh=[];let tot=0,known=0;
+  if(!D)return{learn,rev,fresh,tot,known,revLeft:0};
+  const C=srsCards(),t=todayK(),lg=srsLog(deck),newLeft=Math.max(0,(D.nd??10)-lg.n);
+  for(const n of srsNotes(deck))for(const cid of srsCids(n,D)){const c=C[cid];tot++;if(c&&c.sus)continue;
+    if(srsIsNew(c)){if(fresh.length<newLeft&&srsNewOk(cid,C))fresh.push(cid);continue}
+    if(c.s===2&&c.ivl>=7)known++;
+    if(c.s===1||c.s===3)learn.push([cid,c.dm||0]);else if(c.dd<=t)rev.push([cid,c.dd])}
+  learn.sort((a,b)=>a[1]-b[1]);rev.sort((a,b)=>a[1]<b[1]?-1:a[1]>b[1]?1:hashStr(a[0]+t)-hashStr(b[0]+t));
+  return{learn,rev,fresh,tot,known,revLeft:Math.max(0,SRS_MAXREV-lg.r)}}
+function srsCount(deck){const s=srsScan(deck),now=Date.now();return{n:s.fresh.length,l:s.learn.filter(x=>x[1]<=now+SRS_AHEAD*SRS_MIN).length,r:Math.min(s.rev.length,s.revLeft),tot:s.tot,known:s.known,wait:s.learn.length}}
+/* la carte suivante : d'abord celles en apprentissage dont l'heure est venue, puis les révisions avec une nouvelle toutes les 4 cartes */
+function srsPick(deck,k,avoid){const s=srsScan(deck),now=Date.now();
+  if(s.learn.length&&s.learn[0][1]<=now)return s.learn[0][0];
+  const rv=s.revLeft>0?s.rev.map(x=>x[0]):[];
+  if(rv.length&&(!s.fresh.length||k%4!==3))return rv[0];
+  if(s.fresh.length)return s.fresh[0];
+  const la=s.learn.filter(x=>x[1]<=now+SRS_AHEAD*SRS_MIN);
+  if(la.length)return(la.find(x=>x[0]!==avoid)||la[0])[0];
+  return null}
+
+/* ---- l'algorithme (réglages par défaut d'Anki) ---- */
+const srsDays=(a,b)=>{const f=k=>{const[y,m,d]=String(k).split("-").map(Number);return Date.UTC(y,m-1,d)};return Math.round((f(b)-f(a))/864e5)};
+function srsFuzz(n){if(n<3)return n;const f=Math.max(1,Math.round(n*.05));return n+Math.round((Math.random()*2-1)*f)}
+function srsNext(c,g,now,nofz){const t=today(),M=SRS_MIN,ef=(c&&c.ef)||SRS_EF0,r=((c&&c.r)||0)+1,l=(c&&c.l)||0;
+  const rev=(ivl,e)=>{ivl=Math.min(36500,Math.max(1,nofz?ivl:srsFuzz(ivl)));return{s:2,ivl,ef:e,dd:dkey(add(t,ivl)),r,l}};
+  if(srsIsNew(c)||c.s===1){const st=srsIsNew(c)?0:(c.st||0);
+    if(g===1)return{s:1,st:0,dm:now+SRS_STEPS[0]*M,ef,r,l};
+    if(g===2)return{s:1,st,dm:now+Math.round(st===0&&SRS_STEPS.length>1?(SRS_STEPS[0]+SRS_STEPS[1])/2:SRS_STEPS[st]*1.5)*M,ef,r,l};
+    if(g===3)return st+1<SRS_STEPS.length?{s:1,st:st+1,dm:now+SRS_STEPS[st+1]*M,ef,r,l}:rev(SRS_GRAD,ef);
+    return rev(SRS_EASY,ef)}
+  if(c.s===3){const st=c.st||0,ivl=c.ivl||1;
+    if(g===1)return{...c,s:3,st:0,dm:now+SRS_RESTEPS[0]*M,r};
+    if(g===2)return{...c,s:3,st,dm:now+Math.round(SRS_RESTEPS[st]*1.5)*M,r};
+    if(g===3)return st+1<SRS_RESTEPS.length?{...c,s:3,st:st+1,dm:now+SRS_RESTEPS[st+1]*M,r}:rev(ivl,ef);
+    return rev(ivl+1,ef)}
+  const ivl=c.ivl||1,dl=Math.max(0,srsDays(c.dd||todayK(),todayK()));
+  if(g===1)return{s:3,st:0,dm:now+SRS_RESTEPS[0]*M,ivl:1,ef:Math.max(SRS_EFMIN,ef-200),r,l:l+1};
+  const hard=Math.max(ivl+1,Math.round(ivl*1.2));
+  if(g===2)return rev(hard,Math.max(SRS_EFMIN,ef-150));
+  const good=Math.max(hard+1,Math.round((ivl+dl/2)*ef/1000));
+  if(g===3)return rev(good,ef);
+  return rev(Math.max(good+1,Math.round((ivl+dl)*ef/1000*1.3)),ef+150)}
+const srsFmtMin=m=>m<60?m+" min":Math.round(m/60)+" h";
+const srsFmtDays=d=>d<30?d+" j":d<365?(Math.round(d/3)/10).toLocaleString("fr-FR")+" mois":(Math.round(d/36.5)/10).toLocaleString("fr-FR")+" an"+(d>=730?"s":"");
+function srsLbl(c,g){const now=Date.now(),n=srsNext(c,g,now,true);return n.s===2?srsFmtDays(n.ivl):srsFmtMin(Math.round((n.dm-now)/SRS_MIN))}
+
+/* ---- la séance ---- */
+function srsStart(deck,tab){V.srs={deck,tab,k:0,again:0,flip:false,undo:null};srsGo();window.scrollTo(0,0)}
+function srsGo(){const st=V.srs;st.flip=false;st.cid=srsPick(st.deck,st.k,st.cid);st.fin=!st.cid;
+  if(st.fin){if(st.deck==="en"&&st.k>0)egDay({v:1})}else srsSay(false);render(true)}
+function srsFlip(){const st=V.srs;if(!st||!st.cid)return;st.flip=true;srsSay(true);render(true)}
+function srsSay(back){const st=V.srs;if(!st||!st.cid||V.srsMute)return;const[nid,dir]=st.cid.split(">"),n=srsNote(nid);if(!n||n.d!=="en")return;if((dir==="0")!==back)say(n.f)}
+function srsAnswer(g){const st=V.srs;if(!st||!st.cid||!st.flip)return;const d=srsDoc(),C={...srsCards()},cid=st.cid,old=C[cid],t=todayK();
+  C[cid]={...srsNext(old,g,Date.now()),last:t};
+  const rv={...(d.rev||{})},day={...(rv[t]||{})},x={...(day[st.deck]||{n:0,r:0,a:0,ok:0})};
+  if(srsIsNew(old))x.n++;else if(old.s===2)x.r++;x.a++;if(g>1)x.ok++;day[st.deck]=x;rv[t]=day;
+  const ks=Object.keys(rv).sort();while(ks.length>120)delete rv[ks.shift()];
+  st.undo={cid,old:old||null,day:(d.rev||{})[t]||null,k:st.k,again:st.again};
+  srsSave({cards:C,rev:rv,mig:1});st.k++;if(g===1)st.again++;srsGo()}
+function srsUndo(){const st=V.srs;if(!st||!st.undo)return;const u=st.undo,d=srsDoc(),C={...srsCards()},rv={...(d.rev||{})},t=todayK();
+  if(u.old)C[u.cid]=u.old;else delete C[u.cid];if(u.day)rv[t]=u.day;else delete rv[t];srsSave({cards:C,rev:rv,mig:1});
+  Object.assign(st,{k:u.k,again:u.again,undo:null,cid:u.cid,flip:true,fin:false});render(true)}
+const srsTxt=s=>esc(String(s||"")).replace(/\n/g,"<br>");
+const SRS_G=[[1,"À revoir","again"],[2,"Difficile","hard"],[3,"Correct","good"],[4,"Facile","easy"]];
+function srsCnt(c){return`<span class="srscnt num" aria-label="${c.n} nouvelles, ${c.l} en cours, ${c.r} à revoir"><b class="srsN">${c.n}</b><b class="srsL">${c.l}</b><b class="srsR">${c.r}</b></span>`}
+function srsView(){const st=V.srs,D=srsDecks()[st.deck]||{n:"?",e:""};
+  const head=`<div class="srshead"><span class="srsdeck">${esc(D.e)} ${esc(D.n)}</span>${srsCnt(srsCount(st.deck))}</div>`;
+  if(st.fin){const w=srsScan(st.deck).learn,nx=w.length?Math.max(1,Math.round((w[0][1]-Date.now())/SRS_MIN)):0,pc=st.k?Math.round((st.k-st.again)/st.k*100):0;
+    return`<div class="card stack srscard">${head}<p class="egbig">🎉</p><p><b>${st.k?"Fini pour l'instant !":"Rien à réviser pour l'instant."}</b>${st.k?` ${st.k} réponse${st.k>1?"s":""} · ${pc} % de bonnes.`:""}</p>
+      <p class="muted small">${nx?`${w.length} carte${w.length>1?"s":""} en cours d'apprentissage reviendr${w.length>1?"ont":"a"} dans ${srsFmtMin(nx)}.`:"Les autres cartes reviendront les jours suivants, juste avant que tu les oublies."}</p>
+      <div class="row">${st.undo?`<button class="ghost" data-srsundo="1">↶ Annuler la dernière</button>`:""}<button class="btn" data-srsstop="1">Retour</button></div></div>`}
+  const[nid,dir]=st.cid.split(">"),n=srsNote(nid),cur=srsCards()[st.cid];if(!n)return`<div class="card stack srscard">${head}<p>Cette carte a été supprimée.</p><button class="btn" data-srsstop="1">Retour</button></div>`;
+  const en=n.d==="en",q=dir==="0"?n.f:n.b,a=dir==="0"?n.b:n.f,sayF=en?egSay(n.f):"";
+  const tag=srsIsNew(cur)?`<span class="srstag new">nouvelle</span>`:cur.s===2?"":`<span class="srstag lrn">en cours</span>`;
+  const front=`<span class="srsq">${srsTxt(q)}</span>${en&&dir==="0"?sayF:""}${en?`<small class="muted">${dir==="0"?"Qu'est-ce que ça veut dire ?":"Comment on dit en anglais ?"}</small>`:""}`;
+  const back=`<hr class="srshr"><span class="srsa">${srsTxt(a)}</span>${en&&dir==="1"?sayF:""}${n.x?`<small class="srsx">${srsTxt(n.x)}</small>`:""}`;
+  const pc=typeof matchMedia==="function"&&matchMedia("(hover:hover)").matches;
+  return`<div class="card stack srscard">${head}
+    <div class="srsface">${n.th||tag?`<div class="row" style="justify-content:center;gap:8px">${tag}${n.th?`<small class="muted">${esc(n.th)}</small>`:""}</div>`:""}${front}${st.flip?back:""}</div>
+    ${st.flip?`<div class="srsbtns">${SRS_G.map(([g,l,k])=>`<button class="srsb ${k}" data-srsg="${g}"><small class="num">${srsLbl(cur,g)}</small><b>${l}</b></button>`).join("")}</div>`:`<button class="btn srsshow" data-srsflip="1">Voir la réponse</button>`}
+    <div class="row srsfoot"><button class="linkb" data-srsstop="1">Terminer</button>${st.undo?`<button class="linkb" data-srsundo="1">↶ Annuler</button>`:""}${pc?`<span class="muted small">Espace : retourner · 1 2 3 4 : répondre</span>`:""}</div></div>`}
+
+/* ---- l'onglet 🗂️ Cartes ---- */
+function srsPage(){if(V.srs&&V.srs.tab==="cards")return srsView();
+  const Ds=srsDecks(),day=(srsDoc().rev||{})[todayK()]||{};let a=0,ok=0;Object.values(day).forEach(x=>{a+=x.a||0;ok+=x.ok||0});
+  const rows=Object.entries(Ds).map(([k,D])=>{const c=srsCount(k),todo=c.n+c.l+c.r,op=V.srsOpen===k;
+    return`<div class="srsrow"><button class="srsname" data-srsopen="${k}" aria-expanded="${op}"><span class="srse" aria-hidden="true">${esc(D.e)}</span><span><b>${esc(D.n)}</b><small class="muted">${c.tot?`${c.tot} carte${c.tot>1?"s":""}${c.known?` · ${c.known} bien sue${c.known>1?"s":""}`:""}`:"vide : ajoute des cartes"} ${op?"▴":"▾"}</small></span></button>${c.tot?srsCnt(c):""}${todo?`<button class="btn srsgo" data-srsgo="${k}|cards">Étudier</button>`:`<span class="srsok" aria-label="Rien à réviser">✓</span>`}</div>${op?srsDeckPanel(k,D):""}`}).join("");
+  return`<div class="card stack" style="gap:10px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">🗂️ Mes paquets de cartes</p><span class="muted small">${a?`aujourd'hui : ${a} réponse${a>1?"s":""} · ${Math.round(ok/a*100)} % de bonnes`:""}</span></div>
+    <div class="srsleg muted small"><span><i class="srsN"></i>nouvelles</span><span><i class="srsL"></i>en cours</span><span><i class="srsR"></i>à revoir</span></div>
+    <div class="srsrows">${rows}</div>${srsNewDeck()}</div>
+  ${srsAddCard()}${srsAiCard()}${srsForecast()}${srsHelp()}`}
+function srsDeckPanel(k,D){const C=srsCards(),L=srsNotes(k);
+  const stat=cid=>{const c=C[cid];if(c&&c.sus)return"suspendue";if(srsIsNew(c))return"nouvelle";if(c.s===1||c.s===3)return"en cours";const d=srsDays(todayK(),c.dd);return d<=0?"à revoir":"dans "+srsFmtDays(d)};
+  return`<div class="srspanel stack">
+    <form class="srsopt" data-f="srsopt" data-deck="${k}"><label class="small">Nouvelles cartes par jour <input class="field num" type="number" name="nd" min="0" max="100" value="${D.nd??10}" inputmode="numeric"></label>${k==="en"?"":`<label class="srschk small"><input type="checkbox" name="both" ${D.both?"checked":""}> Nouvelles cartes dans les deux sens</label>`}<button class="ghost on">Enregistrer</button>${D.def?"":`<button type="button" class="ghost" data-srsdeldeck="${k}">${V.confirm==="srsdk"+k?"Confirmer la suppression":"Supprimer le paquet"}</button>`}</form>
+    ${L.length?`<input class="field" type="search" placeholder="Chercher une carte" data-srsq="1" aria-label="Chercher une carte">
+    <ul class="srslist">${L.map(n=>{const ids=srsCids(n,D),sus=ids.every(i=>C[i]&&C[i].sus);return`<li data-srst="${esc((n.f+" "+n.b).toLowerCase())}"><div><span><b>${esc(n.f)}</b><span class="muted"> → ${esc(n.b)}</span></span><small class="muted">${ids.map(stat).join(" · ")}</small></div><span class="srsact">${n.bi?"":`<button class="linkb" data-srsedit="${esc(n.id)}">Modifier</button><button class="linkb" data-srsdel="${esc(n.id)}">${V.confirm==="srsdel"+n.id?"Confirmer":"Supprimer"}</button>`}<button class="linkb" data-srssus="${esc(n.id)}">${sus?"Réactiver":"Suspendre"}</button></span></li>`}).join("")}</ul>`:`<p class="muted small">Aucune carte pour l'instant : ajoute-les ci-dessous, à la main ou avec l'IA.</p>`}</div>`}
+function srsNewDeck(){return`<form class="srsnew" data-f="srsdeck"><input class="field" name="n" placeholder="Nouveau paquet (ex. : Histoire-géo)" maxlength="40" aria-label="Nom du nouveau paquet"><button class="ghost on">Créer</button></form>`}
+const srsOpts=(Ds,sel)=>Object.entries(Ds).map(([k,x])=>`<option value="${k}" ${k===sel?"selected":""}>${esc(x.e)} ${esc(x.n)}</option>`).join("");
+function srsAddCard(){const a=V.srsAdd||{},Ds=srsDecks(),dk=Ds[a.d]?a.d:(Ds[V.srsOpen]?V.srsOpen:"en"),D=Ds[dk],en=dk==="en";
+  return`<details class="card srsaddc" ${V.srsAddOpen||a.edit?"open":""} data-srsdet="add"><summary><b>${a.edit?"✏️ Modifier la carte":"➕ Ajouter une carte"}</b></summary>
+  <form class="stack" data-f="srsadd" style="gap:10px;margin-top:10px">
+    <label class="small">Paquet<select class="field" name="d" data-srsaddd="1">${srsOpts(Ds,dk)}</select></label>
+    <label class="small">${en?"Mot ou expression en anglais":"Recto : la question"}<textarea class="field" name="f" rows="2" ${en?'data-miclang="en-US"':""}>${esc(a.f||"")}</textarea></label>
+    <label class="small">${en?"Traduction en français":"Verso : la réponse"}<textarea class="field" name="b" rows="2">${esc(a.b||"")}</textarea></label>
+    <label class="small">${en?"Phrase d'exemple (facultatif)":"Détail ou exemple (facultatif)"}<input class="field" name="x" value="${esc(a.x||"")}" ${en?'data-miclang="en-US"':""}></label>
+    ${en?`<p class="muted small" style="margin:0">Elle sera dans les deux sens : anglais → français, puis français → anglais.</p>`:`<label class="srschk small"><input type="checkbox" name="r" ${(a.r!=null?a.r:D.both)?"checked":""}> Aussi dans l'autre sens (verso → recto)</label>`}
+    <div class="row"><button class="btn">${a.edit?"Enregistrer":"Ajouter"}</button>${a.edit?`<button type="button" class="ghost" data-srscancel="1">Annuler</button>`:""}</div>
+    ${V.srsMsg?`<p class="small" style="margin:0">${esc(V.srsMsg)}</p>`:""}</form></details>`}
+function srsAiCard(){const s=V.srsAI||{},Ds=srsDecks(),dk=Ds[s.d]?s.d:(Ds[V.srsOpen]?V.srsOpen:"en");
+  return`<details class="card" ${s.open?"open":""} data-srsdet="ai"><summary><b>✨ Créer des cartes avec l'IA</b></summary>
+  <form class="stack" data-f="srsai" style="gap:10px;margin-top:10px">
+    <label class="small">Paquet<select class="field" name="d">${srsOpts(Ds,dk)}</select></label>
+    <label class="small">Sur quoi ?<input class="field" name="t" value="${esc(s.t||"")}" placeholder="ex. : la banque et la bourse · les définitions du chapitre croissance" maxlength="200"></label>
+    <label class="small">Combien de cartes ?<select class="field" name="n">${[5,10,20].map(n=>`<option ${n===(s.n||10)?"selected":""}>${n}</option>`).join("")}</select></label>
+    <div class="row"><button class="btn" ${s.busy?"disabled":""}>${s.busy?"Création en cours…":"Créer les cartes"}</button></div>
+    ${s.err?`<p class="small" style="margin:0">${esc(s.err)}</p>`:""}${s.ok?`<p class="small" style="margin:0">${esc(s.ok)}</p>`:""}</form>
+  ${s.list?`<div class="stack" style="gap:8px;margin-top:12px"><p class="muted small" style="margin:0">Décoche celles que tu ne veux pas. Relis-les : l'IA peut se tromper.</p><ul class="srslist">${s.list.map((c,i)=>`<li><label class="srschk"><input type="checkbox" data-srsaik="${i}" ${c.on?"checked":""}><span><b>${esc(c.f)}</b><span class="muted"> → ${esc(c.b)}</span>${c.x?`<small class="muted" style="display:block">${esc(c.x)}</small>`:""}</span></label></li>`).join("")}</ul>
+    <div class="row"><button class="btn" data-srsaiadd="1">Ajouter ${s.list.filter(c=>c.on).length} carte${s.list.filter(c=>c.on).length>1?"s":""}</button><button class="ghost" data-srsaino="1">Annuler</button></div></div>`:""}</details>`}
+function srsForecast(){const C=srsCards(),t=todayK(),days=[];for(let i=0;i<7;i++)days.push([dkey(add(today(),i)),0]);
+  Object.values(C).forEach(c=>{if(!c||c.sus||c.s!==2||!c.dd)return;const i=Math.max(0,srsDays(t,c.dd));if(i<7)days[i][1]++});
+  return days.some(d=>d[1])?`<div class="card stack"><p class="label" style="margin:0">📅 Cartes à revoir ces 7 prochains jours</p>${cmBars(days)}</div>`:""}
+function srsHelp(){return`<details class="card"><summary><b>❓ Comment ça marche (méthode Anki)</b></summary><div class="stack small" style="gap:8px;margin-top:10px">
+  <p>Chaque carte revient <b>juste avant que tu l'oublies</b>. Lis le recto, réponds <b>dans ta tête</b> (ou à voix haute), touche « Voir la réponse », puis sois honnête :</p>
+  <ul class="list"><li><b>À revoir</b> : tu ne savais pas. Elle revient dans 1 minute, puis 10 minutes.</li><li><b>Difficile</b> : trouvé avec du mal. Elle revient un peu plus tôt que prévu.</li><li><b>Correct</b> : trouvé normalement. L'écart grandit : 1 jour, 3 jours, 8 jours, 3 semaines…</li><li><b>Facile</b> : trouvé tout de suite. L'écart grandit encore plus vite.</li></ul>
+  <p>Le secret : <b>un peu chaque jour</b>. Si tu sautes des jours, les cartes s'accumulent. Tu t'es trompé de bouton ? « ↶ Annuler » revient en arrière.</p></div></details>`}
+
+/* ---- finance : les mots d'un article vont dans tes cartes d'anglais ---- */
+function srsHave(){return new Set([...EG_VOC.map(w=>w.en.toLowerCase()),...Object.values(srsDoc().notes||{}).filter(n=>n&&!n.del&&n.d==="en").map(n=>String(n.f).toLowerCase().trim())])}
+function srsArtBtn(id,a){if(!a||!Array.isArray(a.v)||!a.v.length)return"";const h=srsHave(),miss=a.v.filter(p=>p&&p[1]&&!h.has(String(p[1]).toLowerCase().trim()));
+  return miss.length?`<button class="ghost on srsart" data-srsart="${esc(id)}">🗂️ Ajouter ${miss.length>1?"ces "+miss.length+" mots":"ce mot"} à mes cartes d'anglais</button>`:`<p class="muted small srsart">✓ Ces mots sont dans tes cartes d'anglais.</p>`}
+function srsAddNotes(L){const notes={...(srsDoc().notes||{})},t0=Date.now();L.forEach((n,i)=>{notes["u"+(t0+i).toString(36)+Math.random().toString(36).slice(2,5)]={...n,ts:t0+i}});srsSave({notes})}
+
+/* ---- l'IA crée des cartes ---- */
+async function srsAiGen(d,t,n){const D=srsDecks()[d];if(!D||!t)return;
+  if(SAMPLE_ST==="none"){V.srsAI={d,t,n,open:true,err:"Il faut l'IA : ajoute ta clé Gemini dans ⚙️ Réglages."};return render(true)}
+  V.srsAI={d,t,n,open:true,busy:true};render(true);
+  const p=d==="en"?`Tu aides un lycéen français, débutant en anglais (niveau A1-A2), qui veut devenir trader. Crée ${n} cartes de vocabulaire anglais sur le thème : « ${t} ». Choisis des mots et expressions utiles et courants, du plus simple au plus avancé.
+Réponds UNIQUEMENT en JSON : {"cards":[{"f":"le mot ou l'expression en anglais","b":"la traduction en français","x":"une phrase d'exemple très simple en anglais"}]}`
+    :`Tu aides un élève de Terminale en France (spécialités maths et SES, option maths expertes) qui prépare le bac 2027. Crée ${n} cartes de révision comme dans Anki pour le paquet « ${D.n} », sur : « ${t} ». Une carte = au recto une question courte et précise, au verso une réponse courte et exacte (définition, formule, date, mécanisme, auteur…), conforme au programme officiel de Terminale. Pas de question en double.
+Réponds UNIQUEMENT en JSON : {"cards":[{"f":"la question","b":"la réponse"}]}`;
+  try{const r=await aiSample.json(p),L=(r&&Array.isArray(r.cards)?r.cards:[]).filter(c=>c&&c.f&&c.b).slice(0,n).map(c=>({f:String(c.f).slice(0,400),b:String(c.b).slice(0,800),x:String(c.x||"").slice(0,300),on:true}));
+    if(!L.length)throw{code:"empty_completion"};V.srsAI={d,t,n,open:true,list:L}}
+  catch(e){V.srsAI={d,t,n,open:true,err:"La création n'a pas marché ("+ERR(e&&e.code)+"). Réessaie."}}
+  render(true)}
+
+/* ---- clics, saisie, clavier ---- */
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-srsgo],[data-srsflip],[data-srsg],[data-srsstop],[data-srsundo],[data-srsopen],[data-srsedit],[data-srsdel],[data-srssus],[data-srsdeldeck],[data-srscancel],[data-srsaiadd],[data-srsaino],[data-srsart]");if(!b)return;const d=b.dataset;
+  if(d.srsgo){const[k,tb]=d.srsgo.split("|");V.entTab=tb==="cards"?"cards":"en";if(V.page!=="ent"){V.page="ent";saveV()}return srsStart(k,tb)}
+  if(d.srsflip)return srsFlip();
+  if(d.srsg)return srsAnswer(+d.srsg);
+  if(d.srsundo)return srsUndo();
+  if(d.srsstop){V.srs=null;render(true);return window.scrollTo(0,0)}
+  if(d.srsopen){V.srsOpen=V.srsOpen===d.srsopen?null:d.srsopen;return render(true)}
+  if(d.srsedit){const n=(srsDoc().notes||{})[d.srsedit];if(!n)return;V.srsAdd={edit:d.srsedit,d:n.d,f:n.f,b:n.b,x:n.x||"",r:n.r};V.srsMsg="";V.srsAddOpen=true;render(true);const el=document.querySelector(".srsaddc");if(el)el.scrollIntoView({block:"start"});return}
+  if(d.srscancel){V.srsAdd={d:(V.srsAdd||{}).d};V.srsMsg="";return render(true)}
+  if(d.srsdel){const id=d.srsdel;return confirmOr("srsdel"+id,()=>{const notes={...(srsDoc().notes||{})},C={...srsCards()};delete notes[id];delete C[id+">0"];delete C[id+">1"];srsSave({notes,cards:C,mig:1});render(true)})}
+  if(d.srssus){const n=srsNote(d.srssus);if(!n)return;const D=srsDecks()[n.d],C={...srsCards()},ids=srsCids(n,D),all=ids.every(i=>C[i]&&C[i].sus);
+    ids.forEach(i=>{if(all){const c={...C[i]};delete c.sus;if(Object.keys(c).length)C[i]=c;else delete C[i]}else C[i]={...(C[i]||{}),sus:1}});srsSave({cards:C,mig:1});return render(true)}
+  if(d.srsdeldeck){const k=d.srsdeldeck;return confirmOr("srsdk"+k,()=>{const doc=srsDoc(),notes={...(doc.notes||{})},C={...srsCards()},decks={...(doc.decks||{})};
+    Object.entries(notes).forEach(([id,n])=>{if(n&&n.d===k){delete notes[id];delete C[id+">0"];delete C[id+">1"]}});delete decks[k];srsSave({notes,cards:C,decks,mig:1});V.srsOpen=null;render(true)})}
+  if(d.srsaino){V.srsAI={open:true};return render(true)}
+  if(d.srsaiadd){const s=V.srsAI||{},L=(s.list||[]).filter(c=>c.on);if(!L.length)return;srsAddNotes(L.map(c=>({d:s.d,f:c.f,b:c.b,x:c.x,r:s.d==="en"?1:(srsDecks()[s.d]||{}).both?1:0,src:"ia"})));
+    V.srsAI={open:true,d:s.d,n:s.n,ok:`✓ ${L.length} carte${L.length>1?"s":""} ajoutée${L.length>1?"s":""} au paquet ${(srsDecks()[s.d]||{}).n||""}.`};V.srsOpen=s.d;return render(true)}
+  if(d.srsart){const a=(S.presse||{})[d.srsart];if(!a||!Array.isArray(a.v))return;const h=srsHave(),L=[];a.v.forEach(p=>{const en=String((p||[])[1]||"").trim(),fr=String((p||[])[0]||"").trim();if(en&&fr&&!h.has(en.toLowerCase())){h.add(en.toLowerCase());L.push({d:"en",f:en,b:fr,r:1,src:"art"})}});if(L.length)srsAddNotes(L);return render(true)}});
+document.addEventListener("change",e=>{const t=e.target;if(!t||!t.dataset)return;
+  if(t.dataset.srsaddd!==undefined){const f=t.form;V.srsAdd={...(V.srsAdd||{}),d:t.value,f:f.f.value,b:f.b.value,x:f.x.value};V.srsAddOpen=true;return render(true)}
+  if(t.dataset.srsaik!==undefined){const s=V.srsAI||{};if(s.list&&s.list[+t.dataset.srsaik]){s.list[+t.dataset.srsaik].on=t.checked;render(true)}}});
+document.addEventListener("input",e=>{const t=e.target;if(!t)return;
+  if(t.dataset&&t.dataset.srsq!==undefined){const q=t.value.toLowerCase().trim(),ul=t.parentElement.querySelector(".srslist");if(ul)ul.querySelectorAll("li").forEach(li=>{li.hidden=!!q&&!(li.dataset.srst||"").includes(q)});return}
+  const f=t.form;if(f&&f.dataset&&f.dataset.f==="srsadd"&&t.name)V.srsAdd={...(V.srsAdd||{}),[t.name]:t.type==="checkbox"?(t.checked?1:0):t.value};
+  if(f&&f.dataset&&f.dataset.f==="srsai"&&t.name)V.srsAI={...(V.srsAI||{}),open:true,[t.name]:t.name==="n"?+t.value:t.value}});
+document.addEventListener("toggle",e=>{const t=e.target;if(!t||!t.dataset)return;if(t.dataset.srsdet==="add")V.srsAddOpen=t.open;if(t.dataset.srsdet==="ai")V.srsAI={...(V.srsAI||{}),open:t.open}},true);
+document.addEventListener("submit",e=>{const f=e.target;if(!f||!f.dataset)return;const k=f.dataset.f;if(!["srsadd","srsai","srsopt","srsdeck"].includes(k))return;e.preventDefault();e.stopImmediatePropagation();
+  if(k==="srsadd"){const fr=f.f.value.trim(),bk=f.b.value.trim(),x=f.x.value.trim(),d=f.d.value,a=V.srsAdd||{};if(!fr||!bk){V.srsMsg="Remplis le recto et le verso.";V.srsAddOpen=true;return render(true)}
+    const notes={...(srsDoc().notes||{})};
+    if(!a.edit&&d==="en"&&srsHave().has(fr.toLowerCase())){V.srsMsg="Ce mot est déjà dans tes cartes d'anglais.";V.srsAddOpen=true;return render(true)}
+    const id=a.edit&&notes[a.edit]?a.edit:"u"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+    notes[id]={...(notes[id]||{}),d,f:fr.slice(0,400),b:bk.slice(0,800),x:x.slice(0,300),r:d==="en"?1:(f.r&&f.r.checked?1:0),ts:(notes[id]||{}).ts||Date.now()};
+    srsSave({notes});V.srsAdd={d};V.srsMsg=a.edit?"✓ Carte modifiée.":"✓ Carte ajoutée : elle arrivera avec tes nouvelles cartes.";V.srsAddOpen=true;return render(true)}
+  if(k==="srsai")return srsAiGen(f.d.value,f.t.value.trim().slice(0,200),+f.n.value||10);
+  if(k==="srsopt"){const dk=f.dataset.deck,decks={...(srsDoc().decks||{})},nd=Math.max(0,Math.min(100,Math.round(+f.nd.value||0)));decks[dk]={...(decks[dk]||{}),nd,...(f.both?{both:f.both.checked?1:0}:{})};srsSave({decks});return render(true)}
+  if(k==="srsdeck"){const n=f.n.value.trim().slice(0,40);if(!n)return;const decks={...(srsDoc().decks||{})},id="d"+Date.now().toString(36);decks[id]={n,e:"🗂️",both:0,nd:10};srsSave({decks});V.srsOpen=id;return render(true)}},true);
+document.addEventListener("keydown",e=>{const st=V.srs;if(!st||V.page!=="ent"||!st.cid||st.fin)return;if((V.entTab||"cm")!==(st.tab==="cards"?"cards":"en"))return;
+  const a=document.activeElement;if(a&&a.matches&&a.matches("input,textarea,select,[contenteditable]"))return;
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"){e.preventDefault();return srsUndo()}
+  if(e.ctrlKey||e.metaKey||e.altKey)return;const sp=e.key===" "||e.key==="Enter";if(sp&&a&&a.tagName==="BUTTON")return;
+  if(!st.flip&&sp){e.preventDefault();return srsFlip()}
+  if(st.flip&&/^[1-4]$/.test(e.key)){e.preventDefault();return srsAnswer(+e.key)}
+  if(st.flip&&sp){e.preventDefault();return srsAnswer(3)}});
 
 /* ================================================================
    🐍 PYTHON POUR DÉBUTANT : une petite leçon par jour, du vrai Python qui tourne dans l'appli
@@ -4530,7 +4775,7 @@ function wgObj(sc){const lim=dkey(add(today(),-30)),pts=Object.entries(S.objecti
 
 /* ---- Anglais : le niveau en anneau et la série ---- */
 function wgEng(){const doc=egDoc(),n=EG_LV.length-1,i=Math.min(n,doc.u||0),sh=EG_LV[i].split(" · ")[0],p=n?i/n:0,stk=egStreak(),td=egToday(),st=[td.v,td.g,(td.o||0)>=3].filter(Boolean).length,C=138.2;
-  return wgBtn("ent|en","--ent","wgrow",`<span class="wgring" role="img" aria-label="Niveau ${esc(sh)}"><svg viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="22" fill="none" stroke="var(--soft)" stroke-width="7"/><circle cx="29" cy="29" r="22" fill="none" stroke="var(--c)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${Math.max(2,p*C).toFixed(1)} ${C}" transform="rotate(-90 29 29)"/></svg><b>${esc(sh)}</b></span><span class="wgcol"><span class="wgl">Anglais</span><span class="wgmid num">${stk?stk+" jour"+(stk>1?"s":""):"0 jour"}</span><small>${stk?"de série":"lance ta série"}</small><small>étapes : ${st}/3</small></span>`)}
+  return wgBtn("ent|en","--ent","wgrow",`<span class="wgring" role="img" aria-label="Niveau ${esc(sh)}"><svg viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="22" fill="none" stroke="var(--soft)" stroke-width="7"/><circle cx="29" cy="29" r="22" fill="none" stroke="var(--c)" stroke-width="7" stroke-linecap="round" stroke-dasharray="${Math.max(2,p*C).toFixed(1)} ${C}" transform="rotate(-90 29 29)"/></svg><b>${esc(sh)}</b></span><span class="wgcol"><span class="wgl">Anglais</span><span class="wgmid num">${stk?stk+" jour"+(stk>1?"s":""):"0 jour"}</span><small>${stk?"de série":"lance ta série"}</small><small>${(()=>{const c=srsCount("en"),k=c.n+c.l+c.r;return k?k+" carte"+(k>1?"s":"")+" à voir":"étapes : "+st+"/3"})()}</small></span>`)}
 
 /* ---- Python : leçons faites et la prochaine ---- */
 function wgPy(){const pd=pyDoc(),dn=Object.keys(pd.done||{}).filter(k=>+k<PY_L.length).length,N=PY_L.length,td=!!(pd.d||{})[todayK()],stk=pyStreak();
@@ -4628,7 +4873,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.0.1";
+const APP_VERSION="2.1.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
