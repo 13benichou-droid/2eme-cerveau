@@ -1,61 +1,91 @@
 {
- "updated": "2026-10-13T05:54:00.333Z",
+ "updated": "2026-10-14T06:04:09.128Z",
  "snap": {
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 833",
-    "c": "+0,38 %"
+    "v": "7 828",
+    "c": "−0,07 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 807",
-    "c": "−0,06 %"
+    "v": "7 805",
+    "c": "−0,02 %"
    },
    {
     "n": "Nasdaq",
-    "v": "27 246",
-    "c": "−0,44 %"
+    "v": "27 204",
+    "c": "−0,15 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "15,21",
-    "c": "+2,49 %"
+    "v": "15,27",
+    "c": "+0,39 %"
    },
    {
     "n": "Brent",
-    "v": "105,6 $",
-    "c": "−0,98 %"
+    "v": "106,2 $",
+    "c": "+0,46 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "92,7 $",
-    "c": "−1,16 %"
+    "v": "94,6 $",
+    "c": "+0,49 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 216 $",
-    "c": "+0,60 %"
+    "v": "4 176 $",
+    "c": "−0,02 %"
    },
    {
     "n": "Bitcoin",
-    "v": "83 597 $",
-    "c": "−0,10 %"
+    "v": "83 366 $",
+    "c": "+1,96 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,24 %",
-    "c": "−0,00 pt"
+    "v": "5,22 %",
+    "c": "−0,02 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,118",
-    "c": "−0,29 %"
+    "v": "1,121",
+    "c": "+0,43 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-14-les-constructeurs-en-difficulte-parient-",
+   "src": "Le Monde",
+   "date": "2026-10-14",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/14/les-constructeurs-en-difficulte-parient-sur-le-mondial-de-l-auto-pour-se-relancer_6793464_3234.html",
+   "t": {
+    "fr": "Les constructeurs en difficulté parient sur le Mondial de l’auto pour se relancer",
+    "en": "Les constructeurs en difficulté parient sur le Mondial de l’auto pour se relancer"
+   }
+  },
+  {
+   "id": "2026-10-14-une-dame-a-contracte-60-credits-a-la-con",
+   "src": "Le Monde",
+   "date": "2026-10-14",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/14/une-dame-a-contracte-60-credits-a-la-consommation-sans-que-personne-l-arrete-toujours-plus-de-francais-frappes-par-le-surendettement_6793397_3234.html",
+   "t": {
+    "fr": "« Une dame a contracté 60 crédits à la consommation sans que personne l’arrête » : toujours plus de Français frappés par le surendettement",
+    "en": "« Une dame a contracté 60 crédits à la consommation sans que personne l’arrête » : toujours plus de Français frappés par le surendettement"
+   }
+  },
+  {
+   "id": "2026-10-14-a-moyen-terme-l-ia-va-contraindre-les-et",
+   "src": "Le Monde",
+   "date": "2026-10-14",
+   "url": "https://www.lemonde.fr/idees/article/2026/10/14/a-moyen-terme-l-ia-va-contraindre-les-etats-a-revoir-en-profondeur-leurs-systemes-fiscaux_6793393_3232.html",
+   "t": {
+    "fr": "« A moyen terme, l’IA va contraindre les Etats à revoir en profondeur leurs systèmes fiscaux »",
+    "en": "« A moyen terme, l’IA va contraindre les Etats à revoir en profondeur leurs systèmes fiscaux »"
+   }
+  },
   {
    "id": "2026-10-13-des-epargnants-contraints-de-s-adapter-e",
    "src": "Le Monde",
@@ -310,104 +340,6 @@
    "t": {
     "fr": "Pour son avion de combat du futur, le Royaume-Uni fait un appel du pied à l’Allemagne",
     "en": "Pour son avion de combat du futur, le Royaume-Uni fait un appel du pied à l’Allemagne"
-   }
-  },
-  {
-   "id": "2026-10-08-dans-les-journaux-du-groupe-ebra-l-ia-au",
-   "src": "Le Monde",
-   "date": "2026-10-08",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/08/dans-les-journaux-du-groupe-ebra-l-ia-au-c-ur-d-un-appel-a-la-greve_6790262_3234.html",
-   "t": {
-    "fr": "Dans les journaux du Groupe EBRA, l’IA au cœur d’un appel à la grève",
-    "en": "Dans les journaux du Groupe EBRA, l’IA au cœur d’un appel à la grève"
-   }
-  },
-  {
-   "id": "2026-10-08-l-etat-puise-dans-ses-reserves-de-gazole",
-   "src": "Le Monde",
-   "date": "2026-10-08",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/08/faire-baisser-les-prix-du-gazole-en-mobilisant-les-stocks-strategiques-une-demarche-inedite-qui-pose-de-nombreuses-questions_6790220_3234.html",
-   "t": {
-    "fr": "L'État puise dans ses réserves de gazole pour faire baisser les prix",
-    "en": "State taps strategic diesel reserves to lower prices"
-   },
-   "s": {
-    "fr": "Pour faire face à la hausse des prix à la pompe, le gouvernement français va utiliser ses stocks de carburant stratégiques. Cette mesure exceptionnelle devrait permettre de réduire le prix du gazole de 12 à 18 centimes par litre. Ces réserves sont normalement gardées pour éviter les pénuries d'approvisionnement.",
-    "en": "To combat rising fuel prices, the French government will tap into its strategic fuel reserves. This exceptional measure is expected to lower diesel prices by 12 to 18 cents per liter. These reserves are normally kept to prevent supply shortages."
-   },
-   "d": {
-    "fr": "En trading, cette intervention illustre comment l'augmentation artificielle de l'offre fait baisser le prix d'une matière première. Les traders doivent surveiller ces décisions politiques car elles modifient temporairement les lois naturelles du marché.",
-    "en": "In trading, this intervention illustrates how artificially increasing supply drives down the price of a commodity. Traders must monitor such political decisions as they temporarily alter natural market forces."
-   },
-   "v": [
-    [
-     "stocks stratégiques",
-     "strategic reserves"
-    ],
-    [
-     "matière première",
-     "commodity"
-    ],
-    [
-     "offre et demande",
-     "supply and demand"
-    ],
-    [
-     "approvisionnement",
-     "supply"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi l'utilisation des stocks stratégiques n'est-elle pas une solution durable pour faire baisser les prix ?",
-    "en": "Why is using strategic reserves not a sustainable solution for lowering prices?"
-   },
-   "r": {
-    "fr": "Ces réserves sont limitées et leur épuisement laisserait le pays vulnérable en cas de véritable crise d'approvisionnement géopolitique.",
-    "en": "These reserves are limited, and depleting them would leave the country vulnerable in the event of a real geopolitical supply crisis."
-   }
-  },
-  {
-   "id": "2026-10-08-la-big-tech-emprunte-massivement-pour-fi",
-   "src": "Le Figaro",
-   "date": "2026-10-08",
-   "url": "https://www.lefigaro.fr/economie/500-milliards-de-dollars-en-neuf-mois-les-emprunts-colossaux-de-la-big-tech-tech-mettent-sous-pression-le-marche-de-la-dette-20261008",
-   "t": {
-    "fr": "La Big Tech emprunte massivement pour financer l'intelligence artificielle",
-    "en": "Big Tech borrows heavily to finance artificial intelligence"
-   },
-   "s": {
-    "fr": "Les géants de la technologie ont emprunté 500 milliards de dollars en seulement neuf mois. Ces fonds colossaux sont destinés à financer leurs investissements massifs dans l'intelligence artificielle. Cette frénésie d'emprunts commence à bousculer le marché des obligations d'État américaines.",
-    "en": "Tech giants have borrowed 500 billion dollars in just nine months. These colossal funds are intended to finance their massive investments in artificial intelligence. This borrowing frenzy is starting to disrupt the US government bond market."
-   },
-   "d": {
-    "fr": "Quand des entreprises privées émettent autant de dettes, elles entrent en concurrence directe avec les États qui cherchent aussi à se financer. Pour les traders, cela peut faire grimper les taux d'intérêt globaux et modifier le rendement des obligations.",
-    "en": "When private companies issue so much debt, they compete directly with governments also seeking funding. For traders, this can push up global interest rates and alter bond yields."
-   },
-   "v": [
-    [
-     "marché de la dette",
-     "debt market"
-    ],
-    [
-     "emprunt",
-     "borrowing"
-    ],
-    [
-     "bons du trésor",
-     "treasury bonds"
-    ],
-    [
-     "rendement",
-     "yield"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est le risque pour une entreprise technologique d'accumuler trop de dettes pour l'IA ?",
-    "en": "What is the risk for a tech company of accumulating too much debt for AI?"
-   },
-   "r": {
-    "fr": "Si les investissements dans l'IA ne génèrent pas rapidement les profits espérés, l'entreprise aura des difficultés à rembourser ses créanciers.",
-    "en": "If AI investments do not quickly generate the expected profits, the company will struggle to repay its creditors."
    }
   }
  ],
