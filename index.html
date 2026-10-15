@@ -1010,6 +1010,46 @@ body.kb .tabbar{display:none}
 .heat .hm{width:100%}
 .wg.wgrow:not(.w2){flex-direction:column;align-items:flex-start;gap:6px}
 .wg.wgrow:not(.w2) .wgring,.wg.wgrow:not(.w2) .wgring svg{width:44px;height:44px}
+
+/* ================= 2.8.0 ================= */
+/* graphiques de Ma progression : une couleur, grille discrète, détail au toucher */
+.pch{width:100%;height:auto;display:block;touch-action:pan-y}
+.pch .gl{stroke:var(--line);stroke-width:1}
+.pch .ax{fill:var(--muted);font-size:10px;font-family:var(--body)}
+.pch .vl{fill:var(--ink);font-size:11px;font-weight:700;font-family:var(--body)}
+.pch .ln{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.pch .area{fill:var(--accent);opacity:.1}
+.pch .dot,.pch .xd{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+.pch .xh{stroke:var(--muted);stroke-width:1}
+.pch .br{fill:color-mix(in srgb,var(--accent) 55%,var(--surface))}
+.pch .pb.sel .br{fill:var(--accent)}
+.pch .br0{stroke:var(--line);stroke-width:2}
+.pch .pb{cursor:pointer}
+.ptip{margin:0}
+.ptab summary{cursor:pointer;color:var(--muted)}
+.ptab table{width:100%;border-collapse:collapse;margin-top:6px}.ptab td{padding:3px 0;border-top:1px solid var(--line)}.ptab td.num{text-align:right}
+/* pilote de notes */
+.pileq{width:100%}.pileq button{flex:1}
+.pilcb{font-weight:600;margin-left:2px}
+/* mon avenir */
+.avtabs button{font-size:.82rem;padding-inline:6px}
+.avreco{border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.avrc{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:12px 14px;cursor:pointer}
+.avrc:hover{border-color:var(--accent)}
+.avrct{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.avrc b{font-family:var(--display);font-size:1rem}
+.avjob{padding:12px 14px}
+.avjh{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;padding:0;text-align:left;color:var(--ink);cursor:pointer}
+.avje{font-size:1.4rem;width:32px;text-align:center;flex:none}
+.avjt{display:flex;flex-direction:column;flex:1;min-width:0}
+.salch{width:100%;height:auto;display:block}
+.salch .gl{stroke:var(--line);stroke-width:1}
+.salch .ax{fill:var(--muted);font-size:9.5px;font-family:var(--body)}
+.salch .lb{fill:var(--ink);font-size:11px;font-family:var(--body)}
+.salch .vl{fill:var(--muted);font-size:10px;font-family:var(--body)}
+.salch .rg{fill:var(--accent)}
+.avtabs{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.avtabs button{min-width:0;white-space:nowrap;font-size:.8rem;padding-inline:4px}
 </style>
 <script src="config.js"></script>
 </head>
@@ -2800,7 +2840,7 @@ function themeCard(){const t=appP().theme||"auto";return`<div class="card stack"
   <p class="muted small" style="margin:0">${t==="black"?"Noir pur : plus reposant le soir et ça économise la batterie de l'iPhone.":t==="auto"?"Clair le jour, sombre quand ton téléphone passe en mode sombre.":"Le choix vaut aussi sur ton autre appareil (après synchronisation)."}</p></div>`}
 /* tuiles de l'accueil : ordre, noms et tuiles cachées viennent de tes suggestions */
 /* tuiles cachées : celles que tu as cachées + Maths (cachée par défaut depuis la 1.6.0, « Afficher » la fait revenir) */
-const TILE_OFF=["mx","ps"];
+const TILE_OFF=["mx"];
 function tilesHidden(){const ap=appP();return[...new Set([...(ap.hide||[]),...TILE_OFF.filter(k=>!(ap.show||[]).includes(k))])]}
 function sects(all){const ap=appP(),base=[...SECT,...MOD.tiles.map(t=>[t.k,t.nom])],ord=ap.order||[];
   const L=[...ord.map(k=>base.find(s=>s[0]===k)).filter(Boolean),...base.filter(s=>!ord.includes(s[0]))].map(([k,n])=>[k,(ap.nom||{})[k]||n]);
@@ -4099,21 +4139,30 @@ function pilData(){const p=pnData(),n=p&&p.notes;if(!n||!(n.matieres||[]).length
     const D=psDos(),p1=PIL_SPE.test(a.m||"")?D.m1:PIL_SES.test(a.m||"")?D.s1:null;
     const coef=pilCoef(a.m),spe=coef===16;
     return{m:a.m,A,C,need,k,down,last,p1,coef,spe,math:/math/i.test(a.m||"")&&!/expert/i.test(a.m||""),gap:A==null?-99:T-A}});
+  /* 2.8.0 : cibles équilibrées. Chaque matière comble la même part de l'écart qui la sépare de 20,
+     avec les coefficients du bac, pour que ta moyenne atteigne la cible sans viser 20 partout */
+  const eq=pilEq(),kn=rows.filter(r=>r.A!=null),Cs=kn.reduce((a,r)=>a+r.coef,0),G=Cs?kn.reduce((a,r)=>a+r.coef*r.A,0)/Cs:null;
+  let kk=0;if(eq&&G!=null&&T>G){const den=kn.reduce((a,r)=>a+r.coef*(20-r.A),0);kk=den>0?Math.min(1,(T-G)*Cs/den):0}
+  rows.forEach(r=>{r.t=r.A==null||!eq?T:Math.round(Math.min(20,r.A+kk*(20-r.A))*10)/10;
+    if(r.A!=null){let k,need;for(k=1;k<=4;k++){need=(r.t*(r.C+k)-r.A*r.C)/k;if(need<=20)break}if(k>4)k=4;r.need=need;r.k=k}r.gap=r.A==null?-99:r.t-r.A});
   const pr=r=>r.A==null?-1e9:r.gap>0?r.gap*r.coef*(r.math?1.25:1)+(r.down?4:0):r.gap;rows.sort((x,y)=>pr(y)-pr(x));
-  return{T,rows,periode:n.periode||""}}
-function pilRow(r,T){
+  return{T,rows,periode:n.periode||"",eq,G}}
+const pilEq=()=>appP().pilEq!==false;
+function pilRow(r,T0){const T=r.t!=null?r.t:T0;
   const msg=r.A==null?"Pas encore de note ce trimestre."
     :r.A>=T?(r.need<=0?"✓ Au-dessus de ta cible, avec de la marge.":`✓ Au-dessus de ta cible. Pour y rester : au moins <b>${pct1(r.need)}</b> au prochain contrôle.`)
     :r.need<=20?(r.k===1?`Il te faut <b>${pct1(Math.max(0,r.need))}</b> au prochain contrôle pour atteindre ${pct1(T)}.`:`Vise <b>${pct1(r.need)}</b> de moyenne sur tes ${r.k} prochains contrôles pour atteindre ${pct1(T)}.`)
     :`Ta cible est loin ce trimestre : vise d'abord ${pct1(Math.min(20,r.A+1))} (il te faut <b>${pct1(Math.min(20,(r.A+1)*(r.C+1)-r.A*r.C))}</b> au prochain contrôle).`;
-  return`<div class="pilr ${r.A!=null&&r.A<T?"lo":""}"><div class="pilh"><b>${esc(pilShort(r.m))}</b>${r.spe?`<span class="tag">spécialité · coef. 16 au bac</span>`:r.coef===8?`<span class="tag">coef. 8 au bac</span>`:""}${r.math?`<span class="tag">clé pour les licences de maths</span>`:""}${r.down?`<span class="tag warn">⚠️ en baisse</span>`:""}${r.p1!=null?`<span class="muted small pil1">1re : ${pct1(r.p1)}${r.A!=null?bilDelta(r.A,r.p1):""}</span>`:""}<span class="num pilv">${r.A==null?"—":pct1(r.A)}</span></div>
+  return`<div class="pilr ${r.A!=null&&r.A<T?"lo":""}"><div class="pilh"><b>${esc(pilShort(r.m))}</b>${r.spe?`<span class="tag">spécialité · coef. 16 au bac</span>`:r.coef===8?`<span class="tag">coef. 8 au bac</span>`:""}${r.math?`<span class="tag">clé pour les licences de maths</span>`:""}${r.down?`<span class="tag warn">⚠️ en baisse</span>`:""}${r.p1!=null?`<span class="muted small pil1">1re : ${pct1(r.p1)}${r.A!=null?bilDelta(r.A,r.p1):""}</span>`:""}<span class="num pilv">${r.A==null?"—":pct1(r.A)}<small class="muted pilcb"> → ${pct1(T)}</small></span></div>
     <div class="pilbar" style="--k:${pnCol(r.m)}"><i style="width:${r.A==null?0:Math.min(100,r.A*5)}%"></i><u style="left:${Math.min(100,T*5)}%" title="Ta cible"></u></div>
     <small>${msg}${r.down&&r.last.length?` Dernières notes : ${r.last.map(v=>pct1(v)).join(" puis ")}.`:""}</small></div>`}
 function pilotCard(){const P=pilData();
   if(!P)return`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">🎯 Pilote de notes</p><p class="muted small" style="margin:0">Relie Pronote : l'appli te dira, matière par matière, la note qu'il te faut au prochain contrôle pour atteindre ta cible.</p><div><button class="ghost on" data-page="pron">Relier Pronote</button></div></div>`;
   const top=P.rows.find(r=>r.A!=null&&r.A<P.T),D=psDos(),pn=pnData(),gT=pn&&pn.notes&&typeof pn.notes.moyenne==="number"?pn.notes.moyenne:null;
   return`<div class="card stack pil" style="gap:12px"><div class="row" style="justify-content:space-between;gap:6px"><p class="label" style="margin:0">🎯 Pilote de notes${P.periode?" · "+esc(P.periode):""}</p>
-      <span class="pilt"><button class="ghost" data-pilc="-0.5" aria-label="Baisser la cible">−</button><b class="num">cible ${pct1(P.T)}</b><button class="ghost" data-pilc="0.5" aria-label="Monter la cible">+</button></span></div>
+      <span class="pilt"><button class="ghost" data-pilc="-0.5" aria-label="Baisser la moyenne visée">−</button><b class="num">moyenne visée ${pct1(P.T)}</b><button class="ghost" data-pilc="0.5" aria-label="Monter la moyenne visée">+</button></span></div>
+    <div class="seg pileq" role="group" aria-label="Cibles par matière"><button data-pileq="1" aria-pressed="${P.eq}">⚖️ Cibles équilibrées</button><button data-pileq="0" aria-pressed="${!P.eq}">Même cible partout</button></div>
+    <p class="small" style="margin:0">${P.eq?`Chaque matière a sa propre cible (la flèche →) pour que ta moyenne pondérée comme au bac atteigne ${pct1(P.T)}${P.G!=null?` (aujourd'hui : ${pct1(P.G)})`:""}. Tu ne vises pas 20 partout : chaque matière fait la même part du chemin qui la sépare de 20.`:`Toutes les matières visent ${pct1(P.T)}.`}</p>
     ${D.g1!=null&&gT!=null?`<p class="small" style="margin:0">Moyenne générale : 1re ${pct1(D.g1)} → maintenant <b>${pct1(gT)}</b>${bilDelta(gT,D.g1)}. Parcoursup regarde cette progression.</p>`:""}
     ${P.rows.map(r=>pilRow(r,P.T)).join("")}
     ${top?`<div class="pilact"><span>Priorité de la semaine : <b>${esc(pilShort(top.m))}</b></span><button class="btn" data-pilrev="${esc(top.m)}">📅 Réviser 30 min mardi et jeudi</button></div>`:""}
@@ -4247,7 +4296,7 @@ function trSheet(){const id=V.avSel;if(!id)return"";let t="",body="";
   else if(id==="psup"){t="📅 Parcoursup 2027";body=`<div class="stack" style="gap:10px">${psCalHtml()}</div><div class="stack" style="gap:6px">${psCheckHtml()}</div><div class="stack" style="gap:10px">${psVoeuxHtml()}</div>`}
   else{const x=avItem(id);if(!x)return"";const job=AV_JOBS.some(j=>j.id===id),k=job?4:x.st===1?1:x.st===2?2:3,c=psChemin(),ch=avChosen(k).includes(id),inV=(psDoc("voeux").list||[]).some(v=>v.nom===x.n+" · "+x.u);
     t=`${x.e||(k===1?"🎓":k===2?"↗️":"🏁")} ${x.n}`;
-    body=`<p class="muted small" style="margin:0">${esc(x.u||"")}</p><p class="small" style="margin:0"><b>${job?"Le métier":k===1?"Chiffres":"Comment y entrer"} :</b> ${esc(x.f)}</p><p class="small" style="margin:0"><b>${job?"À savoir":"Pour toi"} :</b> ${esc(x.w)}</p>${avTag(id,k)}
+    body=`<p class="muted small" style="margin:0">${esc(x.u||"")}</p>${x.rec?`<span class="avtag ok">⭐ Mon conseil · ${x.rec==="amb"?"ambitieux":"plus sûr"}</span>`:""}${x.c?`<p class="small" style="margin:0"><b>En quoi ça consiste :</b> ${esc(x.c)}</p>`:""}<p class="small" style="margin:0"><b>${job?"Le métier":k===1?"Chiffres 2025":"Comment y entrer"} :</b> ${esc(x.f)}</p>${x.d?`<p class="small" style="margin:0"><b>Vers Dauphine :</b> ${esc(x.d)}</p>`:""}<p class="small" style="margin:0"><b>${job?"À savoir":"Pour toi"} :</b> ${esc(x.w)}</p>${avTag(id,k)}
       <div class="row">${k===1?`<button class="${ch?"ghost on":"btn"}" data-psfac="${esc(id)}">${ch?"⭐ C'est ma fac (retirer)":"⭐ C'est ma fac de l'an prochain"}</button>${inV?`<span class="tag">✓ dans tes vœux</span>`:`<button class="ghost on" data-psadd="${esc(id)}">＋ Mes vœux</button>`}`
         :job?`<button class="${ch?"ghost on":"btn"}" data-avjob="${esc(id)}">${ch?"🎯 C'est mon objectif":"🎯 C'est ce que je vise"}</button>`
         :`<button class="${ch?"ghost on":"btn"}" data-psaim="${esc(id)}">${ch?"🎯 Je vise (retirer)":"🎯 Je vise"}</button>`}</div>
@@ -4273,13 +4322,13 @@ function avPlan(){const fac=psFacName(),c=psChemin(),job=avItem(avJob())||AV_JOB
     ${st(1,"Terminale","2026-2027",`<span class="avnow">Tu es ici</span><p class="small">Bien finir l'année : tes notes de maths et de SES comptent le plus (coef. 16 chacune), et ton dossier Parcoursup se prépare dès maintenant.</p><div class="row"><button class="ghost on" data-avn="moi">🎓 Ton dossier</button><button class="ghost on" data-avn="psup">📅 Parcoursup${nx?` · J-${psDays(nx[0])}`:""}</button></div>`,"now")}
     ${st(2,"Licence de maths","2027-2030",`<p class="small">Trois ans à la fac. Ta fac de départ : <b>${fac?esc(fac):"à choisir"}</b>.${reb.length?` Rebond visé : <b>${reb.map(x=>esc(x.n)).join(", ")}</b>.`:""} Avec de super résultats, tu peux rebondir en L2 ou en L3 dans une fac plus prestigieuse (Dauphine, Sorbonne…).</p><div class="row"><button class="ghost on" data-avtree="1">🏫 ${fac?"Changer de fac ou de rebond":"Choisir ma fac et mon rebond"}</button></div>`)}
     ${st(3,"Après la licence","2030-2032",`<p class="small">Trois routes possibles, comparées juste en dessous. Tu n'as pas à choisir maintenant : tu décideras en L3, selon tes notes et ce qui te plaît.</p>`)}
-    ${st(4,esc(job.n),"vers 2032",`<p class="small">${esc(job.f)}</p><div class="row"><button class="ghost" data-avtree="1">Voir les autres métiers</button></div>`,"goal")}
+    ${st(4,esc(job.n),"vers 2032",`<p class="small">${esc(job.f)}</p><div class="row"><button class="ghost on" data-avtree="met">💼 Les métiers et leurs salaires</button></div>`,"goal")}
   </ol></div>`}
 function avRoutes(){return`<div class="card stack" style="gap:10px"><p class="label" style="margin:0">🔀 Les 3 routes après la licence</p>
   ${AV_ROUTES.map(r=>`<div class="avr ${r.best?"best":""}"><div class="avrh"><span class="avre" aria-hidden="true">${r.e}</span><div><b>${r.k} · ${r.n}</b><small class="muted">${r.ex}</small></div></div>
     <dl class="avrd"><dt>Mène à</dt><dd>${r.to}${r.best?` <span class="avtag ok">✓ ton objectif</span>`:""}</dd><dt>Durée</dt><dd>${r.d}</dd><dt>Comment y entrer</dt><dd>${r.in}</dd><dt>Coût</dt><dd>${r.co}</dd></dl></div>`).join("")}
   <p class="muted small" style="margin:0">Pour devenir trader quant, les routes A et B sont les plus directes. La route C (Top 3) reste ta porte de secours : elle ouvre surtout la banque d'affaires et les marchés en banque.</p></div>`}
-function pagePs(){return`${avPlan()}${avRoutes()}
+function pagePsOld(){return`${avPlan()}${avRoutes()}
   <details class="card avall" ${V.avAll?"open":""} id="avall"><summary><b>🌳 Toutes les formations en détail</b><span class="muted small" style="display:block">facs de départ, rebonds en L2-L3, masters et écoles : touche une formation pour la découvrir et la choisir</span></summary>
     <div style="margin-top:12px">${avTree()}</div></details>
   <p class="muted small">Sources : rapport Parcoursup 2025 de Dauphine-PSL, pages d'admission en L2 et L3 de Dauphine, Sorbonne Université (candidatures L2-L3), Paris 1 (magistère d'économie), AMSE (magistère), Université Côte d'Azur (licence de maths), Dauphine (Master 203, droits de scolarité 2026-2027), Business Cool (master El Karoui), annuaire Thotis des licences de maths 2025, fiche de la double licence de Paris-Saclay, guides Thotis des admissions sur titre HEC, ESSEC et ESCP, frais 2026 d'HEC, de l'ESSEC et de l'ESCP (Meilleurs Masters, L'Express Éducation), calendrier Parcoursup 2027 annoncé par Les Sherpas.</p>
@@ -5535,10 +5584,10 @@ function wgHome(){const sc=wgSafe(()=>{const s=objScore();objSnap(s);return s});
   if(!wgOff("jour"))out.push(wgSafe(wgJour));
   if(!wgOff("obj")&&sc)out.push(wgSafe(()=>wgProg(sc)));
   if(!wgOff("hab"))out.push(wgSafe(wgHab));
-  if(!wgOff("ent"))out.push(wgSafe(wgEng));
-  if(!wgOff("py"))out.push(wgSafe(wgPy));
+  if(!wgOff("ent"))out.push(wgSafe(()=>wgEng().replace('class="wg wgrow','class="wg w2 wgrow')));
   if(!wgOff("ent"))out.push(wgSafe(wgCm));
   if(!wgOff("fin"))out.push(wgSafe(wgFin));
+  if(!wgOff("ps"))out.push(wgSafe(wgAv));
   return`<div class="wgs">${out.join("")}</div>`}
 
 /* ---- réglage : widgets ou tuiles ---- */
@@ -5970,7 +6019,11 @@ function render(force){
   RD_PAGE=V.page;
   try{tabSync();hintsApply()}catch(e){}
 }
-const backTo=()=>V.prev&&V.prev!==V.page?V.prev:"plus";
+/* navigation : une vraie pile (‹ revient à l'écran d'avant, sans jamais tourner en rond) */
+function navPush(p){if(V.navBack){V.navBack=false;return}
+  if(TAB_ROOT.includes(p)){V.stack=[];return}
+  if(p===V.page)return;const s=(V.stack||[]).filter(x=>x!==p&&x!==V.page);s.push(V.page);V.stack=s.slice(-15)}
+function navBack(){const s=V.stack||[],p=s.pop()||(TAB_ROOT.includes(tabOf(V.page))&&tabOf(V.page)!==V.page?tabOf(V.page):"home");V.stack=s;V.navBack=true;go(p)}
 
 /* ---------- Plus : toutes les rubriques ---------- */
 function pagePlus(){
@@ -5995,7 +6048,7 @@ function progHeat(){const t=today(),start=add(monday(t),-7*11),cells=[];let tot=
   return{html:`<div class="heat" role="img" aria-label="${tot} jours actifs sur les 12 dernières semaines">${cells.join("")}</div>`,tot}}
 function progTile(p,ic,big,n,frac){return`<button class="card ptile" data-page="${p}"><span class="ptop"><span aria-hidden="true">${ic}</span><b class="num">${big}</b></span><span class="ptn">${n}</span>${frac!=null?`<span class="bar"><i style="width:${Math.round(Math.max(0,Math.min(1,frac))*100)}%"></i></span>`:""}</button>`}
 function pageProg(){
-  const sc=wgSafe(()=>objScore()),N=sc&&sc.N,mo=N?(N.gw!=null?N.gw:N.g):null,hm=progHeat();
+  const sc=wgSafe(()=>objScore()),N=sc&&sc.N,mo=N?(N.gw!=null?N.gw:N.g):null;
   const st=+wgSafe(()=>streak())||0,ws=wgSafe(()=>weekSeries(4))||[],wp=ws.length?ws.reduce((a,w)=>a+w.p,0)/ws.length:0;
   const C=(typeof COURS!=="undefined"?COURS:[]).map(s=>[s,+wgSafe(()=>subjStats(s))||0]),cm0=C.length?C.reduce((a,x)=>a+x[1],0)/C.length:0;
   const ex=["mspe","mexp"].map(k=>+wgSafe(()=>cmxList(k).reduce((a,c)=>a+mxStat(c.id).ok,0))||0).reduce((a,b)=>a+b,0);
@@ -6005,8 +6058,7 @@ function pageProg(){
   const py=wgSafe(()=>pySummary())||["—",""],cgN=Object.entries(S.cg||{}).filter(([k,v])=>/^\d{4}-/.test(k)&&v&&v.ok).length;
   const ring=x=>{const r=46,c=2*Math.PI*r;return`<svg viewBox="0 0 108 108" class="pring" aria-hidden="true"><circle cx="54" cy="54" r="${r}" fill="none" stroke="var(--soft)" stroke-width="10"/><circle cx="54" cy="54" r="${r}" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-Math.max(0,Math.min(1,x/100)))}" transform="rotate(-90 54 54)"/></svg>`};
   return`<button class="card phero" data-page="obj">${ring(sc?sc.total:0)}<span class="pherot"><span class="label" style="margin:0">Objectif Top 3</span><b class="num">${sc?pct1(sc.total):"—"} %</b><small class="muted">${mo!=null?`moyenne bac ${pct1(mo)} · `:""}notes, régularité et finance</small></span><span class="muted" aria-hidden="true">›</span></button>
-  <div class="card stack" style="gap:10px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">Tes 12 dernières semaines</p><span class="muted small num">${hm.tot} jour${hm.tot>1?"s":""} actif${hm.tot>1?"s":""}</span></div>${hm.html}
-    <div class="heatk muted small"><span>moins</span>${[0,1,2,3,4].map(a=>`<i class="hm" style="--a:${a}"></i>`).join("")}<span>plus</span></div></div>
+  ${progObjChart(sc)}${progWeekChart()}
   <div class="pgrid">
     ${progTile("hab","🔥",st?`${st} j`:`${Math.round(wp*100)} %`,st?"de série parfaite":"du planning (4 sem.)",wp)}
     ${progTile("cours","📚",`${Math.round(cm0*100)} %`,"des cours vus",cm0)}
@@ -6020,7 +6072,49 @@ function pageProg(){
   <div class="card stack pcours" style="gap:8px"><p class="label" style="margin:0">Cours · chapitres vus ou maîtrisés</p>
     ${C.map(([s,v])=>`<button class="pcl" data-page="cours" data-subj="${s.k}"><span>${esc(s.n)}</span><span class="bar"><i style="width:${Math.round(v*100)}%"></i></span><b class="num">${Math.round(v*100)} %</b></button>`).join("")}</div>`}
 
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-hints],[data-labtab]");if(!b)return;const d=b.dataset;
+/* ---------- graphiques de « Ma progression » (une courbe, des barres ; une seule couleur, au toucher le détail) ---------- */
+const MOIS_C=["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+const fdShort=d=>`${d.getDate()} ${MOIS_C[d.getMonth()]}`;
+function progObjChart(sc){
+  const lim=dkey(add(today(),-90)),pts=Object.entries(S.objectif||{}).filter(([k,v])=>/^\d{4}-\d\d-\d\d$/.test(k)&&k>=lim&&v&&typeof v.p==="number").sort((a,b)=>a[0].localeCompare(b[0])).map(([k,v])=>({k,v:v.p}));
+  const head=`<div class="row" style="justify-content:space-between;align-items:baseline"><p class="label" style="margin:0">Ton objectif Top 3, jour après jour</p>${pts.length>1?`<span class="small num">${pts[pts.length-1].v-pts[0].v>=0?"+":"−"}${pct1(Math.abs(pts[pts.length-1].v-pts[0].v))} pt</span>`:""}</div>`;
+  if(pts.length<2)return`<div class="card stack" style="gap:8px">${head}<p class="small muted" style="margin:0">La courbe se dessine dès demain : l'appli garde ton pourcentage chaque jour.</p></div>`;
+  const W=340,H=170,L=34,R=14,T=14,B=26,d0=new Date(pts[0].k+"T12:00:00"),d1=new Date(pts[pts.length-1].k+"T12:00:00"),span=Math.max(1,(d1-d0)/864e5);
+  let mn=Math.min(...pts.map(p=>p.v)),mx=Math.max(...pts.map(p=>p.v));mn=Math.max(0,Math.floor((mn-2)/5)*5);mx=Math.min(100,Math.ceil((mx+2)/5)*5);if(mx-mn<10)mx=Math.min(100,mn+10);
+  const x=k=>L+((new Date(k+"T12:00:00")-d0)/864e5)/span*(W-L-R),y=v=>T+(1-(v-mn)/(mx-mn))*(H-T-B);
+  const ticks=[mn,(mn+mx)/2,mx],line=pts.map(p=>`${x(p.k).toFixed(1)},${y(p.v).toFixed(1)}`).join(" "),last=pts[pts.length-1];
+  const xl=[pts[0],pts[Math.floor(pts.length/2)],last].filter((p,i,a)=>a.findIndex(q=>q.k===p.k)===i);
+  return`<div class="card stack" style="gap:6px">${head}
+    <svg class="pch pline" viewBox="0 0 ${W} ${H}" data-pts='${JSON.stringify(pts.map(p=>[p.k,Math.round(p.v*10)/10]))}' data-geo="${L},${R},${W}" role="img" aria-label="Évolution de ton objectif Top 3 sur ${pts.length} jours, de ${pct1(pts[0].v)} % à ${pct1(last.v)} %">
+      ${ticks.map(t=>`<line x1="${L}" x2="${W-R}" y1="${y(t)}" y2="${y(t)}" class="gl"/><text x="${L-6}" y="${y(t)+4}" text-anchor="end" class="ax">${Math.round(t)} %</text>`).join("")}
+      ${xl.map(p=>`<text x="${x(p.k)}" y="${H-6}" text-anchor="middle" class="ax">${fdShort(new Date(p.k+"T12:00:00"))}</text>`).join("")}
+      <polygon points="${x(pts[0].k)},${y(mn)} ${line} ${x(last.k)},${y(mn)}" class="area"/>
+      <polyline points="${line}" class="ln"/>
+      <circle cx="${x(last.k)}" cy="${y(last.v)}" r="4.5" class="dot"/>
+      <line class="xh" x1="0" x2="0" y1="${T}" y2="${H-B}" visibility="hidden"/><circle class="xd" r="4.5" visibility="hidden"/>
+      <rect x="${L}" y="0" width="${W-L-R}" height="${H}" fill="transparent" class="hit"/></svg>
+    <p class="ptip small" aria-live="polite">Aujourd'hui : <b class="num">${pct1(last.v)} %</b> · touche la courbe pour voir un jour</p></div>`}
+function progWeekChart(){const t=today(),m0=monday(t),wk=[];
+  for(let w=11;w>=0;w--){const m=add(m0,-7*w);let n=0;for(let i=0;i<7;i++){const d=add(m,i);if(d>t)break;if(progAct(d))n++}wk.push({m,n,cur:w===0})}
+  const W=340,H=160,L=28,R=6,T=16,B=24,bw=(W-L-R)/wk.length,y=v=>T+(1-v/7)*(H-T-B),bar=Math.min(18,bw-6),tot=wk.reduce((a,w)=>a+w.n,0),sel=V.pwSel==null?wk.length-1:V.pwSel,S=wk[sel];
+  return`<div class="card stack" style="gap:6px"><div class="row" style="justify-content:space-between;align-items:baseline"><p class="label" style="margin:0">Jours actifs par semaine</p><span class="small muted num">${tot} jour${tot>1?"s":""} actif${tot>1?"s":""} sur 12 semaines</span></div>
+    <svg class="pch pbars" viewBox="0 0 ${W} ${H}" role="img" aria-label="Nombre de jours actifs par semaine sur les 12 dernières semaines : ${wk.map(w=>w.n).join(", ")}">
+      ${[0,3.5,7].map(v=>`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" class="gl"/>`).join("")}<text x="${L-6}" y="${y(7)+4}" text-anchor="end" class="ax">7 j</text><text x="${L-6}" y="${y(0)+4}" text-anchor="end" class="ax">0</text>
+      ${wk.map((w,i)=>{const cx=L+bw*i+bw/2,h=y(0)-y(w.n),r=Math.min(4,h);return`<g class="pb ${i===sel?"sel":""}" data-pw="${i}">${w.n?`<path d="M${cx-bar/2},${y(0)} v${-(h-r)} q0,${-r} ${r},${-r} h${bar-2*r} q${r},0 ${r},${r} v${h-r} z" class="br"/>`:`<line x1="${cx-bar/2}" x2="${cx+bar/2}" y1="${y(0)-1}" y2="${y(0)-1}" class="br0"/>`}${i===sel?`<text x="${cx}" y="${y(w.n)-5}" text-anchor="middle" class="vl">${w.n}</text>`:""}${i%3===2||i===wk.length-1?`<text x="${w.cur?W-R:cx}" y="${H-6}" text-anchor="${w.cur?"end":"middle"}" class="ax">${w.cur?"cette sem.":fdShort(w.m)}</text>`:""}<rect x="${L+bw*i}" y="0" width="${bw}" height="${H}" fill="transparent"/></g>`}).join("")}
+    </svg>
+    <p class="small" style="margin:0">${S.cur?"Cette semaine":"Semaine du "+fdShort(S.m)} : <b class="num">${S.n} jour${S.n>1?"s":""} actif${S.n>1?"s":""}</b> sur ${S.cur?Math.min(7,Math.round((t-S.m)/864e5)+1):7}</p>
+    <details class="ptab small"><summary>Voir les chiffres</summary><table><tbody>${wk.map(w=>`<tr><td>${w.cur?"Cette semaine":"Semaine du "+fdShort(w.m)}</td><td class="num">${w.n} j</td></tr>`).join("")}</tbody></table></details></div>`}
+/* la courbe : un trait vertical suit le doigt (ou la souris) et affiche le jour */
+function plineMove(svg,cx){const pts=JSON.parse(svg.dataset.pts||"[]");if(pts.length<2)return;const [L,R,W]=svg.dataset.geo.split(",").map(Number),r=svg.getBoundingClientRect(),vx=(cx-r.left)/r.width*W;
+  const poly=svg.querySelector(".ln").getAttribute("points").split(" ").map(p=>p.split(",").map(Number));let i=0,bd=1e9;poly.forEach((p,k)=>{const dd=Math.abs(p[0]-vx);if(dd<bd){bd=dd;i=k}});
+  const [px,py]=poly[i],xh=svg.querySelector(".xh"),xd=svg.querySelector(".xd");xh.setAttribute("x1",px);xh.setAttribute("x2",px);xh.setAttribute("visibility","visible");xd.setAttribute("cx",px);xd.setAttribute("cy",py);xd.setAttribute("visibility","visible");
+  const tip=svg.parentElement.querySelector(".ptip");if(tip)tip.innerHTML=`${fdShort(new Date(pts[i][0]+"T12:00:00"))} : <b class="num">${pct1(pts[i][1])} %</b>`}
+document.addEventListener("pointermove",e=>{const s=e.target.closest&&e.target.closest("svg.pline");if(s)plineMove(s,e.clientX)});
+document.addEventListener("pointerdown",e=>{const s=e.target.closest&&e.target.closest("svg.pline");if(s)plineMove(s,e.clientX)});
+document.addEventListener("click",e=>{const g=e.target.closest&&e.target.closest("svg.pbars [data-pw]");if(g){V.pwSel=+g.dataset.pw;render(true)}});
+
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-hints],[data-labtab],[data-back]");if(!b)return;const d=b.dataset;
+  if(d.back)return navBack();
   if(d.hints){V.hints=!V.hints;lsSet("cerveau-hints",V.hints);return render(true)}
   if(d.labtab){V.labTab=d.labtab;return render(true)}
 });
@@ -6038,6 +6132,161 @@ function dataCard(){return`<div class="card stack"><p class="label" style="margi
     ${V.dataMsg?`<p class="small">${esc(V.dataMsg)}</p>`:""}${V.imp?`<div class="row"><button class="btn" data-impok="1">Confirmer la restauration</button><button class="ghost" data-impno="1">Annuler</button></div>`:""}</div>`}
 /* depuis « Ma progression » : ouvrir directement la bonne matière */
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button[data-page][data-subj]");if(b){V.subj=b.dataset.subj;V.chap=null}});
+
+/* ================================================================
+   MON AVENIR 2.8.0 : plus de facs (ambitieuses et plus sûres, partout en France), mes conseils,
+   les métiers avec leurs salaires, et une page en 4 onglets
+   Chiffres Parcoursup 2025 (places, candidats) : classements Thotis des licences de maths (mars 2026)
+   et d'économie (octobre 2026), d'après l'open data Parcoursup.
+   ================================================================ */
+PS_MAP.push(
+ {id:"lyo",st:1,g:"region",n:"Double licence Mathématiques-Économie",u:"Université Lyon 1 · Villeurbanne",rec:"amb",
+  f:"50 places pour 1 583 candidats (2025). 207 crédits au lieu de 180 : tu obtiens 2 licences.",
+  c:"L1 : algèbre, analyse, probabilités-statistiques, informatique, micro et macroéconomie. L2 : Python, finance, économie publique. L3 : probabilités avancées, équations différentielles, théorie des jeux, économétrie, maths financières. Un stage en entreprise entre la L2 et la L3. SES recommandée.",
+  d:"Avec la licence de maths, tu peux candidater en L3 Mathématiques appliquées ; avec la licence d'éco, en L3 Économie et ingénierie financière. Lyon a aussi l'ISFA (actuariat) et ouvre vers l'ENSAE, l'ENSAI et Polytechnique.",
+  w:"Mon premier choix « ambitieux » : le même mélange maths + éco que ton profil, avec des maths financières dès la L3."},
+ {id:"str",st:1,g:"region",n:"Double licence Mathématiques-Économie",u:"Université de Strasbourg",
+  f:"40 places pour 1 163 candidats (2025). Sur dossier, avis d'une commission pédagogique.",
+  c:"Algèbre, probabilités, statistiques, calcul différentiel, économie, finance, gestion, informatique et langues. Formation « sélective et renforcée » qui demande une grande capacité de travail. Tu obtiens une licence de maths et une licence d'économie-gestion.",
+  d:"Les deux licences t'ouvrent les deux L3 de Dauphine (maths appliquées, économie et ingénierie financière). Après : masters de statistique, d'économétrie, d'actuariat ou de finance.",
+  w:"Même idée que Lyon, dans une très bonne fac de maths."},
+ {id:"tse",st:1,g:"region",n:"Double licence Économie et MIASHS",u:"Toulouse School of Economics (TSE) · Toulouse",
+  f:"90 places pour 1 363 candidats (2025). Petits groupes.",
+  c:"Double diplôme : une licence d'économie (TSE) et une licence MIASHS (maths appliquées). Beaucoup de maths : fondamentaux, algèbre linéaire, fonctions d'une et plusieurs variables, probabilités, intégrales et séries, statistiques et algorithmique.",
+  d:"La licence d'économie et la MIASHS t'ouvrent la L3 Économie et ingénierie financière de Dauphine. TSE est une des meilleures écoles d'économie du monde : on peut aussi y rester jusqu'au master.",
+  w:"Le plus « économie » des trois choix ambitieux, avec le nom TSE sur ton CV."},
+ {id:"evr",st:1,g:"region",n:"Double licence Mathématiques-Économie et gestion",u:"Université d'Évry (Paris-Saclay) · Évry-Courcouronnes",
+  f:"35 places pour 1 488 candidats (2025).",c:"Maths et économie-gestion en parallèle, avec deux licences à la fin.",
+  d:"Les deux licences t'ouvrent les deux L3 de Dauphine, à 40 minutes de Paris.",w:"Ambitieux : beaucoup de candidats pour peu de places."},
+ {id:"rou",st:1,g:"region",n:"Double licence Économie-Mathématiques",u:"Université de Rouen Normandie · Rouen",
+  f:"36 places pour 885 candidats (2025).",c:"Économie et maths en parallèle, avec deux licences à la fin.",
+  d:"Les deux licences t'ouvrent les deux L3 de Dauphine. Rouen est à 1 h 15 de Paris en train.",w:"Un peu moins demandée que Lyon ou Strasbourg."},
+ {id:"mtz",st:1,g:"region",n:"Double licence Économie-Mathématiques",u:"Université de Lorraine · Metz",
+  f:"25 places pour 673 candidats (2025).",c:"Économie et maths en parallèle, en petite promo.",d:"Les deux licences t'ouvrent les deux L3 de Dauphine.",w:"Petite promo : facile d'être suivi de près."},
+ {id:"ang",st:1,g:"region",n:"Double licence Mathématiques-Économie et gestion",u:"Université d'Angers",
+  f:"25 places pour 609 candidats (2025).",c:"Maths et économie-gestion en parallèle, en petite promo.",d:"Les deux licences t'ouvrent les deux L3 de Dauphine.",w:"Une des doubles licences maths-éco les moins demandées."},
+ {id:"smpa",st:1,g:"region",n:"Licence MPA (maths et physique approfondies)",u:"Université de Strasbourg · parcours magistère",
+  f:"33 places pour 1 008 candidats (2025). Pour les très bons profils scientifiques.",
+  c:"Deux ans de maths et de physique à haut niveau, rythme soutenu. Entrée garantie dans au moins un des magistères de Strasbourg (maths ou physique) en L3.",
+  d:"Prépare aussi aux écoles d'ingénieurs par la voie universitaire et au DUAS (actuariat). Pour Dauphine, tu peux viser la L3 Mathématiques appliquées.",
+  w:"Pour toi si tu veux le maximum de maths (route quant), mais il faut aimer la physique."},
+ {id:"tps",st:1,g:"region",n:"Parcours Spéciaux (double diplôme maths)",u:"Université Toulouse III · Toulouse",
+  f:"45 places pour 1 009 candidats (2025).",c:"Une licence de sciences avec un diplôme d'université en plus : un parcours d'excellence en petit effectif.",
+  d:"Un très bon niveau de maths, utile pour la L3 Mathématiques appliquées de Dauphine.",w:"Très scientifique : à mettre si tu veux garder la porte des écoles d'ingénieurs."},
+ {id:"lmn",st:1,g:"surs",n:"Double licence Économie-Mathématiques (actuariat, finance)",u:"Le Mans Université",rec:"sur",
+  f:"40 places pour 619 candidats (2025). Petites promos.",
+  c:"Économie et maths en parallèle, avec une ouverture vers l'actuariat et la finance et des enseignants venus des entreprises. En L3, un parcours sélectif : la 1re année de l'École d'actuariat du Mans, qui continue en Master Actuariat (Institut du Risque et de l'Assurance).",
+  d:"Les deux licences t'ouvrent les deux L3 de Dauphine. Et si tu restes : l'actuariat, un métier de maths très demandé.",
+  w:"Mon premier choix « plus sûr » : maths + éco + finance, beaucoup moins de concurrence, et un vrai plan B (actuaire) si Dauphine ne se fait pas."},
+ {id:"orl",st:1,g:"surs",n:"Licence portail Économie-Mathématiques",u:"Université d'Orléans",
+  f:"60 places pour 358 candidats (2025). Il existe aussi une version « Excellence Minerve » : 10 places pour 85 candidats.",
+  c:"Un portail qui mêle économie et maths dès la 1re année.",d:"Avec de très bons résultats, la L3 Économie et ingénierie financière de Dauphine est accessible.",
+  w:"Ton vœu maths-éco le plus sûr. Orléans est à 1 h de Paris en train."},
+ {id:"lyo1m",st:1,g:"grandes",n:"Licence de Mathématiques (portail Maths-Informatique)",u:"Université Lyon 1 · Villeurbanne",
+  f:"315 places pour 4 531 candidats (2025) : beaucoup de places.",c:"Maths et informatique en L1, puis spécialisation en maths.",d:"Une grande fac de maths : sois dans les premiers pour viser la L3 Mathématiques appliquées de Dauphine.",w:"Sûr et dans une grande ville étudiante."},
+ {id:"str1",st:1,g:"grandes",n:"Licence de Mathématiques (portail Maths-Informatique)",u:"Université de Strasbourg",
+  f:"285 places pour 2 605 candidats (2025).",c:"Maths et informatique en L1, puis spécialisation en maths.",d:"Tu peux aussi tenter la licence MPA ou le DUAS (actuariat) en cours de route.",w:"Beaucoup de places dans une très bonne fac de maths."},
+ {id:"tls3",st:1,g:"grandes",n:"Licence de Mathématiques",u:"Université Toulouse III · Toulouse",f:"124 places pour 3 091 candidats (2025).",c:"Licence de maths classique, dans une grande université scientifique.",d:"Toulouse a aussi TSE pour un master d'économie.",w:"Grande ville étudiante."},
+ {id:"mtp",st:1,g:"grandes",n:"Licence de Mathématiques et ses applications",u:"Université de Montpellier",f:"75 places pour 1 670 candidats (2025).",c:"Maths et leurs applications.",d:"Une base solide pour la L3 Mathématiques appliquées de Dauphine.",w:"Au soleil, pas trop loin de chez toi."},
+ {id:"ren",st:1,g:"grandes",n:"Licence de Mathématiques et applications",u:"Université de Rennes",f:"175 places pour 2 050 candidats (2025). Il existe aussi un parcours DEFI plus sélectif (48 places).",c:"Maths et leurs applications.",d:"Une base solide pour la L3 Mathématiques appliquées de Dauphine.",w:"Grande ville étudiante, 1 h 30 de Paris."},
+ {id:"lil",st:1,g:"grandes",n:"Licence de Mathématiques (portail Maths-Informatique)",u:"Université de Lille",f:"145 places pour 2 190 candidats (2025). Option « recherche renforcée » : 35 places.",c:"Maths et informatique en L1, puis spécialisation en maths.",d:"Une base solide pour la L3 Mathématiques appliquées de Dauphine.",w:"Grande ville étudiante, 1 h de Paris."},
+ {id:"nan",st:1,g:"grandes",n:"Licence de Mathématiques",u:"Nantes Université",f:"112 places pour 1 713 candidats (2025).",c:"Licence de maths classique.",d:"Une base solide pour la L3 Mathématiques appliquées de Dauphine.",w:"Grande ville étudiante."},
+ {id:"cle",st:1,g:"grandes",n:"Licence de Mathématiques (portail Informatique-Mathématiques)",u:"Université Clermont Auvergne · Clermont-Ferrand",f:"200 places pour 1 212 candidats (2025).",c:"Maths et informatique en L1, puis spécialisation.",d:"Une base solide pour la L3 Mathématiques appliquées de Dauphine.",w:"Beaucoup de places pour peu de candidats : un vœu très sûr."}
+);
+/* les groupes de la 1re année : du plus ambitieux au plus sûr */
+Object.assign(PS_G,{region:"Maths-éco et parcours d'excellence en région : ambitieux",surs:"Maths-éco plus sûrs",grandes:"Grandes facs de maths partout en France : plus sûres",sud:"Près de chez toi (Région Sud) : plus sûrs"});
+AV_G.gr=["lyo","str","tse","evr","rou","mtz","ang","smpa","tps"];
+AV_G.gs2=["lmn","orl","amu2"];AV_G.gg=["lyo1m","str1","tls3","mtp","ren","lil","nan","cle"];AV_G.gs=["amu1","uca1","tln1","avi1"];
+AV_STEPS[0].groups=[["gp","🗼 Paris","très ambitieux pour toi"],["gr","🎯 Maths-éco et excellence en région","ambitieux"],["gs2","🛟 Maths-éco plus sûrs","plus sûr"],["gg","🏛️ Grandes facs de maths, partout en France","plus sûr"],["gs","☀️ Près de chez toi (Région Sud)","plus sûr"]];
+/* le métier visé : chiffres mis à jour */
+(()=>{const t=AV_JOBS.find(j=>j.id==="tq");if(t)t.w="Très sélectif (tests de calcul mental, de probabilités et de code). La 1re année à Londres : environ 80 000 à 300 000 £ (fixe + bonus) selon la société, et plus de 250 000 £ dans les meilleures (estimations Quantt, 2026).";
+  const q=AV_JOBS.find(j=>j.id==="qr");if(q)q.w="En banque à Paris : 45 000 à 100 000 € de fixe par an (moyenne 69 500 €, Michael Page), plus un bonus. La voie classique : un master de maths financières."})();
+
+/* ---------- mes conseils pour ta fac ---------- */
+function avReco(){const it=id=>psMap(id)||{n:"",u:""},b=(id,tag,why)=>{const x=it(id);return`<button class="avrc" data-avn="${id}"><span class="avrct">${tag}</span><b>${esc(x.n)}</b><small class="muted">${esc(x.u)}</small><span class="small">${why}</span></button>`};
+  return`<div class="card stack avreco" style="gap:10px"><p class="label" style="margin:0">⭐ Mes conseils pour ta fac de l'an prochain</p>
+  <p class="small" style="margin:0">Ton but : <b>rebondir à Dauphine en L2 ou en L3</b>. Pour ça, le plus important est d'être dans les tout meilleurs de ta promo, surtout en maths. Une <b>double licence maths-éco</b> t'ouvre les deux L3 de Dauphine : Mathématiques appliquées (avec ta licence de maths) et Économie et ingénierie financière (avec ta licence d'éco).</p>
+  ${b("lyo","🎯 Ambitieux · mon 1er choix","Maths + éco à haut niveau, maths financières en L3, un stage, deux licences.")}
+  ${b("lmn","🛟 Plus sûr · mon 1er choix","Maths + éco + finance, beaucoup moins de concurrence, et l'actuariat en plan B.")}
+  ${b("tln1","🏠 Filet de sécurité près de chez toi","Beaucoup de places : pour être sûr d'avoir une fac, et viser la 1re place de ta promo.")}
+  <p class="small" style="margin:0"><b>Mes autres vœux conseillés :</b> Strasbourg et TSE (ambitieux), Orléans portail Économie-Maths (plus sûr), une grande fac de maths comme Lyon 1 ou Clermont (sûr). Sur Parcoursup, tu as jusqu'à 10 vœux.</p>
+  <p class="muted small" style="margin:0">« Ambitieux » ou « plus sûr » vient du nombre de candidats par place en 2025 : ce n'est pas une probabilité d'admission. Vérifie chaque fiche sur Parcoursup dès son ouverture.</p></div>`}
+
+/* ---------- les métiers et leurs salaires ---------- */
+const AV_SAL=[
+ {id:"tq",e:"🎯",n:"Trader quantitatif",o:"Sociétés de trading (Jane Street, Optiver, IMC…), hedge funds · surtout Londres",
+  s:[["1re année (fixe + bonus)","80 000 à 300 000 £ à Londres"],["Après 3 à 5 ans","180 000 à 500 000 £"]],
+  b:"Le bonus dépend de tes résultats et de ceux de la société : il peut faire plus que le fixe.",
+  m:"Il invente, teste et surveille des stratégies de trading avec des maths et du code, souvent en tant que « market maker » (il propose en permanence des prix d'achat et de vente).",
+  j:"Marchés ouverts toute la journée : décisions rapides, beaucoup de chiffres, travail en équipe.",
+  et:"Master de maths financières (route A) ou école d'ingénieurs (route B). Entretiens : calcul mental, probabilités, jeux de paris, code.",
+  sel:"Extrêmement sélectif : quelques places pour des milliers de candidats.",src:"Quantt (2026, estimations)",aj:"tq"},
+ {id:"qr",e:"🧠",n:"Quant en banque (analyste quantitatif)",o:"Banques (BNP Paribas, Société Générale, Natixis…), fonds · Paris, Londres",
+  s:[["À Paris (fixe, tous niveaux)","45 000 à 100 000 € · moyenne 69 500 €"]],b:"Plus un bonus, en général plus modeste que pour les traders.",
+  m:"Il construit les modèles qui donnent le prix des produits financiers et mesurent les risques, et il les programme.",
+  j:"Travail de recherche appliquée : maths, code (Python, C++), échanges avec les traders.",et:"Master de maths financières (El Karoui, 203…) ou école d'ingénieurs.",sel:"Très sélectif, mais plus de places que dans le trading.",src:"Michael Page (grille 2027)",aj:"qr"},
+ {id:"trb",e:"💹",n:"Trader en banque",o:"Salles de marché des banques · Paris, Londres",
+  s:[["Débutant (fixe)","45 000 à 60 000 €"],["3 à 7 ans","65 000 à 95 000 €"],["8 ans et plus","100 000 à 180 000 €"]],
+  b:"Le bonus peut aller jusqu'à 100 % du fixe (200 % si les actionnaires l'acceptent). Au moins la moitié est payée en actions, et une partie est versée plus tard.",
+  m:"Il achète et vend des produits financiers (actions, taux, devises…) pour la banque et ses clients, en gérant les risques.",j:"Journées intenses, calées sur les horaires des marchés.",et:"Master de finance de marché (203…), Top 3 ou école d'ingénieurs.",sel:"Très sélectif.",src:"Travail-Industrie (2026)",aj:"mk"},
+ {id:"sal",e:"📞",n:"Sales (vendeur en salle de marché)",o:"Banques de financement et d'investissement",s:[["Fixe","58 000 à 80 000 €"]],b:"Plus un bonus lié aux clients et aux ventes.",
+  m:"Il conseille les grands clients (fonds, entreprises) et leur vend des produits financiers.",j:"Beaucoup de contact client, de l'anglais tous les jours.",et:"Top 3 ou master de finance de marché.",sel:"Sélectif.",src:"Travail-Industrie (2026)"},
+ {id:"stc",e:"🧩",n:"Structureur",o:"Banques · Paris, Londres",s:[["À Paris (fixe, tous niveaux)","55 000 à 120 000 € · moyenne 87 500 €"]],b:"Plus un bonus.",
+  m:"Il invente des produits financiers sur mesure pour les clients, entre le trader, le quant et le sales.",j:"Maths, créativité et contact client.",et:"Master de finance de marché ou école d'ingénieurs.",sel:"Sélectif.",src:"Michael Page (grille 2027)"},
+ {id:"ma",e:"🤝",n:"Analyste en banque d'affaires (fusions-acquisitions)",o:"Rothschild, Lazard, grandes banques · Paris",
+  s:[["Débutant (fixe)","45 000 à 65 000 € · 52 000 à 75 000 € en Île-de-France"],["3 à 7 ans","65 000 à 95 000 €"],["8 ans et plus","95 000 à 150 000 €"]],b:"Plus un bonus, souvent important.",
+  m:"Il aide les entreprises à en racheter d'autres ou à se vendre : valorisations, modèles Excel, présentations.",j:"Journées très longues, surtout au début.",et:"Top 3 (route C) surtout, ou master de finance.",sel:"Très sélectif.",src:"Travail-Industrie (2026)",aj:"ib"},
+ {id:"pe",e:"🏦",n:"Private equity (fonds d'investissement)",o:"Fonds qui achètent des entreprises · Paris, Londres",s:[["Débutant (fixe)","50 000 à 70 000 € · 57 000 à 81 000 € en Île-de-France"]],b:"Plus un bonus, puis une part des gains du fonds (« carried interest ») pour les plus expérimentés.",
+  m:"Il choisit des entreprises à racheter, les aide à grandir, puis les revend.",j:"Analyse, négociation, suivi des entreprises.",et:"Souvent après 2 ou 3 ans en banque d'affaires ou en conseil.",sel:"Parmi les plus sélectifs de la finance.",src:"Travail-Industrie (2026)"},
+ {id:"gp",e:"📊",n:"Gérant de portefeuille",o:"Sociétés de gestion (Amundi, AXA IM…)",s:[["Débutant (fixe)","42 000 à 55 000 € · 48 000 à 63 000 € en Île-de-France"],["3 à 7 ans","60 000 à 85 000 €"],["8 ans et plus","90 000 à 150 000 €"]],b:"Plus un bonus lié aux performances.",
+  m:"Il décide où placer l'argent de ses clients (actions, obligations…) pour le faire fructifier.",j:"Analyse des marchés et des entreprises, réunions de décision.",et:"Master de finance ou Top 3.",sel:"Sélectif.",src:"Travail-Industrie (2026)"},
+ {id:"rm",e:"🛡️",n:"Risk manager (banque)",o:"Banques, assurances",s:[["Débutant (fixe)","38 000 à 46 000 € · 44 000 à 53 000 € en Île-de-France"],["3 à 7 ans","50 000 à 68 000 €"],["8 ans et plus","68 000 à 95 000 €"]],b:"Bonus plus modeste.",
+  m:"Il mesure et limite les risques que prend la banque (marchés, crédit).",j:"Modèles, contrôles, rapports.",et:"Master de maths financières, de finance ou d'actuariat.",sel:"Accessible avec un bon master.",src:"Travail-Industrie (2026)"},
+ {id:"act",e:"📐",n:"Actuaire",o:"Assurances, mutuelles, cabinets de conseil",s:[["Débutant (fixe)","38 000 à 46 000 €"],["3 à 7 ans","50 000 à 68 000 €"],["8 ans et plus","70 000 à 100 000 €"]],b:"Primes modestes, mais un métier très stable.",
+  m:"Il calcule les risques (accidents, santé, retraite) et le prix des assurances avec des probabilités et des statistiques.",j:"Maths, statistiques, code.",et:"Master d'actuariat (Le Mans, Lyon ISFA, Strasbourg…).",sel:"Accessible avec un bon niveau en maths.",src:"Travail-Industrie (2026)"},
+ {id:"ds",e:"🤖",n:"Data scientist",o:"Banques, tech, toutes entreprises",s:[["Débutant (fixe)","34 000 à 42 000 € · 39 000 à 48 000 € en Île-de-France"],["3 à 7 ans","42 000 à 56 000 €"],["8 ans et plus","56 000 à 78 000 €"]],b:"Selon l'entreprise : plus élevé dans la finance et la tech.",
+  m:"Il tire des informations et des prédictions de grandes quantités de données, souvent avec de l'IA.",j:"Code (Python), statistiques, présentations.",et:"Master de maths appliquées, de statistiques ou d'informatique.",sel:"Accessible.",src:"Travail-Industrie (2026)"},
+ {id:"cs",e:"🧭",n:"Consultant en stratégie",o:"McKinsey, BCG, Bain…",s:[["Débutant (variable compris)","48 000 à 60 000 € environ"],["Manager","112 000 à 185 000 €"],["Associé","300 000 € et plus"]],b:"Chiffres de 2023 : ils ont probablement augmenté depuis.",
+  m:"Il aide les dirigeants d'entreprises à prendre leurs grandes décisions.",j:"Missions de quelques semaines, beaucoup de présentations et de déplacements.",et:"Top 3 (route C) surtout.",sel:"Très sélectif.",src:"Business Cool (2023)"}];
+/* graphique : salaire de départ (fixe brut, France, même source) */
+const AV_SALBAR=[["Private equity",50,70],["Banque d'affaires",45,65],["Trader en banque",45,60],["Gérant de portefeuille",42,55],["Risk manager",38,46],["Actuaire",38,46],["Data scientist",34,42]];
+function avSalChart(){const W=340,L=128,R=60,H=AV_SALBAR.length*30+28,x=v=>L+(v-30)/(80-30)*(W-L-R);
+  const ticks=[30,40,50,60,70,80];
+  return`<svg class="salch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Salaires de départ, fixe brut annuel en France, en milliers d'euros">
+    ${ticks.map(t=>`<line x1="${x(t)}" y1="6" x2="${x(t)}" y2="${H-20}" class="gl"/><text x="${x(t)}" y="${H-6}" text-anchor="middle" class="ax">${t} k€</text>`).join("")}
+    ${AV_SALBAR.map(([n,a,b],i)=>{const y=12+i*30;return`<g><title>${n} : ${a} 000 à ${b} 000 €</title><text x="${L-8}" y="${y+10}" text-anchor="end" class="lb">${n}</text><rect x="${x(a)}" y="${y+2}" width="${x(b)-x(a)}" height="12" rx="4" class="rg"/><text x="${x(b)+6}" y="${y+12}" class="vl">${a}–${b} k€</text></g>`}).join("")}</svg>`}
+function avMetiers(){const j=avJob(),op=V.avJobOpen;
+  return`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">💶 Salaire de départ en France</p><p class="small" style="margin:0">Fixe brut par an, en milliers d'euros, sans le bonus (qui peut doubler le salaire en salle de marché).</p>${avSalChart()}
+    <p class="muted small" style="margin:0">Hors échelle : un trader quantitatif débutant à Londres gagne environ 80 000 à 300 000 £ par an, bonus compris.</p></div>
+  ${AV_SAL.map(s=>{const o=op===s.id;return`<div class="card avjob ${o?"open":""}"><button class="avjh" data-avjob2="${s.id}" aria-expanded="${o}"><span class="avje" aria-hidden="true">${s.e}</span><span class="avjt"><b>${esc(s.n)}${s.aj&&s.aj===j?` <span class="avtag ok">🎯 ton objectif</span>`:""}</b><small class="muted">${esc(s.s[0][1])}</small></span><span class="muted" aria-hidden="true">${o?"▴":"▾"}</span></button>
+    ${o?`<div class="stack" style="gap:8px;margin-top:10px"><p class="muted small" style="margin:0">${esc(s.o)}</p>
+      <dl class="avrd">${s.s.map(([k,v])=>`<dt>${esc(k)}</dt><dd><b>${esc(v)}</b></dd>`).join("")}<dt>Bonus</dt><dd>${esc(s.b)}</dd><dt>Le métier</dt><dd>${esc(s.m)}</dd><dt>Au quotidien</dt><dd>${esc(s.j)}</dd><dt>Études</dt><dd>${esc(s.et)}</dd><dt>Sélectivité</dt><dd>${esc(s.sel)}</dd></dl>
+      ${s.aj?`<div><button class="${s.aj===j?"ghost on":"btn"}" data-avjob="${s.aj}">${s.aj===j?"🎯 C'est mon objectif":"🎯 C'est ce que je vise"}</button></div>`:""}
+      <p class="muted small" style="margin:0">Source : ${esc(s.src)}. Montants bruts annuels, à titre indicatif.</p></div>`:""}</div>`}).join("")}`}
+
+/* ---------- la page, en 4 onglets ---------- */
+const AV_TABS=[["plan","🧭 Plan"],["fac","🏫 Ma fac"],["metiers","💼 Métiers"],["routes","🔀 Après"]];
+const AV_SRC={plan:"Sources : calendrier Parcoursup 2027 annoncé par Les Sherpas.",
+  fac:"Sources : classements Thotis des licences de maths (mars 2026) et d'économie (octobre 2026), d'après l'open data Parcoursup 2025 ; fiches des formations de Lyon 1, Strasbourg, TSE et Le Mans ; Dauphine-PSL (admissions en L3 Mathématiques appliquées et Économie et ingénierie financière) ; rapport Parcoursup 2025 de Dauphine ; Sorbonne, Paris 1, AMSE, Université Côte d'Azur.",
+  metiers:"Sources : Quantt (salaires des traders quantitatifs, 2026), Michael Page (grilles 2027), Travail-Industrie (simulateurs de salaires 2026), Business Cool (salaires en conseil, 2023).",
+  routes:"Sources : Dauphine (Master 203), Business Cool (master El Karoui), guides Thotis des admissions sur titre HEC, ESSEC et ESCP, frais 2026 (Meilleurs Masters, L'Express Éducation)."};
+function avFac(){return`${avReco()}<div class="card stack" style="gap:8px"><p class="label" style="margin:0">🌳 Toutes les formations, étape par étape</p>
+  <p class="small" style="margin:0">1. Ta fac de l'an prochain (Parcoursup) → 2. un rebond en L2 ou en L3 → 3. un master ou une grande école → 4. le métier. Touche une formation pour la découvrir, puis choisis-la.</p>${avTree()}</div>`}
+function pagePs(){const t=AV_TABS.some(x=>x[0]===V.avTab)?V.avTab:"plan";
+  return`<div class="card" style="padding:12px 16px">${avLine()}</div><div class="tabs avtabs" role="tablist">${AV_TABS.map(([k,l])=>`<button role="tab" data-avtab="${k}" aria-selected="${t===k}">${l}</button>`).join("")}</div>
+  ${t==="plan"?avPlan():t==="fac"?avFac():t==="metiers"?avMetiers():avRoutes()}
+  <p class="muted small">${AV_SRC[t]}</p>${trSheet()}`}
+
+/* ---------- accueil : le widget Mon avenir ---------- */
+function wgAv(){const job=avItem(avJob())||AV_JOBS[0],fac=psFacName(),nx=psNext();
+  return wgBtn("ps","--ps","w2",`<span class="wgl">Mon avenir</span><span class="wgmid">${esc(job.e||"🎯")} ${esc(job.n)}</span><small>${fac?"⭐ Ta fac : "+esc(fac.split(" · ")[1]||fac):"Ta fac de l'an prochain : à choisir (mes conseils sont prêts)"}</small>${nx?`<small class="num">📅 Parcoursup · J-${psDays(nx[0])} · ${esc(nx[2]||"")}</small>`:""}`)}
+
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-avtab],[data-avjob2],[data-avtree],[data-pileq]");if(!b)return;const d=b.dataset;
+  if(d.pileq){put("params","appli",{...appP(),pilEq:d.pileq==="1"},true);return render(true)}
+  if(d.avtab){V.avTab=d.avtab;V.avSel=null;render(true);return window.scrollTo(0,0)}
+  if(d.avjob2){V.avJobOpen=V.avJobOpen===d.avjob2?null:d.avjob2;return render(true)}
+  if(d.avtree){e.stopImmediatePropagation();V.avTab=d.avtree==="met"?"metiers":"fac";render(true);return window.scrollTo(0,0)}
+},true);
 
 /* ================================================================
    ACCUEIL
@@ -6062,7 +6311,7 @@ function pageHome(){
   const t=today(),h=new Date().getHours();
   const W=homeMode()==="widgets";
   return`<div class="top">${W?`<div><p class="wgdate">${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p><h1>${h<18?"Bonjour":"Bonsoir"}</h1></div>`:`<div><h1>2ème cerveau 🧠</h1><p>${h<18?"Bonjour":"Bonsoir"} · ${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p></div>`}<div class="topr"><div class="topb"><button class="gear" data-page="idees" aria-label="Suggestions">💡</button><button class="gear" data-page="reglages" aria-label="Réglages">⚙️</button></div><div class="sync" id="sync">${syncTxt}</div></div></div>
-  ${bilHome()}${W?wgHome():`<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>`}${modWrap("accueil","")}${citCard()}`;
+  ${bilHome()}${W?wgHome():`<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>`}${modWrap("accueil","")}${citCard()}${W&&!wgOff("py")?`<div class="wgs wgpy">${wgSafe(()=>wgPy().replace('class="wg ','class="wg w2 '))}</div>`:""}`;
 }
 
 /* ---- sauvegarde / restauration ---- */
@@ -6090,7 +6339,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.7.0";
+const APP_VERSION="2.8.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -6645,7 +6894,7 @@ function render0(force){
   if(V.page==="home"||(!PAGES[V.page]&&!mt)){app.innerHTML=pageHome();return}
   if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
   const body=mt?modHtml(mt.id,mt.page):modWrap(V.page,PAGES[V.page]());
-  app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head">${TAB_ROOT.includes(V.page)?"":`<button class="back" data-page="${backTo()}" aria-label="Retour">‹</button>`}<h1>${esc(sectName(V.page))}</h1><button class="hintb" data-hints="1" aria-label="Afficher les explications" title="Explications" hidden>ⓘ</button>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
+  app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head">${TAB_ROOT.includes(V.page)?"":`<button class="back" data-back="1" aria-label="Retour">‹</button>`}<h1>${esc(sectName(V.page))}</h1><button class="hintb" data-hints="1" aria-label="Afficher les explications" title="Explications" hidden>ⓘ</button>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
   if(V.page==="mx"||V.page==="cours")mxTex();if(V.page==="jour")jAfter();setTimeout(()=>{nUi();micPlace()},0);if(CM&&V.page==="ent"){const ci=document.getElementById("cmin");if(ci&&document.activeElement!==ci)ci.focus({preventScroll:true})}
 }
 /* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
@@ -6654,7 +6903,7 @@ document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},35
 /* ================================================================
    INTERACTIONS
    ================================================================ */
-function go(p){if(V.note)nSave();if(p!==V.page)V.prev=V.page;V.page=p;V.confirm=null;V.chap=null;V.proj=null;V.note=null;V.ndraft=null;V.nf=null;V.nq="";V.newf=false;V.renf=false;if(p==="proj")nHousekeep();saveV();render(true);window.scrollTo(0,0)}
+function go(p){if(V.note)nSave();navPush(p);V.page=p;V.confirm=null;V.chap=null;V.proj=null;V.note=null;V.ndraft=null;V.nf=null;V.nq="";V.newf=false;V.renf=false;if(p==="proj")nHousekeep();saveV();render(true);window.scrollTo(0,0)}
 function confirmOr(id,fn){if(V.confirm===id){V.confirm=null;return fn()}V.confirm=id;render(true)}
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;const d=b.dataset;
