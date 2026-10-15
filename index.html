@@ -923,6 +923,16 @@ details.egart>summary,details.egall>summary{cursor:pointer;display:flex;flex-dir
 .cmxa{text-decoration:none;display:inline-flex;align-items:center}
 .cmxres{font-size:.95rem}
 .cmxq .egopt p{margin:0}
+/* 2.6.0 : relais IA et coach IA finance */
+.relaysrc{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.72rem;line-height:1.35;white-space:pre;overflow:auto;min-height:12em}
+.relayhow>summary{cursor:pointer;padding:4px 0}
+.relayhow[open]{display:flex;flex-direction:column;gap:8px}
+.coach .seg button{min-width:0}
+.coload{margin:6px 0;color:var(--muted);animation:copulse 1.4s ease-in-out infinite}
+@keyframes copulse{50%{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.coload{animation:none}}
+/* champs de formulaire : hauteur naturelle (avant, ils prenaient 140 px de haut dans les formulaires en colonne) */
+form>.field{flex-basis:auto}
 </style>
 <script src="config.js"></script>
 </head>
@@ -1639,7 +1649,7 @@ V.defi=Math.floor(Math.random()*DEFIS.length);V.gi=Math.floor(Math.random()*GLOS
 /* ================================================================
    CLAUDE DANS L'APPLI
    ================================================================ */
-const ERR=c=>({no_key:"Ajoute ta clé d'IA dans Réglages (⚙️ sur l'accueil).",bad_key:"La clé d'IA est refusée : vérifie-la dans Réglages.",bad_model:"Ce modèle d'IA n'existe pas : change son nom dans Réglages.",rate_limited:"Quota gratuit de l'IA atteint : réessaie plus tard ou demain.",offline:"Pas de connexion internet.",ollama_down:"Ollama ne répond pas : lance-le sur ce PC (voir le guide).",invalid_json:"La réponse était illisible, réessaie.",empty_completion:"Pas de réponse, réessaie.",cancelled:"Arrêté."}[c]||"Ça n'a pas marché, réessaie.");
+const ERR=c=>({no_key:"Ajoute ta clé d'IA dans Réglages (⚙️ sur l'accueil).",bad_key:"La clé d'IA est refusée : vérifie-la dans Réglages.",bad_model:"Ce modèle d'IA n'existe pas : change son nom dans Réglages.",rate_limited:"Quota gratuit de Gemini atteint (il revient chaque jour à 9 h). Le relais gratuit évite ça : 🛟 Dépannage → Installer le relais gratuit.",offline:"Pas de connexion internet.",ollama_down:"Ollama ne répond pas : lance-le sur ce PC (voir le guide).",invalid_json:"La réponse était illisible, réessaie.",empty_completion:"Pas de réponse, réessaie.",cancelled:"Arrêté.",relay_auth:"Le relais refuse l'accès : recopie le lien du relais dans Réglages.",relay_down:"Le relais ne répond pas : vérifie-le dans Réglages.",relay_none:"Le relais n'est pas encore installé."}[c]||"Ça n'a pas marché, réessaie.");
 function aiBtn(attr,label){
   if(SAMPLE_ST==="none")return"";
   return`<button class="ghost on" ${attr}>${label}</button>`;
@@ -2091,7 +2101,7 @@ function priceChart(P,o={}){
 }
 
 /* ---- progression ---- */
-function prog(){const p=S.jeu.progress||{};return{xp:p.xp||0,days:p.days||{},actu:p.actu||{}}}
+function prog(){const p=S.jeu.progress||{};return{xp:p.xp||0,days:p.days||{},actu:p.actu||{},coach:p.coach||null}}
 function levelOf(xp){let i=0;LEVELS.forEach((l,k)=>{if(xp>=l[0])i=k});return{i,name:LEVELS[i][1],from:LEVELS[i][0],to:(LEVELS[i+1]||[null])[0]}}
 function gameStreak(p){let d=today(),s=0;if(!p.days[dkey(d)])d=add(d,-1);while(p.days[dkey(d)]){s++;d=add(d,-1)}return s}
 function addXp(fn){const p=prog();fn(p);return put("jeu","progress",p)}
@@ -2143,6 +2153,7 @@ function jeuUI(){
   const head=`<div class="card stack"><div class="row" style="justify-content:space-between"><div><p class="label" style="margin:0">Ton niveau</p><b class="lvname">${lv.name}</b></div><div class="streak" title="Jours d'affilée">🔥 ${st}</div></div>
     <div class="bar"><i style="width:${pctLv}%"></i></div><p class="muted small num">${p.xp} XP${lv.to?` · encore ${lv.to-p.xp} XP pour « ${LEVELS[lv.i+1][1]} »`:" · niveau maximum"}</p><div class="wdots">${week}</div></div>`;
   if(V.g)return head+gameUI();
+  if(V.co)return head+coUI();
   const a=S.jeu.actu,fresh=a&&a.date&&(dayNum(today())-dayNum(new Date(a.date+"T12:00:00")))<=3;
   const ans=fresh?p.actu[a.date]:null;
   const actu=fresh?`<div class="card stack"><p class="label" style="margin:0">⚡ Question d'actu · ${fdate(a.date)}</p><p class="qt">${esc(a.q)}</p>
@@ -2152,7 +2163,7 @@ function jeuUI(){
     <div class="row" style="gap:12px;flex-wrap:nowrap"><span class="gico">${dg.e}</span><div style="min-width:0"><b style="font-family:var(--display);font-size:1.15rem">${dg.n}</b><p class="muted small">${dg.d}</p></div></div>
     ${doneToday?`<p><b>✓ Terminé : ${doneToday.s}/${doneToday.m}</b>. Un nouveau défi t'attend demain.</p>`:`<div><button class="btn" data-play="daily|${dg.k}">Jouer (+${dg.k==="news"?60:dg.k==="calc"?60:dg.k==="simu"?60:50} XP max)</button></div>`}</div>`;
   const practice=`<div><p class="label">S'entraîner (sans XP, nouvelle partie à chaque fois)</p><div class="glist">${GAMES.map(x=>`<button class="card gcard" data-play="practice|${x.k}"><span class="gico">${x.e}</span><b>${x.n}</b><span class="muted small">${x.d}</span></button>`).join("")}</div></div>`;
-  return head+daily+actu+practice+`<p class="muted small">Les défis sont fabriqués par l'appli à partir de la date : ils changent tout seuls chaque jour, sans IA. Les montants sont fictifs, rien n'est un conseil d'investissement.</p>`;
+  return head+daily+coCard()+actu+practice+`<p class="muted small">Les défis du jour et les parties d'entraînement sont fabriqués par l'appli (sans IA) : ils sont illimités. Le coach IA, lui, invente des questions nouvelles. Les montants sont fictifs, rien n'est un conseil d'investissement.</p>`;
 }
 function gameUI(){
   const g=V.g,G=GAMES.find(x=>x.k===g.k),top=`<div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${G.e} ${G.n}</b><span class="muted small">${g.mode==="daily"?"Défi du jour":"Entraînement"}</span></div>`;
@@ -5530,6 +5541,308 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(d.cqans!==undefined){if(st.ans!=null)return;st.ans=d.cqans;const i=st.L[st.i];if(+d.cqans===c.qz[i].a)st.ok++;else st.wrong.push(i);return render(true)}
   if(d.cqnext){st.i++;st.ans=null;if(st.i>=st.L.length){const doc=(S.maths||{})[st.id]||{},q=doc.qz||{};put("maths",st.id,{...doc,qz:{best:Math.max(q.best||0,st.ok),last:st.ok,d:todayK()},maj:Date.now()},true)}render(true);const el=document.querySelector(".cmxt");if(el)el.scrollIntoView({block:"start"})}});
 
+/* code du relais Cloudflare, copié par le bouton « Copier le code du relais » */
+const RELAY_SRC="// Relais IA du « 2ème cerveau » : à coller dans un Worker Cloudflare (offre gratuite).\n// Il reçoit les questions de TON appli et les passe à la première IA gratuite disponible :\n// Mistral → Cerebras → Groq → OpenRouter. Les clés restent ici, dans les « secrets » du Worker :\n// MISTRAL_API_KEY, CEREBRAS_API_KEY, GROQ_API_KEY, OPENROUTER_API_KEY (mets celles que tu as).\nconst ORIGINE = \"__ORIGINE__\"; // l'adresse de ton appli : seule elle peut utiliser ce relais\nconst CODE = \"__CODE__\"; // code secret partagé avec ton appli (ne le donne à personne)\n\nconst IA = [\n  { nom: \"Mistral\", cle: \"MISTRAL_API_KEY\", url: \"https://api.mistral.ai/v1\",\n    modeles: [/^mistral-medium-latest$/, /^mistral-large-latest$/, /^mistral-small-latest$/], defaut: \"mistral-small-latest\" },\n  { nom: \"Cerebras\", cle: \"CEREBRAS_API_KEY\", url: \"https://api.cerebras.ai/v1\",\n    modeles: [/^gpt-oss-120b$/, /qwen-3-235b/, /llama-?3\\.3-70b/, /qwen/, /llama/], defaut: \"gpt-oss-120b\" },\n  { nom: \"Groq\", cle: \"GROQ_API_KEY\", url: \"https://api.groq.com/openai/v1\",\n    modeles: [/^openai\\/gpt-oss-120b$/, /^llama-3\\.3-70b-versatile$/, /^openai\\/gpt-oss-20b$/, /^llama-3\\.1-8b-instant$/], defaut: \"llama-3.3-70b-versatile\" },\n  { nom: \"OpenRouter\", cle: \"OPENROUTER_API_KEY\", url: \"https://openrouter.ai/api/v1\", fixe: \"openrouter/free\" },\n];\nconst choix = {}; // modèle retenu pour chaque IA\nconst pause = {}; // IA à court de quota : on la saute pendant un moment\n\nconst entetes = () => ({\n  \"Access-Control-Allow-Origin\": ORIGINE,\n  \"Access-Control-Allow-Methods\": \"GET, POST, OPTIONS\",\n  \"Access-Control-Allow-Headers\": \"content-type, x-relais\",\n  \"Access-Control-Expose-Headers\": \"x-relais-ia\",\n  \"Access-Control-Max-Age\": \"86400\",\n  \"Vary\": \"Origin\",\n});\nconst json = (obj, status) => new Response(JSON.stringify(obj), { status, headers: { ...entetes(), \"content-type\": \"application/json; charset=utf-8\" } });\n\nasync function modele(ia, cle) {\n  if (ia.fixe) return ia.fixe;\n  if (choix[ia.nom]) return choix[ia.nom];\n  try {\n    const r = await fetch(ia.url + \"/models\", { headers: { authorization: \"Bearer \" + cle } });\n    if (r.ok) {\n      const ids = ((await r.json()).data || []).map(m => String(m.id));\n      for (const re of ia.modeles) { const id = ids.find(x => re.test(x)); if (id) return (choix[ia.nom] = id); }\n    }\n  } catch (e) {}\n  return ia.defaut;\n}\n\nexport default {\n  async fetch(req, env) {\n    if (req.method === \"OPTIONS\") return new Response(null, { status: 204, headers: entetes() });\n    if ((req.headers.get(\"origin\") || \"\") !== ORIGINE) return json({ erreur: \"Cette adresse n'a pas le droit d'utiliser le relais.\" }, 403);\n    if (req.headers.get(\"x-relais\") !== CODE) return json({ erreur: \"Code secret refusé.\" }, 401);\n    const dispo = IA.filter(ia => env[ia.cle]);\n    if (req.method === \"GET\") return json({ ok: true, version: 1, ia: IA.map(ia => ({ nom: ia.nom, cle: !!env[ia.cle] })) }, 200);\n    if (req.method !== \"POST\") return json({ erreur: \"Méthode refusée.\" }, 405);\n    let q;\n    try { q = await req.json(); } catch (e) { return json({ erreur: \"Requête illisible.\" }, 400); }\n    const messages = (Array.isArray(q.messages) ? q.messages : [])\n      .filter(m => m && typeof m.content === \"string\" && m.content.trim())\n      .map(m => ({ role: m.role === \"assistant\" ? \"assistant\" : \"user\", content: m.content.slice(0, 60000) }));\n    if (!messages.length) return json({ erreur: \"Message vide.\" }, 400);\n    if (!dispo.length) return json({ erreur: \"Aucune clé d'IA dans les secrets du relais.\" }, 503);\n    const essais = [];\n    for (const ia of dispo) {\n      if ((pause[ia.nom] || 0) > Date.now()) { essais.push(ia.nom + \" : en pause (quota)\"); continue; }\n      const cle = env[ia.cle], m = await modele(ia, cle);\n      const corps = { model: m, messages, stream: true, temperature: typeof q.temperature === \"number\" ? q.temperature : 0.5 };\n      if (q.max_tokens) corps.max_tokens = Math.min(+q.max_tokens || 2048, 8192);\n      try {\n        const r = await fetch(ia.url + \"/chat/completions\", {\n          method: \"POST\",\n          headers: { authorization: \"Bearer \" + cle, \"content-type\": \"application/json\",\n            ...(ia.nom === \"OpenRouter\" ? { \"HTTP-Referer\": ORIGINE, \"X-Title\": \"2eme cerveau\" } : {}) },\n          body: JSON.stringify(corps),\n        });\n        if (r.ok && r.body) return new Response(r.body, { status: 200, headers: { ...entetes(), \"content-type\": \"text/event-stream; charset=utf-8\", \"cache-control\": \"no-cache\", \"x-relais-ia\": ia.nom + \" | \" + m } });\n        const t = (await r.text()).slice(0, 160).replace(/\\s+/g, \" \");\n        if (r.status === 429) pause[ia.nom] = Date.now() + 30000;\n        if (r.status === 400 || r.status === 404) delete choix[ia.nom];\n        essais.push(ia.nom + \" : \" + r.status + \" \" + t);\n      } catch (e) { essais.push(ia.nom + \" : \" + String(e && e.message || e)); }\n    }\n    return json({ erreur: \"Toutes les IA du relais sont indisponibles pour l'instant.\", essais }, 502);\n  },\n};\n";
+/* ================================================================
+   IA 2.6.0 : une chaîne de secours pour ne (presque) jamais être à court
+   1. Gemini : le modèle choisi, puis les autres modèles Flash gratuits (chacun a son propre quota)
+   2. Le relais Cloudflare de l'élève : Mistral → Cerebras → Groq → OpenRouter
+   3. Ollama, sur le PC où il est activé
+   ================================================================ */
+const GM_FB=["gemini-2.5-flash","gemini-2.5-flash-lite"];
+let AI_LAST="";
+/* minuit heure de Californie (= 9 h à Paris) : c'est là que Google remet les quotas à zéro */
+function aiNextReset(){
+  const now=Date.now(),f=new Intl.DateTimeFormat("en-US",{timeZone:"America/Los_Angeles",hour:"numeric",hourCycle:"h23"});
+  for(let k=1;k<=26;k++){const t=Math.floor(now/36e5)*36e5+k*36e5;if(+f.format(t)===0)return t}
+  return now+864e5;
+}
+const gmOffMap=()=>lsGet("cerveau-gx",{});
+function gmOff(m){return(gmOffMap()[m]||0)>Date.now()}
+function gmMark(m,until){const x=gmOffMap();x[m]=until;Object.keys(x).forEach(k=>{if(x[k]<Date.now())delete x[k]});lsSet("cerveau-gx",x)}
+function gmClear(m){const x=gmOffMap();if(x[m]){delete x[m];lsSet("cerveau-gx",x)}}
+const gmBase=a=>a.model||"gemini-3.5-flash";
+/* les autres modèles Flash gratuits du compte (liste demandée à Google, gardée 3 jours) */
+async function gmList(a){
+  const base=gmBase(a),kh=hashStr(a.key),c=lsGet("cerveau-gm",{});
+  if(c.kh===kh&&c.base===base&&Date.now()-(c.at||0)<3*864e5&&Array.isArray(c.list)&&c.list.length>1)return c.list;
+  let names=[];
+  try{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),6000);
+    const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models?pageSize=1000",{headers:{"x-goog-api-key":a.key},signal:ac.signal});clearTimeout(tm);
+    if(r.ok){const j=await r.json();names=(j.models||[]).filter(m=>(m.supportedGenerationMethods||[]).includes("generateContent")).map(m=>String(m.name||"").replace(/^models\//,""))
+      .filter(n=>/^gemini-\d/.test(n)&&/flash/.test(n)&&!/image|tts|audio|live|embed|think|exp|computer|robot|native|pro/.test(n))}}catch(e){}
+  const root=n=>n.replace(/-(latest|\d{3})$/,""),seen=new Set(),uniq=[];
+  names.sort((x,y)=>x.length-y.length).forEach(n=>{const k=root(n);if(!seen.has(k)){seen.add(k);uniq.push(n)}});
+  const ver=n=>parseFloat((n.match(/gemini-(\d+(?:\.\d+)?)/)||[])[1]||0);
+  uniq.sort((x,y)=>(/preview/.test(x)-/preview/.test(y))||(ver(y)-ver(x))||(/lite/.test(x)-/lite/.test(y))||(x.length-y.length));
+  const list=[base,...uniq.filter(n=>root(n)!==root(base))].slice(0,6);
+  if(uniq.length){lsSet("cerveau-gm",{kh,base,at:Date.now(),list});return list}
+  return[base,...GM_FB.filter(n=>n!==base)];
+}
+/* un appel Gemini en direct (texte reçu au fur et à mesure) */
+async function gmCall(model,turns,json,opts,emit,key){
+  const body={contents:turns.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]})),generationConfig:{temperature:0.5,...(json?{responseMimeType:"application/json"}:{})}};
+  const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":streamGenerateContent?alt=sse",
+    {method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json","x-goog-api-key":key},body:JSON.stringify(body)});
+  if(!r.ok){const tx=await r.text().catch(()=>"");let em=tx;try{const j=JSON.parse(tx);em=(j.error&&(j.error.message||j.error.status))||tx}catch(_){}
+    const w=+((tx.match(/retry in ([\d.]+)\s*s/i)||[])[1]||0);
+    throw{code:r.status===429?"rate_limited":r.status===404?"bad_model":(r.status===400||r.status===401||r.status===403)&&/api.?key|permission|unauth/i.test(tx)?"bad_key":"upstream_error",
+      daily:r.status===429&&/per.?day|daily/i.test(tx),wait:w,message:model+" · HTTP "+r.status+" : "+String(em).slice(0,200)}}
+  let got=false;
+  await readLines(r,line=>{if(!line.startsWith("data:"))return;const j=JSON.parse(line.slice(5));
+    const parts=(((j.candidates||[])[0]||{}).content||{}).parts||[];parts.forEach(p=>{if(p.text&&!p.thought){got=true;emit(p.text)}})});
+  return got;
+}
+async function aiGemini(turns,json,opts,emit,fixed){
+  const a=aiCfg(),base=gmBase(a);let last=null,list=null;
+  const tryOne=async m=>{try{await gmCall(m,turns,json,opts,emit,a.key);gmClear(m);AI_LAST="Gemini · "+m;return true}
+    catch(e){if(e&&e.name==="AbortError")throw e;if(opts._started&&opts._started())throw e;last=e;
+      if(e.code==="rate_limited")gmMark(m,e.daily?aiNextReset():Date.now()+Math.max(30,Math.min(e.wait||60,600))*1000);
+      else if(e.code==="bad_model")gmMark(m,Date.now()+3*864e5);
+      else if(e.code!=="upstream_error")throw e;
+      return false}};
+  if(fixed){if(await tryOne(fixed))return;throw last}
+  if(!gmOff(base)&&await tryOne(base))return;
+  list=await gmList(a);
+  for(const m of list){if(m===base||gmOff(m))continue;if(await tryOne(m))return}
+  throw last||{code:"rate_limited",daily:true,message:"Tous les modèles Gemini gratuits sont à court jusqu'à 9 h."};
+}
+/* le relais Cloudflare (Mistral, Cerebras, Groq, OpenRouter) */
+async function aiRelay(turns,json,opts,emit){
+  const a=aiCfg();let r;
+  try{r=await fetch(a.relayUrl,{method:"POST",signal:opts.signal,headers:{"content-type":"application/json","x-relais":a.relayTok},body:JSON.stringify({messages:turns,temperature:0.5})})}
+  catch(e){if(e&&e.name==="AbortError")throw e;throw{code:"relay_down",message:"Le relais est injoignable ("+String(e&&e.message||e).slice(0,80)+")."}}
+  if(!r.ok){let j={};try{j=await r.json()}catch(_){}
+    throw{code:r.status===401||r.status===403?"relay_auth":"relay_down",message:(j.erreur||"HTTP "+r.status)+(j.essais&&j.essais.length?" · "+j.essais.join(" | "):"")}}
+  AI_LAST=(r.headers.get("x-relais-ia")||"relais").replace(" | "," · ");let err="";
+  await readLines(r,line=>{if(!line.startsWith("data:"))return;const d=line.slice(5).trim();if(!d||d==="[DONE]")return;const j=JSON.parse(d);
+    if(j.error){err=String(j.error.message||j.error).slice(0,160);return}
+    const c=(((j.choices||[])[0]||{}).delta||{}).content;if(c)emit(c)});
+  if(err&&!(opts._started&&opts._started()))throw{code:"relay_down",message:AI_LAST+" : "+err};
+}
+async function aiOllama(turns,json,opts,emit){
+  const a=aiCfg();
+  const r=await fetch(a.ollamaUrl.replace(/\/+$/,"")+"/api/chat",{method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({model:(a.provider==="ollama"?a.model:a.omodel)||"llama3.2",messages:turns,stream:true,...(json?{format:"json"}:{})})});
+  if(!r.ok)throw{code:r.status===404?"bad_model":"upstream_error",message:"Ollama "+r.status};
+  AI_LAST="Ollama · "+((a.provider==="ollama"?a.model:a.omodel)||"llama3.2");
+  await readLines(r,line=>{const j=JSON.parse(line);if(j.message&&j.message.content)emit(j.message.content)});
+}
+async function aiSample(input,opts={}){
+  const a=aiCfg(),json=!!opts._json,turns=mergeTurns(input);let text="";
+  const emit=d=>{if(!d)return;text+=d;try{opts.onText&&opts.onText({text,delta:d})}catch(e){}};
+  const o={...opts,_started:()=>!!text};
+  const only=opts._prov,steps=only?[only]:a.provider==="ollama"?["ollama"]:["gemini","relay","ollama"];
+  let last=null;
+  for(const st of steps){
+    if(st==="gemini"&&!a.key){if(only)throw{code:"no_key"};continue}
+    if(st==="relay"&&!(a.relayUrl&&a.relayTok)){if(only)throw{code:"relay_none"};continue}
+    if(st==="ollama"&&!(only||a.provider==="ollama"||a.backup))continue;
+    if(st!=="ollama"&&!navigator.onLine){last={code:"offline"};continue}
+    try{
+      if(st==="gemini")await aiGemini(turns,json,o,emit,opts._model);
+      else if(st==="relay")await aiRelay(turns,json,o,emit);
+      else await aiOllama(turns,json,o,emit);
+      if(!text.trim())throw{code:"empty_completion"};
+      return{text,truncated:false,modelTierApplied:"default",via:AI_LAST};
+    }catch(e){
+      if(e&&(e.name==="AbortError"||e.code==="cancelled"))throw{code:"cancelled",text:text||undefined};
+      const err=e&&e.code?e:{code:navigator.onLine?(st==="ollama"?"ollama_down":"upstream_error"):"offline",message:String(e&&e.message||e)};
+      if(text)throw{...err,text};
+      /* on garde l'erreur la plus parlante : un quota Gemini atteint passe avant « Ollama éteint » */
+      if(!last||!(st==="ollama"&&last.code==="rate_limited"))last=err;
+    }
+  }
+  throw last||{code:a.provider==="ollama"?"ollama_down":"no_key"};
+}
+
+/* ---------- le relais : code à coller dans Cloudflare, lien à copier sur l'autre appareil ---------- */
+function relayTok(){const a=lsGet("cerveau-ai",{});if(a.relayTok)return a.relayTok;
+  const b=new Uint8Array(18);crypto.getRandomValues(b);const t=btoa(String.fromCharCode(...b)).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+  a.relayTok=t;lsSet("cerveau-ai",a);return t}
+const relayCode=()=>RELAY_SRC.replace("__ORIGINE__",location.origin).replace("__CODE__",relayTok());
+const relayLink=()=>{const a=aiCfg();return a.relayUrl?a.relayUrl+"#"+a.relayTok:""};
+async function relayCopy(txt,key){let ok=false;try{await navigator.clipboard.writeText(txt);ok=true}catch(e){}V.relayCopied=ok?key:"";V.relayShow=V.relayShow||!ok&&key==="code";render(true)}
+async function relaySave(raw){
+  const a=lsGet("cerveau-ai",{});let s=String(raw||"").trim(),tok="";
+  const h=s.indexOf("#");if(h>=0){tok=s.slice(h+1).trim();s=s.slice(0,h)}
+  s=s.replace(/\/+$/,"");
+  if(!s){delete a.relayUrl;lsSet("cerveau-ai",a);setupAI();V.relayMsg="";return render(true)}
+  if(!/^https:\/\/[^\s/]+\.[^\s/]+/.test(s)){V.relayMsg="Colle l'adresse complète du relais, qui commence par https:// (par exemple https://relais-cerveau.ton-nom.workers.dev).";return render(true)}
+  if(tok)a.relayTok=tok;
+  if(!a.relayTok){V.relayMsg="Il manque le code secret : sur l'ordi, copie le « lien pour ton autre appareil » (il se termine par #…) et colle-le ici.";return render(true)}
+  a.relayUrl=s;lsSet("cerveau-ai",a);setupAI();document.activeElement&&document.activeElement.blur();
+  return relayTest();
+}
+async function relayTest(){
+  const a=aiCfg();V.relayBusy=true;V.relayMsg="Test du relais…";render(true);
+  try{
+    const r=await fetch(a.relayUrl,{headers:{"x-relais":a.relayTok}});let j={};try{j=await r.json()}catch(_){}
+    if(r.status===401)throw{m:"Le relais refuse le code secret : recopie le code du relais dans Cloudflare (bouton « Copier le code du relais »), puis Deploy."};
+    if(r.status===403)throw{m:"Le relais n'accepte pas cette adresse d'appli : recopie le code du relais depuis cette appli, puis Deploy."};
+    if(!r.ok||!j.ok)throw{m:"Le relais ne répond pas correctement (HTTP "+r.status+"). Vérifie l'adresse et que tu as bien cliqué sur Deploy."};
+    const L=(j.ia||[]).map(x=>x.nom+(x.cle?" ✓":" ✗")).join(" · "),n=(j.ia||[]).filter(x=>x.cle).length;
+    if(!n)throw{m:"Le relais marche, mais aucune clé d'IA n'est enregistrée dans ses secrets ("+L+")."};
+    V.relayMsg="Relais joint ("+L+"). Petit essai…";render(true);
+    const t=await aiSample("Réponds seulement par : OK, je suis prêt.",{_prov:"relay"});
+    V.relayMsg="✓ Le relais marche : "+(t.via||"relais")+" a répondu « "+t.text.trim().slice(0,40)+" ». IA prêtes : "+L+".";
+  }catch(e){V.relayMsg=e.m||("✗ "+ERR(e.code)+(e.message?" Détail : "+String(e.message).slice(0,260):""))}
+  V.relayBusy=false;render(true);
+}
+/* ce que la chaîne a en réserve, en une ligne */
+function aiChainTxt(){const a=aiCfg(),x=gmOffMap(),now=Date.now(),off=Object.keys(x).filter(k=>x[k]>now);
+  const g=a.key?`Gemini${off.length?` (${off.length} modèle${off.length>1?"s":""} à court jusqu'à ${new Date(Math.max(...off.map(k=>x[k]))).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit"})})`:""}`:"";
+  return[g,a.relayUrl&&a.relayTok?"relais (Mistral, Cerebras, Groq, OpenRouter)":"",a.backup?"Ollama sur ce PC":""].filter(Boolean).join(" → ")||"aucune IA réglée"}
+function relayCard(){const a=aiCfg(),lk=relayLink();
+  return`<div class="stack aichain" style="gap:8px;border-top:1px solid var(--line);padding-top:12px">
+    <div><b>🔗 Relais gratuit · aussi sur iPhone</b><br><span class="muted small">Quand Gemini est à court, Mistral, Cerebras, Groq ou OpenRouter prennent le relais. Ton petit serveur Cloudflare garde les clés.</span></div>
+    <form data-f="airelay" class="stack" style="gap:8px"><input class="field" name="url" autocomplete="off" spellcheck="false" inputmode="url" placeholder="Lien du relais : https://….workers.dev" value="${esc(lk)}" style="-webkit-text-security:${lk?"disc":"none"}">
+      <div class="row"><button class="ghost on" ${V.relayBusy?"disabled":""}>${V.relayBusy?"Test…":"Enregistrer et tester le relais"}</button>${a.relayUrl?`<button type="button" class="ghost" data-relayoff="1">Retirer</button>`:""}</div></form>
+    ${V.relayMsg?`<p class="small">${esc(V.relayMsg)}</p>`:""}
+    ${lk?`<div class="row" style="gap:8px"><button class="ghost" data-relaycopy="link">${V.relayCopied==="link"?"✓ Lien copié":"📋 Copier le lien pour ton autre appareil"}</button></div><p class="muted small" style="margin:0">Colle ce lien au même endroit sur ton iPhone (envoie-le-toi par mail ou dans Notes). Ne le donne à personne.</p>`:""}
+    <details class="relayhow" ${V.relayOpen?"open":""}><summary class="small"><b>Installer le relais (une fois, sur l'ordi, environ 45 min)</b></summary>
+      <p class="small">Le guide complet est dans 🛟 Dépannage → <b>Installer le relais gratuit</b>. Le code à coller dans Cloudflare est ici :</p>
+      <div class="row"><button class="btn" data-relaycopy="code">${V.relayCopied==="code"?"✓ Code copié":"📋 Copier le code du relais"}</button><button class="ghost" data-relayshow="1">${V.relayShow?"Masquer":"Voir le code"}</button></div>
+      ${V.relayShow?`<textarea class="field relaysrc" readonly rows="10" aria-label="Code du relais">${esc(relayCode())}</textarea>`:""}
+      <div><button class="ghost on" data-page="aide" data-aide="relais">🛟 Ouvrir le guide pas à pas</button></div></details>
+    <p class="muted small" style="margin:0">Ordre utilisé : ${esc(aiChainTxt())}.</p></div>`}
+
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-relaycopy],[data-relayshow],[data-relayoff]");if(!b)return;const d=b.dataset;
+  if(d.relaycopy)return relayCopy(d.relaycopy==="code"?relayCode():relayLink(),d.relaycopy);
+  if(d.relayshow){V.relayShow=!V.relayShow;return render(true)}
+  if(d.relayoff){const a=lsGet("cerveau-ai",{});delete a.relayUrl;lsSet("cerveau-ai",a);setupAI();V.relayMsg="Relais retiré de cet appareil.";return render(true)}
+});
+document.addEventListener("toggle",e=>{const t=e.target;if(t&&t.classList&&t.classList.contains("relayhow"))V.relayOpen=t.open},true);
+document.addEventListener("submit",e=>{const f=e.target;if(!f||!f.dataset||f.dataset.f!=="airelay")return;e.preventDefault();e.stopImmediatePropagation();
+  relaySave(new FormData(f).get("url"))},true);
+
+/* ================================================================
+   COACH IA FINANCE (2.6.0) : des séries de questions inventées sans fin par l'IA
+   QCM et calculs corrigés par l'appli (le calcul est refait ici, l'IA ne peut pas se tromper de résultat),
+   réponses rédigées corrigées par l'IA.
+   ================================================================ */
+const CO_TH=[
+ {k:"marche",e:"🌍",n:"Marchés et actu",d:"Taux, inflation, actions, obligations, devises : ce qui fait bouger les prix."},
+ {k:"calc",e:"🧮",n:"Calculs de trader",d:"Rendements, levier, PER, intérêts composés, change."},
+ {k:"risque",e:"🛡️",n:"Gestion du risque",d:"Taille de position, stop-loss, diversification, volatilité."},
+ {k:"quant",e:"🎲",n:"Entretien quant",d:"Probabilités, espérance, calcul mental, énigmes d'entretien."}
+];
+const CO_LV=["Débutant","Intermédiaire","Avancé"],CO_N=5,CO_XP=3,CO_CAP=60;
+/* calculatrice sûre : nombres, + - * / ^, parenthèses, sqrt ln exp log abs, pi, % */
+function coEval(src){
+  let s=String(src==null?"":src).toLowerCase().replace(/\s+/g,"").replace(/−/g,"-").replace(/[×·]/g,"*").replace(/÷/g,"/").replace(/\*\*/g,"^").replace(/(\d),(\d)/g,"$1.$2").replace(/(\d(?:\.\d+)?)%/g,"($1/100)");
+  if(!s||s.length>200)return NaN;let i=0;
+  const eat=c=>s[i]===c&&(i++,true);
+  const E=()=>{let v=T();for(;;){if(eat("+"))v+=T();else if(eat("-"))v-=T();else return v}};
+  const T=()=>{let v=F();for(;;){if(eat("*"))v*=F();else if(eat("/"))v/=F();else return v}};
+  const F=()=>{const b=U();return eat("^")?Math.pow(b,F()):b};
+  const U=()=>eat("-")?-U():eat("+")?U():P();
+  const P=()=>{
+    if(eat("(")){const v=E();if(!eat(")"))throw 0;return v}
+    const f=s.slice(i).match(/^(sqrt|ln|exp|log10|log|abs)\(/);if(f){i+=f[1].length;const v=P();return{sqrt:Math.sqrt,ln:Math.log,exp:Math.exp,log:Math.log10,log10:Math.log10,abs:Math.abs}[f[1]](v)}
+    if(s.startsWith("pi",i)){i+=2;return Math.PI}
+    const m=s.slice(i).match(/^\d+(?:\.\d+)?(?:e[+-]?\d+)?|^\.\d+/);if(!m)throw 0;i+=m[0].length;return parseFloat(m[0])};
+  try{const v=E();return i===s.length&&isFinite(v)?v:NaN}catch(e){return NaN}
+}
+const coSeen=()=>lsGet("cerveau-coach-vu",[]);
+function coRemember(qs){lsSet("cerveau-coach-vu",[...qs.map(q=>String(q.q).slice(0,70)),...coSeen()].slice(0,24))}
+function coLvAuto(){const i=levelOf(prog().xp).i;return i<=1?0:i<=3?1:2}
+function coPrompt(th,lv,lang){const T=CO_TH.find(x=>x.k===th),seen=coSeen().slice(0,15);
+  return`Tu es un coach qui entraîne un élève de Terminale (spécialité maths, maths expertes et SES) qui veut devenir trader puis quant.
+Invente ${CO_N} questions NOUVELLES et variées sur le thème « ${T.n} » (${T.d}), niveau ${CO_LV[lv].toLowerCase()}.
+${lang==="en"?"Écris les questions, les choix et les explications en ANGLAIS, avec le vocabulaire financier anglais (comme dans un entretien à Londres).":"Écris en français."}
+Règles :
+- Exactement 3 questions "qcm" (4 choix, une seule bonne réponse, "a" = numéro de la bonne réponse de 0 à 3), 1 question "num" (la réponse est un nombre) et 1 question "open" (réponse à rédiger en 2 ou 3 phrases).
+- Pour "num" : donne "expr", une expression de calcul (nombres, + - * / ^, parenthèses, et si besoin sqrt( ), ln( ), exp( )) dont le résultat est exactement la réponse, et "unit" ("€", "%", "$", "" …). Si "unit" vaut "%", l'expression donne directement le pourcentage (12.5 pour 12,5 %).
+- Contexte concret et chiffres réalistes. Pas de LaTeX : écris les formules en texte simple.
+- "expl" : explication claire en 2 ou 3 phrases, avec le calcul si besoin. Pour "open", "model" est la réponse modèle.
+${seen.length?"- Ne repose pas ces questions déjà vues : "+seen.join(" | ")+"\n":""}Réponds UNIQUEMENT avec ce JSON :
+{"questions":[{"type":"qcm","q":"…","choices":["…","…","…","…"],"a":0,"expl":"…"},{"type":"num","q":"…","expr":"…","unit":"…","expl":"…"},{"type":"open","q":"…","model":"…","expl":"…"}]}`}
+/* on ne garde que les questions bien formées, et on mélange les choix (l'IA met souvent la bonne en premier) */
+function coClean(j){const L=Array.isArray(j)?j:j&&Array.isArray(j.questions)?j.questions:[];const out=[];
+  L.forEach(x=>{if(!x||typeof x.q!=="string"||!x.q.trim())return;const q=x.q.trim().slice(0,600),ex=String(x.expl||"").slice(0,900);
+    if(x.type==="qcm"&&Array.isArray(x.choices)){const ch=x.choices.map(c=>String(c).trim()).filter(Boolean).slice(0,5),a=+x.a;
+      if(ch.length<3||!(a>=0&&a<ch.length)||new Set(ch).size<ch.length)return;
+      const ord=ch.map((_,k)=>k).sort(()=>Math.random()-.5);out.push({type:"qcm",q,choices:ord.map(k=>ch[k]),a:ord.indexOf(a),expl:ex})}
+    else if(x.type==="num"){let v=coEval(x.expr);if(!isFinite(v))v=coEval(x.ans!=null?x.ans:x.answer);if(!isFinite(v))return;
+      out.push({type:"num",q,val:v,unit:String(x.unit||"").trim().slice(0,8),expr:String(x.expr||"").slice(0,200),expl:ex})}
+    else if(x.type==="open"&&String(x.model||"").trim())out.push({type:"open",q,model:String(x.model).slice(0,900),expl:ex})});
+  return out}
+async function coFetch(th,lv,lang){const j=await aiSample.json(coPrompt(th,lv,lang)),qs=coClean(j);
+  if(qs.length<3)throw{code:"invalid_json"};return qs.slice(0,CO_N)}
+function coStart(th){
+  if(!SAMPLE){V.coErr="Pour le coach IA, règle d'abord l'IA dans ⚙️ Réglages.";return render(true)}
+  const lv=V.coLv??coLvAuto(),lang=V.coLang||"fr";
+  V.co={th,lv,lang,qs:null,i:0,res:[],pick:null,inp:"",grade:null,busy:true,xp:0};V.coErr="";render(true);window.scrollTo(0,0);
+  const st=V.co,p=V.coPre&&V.coPre.th===th&&V.coPre.lv===lv&&V.coPre.lang===lang?V.coPre.p:coFetch(th,lv,lang);V.coPre=null;
+  p.then(qs=>{if(V.co!==st)return;st.qs=qs;st.busy=false;coRemember(qs);render(true)})
+   .catch(e=>{if(V.co!==st)return;V.co=null;V.coErr=ERR(e.code)+(e.code==="invalid_json"?" L'IA a renvoyé une série mal formée.":"");render(true)});
+}
+function coPrefetch(){const c=V.co;if(!c||V.coPre)return;const p=coFetch(c.th,c.lv,c.lang);p.catch(()=>{if(V.coPre&&V.coPre.p===p)V.coPre=null});V.coPre={th:c.th,lv:c.lv,lang:c.lang,p}}
+function coDone(ok){const c=V.co;c.res.push(ok);if(c.i===2)coPrefetch();render(true)}
+function coAnswer(v){const c=V.co,R=c.qs[c.i];if(c.pick!==null)return;
+  if(R.type==="qcm"){c.pick=v;return coDone(v===R.a)}
+  const u=parseNum(v);if(isNaN(u))return;c.pick=u;
+  const tol=Math.max(Math.abs(R.val)*0.01,0.005),cand=R.unit==="%"?[u,u*100,u/100]:[u];coDone(cand.some(x=>Math.abs(x-R.val)<=tol));
+}
+async function coGrade(txt){const c=V.co,R=c.qs[c.i];if(c.pick!==null||c.grade==="busy")return;txt=String(txt||"").trim();if(txt.length<3)return;
+  c.inp=txt;c.grade="busy";render(true);
+  try{const g=await aiSample.json(`Tu corriges la réponse d'un élève de Terminale qui veut devenir trader.
+Question : ${R.q}
+Réponse modèle : ${R.model}
+Réponse de l'élève : ${txt}
+Sois bienveillant mais exigeant${c.lang==="en"?" ; écris en anglais":""}. Reply ONLY with JSON : {"score": note de 0 à 10, "good": "ce qui est juste (1 phrase)", "fix": "ce qui manque ou est faux (1 ou 2 phrases)"}`);
+    const sc=Math.max(0,Math.min(10,Math.round(+g.score)));if(V.co!==c)return;
+    c.grade={sc:isNaN(sc)?0:sc,good:String(g.good||"").slice(0,400),fix:String(g.fix||"").slice(0,500)};c.pick=txt;coDone(c.grade.sc>=6);
+  }catch(e){if(V.co!==c)return;c.grade={self:true,err:ERR(e.code)};render(true)}
+}
+function coSelf(ok){const c=V.co;if(c.pick!==null)return;c.pick=c.inp||"…";c.grade={...(c.grade||{}),self:true,sc:ok?10:0};coDone(ok)}
+function coNext(){const c=V.co;if(c.i<c.qs.length-1){c.i++;c.pick=null;c.inp="";c.grade=null;return render(true)}
+  const n=c.res.filter(Boolean).length,t=dkey(today());c.done=true;
+  const p=prog(),cc=(p.coach&&p.coach.d===t)?p.coach:{d:t,xp:0},gain=Math.max(0,Math.min(n*CO_XP,CO_CAP-cc.xp));c.xp=gain;
+  addXp(q=>{q.xp+=gain;const k=(q.coach&&q.coach.d===t)?q.coach:{d:t,xp:0};q.coach={...k,xp:k.xp+gain,n:(q.coach&&q.coach.n||0)+c.res.length,ok:(q.coach&&q.coach.ok||0)+n}});
+  render(true);
+}
+/* ---- affichage ---- */
+function coCard(){const lv=V.coLv??coLvAuto(),lang=V.coLang||"fr",p=prog(),t=dkey(today()),cx=p.coach&&p.coach.d===t?p.coach.xp:0;
+  return`<div class="card stack coach"><p class="label" style="margin:0">🤖 Coach IA · questions illimitées</p>
+    <p class="muted small" style="margin:0">L'IA invente des séries de ${CO_N} questions, l'appli corrige et l'IA t'explique. +${CO_XP} XP par bonne réponse (${cx}/${CO_CAP} XP aujourd'hui).</p>
+    <div class="row" style="gap:8px"><div class="seg" role="group" aria-label="Niveau">${CO_LV.map((l,i)=>`<button data-colv="${i}" aria-pressed="${i===lv}">${l}</button>`).join("")}</div>
+      <div class="seg" role="group" aria-label="Langue"><button data-colang="fr" aria-pressed="${lang==="fr"}">🇫🇷</button><button data-colang="en" aria-pressed="${lang==="en"}">🇬🇧</button></div></div>
+    <div class="glist">${CO_TH.map(x=>`<button class="card gcard" data-cogo="${x.k}"><span class="gico">${x.e}</span><b>${x.n}</b><span class="muted small">${x.d}</span></button>`).join("")}</div>
+    ${V.coErr?`<p class="small">${esc(V.coErr)}</p>${SAMPLE?"":`<div><button class="ghost on" data-page="reglages">⚙️ Régler l'IA</button></div>`}`:""}
+    <p class="muted small" style="margin:0">${SAMPLE?`IA utilisée : ${esc(aiChainTxt())}. L'IA peut se tromper : si une explication te paraît fausse, vérifie.`:"Règle l'IA dans ⚙️ Réglages pour utiliser le coach."}</p></div>`}
+function coUI(){const c=V.co,T=CO_TH.find(x=>x.k===c.th),quit=`<button class="ghost" data-coquit="1">${c.done?"Fermer":"Quitter"}</button>`;
+  const top=`<div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${T.e} ${T.n}</b><span class="muted small">Coach IA · ${CO_LV[c.lv]}${c.lang==="en"?" · 🇬🇧":""}</span></div>`;
+  if(c.busy)return`<div class="card stack">${top}<p class="coload">⏳ L'IA prépare ta série de ${CO_N} questions…</p><div class="row">${quit}</div></div>`;
+  if(c.done){const n=c.res.filter(Boolean).length;
+    return`<div class="card stack">${top}<div class="gscore"><b class="num">${n}/${c.res.length}</b><span>${n===c.res.length?"Parfait 🏆":n>=c.res.length*0.6?"Bien joué 👏":"On progresse 💪"}</span></div>
+      <p class="num">${c.xp?`<b>+${c.xp} XP</b>`:`<span class="muted small">Plafond de ${CO_CAP} XP du coach atteint aujourd'hui : tu peux continuer pour t'entraîner.</span>`}</p>
+      <div class="row">${quit}<button class="btn" data-cogo="${c.th}">Série suivante →</button></div></div>`}
+  const R=c.qs[c.i],n=c.qs.length,ans=c.pick!==null,ok=ans&&c.res[c.res.length-1];
+  const dots=c.qs.map((_,i)=>`<i class="${i<c.res.length?(c.res[i]?"ok":"ko"):i===c.i?"cur":""}"></i>`).join("");
+  let body;
+  if(R.type==="qcm")body=`<div class="choices">${R.choices.map((x,i)=>`<button class="choice ${ans?(i===R.a?"right":i===c.pick?"wrong":""):""}" data-coans="${i}" ${ans?"disabled":""}>${esc(x)}</button>`).join("")}</div>`;
+  else if(R.type==="num")body=`<form data-f="conum" class="row" style="flex-direction:row;flex-wrap:nowrap"><input class="field" name="v" inputmode="decimal" autocomplete="off" placeholder="Ta réponse" ${ans?`value="${esc(String(c.pick).replace(".",","))}" disabled`:""}>${R.unit?`<span class="muted">${esc(R.unit)}</span>`:""}${ans?"":`<button class="btn">Valider</button>`}</form>`;
+  else body=c.grade&&c.grade.self&&!ans?`<div class="corr"><b>${esc(c.grade.err||"")}</b> Compare avec la réponse modèle : ${esc(R.model)}</div><div class="row"><button class="ghost on" data-coself="1">✓ J'avais bon</button><button class="ghost" data-coself="0">✗ Pas tout à fait</button></div>`
+    :`<form data-f="coopen" class="stack" style="gap:8px"><textarea class="field" name="v" rows="4" placeholder="Ta réponse en 2 ou 3 phrases" ${ans||c.grade==="busy"?"disabled":""}>${esc(c.inp)}</textarea>${ans?"":`<div><button class="btn" ${c.grade==="busy"?"disabled":""}>${c.grade==="busy"?"Correction…":"Corriger"}</button></div>`}</form>`;
+  const res=!ans?"":R.type==="open"?`<div class="corr">${c.grade&&!c.grade.self?`<b>${c.grade.sc}/10 · ${ok?"✓ Bien vu !":"✗ À compléter."}</b><br>${c.grade.good?`👍 ${esc(c.grade.good)}<br>`:""}${c.grade.fix?`✏️ ${esc(c.grade.fix)}<br>`:""}`:`<b>${ok?"✓ Noté comme juste.":"✗ Noté à revoir."}</b><br>`}<b>Réponse modèle :</b> ${esc(R.model)}${R.expl?`<br>💡 ${esc(R.expl)}`:""}</div>`
+    :`<div class="corr"><b>${ok?"✓ Bien vu !":"✗ Pas tout à fait."}</b>${R.type==="num"?` Réponse : ${esc(nfa(Math.round(R.val*1e4)/1e4))} ${esc(R.unit)}.`:""}<br>${esc(R.expl)}</div>`;
+  return`<div class="card stack">${top}<div class="gdots">${dots}</div><div class="qt">${esc(R.q)}</div>${body}${res}
+    <div class="row">${quit}${ans?`<button class="btn" data-conext="1">${c.i<n-1?"Suivant →":"Voir mon score"}</button>`:""}</div></div>`;
+}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-cogo],[data-colv],[data-colang],[data-coans],[data-conext],[data-coquit],[data-coself]");if(!b)return;const d=b.dataset;
+  if(d.cogo)return coStart(d.cogo);
+  if(d.colv){V.coLv=+d.colv;return render(true)}
+  if(d.colang){V.coLang=d.colang;return render(true)}
+  if(d.coans)return coAnswer(+d.coans);
+  if(d.conext)return coNext();
+  if(d.coself)return coSelf(d.coself==="1");
+  if(d.coquit){V.co=null;render(true);return window.scrollTo(0,0)}
+});
+document.addEventListener("submit",e=>{const f=e.target;if(!f||!f.dataset||!["conum","coopen"].includes(f.dataset.f))return;e.preventDefault();e.stopImmediatePropagation();
+  const v=new FormData(f).get("v");if(f.dataset.f==="conum")coAnswer(v);else coGrade(v)},true);
+
 /* ================================================================
    ACCUEIL
    ================================================================ */
@@ -5585,7 +5898,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.5.0";
+const APP_VERSION="2.6.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -5594,7 +5907,7 @@ function lsGet(k,def){try{const v=localStorage.getItem(k);return v===null?def:JS
 function lsSet(k,v){try{v===null?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function cfg(){const b=window.CERVEAU_CONFIG||{},l=lsGet("cerveau-cfg",{});return{supabaseUrl:String(l.supabaseUrl||b.supabaseUrl||"").trim().replace(/\/+$/,""),supabaseKey:String(l.supabaseKey||b.supabaseKey||"").trim()}}
 const cfgOk=()=>{const c=cfg();return!!(c.supabaseUrl&&c.supabaseKey)};
-function aiCfg(){const a=lsGet("cerveau-ai",{});return{provider:a.provider||"gemini",key:a.key||"",model:a.model||"",ollamaUrl:a.ollamaUrl||"http://localhost:11434",backup:!!a.backup,omodel:a.omodel||""}}
+function aiCfg(){const a=lsGet("cerveau-ai",{});return{provider:a.provider||"gemini",key:a.key||"",model:a.model||"",ollamaUrl:a.ollamaUrl||"http://localhost:11434",backup:!!a.backup,omodel:a.omodel||"",relayUrl:a.relayUrl||"",relayTok:a.relayTok||""}}
 
 /* ---------- compte ---------- */
 let SESSION=lsGet("cerveau-session",null);
@@ -5688,7 +6001,7 @@ async function fullSync(full){await flush();await pull(full);await flush()}
 function lastSyncTxt(){const t=lsGet("cerveau-lastsync",0);if(!t)return"";const m=Math.round((Date.now()-t)/60000);return" · dernière synchro "+(m<1?"à l'instant":m<60?"il y a "+m+" min":"le "+fts(t))}
 
 /* ---------- IA : Gemini (gratuit avec quota) ou Ollama (sur le PC, illimité) ---------- */
-function setupAI(){const a=aiCfg();if(a.provider==="ollama"||a.key||a.backup){SAMPLE=aiSample;SAMPLE_ST="ok"}else{SAMPLE=null;SAMPLE_ST="none"}TOOLS_OK=false}
+function setupAI(){const a=aiCfg();if(a.provider==="ollama"||a.key||a.backup||(a.relayUrl&&a.relayTok)){SAMPLE=aiSample;SAMPLE_ST="ok"}else{SAMPLE=null;SAMPLE_ST="none"}TOOLS_OK=false}
 function mergeTurns(input){
   const t=typeof input==="string"?[{role:"user",content:input}]:input,out=[];
   t.forEach(m=>{const role=m.role==="assistant"?"assistant":"user";if(out.length&&out[out.length-1].role===role)out[out.length-1].content+="\n\n"+m.content;else out.push({role,content:String(m.content)})});
@@ -5700,7 +6013,7 @@ async function readLines(r,fn){
     while((i=buf.indexOf("\n"))>=0){const line=buf.slice(0,i).trim();buf=buf.slice(i+1);if(line)try{fn(line)}catch(e){}}}
   if(buf.trim())try{fn(buf.trim())}catch(e){}
 }
-async function aiSample(input,opts={}){
+async function aiSampleOld(input,opts={}){
   const a=aiCfg(),turns=mergeTurns(input),json=!!opts._json,prov=opts._prov||(a.provider==="gemini"&&!a.key&&a.backup?"ollama":a.provider);let text="";
   const emit=d=>{if(!d)return;text+=d;try{opts.onText&&opts.onText({text,delta:d})}catch(e){}};
   try{
@@ -5772,8 +6085,9 @@ function pageReglages(){
       :`<input class="field" id="ai-url" name="url" autocomplete="off" placeholder="http://localhost:11434" value="${esc(a.ollamaUrl)}"><input class="field" id="ai-model" name="model" autocomplete="off" placeholder="Modèle : llama3.2" value="${esc(a.model)}">`}
       <div class="row"><button class="btn" ${V.aiBusy?"disabled":""}>${V.aiBusy?"Test en cours…":"Enregistrer et tester"}</button></div></form>
     ${V.aiMsg?`<p class="small">${esc(V.aiMsg)}</p>${/^✓/.test(V.aiMsg)?"":`<div><button class="ghost on" data-page="aide" data-aide="ia">🛟 Que faire ?</button></div>`}`:""}
-    ${a.provider==="gemini"?`<div class="stack" style="gap:8px;border-top:1px solid var(--line);padding-top:12px"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><span><b>🖥️ Ollama en secours</b><br><span class="muted small">Sur ce PC : si Gemini ne répond pas (quota atteint, pas d'internet), l'appli passe toute seule sur Ollama.</span></span><button class="ghost ${a.backup?"on":""}" data-aibackup="1">${a.backup?"Activé":"Activer"}</button></div>${a.backup?`<form data-f="aibk" class="stack" style="gap:8px"><input class="field" name="url" autocomplete="off" placeholder="http://localhost:11434" value="${esc(a.ollamaUrl)}"><input class="field" name="model" autocomplete="off" placeholder="Modèle : gemma3:4b" value="${esc(a.omodel)}"><div><button class="ghost on">Enregistrer et tester Ollama</button></div></form>${V.aiMsg2?`<p class="small">${esc(V.aiMsg2)}</p>`:""}<p class="muted small">Ollama doit être installé sur ce PC : 🛟 Dépannage → L'IA ne répond plus → Ollama.</p>`:""}</div>`:""}
-    <p class="muted small">${a.provider==="gemini"?"La clé reste sur cet appareil : colle-la aussi sur ton autre appareil. Google fixe le nombre de messages gratuits par jour.":"Ollama doit être installé et lancé sur ce PC (étape 6 du guide). Il ne marche que sur ce PC."}</p></div>`;
+    ${a.provider==="gemini"?`<div class="stack" style="gap:8px;border-top:1px solid var(--line);padding-top:12px"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><span><b>🖥️ Ollama en secours</b><br><span class="muted small">Sur ce PC : si Gemini ne répond pas (quota atteint, pas d'internet), l'appli passe toute seule sur Ollama.</span></span><button class="ghost ${a.backup?"on":""}" data-aibackup="1" style="flex:none">${a.backup?"Activé":"Activer"}</button></div>${a.backup?`<form data-f="aibk" class="stack" style="gap:8px"><input class="field" name="url" autocomplete="off" placeholder="http://localhost:11434" value="${esc(a.ollamaUrl)}"><input class="field" name="model" autocomplete="off" placeholder="Modèle : gemma3:4b" value="${esc(a.omodel)}"><div><button class="ghost on">Enregistrer et tester Ollama</button></div></form>${V.aiMsg2?`<p class="small">${esc(V.aiMsg2)}</p>`:""}<p class="muted small">Ollama doit être installé sur ce PC : 🛟 Dépannage → L'IA ne répond plus → Ollama.</p>`:""}</div>`:""}
+    ${a.provider==="gemini"?relayCard():""}
+    <p class="muted small">${a.provider==="gemini"?"La clé reste sur cet appareil : colle-la aussi sur ton autre appareil. Google fixe le nombre de messages gratuits par jour et par modèle : l'appli passe toute seule d'un modèle Gemini à l'autre, puis au relais et à Ollama.":"Ollama doit être installé et lancé sur ce PC (étape 6 du guide). Il ne marche que sur ce PC."}</p></div>`;
   const inst=`<div class="card stack"><p class="label" style="margin:0">Installer l'appli</p>${isStandalone()?`<p>✓ L'appli est installée sur cet appareil.</p>`:`${INSTALL_EVT?`<div><button class="btn" data-install="1">Installer sur cet appareil</button></div>`:""}
     <p class="small"><b>iPhone</b> : dans Safari, bouton Partager puis « Sur l'écran d'accueil ».<br><b>Android</b> : menu ⋮ de Chrome puis « Installer l'application ».<br><b>Ordinateur</b> : dans Chrome ou Edge, icône d'installation à droite de la barre d'adresse.</p>`}</div>`;
   const aide=`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">Un problème ?</p><p class="muted small">Pronote, IA, synchronisation, actu : un mode d'emploi pas à pas pour chaque panne.</p><div><button class="btn" data-page="aide">🛟 Ouvrir le dépannage</button></div></div>`;
@@ -5785,7 +6099,7 @@ async function testOllama(){V.aiMsg2="Test d'Ollama…";render(true);
   render(true)}
 async function testAI(){
   V.aiBusy=true;V.aiMsg="";render(true);
-  try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.");V.aiMsg="✓ L'IA répond : "+r.text.trim().slice(0,80);aideErr("ia",null)}
+  try{const a0=aiCfg(),r=await aiSample("Réponds seulement par : OK, je suis prêt.",{_prov:a0.provider==="ollama"?"ollama":"gemini"});V.aiMsg="✓ "+(r.via||"L'IA")+" répond : "+r.text.trim().slice(0,80);aideErr("ia",null)}
   catch(e){V.aiMsg=ERR(e.code)+(e.code==="bad_model"&&aiCfg().provider==="gemini"?" Essaie un autre nom de modèle (liste dans Google AI Studio).":"")+(e.message?" Détail : "+String(e.message).slice(0,240):"");aideErr("ia",V.aiMsg)}
   V.aiBusy=false;render(true);
 }
@@ -6038,7 +6352,7 @@ function pageAide(){
 
   <details class="card aide" ${o("ia")}><summary>🤖 L'IA ne répond plus (profs, traducteur)</summary>
     <h4>« Quota gratuit de l'IA atteint »</h4>
-    <p class="small">Rien n'est cassé : Google limite le nombre de messages gratuits par jour. Réessaie plus tard ou demain.</p>
+    <p class="small">Rien n'est cassé : Google limite le nombre de messages gratuits par jour et par modèle. L'appli essaie déjà tous les modèles Gemini gratuits ; leurs quotas reviennent chaque jour à 9 h. Pour ne plus être bloqué, installe le <b>relais gratuit</b> (juste en dessous), et Ollama sur ton PC.</p>
     <h4>« La clé d'IA est refusée »</h4>
     <ol class="aidesteps"><li>Ouvre ${A(L.studio,"Google AI Studio, page des clés")} avec ton compte Google.</li>
       <li>Clique sur <b>Create API key</b>, puis copie la clé qui s'affiche. Ne l'envoie à personne.</li>
@@ -6055,6 +6369,28 @@ function pageAide(){
       <li>Quitte Ollama (clic droit sur son icône près de l'horloge → Quit), puis relance-le.</li>
       <li>Ouvre l'<b>Invite de commandes</b> et tape <code>ollama pull gemma3:4b</code> (environ 3 Go à télécharger).</li>
       <li>Dans l'appli sur ce PC : ⚙️ Réglages → Ollama en secours → <b>Activer</b> → modèle <code>gemma3:4b</code> → <b>Enregistrer et tester Ollama</b>. Si Chrome demande d'autoriser l'accès aux applis de cet appareil, clique sur <b>Autoriser</b>.</li></ol></details>
+
+  <details class="card aide" ${o("relais")}><summary>🔗 Installer le relais gratuit (IA presque illimitée, aussi sur iPhone)</summary>
+    <p class="small">Le relais est un petit programme gratuit que tu mets en ligne sur Cloudflare. Quand Gemini est à court, ton appli lui envoie ses questions, et il les passe à la première IA gratuite disponible : Mistral, Cerebras, Groq puis OpenRouter. Tes clés restent chez Cloudflare. Compte environ 45 minutes, à faire une seule fois sur l'ordi.</p>
+    <h4>Partie 1 · Les clés gratuites (tu peux en sauter : le relais utilise celles que tu as)</h4>
+    <ol class="aidesteps"><li><b>Mistral</b> (très bon en français) : ouvre ${A("https://console.mistral.ai","console.mistral.ai")}, crée un compte et choisis le plan gratuit <b>Experiment</b> (il faut un numéro de téléphone, pas de carte bancaire). Puis <b>API Keys</b> → <b>Create new key</b> → copie la clé. Avec ce plan gratuit, Mistral peut se servir de tes messages pour entraîner ses IA : n'y mets rien de personnel.</li>
+      <li><b>Cerebras</b> : ouvre ${A("https://cloud.cerebras.ai","cloud.cerebras.ai")}, crée un compte → <b>API Keys</b> → crée une clé et copie-la.</li>
+      <li><b>Groq</b> : ouvre ${A("https://console.groq.com/keys","console.groq.com")}, crée un compte → <b>Create API Key</b> → copie-la.</li>
+      <li><b>OpenRouter</b> : ouvre ${A("https://openrouter.ai/settings/keys","openrouter.ai")}, crée un compte → <b>Create Key</b> → copie-la.</li>
+      <li>Colle tes clés dans un endroit sûr de ton PC, le temps de l'installation. Ne les envoie à personne (même pas à Claude), et ne les mets jamais sur GitHub.</li></ol>
+    <h4>Partie 2 · Le relais sur Cloudflare (gratuit, sans carte bancaire)</h4>
+    <ol class="aidesteps"><li>Ouvre ${A("https://dash.cloudflare.com/sign-up","dash.cloudflare.com")} et crée un compte gratuit (confirme ton e-mail).</li>
+      <li>Dans le menu de gauche : <b>Workers &amp; Pages</b> (parfois rangé dans <b>Compute</b>) → <b>Create</b> → <b>Create Worker</b> (modèle « Hello World ») → nomme-le <code>relais-cerveau</code> → <b>Deploy</b>.</li>
+      <li>Dans cette appli, sur ton PC : ⚙️ Réglages → Intelligence artificielle → Relais gratuit → <b>Installer le relais</b> → <b>📋 Copier le code du relais</b>.</li>
+      <li>Sur Cloudflare : <b>Edit code</b> → efface tout le code (Ctrl+A puis Suppr) → colle le tien (Ctrl+V) → <b>Deploy</b>.</li>
+      <li>Retourne sur la page du Worker → <b>Settings</b> → <b>Variables and Secrets</b> → <b>Add</b> → type <b>Secret</b>. Ajoute une ligne par clé, avec exactement ces noms : <code>MISTRAL_API_KEY</code>, <code>CEREBRAS_API_KEY</code>, <code>GROQ_API_KEY</code>, <code>OPENROUTER_API_KEY</code>. Puis <b>Deploy</b> (ou <b>Save</b>).</li>
+      <li>Copie l'adresse du Worker affichée sur sa page, du type <code>https://relais-cerveau.ton-nom.workers.dev</code>.</li></ol>
+    <h4>Partie 3 · Brancher l'appli</h4>
+    <ol class="aidesteps"><li>Sur le PC : ⚙️ Réglages → Relais gratuit → colle l'adresse → <b>Enregistrer et tester le relais</b>. Tu dois lire « ✓ Le relais marche ».</li>
+      <li>Clique sur <b>📋 Copier le lien pour ton autre appareil</b>, envoie-le-toi (mail ou Notes), puis colle-le au même endroit dans l'appli sur ton iPhone → <b>Enregistrer et tester le relais</b>.</li>
+      <li>Si le test dit « code secret refusé » ou « adresse refusée » : recopie le code du relais depuis l'appli, recolle-le dans Cloudflare, puis <b>Deploy</b>.</li>
+      <li>Si une IA est marquée ✗ : sa clé manque dans les secrets du Worker, ou son nom est mal écrit.</li></ol>
+    <p class="muted small">Le relais gratuit de Cloudflare accepte 100 000 demandes par jour. Les quotas gratuits de Mistral, Cerebras, Groq et OpenRouter s'ajoutent à ceux de Gemini.</p></details>
 
   <details class="card aide" ${o("sync")}><summary>🔄 Mes données ne se synchronisent plus</summary>
     <p class="small">Signes : l'accueil affiche « Synchro en attente », ou ton autre appareil ne voit pas tes changements. Tes données restent aussi enregistrées sur chaque appareil : rien n'est perdu.</p>
