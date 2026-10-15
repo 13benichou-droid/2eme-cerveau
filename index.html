@@ -933,6 +933,83 @@ details.egart>summary,details.egall>summary{cursor:pointer;display:flex;flex-dir
 @media (prefers-reduced-motion:reduce){.coload{animation:none}}
 /* champs de formulaire : hauteur naturelle (avant, ils prenaient 140 px de haut dans les formulaires en colonne) */
 form>.field{flex-basis:auto}
+
+/* ================= 2.7.0 : une seule couleur, barre de navigation, pages plus courtes ================= */
+:root:root:root{--accent:#5b46e5;--warn:#c27c00;--info:#2d7ff0}
+@media (prefers-color-scheme:dark){:root:root:root:not([data-theme="light"]){--accent:#9284ff;--warn:#f2b33d;--info:#5aa2ff}}
+:root:root:root[data-theme="dark"]{--accent:#9284ff;--warn:#f2b33d;--info:#5aa2ff}
+:root:root:root{--jour:var(--accent);--hab:var(--accent);--proj:var(--accent);--fin:var(--accent);--lect:var(--accent);--cours:var(--accent);--sport:var(--accent);--obj:var(--accent);--ps:var(--accent);--ent:var(--accent);--py:var(--accent);--mx:var(--accent);--cg:var(--accent);--idee:var(--accent);--pron:var(--accent)}
+/* les couleurs qui ont un sens restent : jaune = à revoir / conseil, bleu = nouveau */
+.egfb.mid{background:color-mix(in srgb,var(--warn) 14%,var(--surface))}
+.pyhint{background:color-mix(in srgb,var(--warn) 12%,var(--surface))}
+.avp.goal .avpn{background:color-mix(in srgb,var(--warn) 25%,var(--surface));border-color:var(--warn)}
+.newsflash{background:color-mix(in srgb,var(--warn) 16%,var(--surface))}
+.srsN,.srsb.easy b{color:var(--info)}
+.srstag.new{background:color-mix(in srgb,var(--info) 15%,transparent);color:var(--info)}
+.bilh{border-color:color-mix(in srgb,var(--accent) 40%,var(--line));background:color-mix(in srgb,var(--accent) 8%,var(--surface))}
+
+/* barre de navigation en bas, au pouce */
+body.hastabs .wrap{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  padding:6px max(6px,env(safe-area-inset-left,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-right,0px));
+  background:color-mix(in srgb,var(--surface) 88%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);border-top:1px solid var(--line)}
+.tabbar button{display:flex;flex-direction:column;align-items:center;gap:2px;border:0;background:none;color:var(--muted);padding:5px 0 3px;min-height:50px;border-radius:12px;font-size:.68rem;font-weight:650;letter-spacing:.01em;-webkit-tap-highlight-color:transparent}
+.tabbar .ico{width:24px;height:24px}
+.tabbar button[aria-current="page"]{color:var(--accent)}
+.tabbar button[aria-current="page"] .ico{stroke-width:2.3}
+.tabbar button:active{transform:scale(.94)}
+@media (min-width:700px){.tabbar{left:50%;right:auto;transform:translateX(-50%);width:min(560px,100%);bottom:12px;border:1px solid var(--line);border-radius:22px;padding-bottom:6px;box-shadow:0 8px 28px rgb(0 0 0 / .12)}}
+body.kb .tabbar{display:none}
+.tabbar[hidden]{display:none}
+
+/* en-tête des rubriques : ⓘ pour revoir les explications */
+.hintb{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-size:1rem;line-height:1;display:grid;place-items:center}
+.hintb[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--surface))}
+.sec:not(.hints) .hint{display:none}
+.sec.hints .hint{border-left:3px solid color-mix(in srgb,var(--accent) 45%,transparent);padding-left:10px}
+
+/* Plus */
+.progcta,.phero{display:flex;align-items:center;gap:14px;width:100%;text-align:left;color:var(--ink);cursor:pointer}
+.progcti{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,var(--surface));color:var(--accent);flex:none}
+.icob{width:26px;height:26px}
+.progctt{display:flex;flex-direction:column;flex:1;min-width:0}
+.progctt b{font-family:var(--display);font-size:1.1rem}
+.plist{display:flex;flex-direction:column;padding:4px 16px}
+.plist button{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;text-align:left;padding:12px 0;color:var(--ink)}
+.plist button+button{border-top:1px solid var(--line)}
+.ple{font-size:1.25rem;width:28px;text-align:center}
+.plt{display:flex;flex-direction:column;flex:1;min-width:0}
+
+/* Ma progression */
+.pring{width:96px;height:96px;flex:none}
+.pherot{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pherot b{font-family:var(--display);font-size:2.1rem;line-height:1.05;color:var(--accent)}
+.heat{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;gap:4px;justify-content:start}
+.hm{display:block;width:clamp(14px,5.6vw,20px);aspect-ratio:1;border-radius:4px;background:color-mix(in srgb,var(--accent) calc(var(--a) * 22%),var(--soft))}
+.hm.fut{background:transparent;border:1px dashed var(--line)}
+.heatk{display:flex;align-items:center;gap:4px}.heatk .hm{width:12px}
+.prow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;color:var(--ink);padding:12px 14px;cursor:pointer}
+.prow+.prow{margin-top:-4px}
+.prowi{font-size:1.3rem;width:30px;text-align:center;flex:none}
+.prowt{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.prowt .bar{height:6px;border-radius:3px;background:var(--soft);overflow:hidden;margin-top:3px}
+.prowt .bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.prowb{font-family:var(--display);font-weight:800;font-size:1.05rem;color:var(--accent);white-space:nowrap}
+.labseg{width:100%}.labseg button{flex:1}
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ptile{display:flex;flex-direction:column;gap:4px;align-items:stretch;text-align:left;color:var(--ink);padding:12px 14px;cursor:pointer;min-width:0}
+.ptop{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:1.15rem}
+.ptop b{font-family:var(--display);font-size:1.35rem;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ptn{font-size:.8rem;color:var(--muted);line-height:1.3}
+.ptile .bar,.pcl .bar{height:6px;border-radius:3px;background:var(--soft);overflow:hidden}
+.ptile .bar i,.pcl .bar i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.pcl{display:grid;grid-template-columns:minmax(0,7.5em) minmax(0,1fr) 3.2em;align-items:center;gap:10px;border:0;background:none;padding:4px 0;color:var(--ink);text-align:left;font-size:.9rem}
+.pcl span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcl b{text-align:right;color:var(--accent);font-size:.88rem}
+.heat{grid-template-columns:repeat(12,minmax(0,1fr))!important;justify-content:stretch!important}
+.heat .hm{width:100%}
+.wg.wgrow:not(.w2){flex-direction:column;align-items:flex-start;gap:6px}
+.wg.wgrow:not(.w2) .wgring,.wg.wgrow:not(.w2) .wgring svg{width:44px;height:44px}
 </style>
 <script src="config.js"></script>
 </head>
@@ -2163,7 +2240,7 @@ function jeuUI(){
     <div class="row" style="gap:12px;flex-wrap:nowrap"><span class="gico">${dg.e}</span><div style="min-width:0"><b style="font-family:var(--display);font-size:1.15rem">${dg.n}</b><p class="muted small">${dg.d}</p></div></div>
     ${doneToday?`<p><b>✓ Terminé : ${doneToday.s}/${doneToday.m}</b>. Un nouveau défi t'attend demain.</p>`:`<div><button class="btn" data-play="daily|${dg.k}">Jouer (+${dg.k==="news"?60:dg.k==="calc"?60:dg.k==="simu"?60:50} XP max)</button></div>`}</div>`;
   const practice=`<div><p class="label">S'entraîner (sans XP, nouvelle partie à chaque fois)</p><div class="glist">${GAMES.map(x=>`<button class="card gcard" data-play="practice|${x.k}"><span class="gico">${x.e}</span><b>${x.n}</b><span class="muted small">${x.d}</span></button>`).join("")}</div></div>`;
-  return head+daily+coCard()+actu+practice+`<p class="muted small">Les défis du jour et les parties d'entraînement sont fabriqués par l'appli (sans IA) : ils sont illimités. Le coach IA, lui, invente des questions nouvelles. Les montants sont fictifs, rien n'est un conseil d'investissement.</p>`;
+  return head+daily+actu+labSeg()+(V.labTab==="coach"?coCard():practice)+`<p class="muted small">Les défis du jour et les parties d'entraînement sont fabriqués par l'appli (sans IA) : ils sont illimités. Le coach IA, lui, invente des questions nouvelles. Les montants sont fictifs, rien n'est un conseil d'investissement.</p>`;
 }
 function gameUI(){
   const g=V.g,G=GAMES.find(x=>x.k===g.k),top=`<div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${G.e} ${G.n}</b><span class="muted small">${g.mode==="daily"?"Défi du jour":"Entraînement"}</span></div>`;
@@ -2728,7 +2805,7 @@ function tilesHidden(){const ap=appP();return[...new Set([...(ap.hide||[]),...TI
 function sects(all){const ap=appP(),base=[...SECT,...MOD.tiles.map(t=>[t.k,t.nom])],ord=ap.order||[];
   const L=[...ord.map(k=>base.find(s=>s[0]===k)).filter(Boolean),...base.filter(s=>!ord.includes(s[0]))].map(([k,n])=>[k,(ap.nom||{})[k]||n]);
   const hid=tilesHidden();return all?L:L.filter(s=>!hid.includes(s[0]))}
-function sectName(k){const s=sects(true).find(x=>x[0]===k);return s?s[1]:k==="aide"?"Dépannage":k==="idees"?"Suggestions":k==="bilan"?"Bilan de la semaine":"Réglages"}
+function sectName(k){const s=sects(true).find(x=>x[0]===k);return s?s[1]:k==="aide"?"Dépannage":k==="prog"?"Ma progression":k==="plus"?"Toutes les rubriques":k==="idees"?"Suggestions":k==="bilan"?"Bilan de la semaine":"Réglages"}
 
 const SG_JN=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
 const SG_PL={trajet:"Trajet du retour",pause:"Pause en rentrant",dinerDur:"Durée du dîner",sportTrajet:"Trajets salle de sport",sportDur:"Séance de sport",devoir:"Temps par devoir Pronote",
@@ -5456,18 +5533,18 @@ function wgRubs(){return`<p class="label wgh">Toutes les rubriques</p><div class
 
 function wgHome(){const sc=wgSafe(()=>{const s=objScore();objSnap(s);return s});const out=[];
   if(!wgOff("jour"))out.push(wgSafe(wgJour));
-  if(!wgOff("obj")&&sc)out.push(wgSafe(()=>wgObj(sc)));
+  if(!wgOff("obj")&&sc)out.push(wgSafe(()=>wgProg(sc)));
   if(!wgOff("hab"))out.push(wgSafe(wgHab));
   if(!wgOff("ent"))out.push(wgSafe(wgEng));
   if(!wgOff("py"))out.push(wgSafe(wgPy));
   if(!wgOff("ent"))out.push(wgSafe(wgCm));
   if(!wgOff("fin"))out.push(wgSafe(wgFin));
-  return`<div class="wgs">${out.join("")}</div>${wgRubs()}`}
+  return`<div class="wgs">${out.join("")}</div>`}
 
 /* ---- réglage : widgets ou tuiles ---- */
 function homeCard(){const m=homeMode();return`<div class="card stack" style="gap:10px"><p class="label" style="margin:0">🏠 Accueil</p>
   <div class="seg" role="group" aria-label="Accueil"><button data-homeset="widgets" aria-pressed="${m==="widgets"}">Widgets</button><button data-homeset="tuiles" aria-pressed="${m==="tuiles"}">Tuiles (ancien)</button></div>
-  <p class="muted small" style="margin:0">${m==="widgets"?"Un chiffre clé par cadre. Toutes les rubriques restent en bas de l'accueil.":"L'accueil d'avant : une grande tuile par rubrique."}</p></div>`}
+  <p class="muted small" style="margin:0">${m==="widgets"?"Un chiffre clé par cadre. Toutes les rubriques sont dans l'onglet « Plus », en bas de l'écran.":"L'accueil d'avant : une grande tuile par rubrique."}</p></div>`}
 
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-wgo],[data-homeset]");if(!b)return;const d=b.dataset;
   if(d.homeset){put("params","appli",{...appP(),home:d.homeset},true);return render(true)}
@@ -5844,6 +5921,125 @@ document.addEventListener("submit",e=>{const f=e.target;if(!f||!f.dataset||!["co
   const v=new FormData(f).get("v");if(f.dataset.f==="conum")coAnswer(v);else coGrade(v)},true);
 
 /* ================================================================
+   DESIGN 2.7.0 : une barre de navigation en bas, une seule couleur, des pages plus courtes
+   (les explications passent derrière ⓘ), et « Ma progression » qui regroupe tout
+   ================================================================ */
+const ICO={
+ home:'<path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1h-4.5v-6h-6v6H4.5a1 1 0 0 1-1-1z"/>',
+ cal:'<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+ book:'<path d="M5 4.5A1.5 1.5 0 0 1 6.5 3H19v15H6.5A1.5 1.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-3M9 7.5h6"/>',
+ target:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/>',
+ grid:'<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>'
+};
+const TABS=[["home","Accueil","home"],["jour","Journée","cal"],["cours","Cours","book"],["ent","S'entraîner","target"],["plus","Plus","grid"]];
+const TAB_ROOT=["home","jour","cours","ent","plus"];
+const tabOf=p=>p==="mx"?"cours":TABS.some(t=>t[0]===p)?p:"plus";
+const ico=(k,c)=>`<svg class="${c||"ico"}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[k]}</svg>`;
+function tabSync(){
+  let nav=document.getElementById("tabbar");
+  if(!nav){nav=document.createElement("nav");nav.id="tabbar";nav.className="tabbar";nav.setAttribute("aria-label","Navigation principale");document.body.appendChild(nav);document.body.classList.add("hastabs")}
+  const cur=tabOf(V.page),sig=cur;
+  if(nav.dataset.sig!==sig){nav.dataset.sig=sig;
+    nav.innerHTML=TABS.map(([k,n,i])=>`<button data-page="${k}" ${k===cur?'aria-current="page"':""}>${ico(i)}<span>${n}</span></button>`).join("")}
+  nav.hidden=V.page==="proj";document.body.classList.toggle("hastabs",!nav.hidden);
+}
+/* clavier ouvert sur téléphone : on cache la barre pour laisser la place */
+document.addEventListener("focusin",e=>{if(e.target&&e.target.matches&&e.target.matches("input:not([type=checkbox]):not([type=radio]):not([type=file]),textarea,select,[contenteditable]"))document.body.classList.add("kb")});
+document.addEventListener("focusout",()=>setTimeout(()=>{const a=document.activeElement;if(!(a&&a.matches&&a.matches("input,textarea,select,[contenteditable]")))document.body.classList.remove("kb")},120));
+
+/* les longues explications grises se rangent derrière ⓘ (elles ne servent qu'une fois) */
+const HINT_SKIP=["reglages","aide","idees","prog","plus","home"];
+function hintsApply(){
+  const sec=document.querySelector("#app>.sec");if(!sec)return;
+  let n=0;
+  if(!HINT_SKIP.includes(V.page))sec.querySelectorAll("p.muted").forEach(p=>{
+    if(p.closest("form,.corr,.out,.chat,.mxt,.mxsol,.egflash,.srscard,.relayhow,.aichain,.empty,.gscore,.wg"))return;
+    if(p.querySelector("a,button,input,select,textarea,label"))return;
+    if(p.textContent.trim().length<100)return;p.classList.add("hint");n++});
+  const hb=sec.querySelector(".head .hintb");if(hb){hb.hidden=!n;hb.setAttribute("aria-pressed",String(!!V.hints))}
+  sec.classList.toggle("hints",!!V.hints);
+}
+V.hints=lsGet("cerveau-hints",false);
+/* après chaque affichage : les sections ouvertes restent ouvertes, la barre suit la page */
+let RD_PAGE=null;
+function render(force){
+  const app=document.getElementById("app"),pg=V.page;
+  const op=app&&RD_PAGE===pg?[...app.querySelectorAll("details[open]>summary")].map(s=>s.textContent.trim()):[];
+  render0(force);
+  if(app&&op.length&&V.page===pg)app.querySelectorAll("details:not([open])>summary").forEach(s=>{if(op.includes(s.textContent.trim()))s.parentElement.open=true});
+  RD_PAGE=V.page;
+  try{tabSync();hintsApply()}catch(e){}
+}
+const backTo=()=>V.prev&&V.prev!==V.page?V.prev:"plus";
+
+/* ---------- Plus : toutes les rubriques ---------- */
+function pagePlus(){
+  const sc=wgSafe(()=>objScore());
+  return`<button class="card progcta" data-page="prog"><span class="progcti">${ico("target","icob")}</span><span class="progctt"><b>Ma progression</b><small class="muted">Tout ce que tu as fait, au même endroit${sc&&sc.total!=null?` · objectif ${pct1(sc.total)} %`:""}</small></span><span aria-hidden="true">›</span></button>
+  ${wgRubs().replace(/<p class="label wgh">[^<]*<\/p>/,"")}
+  <div class="card plist">${[["reglages","⚙️","Réglages","IA, synchronisation, apparence, sauvegarde"],["idees","💡","Suggestions","Change l'appli en l'écrivant"],["bilan","📊","Bilan de la semaine","Ce qui a marché, ce qu'on change"],["aide","🛟","Dépannage","Un mode d'emploi pour chaque panne"]]
+    .map(([k,e,n,d])=>`<button data-page="${k}"><span class="ple" aria-hidden="true">${e}</span><span class="plt"><b>${n}</b><small class="muted">${d}</small></span><span class="muted" aria-hidden="true">›</span></button>`).join("")}</div>`}
+
+/* ---------- Ma progression : un seul écran pour tout voir ---------- */
+function progAct(d){const k=dkey(d);let n=0;
+  try{if(dayStats(d).n>0)n++}catch(e){}
+  try{if(prog().days[k])n++}catch(e){}
+  try{const e=(egDoc().d||{})[k];if(e&&Object.values(e).some(v=>v))n++}catch(e){}
+  try{if((drill("cm").hist||[]).some(x=>x.d===k))n++}catch(e){}
+  try{if((pyDoc().d||{})[k])n++}catch(e){}
+  try{const c=S.cg[k];if(c&&c.rep!=null)n++}catch(e){}
+  return n}
+function progHeat(){const t=today(),start=add(monday(t),-7*11),cells=[];let tot=0;
+  for(let w=0;w<12;w++)for(let i=0;i<7;i++){const d=add(start,w*7+i),fut=d>t,n=fut?0:progAct(d);if(n)tot++;
+    cells.push(`<i class="hm${fut?" fut":""}" style="--a:${Math.min(n,4)}" title="${d.getDate()} ${MOIS[d.getMonth()]} : ${n} activité${n>1?"s":""}"></i>`)}
+  return{html:`<div class="heat" role="img" aria-label="${tot} jours actifs sur les 12 dernières semaines">${cells.join("")}</div>`,tot}}
+function progTile(p,ic,big,n,frac){return`<button class="card ptile" data-page="${p}"><span class="ptop"><span aria-hidden="true">${ic}</span><b class="num">${big}</b></span><span class="ptn">${n}</span>${frac!=null?`<span class="bar"><i style="width:${Math.round(Math.max(0,Math.min(1,frac))*100)}%"></i></span>`:""}</button>`}
+function pageProg(){
+  const sc=wgSafe(()=>objScore()),N=sc&&sc.N,mo=N?(N.gw!=null?N.gw:N.g):null,hm=progHeat();
+  const st=+wgSafe(()=>streak())||0,ws=wgSafe(()=>weekSeries(4))||[],wp=ws.length?ws.reduce((a,w)=>a+w.p,0)/ws.length:0;
+  const C=(typeof COURS!=="undefined"?COURS:[]).map(s=>[s,+wgSafe(()=>subjStats(s))||0]),cm0=C.length?C.reduce((a,x)=>a+x[1],0)/C.length:0;
+  const ex=["mspe","mexp"].map(k=>+wgSafe(()=>cmxList(k).reduce((a,c)=>a+mxStat(c.id).ok,0))||0).reduce((a,b)=>a+b,0);
+  const lv=wgSafe(()=>egLv())||null,es=+wgSafe(()=>egStreak())||0,sr=wgSafe(()=>srsCount("en"))||{known:0};
+  const p=prog(),L=levelOf(p.xp),gs=gameStreak(p);
+  const cm=(wgSafe(()=>drill("cm").hist)||[]).reduce((a,x)=>Math.max(a,x.s||0),0);
+  const py=wgSafe(()=>pySummary())||["—",""],cgN=Object.entries(S.cg||{}).filter(([k,v])=>/^\d{4}-/.test(k)&&v&&v.ok).length;
+  const ring=x=>{const r=46,c=2*Math.PI*r;return`<svg viewBox="0 0 108 108" class="pring" aria-hidden="true"><circle cx="54" cy="54" r="${r}" fill="none" stroke="var(--soft)" stroke-width="10"/><circle cx="54" cy="54" r="${r}" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-Math.max(0,Math.min(1,x/100)))}" transform="rotate(-90 54 54)"/></svg>`};
+  return`<button class="card phero" data-page="obj">${ring(sc?sc.total:0)}<span class="pherot"><span class="label" style="margin:0">Objectif Top 3</span><b class="num">${sc?pct1(sc.total):"—"} %</b><small class="muted">${mo!=null?`moyenne bac ${pct1(mo)} · `:""}notes, régularité et finance</small></span><span class="muted" aria-hidden="true">›</span></button>
+  <div class="card stack" style="gap:10px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">Tes 12 dernières semaines</p><span class="muted small num">${hm.tot} jour${hm.tot>1?"s":""} actif${hm.tot>1?"s":""}</span></div>${hm.html}
+    <div class="heatk muted small"><span>moins</span>${[0,1,2,3,4].map(a=>`<i class="hm" style="--a:${a}"></i>`).join("")}<span>plus</span></div></div>
+  <div class="pgrid">
+    ${progTile("hab","🔥",st?`${st} j`:`${Math.round(wp*100)} %`,st?"de série parfaite":"du planning (4 sem.)",wp)}
+    ${progTile("cours","📚",`${Math.round(cm0*100)} %`,"des cours vus",cm0)}
+    ${progTile("ent","🇬🇧",lv||"?",lv?`anglais${es?` · 🔥 ${es} j`:""}`:"anglais : à tester",lv?(EN_LV.indexOf(lv)+1)/6:0)}
+    ${progTile("cours","✏️",String(ex),"exos de maths réussis",null)}
+    ${progTile("ent","🧮",cm?String(cm):"—","calcul mental (record)",null)}
+    ${progTile("py","🐍",py[0],"leçons de Python",null)}
+    ${progTile("fin","💹",String(p.xp),`XP Trading Lab · ${L.name}`,L.to?(p.xp-L.from)/(L.to-L.from):1)}
+    ${progTile("cg","🌍",String(cgN),"quiz de culture G",null)}
+  </div>
+  <div class="card stack pcours" style="gap:8px"><p class="label" style="margin:0">Cours · chapitres vus ou maîtrisés</p>
+    ${C.map(([s,v])=>`<button class="pcl" data-page="cours" data-subj="${s.k}"><span>${esc(s.n)}</span><span class="bar"><i style="width:${Math.round(v*100)}%"></i></span><b class="num">${Math.round(v*100)} %</b></button>`).join("")}</div>`}
+
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-hints],[data-labtab]");if(!b)return;const d=b.dataset;
+  if(d.hints){V.hints=!V.hints;lsSet("cerveau-hints",V.hints);return render(true)}
+  if(d.labtab){V.labTab=d.labtab;return render(true)}
+});
+
+/* accueil : le widget « Ma progression » remplace celui de l'objectif (le % reste en grand) */
+function wgProg(sc){const st=wgSafe(()=>streak())||0,C=typeof COURS!=="undefined"?COURS:[],cp=C.length?C.reduce((a,s)=>a+(+wgSafe(()=>subjStats(s))||0),0)/C.length:0;
+  return wgBtn("prog","--obj","",`<span class="wgl">Ma progression</span><span class="wgbig num">${pct1(sc.total)} %</span><small>objectif Top 3</small><small class="num">📚 ${Math.round(cp*100)} % · 🔥 ${st} j</small>`)}
+/* Trading Lab : les jeux et le coach IA ne sont plus mélangés */
+function labSeg(){const t=V.labTab==="coach"?"coach":"jeux";
+  return`<div class="seg labseg" role="group" aria-label="Type d'entraînement"><button data-labtab="jeux" aria-pressed="${t==="jeux"}">🎮 Jeux · sans IA</button><button data-labtab="coach" aria-pressed="${t==="coach"}">🤖 Coach IA</button></div>`}
+/* la sauvegarde passe de l'accueil aux Réglages */
+function dataCard(){return`<div class="card stack"><p class="label" style="margin:0">💾 Mes données</p>
+    <p class="muted small">Tout s'enregistre d'abord sur cet appareil, puis se synchronise avec ton compte. Garde aussi un fichier de sauvegarde de temps en temps.</p>
+    <div class="row">${DL?`<button class="ghost on" data-export="1">Sauvegarder dans un fichier</button>`:""}<label class="ghost on" for="imp" style="cursor:pointer">Restaurer un fichier</label><input type="file" id="imp" data-imp="1" accept=".json,application/json" hidden></div>
+    ${V.dataMsg?`<p class="small">${esc(V.dataMsg)}</p>`:""}${V.imp?`<div class="row"><button class="btn" data-impok="1">Confirmer la restauration</button><button class="ghost" data-impno="1">Annuler</button></div>`:""}</div>`}
+/* depuis « Ma progression » : ouvrir directement la bonne matière */
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button[data-page][data-subj]");if(b){V.subj=b.dataset.subj;V.chap=null}});
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
 const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["ps","Mon avenir"],["ent","Entraîne­ment"],["py","Python"],["cours","Cours"],["mx","Maths"],["cg","Culture G"]];
@@ -5866,11 +6062,7 @@ function pageHome(){
   const t=today(),h=new Date().getHours();
   const W=homeMode()==="widgets";
   return`<div class="top">${W?`<div><p class="wgdate">${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p><h1>${h<18?"Bonjour":"Bonsoir"}</h1></div>`:`<div><h1>2ème cerveau 🧠</h1><p>${h<18?"Bonjour":"Bonsoir"} · ${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p></div>`}<div class="topr"><div class="topb"><button class="gear" data-page="idees" aria-label="Suggestions">💡</button><button class="gear" data-page="reglages" aria-label="Réglages">⚙️</button></div><div class="sync" id="sync">${syncTxt}</div></div></div>
-  ${bilHome()}${W?wgHome():`<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>`}${modWrap("accueil","")}${citCard()}
-  <div class="card stack" style="margin-top:16px"><p class="label" style="margin:0">💾 Mes données</p>
-    <p class="muted small">Tout s'enregistre d'abord sur cet appareil, puis se synchronise avec ton compte (⚙️ Réglages). Garde aussi un fichier de sauvegarde de temps en temps.</p>
-    <div class="row">${DL?`<button class="ghost on" data-export="1">Sauvegarder dans un fichier</button>`:""}<label class="ghost on" for="imp" style="cursor:pointer">Restaurer un fichier</label><button class="ghost" data-page="aide">🛟 Dépannage</button><input type="file" id="imp" data-imp="1" accept=".json,application/json" hidden></div>
-    ${V.dataMsg?`<p class="small">${esc(V.dataMsg)}</p>`:""}${V.imp?`<div class="row"><button class="btn" data-impok="1">Confirmer la restauration</button><button class="ghost" data-impno="1">Annuler</button></div>`:""}</div>`;
+  ${bilHome()}${W?wgHome():`<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>`}${modWrap("accueil","")}${citCard()}`;
 }
 
 /* ---- sauvegarde / restauration ---- */
@@ -5898,7 +6090,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.6.0";
+const APP_VERSION="2.7.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -6091,7 +6283,7 @@ function pageReglages(){
   const inst=`<div class="card stack"><p class="label" style="margin:0">Installer l'appli</p>${isStandalone()?`<p>✓ L'appli est installée sur cet appareil.</p>`:`${INSTALL_EVT?`<div><button class="btn" data-install="1">Installer sur cet appareil</button></div>`:""}
     <p class="small"><b>iPhone</b> : dans Safari, bouton Partager puis « Sur l'écran d'accueil ».<br><b>Android</b> : menu ⋮ de Chrome puis « Installer l'application ».<br><b>Ordinateur</b> : dans Chrome ou Edge, icône d'installation à droite de la barre d'adresse.</p>`}</div>`;
   const aide=`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">Un problème ?</p><p class="muted small">Pronote, IA, synchronisation, actu : un mode d'emploi pas à pas pour chaque panne.</p><div><button class="btn" data-page="aide">🛟 Ouvrir le dépannage</button></div></div>`;
-  return themeCard()+homeCard()+aide+sync+pnReglages()+ai+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
+  return themeCard()+homeCard()+aide+sync+pnReglages()+ai+dataCard()+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
 }
 async function testOllama(){V.aiMsg2="Test d'Ollama…";render(true);
   try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.",{_prov:"ollama"});V.aiMsg2="✓ Ollama répond : "+r.text.trim().slice(0,80)}
@@ -6441,9 +6633,9 @@ document.addEventListener("click",e=>{
 /* ================================================================
    RENDU
    ================================================================ */
-const PAGES={py:pagePy,ps:pagePs,ent:pageEnt,bilan:pageBilan,idees:pageIdees,cg:pageCg,mx:pageMx,reglages:pageReglages,aide:pageAide,pron:pagePron,jour:pageJour,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
+const PAGES={prog:pageProg,plus:pagePlus,py:pagePy,ps:pagePs,ent:pageEnt,bilan:pageBilan,idees:pageIdees,cg:pageCg,mx:pageMx,reglages:pageReglages,aide:pageAide,pron:pagePron,jour:pageJour,hab:pageHab,proj:pageProj,fin:pageFin,obj:pageObj,cours:pageCours};
 let pending=false;
-function render(force){
+function render0(force){
   const a=document.activeElement;
   if(!force&&a&&a.matches&&a.matches("input:not([type=checkbox]),select,textarea,[contenteditable]")&&a.closest("#app")){pending=true;return}
   if(!force&&typeof JD!=="undefined"&&JD&&JD.active){pending=true;return}
@@ -6453,7 +6645,7 @@ function render(force){
   if(V.page==="home"||(!PAGES[V.page]&&!mt)){app.innerHTML=pageHome();return}
   if(V.page==="proj"){app.innerHTML=`<div class="sec notesapp" style="--c:var(--ny)">${pageProj()}</div>`;return}
   const body=mt?modHtml(mt.id,mt.page):modWrap(V.page,PAGES[V.page]());
-  app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head"><button class="back" data-page="home" aria-label="Accueil">‹</button><h1>${esc(sectName(V.page))}</h1>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
+  app.innerHTML=`<div class="sec" style="--c:${mt?mt.couleur:`var(${COL[V.page]||"--proj"})`}"><div class="head">${TAB_ROOT.includes(V.page)?"":`<button class="back" data-page="${backTo()}" aria-label="Retour">‹</button>`}<h1>${esc(sectName(V.page))}</h1><button class="hintb" data-hints="1" aria-label="Afficher les explications" title="Explications" hidden>ⓘ</button>${mt?`<span class="modico" aria-hidden="true">${esc(mt.emoji)}</span>`:(ILL[V.page]||"").replace('class="ill"',"")}</div>${body}</div>`;
   if(V.page==="mx"||V.page==="cours")mxTex();if(V.page==="jour")jAfter();setTimeout(()=>{nUi();micPlace()},0);if(CM&&V.page==="ent"){const ci=document.getElementById("cmin");if(ci&&document.activeElement!==ci)ci.focus({preventScroll:true})}
 }
 /* on attend la fin du toucher : sinon le bouton visé disparaît avant le clic */
@@ -6462,7 +6654,7 @@ document.addEventListener("focusout",()=>setTimeout(()=>{if(pending)render()},35
 /* ================================================================
    INTERACTIONS
    ================================================================ */
-function go(p){if(V.note)nSave();V.page=p;V.confirm=null;V.chap=null;V.proj=null;V.note=null;V.ndraft=null;V.nf=null;V.nq="";V.newf=false;V.renf=false;if(p==="proj")nHousekeep();saveV();render(true);window.scrollTo(0,0)}
+function go(p){if(V.note)nSave();if(p!==V.page)V.prev=V.page;V.page=p;V.confirm=null;V.chap=null;V.proj=null;V.note=null;V.ndraft=null;V.nf=null;V.nq="";V.newf=false;V.renf=false;if(p==="proj")nHousekeep();saveV();render(true);window.scrollTo(0,0)}
 function confirmOr(id,fn){if(V.confirm===id){V.confirm=null;return fn()}V.confirm=id;render(true)}
 document.addEventListener("click",e=>{
   const b=e.target.closest("button");if(!b)return;const d=b.dataset;
