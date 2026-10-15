@@ -1,61 +1,91 @@
 {
- "updated": "2026-10-14T06:04:09.128Z",
+ "updated": "2026-10-15T06:04:07.048Z",
  "snap": {
-  "date": "2026-10-13",
+  "date": "2026-10-14",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 828",
-    "c": "−0,07 %"
+    "v": "7 873",
+    "c": "+0,58 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 805",
-    "c": "−0,02 %"
+    "v": "7 719",
+    "c": "−1,11 %"
    },
    {
     "n": "Nasdaq",
-    "v": "27 204",
-    "c": "−0,15 %"
+    "v": "26 693",
+    "c": "−1,88 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "15,27",
-    "c": "+0,39 %"
+    "v": "16,87",
+    "c": "+10,48 %"
    },
    {
     "n": "Brent",
-    "v": "106,2 $",
-    "c": "+0,46 %"
+    "v": "104,5 $",
+    "c": "−1,49 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "94,6 $",
-    "c": "+0,49 %"
+    "v": "94,2 $",
+    "c": "−0,98 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 176 $",
-    "c": "−0,02 %"
+    "v": "4 160 $",
+    "c": "+1,28 %"
    },
    {
     "n": "Bitcoin",
-    "v": "83 366 $",
-    "c": "+1,96 %"
+    "v": "80 528 $",
+    "c": "−3,09 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,22 %",
-    "c": "−0,02 pt"
+    "v": "5,19 %",
+    "c": "−0,03 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,121",
-    "c": "+0,43 %"
+    "v": "1,122",
+    "c": "+0,10 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-15-ecoscore-la-course-des-flottes-d-entrepr",
+   "src": "Le Monde",
+   "date": "2026-10-15",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/15/ecoscore-la-course-des-flottes-d-entreprise-au-precieux-label-environnemental_6794183_3234.html",
+   "t": {
+    "fr": "Ecoscore : la course des flottes d’entreprise au précieux label environnemental",
+    "en": "Ecoscore : la course des flottes d’entreprise au précieux label environnemental"
+   }
+  },
+  {
+   "id": "2026-10-15-les-damnes-de-la-donnee-les-travailleurs",
+   "src": "Le Monde",
+   "date": "2026-10-15",
+   "url": "https://www.lemonde.fr/vie-au-travail/article/2026/10/15/les-damnes-de-la-donnee-les-travailleurs-du-sud-invisibilises-et-pourtant-indispensables-au-developpement-de-l-ia_6794181_6768900.html",
+   "t": {
+    "fr": "« Les Damnés de la donnée » : les travailleurs du Sud, invisibilisés et pourtant indispensables au développement de l’IA",
+    "en": "« Les Damnés de la donnée » : les travailleurs du Sud, invisibilisés et pourtant indispensables au développement de l’IA"
+   }
+  },
+  {
+   "id": "2026-10-15-les-menages-pris-en-etau-entre-des-depen",
+   "src": "Le Monde",
+   "date": "2026-10-15",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/15/les-menages-pris-en-etau-entre-des-depenses-contraintes-de-plus-en-plus-lourdes-et-l-envolee-des-prix_6794079_3234.html",
+   "t": {
+    "fr": "Les ménages pris en étau entre des dépenses contraintes de plus en plus lourdes et l’envolée des prix",
+    "en": "Les ménages pris en étau entre des dépenses contraintes de plus en plus lourdes et l’envolée des prix"
+   }
+  },
   {
    "id": "2026-10-14-les-constructeurs-en-difficulte-parient-",
    "src": "Le Monde",
@@ -276,70 +306,6 @@
    "r": {
     "fr": "Les monopoles permettent de fixer les prix librement sans crainte de perdre des clients, garantissant des marges bénéficiaires élevées et stables.",
     "en": "Monopolies allow companies to set prices freely without fear of losing customers, ensuring high and stable profit margins."
-   }
-  },
-  {
-   "id": "2026-10-08-intelligence-artificielle-mistral-defie-",
-   "src": "Le Figaro",
-   "date": "2026-10-08",
-   "url": "https://www.lefigaro.fr/secteur/high-tech/intelligence-artificielle-mistral-est-a-quelques-mois-de-rattraper-ses-concurrents-americains-assure-arthur-mensch-20261008",
-   "t": {
-    "fr": "Intelligence Artificielle : Mistral défie les géants américains",
-    "en": "Artificial Intelligence: Mistral Challenges US Giants"
-   },
-   "s": {
-    "fr": "Le champion français de l'intelligence artificielle, Mistral, affirme être sur le point de rattraper ses concurrents d'outre-Atlantique. Selon son dirigeant Arthur Mensch, le lancement récent du modèle Large 4 marque une avancée technologique majeure pour l'entreprise.",
-    "en": "The French artificial intelligence champion, Mistral, claims to be on the verge of catching up with its American competitors. According to its leader Arthur Mensch, the recent launch of the Large 4 model marks a major technological breakthrough for the company."
-   },
-   "d": {
-    "fr": "Dans le secteur de la tech, la vitesse d'innovation détermine souvent la valorisation d'une entreprise et l'intérêt des capital-risqueurs. Être capable de rivaliser avec les leaders du marché mondial peut attirer des flux massifs de capitaux vers une jeune pousse.",
-    "en": "In the tech sector, the speed of innovation often determines a company's valuation and venture capitalists' interest. Being able to compete with global market leaders can attract massive capital flows to a startup."
-   },
-   "v": [
-    [
-     "valorisation",
-     "valuation"
-    ],
-    [
-     "capital-risque",
-     "venture capital"
-    ],
-    [
-     "avantage technologique",
-     "technological edge"
-    ],
-    [
-     "part de marché",
-     "market share"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi les investisseurs acceptent-ils de financer des entreprises technologiques qui ne sont pas encore rentables ?",
-    "en": "Why do investors agree to finance tech companies that are not yet profitable?"
-   },
-   "r": {
-    "fr": "Ils parient sur la croissance future et la capacité de l'entreprise à dominer un marché en forte expansion. Si la technologie s'impose, les bénéfices à long terme compenseront largement les pertes initiales.",
-    "en": "They bet on future growth and the company's ability to dominate a rapidly expanding market. If the technology succeeds, long-term profits will easily offset initial losses."
-   }
-  },
-  {
-   "id": "2026-10-08-carburants-le-gouvernement-reunit-les-di",
-   "src": "Le Monde",
-   "date": "2026-10-08",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/08/carburants-le-gouvernement-reunit-les-distributeurs-lundi-et-espere-une-baisse-des-prix-debut-novembre_6790284_3234.html",
-   "t": {
-    "fr": "Carburants : le gouvernement réunit les distributeurs lundi et espère une baisse des prix « début novembre »",
-    "en": "Carburants : le gouvernement réunit les distributeurs lundi et espère une baisse des prix « début novembre »"
-   }
-  },
-  {
-   "id": "2026-10-08-pour-son-avion-de-combat-du-futur-le-roy",
-   "src": "Le Monde",
-   "date": "2026-10-08",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/08/pour-son-avion-de-combat-du-futur-le-royaume-uni-fait-un-appel-du-pied-a-l-allemagne_6790280_3234.html",
-   "t": {
-    "fr": "Pour son avion de combat du futur, le Royaume-Uni fait un appel du pied à l’Allemagne",
-    "en": "Pour son avion de combat du futur, le Royaume-Uni fait un appel du pied à l’Allemagne"
    }
   }
  ],
