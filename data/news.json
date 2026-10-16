@@ -1,61 +1,91 @@
 {
- "updated": "2026-10-15T06:04:07.048Z",
+ "updated": "2026-10-16T06:04:33.706Z",
  "snap": {
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 873",
-    "c": "+0,58 %"
+    "v": "7 935",
+    "c": "+0,78 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 719",
-    "c": "−1,11 %"
+    "v": "7 744",
+    "c": "+0,33 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 693",
-    "c": "−1,88 %"
+    "v": "26 713",
+    "c": "+0,08 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "16,87",
-    "c": "+10,48 %"
+    "v": "16,46",
+    "c": "−2,43 %"
    },
    {
     "n": "Brent",
-    "v": "104,5 $",
-    "c": "−1,49 %"
+    "v": "105,2 $",
+    "c": "−0,65 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "94,2 $",
-    "c": "−0,98 %"
+    "v": "95,8 $",
+    "c": "−2,27 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 160 $",
-    "c": "+1,28 %"
+    "v": "4 194 $",
+    "c": "+0,57 %"
    },
    {
     "n": "Bitcoin",
-    "v": "80 528 $",
-    "c": "−3,09 %"
+    "v": "82 006 $",
+    "c": "+0,54 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,19 %",
-    "c": "−0,03 pt"
+    "v": "5,09 %",
+    "c": "−0,10 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,122",
-    "c": "+0,10 %"
+    "v": "1,123",
+    "c": "+0,30 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-16-l-investissement-socialement-responsable",
+   "src": "Le Monde",
+   "date": "2026-10-16",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/16/l-investissement-socialement-responsable-reste-boude-par-les-epargnants_6795180_3234.html",
+   "t": {
+    "fr": "L’investissement socialement responsable reste boudé par les épargnants",
+    "en": "L’investissement socialement responsable reste boudé par les épargnants"
+   }
+  },
+  {
+   "id": "2026-10-16-les-pays-membres-de-l-ue-peinent-a-s-ent",
+   "src": "Le Monde",
+   "date": "2026-10-16",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/16/carburants-les-vingt-sept-peinent-a-s-entendre-pour-faire-baisser-les-prix-de-l-energie-un-cauchemar-pour-l-economie-europeenne_6795109_3234.html",
+   "t": {
+    "fr": "Les pays membres de l’UE peinent à s’entendre pour faire baisser les prix de l’énergie",
+    "en": "Les pays membres de l’UE peinent à s’entendre pour faire baisser les prix de l’énergie"
+   }
+  },
+  {
+   "id": "2026-10-16-le-pouvoir-d-achat-des-francais-a-t-il-v",
+   "src": "Le Monde",
+   "date": "2026-10-16",
+   "url": "https://www.lemonde.fr/les-decodeurs/article/2026/10/16/le-pouvoir-d-achat-des-francais-a-t-il-vraiment-decroche-ce-que-disent-les-chiffres_6795107_4355770.html",
+   "t": {
+    "fr": "Le pouvoir d’achat des Français a-t-il vraiment décroché ? Ce que disent les chiffres",
+    "en": "Le pouvoir d’achat des Français a-t-il vraiment décroché ? Ce que disent les chiffres"
+   }
+  },
   {
    "id": "2026-10-15-ecoscore-la-course-des-flottes-d-entrepr",
    "src": "Le Monde",
@@ -174,138 +204,6 @@
    "t": {
     "fr": "Face à la Chine, la France et l’Espagne défendent des stratégies différentes",
     "en": "Face à la Chine, la France et l’Espagne défendent des stratégies différentes"
-   }
-  },
-  {
-   "id": "2026-10-09-deception-sur-les-revenus-d-openai-wall-",
-   "src": "Le Monde",
-   "date": "2026-10-09",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/09/les-ambiguites-sur-le-chiffre-d-affaires-d-openai-effraient-wall-street_6790497_3234.html",
-   "t": {
-    "fr": "Déception sur les revenus d'OpenAI : Wall Street s'inquiète",
-    "en": "OpenAI Revenue Disappointment Sparks Wall Street Concerns"
-   },
-   "s": {
-    "fr": "Les prévisions de chiffre d'affaires d'OpenAI ont été revues à la baisse, s'établissant à 50 milliards de dollars au lieu des 68 milliards attendus. Cette annonce a entraîné un report de son introduction en Bourse à 2027 et a provoqué une baisse des actions liées à l'intelligence artificielle. Les investisseurs craignent désormais que la rentabilité du secteur ne soit pas à la hauteur des attentes.",
-    "en": "OpenAI's revenue projections fell short of expectations, reaching 50 billion dollars instead of the anticipated 68 billion. This news prompted the company to delay its initial public offering to 2027 and triggered a sell-off in artificial intelligence stocks. Investors are now worried that the sector's profitability might not match previous hype."
-   },
-   "d": {
-    "fr": "En trading, lorsqu'une entreprise leader déçoit sur ses chiffres, cela peut entraîner une baisse collective de tout son secteur d'activité par effet de contagion. C'est pourquoi les traders surveillent de près les publications de résultats, car elles redéfinissent la valeur réelle des entreprises technologiques.",
-    "en": "In trading, when a sector leader underperforms, it can drag down the stock prices of all related companies due to a contagion effect. This is why traders closely monitor earnings reports, as they redefine the actual valuation of tech firms."
-   },
-   "v": [
-    [
-     "chiffre d'affaires",
-     "revenue"
-    ],
-    [
-     "introduction en Bourse",
-     "initial public offering"
-    ],
-    [
-     "secteur technologique",
-     "tech sector"
-    ],
-    [
-     "prévisions financières",
-     "financial forecasts"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi une baisse des prévisions d'une seule entreprise non cotée peut-elle faire chuter d'autres actions en Bourse ?",
-    "en": "Why can a drop in forecasts for a single unlisted company cause other stock prices to fall?"
-   },
-   "r": {
-    "fr": "OpenAI est perçue comme le baromètre de l'intelligence artificielle ; si ses revenus déçoivent, les investisseurs craignent que tout le marché de l'IA soit surévalué.",
-    "en": "OpenAI is seen as the bellwether for artificial intelligence; if its revenues disappoint, investors fear the entire AI market might be overvalued."
-   }
-  },
-  {
-   "id": "2026-10-09-alerte-sur-les-taux-d-interet-americains",
-   "src": "Financial Times",
-   "date": "2026-10-09",
-   "url": "https://www.ft.com/content/a752a86c-cf05-4152-b842-2ae6b6bf3fe0?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Alerte sur les taux d'intérêt américains à 10 ans",
-    "en": "Warning on US 10-Year Treasury Yields"
-   },
-   "s": {
-    "fr": "Selon le géant de l'investissement Pimco, les rendements des obligations d'État américaines à 10 ans risquent d'atteindre 6 % pour la première fois depuis l'an 2000. Cette hausse s'explique par l'obligation pour certains acteurs du marché de déboucler des positions perdantes. Une telle augmentation des coûts d'emprunt représente un risque majeur pour l'économie globale.",
-    "en": "According to investment giant Pimco, US 10-year Treasury yields could hit 6% for the first time since 2000. This potential rise is driven by market participants being forced to unwind losing bets. Such an increase in borrowing costs poses a major risk to the global economy."
-   },
-   "d": {
-    "fr": "Les obligations d'État sont considérées comme des placements sûrs, mais si leurs taux grimpent, emprunter devient plus cher pour tout le monde. Pour un trader, une hausse des taux obligataires rend souvent les actions moins attractives car les investisseurs préfèrent la sécurité des obligations à haut rendement.",
-    "en": "Government bonds are considered safe investments, but when their yields rise, borrowing becomes more expensive for everyone. For a trader, rising bond yields often make stocks less attractive because investors prefer the safety of high-yielding bonds."
-   },
-   "v": [
-    [
-     "rendement obligataire",
-     "bond yield"
-    ],
-    [
-     "obligations du Trésor",
-     "Treasury bonds"
-    ],
-    [
-     "coûts d'emprunt",
-     "borrowing costs"
-    ],
-    [
-     "déboucler une position",
-     "unwind a position"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'impact d'une hausse des taux d'intérêt sur les entreprises qui veulent se développer ?",
-    "en": "What is the impact of rising interest rates on companies looking to expand?"
-   },
-   "r": {
-    "fr": "Des taux plus élevés augmentent le coût de leurs dettes, ce qui réduit leurs bénéfices et freine leurs investissements.",
-    "en": "Higher rates increase their debt servicing costs, which reduces their profits and slows down their investments."
-   }
-  },
-  {
-   "id": "2026-10-09-virgin-trains-s-attaque-au-monopole-d-eu",
-   "src": "Le Monde",
-   "date": "2026-10-09",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/09/virgin-trains-se-pose-en-serieux-concurrent-d-eurostar-sur-le-trafic-transmanche_6790518_3234.html",
-   "t": {
-    "fr": "Virgin Trains s'attaque au monopole d'Eurostar",
-    "en": "Virgin Trains Challenges Eurostar's Monopoly"
-   },
-   "s": {
-    "fr": "La compagnie ferroviaire de Richard Branson, Virgin Trains, projette de lancer vingt liaisons quotidiennes à travers le tunnel sous la Manche d'ici 2030. Ce projet en ferait le tout premier concurrent direct d'Eurostar sur ce trajet stratégique reliant Londres au continent européen. Cette initiative pourrait transformer le marché des transports transmanches.",
-    "en": "Richard Branson's railway company, Virgin Trains, plans to launch twenty daily trips through the Channel Tunnel by 2030. This project would make it the very first direct competitor to Eurostar on this strategic route linking London to continental Europe. This initiative could transform the cross-Channel transport market."
-   },
-   "d": {
-    "fr": "L'arrivée d'un nouveau concurrent dans un secteur monopolistique stimule généralement la baisse des prix et l'innovation pour séduire les clients. En bourse, la fin d'un monopole peut affaiblir la rentabilité de l'acteur historique, ce que les traders anticipent en ajustant leurs investissements.",
-    "en": "The entry of a new competitor into a monopolistic sector generally drives down prices and stimulates innovation to attract customers. In the stock market, the end of a monopoly can weaken the incumbent's profitability, which traders anticipate by adjusting their investments."
-   },
-   "v": [
-    [
-     "concurrence",
-     "competition"
-    ],
-    [
-     "monopole",
-     "monopoly"
-    ],
-    [
-     "liaison ferroviaire",
-     "rail link"
-    ],
-    [
-     "part de marché",
-     "market share"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi les investisseurs aiment-ils généralement les entreprises en situation de monopole ?",
-    "en": "Why do investors generally like companies with a monopoly?"
-   },
-   "r": {
-    "fr": "Les monopoles permettent de fixer les prix librement sans crainte de perdre des clients, garantissant des marges bénéficiaires élevées et stables.",
-    "en": "Monopolies allow companies to set prices freely without fear of losing customers, ensuring high and stable profit margins."
    }
   }
  ],
