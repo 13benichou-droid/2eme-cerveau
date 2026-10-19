@@ -1,61 +1,193 @@
 {
- "updated": "2026-10-16T06:04:33.706Z",
+ "updated": "2026-10-19T06:07:44.813Z",
  "snap": {
-  "date": "2026-10-15",
+  "date": "2026-10-16",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 935",
-    "c": "+0,78 %"
+    "v": "7 957",
+    "c": "+0,28 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 744",
-    "c": "+0,33 %"
+    "v": "7 659",
+    "c": "−1,09 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 713",
-    "c": "+0,08 %"
+    "v": "26 140",
+    "c": "−2,15 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "16,46",
-    "c": "−2,43 %"
+    "v": "19,99",
+    "c": "+21,45 %"
    },
    {
     "n": "Brent",
-    "v": "105,2 $",
-    "c": "−0,65 %"
+    "v": "107,7 $",
+    "c": "−2,01 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "95,8 $",
-    "c": "−2,27 %"
+    "v": "97,3 $",
+    "c": "−4,08 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 194 $",
-    "c": "+0,57 %"
+    "v": "4 206 $",
+    "c": "+0,60 %"
    },
    {
     "n": "Bitcoin",
-    "v": "82 006 $",
-    "c": "+0,54 %"
+    "v": "82 696 $",
+    "c": "+1,61 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,09 %",
-    "c": "−0,10 pt"
+    "v": "5,10 %",
+    "c": "+0,01 pt"
    },
    {
     "n": "EUR/USD",
     "v": "1,123",
-    "c": "+0,30 %"
+    "c": "+0,11 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-19-remontee-des-taux-d-interet-et-impact-su",
+   "src": "Le Monde",
+   "date": "2026-10-19",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/19/placements-la-remontee-des-taux-d-interet-rebat-les-cartes-de-l-epargne_6797404_3234.html",
+   "t": {
+    "fr": "Remontée des taux d'intérêt et impact sur l'épargne",
+    "en": "Interest rate hikes and their impact on savings"
+   },
+   "s": {
+    "fr": "En France, la hausse récente des taux d'intérêt modifie en profondeur le paysage des placements financiers. Cette dynamique engendre de nouvelles perspectives de gain pour certains épargnants, mais accroît également les risques pour d'autres.",
+    "en": "In France, the recent increase in interest rates is profoundly altering the investment landscape. This trend creates new earning opportunities for some savers while increasing risks for others."
+   },
+   "d": {
+    "fr": "En trading et en finance, des taux d'intérêt plus élevés rendent les placements sans risque plus attractifs par rapport aux actions. Pour un débutant, cela signifie qu'il faut surveiller les décisions des banques centrales car elles orientent les flux de capitaux.",
+    "en": "In trading and finance, higher interest rates make risk-free investments more attractive compared to stocks. For a beginner, this means monitoring central bank decisions as they direct capital flows."
+   },
+   "v": [
+    [
+     "Taux d'intérêt",
+     "Interest rate"
+    ],
+    [
+     "Épargne",
+     "Savings"
+    ],
+    [
+     "Placement",
+     "Investment"
+    ],
+    [
+     "Rendement",
+     "Yield"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les investisseurs réorientent-ils leur capital lorsque les taux d'intérêt augmentent ?",
+    "en": "Why do investors shift their capital when interest rates rise?"
+   },
+   "r": {
+    "fr": "Ils cherchent à profiter de rendements plus élevés offerts par des actifs moins risqués comme les obligations. Cela réduit l'attrait relatif des marchés boursiers plus volatils.",
+    "en": "They seek to take advantage of higher yields offered by less risky assets such as bonds. This reduces the relative attractiveness of more volatile stock markets."
+   }
+  },
+  {
+   "id": "2026-10-19-tensions-au-moyen-orient-et-exportations",
+   "src": "Le Monde",
+   "date": "2026-10-19",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/19/pris-au-piege-du-detroit-d-ormuz-le-qatar-cherche-une-sortie-de-crise_6797486_3234.html",
+   "t": {
+    "fr": "Tensions au Moyen-Orient et exportations de gaz du Qatar",
+    "en": "Middle East tensions and Qatar's gas exports"
+   },
+   "s": {
+    "fr": "Le conflit au Moyen-Orient perturbe gravement l'économie du Qatar en bloquant l'accès au détroit d'Ormuz. L'émirat cherche une solution car son modèle économique repose essentiellement sur le gaz naturel liquéfié.",
+    "en": "The conflict in the Middle East severely disrupts Qatar's economy by blocking access to the Strait of Hormuz. The emirate is seeking a solution since its economic model relies mainly on liquefied natural gas."
+   },
+   "d": {
+    "fr": "Les blocages maritimes dans des zones stratégiques provoquent souvent une hausse soudaine des prix de l'énergie sur les marchés. Un trader doit comprendre comment les événements géopolitiques créent de la volatilité sur les matières premières.",
+    "en": "Maritime blockades in strategic areas often cause a sudden rise in energy prices across markets. A trader must understand how geopolitical events create volatility in commodities."
+   },
+   "v": [
+    [
+     "Gaz naturel liquéfié",
+     "Liquefied natural gas"
+    ],
+    [
+     "Matières premières",
+     "Commodities"
+    ],
+    [
+     "Modèle économique",
+     "Business model"
+    ],
+    [
+     "Choc d'offre",
+     "Supply shock"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'impact d'un blocage du détroit d'Ormuz sur le marché mondial de l'énergie ?",
+    "en": "What is the impact of a blockage in the Strait of Hormuz on the global energy market?"
+   },
+   "r": {
+    "fr": "Il restreint l'approvisionnement en gaz et en pétrole, ce qui entraîne une hausse brutale des cours mondiaux. Cette situation crée une forte incertitude pour les entreprises consommatrices d'énergie.",
+    "en": "It restricts the supply of gas and oil, driving a sharp surge in global prices. This situation creates significant uncertainty for energy-consuming companies."
+   }
+  },
+  {
+   "id": "2026-10-19-rebond-des-contrats-a-terme-americains-a",
+   "src": "Yahoo Finance",
+   "date": "2026-10-19",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/u-stock-futures-climb-investors-020224425.html?.tsrc=rss",
+   "t": {
+    "fr": "Rebond des contrats à terme américains après la chute de la tech",
+    "en": "U.S. futures rebound following technology stock selloff"
+   },
+   "s": {
+    "fr": "Les contrats à terme sur les indices américains ont progressé, portés par le retour des investisseurs vers les valeurs de l'intelligence artificielle. Ce rebond survient après une nette baisse la semaine précédente et avant une série importante de résultats d'entreprises.",
+    "en": "U.S. index futures advanced, driven by investors returning to artificial intelligence stocks. This rebound comes after a sharp decline the previous week and ahead of a key corporate earnings week."
+   },
+   "d": {
+    "fr": "Les contrats à terme permettent de mesurer le sentiment des investisseurs avant l'ouverture officielle de la bourse. Après un mouvement de vente massif, les acheteurs profitent parfois de prix plus bas pour revenir sur le marché.",
+    "en": "Futures contracts allow traders to gauge investor sentiment before the stock market official opening. Following a massive selloff, buyers sometimes take advantage of lower prices to re-enter the market."
+   },
+   "v": [
+    [
+     "Contrats à terme",
+     "Futures contracts"
+    ],
+    [
+     "Vague de vente",
+     "Selloff"
+    ],
+    [
+     "Saison des résultats",
+     "Earnings season"
+    ],
+    [
+     "Sentiment de marché",
+     "Market sentiment"
+    ]
+   ],
+   "q": {
+    "fr": "Que représentent les contrats « futures » pour les traders avant l'ouverture du marché ?",
+    "en": "What do futures contracts represent for traders prior to market open?"
+   },
+   "r": {
+    "fr": "Ils servent d'indicateurs anticipés sur la tendance probable des actions à l'ouverture de la séance. Les traders les utilisent pour ajuster leurs positions ou se couvrir contre le risque.",
+    "en": "They serve as early indicators of the likely trend for equities at the opening bell. Traders use them to adjust their positions or hedge against risk."
+   }
+  },
   {
    "id": "2026-10-16-l-investissement-socialement-responsable",
    "src": "Le Monde",
@@ -174,36 +306,6 @@
    "t": {
     "fr": "A Beauvais, avec les passagers de Ryanair, plongée dans l’univers des vols ultra-low cost : « Je paie 35 euros pour l’aller-retour, mais c’est parce que je n’emporte qu’un tout petit sac à dos »",
     "en": "A Beauvais, avec les passagers de Ryanair, plongée dans l’univers des vols ultra-low cost : « Je paie 35 euros pour l’aller-retour, mais c’est parce que je n’emporte qu’un tout petit sac à dos »"
-   }
-  },
-  {
-   "id": "2026-10-12-compte-a-terme-ou-livret-bancaire-quel-e",
-   "src": "Le Monde",
-   "date": "2026-10-12",
-   "url": "https://www.lemonde.fr/argent/article/2026/10/12/compte-a-terme-ou-livret-bancaire-quel-est-le-meilleur-choix-apres-la-hausse-des-taux_6792423_1657007.html",
-   "t": {
-    "fr": "Compte à terme ou livret bancaire, quel est le meilleur choix après la hausse des taux ?",
-    "en": "Compte à terme ou livret bancaire, quel est le meilleur choix après la hausse des taux ?"
-   }
-  },
-  {
-   "id": "2026-10-12-le-commissaire-europeen-au-climat-compte",
-   "src": "Le Monde",
-   "date": "2026-10-12",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/12/le-commissaire-europeen-au-climat-compte-sur-le-made-in-europe-et-le-nucleaire-pour-reduire-les-emissions-de-carbone_6792422_3234.html",
-   "t": {
-    "fr": "Le commissaire européen au climat compte sur le « made in Europe » et le nucléaire pour réduire les émissions de carbone",
-    "en": "Le commissaire européen au climat compte sur le « made in Europe » et le nucléaire pour réduire les émissions de carbone"
-   }
-  },
-  {
-   "id": "2026-10-12-face-a-la-chine-la-france-et-l-espagne-d",
-   "src": "Le Monde",
-   "date": "2026-10-12",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/12/face-a-la-chine-la-france-et-l-espagne-defendent-des-strategies-differentes_6792345_3234.html",
-   "t": {
-    "fr": "Face à la Chine, la France et l’Espagne défendent des stratégies différentes",
-    "en": "Face à la Chine, la France et l’Espagne défendent des stratégies différentes"
    }
   }
  ],
