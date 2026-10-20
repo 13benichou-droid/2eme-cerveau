@@ -1,61 +1,91 @@
 {
- "updated": "2026-10-19T06:07:44.813Z",
+ "updated": "2026-10-20T06:06:19.683Z",
  "snap": {
-  "date": "2026-10-16",
+  "date": "2026-10-19",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 957",
-    "c": "+0,28 %"
+    "v": "7 868",
+    "c": "−1,11 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 659",
-    "c": "−1,09 %"
+    "v": "7 691",
+    "c": "+0,41 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 140",
-    "c": "−2,15 %"
+    "v": "26 431",
+    "c": "+1,11 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "19,99",
-    "c": "+21,45 %"
+    "v": "18,44",
+    "c": "−7,75 %"
    },
    {
     "n": "Brent",
-    "v": "107,7 $",
-    "c": "−2,01 %"
+    "v": "110,4 $",
+    "c": "+0,76 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "97,3 $",
-    "c": "−4,08 %"
+    "v": "99,2 $",
+    "c": "−4,28 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 206 $",
-    "c": "+0,60 %"
+    "v": "4 141 $",
+    "c": "−0,47 %"
    },
    {
     "n": "Bitcoin",
-    "v": "82 696 $",
-    "c": "+1,61 %"
+    "v": "81 575 $",
+    "c": "−0,54 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,10 %",
-    "c": "+0,01 pt"
+    "v": "5,14 %",
+    "c": "+0,04 pt"
    },
    {
     "n": "EUR/USD",
     "v": "1,123",
-    "c": "+0,11 %"
+    "c": "+0,04 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-20-apres-les-violences-urbaines-du-17-octob",
+   "src": "Le Monde",
+   "date": "2026-10-20",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/20/apres-les-violences-urbaines-du-17-octobre-assureurs-et-etat-se-disputent-le-partage-des-responsabilites_6797879_3234.html",
+   "t": {
+    "fr": "Après les violences urbaines du 17 octobre, assureurs et Etat se disputent le partage des responsabilités",
+    "en": "Après les violences urbaines du 17 octobre, assureurs et Etat se disputent le partage des responsabilités"
+   }
+  },
+  {
+   "id": "2026-10-20-assurance-vie-choisir-les-fonds-en-euros",
+   "src": "Le Monde",
+   "date": "2026-10-20",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/20/assurance-vie-choisir-les-fonds-en-euros-reste-le-placement-incontournable-pour-les-epargnants-francais_6797873_3234.html",
+   "t": {
+    "fr": "Assurance-vie : choisir les fonds en euros reste le placement incontournable pour les épargnants français",
+    "en": "Assurance-vie : choisir les fonds en euros reste le placement incontournable pour les épargnants français"
+   }
+  },
+  {
+   "id": "2026-10-20-on-a-teste-instinct-l-agent-ia-grand-pub",
+   "src": "Le Monde",
+   "date": "2026-10-20",
+   "url": "https://www.lemonde.fr/pixels/article/2026/10/20/on-a-teste-instinct-l-agent-ia-grand-public-qui-entend-concurrencer-ceux-d-openai-et-de-meta_6797872_4408996.html",
+   "t": {
+    "fr": "On a testé Instinct, l’agent IA grand public qui entend concurrencer ceux d’OpenAI et de Meta",
+    "en": "On a testé Instinct, l’agent IA grand public qui entend concurrencer ceux d’OpenAI et de Meta"
+   }
+  },
   {
    "id": "2026-10-19-remontee-des-taux-d-interet-et-impact-su",
    "src": "Le Monde",
@@ -276,36 +306,6 @@
    "t": {
     "fr": "« A moyen terme, l’IA va contraindre les Etats à revoir en profondeur leurs systèmes fiscaux »",
     "en": "« A moyen terme, l’IA va contraindre les Etats à revoir en profondeur leurs systèmes fiscaux »"
-   }
-  },
-  {
-   "id": "2026-10-13-des-epargnants-contraints-de-s-adapter-e",
-   "src": "Le Monde",
-   "date": "2026-10-13",
-   "url": "https://www.lemonde.fr/argent/article/2026/10/13/des-epargnants-contraints-de-s-adapter-en-permanence-a-de-nouvelles-regles-fiscales_6793056_1657007.html",
-   "t": {
-    "fr": "Des épargnants contraints de s’adapter en permanence à de nouvelles règles fiscales",
-    "en": "Des épargnants contraints de s’adapter en permanence à de nouvelles règles fiscales"
-   }
-  },
-  {
-   "id": "2026-10-13-dette-l-inquietante-envolee-des-taux-d-i",
-   "src": "Le Monde",
-   "date": "2026-10-13",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/13/dette-l-inquietante-envolee-des-taux-d-interet-en-16-dates_6793053_3234.html",
-   "t": {
-    "fr": "Dette : l’inquiétante envolée des taux d’intérêt en 16 dates",
-    "en": "Dette : l’inquiétante envolée des taux d’intérêt en 16 dates"
-   }
-  },
-  {
-   "id": "2026-10-13-a-beauvais-avec-les-passagers-de-ryanair",
-   "src": "Le Monde",
-   "date": "2026-10-13",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/13/a-beauvais-avec-les-passagers-de-ryanair-plongee-dans-l-univers-des-vols-ultra-low-cost-je-paie-35-euros-pour-l-aller-retour-mais-c-est-parce-que-je-n-emporte-qu-un-tout-petit-sac-a-dos_6793049_3234.html",
-   "t": {
-    "fr": "A Beauvais, avec les passagers de Ryanair, plongée dans l’univers des vols ultra-low cost : « Je paie 35 euros pour l’aller-retour, mais c’est parce que je n’emporte qu’un tout petit sac à dos »",
-    "en": "A Beauvais, avec les passagers de Ryanair, plongée dans l’univers des vols ultra-low cost : « Je paie 35 euros pour l’aller-retour, mais c’est parce que je n’emporte qu’un tout petit sac à dos »"
    }
   }
  ],
