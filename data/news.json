@@ -1,61 +1,91 @@
 {
- "updated": "2026-10-20T06:06:19.683Z",
+ "updated": "2026-10-21T06:07:10.716Z",
  "snap": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 868",
-    "c": "−1,11 %"
+    "v": "7 838",
+    "c": "−0,38 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 691",
-    "c": "+0,41 %"
+    "v": "7 713",
+    "c": "+0,28 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 431",
-    "c": "+1,11 %"
+    "v": "26 425",
+    "c": "−0,02 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "18,44",
-    "c": "−7,75 %"
+    "v": "17,31",
+    "c": "−6,13 %"
    },
    {
     "n": "Brent",
-    "v": "110,4 $",
-    "c": "+0,76 %"
+    "v": "110,5 $",
+    "c": "+1,57 %"
    },
    {
     "n": "Pétrole WTI",
     "v": "99,2 $",
-    "c": "−4,28 %"
+    "c": "−2,51 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 141 $",
-    "c": "−0,47 %"
+    "v": "4 135 $",
+    "c": "−0,19 %"
    },
    {
     "n": "Bitcoin",
-    "v": "81 575 $",
-    "c": "−0,54 %"
+    "v": "82 598 $",
+    "c": "+0,91 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,14 %",
-    "c": "+0,04 pt"
+    "v": "5,12 %",
+    "c": "−0,02 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,123",
-    "c": "+0,04 %"
+    "v": "1,122",
+    "c": "+0,08 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-21-on-pourrait-croire-que-c-est-de-l-ia-qua",
+   "src": "Le Monde",
+   "date": "2026-10-21",
+   "url": "https://www.lemonde.fr/pixels/article/2026/10/21/on-pourrait-croire-que-c-est-de-l-ia-quand-la-peur-du-soupcon-change-notre-facon-d-ecrire_6798209_4408996.html",
+   "t": {
+    "fr": "« On pourrait croire que c’est de l’IA » : quand la peur du soupçon change notre façon d’écrire",
+    "en": "« On pourrait croire que c’est de l’IA » : quand la peur du soupçon change notre façon d’écrire"
+   }
+  },
+  {
+   "id": "2026-10-21-ludovic-huzieux-cofondateur-d-artemis-co",
+   "src": "Le Monde",
+   "date": "2026-10-21",
+   "url": "https://www.lemonde.fr/argent/article/2026/10/21/ludovic-huzieux-cofondateur-d-artemis-courtage-nous-anticipons-une-rarefaction-du-credit-immobilier_6798208_1657007.html",
+   "t": {
+    "fr": "Ludovic Huzieux, cofondateur d’Artémis courtage : « Nous anticipons une raréfaction du crédit immobilier »",
+    "en": "Ludovic Huzieux, cofondateur d’Artémis courtage : « Nous anticipons une raréfaction du crédit immobilier »"
+   }
+  },
+  {
+   "id": "2026-10-21-au-bresil-l-uberisation-de-l-economie-pr",
+   "src": "Le Monde",
+   "date": "2026-10-21",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/21/au-bresil-l-uberisation-de-l-economie-profite-a-l-extreme-droite_6798203_3234.html",
+   "t": {
+    "fr": "Au Brésil, l’ubérisation de l’économie profite à l’extrême droite",
+    "en": "Au Brésil, l’ubérisation de l’économie profite à l’extrême droite"
+   }
+  },
   {
    "id": "2026-10-20-apres-les-violences-urbaines-du-17-octob",
    "src": "Le Monde",
@@ -276,36 +306,6 @@
    "t": {
     "fr": "Les ménages pris en étau entre des dépenses contraintes de plus en plus lourdes et l’envolée des prix",
     "en": "Les ménages pris en étau entre des dépenses contraintes de plus en plus lourdes et l’envolée des prix"
-   }
-  },
-  {
-   "id": "2026-10-14-les-constructeurs-en-difficulte-parient-",
-   "src": "Le Monde",
-   "date": "2026-10-14",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/14/les-constructeurs-en-difficulte-parient-sur-le-mondial-de-l-auto-pour-se-relancer_6793464_3234.html",
-   "t": {
-    "fr": "Les constructeurs en difficulté parient sur le Mondial de l’auto pour se relancer",
-    "en": "Les constructeurs en difficulté parient sur le Mondial de l’auto pour se relancer"
-   }
-  },
-  {
-   "id": "2026-10-14-une-dame-a-contracte-60-credits-a-la-con",
-   "src": "Le Monde",
-   "date": "2026-10-14",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/14/une-dame-a-contracte-60-credits-a-la-consommation-sans-que-personne-l-arrete-toujours-plus-de-francais-frappes-par-le-surendettement_6793397_3234.html",
-   "t": {
-    "fr": "« Une dame a contracté 60 crédits à la consommation sans que personne l’arrête » : toujours plus de Français frappés par le surendettement",
-    "en": "« Une dame a contracté 60 crédits à la consommation sans que personne l’arrête » : toujours plus de Français frappés par le surendettement"
-   }
-  },
-  {
-   "id": "2026-10-14-a-moyen-terme-l-ia-va-contraindre-les-et",
-   "src": "Le Monde",
-   "date": "2026-10-14",
-   "url": "https://www.lemonde.fr/idees/article/2026/10/14/a-moyen-terme-l-ia-va-contraindre-les-etats-a-revoir-en-profondeur-leurs-systemes-fiscaux_6793393_3232.html",
-   "t": {
-    "fr": "« A moyen terme, l’IA va contraindre les Etats à revoir en profondeur leurs systèmes fiscaux »",
-    "en": "« A moyen terme, l’IA va contraindre les Etats à revoir en profondeur leurs systèmes fiscaux »"
    }
   }
  ],
