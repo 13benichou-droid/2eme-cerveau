@@ -91,7 +91,17 @@ const short = async r => (await r.text()).slice(0, 160).replace(/\s+/g, " ");
 
 async function viaGemini(prompt) {
   const key = env("GEMINI_API_KEY"); if (!key) return [];
-  const models = [...new Set([env("GEMINI_MODEL"), "gemini-3.5-flash", "gemini-2.5-flash", "gemini-2.5-flash-lite"].filter(Boolean))];
+  /* chaque modèle Flash a son propre quota : on prend la liste à jour chez Google (les 2.x ne sont plus ouverts aux nouveaux comptes) */
+  let dispo = [];
+  try {
+    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models?pageSize=1000", { headers: { "x-goog-api-key": key } });
+    if (r.ok) dispo = ((await r.json()).models || []).filter(m => (m.supportedGenerationMethods || []).includes("generateContent"))
+      .map(m => String(m.name || "").replace(/^models\//, ""))
+      .filter(n => /^gemini-[3-9]/.test(n) && /flash/.test(n) && !/image|tts|audio|live|embed|transcri|translate|preview|exp|robot|computer/.test(n));
+  } catch { }
+  const ver = n => parseFloat((n.match(/^gemini-(\d+(?:\.\d+)?)/) || [])[1] || 0);
+  dispo.sort((a, b) => (/lite/.test(a) - /lite/.test(b)) || ver(b) - ver(a));
+  const models = [...new Set([env("GEMINI_MODEL"), "gemini-3.5-flash", ...dispo, "gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite"].filter(Boolean))].slice(0, 6);
   return models.map(model => ({ nom: "Gemini · " + model, run: async () => {
     const r = await post(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { "x-goog-api-key": key },
       { contents: [{ role: "user", parts: [{ text: prompt }] }], generationConfig: { temperature: 0.4, responseMimeType: "application/json" } });
