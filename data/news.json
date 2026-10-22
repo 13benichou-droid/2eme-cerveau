@@ -1,61 +1,91 @@
 {
- "updated": "2026-10-21T06:07:10.716Z",
+ "updated": "2026-10-22T06:07:59.333Z",
  "snap": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 838",
-    "c": "−0,38 %"
+    "v": "7 922",
+    "c": "+1,06 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 713",
-    "c": "+0,28 %"
+    "v": "7 757",
+    "c": "+0,58 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 425",
-    "c": "−0,02 %"
+    "v": "26 703",
+    "c": "+1,05 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "17,31",
-    "c": "−6,13 %"
+    "v": "16,68",
+    "c": "−3,64 %"
    },
    {
     "n": "Brent",
-    "v": "110,5 $",
-    "c": "+1,57 %"
+    "v": "111,4 $",
+    "c": "+2,35 %"
    },
    {
     "n": "Pétrole WTI",
     "v": "99,2 $",
-    "c": "−2,51 %"
+    "c": "+2,12 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 135 $",
-    "c": "−0,19 %"
+    "v": "4 099 $",
+    "c": "−1,23 %"
    },
    {
     "n": "Bitcoin",
-    "v": "82 598 $",
-    "c": "+0,91 %"
+    "v": "82 783 $",
+    "c": "−0,19 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,12 %",
-    "c": "−0,02 pt"
+    "v": "5,15 %",
+    "c": "+0,03 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,122",
-    "c": "+0,08 %"
+    "v": "1,125",
+    "c": "+0,19 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-22-le-17-octobre-une-onde-de-choc-chez-les-",
+   "src": "Le Monde",
+   "date": "2026-10-22",
+   "url": "https://www.lemonde.fr/politique/article/2026/10/22/le-17-octobre-une-onde-de-choc-chez-les-prefets-aussi-c-est-les-tenebres-qu-ils-disaient-en-effet-nous-y-sommes_6798581_823448.html",
+   "t": {
+    "fr": "Le 17 octobre, une onde de choc chez les préfets aussi : « “C’est les ténèbres” qu’ils disaient… En effet, nous y sommes »",
+    "en": "Le 17 octobre, une onde de choc chez les préfets aussi : « “C’est les ténèbres” qu’ils disaient… En effet, nous y sommes »"
+   }
+  },
+  {
+   "id": "2026-10-22-banque-43-des-francais-sont-a-decouvert-",
+   "src": "Le Monde",
+   "date": "2026-10-22",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/22/banque-43-des-francais-sont-a-decouvert-au-moins-une-fois-par-an_6798573_3234.html",
+   "t": {
+    "fr": "Banque : 43 % des Français sont à découvert au moins une fois par an",
+    "en": "Banque : 43 % des Français sont à découvert au moins une fois par an"
+   }
+  },
+  {
+   "id": "2026-10-22-a-mayotte-orange-somme-de-stopper-son-de",
+   "src": "Le Monde",
+   "date": "2026-10-22",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/22/a-mayotte-orange-somme-de-stopper-son-deploiement-anarchique-de-la-fibre-optique_6798569_3234.html",
+   "t": {
+    "fr": "A Mayotte, Orange sommé de stopper son « déploiement anarchique » de la fibre optique",
+    "en": "A Mayotte, Orange sommé de stopper son « déploiement anarchique » de la fibre optique"
+   }
+  },
   {
    "id": "2026-10-21-on-pourrait-croire-que-c-est-de-l-ia-qua",
    "src": "Le Monde",
@@ -276,36 +306,6 @@
    "t": {
     "fr": "Le pouvoir d’achat des Français a-t-il vraiment décroché ? Ce que disent les chiffres",
     "en": "Le pouvoir d’achat des Français a-t-il vraiment décroché ? Ce que disent les chiffres"
-   }
-  },
-  {
-   "id": "2026-10-15-ecoscore-la-course-des-flottes-d-entrepr",
-   "src": "Le Monde",
-   "date": "2026-10-15",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/15/ecoscore-la-course-des-flottes-d-entreprise-au-precieux-label-environnemental_6794183_3234.html",
-   "t": {
-    "fr": "Ecoscore : la course des flottes d’entreprise au précieux label environnemental",
-    "en": "Ecoscore : la course des flottes d’entreprise au précieux label environnemental"
-   }
-  },
-  {
-   "id": "2026-10-15-les-damnes-de-la-donnee-les-travailleurs",
-   "src": "Le Monde",
-   "date": "2026-10-15",
-   "url": "https://www.lemonde.fr/vie-au-travail/article/2026/10/15/les-damnes-de-la-donnee-les-travailleurs-du-sud-invisibilises-et-pourtant-indispensables-au-developpement-de-l-ia_6794181_6768900.html",
-   "t": {
-    "fr": "« Les Damnés de la donnée » : les travailleurs du Sud, invisibilisés et pourtant indispensables au développement de l’IA",
-    "en": "« Les Damnés de la donnée » : les travailleurs du Sud, invisibilisés et pourtant indispensables au développement de l’IA"
-   }
-  },
-  {
-   "id": "2026-10-15-les-menages-pris-en-etau-entre-des-depen",
-   "src": "Le Monde",
-   "date": "2026-10-15",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/15/les-menages-pris-en-etau-entre-des-depenses-contraintes-de-plus-en-plus-lourdes-et-l-envolee-des-prix_6794079_3234.html",
-   "t": {
-    "fr": "Les ménages pris en étau entre des dépenses contraintes de plus en plus lourdes et l’envolée des prix",
-    "en": "Les ménages pris en étau entre des dépenses contraintes de plus en plus lourdes et l’envolée des prix"
    }
   }
  ],
