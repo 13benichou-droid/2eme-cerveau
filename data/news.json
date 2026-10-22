@@ -1,47 +1,47 @@
 {
- "updated": "2026-10-22T15:31:34.929Z",
+ "updated": "2026-10-22T15:35:40.282Z",
  "snap": {
   "date": "2026-10-22",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 801",
-    "c": "−1,53 %"
+    "v": "7 806",
+    "c": "−1,46 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 655",
-    "c": "−1,32 %"
+    "v": "7 658",
+    "c": "−1,28 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 095",
-    "c": "−2,28 %"
+    "v": "26 108",
+    "c": "−2,23 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "19,26",
-    "c": "+15,47 %"
+    "v": "18,96",
+    "c": "+13,67 %"
    },
    {
     "n": "Brent",
-    "v": "111,2 $",
-    "c": "+2,19 %"
+    "v": "111,1 $",
+    "c": "+2,11 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "98,2 $",
-    "c": "+1,10 %"
+    "v": "98,1 $",
+    "c": "+1,02 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 074 $",
-    "c": "−1,83 %"
+    "v": "4 070 $",
+    "c": "−1,93 %"
    },
    {
     "n": "Bitcoin",
-    "v": "81 390 $",
-    "c": "−3,12 %"
+    "v": "81 430 $",
+    "c": "−3,07 %"
    },
    {
     "n": "US 10 ans",
@@ -51,11 +51,146 @@
    {
     "n": "EUR/USD",
     "v": "1,120",
-    "c": "−0,21 %"
+    "c": "−0,20 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-22-le-taux-d-emprunt-francais-franchit-le-s",
+   "src": "franceinfo",
+   "date": "2026-10-22",
+   "url": "https://www.franceinfo.fr/economie/crise/crise-de-la-dette/dette-francaise-alerte-sur-les-taux-d-emprunt_8248849.html#xtor=RSS-3-%5Bgeneral%5D",
+   "t": {
+    "fr": "Le taux d'emprunt français franchit le seuil des 5 %",
+    "en": "French borrowing rate crosses the 5% threshold"
+   },
+   "s": {
+    "fr": "Le coût du financement de la dette française à dix ans a dépassé la barre des 5 %, une situation inédite depuis l'année 2002. Cette augmentation alourdit la charge des intérêts que l'État doit régler et risque de renchérir les crédits pour les emprunteurs. Les marchés réagissent ainsi aux incertitudes politiques et aux tensions budgétaires.",
+    "en": "The cost of financing French ten-year debt has climbed above 5%, marking a record high since 2002. This increase raises interest payments for the government and threatens to make borrowing more costly for borrowers. Bond markets are reflecting political uncertainties and growing budget concerns."
+   },
+   "d": {
+    "fr": "Sur le marché obligataire, quand le rendement d'une obligation d'État monte, son prix baisse car les créanciers exigent une rémunération supérieure face au risque. Pour un apprenti trader, surveiller ce taux est crucial car il donne le ton du coût du crédit dans toute l'économie.",
+    "en": "In the bond market, when a sovereign yield rises, bond prices fall because creditors demand higher compensation for perceived risk. For a novice trader, tracking sovereign yields is essential because they set the benchmark for borrowing costs across the economy."
+   },
+   "v": [
+    [
+     "taux d'emprunt",
+     "borrowing rate"
+    ],
+    [
+     "obligation souveraine",
+     "sovereign bond"
+    ],
+    [
+     "rendement",
+     "yield"
+    ],
+    [
+     "charge de la dette",
+     "debt burden"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi une hausse des taux de l'État peut-elle affecter les crédits des particuliers ?",
+    "en": "Why does an increase in government bond yields affect retail loans?"
+   },
+   "r": {
+    "fr": "Les banques commerciales se basent souvent sur le coût d'emprunt de l'État pour fixer leurs propres barèmes de prêts aux ménages.",
+    "en": "Commercial banks typically use sovereign borrowing rates as a benchmark to set their own lending rates for households."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-22-chute-de-meta-les-investissements-coloss",
+   "src": "Financial Times",
+   "date": "2026-10-22",
+   "url": "https://www.ft.com/content/6e318b81-a771-4842-9754-e265fef2852f?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Chute de Meta : les investissements colossaux dans l'IA inquiètent les marchés",
+    "en": "Meta sell-off: massive AI spending sparks market concerns"
+   },
+   "s": {
+    "fr": "L'action du groupe Meta a subi un net repli, faisant fondre sa valorisation de plus de 100 milliards de dollars. Les investisseurs sanctionnent la perspective de dépenses massives de centaines de milliards de dollars prévues dans l'intelligence artificielle. Ce mouvement de vente a pesé sur l'ensemble du secteur technologique américain.",
+    "en": "Meta shares tumbled sharply, wiping out more than $100 billion from its market value. Investors reacted negatively to forecasts of hundreds of billions of dollars in spending dedicated to artificial intelligence. This wave of selling also dragged down the broader US tech sector."
+   },
+   "d": {
+    "fr": "En bourse, les prévisions financières futures comptent parfois beaucoup plus que les gains passés dans l'évaluation d'une entreprise. Si des dépenses d'investissement gigantesques menacent la rentabilité à court terme, les opérateurs n'hésitent pas à liquider leurs positions.",
+    "en": "In stock trading, forward-looking guidance often matters much more than past profits when evaluating a listed company. If massive capital expenditures threaten near-term profit margins, market participants will quickly sell their positions."
+   },
+   "v": [
+    [
+     "capitalisation boursière",
+     "market capitalization"
+    ],
+    [
+     "mouvement de vente",
+     "sell-off"
+    ],
+    [
+     "prévisions financières",
+     "guidance"
+    ],
+    [
+     "secteur technologique",
+     "tech sector"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi le cours d'une entreprise technologique peut-il baisser après l'annonce d'investissements massifs ?",
+    "en": "Why can a tech company's stock price drop after announcing heavy investments?"
+   },
+   "r": {
+    "fr": "Les traders craignent que ces sorties d'argent ne réduisent les bénéfices futurs si les revenus générés par l'IA tardent à se concrétiser.",
+    "en": "Traders worry that large capital outlays will squeeze future profits if the revenue from AI takes too long to materialize."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-22-renault-vend-son-usine-de-moteurs-de-for",
+   "src": "Le Figaro",
+   "date": "2026-10-22",
+   "url": "https://www.lefigaro.fr/societes/renault-annonce-ceder-son-usine-de-moteurs-de-formule-1-dans-l-essonne-au-groupe-belge-dumarey-20261022",
+   "t": {
+    "fr": "Renault vend son usine de moteurs de Formule 1 au groupe Dumarey",
+    "en": "Renault sells its Formula 1 engine plant to Dumarey"
+   },
+   "s": {
+    "fr": "Le groupe automobile Renault a conclu un accord pour céder son site industriel de moteurs de Formule 1 situé dans l'Essonne à l'entreprise belge Dumarey. L'opération comprend le transfert du personnel et des équipements indispensables à la continuité de l'activité. Cette décision s'inscrit dans les réorganisations industrielles récentes du constructeur.",
+    "en": "Automaker Renault has agreed to transfer its Formula 1 engine production site in Essonne to Belgian company Dumarey. The transaction includes the transfer of operational teams and necessary manufacturing assets. This decision reflects the carmaker's ongoing industrial restructuring."
+   },
+   "d": {
+    "fr": "La cession d'une division permet à une entreprise cotée de réallouer son capital vers ses activités prioritaires. Pour les intervenants de marché, ces restructurations modifient le profil de risque et les perspectives de rentabilité du groupe.",
+    "en": "Divesting a business unit allows a public company to reallocate capital toward core activities. For market participants, such corporate restructurings reshape the company's risk profile and profitability outlook."
+   },
+   "v": [
+    [
+     "cession d'actifs",
+     "asset divestment"
+    ],
+    [
+     "restructuration d'entreprise",
+     "corporate restructuring"
+    ],
+    [
+     "constructeur automobile",
+     "automaker"
+    ],
+    [
+     "actionnaire",
+     "shareholder"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'intérêt pour une entreprise de céder des unités non stratégiques ?",
+    "en": "What is the benefit for a company in selling non-core business units?"
+   },
+   "r": {
+    "fr": "Elle peut ainsi réduire ses coûts d'exploitation et se concentrer sur les secteurs les plus rentables ou stratégiques.",
+    "en": "It can reduce operational costs and concentrate its financial resources on its most profitable or strategic operations."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-10-22-taux-d-interet-au-dela-des-5-une-hausse-",
    "src": "Le Monde",
@@ -473,9 +608,45 @@
    "date": "2026-10-20",
    "url": "https://www.lemonde.fr/economie/article/2026/10/20/apres-les-violences-urbaines-du-17-octobre-assureurs-et-etat-se-disputent-le-partage-des-responsabilites_6797879_3234.html",
    "t": {
-    "fr": "Après les violences urbaines du 17 octobre, assureurs et Etat se disputent le partage des responsabilités",
-    "en": "Après les violences urbaines du 17 octobre, assureurs et Etat se disputent le partage des responsabilités"
-   }
+    "fr": "Dégâts du 17 octobre : débat financier entre assureurs et pouvoirs publics",
+    "en": "October 17 damages: financial dispute between insurers and the state"
+   },
+   "s": {
+    "fr": "À la suite des violences urbaines du 17 octobre, un différend oppose les compagnies d'assurance et l'État sur la répartition des indemnisations. Chacun tente de définir sa part de responsabilité dans la prise en charge financière des dégradations constatées.",
+    "en": "Following urban unrest on October 17, insurance companies and the state are disputing who should pay for the damage. Both sides are attempting to establish financial responsibility for covering the reported losses."
+   },
+   "d": {
+    "fr": "Dans le domaine de l'assurance cotée en bourse, une recrudescence de dégradations matérielles engendre une augmentation imprévue des versements de sinistres. Pour un trader, l'issue de ces discussions réglementaires peut modifier directement la marge nette des assureurs.",
+    "en": "For publicly traded insurance firms, a surge in property damages leads to higher unexpected claim payouts. For a trader, the outcome of regulatory disputes over liability directly affects the net margins of insurers."
+   },
+   "v": [
+    [
+     "compagnie d'assurance",
+     "insurance company"
+    ],
+    [
+     "indemnisation",
+     "compensation"
+    ],
+    [
+     "sinistre",
+     "loss claim"
+    ],
+    [
+     "responsabilité financière",
+     "financial liability"
+    ]
+   ],
+   "q": {
+    "fr": "En quoi la charge des dédommagements urbains affecte-t-elle le bilan des assureurs ?",
+    "en": "How does the cost of property damage claims affect insurers' balance sheets?"
+   },
+   "r": {
+    "fr": "Une hausse soudaine des dédommagements réduit le résultat opérationnel et peut dégrader la rentabilité des fonds propres de l'assureur.",
+    "en": "A sudden rise in claims payouts lowers operating profit and can diminish the insurer's return on equity."
+   },
+   "ia": "Gemini",
+   "iat": 1
   },
   {
    "id": "2026-10-20-assurance-vie-choisir-les-fonds-en-euros",
@@ -483,9 +654,45 @@
    "date": "2026-10-20",
    "url": "https://www.lemonde.fr/economie/article/2026/10/20/assurance-vie-choisir-les-fonds-en-euros-reste-le-placement-incontournable-pour-les-epargnants-francais_6797873_3234.html",
    "t": {
-    "fr": "Assurance-vie : choisir les fonds en euros reste le placement incontournable pour les épargnants français",
-    "en": "Assurance-vie : choisir les fonds en euros reste le placement incontournable pour les épargnants français"
-   }
+    "fr": "Épargne française : le fonds en euros conserve sa place centrale",
+    "en": "French savings: guaranteed euro funds remain the central choice"
+   },
+   "s": {
+    "fr": "Les supports en euros de l'assurance-vie continuent de représenter le placement de prédilection des particuliers en France. Cette préférence persiste malgré la présence d'autres supports d'investissement aux profils de risque variés.",
+    "en": "Guaranteed euro-denominated life insurance funds continue to be the preferred investment choice for French households. This dominance persists despite the availability of alternative assets with diverse risk profiles."
+   },
+   "d": {
+    "fr": "Les fonds en euros sont conçus pour offrir une protection du capital investi contre les fluctuations boursières. En observant les flux vers ces produits sûrs, les traders peuvent évaluer l'appétit ou l'aversion au risque des ménages.",
+    "en": "Guaranteed euro funds provide capital preservation against broader financial market swings. By observing flows into safe products, traders can gauge retail investors' overall risk tolerance or aversion."
+   },
+   "v": [
+    [
+     "assurance-vie",
+     "life insurance"
+    ],
+    [
+     "fonds en euros",
+     "guaranteed euro fund"
+    ],
+    [
+     "préservation du capital",
+     "capital preservation"
+    ],
+    [
+     "aversion au risque",
+     "risk aversion"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les investisseurs particuliers plébiscitent-ils les placements garantis en période troublée ?",
+    "en": "Why do retail investors favor guaranteed products during uncertain periods?"
+   },
+   "r": {
+    "fr": "Ils cherchent avant tout à immuniser leur capital contre la baisse des marchés d'actions ou d'obligations volatiles.",
+    "en": "They prioritize shielding their principal from declines in volatile equity or bond markets."
+   },
+   "ia": "Gemini",
+   "iat": 1
   },
   {
    "id": "2026-10-20-on-a-teste-instinct-l-agent-ia-grand-pub",
@@ -493,9 +700,45 @@
    "date": "2026-10-20",
    "url": "https://www.lemonde.fr/pixels/article/2026/10/20/on-a-teste-instinct-l-agent-ia-grand-public-qui-entend-concurrencer-ceux-d-openai-et-de-meta_6797872_4408996.html",
    "t": {
-    "fr": "On a testé Instinct, l’agent IA grand public qui entend concurrencer ceux d’OpenAI et de Meta",
-    "en": "On a testé Instinct, l’agent IA grand public qui entend concurrencer ceux d’OpenAI et de Meta"
-   }
+    "fr": "Lancement d'Instinct : une nouvelle offre face aux leaders de l'IA",
+    "en": "Launch of Instinct: a new challenger against AI market leaders"
+   },
+   "s": {
+    "fr": "Un outil d'intelligence artificielle nommé Instinct a été dévoilé pour cibler le grand public. La solution se positionne pour faire concurrence directe aux technologies développées par Meta et OpenAI.",
+    "en": "An artificial intelligence agent named Instinct has been launched for general consumers. The tool aims to compete directly against technology products developed by Meta and OpenAI."
+   },
+   "d": {
+    "fr": "L'irruption d'un nouvel acteur dans les nouvelles technologies montre l'intensité de la bataille pour monétiser l'intelligence artificielle. Les marchés boursiers surveillent ces nouveautés car elles peuvent entamer les marges et les parts de marché des grandes entreprises technologiques.",
+    "en": "The arrival of a new entrant in the tech space underscores the intense battle to commercialize artificial intelligence. Markets follow these developments closely as they can disrupt market share and profit margins for tech incumbents."
+   },
+   "v": [
+    [
+     "avantage concurrentiel",
+     "competitive advantage"
+    ],
+    [
+     "secteur technologique",
+     "tech sector"
+    ],
+    [
+     "barrière à l'entrée",
+     "barrier to entry"
+    ],
+    [
+     "monétisation",
+     "monetization"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi la concurrence accrue dans l'IA est-elle surveillée par les actionnaires des géants du secteur ?",
+    "en": "Why do shareholders of tech giants closely monitor rising competition in AI?"
+   },
+   "r": {
+    "fr": "Une concurrence accrue peut forcer les entreprises à réduire leurs tarifs ou à augmenter leurs dépenses en recherche pour préserver leur avance.",
+    "en": "Heightened competition can force companies to lower prices or ramp up research spending to defend their market position."
+   },
+   "ia": "Gemini",
+   "iat": 1
   },
   {
    "id": "2026-10-19-remontee-des-taux-d-interet-et-impact-su",
@@ -635,9 +878,45 @@
    "date": "2026-10-16",
    "url": "https://www.lemonde.fr/economie/article/2026/10/16/l-investissement-socialement-responsable-reste-boude-par-les-epargnants_6795180_3234.html",
    "t": {
-    "fr": "L’investissement socialement responsable reste boudé par les épargnants",
-    "en": "L’investissement socialement responsable reste boudé par les épargnants"
-   }
+    "fr": "Investissement responsable : la défiance persistante des épargnants",
+    "en": "Responsible investing: persistent reluctance among retail savers"
+   },
+   "s": {
+    "fr": "Les produits financiers orientés vers des critères responsables peinent à convaincre les épargnants particuliers. Ces derniers continuent de délaisser majoritairement ces solutions d'investissement éthiques.",
+    "en": "Financial products adhering to responsible guidelines continue to struggle to attract retail savers. Individual investors largely keep their funds away from these ethical investment vehicles."
+   },
+   "d": {
+    "fr": "La finance durable cherche à flécher les capitaux vers des entreprises engagées sur des critères extra-financiers précis. Un manque d'intérêt des souscripteurs particuliers limite la liquidité et le développement de ces fonds spécialisés.",
+    "en": "Sustainable finance seeks to direct capital toward companies adhering to specific non-financial guidelines. A lack of retail demand constrains trading volume and the overall expansion of these dedicated funds."
+   },
+   "v": [
+    [
+     "investissement socialement responsable",
+     "socially responsible investing"
+    ],
+    [
+     "critères ESG",
+     "ESG criteria"
+    ],
+    [
+     "collecte de fonds",
+     "fund inflows"
+    ],
+    [
+     "liquidité du marché",
+     "market liquidity"
+    ]
+   ],
+   "q": {
+    "fr": "Quel facteur peut freiner l'achat de fonds éthiques par les particuliers ?",
+    "en": "What factor can hinder the adoption of ethical funds by individual investors?"
+   },
+   "r": {
+    "fr": "L'incertitude quant à leur rentabilité comparée aux indices traditionnels et le manque de lisibilité des critères de gestion.",
+    "en": "Uncertainty regarding their financial performance relative to standard indices and a lack of transparency in screening processes."
+   },
+   "ia": "Gemini",
+   "iat": 1
   },
   {
    "id": "2026-10-16-les-pays-membres-de-l-ue-peinent-a-s-ent",
@@ -645,9 +924,45 @@
    "date": "2026-10-16",
    "url": "https://www.lemonde.fr/economie/article/2026/10/16/carburants-les-vingt-sept-peinent-a-s-entendre-pour-faire-baisser-les-prix-de-l-energie-un-cauchemar-pour-l-economie-europeenne_6795109_3234.html",
    "t": {
-    "fr": "Les pays membres de l’UE peinent à s’entendre pour faire baisser les prix de l’énergie",
-    "en": "Les pays membres de l’UE peinent à s’entendre pour faire baisser les prix de l’énergie"
-   }
+    "fr": "Prix de l'énergie : désaccords persistants entre partenaires européens",
+    "en": "Energy prices: persistent disagreements among European partners"
+   },
+   "s": {
+    "fr": "Les pays de l'Union européenne peinent à trouver un compromis sur les méthodes pour réduire les coûts de l'énergie. Les disparités nationales empêchent la mise en place d'une réponse tarifaire unifiée.",
+    "en": "European Union member states are struggling to reach common ground on strategies to lower energy costs. Conflicting national priorities prevent the implementation of a coordinated price relief mechanism."
+   },
+   "d": {
+    "fr": "L'énergie est un coût de production fondamental pour la plupart des entreprises manufacturières et de services. Les divergences politiques prolongées créent de l'incertitude et alimentent les fluctuations de cours sur les contrats à terme d'énergie.",
+    "en": "Energy is a primary input cost for industrial and commercial businesses across the economy. Extended regulatory deadlock fosters uncertainty and fuels volatility across energy futures contracts."
+   },
+   "v": [
+    [
+     "marché de l'énergie",
+     "energy market"
+    ],
+    [
+     "inflation",
+     "inflation"
+    ],
+    [
+     "coût de production",
+     "production cost"
+    ],
+    [
+     "matières premières",
+     "commodities"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'impact d'une énergie chère sur les marges des entreprises industrielles ?",
+    "en": "How do high energy prices impact the margins of industrial firms?"
+   },
+   "r": {
+    "fr": "Des factures énergétiques élevées renchérissent les frais fixes des usines, ce qui rogne directement leur rentabilité opérationnelle.",
+    "en": "Elevated energy bills increase factory operating expenses, directly eroding operational profitability."
+   },
+   "ia": "Gemini",
+   "iat": 1
   },
   {
    "id": "2026-10-16-le-pouvoir-d-achat-des-francais-a-t-il-v",
@@ -655,23 +970,59 @@
    "date": "2026-10-16",
    "url": "https://www.lemonde.fr/les-decodeurs/article/2026/10/16/le-pouvoir-d-achat-des-francais-a-t-il-vraiment-decroche-ce-que-disent-les-chiffres_6795107_4355770.html",
    "t": {
-    "fr": "Le pouvoir d’achat des Français a-t-il vraiment décroché ? Ce que disent les chiffres",
-    "en": "Le pouvoir d’achat des Français a-t-il vraiment décroché ? Ce que disent les chiffres"
-   }
+    "fr": "Pouvoir d'achat en France : analyse de la situation statistique",
+    "en": "Purchasing power in France: analysis of statistical evidence"
+   },
+   "s": {
+    "fr": "La question d'une perte d'autonomie financière des ménages français fait l'objet d'évaluations fondées sur les relevés macroéconomiques récents. Les données mesurent l'effet réel de la dynamique des prix sur les revenus disponibles.",
+    "en": "The potential erosion of French household financial capacity is being evaluated through recent macroeconomic indicators. Statistical records show the concrete impact of price dynamics on disposable household income."
+   },
+   "d": {
+    "fr": "Le niveau du pouvoir d'achat détermine directement la vigueur de la consommation, qui représente un moteur clé du produit intérieur brut. Si le budget des ménages se contracte, les traders anticipent souvent un ralentissement des ventes dans le secteur de la distribution.",
+    "en": "Purchasing power directly governs private consumption, which serves as a major driver of gross domestic product. If household budgets contract, traders often prepare for weaker sales among consumer and retail stocks."
+   },
+   "v": [
+    [
+     "pouvoir d'achat",
+     "purchasing power"
+    ],
+    [
+     "revenu disponible",
+     "disposable income"
+    ],
+    [
+     "consommation des ménages",
+     "household consumption"
+    ],
+    [
+     "indicateur économique",
+     "economic indicator"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les investisseurs scrutent-ils l'évolution du pouvoir d'achat ?",
+    "en": "Why do market participants closely follow trends in purchasing power?"
+   },
+   "r": {
+    "fr": "Une détérioration du pouvoir d'achat peut peser sur la demande globale et ralentir les bénéfices des entreprises cotées.",
+    "en": "A decline in consumer purchasing power can soften overall demand and suppress earnings across listed corporations."
+   },
+   "ia": "Gemini",
+   "iat": 1
   }
  ],
  "actu": {
   "date": "2026-10-22",
-  "q": "What does a 10‑year French government bond yield above 5 % indicate?",
+  "q": "Quel seuil symbolique le taux d'emprunt à dix ans de la France a-t-il dépassé pour la première fois depuis 2002 ?",
   "choices": [
-   "Lower borrowing costs for the state",
-   "Higher borrowing costs for the state",
-   "Stable inflation expectations",
-   "A decrease in the budget deficit"
+   "2 %",
+   "3,5 %",
+   "5 %",
+   "6 %"
   ],
-  "a": 1,
-  "expl": "When the yield rises above 5 %, the state must pay more interest on new debt, raising its financing cost. This also signals that investors demand a higher risk premium.",
-  "src": "Le Monde",
-  "url": "https://www.lemonde.fr/idees/article/2026/10/22/taux-d-interet-au-dela-des-5-une-hausse-qui-sanctionne-un-debat-budgetaire-enlise_6798598_3232.html"
+  "a": 2,
+  "expl": "Le taux de l'obligation assimilable du Trésor à dix ans a grimpé au-dessus des 5 %, un record depuis plus de vingt ans. Ce niveau reflète la méfiance accrue des investisseurs face aux incertitudes politiques et budgétaires françaises.",
+  "src": "franceinfo",
+  "url": "https://www.franceinfo.fr/economie/crise/crise-de-la-dette/dette-francaise-alerte-sur-les-taux-d-emprunt_8248849.html#xtor=RSS-3-%5Bgeneral%5D"
  }
 }
