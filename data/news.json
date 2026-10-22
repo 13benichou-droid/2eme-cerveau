@@ -1,70 +1,241 @@
 {
- "updated": "2026-10-22T06:07:59.333Z",
+ "updated": "2026-10-22T15:31:34.929Z",
  "snap": {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 922",
-    "c": "+1,06 %"
+    "v": "7 801",
+    "c": "−1,53 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 757",
-    "c": "+0,58 %"
+    "v": "7 655",
+    "c": "−1,32 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 703",
-    "c": "+1,05 %"
+    "v": "26 095",
+    "c": "−2,28 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "16,68",
-    "c": "−3,64 %"
+    "v": "19,26",
+    "c": "+15,47 %"
    },
    {
     "n": "Brent",
-    "v": "111,4 $",
-    "c": "+2,35 %"
+    "v": "111,2 $",
+    "c": "+2,19 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "99,2 $",
-    "c": "+2,12 %"
+    "v": "98,2 $",
+    "c": "+1,10 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 099 $",
-    "c": "−1,23 %"
+    "v": "4 074 $",
+    "c": "−1,83 %"
    },
    {
     "n": "Bitcoin",
-    "v": "82 783 $",
-    "c": "−0,19 %"
+    "v": "81 390 $",
+    "c": "−3,12 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,15 %",
-    "c": "+0,03 pt"
+    "v": "5,01 %",
+    "c": "−0,14 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,125",
-    "c": "+0,19 %"
+    "v": "1,120",
+    "c": "−0,21 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-22-taux-d-interet-au-dela-des-5-une-hausse-",
+   "src": "Le Monde",
+   "date": "2026-10-22",
+   "url": "https://www.lemonde.fr/idees/article/2026/10/22/taux-d-interet-au-dela-des-5-une-hausse-qui-sanctionne-un-debat-budgetaire-enlise_6798598_3232.html",
+   "t": {
+    "fr": "Taux d’intérêt au‑delà des 5 % : une hausse qui sanctionne un débat budgétaire enlisé",
+    "en": "Interest rates above 5 %: a rise that penalises a stuck budget debate"
+   },
+   "s": {
+    "fr": "Le rendement du bon du Trésor français à dix ans a franchi la barre des 5 %, un niveau jamais vu depuis 2002. Cette hausse intervient alors que les parlementaires peinent à débattre du projet de loi de finances 2027.",
+    "en": "The yield on France’s 10‑year government bond rose above 5 %, a level not seen since 2002. The increase comes while lawmakers struggle to discuss the 2027 budget bill."
+   },
+   "d": {
+    "fr": "Un rendement plus élevé signifie que l’État doit payer davantage d’intérêts lorsqu’il emprunte. Pour les traders, cela rend les obligations françaises plus attractives mais augmente le coût du financement public.",
+    "en": "Higher yields mean the state must pay more interest on new debt. For traders, French bonds become more attractive but public financing costs rise."
+   },
+   "v": [
+    [
+     "rendement obligataire",
+     "bond yield"
+    ],
+    [
+     "taux d'intérêt",
+     "interest rate"
+    ],
+    [
+     "débat budgétaire",
+     "budget debate"
+    ],
+    [
+     "émission d'État",
+     "government bond issuance"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi un rendement obligataire plus élevé augmente‑t‑il le coût de financement de l’État ?",
+    "en": "Why does a higher bond yield increase the cost of state financing?"
+   },
+   "r": {
+    "fr": "Parce que l’État doit verser plus d’intérêts sur chaque euro emprunté.",
+    "en": "Because the state has to pay more interest on every euro it borrows."
+   },
+   "ia": "Groq"
+  },
+  {
+   "id": "2026-10-22-meta-enregistre-ses-premiers-succes-dans",
+   "src": "Le Figaro",
+   "date": "2026-10-22",
+   "url": "https://www.lefigaro.fr/secteur/high-tech/nouveaux-modeles-investissements-colossaux-sous-la-houlette-d-alexandr-wang-meta-enregistre-ses-premiers-succes-dans-l-ia-20261022",
+   "t": {
+    "fr": "Meta enregistre ses premiers succès dans l’IA sous la houlette d’Alexandr Wang",
+    "en": "Meta records its first AI successes under Alexandr Wang"
+   },
+   "s": {
+    "fr": "Meta rattrape son retard face à OpenAI et Anthropic en lançant un agent d’intelligence artificielle destiné au grand public. Le groupe prévoit d’investir 145 milliards de dollars dans l’IA cette année.",
+    "en": "Meta is catching up with OpenAI and Anthropic by launching a consumer‑focused AI agent. The company plans to invest $145 billion in AI this year."
+   },
+   "d": {
+    "fr": "Des dépenses massives en R&D peuvent faire grimper le cours de l’action si les investisseurs anticipent de futurs profits. En même temps, le coût immédiat peut créer de la volatilité à court terme.",
+    "en": "Huge R&D spending can boost the stock price if investors expect future profits. At the same time, the immediate cost can cause short‑term volatility."
+   },
+   "v": [
+    [
+     "investissement",
+     "investment"
+    ],
+    [
+     "agent d'intelligence artificielle",
+     "AI agent"
+    ],
+    [
+     "logiciel de pointe",
+     "cutting‑edge software"
+    ],
+    [
+     "capitalisation boursière",
+     "market cap"
+    ]
+   ],
+   "q": {
+    "fr": "Comment un investissement massif en IA peut‑il influencer le cours de l’action de Meta ?",
+    "en": "How can a massive AI investment influence Meta’s share price?"
+   },
+   "r": {
+    "fr": "Les investisseurs évaluent les gains futurs attendus contre le poids du coût actuel, ce qui peut faire monter ou baisser le cours.",
+    "en": "Investors weigh expected future gains against the current cost, which can push the price up or down."
+   },
+   "ia": "Groq"
+  },
+  {
+   "id": "2026-10-22-epargnants-et-actionnaires-de-tudigo-pre",
+   "src": "Le Monde",
+   "date": "2026-10-22",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/22/epargnants-et-actionnaires-de-tudigo-premieres-victimes-de-sa-liquidation_6798615_3234.html",
+   "t": {
+    "fr": "Épargnants et actionnaires de Tudigo, premières victimes de sa liquidation",
+    "en": "Tudigo savers and shareholders become first victims of its liquidation"
+   },
+   "s": {
+    "fr": "Le tribunal de commerce de Bordeaux a rejeté les sept offres de reprise de la plateforme de crowdfunding en redressement judiciaire. Les clients devront payer des prestataires externes et les actionnaires perdront tout leur capital investi.",
+    "en": "The Bordeaux commercial court rejected seven takeover bids for the crowdfunding platform under judicial recovery. Clients will have to pay external providers and shareholders will lose all invested capital."
+   },
+   "d": {
+    "fr": "En liquidation, les actifs sont d’abord vendus pour rembourser les créanciers, les actionnaires étant les derniers à être payés. Cela montre l’importance d’évaluer le risque avant d’investir dans des start‑ups.",
+    "en": "In liquidation, assets are sold first to repay creditors, leaving shareholders last. This highlights the need to assess risk before investing in start‑ups."
+   },
+   "v": [
+    [
+     "liquidation judiciaire",
+     "court‑ordered liquidation"
+    ],
+    [
+     "actionnaire",
+     "shareholder"
+    ],
+    [
+     "crowdfunding",
+     "crowdfunding"
+    ],
+    [
+     "capital investi",
+     "invested capital"
+    ]
+   ],
+   "q": {
+    "fr": "Que devient l’argent des actionnaires lorsqu’une entreprise est liquidée ?",
+    "en": "What happens to shareholders’ money when a company is liquidated?"
+   },
+   "r": {
+    "fr": "Il est généralement perdu, les actifs étant utilisés pour payer les créanciers avant les actionnaires.",
+    "en": "It is usually lost, as assets are used to pay creditors before shareholders."
+   },
+   "ia": "Groq"
+  },
   {
    "id": "2026-10-22-le-17-octobre-une-onde-de-choc-chez-les-",
    "src": "Le Monde",
    "date": "2026-10-22",
    "url": "https://www.lemonde.fr/politique/article/2026/10/22/le-17-octobre-une-onde-de-choc-chez-les-prefets-aussi-c-est-les-tenebres-qu-ils-disaient-en-effet-nous-y-sommes_6798581_823448.html",
    "t": {
-    "fr": "Le 17 octobre, une onde de choc chez les préfets aussi : « “C’est les ténèbres” qu’ils disaient… En effet, nous y sommes »",
-    "en": "Le 17 octobre, une onde de choc chez les préfets aussi : « “C’est les ténèbres” qu’ils disaient… En effet, nous y sommes »"
-   }
+    "fr": "Choc chez les préfets le 17 octobre : « C’est les ténèbres »",
+    "en": "Shock among prefects on Oct 17: “It’s darkness”"
+   },
+   "s": {
+    "fr": "Le 17 octobre, les préfets ont ressenti une onde de choc et ont décrit la situation comme des ténèbres. L’article souligne le sentiment d’urgence ressenti par les représentants de l’État.",
+    "en": "On Oct 17, prefects felt a shock wave and described the situation as darkness. The article highlights the sense of urgency felt by state representatives."
+   },
+   "d": {
+    "fr": "Les préfets sont les représentants du gouvernement au niveau départemental et assurent le respect des lois. Une crise sociale peut compliquer leurs missions de sécurité et de coordination.",
+    "en": "Prefects are the government’s representatives at the departmental level, ensuring law enforcement. Social unrest can complicate their security and coordination duties."
+   },
+   "v": [
+    [
+     "préfet",
+     "prefect"
+    ],
+    [
+     "décentralisation",
+     "decentralisation"
+    ],
+    [
+     "crise sociale",
+     "social crisis"
+    ],
+    [
+     "autorité d'État",
+     "state authority"
+    ]
+   ],
+   "q": {
+    "fr": "Quel rôle les préfets jouent‑ils dans l’administration française ?",
+    "en": "What role do prefects play in French administration?"
+   },
+   "r": {
+    "fr": "Ils représentent le gouvernement central dans chaque département et veillent à l’application des lois.",
+    "en": "They represent the central government in each department and ensure the application of laws."
+   },
+   "ia": "Groq",
+   "iat": 1
   },
   {
    "id": "2026-10-22-banque-43-des-francais-sont-a-decouvert-",
@@ -72,9 +243,45 @@
    "date": "2026-10-22",
    "url": "https://www.lemonde.fr/economie/article/2026/10/22/banque-43-des-francais-sont-a-decouvert-au-moins-une-fois-par-an_6798573_3234.html",
    "t": {
-    "fr": "Banque : 43 % des Français sont à découvert au moins une fois par an",
-    "en": "Banque : 43 % des Français sont à découvert au moins une fois par an"
-   }
+    "fr": "Banque : 43 % des Français sont à découvert au moins une fois par an",
+    "en": "Banking: 43 % of French people are overdrafted at least once a year"
+   },
+   "s": {
+    "fr": "Une part importante des Français se retrouve en découvert bancaire au moins une fois chaque année. L’article met en avant la fréquence de ce phénomène.",
+    "en": "A large share of French people end up with a bank overdraft at least once each year. The article highlights how common this phenomenon is."
+   },
+   "d": {
+    "fr": "Un découvert signifie que le solde du compte devient négatif, souvent accompagné de frais bancaires. Cela peut affecter la santé financière d’un ménage et son accès au crédit.",
+    "en": "An overdraft means the account balance goes negative, often with bank fees. It can affect a household’s financial health and credit access."
+   },
+   "v": [
+    [
+     "découvert bancaire",
+     "overdraft"
+    ],
+    [
+     "frais bancaires",
+     "bank fees"
+    ],
+    [
+     "solde négatif",
+     "negative balance"
+    ],
+    [
+     "gestion de trésorerie",
+     "cash management"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les découverts fréquents sont‑ils risqués pour un ménage ?",
+    "en": "Why can frequent overdrafts be risky for a household?"
+   },
+   "r": {
+    "fr": "Ils entraînent des frais supplémentaires et peuvent détériorer la réputation de crédit du ménage.",
+    "en": "They generate extra fees and can damage the household’s credit reputation."
+   },
+   "ia": "Groq",
+   "iat": 1
   },
   {
    "id": "2026-10-22-a-mayotte-orange-somme-de-stopper-son-de",
@@ -82,9 +289,45 @@
    "date": "2026-10-22",
    "url": "https://www.lemonde.fr/economie/article/2026/10/22/a-mayotte-orange-somme-de-stopper-son-deploiement-anarchique-de-la-fibre-optique_6798569_3234.html",
    "t": {
-    "fr": "A Mayotte, Orange sommé de stopper son « déploiement anarchique » de la fibre optique",
-    "en": "A Mayotte, Orange sommé de stopper son « déploiement anarchique » de la fibre optique"
-   }
+    "fr": "Mayotte : Orange sommé de stopper son « déploiement anarchique » de la fibre",
+    "en": "Mayotte: Orange ordered to halt its “chaotic” fiber rollout"
+   },
+   "s": {
+    "fr": "À Mayotte, l’opérateur Orange a reçu l’ordre de mettre fin à un déploiement de fibre jugé anarchique. L’article signale l’intervention des autorités de régulation.",
+    "en": "In Mayotte, telecom operator Orange was ordered to stop a fiber rollout deemed chaotic. The article notes regulatory intervention."
+   },
+   "d": {
+    "fr": "Le déploiement d’infrastructures numériques nécessite des autorisations et un suivi rigoureux. Un arrêt imposé peut retarder les revenus prévus et impacter la valorisation de l’entreprise.",
+    "en": "Deploying digital infrastructure requires permits and strict oversight. A forced halt can delay expected revenues and affect the company’s valuation."
+   },
+   "v": [
+    [
+     "déploiement de la fibre",
+     "fiber rollout"
+    ],
+    [
+     "autorité de régulation",
+     "regulatory authority"
+    ],
+    [
+     "infrastructure numérique",
+     "digital infrastructure"
+    ],
+    [
+     "investissement capex",
+     "capex investment"
+    ]
+   ],
+   "q": {
+    "fr": "Quelles conséquences une régulation stricte peut‑elle avoir sur un opérateur télécom ?",
+    "en": "What consequences can strict regulation have on a telecom operator?"
+   },
+   "r": {
+    "fr": "Elle peut entraîner des amendes, des retards de projet et une révision à la baisse des prévisions de revenu.",
+    "en": "It can lead to fines, project delays, and a downward revision of revenue forecasts."
+   },
+   "ia": "Groq",
+   "iat": 1
   },
   {
    "id": "2026-10-21-on-pourrait-croire-que-c-est-de-l-ia-qua",
@@ -92,9 +335,45 @@
    "date": "2026-10-21",
    "url": "https://www.lemonde.fr/pixels/article/2026/10/21/on-pourrait-croire-que-c-est-de-l-ia-quand-la-peur-du-soupcon-change-notre-facon-d-ecrire_6798209_4408996.html",
    "t": {
-    "fr": "« On pourrait croire que c’est de l’IA » : quand la peur du soupçon change notre façon d’écrire",
-    "en": "« On pourrait croire que c’est de l’IA » : quand la peur du soupçon change notre façon d’écrire"
-   }
+    "fr": "« On pourrait croire que c’est de l’IA » : quand la peur du soupçon change notre façon d’écrire",
+    "en": "“You might think it’s AI”: how suspicion reshapes our writing"
+   },
+   "s": {
+    "fr": "L’article explore comment la crainte que du texte soit généré par l’IA influence les pratiques rédactionnelles. Il montre l’impact de cette méfiance sur le style et la vérification.",
+    "en": "The article explores how fear that text is AI‑generated influences writing practices. It shows the impact of this mistrust on style and verification."
+   },
+   "d": {
+    "fr": "L’essor de l’IA soulève des questions d’authenticité et de transparence dans les médias. Les rédacteurs peuvent renforcer les contrôles et mentionner l’usage éventuel d’outils d’IA.",
+    "en": "The rise of AI raises authenticity and transparency questions in media. Writers may tighten checks and disclose possible AI tool usage."
+   },
+   "v": [
+    [
+     "intelligence artificielle",
+     "artificial intelligence"
+    ],
+    [
+     "authenticité",
+     "authenticity"
+    ],
+    [
+     "détection d'IA",
+     "AI detection"
+    ],
+    [
+     "édition",
+     "editing"
+    ]
+   ],
+   "q": {
+    "fr": "Comment la peur de l’IA peut‑elle modifier le travail des journalistes ?",
+    "en": "How might fear of AI change journalists’ work?"
+   },
+   "r": {
+    "fr": "Ils peuvent instaurer des procédures de vérification plus strictes et indiquer quand l’IA a été utilisée.",
+    "en": "They may implement stricter verification procedures and disclose when AI was used."
+   },
+   "ia": "Groq",
+   "iat": 1
   },
   {
    "id": "2026-10-21-ludovic-huzieux-cofondateur-d-artemis-co",
@@ -102,9 +381,45 @@
    "date": "2026-10-21",
    "url": "https://www.lemonde.fr/argent/article/2026/10/21/ludovic-huzieux-cofondateur-d-artemis-courtage-nous-anticipons-une-rarefaction-du-credit-immobilier_6798208_1657007.html",
    "t": {
-    "fr": "Ludovic Huzieux, cofondateur d’Artémis courtage : « Nous anticipons une raréfaction du crédit immobilier »",
-    "en": "Ludovic Huzieux, cofondateur d’Artémis courtage : « Nous anticipons une raréfaction du crédit immobilier »"
-   }
+    "fr": "Artémis courtage anticipe une raréfaction du crédit immobilier",
+    "en": "Artémis brokerage expects a tightening of mortgage credit"
+   },
+   "s": {
+    "fr": "Le cofondateur d’Artémis courtage prévoit que le crédit immobilier deviendra plus rare. L’article signale une possible contraction du financement du logement.",
+    "en": "The co‑founder of Artémis brokerage expects mortgage credit to become scarcer. The article signals a possible contraction in housing finance."
+   },
+   "d": {
+    "fr": "Lorsque les banques restreignent les prêts, les acheteurs rencontrent plus de difficultés et la demande immobilière peut ralentir. Les courtiers doivent alors ajuster leurs stratégies.",
+    "en": "When banks tighten lending, buyers face more difficulty and housing demand may slow. Brokers must then adjust their strategies."
+   },
+   "v": [
+    [
+     "crédit immobilier",
+     "mortgage credit"
+    ],
+    [
+     "rarefaction",
+     "tightening"
+    ],
+    [
+     "courtier",
+     "broker"
+    ],
+    [
+     "taux hypothécaire",
+     "mortgage rate"
+    ]
+   ],
+   "q": {
+    "fr": "Quel impact une raréfaction du crédit immobilier a‑t‑elle sur les acquéreurs de logement ?",
+    "en": "What impact does a tightening of mortgage credit have on home buyers?"
+   },
+   "r": {
+    "fr": "Cela rend l’emprunt plus difficile et peut réduire la demande de biens immobiliers.",
+    "en": "It makes borrowing harder and can reduce demand for real estate."
+   },
+   "ia": "Groq",
+   "iat": 1
   },
   {
    "id": "2026-10-21-au-bresil-l-uberisation-de-l-economie-pr",
@@ -113,8 +428,44 @@
    "url": "https://www.lemonde.fr/economie/article/2026/10/21/au-bresil-l-uberisation-de-l-economie-profite-a-l-extreme-droite_6798203_3234.html",
    "t": {
     "fr": "Au Brésil, l’ubérisation de l’économie profite à l’extrême droite",
-    "en": "Au Brésil, l’ubérisation de l’économie profite à l’extrême droite"
-   }
+    "en": "In Brazil, gig‑economy growth benefits the far‑right"
+   },
+   "s": {
+    "fr": "L’article indique que le modèle d’ubérisation de l’économie brésilienne profite aux forces de l’extrême droite. Il souligne le lien entre travail précaire et dynamique politique.",
+    "en": "The article notes that Brazil’s gig‑economy model benefits far‑right forces. It highlights the link between precarious work and political dynamics."
+   },
+   "d": {
+    "fr": "Le travail via des plateformes crée de nouvelles catégories de travailleurs qui peuvent devenir un électorat ciblé. Les partis politiques adaptent leurs messages pour capter ce public.",
+    "en": "Platform work creates new categories of workers who can become a targeted electorate. Political parties tailor messages to attract this group."
+   },
+   "v": [
+    [
+     "ubérisation",
+     "gig‑economy"
+    ],
+    [
+     "extrême droite",
+     "far‑right"
+    ],
+    [
+     "travail précaire",
+     "precarious work"
+    ],
+    [
+     "plateforme numérique",
+     "digital platform"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi la croissance du gig‑economy peut‑elle influencer la scène politique ?",
+    "en": "Why can gig‑economy growth influence the political scene?"
+   },
+   "r": {
+    "fr": "Elle crée de nouveaux groupes d’électeurs et modifie les priorités de politique du travail.",
+    "en": "It creates new voter groups and shifts labor policy priorities."
+   },
+   "ia": "Groq",
+   "iat": 1
   },
   {
    "id": "2026-10-20-apres-les-violences-urbaines-du-17-octob",
@@ -310,17 +661,17 @@
   }
  ],
  "actu": {
-  "date": "2026-10-08",
-  "q": "Quel montant colossal les géants de la technologie ont-ils emprunté en neuf mois pour financer l'IA ?",
+  "date": "2026-10-22",
+  "q": "What does a 10‑year French government bond yield above 5 % indicate?",
   "choices": [
-   "150 milliards de dollars",
-   "350 millions d'euros",
-   "500 milliards de dollars",
-   "125 milliards d'euros"
+   "Lower borrowing costs for the state",
+   "Higher borrowing costs for the state",
+   "Stable inflation expectations",
+   "A decrease in the budget deficit"
   ],
-  "a": 2,
-  "expl": "Les entreprises de la Big Tech ont emprunté 500 milliards de dollars en neuf mois pour financer l'intelligence artificielle. Ce montant exceptionnel pèse lourdement sur le marché de la dette et concurrence les obligations d'État.",
-  "src": "Le Figaro",
-  "url": "https://www.lefigaro.fr/economie/500-milliards-de-dollars-en-neuf-mois-les-emprunts-colossaux-de-la-big-tech-tech-mettent-sous-pression-le-marche-de-la-dette-20261008"
+  "a": 1,
+  "expl": "When the yield rises above 5 %, the state must pay more interest on new debt, raising its financing cost. This also signals that investors demand a higher risk premium.",
+  "src": "Le Monde",
+  "url": "https://www.lemonde.fr/idees/article/2026/10/22/taux-d-interet-au-dela-des-5-une-hausse-qui-sanctionne-un-debat-budgetaire-enlise_6798598_3232.html"
  }
 }
