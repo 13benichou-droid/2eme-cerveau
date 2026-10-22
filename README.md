@@ -4,8 +4,8 @@ Appli perso installable (téléphone et ordinateur) : habitudes, projets, financ
 
 - **Fonctionne hors connexion** : tout est d'abord enregistré sur l'appareil.
 - **Synchronisation** téléphone ↔ ordi avec un compte Supabase gratuit (`supabase.sql`, `config.js`).
-- **IA** au choix dans ⚙️ Réglages : Gemini (gratuit avec quota) ou Ollama sur le PC (illimité).
-- **Actu du jour** : `.github/workflows/actu.yml` lance `scripts/actu.mjs` chaque matin en semaine et met à jour `data/news.json`. Avec le secret `GEMINI_API_KEY`, les articles sont résumés en français et en anglais ; sans lui, seuls les titres et les liens sont gardés.
+- **IA** dans ⚙️ Réglages : Gemini (gratuit avec quota), puis le relais Cloudflare (Mistral, Cerebras, Groq, OpenRouter), puis Ollama sur le PC.
+- **Actu du jour** : `.github/workflows/actu.yml` lance `scripts/actu.mjs` chaque matin en semaine et met à jour `data/news.json`. Les résumés FR/EN sont écrits par la première IA qui répond : Gemini (secret `GEMINI_API_KEY`), puis le relais Cloudflare (secret `RELAIS_LIEN` = le « lien pour ton autre appareil » des Réglages), puis d'éventuelles clés directes (`MISTRAL_API_KEY`, `CEREBRAS_API_KEY`, `GROQ_API_KEY`, `OPENROUTER_API_KEY`). Un article resté sans résumé est rattrapé les jours suivants, ou depuis l'appli avec « ✨ Résumer avec l'IA ».
 
 ## Fichiers
 
