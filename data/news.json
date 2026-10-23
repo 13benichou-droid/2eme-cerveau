@@ -1,61 +1,196 @@
 {
- "updated": "2026-10-22T15:35:40.282Z",
+ "updated": "2026-10-23T06:09:21.832Z",
  "snap": {
   "date": "2026-10-22",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 806",
-    "c": "−1,46 %"
+    "v": "7 811",
+    "c": "−1,39 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 658",
-    "c": "−1,28 %"
+    "v": "7 663",
+    "c": "−1,21 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 108",
-    "c": "−2,23 %"
+    "v": "26 009",
+    "c": "−2,60 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "18,96",
-    "c": "+13,67 %"
+    "v": "19,03",
+    "c": "+14,09 %"
    },
    {
     "n": "Brent",
-    "v": "111,1 $",
-    "c": "+2,11 %"
+    "v": "114,3 $",
+    "c": "+1,00 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "98,1 $",
-    "c": "+1,02 %"
+    "v": "100,6 $",
+    "c": "+1,18 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 070 $",
-    "c": "−1,93 %"
+    "v": "4 036 $",
+    "c": "−0,61 %"
    },
    {
     "n": "Bitcoin",
-    "v": "81 430 $",
-    "c": "−3,07 %"
+    "v": "81 716 $",
+    "c": "−2,73 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,01 %",
-    "c": "−0,14 pt"
+    "v": "4,95 %",
+    "c": "−0,19 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,120",
-    "c": "−0,20 %"
+    "v": "1,121",
+    "c": "−0,18 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-23-tension-sur-les-obligations-francaises-e",
+   "src": "Le Monde",
+   "date": "2026-10-23",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/23/qui-viendra-sauver-la-france-en-cas-de-crise-de-la-dette_6798902_3234.html",
+   "t": {
+    "fr": "Tension sur les obligations françaises et la dette souveraine",
+    "en": "Tension on French bonds and sovereign debt"
+   },
+   "s": {
+    "fr": "Les taux d'intérêt des obligations de l'État français ont dépassé la barre des 5 % pour la première fois depuis l'année 2002. Cette situation accentue les craintes d'une crise budgétaire, tandis que les investisseurs surveillent de près le rôle de la Banque centrale européenne.",
+    "en": "Interest rates on French government bonds exceeded 5% for the first time since 2002. This situation increases fears of a budgetary crisis, while investors closely monitor the role of the European Central Bank."
+   },
+   "d": {
+    "fr": "Quand les taux obligataires grimpent, cela signifie que emprunter de l'argent coûte de plus en plus cher aux États. Pour un trader, suivre ces fluctuations est vital car cela reflète la confiance des marchés dans l'économie d'un pays.",
+    "en": "When bond yields rise, it means borrowing money becomes increasingly expensive for governments. For a trader, monitoring these fluctuations is vital as it reflects market confidence in a country's economy."
+   },
+   "v": [
+    [
+     "obligation",
+     "bond"
+    ],
+    [
+     "taux d'intérêt",
+     "interest rate"
+    ],
+    [
+     "crise de la dette",
+     "debt crisis"
+    ],
+    [
+     "banque centrale",
+     "central bank"
+    ]
+   ],
+   "q": {
+    "fr": "Que se passe-t-il lorsque les taux d'emprunt d'un pays augmentent fortement ?",
+    "en": "What happens when a country's borrowing rates rise sharply?"
+   },
+   "r": {
+    "fr": "Le coût pour rembourser sa dette devient beaucoup plus lourd pour l'État.",
+    "en": "The cost of repaying its debt becomes much heavier for the state."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-23-wall-street-secouee-par-les-doutes-sur-l",
+   "src": "Le Monde",
+   "date": "2026-10-23",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/23/les-inquietudes-sur-l-intelligence-artificielle-font-plonger-wall-street_6798868_3234.html",
+   "t": {
+    "fr": "Wall Street secouée par les doutes sur l'intelligence artificielle",
+    "en": "Wall Street shaken by doubts over artificial intelligence"
+   },
+   "s": {
+    "fr": "Les marchés boursiers américains ont chuté après que Meta a annoncé une nouvelle levée de capitaux. Les investisseurs commencent à s'interroger sur la rentabilité réelle des investissements massifs réalisés dans le secteur technologique.",
+    "en": "US stock markets fell after Meta announced a new capital raise. Investors are beginning to question the actual profitability of massive investments made in the tech sector."
+   },
+   "d": {
+    "fr": "En trading, un engouement excessif peut créer des bulles spéculatives si les profits ne suivent pas. Il est donc crucial d'analyser les fondamentaux des entreprises avant d'investir massivement.",
+    "en": "In trading, excessive hype can create speculative bubbles if profits do not follow. It is therefore crucial to analyze companies' fundamentals before investing heavily."
+   },
+   "v": [
+    [
+     "levée de capital",
+     "capital raise"
+    ],
+    [
+     "investissement",
+     "investment"
+    ],
+    [
+     "baisse des marchés",
+     "market sell-off"
+    ],
+    [
+     "profit",
+     "profit"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les investisseurs s'inquiètent-ils des dépenses dans l'intelligence artificielle ?",
+    "en": "Why are investors worried about spending on artificial intelligence?"
+   },
+   "r": {
+    "fr": "Ils doutent de la capacité des entreprises technologiques à générer assez de profits.",
+    "en": "They doubt the ability of tech companies to generate enough profits."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-23-risques-de-pression-sur-le-peso-argentin",
+   "src": "Financial Times",
+   "date": "2026-10-23",
+   "url": "https://www.ft.com/content/c97986bf-6d3a-47a9-834c-173228454c3d?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Risques de pression sur le peso argentin à l'approche des élections",
+    "en": "Risks of pressure on the Argentine peso as elections approach"
+   },
+   "s": {
+    "fr": "À l'approche des élections en Argentine, les sondages serrés font craindre de l'instabilité pour la monnaie locale. Certains analystes estiment que le peso va subir une forte pression sur le marché des changes.",
+    "en": "As elections approach in Argentina, close polls raise fears of instability for the local currency. Some analysts expect the peso to face strong pressure on the foreign exchange market."
+   },
+   "d": {
+    "fr": "Le marché des devises est très sensible à la politique et aux élections. Pour un trader, anticiper ce type d'événement permet de mieux gérer le risque de change.",
+    "en": "The foreign exchange market is very sensitive to politics and elections. For a trader, anticipating this type of event helps to better manage foreign exchange risk."
+   },
+   "v": [
+    [
+     "devise",
+     "currency"
+    ],
+    [
+     "taux de change",
+     "exchange rate"
+    ],
+    [
+     "analyste",
+     "analyst"
+    ],
+    [
+     "risque",
+     "risk"
+    ]
+   ],
+   "q": {
+    "fr": "Quel événement politique pèse actuellement sur la monnaie argentine ?",
+    "en": "What political event is currently weighing on the Argentine currency?"
+   },
+   "r": {
+    "fr": "Les élections nationales et les résultats incertains des sondages.",
+    "en": "National elections and uncertain poll results."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-10-22-le-taux-d-emprunt-francais-franchit-le-s",
    "src": "franceinfo",
@@ -1012,17 +1147,17 @@
   }
  ],
  "actu": {
-  "date": "2026-10-22",
-  "q": "Quel seuil symbolique le taux d'emprunt à dix ans de la France a-t-il dépassé pour la première fois depuis 2002 ?",
+  "date": "2026-10-23",
+  "q": "Quel événement a touché les obligations de l'État français pour la première fois depuis 2002 ?",
   "choices": [
-   "2 %",
-   "3,5 %",
-   "5 %",
-   "6 %"
+   "Les taux d'intérêt ont dépassé 5 %",
+   "La dette a été totalement effacée",
+   "Le FMI a pris le contrôle du budget",
+   "La Bourse a fermé définitivement"
   ],
-  "a": 2,
-  "expl": "Le taux de l'obligation assimilable du Trésor à dix ans a grimpé au-dessus des 5 %, un record depuis plus de vingt ans. Ce niveau reflète la méfiance accrue des investisseurs face aux incertitudes politiques et budgétaires françaises.",
-  "src": "franceinfo",
-  "url": "https://www.franceinfo.fr/economie/crise/crise-de-la-dette/dette-francaise-alerte-sur-les-taux-d-emprunt_8248849.html#xtor=RSS-3-%5Bgeneral%5D"
+  "a": 0,
+  "expl": "Les taux d'intérêt des obligations françaises ont franchi la barre des 5 %, ravivant les craintes d'une crise budgétaire. C'est un indicateur clé que surveillent tous les investisseurs sur les marchés.",
+  "src": "Le Monde",
+  "url": "https://www.lemonde.fr/economie/article/2026/10/23/qui-viendra-sauver-la-france-en-cas-de-crise-de-la-dette_6798902_3234.html"
  }
 }
