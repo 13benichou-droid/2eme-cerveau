@@ -1364,6 +1364,9 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 /* en sombre, l'orange est clair : texte foncé dessus pour rester lisible */
 @media (prefers-color-scheme:dark){:root[data-style="arcade"]:not([data-theme="light"]) :is(.av,.msg.u,.wdot.on,.avs.done .avd,.avp.now .avpn,.avnow,.etlad span.cur){color:var(--onhot)}}
 :root[data-style="arcade"][data-theme="dark"] :is(.av,.msg.u,.wdot.on,.avs.done .avd,.avp.now .avpn,.avnow,.etlad span.cur){color:var(--onhot)}
+
+/* 2.21.1 : Mon avenir sous la pensée du jour */
+.wgs.wgav{margin-top:12px}
 </style>
 <script src="config.js"></script>
 </head>
@@ -6072,7 +6075,6 @@ function wgHome(){if(typeof axOn==="function"&&axOn())return axHome();
   if(!wgOff("ent"))out.push(wgSafe(()=>wgEng().replace('class="wg wgrow','class="wg w2 wgrow')));
   if(!wgOff("ent"))out.push(wgSafe(wgCm));
   if(!wgOff("fin"))out.push(wgSafe(wgFin));
-  if(!wgOff("ps"))out.push(wgSafe(wgAv));
   return`<div class="wgs">${out.join("")}</div>`}
 
 /* ---- réglage : widgets ou tuiles ---- */
@@ -7907,13 +7909,15 @@ function axQuests(){const Q=[];
   return`<section class="axcard axquests"><div class="axqh"><h2>Quêtes du jour</h2><span class="num">${nOk}/${Q.length}</span></div>
   ${Q.map(q=>`<button class="axq${q.ok?" ok":""}" data-wgo="${q.go}"><span class="axqi ${q.c}">${q.ok?AXI.ok:q.ic}</span><span class="axqt"><b>${q.t}</b>${q.sub?`<small>${q.sub}</small>`:""}<span class="axqbar" aria-hidden="true"><i style="width:${Math.round(Math.max(0,Math.min(1,q.p))*100)}%"></i></span></span><span class="axqv num">${q.v}</span></button>`).join("")}</section>`}
 
+/* ---- Mon avenir, sous la pensée du jour (2.21.1) : un gros bouton vers le plateau ---- */
+function axAv(){return wgAv().replace('class="wg w2"','class="wg w2 axav"').replace(/<\/button>$/,`<span class="axgo">Ouvrir mon plateau${AXI.go}</span></button>`)}
+
 function axHome(){const sc=wgSafe(()=>{const s=objScore();objSnap(s);return s});const out=[];
   if(!wgOff("jour"))out.push(wgSafe(axHero));
   out.push(wgSafe(axQuests));
   if(!wgOff("mm")&&typeof wgMm==="function")out.push(wgSafe(()=>wgMm()));
   if(!wgOff("obj")&&sc)out.push(wgSafe(()=>wgProg(sc).replace('class="wg ','class="wg w2 ')));
   if(!wgOff("fin"))out.push(wgSafe(()=>wgFin()));
-  if(!wgOff("ps"))out.push(wgSafe(()=>wgAv()));
   return`${wgSafe(axBar)}<div class="wgs">${out.join("")}</div>`}
 
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-styleset]");if(!b)return;
@@ -7943,7 +7947,7 @@ function pageHome(){
   const t=today(),h=new Date().getHours();
   const W=homeMode()==="widgets";
   return`<div class="top">${W?`<div><p class="wgdate">${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p><h1>${h<18?"Bonjour":"Bonsoir"}</h1></div>`:`<div><h1>2ème cerveau 🧠</h1><p>${h<18?"Bonjour":"Bonsoir"} · ${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p></div>`}<div class="topr"><div class="topb"><button class="gear" data-page="idees" aria-label="Suggestions">💡</button><button class="gear" data-page="reglages" aria-label="Réglages">⚙️</button></div><div class="sync" id="sync">${syncTxt}</div></div></div>
-  ${bilHome()}${W?wgHome():`<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>`}${modWrap("accueil","")}${citCard()}${W&&!wgOff("py")?`<div class="wgs wgpy">${wgSafe(()=>wgPy().replace('class="wg ','class="wg w2 '))}</div>`:""}`;
+  ${bilHome()}${W?wgHome():`<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>`}${modWrap("accueil","")}${citCard()}${W&&!wgOff("ps")?`<div class="wgs wgav">${wgSafe(()=>axOn()?axAv():wgAv())}</div>`:""}${W&&!wgOff("py")?`<div class="wgs wgpy">${wgSafe(()=>wgPy().replace('class="wg ','class="wg w2 '))}</div>`:""}`;
 }
 
 /* ---- sauvegarde / restauration ---- */
@@ -7971,7 +7975,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.21.0";
+const APP_VERSION="2.21.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
