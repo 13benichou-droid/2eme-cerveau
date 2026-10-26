@@ -1,61 +1,196 @@
 {
- "updated": "2026-10-23T06:09:21.832Z",
+ "updated": "2026-10-26T06:10:47.662Z",
  "snap": {
-  "date": "2026-10-22",
+  "date": "2026-10-23",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 811",
-    "c": "−1,39 %"
+    "v": "7 783",
+    "c": "−0,36 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 663",
-    "c": "−1,21 %"
+    "v": "7 624",
+    "c": "−0,52 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 009",
-    "c": "−2,60 %"
+    "v": "25 955",
+    "c": "−0,21 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "19,03",
-    "c": "+14,09 %"
+    "v": "19,45",
+    "c": "+2,21 %"
    },
    {
     "n": "Brent",
-    "v": "114,3 $",
-    "c": "+1,00 %"
+    "v": "109,5 $",
+    "c": "−6,17 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "100,6 $",
-    "c": "+1,18 %"
+    "v": "100,9 $",
+    "c": "−2,30 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 036 $",
-    "c": "−0,61 %"
+    "v": "4 026 $",
+    "c": "+0,44 %"
    },
    {
     "n": "Bitcoin",
-    "v": "81 716 $",
-    "c": "−2,73 %"
+    "v": "79 944 $",
+    "c": "−1,05 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,95 %",
-    "c": "−0,19 pt"
+    "v": "4,99 %",
+    "c": "+0,03 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,121",
-    "c": "−0,18 %"
+    "v": "1,122",
+    "c": "−0,02 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-26-rebond-des-contrats-a-terme-americains-a",
+   "src": "Yahoo Finance",
+   "date": "2026-10-26",
+   "url": "https://finance.yahoo.com/markets/stocks/articles/u-stock-futures-edge-higher-011151135.html?.tsrc=rss",
+   "t": {
+    "fr": "Rebond des contrats à terme américains après des pertes technologiques",
+    "en": "US stock futures bounce back after tech losses"
+   },
+   "s": {
+    "fr": "Les contrats à terme sur les indices boursiers américains ont légèrement progressé après une semaine marquée par de fortes baisses dans le secteur technologique. L'attention des marchés se tourne désormais vers une réunion de la Réserve fédérale et des publications de résultats d'entreprises.",
+    "en": "US stock index futures rose slightly following a week marked by sharp drops in the technology sector. Market attention is now shifting toward a Federal Reserve meeting and upcoming earnings reports."
+   },
+   "d": {
+    "fr": "Les contrats à terme permettent d'anticiper la direction future du marché avant l'ouverture officielle. Les annonces de la banque centrale et les résultats d'entreprises sont des catalyseurs majeurs qui font bouger les cours.",
+    "en": "Futures contracts allow traders to anticipate market direction before the official opening. Central bank announcements and corporate earnings are major catalysts that move prices."
+   },
+   "v": [
+    [
+     "contrats à terme",
+     "stock futures"
+    ],
+    [
+     "technologie",
+     "technology"
+    ],
+    [
+     "réserve fédérale",
+     "Federal Reserve"
+    ],
+    [
+     "bénéfices",
+     "earnings"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les traders surveillent-ils de près les réunions de la Réserve fédérale ?",
+    "en": "Why do traders closely monitor Federal Reserve meetings?"
+   },
+   "r": {
+    "fr": "Car les décisions de la banque centrale influencent fortement les taux d'intérêt et l'orientation des marchés.",
+    "en": "Because central bank decisions strongly influence interest rates and market direction."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-25-les-tensions-en-france-pesent-sur-la-bou",
+   "src": "Le Figaro",
+   "date": "2026-10-25",
+   "url": "https://www.lefigaro.fr/economie/violences-urbaines-flambee-des-taux-d-interet-le-decrochage-du-cac-40-un-reflet-des-desordres-francais-20261025",
+   "t": {
+    "fr": "Les tensions en France pèsent sur la Bourse de Paris",
+    "en": "French social and political tensions weigh on the Paris stock exchange"
+   },
+   "s": {
+    "fr": "La situation politique et budgétaire difficile en France entraîne des répercussions négatives sur les marchés financiers. L'indice phare de la Bourse de Paris affiche une baisse depuis le début de l'année, pénalisé par ces désordres.",
+    "en": "The difficult political and budgetary situation in France is having negative repercussions on financial markets. The benchmark index of the Paris stock exchange has been falling since the beginning of the year, penalized by these disorders."
+   },
+   "d": {
+    "fr": "En tant que trader, retiens que la stabilité politique d'un pays influence directement la confiance des investisseurs. Des incertitudes locales peuvent faire reculer les principaux indices boursiers nationaux.",
+    "en": "As a trader, remember that a country's political stability directly influences investor confidence. Local uncertainties can push down major national stock indices."
+   },
+   "v": [
+    [
+     "indice boursier",
+     "stock index"
+    ],
+    [
+     "valeurs",
+     "stocks"
+    ],
+    [
+     "baisse",
+     "decline"
+    ],
+    [
+     "marchés financiers",
+     "financial markets"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'impact général des crises politiques locales sur un indice boursier national ?",
+    "en": "What is the general impact of local political crises on a national stock index?"
+   },
+   "r": {
+    "fr": "Elles créent de l'incertitude et font souvent baisser la valeur des actions et des indices du pays.",
+    "en": "They create uncertainty and often drive down the value of the country's stocks and indices."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-25-le-nigeria-mise-sur-ses-ressources-pour-",
+   "src": "Le Figaro",
+   "date": "2026-10-25",
+   "url": "https://www.lefigaro.fr/conjoncture/le-nigeria-cet-outsider-petrolier-et-gazier-qui-veut-tirer-parti-du-conflit-au-moyen-orient-20261025",
+   "t": {
+    "fr": "Le Nigeria mise sur ses ressources pour doubler sa production",
+    "en": "Nigeria relies on its resources to double production"
+   },
+   "s": {
+    "fr": "Le Nigeria cherche à capitaliser sur le conflit au Moyen-Orient en développant son potentiel pétrolier et gazier offshore. Le pays ambitionne de quasiment doubler sa production d'hydrocarbures d'ici la fin de la décennie.",
+    "en": "Nigeria is seeking to capitalize on the Middle East conflict by developing its offshore oil and gas potential. The country aims to almost double its hydrocarbon production by the end of the decade."
+   },
+   "d": {
+    "fr": "Pour un trader, suivre l'évolution de la production des pays producteurs permet d'anticiper l'offre mondiale en énergie. Une hausse ou une baisse de la production influence directement les prix des matières premières.",
+    "en": "For a trader, tracking changes in producing countries' output helps anticipate global energy supply. An increase or decrease in production directly influences commodity prices."
+   },
+   "v": [
+    [
+     "pétrole",
+     "oil"
+    ],
+    [
+     "gazier",
+     "gas"
+    ],
+    [
+     "production",
+     "production"
+    ],
+    [
+     "matières premières",
+     "commodities"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'effet potentiel d'une augmentation importante de la production d'un pays exportateur sur le marché ?",
+    "en": "What is the potential effect of a significant increase in production by an exporting country on the market?"
+   },
+   "r": {
+    "fr": "Cela peut accroître l'offre globale et influencer à la baisse les prix des hydrocarbures.",
+    "en": "This can increase global supply and exert downward pressure on hydrocarbon prices."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-10-23-tension-sur-les-obligations-francaises-e",
    "src": "Le Monde",
