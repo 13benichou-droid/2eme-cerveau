@@ -7934,7 +7934,7 @@ function axQuests(){const Q=[];
   if(!wgOff("hab")){const s=dayStats(today());if(s.t)Q.push({go:"hab",ic:AXI.list,c:"q1",t:esc(sectName("hab")),v:`${s.n}/${s.t}`,p:s.n/s.t,ok:s.n>=s.t,sub:s.n>=s.t?"tout est coché aujourd'hui":"tes tâches du jour à cocher"})}
   if(!wgOff("ent")){const c=wgSafe(()=>srsCount("en"))||{n:0,l:0,r:0},k=c.n+c.l+c.r,td=wgSafe(()=>egAny((egDoc().d||{})[todayK()]))||false;
     Q.push({go:"ent|en",ic:AXI.cards,c:"q2",t:"Anglais",v:td?"fait":k?`${k} carte${k>1?"s":""}`:"séance",p:td?1:0,ok:!!td,sub:td?"séance du jour faite":k?"à revoir aujourd'hui":"10 à 25 min"})}
-  if(!wgOff("fin")){const r=wgSafe(()=>prog().days[dkey(today())]);Q.push({go:"fin|actu",ic:AXI.chart,c:"q3",t:"Défi finance du jour",v:r?`${r.s}/${r.m}`:"0/1",p:r?1:0,ok:!!r,sub:r?"réussi, bravo":"une question sur l'actu"})}
+  if(!wgOff("fin")){const r=wgSafe(()=>prog().days[dkey(today())]);Q.push({go:"fin|actu",ic:AXI.chart,c:"q3",t:"Défi finance du jour",v:r?`${r.s}/${r.m}`:"0/1",p:r?1:0,ok:!!r,sub:r?(r.s>=r.m?"tout juste, bravo":"fait aujourd'hui"):"une question sur l'actu"})}
   if(!wgOff("ent")){const st=wgSafe(()=>cmStats())||{best:0,tb:0};Q.push({go:"ent|cm",ic:AXI.bolt,c:"q4",t:"Calcul mental",v:st.tb?String(st.tb):"0/1",p:st.tb?1:0,ok:!!st.tb,sub:st.tb?`aujourd'hui ${st.tb}${st.best?" · record "+st.best:""}`:st.best?`record à battre : ${st.best}`:"2 min chrono"})}
   if(!Q.length)return"";const nOk=Q.filter(q=>q.ok).length;
   return`<section class="axcard axquests"><div class="axqh"><h2>Quêtes du jour</h2><span class="num">${nOk}/${Q.length}</span></div>
@@ -8006,7 +8006,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.22.1";
+const APP_VERSION="2.22.2";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
