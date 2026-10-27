@@ -1,61 +1,196 @@
 {
- "updated": "2026-10-26T06:10:47.662Z",
+ "updated": "2026-10-27T06:10:05.416Z",
  "snap": {
-  "date": "2026-10-23",
+  "date": "2026-10-26",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 783",
-    "c": "−0,36 %"
+    "v": "7 847",
+    "c": "+0,83 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 624",
-    "c": "−0,52 %"
+    "v": "7 677",
+    "c": "+0,70 %"
    },
    {
     "n": "Nasdaq",
-    "v": "25 955",
-    "c": "−0,21 %"
+    "v": "26 169",
+    "c": "+0,82 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "19,45",
-    "c": "+2,21 %"
+    "v": "18,39",
+    "c": "−5,45 %"
    },
    {
     "n": "Brent",
-    "v": "109,5 $",
-    "c": "−6,17 %"
+    "v": "109,9 $",
+    "c": "−5,09 %"
    },
    {
     "n": "Pétrole WTI",
     "v": "100,9 $",
-    "c": "−2,30 %"
+    "c": "−0,84 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 026 $",
-    "c": "+0,44 %"
+    "v": "4 023 $",
+    "c": "−0,38 %"
    },
    {
     "n": "Bitcoin",
-    "v": "79 944 $",
-    "c": "−1,05 %"
+    "v": "79 817 $",
+    "c": "−0,26 %"
    },
    {
     "n": "US 10 ans",
     "v": "4,99 %",
-    "c": "+0,03 pt"
+    "c": "−0,00 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,122",
-    "c": "−0,02 %"
+    "v": "1,117",
+    "c": "−0,43 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-27-l-entree-en-bourse-d-anthropic-relance-l",
+   "src": "Yahoo Finance",
+   "date": "2026-10-27",
+   "url": "https://finance.yahoo.com/technology/ai/articles/asia-stocks-jump-anthropic-ipo-030941469.html?.tsrc=rss",
+   "t": {
+    "fr": "L'entrée en bourse d'Anthropic relance le secteur de l'IA",
+    "en": "Anthropic IPO Filing Revives AI Sector"
+   },
+   "s": {
+    "fr": "Le projet d'introduction en bourse de la jeune pousse Anthropic a relancé l'intérêt pour l'intelligence artificielle. Cela a entraîné une hausse des titres technologiques et des marchés asiatiques. Ce rebond survient juste avant plusieurs réunions de banques centrales et la publication de résultats d'entreprises.",
+    "en": "The initial public offering filing by startup Anthropic has renewed enthusiasm for artificial intelligence. This triggered a surge in technology stocks and Asian markets. This rally comes ahead of several central bank meetings and key corporate earnings announcements."
+   },
+   "d": {
+    "fr": "Une annonce majeure concernant une entreprise phare peut dynamiser l'ensemble d'un secteur sur les marchés. Pour un débutant, observer ces effets d'entraînement aide à comprendre les mouvements collectifs des actions.",
+    "en": "A major announcement regarding a flagship company can energize an entire sector across financial markets. For a beginner, observing these ripple effects helps in understanding collective stock movements."
+   },
+   "v": [
+    [
+     "Introduction en bourse",
+     "Initial public offering"
+    ],
+    [
+     "Action technologique",
+     "Tech stock"
+    ],
+    [
+     "Résultats d'entreprises",
+     "Corporate earnings"
+    ],
+    [
+     "Banque centrale",
+     "Central bank"
+    ]
+   ],
+   "q": {
+    "fr": "Quel événement a stimulé les marchés asiatiques au début de la semaine ?",
+    "en": "What event boosted Asian markets at the start of the week?"
+   },
+   "r": {
+    "fr": "C'est l'annonce du projet d'introduction en bourse de la société d'IA Anthropic.",
+    "en": "It was the announcement of the IPO filing by the AI company Anthropic."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-27-hsbc-lance-un-rachat-d-actions-de-1-mill",
+   "src": "Le Figaro",
+   "date": "2026-10-27",
+   "url": "https://www.lefigaro.fr/societes/hsbc-annonce-un-plan-de-rachat-d-actions-d-un-milliard-de-dollars-20261027",
+   "t": {
+    "fr": "HSBC lance un rachat d'actions de 1 milliard de dollars",
+    "en": "HSBC Announces $1 Billion Share Buyback Plan"
+   },
+   "s": {
+    "fr": "Le groupe bancaire HSBC a révélé un programme visant à racheter pour un milliard de dollars de ses propres actions. Cette décision est communiquée alors que les résultats nets du troisième trimestre 2026 sont ressortis en dessous des prévisions. Le marché financier n'a donc pas vu ses attentes comblées sur le plan des bénéfices.",
+    "en": "Banking group HSBC disclosed a plan to buy back one billion dollars worth of its own shares. This decision was released alongside third-quarter 2026 net profits that fell short of market forecasts. Investors had anticipated higher earnings performance for this period."
+   },
+   "d": {
+    "fr": "Un rachat d'actions permet à une société de diminuer le nombre de ses titres en circulation pour essayer de soutenir leur valeur. C'est une stratégie fréquente pour rassurer les investisseurs après des résultats financiers décevants.",
+    "en": "A share buyback enables a company to reduce the supply of its stock to help support its trading price. It is a common strategy to reassure investors after disappointing earnings results."
+   },
+   "v": [
+    [
+     "Rachat d'actions",
+     "Share buyback"
+    ],
+    [
+     "Bénéfice net",
+     "Net profit"
+    ],
+    [
+     "Troisième trimestre",
+     "Third quarter"
+    ],
+    [
+     "Attentes du marché",
+     "Market expectations"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi la décision de HSBC survient-elle dans un contexte particulier ?",
+    "en": "Why does HSBC's decision come in a specific context?"
+   },
+   "r": {
+    "fr": "Parce qu'elle intervient juste après la publication d'un bénéfice net plus faible que prévu.",
+    "en": "Because it arrives right after the publication of lower-than-expected net profit."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-27-chute-de-la-monnaie-bresilienne-face-aux",
+   "src": "Financial Times",
+   "date": "2026-10-27",
+   "url": "https://www.ft.com/content/0231b234-14dc-4ff0-8263-e1063b0a25d5?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Chute de la monnaie brésilienne face aux inquiétudes budgétaires",
+    "en": "Brazilian Currency Drops Amid Fiscal Management Concerns"
+   },
+   "s": {
+    "fr": "Le Brésil fait face à des secousses financières provoquées par des doutes sur la conduite économique du gouvernement de Lula. Ces inquiétudes ont causé la plus forte baisse journalière de la monnaie nationale depuis plus d'un quart de siècle. La situation politique et fiscale pèse lourdement sur la confiance des investisseurs.",
+    "en": "Brazil is experiencing financial distress caused by doubts regarding the economic management of Lula's administration. These concerns triggered the worst single-day decline for the national currency in over 25 years. Political and fiscal conditions are weighing heavily on investor confidence."
+   },
+   "d": {
+    "fr": "Sur le marché des devises, la méfiance envers la politique budgétaire d'un État entraîne souvent une dépréciative rapide de sa monnaie. Les traders Forex doivent impérativement suivre la stabilité économique des pays concernés.",
+    "en": "In currency markets, distrust regarding a state's fiscal policy often leads to a rapid devaluation of its tender. Forex traders must closely monitor the economic stability of the countries involved."
+   },
+   "v": [
+    [
+     "Déroute des marchés",
+     "Market rout"
+    ],
+    [
+     "Gestion budgétaire",
+     "Fiscal management"
+    ],
+    [
+     "Monnaie nationale",
+     "National currency"
+    ],
+    [
+     "Marché des devises",
+     "Foreign exchange market"
+    ]
+   ],
+   "q": {
+    "fr": "Quelle a été la réaction de la devise du Brésil face aux inquiétudes économiques ?",
+    "en": "How did Brazil's currency react to economic concerns?"
+   },
+   "r": {
+    "fr": "Elle a enregistré sa pire chute sur une journée depuis plus de 25 ans.",
+    "en": "It recorded its worst single-day fall in more than 25 years."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-10-26-rebond-des-contrats-a-terme-americains-a",
    "src": "Yahoo Finance",
