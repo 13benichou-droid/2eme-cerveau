@@ -1,61 +1,196 @@
 {
- "updated": "2026-10-27T06:10:05.416Z",
+ "updated": "2026-10-28T06:18:58.598Z",
  "snap": {
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 847",
-    "c": "+0,83 %"
+    "v": "7 887",
+    "c": "+0,51 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 677",
-    "c": "+0,70 %"
+    "v": "7 723",
+    "c": "+0,60 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 169",
-    "c": "+0,82 %"
+    "v": "26 478",
+    "c": "+1,18 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "18,39",
-    "c": "−5,45 %"
+    "v": "17,52",
+    "c": "−4,73 %"
    },
    {
     "n": "Brent",
-    "v": "109,9 $",
-    "c": "−5,09 %"
+    "v": "111,1 $",
+    "c": "−2,45 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "100,9 $",
-    "c": "−0,84 %"
+    "v": "101,5 $",
+    "c": "+1,58 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 023 $",
-    "c": "−0,38 %"
+    "v": "4 043 $",
+    "c": "−0,77 %"
    },
    {
     "n": "Bitcoin",
-    "v": "79 817 $",
-    "c": "−0,26 %"
+    "v": "80 838 $",
+    "c": "+1,04 %"
    },
    {
     "n": "US 10 ans",
     "v": "4,99 %",
-    "c": "−0,00 pt"
+    "c": "+0,01 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,117",
-    "c": "−0,43 %"
+    "v": "1,112",
+    "c": "−0,46 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-28-forte-hausse-des-benefices-pour-sk-hynix",
+   "src": "Le Figaro",
+   "date": "2026-10-28",
+   "url": "https://www.lefigaro.fr/societes/sk-hynix-portes-par-l-ia-le-benefice-net-bondit-de-216-au-troisieme-trimestre-20261028",
+   "t": {
+    "fr": "Forte hausse des bénéfices pour SK Hynix",
+    "en": "Strong profit surge for SK Hynix"
+   },
+   "s": {
+    "fr": "Le fabricant de puces électroniques sud-coréen a enregistré une augmentation spectaculaire de ses bénéfices au cours du troisième trimestre. Cette performance financière exceptionnelle est directement portée par la forte dynamique du secteur de l'intelligence artificielle.",
+    "en": "The South Korean chip manufacturer recorded a dramatic increase in profits during the third quarter. This exceptional financial performance is directly driven by the strong momentum of the artificial intelligence sector."
+   },
+   "d": {
+    "fr": "En trading, les résultats financiers d'une entreprise influencent directement sa valeur en bourse. Une forte croissance des profits peut attirer massivement les investisseurs et faire grimper le cours de l'action.",
+    "en": "In trading, a company's financial results directly influence its stock market value. Strong profit growth can massively attract investors and drive up the share price."
+   },
+   "v": [
+    [
+     "bénéfice net",
+     "net profit"
+    ],
+    [
+     "puces électroniques",
+     "electronic chips"
+    ],
+    [
+     "action",
+     "stock"
+    ],
+    [
+     "investisseur",
+     "investor"
+    ]
+   ],
+   "q": {
+    "fr": "Quel secteur d'activité est le principal moteur de cette forte croissance financière ?",
+    "en": "Which business sector is the main driver of this strong financial growth?"
+   },
+   "r": {
+    "fr": "Il s'agit du secteur de l'intelligence artificielle.",
+    "en": "It is the artificial intelligence sector."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-28-entree-en-bourse-record-pour-jio",
+   "src": "Financial Times",
+   "date": "2026-10-28",
+   "url": "https://www.ft.com/content/32f2864d-c122-4d83-b0c5-8d2f1fcc63bd?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Entrée en bourse record pour Jio",
+    "en": "Record IPO for Jio"
+   },
+   "s": {
+    "fr": "L'entreprise de télécommunications Jio, liée à Ambani, a fait une entrée remarquée sur le marché indien avec une hausse notable de ses actions. Cette introduction en bourse majeure a permis de lever des fonds importants malgré un climat boursier incertain.",
+    "en": "Telecom business Jio, linked to Ambani, made a notable market entry in India with a significant rise in its shares. This major initial public offering raised substantial funds despite an uncertain stock market climate."
+   },
+   "d": {
+    "fr": "Une introduction en bourse permet à une entreprise privée de vendre ses parts au grand public pour financer son développement. Pour un trader, c'est un moment clé pour analyser la demande et la valorisation initiale d'un nouvel actif.",
+    "en": "An initial public offering allows a private company to sell shares to the general public to fund its development. For a trader, this is a key moment to analyze demand and the initial valuation of a new asset."
+   },
+   "v": [
+    [
+     "introduction en bourse",
+     "initial public offering"
+    ],
+    [
+     "action",
+     "share"
+    ],
+    [
+     "valorisation",
+     "valuation"
+    ],
+    [
+     "marché boursier",
+     "stock market"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'objectif principal d'une entreprise lorsqu'elle réalise une introduction en bourse ?",
+    "en": "What is the main objective of a company when it carries out an initial public offering?"
+   },
+   "r": {
+    "fr": "Elle cherche à lever des fonds et à ouvrir son capital au public pour financer sa croissance.",
+    "en": "It seeks to raise funds and open its capital to the public to finance its growth."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-28-nouvelle-baisse-des-prix-pour-les-scpi",
+   "src": "Le Monde",
+   "date": "2026-10-28",
+   "url": "https://www.lemonde.fr/argent/article/2026/10/28/les-scpi-a-nouveau-dans-la-tourmente-la-hausse-des-taux-d-interet-conduit-a-de-nouvelles-baisses-de-prix_6801533_1657007.html",
+   "t": {
+    "fr": "Nouvelle baisse des prix pour les SCPI",
+    "en": "New price drop for SCPIs"
+   },
+   "s": {
+    "fr": "Le marché des SCPI subit de nouvelles pressions à la baisse sur ses prix en raison de la remontée des taux d'intérêt. Face à la concurrence de placements obligataires plus attractifs, seuls les meilleurs produits parviennent à séduire les épargnants.",
+    "en": "The SCPI market is experiencing further downward pressure on its prices due to rising interest rates. Faced with competition from more attractive bond investments, only the best products manage to seduce savers."
+   },
+   "d": {
+    "fr": "Quand les taux d'intérêt augmentent, les placements alternatifs deviennent plus compétitifs, ce qui pèse sur la valeur de certains actifs immobiliers. Un trader doit surveiller ces variations macroéconomiques pour ajuster ses choix de placement.",
+    "en": "When interest rates rise, alternative investments become more competitive, weighing on the value of certain real estate assets. A trader must monitor these macroeconomic variations to adjust their investment choices."
+   },
+   "v": [
+    [
+     "taux d'intérêt",
+     "interest rate"
+    ],
+    [
+     "placement",
+     "investment"
+    ],
+    [
+     "obligation",
+     "bond"
+    ],
+    [
+     "épargnant",
+     "saver"
+    ]
+   ],
+   "q": {
+    "fr": "Quel facteur économique principal est à l'origine de cette baisse des prix sur le marché des SCPI ?",
+    "en": "What main economic factor is causing this price drop in the SCPI market?"
+   },
+   "r": {
+    "fr": "Il s'agit de la hausse des taux d'intérêt.",
+    "en": "It is the rise in interest rates."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-10-27-l-entree-en-bourse-d-anthropic-relance-l",
    "src": "Yahoo Finance",
@@ -1276,158 +1411,20 @@
     "fr": "Ils servent d'indicateurs anticipés sur la tendance probable des actions à l'ouverture de la séance. Les traders les utilisent pour ajuster leurs positions ou se couvrir contre le risque.",
     "en": "They serve as early indicators of the likely trend for equities at the opening bell. Traders use them to adjust their positions or hedge against risk."
    }
-  },
-  {
-   "id": "2026-10-16-l-investissement-socialement-responsable",
-   "src": "Le Monde",
-   "date": "2026-10-16",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/16/l-investissement-socialement-responsable-reste-boude-par-les-epargnants_6795180_3234.html",
-   "t": {
-    "fr": "Investissement responsable : la défiance persistante des épargnants",
-    "en": "Responsible investing: persistent reluctance among retail savers"
-   },
-   "s": {
-    "fr": "Les produits financiers orientés vers des critères responsables peinent à convaincre les épargnants particuliers. Ces derniers continuent de délaisser majoritairement ces solutions d'investissement éthiques.",
-    "en": "Financial products adhering to responsible guidelines continue to struggle to attract retail savers. Individual investors largely keep their funds away from these ethical investment vehicles."
-   },
-   "d": {
-    "fr": "La finance durable cherche à flécher les capitaux vers des entreprises engagées sur des critères extra-financiers précis. Un manque d'intérêt des souscripteurs particuliers limite la liquidité et le développement de ces fonds spécialisés.",
-    "en": "Sustainable finance seeks to direct capital toward companies adhering to specific non-financial guidelines. A lack of retail demand constrains trading volume and the overall expansion of these dedicated funds."
-   },
-   "v": [
-    [
-     "investissement socialement responsable",
-     "socially responsible investing"
-    ],
-    [
-     "critères ESG",
-     "ESG criteria"
-    ],
-    [
-     "collecte de fonds",
-     "fund inflows"
-    ],
-    [
-     "liquidité du marché",
-     "market liquidity"
-    ]
-   ],
-   "q": {
-    "fr": "Quel facteur peut freiner l'achat de fonds éthiques par les particuliers ?",
-    "en": "What factor can hinder the adoption of ethical funds by individual investors?"
-   },
-   "r": {
-    "fr": "L'incertitude quant à leur rentabilité comparée aux indices traditionnels et le manque de lisibilité des critères de gestion.",
-    "en": "Uncertainty regarding their financial performance relative to standard indices and a lack of transparency in screening processes."
-   },
-   "ia": "Gemini",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-16-les-pays-membres-de-l-ue-peinent-a-s-ent",
-   "src": "Le Monde",
-   "date": "2026-10-16",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/16/carburants-les-vingt-sept-peinent-a-s-entendre-pour-faire-baisser-les-prix-de-l-energie-un-cauchemar-pour-l-economie-europeenne_6795109_3234.html",
-   "t": {
-    "fr": "Prix de l'énergie : désaccords persistants entre partenaires européens",
-    "en": "Energy prices: persistent disagreements among European partners"
-   },
-   "s": {
-    "fr": "Les pays de l'Union européenne peinent à trouver un compromis sur les méthodes pour réduire les coûts de l'énergie. Les disparités nationales empêchent la mise en place d'une réponse tarifaire unifiée.",
-    "en": "European Union member states are struggling to reach common ground on strategies to lower energy costs. Conflicting national priorities prevent the implementation of a coordinated price relief mechanism."
-   },
-   "d": {
-    "fr": "L'énergie est un coût de production fondamental pour la plupart des entreprises manufacturières et de services. Les divergences politiques prolongées créent de l'incertitude et alimentent les fluctuations de cours sur les contrats à terme d'énergie.",
-    "en": "Energy is a primary input cost for industrial and commercial businesses across the economy. Extended regulatory deadlock fosters uncertainty and fuels volatility across energy futures contracts."
-   },
-   "v": [
-    [
-     "marché de l'énergie",
-     "energy market"
-    ],
-    [
-     "inflation",
-     "inflation"
-    ],
-    [
-     "coût de production",
-     "production cost"
-    ],
-    [
-     "matières premières",
-     "commodities"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'impact d'une énergie chère sur les marges des entreprises industrielles ?",
-    "en": "How do high energy prices impact the margins of industrial firms?"
-   },
-   "r": {
-    "fr": "Des factures énergétiques élevées renchérissent les frais fixes des usines, ce qui rogne directement leur rentabilité opérationnelle.",
-    "en": "Elevated energy bills increase factory operating expenses, directly eroding operational profitability."
-   },
-   "ia": "Gemini",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-16-le-pouvoir-d-achat-des-francais-a-t-il-v",
-   "src": "Le Monde",
-   "date": "2026-10-16",
-   "url": "https://www.lemonde.fr/les-decodeurs/article/2026/10/16/le-pouvoir-d-achat-des-francais-a-t-il-vraiment-decroche-ce-que-disent-les-chiffres_6795107_4355770.html",
-   "t": {
-    "fr": "Pouvoir d'achat en France : analyse de la situation statistique",
-    "en": "Purchasing power in France: analysis of statistical evidence"
-   },
-   "s": {
-    "fr": "La question d'une perte d'autonomie financière des ménages français fait l'objet d'évaluations fondées sur les relevés macroéconomiques récents. Les données mesurent l'effet réel de la dynamique des prix sur les revenus disponibles.",
-    "en": "The potential erosion of French household financial capacity is being evaluated through recent macroeconomic indicators. Statistical records show the concrete impact of price dynamics on disposable household income."
-   },
-   "d": {
-    "fr": "Le niveau du pouvoir d'achat détermine directement la vigueur de la consommation, qui représente un moteur clé du produit intérieur brut. Si le budget des ménages se contracte, les traders anticipent souvent un ralentissement des ventes dans le secteur de la distribution.",
-    "en": "Purchasing power directly governs private consumption, which serves as a major driver of gross domestic product. If household budgets contract, traders often prepare for weaker sales among consumer and retail stocks."
-   },
-   "v": [
-    [
-     "pouvoir d'achat",
-     "purchasing power"
-    ],
-    [
-     "revenu disponible",
-     "disposable income"
-    ],
-    [
-     "consommation des ménages",
-     "household consumption"
-    ],
-    [
-     "indicateur économique",
-     "economic indicator"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi les investisseurs scrutent-ils l'évolution du pouvoir d'achat ?",
-    "en": "Why do market participants closely follow trends in purchasing power?"
-   },
-   "r": {
-    "fr": "Une détérioration du pouvoir d'achat peut peser sur la demande globale et ralentir les bénéfices des entreprises cotées.",
-    "en": "A decline in consumer purchasing power can soften overall demand and suppress earnings across listed corporations."
-   },
-   "ia": "Gemini",
-   "iat": 1
   }
  ],
  "actu": {
-  "date": "2026-10-23",
-  "q": "Quel événement a touché les obligations de l'État français pour la première fois depuis 2002 ?",
+  "date": "2026-10-28",
+  "q": "Quel événement récent a permis au bénéfice net de SK Hynix de bondir de 216% au troisième trimestre ?",
   "choices": [
-   "Les taux d'intérêt ont dépassé 5 %",
-   "La dette a été totalement effacée",
-   "Le FMI a pris le contrôle du budget",
-   "La Bourse a fermé définitivement"
+   "La baisse des taux de la Réserve fédérale",
+   "Le boom de l'intelligence artificielle",
+   "Une introduction en bourse record",
+   "La hausse du prix des matières premières"
   ],
-  "a": 0,
-  "expl": "Les taux d'intérêt des obligations françaises ont franchi la barre des 5 %, ravivant les craintes d'une crise budgétaire. C'est un indicateur clé que surveillent tous les investisseurs sur les marchés.",
-  "src": "Le Monde",
-  "url": "https://www.lemonde.fr/economie/article/2026/10/23/qui-viendra-sauver-la-france-en-cas-de-crise-de-la-dette_6798902_3234.html"
+  "a": 1,
+  "expl": "Le géant des puces électroniques a profité de la forte demande liée au secteur de l'intelligence artificielle. Cette dynamique a propulsé ses résultats financiers trimestriels à la hausse.",
+  "src": "Le Figaro",
+  "url": "https://www.lefigaro.fr/societes/sk-hynix-portes-par-l-ia-le-benefice-net-bondit-de-216-au-troisieme-trimestre-20261028"
  }
 }
