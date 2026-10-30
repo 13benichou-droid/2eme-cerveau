@@ -1,61 +1,196 @@
 {
- "updated": "2026-10-29T06:18:03.314Z",
+ "updated": "2026-10-30T06:17:05.869Z",
  "snap": {
-  "date": "2026-10-28",
+  "date": "2026-10-29",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 887",
-    "c": "−0,00 %"
+    "v": "7 970",
+    "c": "+1,05 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 744",
-    "c": "+0,28 %"
+    "v": "7 720",
+    "c": "−0,30 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 550",
-    "c": "+0,27 %"
+    "v": "26 185",
+    "c": "−1,38 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "16,91",
-    "c": "−3,48 %"
+    "v": "17,20",
+    "c": "+1,71 %"
    },
    {
     "n": "Brent",
-    "v": "110,1 $",
-    "c": "−4,57 %"
+    "v": "112,2 $",
+    "c": "−2,32 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "101,3 $",
-    "c": "−1,44 %"
+    "v": "103,2 $",
+    "c": "+1,21 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 037 $",
-    "c": "−0,35 %"
+    "v": "3 999 $",
+    "c": "−0,81 %"
    },
    {
     "n": "Bitcoin",
-    "v": "79 992 $",
-    "c": "−1,01 %"
+    "v": "78 457 $",
+    "c": "−3,46 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,05 %",
-    "c": "+0,05 pt"
+    "v": "4,99 %",
+    "c": "−0,06 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,114",
-    "c": "+0,07 %"
+    "v": "1,119",
+    "c": "+0,29 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-10-30-vague-de-baisse-sur-la-tech-a-cause-de-r",
+   "src": "Le Monde",
+   "date": "2026-10-30",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/30/apres-google-amazon-pris-entre-la-progression-de-l-ia-et-la-deception-sur-ses-metiers-traditionnels_6802592_3234.html",
+   "t": {
+    "fr": "Vague de baisse sur la tech à cause de résultats décevants",
+    "en": "Tech sell-off following disappointing financial results"
+   },
+   "s": {
+    "fr": "Le titre d'Amazon a chuté après la publication de résultats trimestriels inférieurs aux attentes des investisseurs. Cette contre-performance s'inscrit dans un contexte où les marchés sanctionnent la transition des géants technologiques vers l'intelligence artificielle.",
+    "en": "Amazon shares dropped after reporting quarterly results below expectations. Markets are punishing tech giants navigating their transition toward artificial intelligence."
+   },
+   "d": {
+    "fr": "En trading, les attentes des analystes sont cruciales : si une entreprise performe mais reste sous les prévisions, son cours peut s'effondrer. C'est un rappel que le marché anticipe toujours le futur plutôt que de se contenter du présent.",
+    "en": "Analyst expectations drive stock prices; missing forecasts often triggers a sell-off. Markets always price in future expectations rather than past achievements."
+   },
+   "v": [
+    [
+     "action",
+     "stock"
+    ],
+    [
+     "résultats trimestriels",
+     "quarterly earnings"
+    ],
+    [
+     "bourse",
+     "stock exchange"
+    ],
+    [
+     "attentes",
+     "expectations"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi une action baisse-t-elle alors que l'entreprise continue de faire du chiffre ?",
+    "en": "Why does a stock price drop even when a company generates revenue?"
+   },
+   "r": {
+    "fr": "Parce que ses résultats sont inférieurs aux prévisions des analystes et aux attentes du marché.",
+    "en": "Because its results fall short of analyst forecasts and market expectations."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-30-la-plateforme-crypto-binance-subit-un-pi",
+   "src": "Financial Times",
+   "date": "2026-10-30",
+   "url": "https://www.ft.com/content/c7f5e395-c3a9-430e-b757-5014527b4d49?syn-25a6b1a6=1",
+   "t": {
+    "fr": "La plateforme crypto Binance subit un piratage massif",
+    "en": "Crypto exchange Binance hit by massive security breach"
+   },
+   "s": {
+    "fr": "La plus grande plateforme d'échange de cryptomonnaies au monde a dû suspendre les retraits suite à un vol évalué à des milliards de dollars. Cet incident fait suite à la compromission de l'ordinateur d'un ingénieur.",
+    "en": "The world's largest crypto exchange halted withdrawals after a massive multi-billion dollar hack originating from a compromised laptop."
+   },
+   "d": {
+    "fr": "Cet événement illustre le risque systémique et technique inhérent au secteur des cryptomonnaies. Pour un trader, la sécurité des plateformes est un paramètre primordial à intégrer dans sa gestion du risque.",
+    "en": "This event highlights the technical and systemic risks in crypto markets. Platform security is a vital metric for traders to monitor in risk management."
+   },
+   "v": [
+    [
+     "cryptomonnaie",
+     "cryptocurrency"
+    ],
+    [
+     "retraits",
+     "withdrawals"
+    ],
+    [
+     "piratage",
+     "hack"
+    ],
+    [
+     "gestion du risque",
+     "risk management"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est le risque principal pour les fonds déposés sur une plateforme d'échange centralisée ?",
+    "en": "What is the primary risk for funds deposited on a centralized exchange?"
+   },
+   "r": {
+    "fr": "Le risque de cyberattaque ou de piratage pouvant bloquer les actifs des utilisateurs.",
+    "en": "The risk of a cyberattack or security breach freezing user assets."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-10-30-l-union-europeenne-libere-des-barils-de-",
+   "src": "Le Monde",
+   "date": "2026-10-30",
+   "url": "https://www.lemonde.fr/economie/article/2026/10/30/crise-energetique-onze-pays-de-l-ue-vont-liberer-42-6-millions-de-barils-de-petrole-afin-de-stabiliser-les-prix-du-gazole-avant-l-hiver_6802691_3234.html",
+   "t": {
+    "fr": "L'Union européenne libère des barils de pétrole pour stabiliser les cours",
+    "en": "EU releases strategic oil barrels to stabilize energy prices"
+   },
+   "s": {
+    "fr": "Face à la flambée des prix de l'énergie à l'approche de l'hiver, onze pays de l'Union européenne ont décidé de puiser dans leurs réserves stratégiques de pétrole. L'objectif est de réguler le marché et d'apaiser les tarifs du gazole.",
+    "en": "Faced with soaring energy prices ahead of winter, eleven EU nations decided to tap strategic oil reserves to stabilize diesel prices."
+   },
+   "d": {
+    "fr": "Sur les marchés des matières premières, l'offre et la demande dictent les prix. Lorsque les États interviennent pour augmenter l'offre disponible, ils cherchent directement à calmer la volatilité des cours.",
+    "en": "In commodities markets, supply and demand drive prices. When governments increase available supply, they actively seek to calm price volatility."
+   },
+   "v": [
+    [
+     "matières premières",
+     "commodities"
+    ],
+    [
+     "pétrole",
+     "oil"
+    ],
+    [
+     "offre",
+     "supply"
+    ],
+    [
+     "volatilité",
+     "volatility"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'effet généralement observé sur les prix d'une matière première lorsque les stocks stratégiques sont augmentés sur le marché ?",
+    "en": "What is the typical price effect on a commodity when strategic reserves are released onto the market?"
+   },
+   "r": {
+    "fr": "Cela tend à faire baisser ou stabiliser les prix en augmentant l'offre immédiate.",
+    "en": "It tends to lower or stabilize prices by increasing immediate supply."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-10-29-samsung-multiplie-ses-profits-grace-a-l-",
    "src": "Le Figaro",
@@ -1275,144 +1410,6 @@
     "en": "It creates new voter groups and shifts labor policy priorities."
    },
    "ia": "Groq",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-20-apres-les-violences-urbaines-du-17-octob",
-   "src": "Le Monde",
-   "date": "2026-10-20",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/20/apres-les-violences-urbaines-du-17-octobre-assureurs-et-etat-se-disputent-le-partage-des-responsabilites_6797879_3234.html",
-   "t": {
-    "fr": "Dégâts du 17 octobre : débat financier entre assureurs et pouvoirs publics",
-    "en": "October 17 damages: financial dispute between insurers and the state"
-   },
-   "s": {
-    "fr": "À la suite des violences urbaines du 17 octobre, un différend oppose les compagnies d'assurance et l'État sur la répartition des indemnisations. Chacun tente de définir sa part de responsabilité dans la prise en charge financière des dégradations constatées.",
-    "en": "Following urban unrest on October 17, insurance companies and the state are disputing who should pay for the damage. Both sides are attempting to establish financial responsibility for covering the reported losses."
-   },
-   "d": {
-    "fr": "Dans le domaine de l'assurance cotée en bourse, une recrudescence de dégradations matérielles engendre une augmentation imprévue des versements de sinistres. Pour un trader, l'issue de ces discussions réglementaires peut modifier directement la marge nette des assureurs.",
-    "en": "For publicly traded insurance firms, a surge in property damages leads to higher unexpected claim payouts. For a trader, the outcome of regulatory disputes over liability directly affects the net margins of insurers."
-   },
-   "v": [
-    [
-     "compagnie d'assurance",
-     "insurance company"
-    ],
-    [
-     "indemnisation",
-     "compensation"
-    ],
-    [
-     "sinistre",
-     "loss claim"
-    ],
-    [
-     "responsabilité financière",
-     "financial liability"
-    ]
-   ],
-   "q": {
-    "fr": "En quoi la charge des dédommagements urbains affecte-t-elle le bilan des assureurs ?",
-    "en": "How does the cost of property damage claims affect insurers' balance sheets?"
-   },
-   "r": {
-    "fr": "Une hausse soudaine des dédommagements réduit le résultat opérationnel et peut dégrader la rentabilité des fonds propres de l'assureur.",
-    "en": "A sudden rise in claims payouts lowers operating profit and can diminish the insurer's return on equity."
-   },
-   "ia": "Gemini",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-20-assurance-vie-choisir-les-fonds-en-euros",
-   "src": "Le Monde",
-   "date": "2026-10-20",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/20/assurance-vie-choisir-les-fonds-en-euros-reste-le-placement-incontournable-pour-les-epargnants-francais_6797873_3234.html",
-   "t": {
-    "fr": "Épargne française : le fonds en euros conserve sa place centrale",
-    "en": "French savings: guaranteed euro funds remain the central choice"
-   },
-   "s": {
-    "fr": "Les supports en euros de l'assurance-vie continuent de représenter le placement de prédilection des particuliers en France. Cette préférence persiste malgré la présence d'autres supports d'investissement aux profils de risque variés.",
-    "en": "Guaranteed euro-denominated life insurance funds continue to be the preferred investment choice for French households. This dominance persists despite the availability of alternative assets with diverse risk profiles."
-   },
-   "d": {
-    "fr": "Les fonds en euros sont conçus pour offrir une protection du capital investi contre les fluctuations boursières. En observant les flux vers ces produits sûrs, les traders peuvent évaluer l'appétit ou l'aversion au risque des ménages.",
-    "en": "Guaranteed euro funds provide capital preservation against broader financial market swings. By observing flows into safe products, traders can gauge retail investors' overall risk tolerance or aversion."
-   },
-   "v": [
-    [
-     "assurance-vie",
-     "life insurance"
-    ],
-    [
-     "fonds en euros",
-     "guaranteed euro fund"
-    ],
-    [
-     "préservation du capital",
-     "capital preservation"
-    ],
-    [
-     "aversion au risque",
-     "risk aversion"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi les investisseurs particuliers plébiscitent-ils les placements garantis en période troublée ?",
-    "en": "Why do retail investors favor guaranteed products during uncertain periods?"
-   },
-   "r": {
-    "fr": "Ils cherchent avant tout à immuniser leur capital contre la baisse des marchés d'actions ou d'obligations volatiles.",
-    "en": "They prioritize shielding their principal from declines in volatile equity or bond markets."
-   },
-   "ia": "Gemini",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-20-on-a-teste-instinct-l-agent-ia-grand-pub",
-   "src": "Le Monde",
-   "date": "2026-10-20",
-   "url": "https://www.lemonde.fr/pixels/article/2026/10/20/on-a-teste-instinct-l-agent-ia-grand-public-qui-entend-concurrencer-ceux-d-openai-et-de-meta_6797872_4408996.html",
-   "t": {
-    "fr": "Lancement d'Instinct : une nouvelle offre face aux leaders de l'IA",
-    "en": "Launch of Instinct: a new challenger against AI market leaders"
-   },
-   "s": {
-    "fr": "Un outil d'intelligence artificielle nommé Instinct a été dévoilé pour cibler le grand public. La solution se positionne pour faire concurrence directe aux technologies développées par Meta et OpenAI.",
-    "en": "An artificial intelligence agent named Instinct has been launched for general consumers. The tool aims to compete directly against technology products developed by Meta and OpenAI."
-   },
-   "d": {
-    "fr": "L'irruption d'un nouvel acteur dans les nouvelles technologies montre l'intensité de la bataille pour monétiser l'intelligence artificielle. Les marchés boursiers surveillent ces nouveautés car elles peuvent entamer les marges et les parts de marché des grandes entreprises technologiques.",
-    "en": "The arrival of a new entrant in the tech space underscores the intense battle to commercialize artificial intelligence. Markets follow these developments closely as they can disrupt market share and profit margins for tech incumbents."
-   },
-   "v": [
-    [
-     "avantage concurrentiel",
-     "competitive advantage"
-    ],
-    [
-     "secteur technologique",
-     "tech sector"
-    ],
-    [
-     "barrière à l'entrée",
-     "barrier to entry"
-    ],
-    [
-     "monétisation",
-     "monetization"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi la concurrence accrue dans l'IA est-elle surveillée par les actionnaires des géants du secteur ?",
-    "en": "Why do shareholders of tech giants closely monitor rising competition in AI?"
-   },
-   "r": {
-    "fr": "Une concurrence accrue peut forcer les entreprises à réduire leurs tarifs ou à augmenter leurs dépenses en recherche pour préserver leur avance.",
-    "en": "Heightened competition can force companies to lower prices or ramp up research spending to defend their market position."
-   },
-   "ia": "Gemini",
    "iat": 1
   }
  ],
