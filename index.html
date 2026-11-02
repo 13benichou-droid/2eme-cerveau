@@ -1451,6 +1451,65 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 .msfb.ok{border-left:4px solid var(--up)}.msfb.mid{border-left:4px solid var(--warn)}.msfb.ko{border-left:4px solid var(--down)}
 .msnm{font-family:var(--display);font-size:1.1rem}
 .mslog summary{cursor:pointer}.mslog p{margin:8px 0 0}
+
+/* 2.26.0 : Macro Quest (le Macro Lab en jeu vidéo) */
+.mqhud{display:flex;flex-direction:column;gap:8px}
+.mqhudt{display:flex;align-items:center;gap:12px}
+.mqava{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.8rem;background:color-mix(in srgb,var(--fin) 16%,var(--surface));flex:none}
+.mqlvl{display:block;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mqlvn{font-family:var(--display);font-size:1.2rem;line-height:1.15}
+.mqfire{margin-left:auto;font-size:1.05rem;white-space:nowrap}
+.mqxpbar{height:14px;border-radius:7px;background:var(--soft);overflow:hidden;box-shadow:inset 0 0 0 2px var(--line)}
+.mqxpbar i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#ffb020,var(--hot,#ff7a1a));transition:width .4s}
+.mqquests{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.mqq{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:12px 10px;color:var(--ink);min-width:0}
+.mqq b{font-size:.88rem;line-height:1.15}.mqq small{font-size:.72rem;color:var(--muted);line-height:1.25}
+.mqqi{font-size:1.4rem}.mqq.done{opacity:.75}
+.mqqmain{background:color-mix(in srgb,var(--hot,#ff7a1a) 14%,var(--surface));border-color:var(--hot,#ff7a1a)}
+.mqworld{border-radius:20px;padding:12px;background:color-mix(in srgb,var(--wc) 8%,var(--surface));border:2px solid color-mix(in srgb,var(--wc) 35%,var(--line))}
+.mqworld.locked{filter:grayscale(1);opacity:.6}
+.mqban{display:flex;align-items:center;gap:10px}
+.mqbane{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;background:var(--wc);flex:none}
+.mqbann{display:block;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mqban b{font-family:var(--display);line-height:1.2}
+.mqbans{margin-left:auto;font-weight:800;color:#d39b00;white-space:nowrap}
+.mqpath{display:flex;flex-direction:column;align-items:center;gap:6px;padding:34px 0 4px}
+.mqnodew{display:flex;flex-direction:column;align-items:center;gap:2px;transform:translateX(var(--off,0))}
+.mqnode,.mqboss{position:relative;width:64px;height:58px;border-radius:50%;border:3px solid var(--line);background:var(--surface);color:var(--ink);font-family:var(--display);font-weight:900;font-size:1.3rem;box-shadow:0 6px 0 var(--edge,var(--line));padding:0;cursor:pointer}
+.mqnode.done{background:var(--wc);border-color:var(--wc);color:#fff;box-shadow:0 6px 0 color-mix(in srgb,var(--wc) 60%,#000)}
+.mqnode.cur,.mqboss.cur{border-color:var(--hot,#ff7a1a);animation:mqpulse 1.6s ease-in-out infinite}
+.mqnode:disabled,.mqboss:disabled{opacity:.55;cursor:default;box-shadow:none}
+.mqnode:active:not(:disabled),.mqboss:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 var(--edge,var(--line))}
+.mqboss{width:84px;height:76px;font-size:2rem;border-width:4px}
+.mqboss.done{background:#ffd34d;border-color:#d39b00}
+.mqhere{position:absolute;top:-26px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.68rem;font-weight:800;letter-spacing:.05em;background:var(--ink);color:var(--bg);padding:3px 8px;border-radius:8px;text-transform:uppercase}
+.mqst{font-size:.85rem;color:#d39b00;letter-spacing:1px;min-height:1.1em}
+@keyframes mqpulse{0%,100%{box-shadow:0 6px 0 var(--edge,var(--line)),0 0 0 0 color-mix(in srgb,var(--hot,#ff7a1a) 50%,transparent)}50%{box-shadow:0 6px 0 var(--edge,var(--line)),0 0 0 10px transparent}}
+@media (prefers-reduced-motion:reduce){.mqnode.cur,.mqboss.cur{animation:none}}
+.mqachg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.mqa{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;padding:8px 4px;border-radius:12px;background:var(--soft);opacity:.55}
+.mqa.on{opacity:1;background:color-mix(in srgb,#ffd34d 25%,var(--surface))}
+.mqa span{font-size:1.5rem}.mqa b{font-size:.78rem}.mqa small{font-size:.66rem;color:var(--muted);line-height:1.2}
+.mqtop{display:flex;align-items:center;gap:10px}
+.mqprog{flex:1;height:14px;border-radius:7px;background:var(--soft);overflow:hidden}
+.mqprog i{display:block;height:100%;background:#2bb673;border-radius:7px;transition:width .3s}
+.mqhearts{font-size:1.1rem;white-space:nowrap}
+.mqtitle{font-family:var(--display);font-size:1.3rem;line-height:1.2}
+.mqbrief p{font-size:1.05rem;line-height:1.55;margin:0}
+.mqcombo{color:var(--hot,#ff7a1a);font-weight:900}
+.mqqcard.good{border-color:#2bb673}.mqqcard.bad{border-color:var(--down);animation:mqshake .35s}
+@keyframes mqshake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.mqqcard.bad{animation:none}}
+.mqnext{width:100%}
+.mqend{text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.mqend.win{border-color:#2bb673}.mqend.lose{border-color:var(--down)}
+.mqendh{font-family:var(--display);font-size:1.6rem}
+.mqbigst{font-size:2.6rem;color:#ffb020;letter-spacing:4px;line-height:1}.mqbigst span{color:var(--line)}
+.mqendst{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%}
+.mqendst div{display:flex;flex-direction:column;background:var(--soft);border-radius:12px;padding:8px 4px}
+.mqendst b{font-family:var(--display);font-size:1.3rem}.mqendst span{font-size:.72rem;color:var(--muted)}
+.mqlvup,.mqnewach{margin:0;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,#ffd34d 25%,var(--surface))}
+@media (max-width:360px){.mqquests{grid-template-columns:minmax(0,1fr)}}
 </style>
 <script src="config.js"></script>
 </head>
@@ -2453,10 +2512,11 @@ const ML_SECS=[["hab","🌱","Habitudes dès 18 ans","La checklist à suivre, da
   ["cas","🔍","Études de cas","Les analyses de patrimoine Finary"],["pieges","⚠️","Pièges & arnaques","Ce qui fait perdre de l'argent"],
   ["biblio","📖","Bibliothèque","Livres et outils cités"],["gloss","🔤","Glossaire","Les mots de la finance"],
   ["vids","🎬","Toutes les vidéos","Les 393 vidéos, par thème"],["outils","🧮","Outils","Intérêts composés, frais, taux d'épargne"]];
-function mlBack(t){return`<div class="row" style="gap:10px;flex-wrap:nowrap"><button class="back" data-mlv="home" aria-label="Retour">‹</button><b style="font-family:var(--display);font-size:1.15rem">${t}</b></div>`}
+function mlBack(t){return`<div class="row" style="gap:10px;flex-wrap:nowrap"><button class="back" data-mlv="codex" aria-label="Retour">‹</button><b style="font-family:var(--display);font-size:1.15rem">${t}</b></div>`}
 
 function macroUI(){
-  const v=V.mlv||"home";
+  if(!V.mlv||V.mlv==="home")return mqUI();
+  const v=V.mlv==="codex"?"home":V.mlv;
   if(v==="les"&&V.mll)return mlLesson(V.mll);
   const f={hab:mlHab,env:mlEnv,voies:mlVoies,cours:mlCours,cas:mlCas,pieges:mlPieges,biblio:mlBiblio,gloss:mlGloss,vids:mlVidsUI,outils:mlOutils}[v];
   if(f)return`<div class="stack">${f()}</div>`;
@@ -2464,7 +2524,8 @@ function macroUI(){
   const pct=s.L.length?Math.round(s.done/s.L.length*100):0;
   const ckNext=s.ck.find(i=>!mlCkDone(p,i));
   return`<div class="stack">
-  <div class="card stack"><div><p class="label" style="margin:0">Macro Lab · d'après les vidéos Finary</p><b style="font-family:var(--display);font-size:1.3rem">Ta progression</b></div>
+  <button class="ghost on" data-mlv="home" style="align-self:flex-start">🎮 Retour à la carte Macro Quest</button>
+  <div class="card stack"><div><p class="label" style="margin:0">Codex · d'après les vidéos Finary</p><b style="font-family:var(--display);font-size:1.3rem">Toutes les ressources</b></div>
     <div class="bar"><i style="width:${pct}%"></i></div>
     <div class="mlstats"><div><b class="num">${s.done}/${s.L.length}</b><span>leçons</span></div><div><b class="num">${s.avg===null?"–":s.avg+" %"}</b><span>aux quiz</span></div><div><b class="num">${s.ckd}/${s.ck.length}</b><span>habitudes</span></div><div><b class="num">${s.vus}</b><span>vidéos vues</span></div></div></div>
   ${next?`<div class="card stack"><p class="label" style="margin:0">Leçon du jour</p><b>${esc(next.titre)}</b><p class="mlsub small">${esc(next.mod.titre)}</p><div><button class="btn" data-mlles="${next.id}">Commencer</button></div></div>`:""}
@@ -8362,6 +8423,109 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(b.dataset.mspick!=null)return msPick(+b.dataset.mspick);if(b.dataset.msnext)return msNext()});
 
 /* ================================================================
+   2.26.0 : MACRO QUEST — le Macro Lab en jeu vidéo
+   9 mondes (les 9 modules), 6 niveaux par monde (les leçons) et un boss.
+   Un niveau = un briefing rapide puis un combat de 5 questions avec 3 cœurs,
+   des combos et 1 à 3 étoiles. Le boss mélange tout le monde : le battre ouvre
+   le monde suivant. Chaque jour : l'Arène (5 questions) et ta série 🔥.
+   Les quêtes « dans la vraie vie » (la checklist) rapportent aussi des XP.
+   Tout le contenu d'avant (vidéos, cas, glossaire, enveloppes…) est dans le Codex.
+   Progression : S.perso.macrolab.game (synchronisée).
+   ================================================================ */
+const MQ_LV=[[0,"Apprenti épargnant"],[150,"Épargnant malin"],[400,"Investisseur débutant"],[800,"Investisseur"],[1400,"Stratège"],[2200,"Gérant de fortune"],[3400,"Maître de la macro"]];
+const MQ_W=[["💶","#2bb673"],["🌍","#2d7ff0"],["📈","#ff7a1a"],["🏦","#8b5cf6"],["🌋","#e5484d"],["🗺️","#12b5a6"],["🧰","#d39b00"],["🧠","#db2777"],["🏰","#5b6577"]];
+const MQ_ACH=[["first","🎯","Premier niveau","Finir ton premier niveau"],["perfect","⭐","Sans faute","3 étoiles sur un niveau"],["boss1","👑","Tueur de boss","Battre ton premier boss"],["combo5","⚡","Combo x5","5 bonnes réponses d'affilée"],["arena","🏟️","Gladiateur","Finir une Arène du jour"],["streak3","🔥","Régulier","3 jours de jeu d'affilée"],["lv10","📚","Studieux","10 niveaux terminés"],["irl3","🌱","Dans la vraie vie","3 quêtes de la vraie vie faites"],["world3","🗺️","Explorateur","Ouvrir le 3e monde"]];
+const mqG=()=>{const p=mlP(),g=p.game||{};return{xp:g.xp||0,st:g.st||{},boss:g.boss||{},days:g.days||{},ach:g.ach||{},best:g.best||0,arena:g.arena||{}}};
+function mqSaveG(f){mlSave(p=>{p.game={...mqG(),...(p.game||{})};f(p.game,p)})}
+/* les quêtes de la vraie vie (checklist) valent 30 XP chacune, tant qu'elles sont cochées */
+const mqIrl=()=>{const p=mlP();return((MACRO.habits||{}).checklist||[]).filter(i=>mlCkDone(p,i)).length};
+const mqXP=()=>mqG().xp+30*mqIrl();
+function mqLevel(xp){let i=0;MQ_LV.forEach((l,k)=>{if(xp>=l[0])i=k});return{i,n:MQ_LV[i][1],from:MQ_LV[i][0],to:(MQ_LV[i+1]||[null])[0]}}
+const mqMods=()=>MACRO.cours||[];
+/* étoiles d'un niveau : celles du jeu, ou 1 si la leçon était déjà faite avant */
+function mqStars(id){const g=mqG(),p=mlP();return g.st[id]||(p.les[id]&&p.les[id].done?1:0)}
+function mqWorldOpen(wi){return wi===0||!!mqG().boss[mqMods()[wi-1].id]}
+function mqLesOpen(wi,li){if(!mqWorldOpen(wi))return false;if(li===0)return true;return mqStars(mqMods()[wi].lecons[li-1].id)>0}
+function mqBossOpen(wi){return mqWorldOpen(wi)&&mqMods()[wi].lecons.every(l=>mqStars(l.id)>0)}
+function mqStreak(dd){const d=dd||mqG().days;let x=today(),s=0;if(!d[dkey(x)])x=add(x,-1);while(d[dkey(x)]){s++;x=add(x,-1)}return s}
+/* le prochain niveau à jouer */
+function mqNext(){const M=mqMods();for(let wi=0;wi<M.length;wi++){if(!mqWorldOpen(wi))return null;for(let li=0;li<M[wi].lecons.length;li++)if(!mqStars(M[wi].lecons[li].id))return{wi,li};if(!mqG().boss[M[wi].id])return{wi,boss:true}}return null}
+function mqAch(g,k){if(g.ach[k])return false;g.ach[k]=dkey(today());(V.mqNew=V.mqNew||[]).push(k);return true}
+function mqCheckAch(g,p){const n=Object.keys(g.st).length;if(n>=1)mqAch(g,"first");if(Object.values(g.st).some(s=>s>=3))mqAch(g,"perfect");if(Object.keys(g.boss).length)mqAch(g,"boss1");if(n>=10)mqAch(g,"lv10");
+  if((g.best||0)>=5)mqAch(g,"combo5");if(Object.keys(g.arena).length)mqAch(g,"arena");if(mqStreak(g.days)>=3)mqAch(g,"streak3");if(Object.keys(g.boss).length>=2)mqAch(g,"world3");
+  const ck=((MACRO.habits||{}).checklist||[]).filter(i=>mlCkDone(p,i)).length;if(ck>=3)mqAch(g,"irl3")}
+
+/* ---- la carte du monde ---- */
+function mqUI(){const r=V.mq;if(r)return mqPlay();
+  const g=mqG(),X=mqXP(),L=mqLevel(X),pc=L.to?Math.round((X-L.from)/(L.to-L.from)*100):100,st=mqStreak(),nx=mqNext(),M=mqMods(),td=dkey(today());
+  const ck=(MACRO.habits||{}).checklist||[],p=mlP(),ckd=ck.filter(i=>mlCkDone(p,i)).length,ar=g.arena[td];
+  const hud=`<div class="card mqhud"><div class="mqhudt"><span class="mqava" aria-hidden="true">🧭</span><div style="min-width:0"><span class="mqlvl">Niveau ${L.i+1}</span><b class="mqlvn">${esc(L.n)}</b></div><span class="mqfire" aria-label="${st} jours de série">🔥 <b class="num">${st}</b></span></div>
+    <div class="mqxpbar" aria-hidden="true"><i style="width:${pc}%"></i></div><p class="small muted num" style="margin:0">${X} XP${L.to?` · encore ${L.to-X} XP pour « ${esc(MQ_LV[L.i+1][1])} »`:" · niveau maximum"}</p></div>`;
+  const quests=`<div class="mqquests">
+    <button class="card mqq ${ar?"done":""}" data-mqgo="arena"><span class="mqqi">🏟️</span><b>Arène du jour</b><small>${ar?`✓ ${ar.ok}/5 aujourd'hui`:"5 questions · +50 XP"}</small></button>
+    ${nx?`<button class="card mqq mqqmain" data-mqgo="${nx.boss?"boss|"+nx.wi:"les|"+nx.wi+"|"+nx.li}"><span class="mqqi">${nx.boss?"👹":"▶"}</span><b>${nx.boss?"Affronter le boss":"Continuer"}</b><small>${esc(nx.boss?M[nx.wi].titre:M[nx.wi].lecons[nx.li].titre)}</small></button>`:`<div class="card mqq done"><span class="mqqi">🏆</span><b>Tous les mondes finis</b><small>Rejoue pour 3 étoiles</small></div>`}
+    <button class="card mqq" data-mlv="hab"><span class="mqqi">🌱</span><b>Quêtes IRL</b><small>${ckd}/${ck.length} faites · +30 XP</small></button></div>`;
+  const worlds=M.map((m,wi)=>{const open=mqWorldOpen(wi),[em,col]=MQ_W[wi%MQ_W.length],stars=m.lecons.reduce((a,l)=>a+mqStars(l.id),0),beat=!!g.boss[m.id],cur=nx&&nx.wi===wi;
+    const nodes=m.lecons.map((l,li)=>{const s=mqStars(l.id),o=mqLesOpen(wi,li),isCur=cur&&!nx.boss&&nx.li===li;
+      return`<div class="mqnodew" style="--off:${[0,1,2,1,0,-1][li%6]*22}%"><button class="mqnode ${s?"done":""} ${isCur?"cur":""}" data-mqgo="les|${wi}|${li}" ${o?"":"disabled"} aria-label="Niveau ${li+1} : ${esc(l.titre)}${o?"":" (verrouillé)"}">${o?(s?"✓":li+1):"🔒"}${isCur?`<span class="mqhere">Joue ici</span>`:""}</button><span class="mqst" aria-hidden="true">${"★".repeat(s)}${"☆".repeat(3-s)}</span></div>`}).join("");
+    const bo=mqBossOpen(wi);
+    return`<section class="mqworld ${open?"":"locked"}" style="--wc:${col}" ${cur?'id="mqcur"':""}><div class="mqban"><span class="mqbane">${open?em:"🔒"}</span><div style="min-width:0"><span class="mqbann">Monde ${wi+1}</span><b>${esc(m.titre)}</b></div><span class="mqbans num">${stars}/${m.lecons.length*3} ★</span></div>
+      ${open?`<div class="mqpath">${nodes}<div class="mqnodew"><button class="mqboss ${beat?"done":""} ${cur&&nx.boss?"cur":""}" data-mqgo="boss|${wi}" ${bo?"":"disabled"} aria-label="Boss du monde ${wi+1}${bo?"":" (verrouillé)"}">${beat?"👑":bo?"👹":"🔒"}</button><span class="mqst">${beat?"Boss vaincu":"Boss"}</span></div></div>`:`<p class="small muted" style="margin:6px 0 0">Bats le boss du monde ${wi} pour ouvrir ce monde.</p>`}</section>`}).join("");
+  const ach=`<details class="card mqach"><summary><b>🏅 Succès</b> <span class="muted small num">${Object.keys(g.ach).length}/${MQ_ACH.length}</span></summary><div class="mqachg">${MQ_ACH.map(([k,e,t,d])=>`<div class="mqa ${g.ach[k]?"on":""}"><span>${g.ach[k]?e:"🔒"}</span><b>${t}</b><small>${d}</small></div>`).join("")}</div></details>`;
+  setTimeout(()=>{if(V.mqScroll){V.mqScroll=false;const c=document.getElementById("mqcur");c&&c.scrollIntoView&&c.scrollIntoView({block:"center"})}},30);
+  return`<div class="stack mqmap">${hud}${quests}${worlds}${ach}<button class="ghost on" data-mlv="codex" style="align-self:flex-start">📚 Ouvrir le Codex (vidéos, cas, enveloppes, glossaire…)</button>
+    <p class="mlsub small">Contenu tiré des vidéos de la chaîne Finary, chiffres vérifiés pour ${esc(MACRO.maj||"2026")}. Éducatif, pas un conseil personnalisé.</p></div>`}
+
+/* ---- une partie : niveau, boss ou arène ---- */
+function mqStart(kind,a,b){const M=mqMods();let qs=[],brief=[],title,sub;
+  if(kind==="les"){const l=M[a].lecons[b];qs=(l.quiz||[]).slice(0,5);brief=[...(l.essentiel||[]).slice(0,4),...(l.chiffres||[]).slice(0,2).map(x=>"🔢 "+x)];title=l.titre;sub=`Monde ${a+1} · niveau ${b+1}`}
+  else if(kind==="boss"){const r=rngOf(hashStr("boss|"+M[a].id+"|"+Date.now()));const all=M[a].lecons.flatMap(l=>l.quiz||[]);qs=all.map(q=>[r(),q]).sort((x,y)=>x[0]-y[0]).slice(0,10).map(x=>x[1]);title="Boss : "+M[a].titre;sub=`Monde ${a+1} · 10 questions, 3 cœurs`}
+  else{const r=rngOf(hashStr("arena|"+dkey(today())));const pool=[];M.forEach((m,wi)=>m.lecons.forEach((l,li)=>{if(mqLesOpen(wi,li))(l.quiz||[]).forEach(q=>pool.push(q))}));qs=pool.map(q=>[r(),q]).sort((x,y)=>x[0]-y[0]).slice(0,5).map(x=>x[1]);title="Arène du jour";sub="5 questions de tes mondes ouverts"}
+  V.mq={kind,a,b,qs,brief,title,sub,ph:brief.length?"brief":"quiz",bi:0,i:0,hearts:3,combo:0,best:0,ok:0,miss:0,pick:null,xp:0};render(true);window.scrollTo(0,0)}
+function mqPlay(){const r=V.mq,hearts=`<span class="mqhearts" aria-label="${r.hearts} cœurs">${"❤️".repeat(r.hearts)}${"🖤".repeat(Math.max(0,3-r.hearts))}</span>`;
+  const top=`<div class="mqtop"><button class="back" data-mqquit="1" aria-label="Quitter">✕</button><div class="mqprog" aria-hidden="true"><i style="width:${r.ph==="brief"?0:Math.round(r.i/r.qs.length*100)}%"></i></div>${r.ph==="quiz"?hearts:""}</div>`;
+  if(r.ph==="brief"){const t=r.brief[r.bi];
+    return`<div class="stack mqgame">${top}<p class="label" style="margin:0">${esc(r.sub)} · briefing ${r.bi+1}/${r.brief.length}</p><b class="mqtitle">${esc(r.title)}</b>
+      <div class="card mqbrief"><p>${esc(t)}</p></div>
+      <div class="row"><button class="btn" data-mqb="next">${r.bi<r.brief.length-1?"Suivant →":"⚔️ Au combat !"}</button>${r.bi<r.brief.length-1?`<button class="ghost" data-mqb="fight">Passer au combat</button>`:""}</div></div>`}
+  if(r.ph==="end")return mqEnd();
+  const q=r.qs[r.i],a=r.pick;
+  return`<div class="stack mqgame">${top}<p class="label" style="margin:0">${esc(r.sub)} · question ${r.i+1}/${r.qs.length}${r.combo>=2?` · <span class="mqcombo">⚡ combo x${r.combo}</span>`:""}</p>
+    <div class="card mqqcard ${a!=null?(a===q.a?"good":"bad"):""}"><p class="qt">${esc(q.q)}</p><div class="choices">${q.c.map((c,ci)=>`<button class="choice ${a!=null?(ci===q.a?"right":ci===a?"wrong":""):""}" data-mqa="${ci}" ${a!=null?"disabled":""}>${esc(c)}</button>`).join("")}</div>
+    ${a!=null?`<div class="corr"><b>${a===q.a?`✓ Touché ! +${10+Math.min(r.combo-1,4)*2} XP`:"✗ Raté, tu perds un cœur."}</b> ${esc(q.e||"")}</div>`:""}</div>
+    ${a!=null?`<button class="btn mqnext" data-mqn="1">${r.hearts<=0?"Voir le résultat":r.i<r.qs.length-1?"Suivant →":"Voir le résultat"}</button>`:""}</div>`}
+function mqAnswer(ci){const r=V.mq;if(!r||r.pick!=null)return;const q=r.qs[r.i];r.pick=ci;
+  if(ci===q.a){r.ok++;r.combo++;r.best=Math.max(r.best,r.combo);r.xp+=10+Math.min(r.combo-1,4)*2}else{r.miss++;r.combo=0;r.hearts--}
+  render(true)}
+function mqNextQ(){const r=V.mq;r.pick=null;if(r.hearts<=0||r.i>=r.qs.length-1)return mqFinish();r.i++;render(true)}
+function mqFinish(){const r=V.mq,M=mqMods(),win=r.hearts>0,td=dkey(today());r.ph="end";r.win=win;
+  r.stars=r.kind==="les"&&win?(r.miss===0?3:r.miss===1?2:1):0;let bonus=0;const L0=mqLevel(mqXP()).i;
+  mqSaveG((g,p)=>{g.days={...g.days,[td]:true};g.best=Math.max(g.best||0,r.best);
+    if(r.kind==="les"&&win){const id=M[r.a].lecons[r.b].id,old=(g.st||{})[id]||0;if(!old)bonus=20;g.st={...g.st,[id]:Math.max(old,r.stars)};p.les={...(p.les||{}),[id]:{...(p.les||{})[id],done:true,ok:r.ok,tot:r.qs.length}}}
+    if(r.kind==="boss"&&win){const id=M[r.a].id;if(!g.boss[id])bonus=100;g.boss={...g.boss,[id]:td}}
+    if(r.kind==="arena"&&!g.arena[td]){bonus=win?50:20;g.arena={...g.arena,[td]:{ok:r.ok}}}
+    r.bonus=bonus;g.xp=(g.xp||0)+(win||r.kind==="arena"?r.xp:Math.round(r.xp/2))+bonus;mqCheckAch(g,p)});
+  r.lvUp=mqLevel(mqXP()).i>L0;render(true)}
+function mqEnd(){const r=V.mq,gain=(r.win||r.kind==="arena"?r.xp:Math.round(r.xp/2))+(r.bonus||0),nw=(V.mqNew||[]).map(k=>MQ_ACH.find(a=>a[0]===k)).filter(Boolean);
+  const head=r.win?(r.kind==="boss"?"👑 Boss vaincu !":r.kind==="arena"?"🏟️ Arène terminée !":"🎉 Niveau terminé !"):"💀 Plus de cœurs…";
+  return`<div class="stack mqgame"><div class="card mqend ${r.win?"win":"lose"}"><b class="mqendh">${head}</b>
+    ${r.kind==="les"&&r.win?`<div class="mqbigst" aria-label="${r.stars} étoiles sur 3">${"★".repeat(r.stars)}<span>${"★".repeat(3-r.stars)}</span></div>`:""}
+    <div class="mqendst"><div><b class="num">${r.ok}/${r.qs.length}</b><span>bonnes réponses</span></div><div><b class="num">+${gain}</b><span>XP</span></div><div><b class="num">${r.best}</b><span>meilleur combo</span></div></div>
+    ${r.lvUp?`<p class="mqlvup">⬆️ Niveau supérieur : <b>${esc(mqLevel(mqXP()).n)}</b> !</p>`:""}
+    ${nw.map(a=>`<p class="mqnewach">${a[1]} Succès débloqué : <b>${esc(a[2])}</b></p>`).join("")}
+    ${!r.win?`<p class="small">${r.kind==="boss"?"Le boss était plus fort cette fois. Revois les niveaux du monde, puis retente-le.":"Relis le briefing et retente : il faut au moins une bonne partie pour débloquer le niveau suivant."}</p>`:r.kind==="boss"&&r.a<mqMods().length-1?`<p class="small">🗺️ Le monde ${r.a+2} est ouvert : <b>${esc(mqMods()[r.a+1].titre)}</b>.</p>`:""}
+    ${r.kind==="les"?`<button class="linkb" data-mqcodex="${r.a}|${r.b}">📖 Revoir la leçon complète (vidéos, cartes)</button>`:""}</div>
+    <div class="row">${!r.win||r.kind==="les"&&r.stars<3?`<button class="ghost on" data-mqgo="${r.kind}|${r.a}|${r.b}">↻ Rejouer</button>`:""}<button class="btn" data-mqquit="1">Retour à la carte</button></div></div>`}
+
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-mqgo],[data-mqa],[data-mqn],[data-mqb],[data-mqquit],[data-mqcodex]");if(!b)return;const d=b.dataset;
+  if(d.mqgo){const[k,a,c]=d.mqgo.split("|");V.mqNew=[];return mqStart(k,+a||0,+c||0)}
+  if(d.mqa!=null)return mqAnswer(+d.mqa);
+  if(d.mqn)return mqNextQ();
+  if(d.mqb){const r=V.mq;if(d.mqb==="fight"||r.bi>=r.brief.length-1)r.ph="quiz";else r.bi++;return render(true)}
+  if(d.mqquit){V.mq=null;V.mqNew=[];V.mqScroll=true;return render(true)}
+  if(d.mqcodex){const[a,c]=d.mqcodex.split("|").map(Number);V.mq=null;V.mlv="les";V.mll=mqMods()[a].lecons[c].id;render(true);window.scrollTo(0,0)}});
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
 const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["ps","Mon avenir"],["ent","Entraîne­ment"],["py","Python"],["cours","Cours"],["mx","Maths"],["mm","Mode maths"],["cg","Culture G"]];
@@ -8413,7 +8577,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.25.0";
+const APP_VERSION="2.26.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
