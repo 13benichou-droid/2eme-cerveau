@@ -1429,6 +1429,28 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 
 /* 2.21.1 : Mon avenir sous la pensée du jour */
 .wgs.wgav{margin-top:12px}
+
+/* 2.24.0 : Mes habitudes (éditeur) */
+.heclosed{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.helist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.herow{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-bottom:1px solid var(--line)}
+.hetop{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.hen{font-size:1rem}
+.hedays{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.hed{min-height:40px;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--muted);font-weight:800;font-family:var(--display);padding:0}
+.hed.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.hebot{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.hedur{display:inline-flex;align-items:center;gap:10px}
+.hestep{width:40px;height:40px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font-size:1.2rem;font-weight:800}
+.hemsg{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--accent) 10%,var(--surface));font-size:.9rem}
+.headd{border-top:2px solid var(--line);padding-top:12px}
+
+/* 2.25.0 : séance guidée */
+.choice.mid{border-color:var(--warn);background:color-mix(in srgb,var(--warn) 12%,var(--surface))}
+.gdots i.mid{background:var(--warn)}
+.msfb.ok{border-left:4px solid var(--up)}.msfb.mid{border-left:4px solid var(--warn)}.msfb.ko{border-left:4px solid var(--down)}
+.msnm{font-family:var(--display);font-size:1.1rem}
+.mslog summary{cursor:pointer}.mslog p{margin:8px 0 0}
 </style>
 <script src="config.js"></script>
 </head>
@@ -2597,7 +2619,7 @@ const GAMES=[
  {k:"graph",n:"Lis le graphique",e:"📈",d:"Tendance, moyenne mobile, plus haut : lis un graphique comme un pro."},
  {k:"levier",n:"Effet de levier",e:"⚖️",d:"Mesure ce que le levier fait à tes gains… et à tes pertes."},
  {k:"calc",n:"Calculs de trader",e:"🧮",d:"Variations, dividendes, PER, intérêts composés."},
- {k:"simu",n:"Séance simulée",e:"🎮",d:"20 séances sur l'action fictive NOVA avec 10 000 € virtuels."}
+ {k:"simu",n:"Séance guidée",e:"🎯",d:"Un vrai cas de marché en 4 décisions : un coach t'explique chaque choix, et tu vois ce que ta stratégie rapporte en moyenne."}
 ];
 const dayNum=d=>Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5);
 const dailyGame=d=>GAMES[((dayNum(d)%GAMES.length)+GAMES.length)%GAMES.length];
@@ -2714,7 +2736,7 @@ function genSimu(r){
     P.push(r2(Math.max(1,P[t-1]*(1+ret))))}
   return{sim:true,P,news,lesson:"Une bonne partie des mouvements est imprévisible : ce qui fait un bon trader, c'est de couper vite ses pertes et de limiter son risque, pas de deviner l'avenir."};
 }
-const GEN={news:genNews,risk:genRisk,graph:genGraph,levier:genLevier,calc:genCalc,simu:genSimu};
+const GEN={news:genNews,risk:genRisk,graph:genGraph,levier:genLevier,calc:genCalc,simu:genMission};
 
 /* ---- graphique ---- */
 function priceChart(P,o={}){
@@ -2743,6 +2765,7 @@ function startGame(mode,k){
   const seed=mode==="daily"?hashStr("2cerveau|"+dkey(today())+"|"+k):(Date.now()%2147483647);
   const data=GEN[k](rngOf(seed));
   V.g={mode,k,data,i:0,pick:null,val:null,res:[],done:false};V.gin="";
+  if(data.mission)V.g.ms={step:0,ans:null,pts:0,log:[]};
   if(data.sim)V.g.sim={t:0,cash:10000,sh:0,entry:0,stop:true,fees:0,trades:[],marks:[],log:[]};
   render(true);
 }
@@ -2806,9 +2829,10 @@ function gameUI(){
       ${g.xp?`<p class="num"><b>+${g.xp} XP</b></p>`:g.mode==="daily"?`<p class="muted small">Défi déjà compté aujourd'hui.</p>`:`<p class="muted small">Partie d'entraînement : pas d'XP.</p>`}
       ${sim?`${priceChart(g.data.P,{marks:sim.marks})}<div class="stats"><div class="stat"><b>${euro(sim.final)}</b><span>ton résultat</span></div><div class="stat"><b>${euro(sim.bh)}</b><span>acheter et garder</span></div><div class="stat"><b>${euro(sim.fees,2)}</b><span>frais payés</span></div></div>
         <p class="small muted">${sim.trades.length} trade${sim.trades.length>1?"s":""}${sim.trades.length?` · meilleur ${spct(Math.max(...sim.trades.map(t=>t.pct)))} · pire ${spct(Math.min(...sim.trades.map(t=>t.pct)))}`:""}. Points : capital protégé (2), au moins aussi bien qu'acheter et garder (2), aucune perte de plus de 8 % sur un trade (1).</p>`:""}
-      <div class="corr">💡 ${g.data.lesson}</div>
+      ${g.ms?msDebrief():""}<div class="corr">💡 ${g.data.lesson}</div>
       <div class="row">${quit}<button class="btn" data-play="practice|${g.k}">Rejouer pour s'entraîner</button></div></div>`;
   }
+  if(g.data.mission)return msUI(top,quit);
   if(g.data.sim)return simUI(top,quit);
   const R=g.data.rounds[g.i],n=g.data.rounds.length,answered=g.pick!==null,ok=answered&&g.res[g.res.length-1];
   const dots=g.data.rounds.map((_,i)=>`<i class="${i<g.res.length?(g.res[i]?"ok":"ko"):i===g.i?"cur":""}"></i>`).join("");
@@ -3339,7 +3363,11 @@ function pageObj(){
    ================================================================ */
 const edtP=()=>((S.params||{}).edt)||{};
 const appP=()=>((S.params||{}).appli)||{};
-function habSync(){Object.entries(edtP().custom||{}).forEach(([k,v])=>{if(v&&v.n){HABITS[k]=[v.n,""];if(!JORD[k])JORD[k]=5}})}
+/* 2.24.0 : les noms d'origine sont gardés (HAB0) pour qu'un renommage puisse s'annuler ; edt.nom = tes nouveaux noms */
+let HAB0=null;
+function habSync(){if(!HAB0)HAB0=JSON.parse(JSON.stringify(HABITS));Object.keys(HABITS).forEach(k=>{if(!HAB0[k])delete HABITS[k]});Object.entries(HAB0).forEach(([k,v])=>HABITS[k]=v.slice());
+  Object.entries(edtP().custom||{}).forEach(([k,v])=>{if(v&&v.n){HABITS[k]=[v.n,""];if(!JORD[k])JORD[k]=5}});
+  Object.entries(edtP().nom||{}).forEach(([k,n])=>{if(HABITS[k]&&n)HABITS[k]=[String(n),HABITS[k][1]]})}
 const habN=h=>(HABITS[h]||[String(h)])[0];
 const habL=h=>habN(h)+(((HABITS[h]||[])[1])==="fiche"?" (fiche)":"");
 function jBase(h){const d=(edtP().dur||{})[h];if(d>0)return d;const c=(edtP().custom||{})[h];return(c&&c.min)||JDUR[h]||30}
@@ -3444,6 +3472,9 @@ function sgCompute(ops,scope){
       if(o.hide!=null){a.hide=(a.hide||[]).filter(k=>k!==o.k);if(o.hide)a.hide.push(o.k);a.show=(a.show||[]).filter(k=>k!==o.k);if(!o.hide)a.show.push(o.k);lines.push(`Tuile « ${nm} » ${o.hide?"cachée":"affichée"}`)}
       if(o.nom){a.nom={...(a.nom||{}),[o.k]:String(o.nom).slice(0,30)};lines.push(`Tuile « ${nm} » renommée « ${a.nom[o.k]} »`)}
       if(o.pos){const ks=sects(true).map(s=>s[0]).filter(k=>k!==o.k);if(o.pos==="first")ks.unshift(o.k);else ks.push(o.k);a.order=ks;lines.push(`Tuile « ${nm} » ${o.pos==="first"?"en premier":"en dernier"}`)}}
+    else if(o.t==="ren"){if(!HABITS[o.a]||!o.n)continue;const n=String(o.n).trim().slice(0,40),old=habN(o.a);if(!n||n===old)continue;
+      if(e.custom&&e.custom[o.a])e.custom={...e.custom,[o.a]:{...e.custom[o.a],n}};else e.nom={...(e.nom||{}),[o.a]:n};lines.push(`${old} s'appelle maintenant « ${n} »`)}
+    else if(o.t==="forget"){if(e.custom&&e.custom[o.a]){const c={...e.custom};delete c[o.a];e.custom=c}}
     else if(o.t==="theme"){D.appli.theme=o.v;lines.push(`Apparence : ${{light:"claire",dark:"sombre",black:"noire",auto:"comme ton téléphone"}[o.v]||o.v}`)}
   }
   Object.entries(pw).forEach(([w,l])=>{w=+w;const pl=l.length>1;lines.push(`Objectif Top 3 : ${l.join(", ")} ${w===0?(pl?"ne comptent plus":"ne compte plus"):(pl?"comptent ":"compte ")+wTxt(w)} dans la régularité`)});
@@ -3489,6 +3520,8 @@ function sgClause(c,raw){
   const H=re=>re.test(c),S_=sgSubj(c),ds=sgDays(c),du=sgDur(c),ck=sgClock(c),one=x=>[x];let m;
   /* apparence */
   if(H(/\b(mode|theme|fond|apparence|couleurs?)\b/)){if(H(/\bnoire?\b|black|oled|amoled/))return one({t:"theme",v:"black"});if(H(/sombre|dark|nuit/))return one({t:"theme",v:"dark"});if(H(/clair|blanc|light/))return one({t:"theme",v:"light"});if(H(/\bauto/))return one({t:"theme",v:"auto"})}
+  /* 2.24.0 : « je veux pouvoir supprimer une habitude » : l'appli sait déjà le faire → on ouvre le bon outil */
+  const gw=sgGo(c,S_);if(gw)return one(gw);
   /* tuiles de l'accueil */
   const tk=sgTile(c);
   if(tk&&H(/\b(tuile|rubrique|case|bloc|accueil|icone)\b|en premier|en haut|en dernier|en bas|au debut|a la fin|renomm/)){
@@ -3551,6 +3584,17 @@ function sgClause(c,raw){
     n=n.replace(/\s*(\b(le|les|chaque|tous|toutes|tout|pendant|en|pour|de|à|a|le soir|ce soir|demain|aujourd'hui)\b\s*)?(\d.*|\b(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche|semaine|week-end|soir|jours?|matin)\b.*)$/i,"").replace(/[.,;!]+$/,"").trim();
     if(n.length>=2&&n.length<=60){n=n[0].toUpperCase()+n.slice(1);return one(SG_WK.test(c)&&n.length<=30?{t:"new",n,min:du||30,days:ds}:{t:"tache",n,min:du||30,days:SG_TD.test(c)?ds:[]})}}
   return null}
+/* les outils qui existent déjà : on y emmène au lieu de créer un module */
+const SG_GO={hab:{p:"hab",lb:"✏️ Ouvrir « Mes habitudes »",how:"Dans Suivi d'habitudes, le bouton ✏️ Modifier mes habitudes te permet d'ajouter, supprimer ou renommer une habitude, et de choisir ses jours et sa durée."},
+  cartes:{p:"ent",tab:"cards",lb:"🗂️ Ouvrir mes cartes",how:"Dans S'entraîner → Cartes, touche le nom d'un paquet : nombre de nouvelles cartes par jour, les deux sens, supprimer ou suspendre une carte."},
+  style:{p:"reglages",lb:"⚙️ Ouvrir les Réglages",how:"Dans ⚙️ Réglages : le style (Arcade suisse ou Classique), l'apparence (clair, sombre, noir) et l'accueil."}};
+function sgGo(c,S_){const can=/\b(pouvoir|possible|comment|moyen|bouton|option|je peux|on peut|peut on|permettre|permet|gerer|gere)\b/.test(c);
+  if(/\bhabitudes?\b/.test(c)&&/supprim|enleve|retir|modifi|chang|ajout|rajout|renomm|gere|gerer|edit|organis|\bjours?\b|duree|efface|vire/.test(c)){
+    const rest=c.replace(/^.*?\bhabitudes?\b/,"").replace(/\b(dans|la|le|les|de|d|des|du|sur|via|depuis|en|categorie|rubrique|suivi|onglet|page|partie|habitudes?|mobile|telephone|portable|iphone|appli|application|l appli|stp|s il te plait|svp|aussi|directement|facilement|moi|me|mes|ma|mon)\b/g," ").trim();
+    if(can||!rest||!S_.length&&/\b(une|des|mes|les)\s+habitudes?\b/.test(c)&&!/\bhabitudes?\s+\w{3,}/.test(c.replace(/habitudes? (dans|de|du|sur|via|depuis|en)\b.*$/,"")))return{t:"go",k:"hab"}}
+  if(can&&/\bcartes?\b|\bpaquets?\b|\banki\b/.test(c))return{t:"go",k:"cartes"};
+  if(can&&/\b(style|couleurs?|theme|mode sombre|apparence)\b/.test(c))return{t:"go",k:"style"};
+  return null}
 const SG_TD=/aujourd hui|ce soir|ce matin|cet apres|\bdemain\b|cette fois|pour une fois|cette semaine|exceptionnel|\bce (lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)\b/;
 const SG_WK=/\b(lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche)s?\b|\bchaque\b|tous les|toutes les|week ?-?end|en semaine|desormais|dorenavant|toujours|d habitude|a partir de|en general|tout le temps/;
 /* nom d'une tâche tapée : on enlève « ajoute une tâche », la durée et le jour */
@@ -3587,6 +3631,8 @@ Opérations possibles (champ "t") :
 {"t":"poids","a":id ou "devoir","w":0 à 3} combien une tâche compte dans la régularité de l'objectif
 {"t":"tuile","k":clé,"hide":true|false} ; {"t":"tuile","k":clé,"pos":"first"|"last"} ; {"t":"tuile","k":clé,"nom":"Nouveau nom"}
 {"t":"theme","v":"light"|"dark"|"black"|"auto"} (black = noir pur)
+{"t":"ren","a":id,"n":"Nouveau nom"} renomme une habitude ; supprimer complètement une habitude = {"t":"del","a":id,"days":[]}
+{"t":"go","k":"hab"|"cartes"|"style"} quand Nathan demande de POUVOIR faire quelque chose que l'appli sait déjà faire : "hab" = éditeur « Mes habitudes » (ajouter, supprimer, renommer, jours, durée), "cartes" = réglages des paquets de cartes, "style" = Réglages (style, apparence). Dans ce cas, mets seulement cette opération et "code": false.
 Réponds UNIQUEMENT en JSON : {"ops":[…],"scope":"always" ou "once","resume":"une phrase courte en français (tutoiement) qui dit ce que tu as compris","code":true|false,"idee":"si code est true : l'idée reformulée clairement"}
 "scope" vaut "once" seulement si Nathan dit que c'est pour aujourd'hui, ce soir, demain ou une seule fois.
 "code" vaut true si la suggestion demande une nouvelle fonction de l'appli qu'aucune opération ne permet (nouvelle rubrique, graphique, bouton, rappel…).
@@ -3616,6 +3662,8 @@ function sgValid(o){if(!o||typeof o!=="object")throw{code:"invalid_json"};
     else if(t==="poids"&&(H(x.a)||x.a==="devoir")&&x.w!=null&&!isNaN(+x.w))ops.push({t,a:x.a,w:+x.w});
     else if(t==="tuile"&&sects(true).some(s=>s[0]===x.k))ops.push({t,k:x.k,hide:typeof x.hide==="boolean"?x.hide:undefined,pos:["first","last"].includes(x.pos)?x.pos:undefined,nom:typeof x.nom==="string"&&x.nom.trim()?x.nom.trim():undefined});
     else if(t==="theme"&&["light","dark","black","auto"].includes(x.v))ops.push({t,v:x.v});
+    else if(t==="ren"&&H(x.a)&&typeof x.n==="string"&&x.n.trim())ops.push({t,a:x.a,n:x.n.trim().slice(0,40)});
+    else if(t==="go"&&SG_GO[x.k])ops.push({t,k:x.k});
     else if(t==="tache"&&typeof x.n==="string"&&x.n.trim())ops.push({t,n:x.n.trim().slice(0,120),min:+x.min||30,days:D(x.days)});
     else if(t==="report"&&typeof x.k==="string"&&TK.includes(x.k))ops.push({t,k:x.k});
     else if(t==="prio"){const ks=(Array.isArray(x.k)?x.k:[x.k]).filter(k=>typeof k==="string"&&TK.includes(k));if(ks.length)ops.push({t,k:ks})}});
@@ -3657,6 +3705,7 @@ async function sgSubmit(place,txt){
   let p=sgLocal(txt);
   if((!p||p.code||p.weak)&&SAMPLE){try{const q=await sgAI(txt,place);if(q.ops.length||q.code||!p)p=q}catch(e){if(!p)st.err=ERR(e.code)}}
   st.busy=false;st.p=p||null;
+  const go=p&&p.ops.find(o=>o.t==="go"&&SG_GO[o.k]);if(go){st.go=go.k;if(V.sg[place]===st)render(true);return}
   if(p&&p.ops.length)sgDo(st,place==="jour"?"auto":"autoA");
   if(V.sg[place]===st){render(true);sgShow()}}
 /* « Plutôt chaque semaine » / « Plutôt juste aujourd'hui » : on annule puis on refait avec l'autre portée */
@@ -3670,6 +3719,8 @@ function sgFx(x){const out=[],d=x.b.s-x.a.s;
   return out}
 function sgResult(place){const st=V.sg[place];
   if(st.busy)return`<p class="muted small">Je modifie ton planning…</p>`;
+  if(st.go){const g=SG_GO[st.go];return`<div class="sgres ok"><p><b>✓ C'est déjà possible, directement :</b></p><p>${esc(g.how)}</p>
+    <div class="row"><button class="btn" data-sggo="${st.go}">${g.lb}</button><button class="ghost" data-sgno="${place}">OK</button></div></div>`}
   if(st.msg)return`<div class="sgres ok"><p>${esc(st.msg)}</p><div class="row"><button class="ghost on" data-sgno="${place}">OK</button></div></div>`;
   const p=st.p,r=st.res,live=st.logId&&sgList().some(x=>x.id===st.logId&&x.etat==="ok");
   if(p&&r&&r.lines.length&&live){const sw=st.scopes.length===1&&(place==="jour"||st.scopes[0]==="once"),jr=place==="jour";
@@ -4455,6 +4506,7 @@ function pageHab(){
     <ul class="list">${u.hab.map(h=>`<li><label class="chk"><input type="checkbox" id="hab-${h}" data-hab="${h}" ${k[h]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(habN(h))}</span><span class="tag">${(HABITS[h]||[])[1]||""}</span></label></li>`).join("")}${u.pn.map(x=>`<li><label class="chk"><input type="checkbox" id="hab-pn-${sid(x.id)}" data-pnd="${esc(x.id)}|${x._dk}" ${x.fait||k["pn:"+x.id]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.m||"Devoir")}<small class="pnhw">${esc(String(x.txt||"").slice(0,140))}</small></span><span class="tag">Devoir</span></label></li>`).join("")}${u.xs.map(x=>`<li><label class="chk"><input type="checkbox" id="hab-x-${x.id}" data-jt="x|${x.id}|${x._dk}" ${x.ok?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.t)}</span><span class="tag">${x.min} min</span></label></li>`).join("")}</ul>
     <form class="row" data-f="jadd" data-dk="${addK}" style="flex-direction:row;flex-wrap:nowrap"><input class="field" id="hab-add" name="t" placeholder="+ Ajouter une tâche pour ${we?"ce week-end":"ce jour"}" autocomplete="off" required><input type="hidden" name="min" value="30"><button class="ghost on" aria-label="Ajouter">Ajouter</button></form>
   </div>
+  ${heCard()}
   <div><p class="label">Cette semaine</p><div class="week" style="grid-template-columns:repeat(6,minmax(0,1fr))">${week}</div></div>
   <div class="stats"><div class="stat"><b>${streak()}</b><span>jours parfaits d'affilée (le week-end compte pour un)</span></div>
     <div class="stat"><b>${Math.round(weekSeries(1)[0].p*100)}%</b><span>cette semaine</span></div>
@@ -8165,6 +8217,151 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   put("params","appli",{...appP(),style:b.dataset.styleset},true);themeSync();render(true)});
 
 /* ================================================================
+   2.24.0 : MES HABITUDES — les modifier directement, sans passer par l'IA
+   Dans Suivi d'habitudes : ajouter, renommer, supprimer une habitude, choisir ses jours
+   et sa durée, au doigt. Chaque changement passe par le même moteur que les suggestions
+   (sgCompute / sgCommit) : il apparaît dans l'historique et s'annule d'un geste.
+   ================================================================ */
+const HE_DAYS=[[1,"L"],[2,"M"],[3,"M"],[4,"J"],[5,"V"],[6,"S"],[0,"D"]];
+/* toutes les habitudes de l'emploi du temps de base, plus celles que tu as créées */
+function heList(){const tk=dkey(today()),seen=[];
+  for(const[w]of HE_DAYS)planBase(tk,w).forEach(h=>{if(!seen.includes(h))seen.push(h)});
+  Object.keys(edtP().custom||{}).forEach(h=>{if(!seen.includes(h))seen.push(h)});
+  return seen.filter(h=>HABITS[h]).map(h=>({h,days:HE_DAYS.map(([w])=>w).filter(w=>planBase(tk,w).includes(h)),min:jDur(h,jBase(h)),custom:!!(edtP().custom||{})[h]}))}
+/* applique des opérations « chaque semaine », garde la trace pour pouvoir annuler */
+function heDo(ops,txt){const r=sgCompute(ops,"always");if(!r.lines.length){V.heMsg={t:r.notes.join(" ")||"Rien à changer."};return render(true)}
+  const id=sgCommit(r,txt,"always");habSync();V.heMsg={t:r.lines.join(" · "),id};render(true)}
+function heCard(){const open=!!V.habEdit;
+  if(!open)return`<div class="card heclosed"><button class="ghost on heopen" data-heopen="1">✏️ Modifier mes habitudes</button><span class="muted small">ajouter, supprimer, changer les jours ou la durée</span></div>`;
+  const L=heList(),add=V.heAdd||{days:[1,2,3,4,5]},msg=V.heMsg;
+  return`<div class="card stack hecard" id="hecard"><div class="row" style="justify-content:space-between;align-items:center"><p class="label" style="margin:0">✏️ Mes habitudes</p><button class="ghost" data-heopen="0">Fermer</button></div>
+    <p class="muted small" style="margin:0">Touche un jour pour l'activer ou l'enlever. Les changements valent pour chaque semaine, à partir d'aujourd'hui (les jours passés ne bougent pas).</p>
+    ${msg?`<div class="hemsg"><span>${msg.id?"✓ ":""}${esc(msg.t)}</span>${msg.id?`<button class="linkb" data-heundo="${msg.id}">↩︎ Annuler</button>`:""}</div>`:""}
+    <ul class="helist">${L.map(x=>{const ren=V.heRen===x.h;return`<li class="herow">
+      <div class="hetop">${ren?`<form class="row heren" data-f="heren" data-h="${esc(x.h)}" style="flex-wrap:nowrap"><input class="field" name="n" value="${esc(habN(x.h))}" maxlength="40" aria-label="Nouveau nom" required><button class="btn">OK</button></form>`
+        :`<b class="hen">${esc(habL(x.h))}</b><button class="linkb" data-heren="${esc(x.h)}" aria-label="Renommer ${esc(habN(x.h))}">Renommer</button>`}</div>
+      <div class="hedays" role="group" aria-label="Jours de ${esc(habN(x.h))}">${HE_DAYS.map(([w,l])=>`<button class="hed ${x.days.includes(w)?"on":""}" data-hed="${esc(x.h)}|${w}" aria-pressed="${x.days.includes(w)}" aria-label="${SG_JN[w]}">${l}</button>`).join("")}</div>
+      <div class="hebot"><span class="hedur"><button class="hestep" data-hedur="${esc(x.h)}|-5" aria-label="5 minutes de moins">−</button><b class="num">${fdur(x.min)}</b><button class="hestep" data-hedur="${esc(x.h)}|5" aria-label="5 minutes de plus">+</button></span>
+        <button class="ghost hedel" data-hedel="${esc(x.h)}">${V.confirm==="hedel"+x.h?"Confirmer la suppression":"🗑 Supprimer"}</button></div>
+      ${x.days.length?"":`<small class="muted">Pas prévue en ce moment : touche un jour pour la remettre.</small>`}</li>`}).join("")}</ul>
+    <form class="stack headd" data-f="headd" style="gap:8px"><p class="label" style="margin:0">➕ Nouvelle habitude</p>
+      <div class="row" style="flex-wrap:nowrap"><input class="field" name="n" placeholder="Ex. : Lecture, Méditation, Piano…" maxlength="40" required aria-label="Nom de la nouvelle habitude"><input class="field num" name="min" type="number" min="5" max="300" step="5" value="${add.min||30}" inputmode="numeric" aria-label="Durée en minutes" style="max-width:84px"><span class="muted small">min</span></div>
+      <div class="hedays" role="group" aria-label="Jours de la nouvelle habitude">${HE_DAYS.map(([w,l])=>`<button type="button" class="hed ${add.days.includes(w)?"on":""}" data-headd="${w}" aria-pressed="${add.days.includes(w)}" aria-label="${SG_JN[w]}">${l}</button>`).join("")}</div>
+      <div><button class="btn">Ajouter l'habitude</button></div></form></div>`}
+
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-heopen],[data-hed],[data-hedur],[data-hedel],[data-heren],[data-headd],[data-heundo]");if(!b)return;const d=b.dataset;
+  if(d.heopen){V.habEdit=d.heopen==="1";V.heMsg=null;V.heRen=null;render(true);if(V.habEdit)setTimeout(()=>{const c=document.getElementById("hecard");c&&c.scrollIntoView&&c.scrollIntoView({behavior:"smooth",block:"start"})},50);return}
+  if(d.heundo){sgUndo(d.heundo);habSync();V.heMsg={t:"Annulé."};return render(true)}
+  if(d.heren){V.heRen=d.heren;return render(true)}
+  /* les jours de la nouvelle habitude : sans tout redessiner, pour ne pas effacer ce que tu as tapé */
+  if(d.headd){e.preventDefault();const a=V.heAdd||{days:[1,2,3,4,5]},w=+d.headd,on=!a.days.includes(w),ds=on?[...a.days,w]:a.days.filter(x=>x!==w);V.heAdd={...a,days:ds};b.classList.toggle("on",on);b.setAttribute("aria-pressed",on);return}
+  if(d.hed){const[h,w]=d.hed.split("|"),wd=+w,on=planBase(dkey(today()),wd).includes(h);return heDo([{t:on?"del":"add",a:h,days:[wd]}],`Mes habitudes : ${habN(h)} ${on?"enlevé":"ajouté"} le ${SG_JN[wd]}`)}
+  if(d.hedur){const[h,s]=d.hedur.split("|"),now=jDur(h,jBase(h)),m=Math.max(5,Math.min(300,now+ +s));if(m===now)return;return heDo([{t:"dur",a:h,min:m}],`Mes habitudes : ${habN(h)} ${fdur(m)}`)}
+  if(d.hedel){const h=d.hedel;return confirmOr("hedel"+h,()=>heDo([{t:"del",a:h,days:[]},...((edtP().custom||{})[h]?[{t:"forget",a:h}]:[])],`Mes habitudes : ${habN(h)} supprimé`))}
+});
+/* les formulaires : renommer, ajouter */
+function heSubmit(k,f,x){
+  if(k==="heren"){const h=f.dataset.h,n=String(x.n||"").trim().slice(0,40);V.heRen=null;if(!n||n===habN(h))return render(true);return heDo([{t:"ren",a:h,n}],`Mes habitudes : ${habN(h)} → ${n}`)}
+  if(k==="headd"){const n=String(x.n||"").trim().slice(0,40),a=V.heAdd||{days:[1,2,3,4,5]},m=Math.max(5,Math.min(300,Math.round(+x.min||30)));if(!n)return;
+    if(!a.days.length){V.heMsg={t:"Choisis au moins un jour pour ta nouvelle habitude."};return render(true)}
+    V.heAdd={days:a.days,min:m};return heDo([{t:"new",n,min:m,days:a.days}],`Mes habitudes : nouvelle habitude ${n}`)}}
+
+/* ================================================================
+   2.25.0 : SÉANCE GUIDÉE (remplace la séance simulée « pile ou face »)
+   Un vrai cas de marché en 4 décisions : lire le graphique, entrer (ou pas),
+   gérer son risque, réagir quand ça bouge. Après chaque choix, un coach explique
+   ce qu'un pro ferait et pourquoi. À la fin : la qualité de tes décisions (ce qui
+   compte), le résultat (en partie de la chance) et ce que ta stratégie rapporterait
+   en moyenne si tu la rejouais 100 fois. Entreprises et chiffres : fictifs.
+   ================================================================ */
+const MS_RISK={q:"Si tu prends position, comment tu gères ton risque ?",o:[
+  {t:"Petite position : je risque 1 à 2 % de mon capital, stop {stop}",g:2,r:"r1",x:"C'est la règle des pros : une perte ne doit jamais te mettre en danger. Avec un stop à −5 %, tu peux miser 2 000 € et ne risquer que 100 € sur 10 000."},
+  {t:"Tout miser, sans stop : ce signal est trop beau",g:0,r:"r2",x:"Le piège classique. Aucun signal n'est sûr : sans stop, une seule mauvaise surprise peut effacer des mois de gains."},
+  {t:"Grosse position avec un stop très serré (−1,5 %)",g:1,r:"r3",x:"Mieux que pas de stop, mais trop serré : le moindre mouvement normal (le « bruit ») te fait sortir avant que ton idée ait eu le temps de marcher."}],c:"Gestion du risque"};
+const MS_SC=[
+ {id:"trend",nm:"ORBIS · le repli dans la tendance",co:"ORBIS (semi-conducteurs, fictive) monte depuis 3 mois. Le cours vient de reculer de 6 % et touche sa moyenne mobile (en pointillés), qui l'a déjà soutenu deux fois.",pUp:.65,stop:"sous le dernier creux (−5 %)",shape:"trend",
+  q1:{q:"Quelle est la tendance de fond ?",o:[{t:"Haussière",g:2,x:"Des plus hauts et des plus bas de plus en plus hauts, et un cours au-dessus de sa moyenne mobile : c'est la définition d'une tendance haussière."},{t:"Baissière",g:0,x:"Le cours recule depuis quelques séances, mais sur 3 mois il monte nettement : ne confonds pas un repli et une tendance."},{t:"Il n'y en a pas, c'est du hasard",g:0,x:"Le court terme est en partie aléatoire, mais ici la structure est claire : des creux de plus en plus hauts."}],c:"Lire une tendance"},
+  q2:{q:"Que fais-tu ?",o:[{t:"J'achète ici, sur la moyenne mobile",g:2,e:"now",x:"Acheter un repli dans une tendance haussière, sur un support qui a déjà tenu, c'est le meilleur rapport gain/risque : ton stop est proche et l'objectif est loin."},{t:"J'attends que le cours reparte pour confirmer",g:1,e:"wait",x:"Plus prudent, mais tu achèteras plus cher. Acceptable si tu manques de confiance dans le signal."},{t:"Je vends à découvert : ça baisse !",g:0,e:"short",x:"Parier contre la tendance de fond sur un simple repli : tu prends le risque dans le mauvais sens."},{t:"Je ne fais rien",g:1,e:"none",x:"Aucune perte, mais tu laisses passer un bon signal. Ne rien faire est aussi une décision."}],c:"Point d'entrée"}},
+ {id:"break",nm:"NOVA · la cassure de résistance",co:"NOVA (robotique, fictive) bute depuis 2 mois sur 50 €, une résistance. Aujourd'hui, le cours la franchit avec un volume 3 fois plus élevé que d'habitude.",pUp:.6,stop:"sous 50 € (−5 %)",shape:"break",
+  q1:{q:"Que t'apprend ce gros volume ?",o:[{t:"Beaucoup d'acheteurs sont là : la cassure est crédible",g:2,x:"Une cassure sans volume est suspecte ; avec 3 fois le volume habituel, de gros acteurs achètent vraiment."},{t:"Rien, le volume ne compte pas",g:0,x:"Le volume mesure la conviction derrière un mouvement. Les traders le regardent toujours sur une cassure."},{t:"Que tout le monde vend",g:0,x:"Le volume compte les échanges : chaque action vendue est achetée. Ici le prix monte, donc les acheteurs dominent."}],c:"Volume"},
+  q2:{q:"Que fais-tu ?",o:[{t:"J'achète la cassure",g:2,e:"now",x:"L'ancienne résistance (50 €) devient un support : ton stop juste en dessous a une logique claire."},{t:"J'attends un retour sur 50 € pour acheter",g:2,e:"wait",x:"Le « pullback » sur l'ancienne résistance : entrée prudente et stop très proche. Le risque : le cours ne revient jamais."},{t:"Je vends à découvert : ça a trop monté",g:0,e:"short",x:"« Trop monté » n'est pas une raison. Une cassure sur gros volume est un signal de force."},{t:"Je ne fais rien",g:1,e:"none",x:"Pas d'erreur, mais c'est un signal classique que les pros aiment."}],c:"Cassure"}},
+ {id:"knife",nm:"LUMEN · le couteau qui tombe",co:"La banque fictive LUMEN chute de 14 % en une séance après l'annonce d'une enquête pour fraude. Le cours est au plus bas depuis 5 ans.",pUp:.35,stop:"sous le plus bas du jour (−5 %)",shape:"knife",
+  q1:{q:"Le cours est-il « pas cher » maintenant ?",o:[{t:"Pas forcément : la baisse peut continuer",g:2,x:"Un prix bas n'est pas un prix bon marché. Après une vraie mauvaise nouvelle, d'autres vendeurs arrivent souvent les jours suivants."},{t:"Oui, −14 % c'est une affaire",g:0,x:"Le marché a peut-être raison : une enquête pour fraude peut révéler d'autres problèmes."},{t:"Oui, c'est le plus bas depuis 5 ans",g:0,x:"Un plus bas historique peut être cassé : le prix ne « doit » rien à personne."}],c:"Valeur et prix"},
+  q2:{q:"Que fais-tu ?",o:[{t:"J'achète tout de suite le rebond",g:0,e:"now",x:"« Attraper un couteau qui tombe » : tu achètes sans aucun signal que la baisse est finie."},{t:"J'attends que le cours se stabilise plusieurs jours",g:2,e:"wait",x:"Laisser le marché digérer la nouvelle et attendre un plancher : tu achèteras peut-être un peu plus haut, mais avec beaucoup moins de risque."},{t:"Je vends à découvert",g:1,e:"short",x:"Logique, mais risqué : après une grosse chute, les rebonds peuvent être violents."},{t:"Je ne fais rien : ce n'est pas mon trade",g:2,e:"none",x:"Excellent réflexe : quand tu ne comprends pas la situation, la meilleure position est souvent aucune position."}],c:"Mauvaise nouvelle"}},
+ {id:"gap",nm:"AERO · le gap des résultats",co:"AERO (aéronautique, fictive) publie des résultats records : le cours ouvre à +11 %. Tout le monde en parle sur les réseaux.",pUp:.45,stop:"sous le prix d'ouverture (−5 %)",shape:"gap",
+  q1:{q:"C'est quoi, un gap ?",o:[{t:"Un saut de prix entre la clôture d'hier et l'ouverture d'aujourd'hui",g:2,x:"Aucun échange n'a eu lieu entre les deux prix : il y a un « trou » sur le graphique."},{t:"Une erreur de cotation",g:0,x:"C'est un vrai prix : les ordres de la nuit se sont accumulés après l'annonce."},{t:"Le volume du jour",g:0,x:"Le gap est un écart de prix, pas une quantité échangée."}],c:"Gap"},
+  q2:{q:"Que fais-tu ?",o:[{t:"J'achète à l'ouverture, avant que ça monte encore",g:0,e:"now",x:"C'est la peur de rater (FOMO) : tu achètes au moment où l'enthousiasme est au maximum, et les gaps se referment souvent en partie."},{t:"J'attends la première heure, ou un repli",g:2,e:"wait",x:"Laisser passer l'excitation de l'ouverture : si la hausse tient, tu entres avec un point de repère clair."},{t:"Je vends à découvert le gap",g:1,e:"short",x:"Parier qu'un gap se referme, ça arrive, mais contre des résultats records, c'est risqué."},{t:"Je ne fais rien",g:1,e:"none",x:"Raisonnable : rien ne t'oblige à jouer chaque nouvelle."}],c:"FOMO"}},
+ {id:"macro",nm:"CREDIA · la BCE relève ses taux",co:"La BCE relève ses taux de 0,5 point, plus que prévu. Tu regardes la banque fictive CREDIA et une start-up tech très endettée.",pUp:.65,stop:"sous le dernier creux (−5 %)",shape:"macro",
+  q1:{q:"Pourquoi une hausse des taux aide souvent les banques ?",o:[{t:"Elles gagnent plus sur l'écart entre le taux des crédits et celui des dépôts",g:2,x:"C'est la marge d'intérêt : quand les taux montent, les banques remontent vite le taux de leurs crédits."},{t:"Parce que les gens empruntent plus",g:0,x:"C'est l'inverse : le crédit plus cher freine les emprunts. Le gain vient de la marge sur chaque crédit."},{t:"Ça ne change rien pour elles",g:0,x:"Les taux sont la matière première des banques : ça change beaucoup."}],c:"Macro et secteurs"},
+  q2:{q:"Que fais-tu ?",o:[{t:"J'achète CREDIA",g:2,e:"now",x:"Tu joues le secteur qui profite de la hausse des taux, avec un stop sous le dernier creux."},{t:"J'achète la start-up tech très endettée",g:0,e:"inv",x:"Mauvais côté : des taux plus hauts rendent sa dette plus chère et ses profits futurs moins intéressants."},{t:"J'attends une confirmation",g:1,e:"wait",x:"Prudent, mais la réaction aux taux est souvent rapide."},{t:"Je ne fais rien",g:1,e:"none",x:"Pas d'erreur. Retiens quand même le lien taux → banques."}],c:"Macro et secteurs"}},
+ {id:"range",nm:"TEMPO · acheter le support",co:"TEMPO (distribution, fictive) oscille entre 20 € (support) et 24 € (résistance) depuis 4 mois. Le cours est à 20,20 €.",pUp:.62,stop:"sous 19,50 € (−3,5 %)",shape:"range",
+  q1:{q:"Comment appelle-t-on le niveau des 20 € ?",o:[{t:"Un support : les acheteurs y reviennent",g:2,x:"Chaque fois que le cours est descendu vers 20 €, des acheteurs l'ont fait remonter."},{t:"Une résistance",g:0,x:"La résistance, c'est le plafond (24 €), là où les vendeurs reviennent."},{t:"Un gap",g:0,x:"Un gap est un saut de prix. Ici, c'est un niveau qui tient."}],c:"Support et résistance"},
+  q2:{q:"Que fais-tu ?",o:[{t:"J'achète près du support, objectif 24 €",g:2,e:"now",x:"Gain possible ≈ +19 %, risque ≈ −3,5 % : un rapport gain/risque de plus de 5 pour 1."},{t:"J'attends un rebond sur 20 € pour acheter",g:2,e:"wait",x:"Tu laisses le support prouver qu'il tient encore : un peu moins de gain, plus de sécurité."},{t:"Je vends à découvert près du support",g:0,e:"short",x:"Vendre au plancher : tu paries que le support casse, avec un mauvais rapport gain/risque."},{t:"Je ne fais rien",g:1,e:"none",x:"Pas d'erreur, mais c'est le scénario le plus classique du trading."}],c:"Support et résistance"}}];
+
+/* ---- le graphique avant la décision (forme selon le cas) ---- */
+function msPre(sh,r){const P=[],n=32,w=()=>gauss(r);let p;
+  if(sh==="trend"){p=40;for(let i=0;i<n;i++){p*=1+(i<26?0.009:-0.011)+0.008*w();P.push(p)}}
+  else if(sh==="break"){p=46;for(let i=0;i<n-1;i++){p=Math.min(49.6,Math.max(43.5,p*(1+0.012*w())));P.push(p)}P.push(51.4)}
+  else if(sh==="knife"){p=31;for(let i=0;i<n-1;i++){p*=1+0.006*w()-0.001;P.push(p)}P.push(p*0.86)}
+  else if(sh==="gap"){p=60;for(let i=0;i<n-1;i++){p*=1+0.004+0.008*w();P.push(p)}P.push(p*1.11)}
+  else if(sh==="macro"){p=24;for(let i=0;i<n;i++){p*=1+0.001+0.009*w();P.push(p)}}
+  else{p=22;let d=1;for(let i=0;i<n-1;i++){p+=d*0.45+0.25*w();if(p>23.7)d=-1;if(p<20.4)d=1;p=Math.min(23.9,Math.max(20.2,p));P.push(p)}P.push(20.2)}
+  return P.map(r2)}
+function genMission(r){const sc=MS_SC[Math.floor(r()*MS_SC.length)],up=r()<sc.pUp,pre=msPre(sc.shape,r);
+  return{mission:true,sc:sc.id,up,pre,noise:Array.from({length:12},()=>gauss(r)),lesson:"Le résultat d'un seul trade dépend en partie de la chance. Ce qui fait un bon trader, c'est de prendre des décisions qui gagnent en moyenne, en limitant toujours la perte possible."}}
+const msSc=g=>MS_SC.find(s=>s.id===g.data.sc);
+/* ---- les questions : lecture, entrée, risque, puis la réaction quand ça bouge (elle dépend de ce que tu as fait) ---- */
+function msQ(g){const sc=msSc(g),m=g.ms,e=m.e;
+  if(m.step===0)return sc.q1;if(m.step===1)return sc.q2;
+  if(m.step===2)return{...MS_RISK,o:MS_RISK.o.map(o=>({...o,t:o.t.replace("{stop}",sc.stop)}))};
+  if(e==="none")return{ev:"Le cours bouge de 4 % sans toi.",q:"Que fais-tu ?",c:"Discipline",o:[{t:"J'attends le prochain bon signal",g:2,m:"keep",x:"Rater un mouvement n'est pas une perte. Les bonnes occasions reviennent toujours."},{t:"Je cours après le prix et j'achète maintenant",g:0,m:"chase",x:"Tu achètes plus cher, sans plan ni point de stop logique : c'est comme ça qu'on achète au plus haut."},{t:"Je doublerai la mise au prochain trade pour rattraper",g:0,m:"keep",x:"Vouloir « se refaire » mène à prendre trop de risque. Chaque trade est indépendant."}]};
+  if(e==="wait")return{ev:"Le cours recule de 3 % : tu n'es pas encore entré.",q:"Que fais-tu ?",c:"Discipline",o:[{t:"J'attends ma confirmation, comme prévu",g:2,m:"keep",x:"Tu suis ton plan : tu n'entres que si le marché te donne raison."},{t:"J'achète quand même maintenant, c'est moins cher",g:1,m:"now",x:"Meilleur prix, mais tu changes de plan en cours de route. Parfois ça marche, mais c'est une habitude dangereuse."},{t:"J'abandonne l'idée",g:1,m:"keep",x:"Pas grave, mais un recul de 3 % était prévisible : c'est pour ça que tu attendais une confirmation."}]};
+  if(m.r==="r3"&&e!=="short")return{ev:"Le cours recule de 3 % : ton stop serré à −1,5 % a sauté. Puis le cours repart.",q:"Que fais-tu ?",c:"Discipline",o:[{t:"Je note la leçon : stop trop serré, j'attends le prochain signal",g:2,m:"keep",x:"Tu analyses l'erreur au lieu de te venger du marché."},{t:"Je rachète tout de suite, plus haut, pour me refaire",g:0,m:"revenge",x:"Le « revenge trading » : agir sous le coup de la frustration, la pire façon de trader."},{t:"Je rachète avec un stop logique sous le support",g:1,m:"rebuy",x:"Possible si le signal est toujours valable, mais tu paies plus cher : sois honnête sur tes raisons."}]};
+  return{ev:e==="short"?"Juste après ta vente à découvert, le cours remonte de 3 %, sans nouvelle.":"Juste après ton achat, le cours recule de 3 %, sans nouvelle.",q:"Que fais-tu ?",c:"Discipline",o:[
+    {t:"Je garde : mon plan prévoyait ça, mon stop me protège",g:m.r==="r2"?1:2,m:"hold",x:m.r==="r2"?"Garder son plan, oui, mais tu n'as pas de stop : si ça continue, rien ne limite ta perte.":"Un recul de 3 % est un mouvement normal. Tant que ton stop n'est pas touché, ton idée reste valable."},
+    {t:"Je coupe tout de suite, j'ai peur",g:1,m:"cut",x:"Couper petit n'est jamais une catastrophe, mais sortir sur du simple bruit, sans raison, c'est payer des frais pour rien."},
+    {t:e==="short"?"J'en revends encore pour améliorer mon prix moyen":"J'en rachète autant pour baisser mon prix moyen",g:0,m:"add",x:"« Moyenner à la baisse » : tu doubles ton risque sur un trade qui va contre toi. C'est comme ça que les petites pertes deviennent énormes."}]}}
+/* ---- le résultat : ce trade-ci, et en moyenne sur 100 fois ---- */
+function msRes(e,r,mg,up){const V={r1:2000,r2:10000,r3:6000}[r]||2000,stop={r1:0.05,r2:null,r3:0.015}[r];const sl=x=>stop==null?x:Math.max(x,-stop);
+  if(e==="none")return mg==="chase"?(up?2000*0.04:-2000*0.07):0;
+  if(e==="wait"){if(mg==="now")return up?V*0.12:V*sl(-0.09);return up?V*0.055:0}
+  if(r==="r3"&&e!=="short"){const base=V*-0.015;if(mg==="revenge")return base+(up?6000*0.06:-6000*0.1);if(mg==="rebuy")return base+(up?2000*0.06:-2000*0.05);return base}
+  const dir=e==="short"?-1:1,good=e==="inv"?!up:up,win=dir===1?good:!up;
+  if(mg==="cut")return V*-0.03;
+  const one=win?(e==="short"?0.11:0.09):sl(-0.12);
+  if(mg==="add")return V*one+V*(win?one+0.03:sl(-0.09));
+  return V*one}
+const msEV=(sc,e,r,mg)=>sc.pUp*msRes(e,r,mg,true)+(1-sc.pUp)*msRes(e,r,mg,false);
+/* le cours après la décision (pour le graphique final) */
+function msPost(g){const m=g.ms,last=g.data.pre[g.data.pre.length-1],up=m.e==="inv"?!g.data.up:g.data.up,P=[];let p=last;
+  for(let i=0;i<12;i++){const tgt=i<3?last*(m.e==="short"?1+0.01*(i+1):1-0.01*(i+1)):last*(1+(up?0.09:-0.12)*(i-2)/9);p=r2(tgt*(1+0.006*g.data.noise[i]));P.push(p)}return P}
+function msPick(i){const g=V.g,m=g.ms,Q=msQ(g),o=Q.o[i];if(!o||m.ans!=null)return;m.ans=i;m.pts+=o.g;m.log.push({c:Q.c,g:o.g,t:o.t,x:o.x});
+  if(m.step===1)m.e=o.e;if(m.step===2)m.r=o.r;if(m.step===3)m.mg=o.m;render(true)}
+function msNext(){const g=V.g,m=g.ms;if(m.ans==null)return;m.ans=null;
+  if(m.step<3){m.step++;return render(true)}
+  const sc=msSc(g);m.pnl=msRes(m.e,m.r,m.mg,g.data.up);m.ev=msEV(sc,m.e,m.r,m.mg);m.best=Math.max(...[["now","r1","hold"],["wait","r1","keep"],["none","r1","keep"]].map(x=>msEV(sc,...x)));
+  m.post=msPost(g);finishGame(Math.round(m.pts/8*5),5)}
+function msUI(top,quit){const g=V.g,m=g.ms,sc=msSc(g),Q=msQ(g),a=m.ans,o=a!=null?Q.o[a]:null;
+  const dots=[0,1,2,3].map(i=>`<i class="${i<m.step||(i===m.step&&a!=null)?(m.log[i]&&m.log[i].g===2?"ok":m.log[i]&&m.log[i].g===1?"mid":"ko"):i===m.step?"cur":""}"></i>`).join("");
+  const lab=["Lire le graphique","Décider","Gérer le risque","Réagir"][m.step];
+  return`<div class="card stack mscard">${top}<div class="gdots msdots">${dots}</div>
+    <p class="label" style="margin:0">Étape ${m.step+1}/4 · ${lab}</p><b class="msnm">${esc(sc.nm)}</b>
+    ${m.step<3?`<p class="small" style="margin:0">${esc(sc.co)}</p>`:""}${priceChart(g.data.pre,{ma:true})}
+    ${Q.ev?`<div class="newsflash">⚡ ${esc(Q.ev)}</div>`:""}<div class="qt">${esc(Q.q)}</div>
+    <div class="choices">${Q.o.map((x,i)=>`<button class="choice ${a!=null?(i===a?(x.g===2?"right":x.g===1?"mid":"wrong"):x.g===2?"right":""):""}" data-mspick="${i}" ${a!=null?"disabled":""}>${esc(x.t)}</button>`).join("")}</div>
+    ${o?`<div class="corr msfb ${o.g===2?"ok":o.g===1?"mid":"ko"}"><b>${o.g===2?"✓ Réflexe de pro":o.g===1?"≈ Acceptable":"✗ Piège classique"}</b> · <span class="muted small">${esc(Q.c)}</span><br>${esc(o.x)}${o.g<2?`<br><span class="small"><b>Le meilleur choix :</b> ${esc(Q.o.find(y=>y.g===2).t)}.</span>`:""}</div>
+      <div class="row">${quit}<button class="btn" data-msnext="1">${m.step<3?"Suite →":"Voir le résultat"}</button></div>`:`<div class="row">${quit}</div>`}</div>`}
+function msDebrief(){const g=V.g,m=g.ms,sc=msSc(g),P=[...g.data.pre,...m.post],eur=x=>(x>=0?"+":"−")+euro(Math.abs(x)).replace(/^-/,"");
+  return`<div class="msdeb stack" style="gap:10px">${priceChart(P,{ma:true,marks:m.e==="none"?[]:[{i:g.data.pre.length-1,buy:m.e!=="short"}]})}
+    <div class="stats"><div class="stat"><b class="num">${m.pts}/8</b><span>qualité de tes décisions</span></div><div class="stat"><b class="num">${eur(m.pnl)}</b><span>résultat de ce trade</span></div><div class="stat"><b class="num">${eur(m.ev)}</b><span>en moyenne sur 100 fois</span></div></div>
+    <p class="small" style="margin:0">${g.data.up!==(m.e==="inv")?"Cette fois, le marché est allé dans le sens du scénario.":"Cette fois, le marché est allé contre le scénario."} ${m.pnl>=0&&m.ev<0?"<b>Attention : tu as gagné, mais ta stratégie perd en moyenne.</b> Ce gain, c'est de la chance.":m.pnl<0&&m.ev>=0?"<b>Tu as perdu, mais ta stratégie gagne en moyenne :</b> c'est une bonne décision avec un mauvais résultat. Ça arrive, et c'est normal.":m.ev>=0&&m.pts>=6?"Bonne décision et résultat logique.":m.ev>=0?"Ta stratégie gagne en moyenne, mais certaines décisions sont risquées : revois-les juste en dessous.":"Décision perdante en moyenne : regarde ce que le coach conseillait."}</p>
+    ${(()=>{const w=Math.min(msRes(m.e,m.r,m.mg,true),msRes(m.e,m.r,m.mg,false));return`<p class="small" style="margin:0">Pire cas avec ton plan : <b class="num">${eur(w)}</b> sur 10 000 €${w<-1000?" : beaucoup trop. Un pro ne risque jamais plus de 1 à 2 % de son capital sur un seul trade.":w<0?", une perte que tu peux encaisser.":"."}</p>`})()}
+    ${m.ev<m.best-1?`<p class="small muted" style="margin:0">La meilleure stratégie sur ce cas rapporte en moyenne <b>${eur(m.best)}</b> par trade.</p>`:""}
+    <details class="mslog"><summary><b>Revoir tes 4 décisions</b></summary>${m.log.map(l=>`<p class="small"><b>${l.g===2?"✓":l.g===1?"≈":"✗"} ${esc(l.c)} :</b> ${esc(l.t)}<br><span class="muted">${esc(l.x)}</span></p>`).join("")}</details></div>`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-mspick],[data-msnext]");if(!b||!V.g||!V.g.ms)return;
+  if(b.dataset.mspick!=null)return msPick(+b.dataset.mspick);if(b.dataset.msnext)return msNext()});
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
 const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Top 3"],["ps","Mon avenir"],["ent","Entraîne­ment"],["py","Python"],["cours","Cours"],["mx","Maths"],["mm","Mode maths"],["cg","Culture G"]];
@@ -8216,7 +8413,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.23.0";
+const APP_VERSION="2.25.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -8793,6 +8990,7 @@ document.addEventListener("click",e=>{
   if(d.sgswitch)return sgSwitch(d.sgswitch);
   if(d.sgno){V.sg[d.sgno]=null;V.jHi=[];return render(true)}
   if(d.sgundo){V.jHi=[];return sgUndo(d.sgundo)}
+  if(d.sggo){const g=SG_GO[d.sggo];V.sg={};if(g.p==="hab"){V.habEdit=true;V.day=today()}if(g.tab)V.entTab=g.tab;return go(g.p)}
   if(d.sgidee)return sgIdee(d.sgidee);
   if(d.sgdel){sgSave(sgList().filter(x=>x.id!==d.sgdel));return render(true)}
   if(d.sgshow)return sgQuick([{t:"tuile",k:d.sgshow,hide:false}],"Afficher la tuile « "+sectName(d.sgshow)+" »");
@@ -8957,6 +9155,7 @@ document.addEventListener("submit",e=>{
   e.preventDefault();const f=e.target,x=Object.fromEntries(new FormData(f));
   const k=f.dataset.f;
   if(k&&k.slice(0,4)==="mod:"){const h=MOD.submits[k.slice(4)];if(h){try{h.fn(x,f)}catch(err){modFail(h.id,err);render(true)}}return}
+  if(k==="heren"||k==="headd")return heSubmit(k,f,x);
   if(k==="sugg"){document.activeElement&&document.activeElement.blur();return sgSubmit(f.dataset.place,x.t)}
   if(k==="psv"){psAddV(x.nom);f.reset();return}
   if(k==="cfg"){const u=String(x.url||"").trim(),key=String(x.key||"").trim();if(!/^https:\/\/.+/.test(u)||!key){return}lsSet("cerveau-cfg",{supabaseUrl:u,supabaseKey:key});setSync("Non connecté");return render(true)}
