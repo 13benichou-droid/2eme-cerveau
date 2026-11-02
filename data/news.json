@@ -1,61 +1,196 @@
 {
- "updated": "2026-10-30T06:17:05.869Z",
+ "updated": "2026-11-02T06:34:44.241Z",
  "snap": {
-  "date": "2026-10-29",
+  "date": "2026-10-30",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 970",
-    "c": "+1,05 %"
+    "v": "7 969",
+    "c": "−0,01 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 720",
-    "c": "−0,30 %"
+    "v": "7 580",
+    "c": "−1,82 %"
    },
    {
     "n": "Nasdaq",
-    "v": "26 185",
-    "c": "−1,38 %"
+    "v": "25 437",
+    "c": "−2,86 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "17,20",
-    "c": "+1,71 %"
+    "v": "19,42",
+    "c": "+12,91 %"
    },
    {
     "n": "Brent",
-    "v": "112,2 $",
-    "c": "−2,32 %"
+    "v": "110,1 $",
+    "c": "−6,41 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "103,2 $",
-    "c": "+1,21 %"
+    "v": "100,7 $",
+    "c": "−3,28 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 999 $",
-    "c": "−0,81 %"
+    "v": "3 920 $",
+    "c": "+0,55 %"
    },
    {
     "n": "Bitcoin",
-    "v": "78 457 $",
-    "c": "−3,46 %"
+    "v": "78 081 $",
+    "c": "+0,83 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,99 %",
+    "v": "4,93 %",
     "c": "−0,06 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,119",
-    "c": "+0,29 %"
+    "v": "1,118",
+    "c": "+0,00 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-02-avertissement-sur-les-resultats-financie",
+   "src": "Le Monde",
+   "date": "2026-11-02",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/02/en-retard-sur-ses-livraisons-de-trains-en-allemagne-alstom-emet-un-nouvel-avertissement-sur-ses-resultats_6805052_3234.html",
+   "t": {
+    "fr": "Avertissement sur les résultats financiers du groupe Alstom",
+    "en": "Financial profit warning issued by Alstom"
+   },
+   "s": {
+    "fr": "Le constructeur ferroviaire français Alstom a révisé à la baisse ses objectifs financiers pour la période d'avril à septembre 2026. Cette alerte s'explique par des retards accumulés dans la livraison de ses modèles de trains Coradia Max à l'Allemagne.",
+    "en": "French train manufacturer Alstom has lowered its financial guidance for the period from April to September 2026. This warning stems from delivery delays regarding its Coradia Max trains in Germany."
+   },
+   "d": {
+    "fr": "Lorsqu'une entreprise ne tient pas ses délais de livraison, ses coûts augmentent et la confiance des marchés s'effrite instantanément. Pour un investisseur débutant, un avertissement sur résultats annonce très souvent un décrochage du cours de l'action.",
+    "en": "When a company fails to meet delivery schedules, its costs rise and market confidence rapidly erodes. For a beginner trader, a profit warning frequently signals a sharp decline in stock price."
+   },
+   "v": [
+    [
+     "avertissement sur résultats",
+     "profit warning"
+    ],
+    [
+     "prévisions financières",
+     "financial forecasts"
+    ],
+    [
+     "constructeur ferroviaire",
+     "train manufacturer"
+    ],
+    [
+     "retard de livraison",
+     "delivery delay"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi un problème industriel sur une ligne de production influence-t-il directement la Bourse ?",
+    "en": "Why does an industrial issue on a production line directly influence the stock market?"
+   },
+   "r": {
+    "fr": "Parce qu'un retard industriel perturbe les encaissements prévus et détériore les bénéfices futurs de l'entreprise.",
+    "en": "Because industrial delays disrupt expected cash flows and harm the company's future profits."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-02-l-impact-des-taux-d-interet-sur-l-enthou",
+   "src": "Financial Times",
+   "date": "2026-11-02",
+   "url": "https://www.ft.com/content/6e99dc59-8bd0-4c5c-8186-f6ceed04233a?syn-25a6b1a6=1",
+   "t": {
+    "fr": "L'impact des taux d'intérêt sur l'enthousiasme pour l'IA",
+    "en": "The impact of interest rates on the AI boom"
+   },
+   "s": {
+    "fr": "L'engouement massif des marchés pour les valeurs de l'intelligence artificielle pourrait être rapidement limité si les taux d'intérêt restent élevés. La hausse du coût du capital agit en effet comme un facteur dégonflant les bulles spéculatives.",
+    "en": "The market's intense enthusiasm for artificial intelligence stocks could be checked if interest rates stay high. High capital costs function as a mechanism that deflates speculative bubbles."
+   },
+   "d": {
+    "fr": "Des taux d'intérêt élevés rendent les financements plus coûteux et incitent les investisseurs à privilégier des actifs moins risqués. Pour un trader, il est essentiel d'analyser le coût de l'argent avant de miser sur des sociétés technologiques fortement valorisées.",
+    "en": "High interest rates make funding more expensive and prompt investors to favor lower-risk assets. For a trader, evaluating the cost of money is critical before speculating on highly valued tech firms."
+   },
+   "v": [
+    [
+     "taux d'intérêt",
+     "interest rate"
+    ],
+    [
+     "bulle boursière",
+     "market bubble"
+    ],
+    [
+     "coût du capital",
+     "cost of capital"
+    ],
+    [
+     "engouement spéculatif",
+     "speculative mania"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi des taux plus élevés pénalisent-ils davantage les entreprises technologiques ?",
+    "en": "Why do higher interest rates hurt tech companies more significantly?"
+   },
+   "r": {
+    "fr": "Les entreprises technologiques s'appuient sur des profits futurs très lointains, qui perdent de leur valeur actuelle lorsque les taux grimpent.",
+    "en": "Tech companies rely heavily on distant future earnings, which lose present value when interest rates rise."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-02-offensive-majeure-des-groupes-japonais-d",
+   "src": "Financial Times",
+   "date": "2026-11-02",
+   "url": "https://www.ft.com/content/9652cb30-c8b1-4f36-993f-54f7827d2174?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Offensive majeure des groupes japonais dans le gaz américain",
+    "en": "Major offensive by Japanese groups in US gas assets"
+   },
+   "s": {
+    "fr": "Plusieurs entreprises japonaises ont investi 21 milliards de dollars pour acquérir des actifs de gaz de schiste le long du Golfe du Mexique. Deuxième plus grand acheteur mondial de GNL, le Japon cherche à sécuriser son approvisionnement énergétique face aux tensions mondiales.",
+    "en": "Several Japanese companies invested $21 billion to acquire shale gas assets along the US Gulf Coast. As the world's second-biggest LNG buyer, Japan aims to secure its energy supply amid global volatility."
+   },
+   "d": {
+    "fr": "Ce type d'opération de grande ampleur montre comment les acteurs économiques anticipent les risques de pénurie énergétique. Un trader surveillant les matières premières observe ces achats stratégiques pour comprendre l'évolution de l'offre et de la demande à long terme.",
+    "en": "Such large-scale deals demonstrate how corporate entities hedge against potential energy shortages. Traders monitoring commodities watch these strategic purchases to gauge long-term supply and demand trends."
+   },
+   "v": [
+    [
+     "gaz naturel liquéfié (GNL)",
+     "liquefied natural gas (LNG)"
+    ],
+    [
+     "gaz de schiste",
+     "shale gas"
+    ],
+    [
+     "approvisionnement énergétique",
+     "energy supply"
+    ],
+    [
+     "vague de transactions",
+     "deal spree"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'intérêt pour un pays importateur de posséder la source d'extraction à l'étranger ?",
+    "en": "Why does an importing country benefit from owning foreign extraction sources?"
+   },
+   "r": {
+    "fr": "Cela lui garantit un accès direct à la ressource et réduit son exposition aux variations brutales des prix sur le marché libre.",
+    "en": "It guarantees direct access to the resource while lowering vulnerability to sharp open-market price swings."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-10-30-vague-de-baisse-sur-la-tech-a-cause-de-r",
    "src": "Le Monde",
@@ -1270,144 +1405,6 @@
    "r": {
     "fr": "Elle peut entraîner des amendes, des retards de projet et une révision à la baisse des prévisions de revenu.",
     "en": "It can lead to fines, project delays, and a downward revision of revenue forecasts."
-   },
-   "ia": "Groq",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-21-on-pourrait-croire-que-c-est-de-l-ia-qua",
-   "src": "Le Monde",
-   "date": "2026-10-21",
-   "url": "https://www.lemonde.fr/pixels/article/2026/10/21/on-pourrait-croire-que-c-est-de-l-ia-quand-la-peur-du-soupcon-change-notre-facon-d-ecrire_6798209_4408996.html",
-   "t": {
-    "fr": "« On pourrait croire que c’est de l’IA » : quand la peur du soupçon change notre façon d’écrire",
-    "en": "“You might think it’s AI”: how suspicion reshapes our writing"
-   },
-   "s": {
-    "fr": "L’article explore comment la crainte que du texte soit généré par l’IA influence les pratiques rédactionnelles. Il montre l’impact de cette méfiance sur le style et la vérification.",
-    "en": "The article explores how fear that text is AI‑generated influences writing practices. It shows the impact of this mistrust on style and verification."
-   },
-   "d": {
-    "fr": "L’essor de l’IA soulève des questions d’authenticité et de transparence dans les médias. Les rédacteurs peuvent renforcer les contrôles et mentionner l’usage éventuel d’outils d’IA.",
-    "en": "The rise of AI raises authenticity and transparency questions in media. Writers may tighten checks and disclose possible AI tool usage."
-   },
-   "v": [
-    [
-     "intelligence artificielle",
-     "artificial intelligence"
-    ],
-    [
-     "authenticité",
-     "authenticity"
-    ],
-    [
-     "détection d'IA",
-     "AI detection"
-    ],
-    [
-     "édition",
-     "editing"
-    ]
-   ],
-   "q": {
-    "fr": "Comment la peur de l’IA peut‑elle modifier le travail des journalistes ?",
-    "en": "How might fear of AI change journalists’ work?"
-   },
-   "r": {
-    "fr": "Ils peuvent instaurer des procédures de vérification plus strictes et indiquer quand l’IA a été utilisée.",
-    "en": "They may implement stricter verification procedures and disclose when AI was used."
-   },
-   "ia": "Groq",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-21-ludovic-huzieux-cofondateur-d-artemis-co",
-   "src": "Le Monde",
-   "date": "2026-10-21",
-   "url": "https://www.lemonde.fr/argent/article/2026/10/21/ludovic-huzieux-cofondateur-d-artemis-courtage-nous-anticipons-une-rarefaction-du-credit-immobilier_6798208_1657007.html",
-   "t": {
-    "fr": "Artémis courtage anticipe une raréfaction du crédit immobilier",
-    "en": "Artémis brokerage expects a tightening of mortgage credit"
-   },
-   "s": {
-    "fr": "Le cofondateur d’Artémis courtage prévoit que le crédit immobilier deviendra plus rare. L’article signale une possible contraction du financement du logement.",
-    "en": "The co‑founder of Artémis brokerage expects mortgage credit to become scarcer. The article signals a possible contraction in housing finance."
-   },
-   "d": {
-    "fr": "Lorsque les banques restreignent les prêts, les acheteurs rencontrent plus de difficultés et la demande immobilière peut ralentir. Les courtiers doivent alors ajuster leurs stratégies.",
-    "en": "When banks tighten lending, buyers face more difficulty and housing demand may slow. Brokers must then adjust their strategies."
-   },
-   "v": [
-    [
-     "crédit immobilier",
-     "mortgage credit"
-    ],
-    [
-     "rarefaction",
-     "tightening"
-    ],
-    [
-     "courtier",
-     "broker"
-    ],
-    [
-     "taux hypothécaire",
-     "mortgage rate"
-    ]
-   ],
-   "q": {
-    "fr": "Quel impact une raréfaction du crédit immobilier a‑t‑elle sur les acquéreurs de logement ?",
-    "en": "What impact does a tightening of mortgage credit have on home buyers?"
-   },
-   "r": {
-    "fr": "Cela rend l’emprunt plus difficile et peut réduire la demande de biens immobiliers.",
-    "en": "It makes borrowing harder and can reduce demand for real estate."
-   },
-   "ia": "Groq",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-21-au-bresil-l-uberisation-de-l-economie-pr",
-   "src": "Le Monde",
-   "date": "2026-10-21",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/21/au-bresil-l-uberisation-de-l-economie-profite-a-l-extreme-droite_6798203_3234.html",
-   "t": {
-    "fr": "Au Brésil, l’ubérisation de l’économie profite à l’extrême droite",
-    "en": "In Brazil, gig‑economy growth benefits the far‑right"
-   },
-   "s": {
-    "fr": "L’article indique que le modèle d’ubérisation de l’économie brésilienne profite aux forces de l’extrême droite. Il souligne le lien entre travail précaire et dynamique politique.",
-    "en": "The article notes that Brazil’s gig‑economy model benefits far‑right forces. It highlights the link between precarious work and political dynamics."
-   },
-   "d": {
-    "fr": "Le travail via des plateformes crée de nouvelles catégories de travailleurs qui peuvent devenir un électorat ciblé. Les partis politiques adaptent leurs messages pour capter ce public.",
-    "en": "Platform work creates new categories of workers who can become a targeted electorate. Political parties tailor messages to attract this group."
-   },
-   "v": [
-    [
-     "ubérisation",
-     "gig‑economy"
-    ],
-    [
-     "extrême droite",
-     "far‑right"
-    ],
-    [
-     "travail précaire",
-     "precarious work"
-    ],
-    [
-     "plateforme numérique",
-     "digital platform"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi la croissance du gig‑economy peut‑elle influencer la scène politique ?",
-    "en": "Why can gig‑economy growth influence the political scene?"
-   },
-   "r": {
-    "fr": "Elle crée de nouveaux groupes d’électeurs et modifie les priorités de politique du travail.",
-    "en": "It creates new voter groups and shifts labor policy priorities."
    },
    "ia": "Groq",
    "iat": 1
