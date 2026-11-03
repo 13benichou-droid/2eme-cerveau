@@ -1523,6 +1523,14 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 .tfl li{display:flex;gap:10px;align-items:center}
 .tfl li>span:nth-child(2){flex:1;min-width:0}
 .cgdefi{--c:var(--accent)}
+/* 2.27.1 : aide du Trading Lab */
+.labterms{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:.9rem}
+.labterms dt{font-weight:800}
+.labterms dd{margin:0;color:var(--muted)}
+.labex{font-size:.92rem}
+.labd summary{cursor:pointer;font-weight:700}
+.labtools{gap:8px}
+.labhint{border-color:var(--accent)}
 </style>
 <script src="config.js"></script>
 </head>
@@ -2838,7 +2846,7 @@ function addXp(fn){const p=prog();fn(p);return put("jeu","progress",p)}
 function startGame(mode,k){
   const seed=mode==="daily"?hashStr("2cerveau|"+dkey(today())+"|"+k):(Date.now()%2147483647);
   const data=GEN[k](rngOf(seed));
-  V.g={mode,k,data,i:0,pick:null,val:null,res:[],done:false};V.gin="";
+  V.g={mode,k,data,i:0,pick:null,val:null,res:[],done:false};V.gin="";V.g.pre=!labSeen(k);V.gHint=false;V.gAide=false;
   if(data.mission)V.g.ms={step:0,ans:null,pts:0,log:[]};
   if(data.sim)V.g.sim={t:0,cash:10000,sh:0,entry:0,stop:true,fees:0,trades:[],marks:[],log:[]};
   render(true);
@@ -2848,7 +2856,7 @@ function gAnswer(val){
   let ok;if(R.kind==="choice"){g.pick=val;ok=val===R.a}else{const v=parseNum(val);if(isNaN(v))return;g.pick=v;ok=Math.abs(v-R.ans)<=R.tol+1e-9}
   g.res.push(ok);render(true);
 }
-function gNext(){const g=V.g;g.pick=null;V.gin="";if(g.i<g.data.rounds.length-1){g.i++;render(true)}else finishGame(g.res.filter(Boolean).length,g.data.rounds.length)}
+function gNext(){const g=V.g;g.pick=null;V.gin="";V.gHint=false;V.gAide=false;if(g.i<g.data.rounds.length-1){g.i++;render(true)}else finishGame(g.res.filter(Boolean).length,g.data.rounds.length)}
 function finishGame(score,max){
   const g=V.g;g.done=true;g.score=score;g.max=max;g.xp=0;
   const p=prog(),t=dkey(today());
@@ -2890,6 +2898,7 @@ function jeuUI(){
     ${ans?`<div class="corr">${ans.ok?"✓ Bien vu ! +10 XP. ":"✗ Pas tout à fait. "}${esc(a.expl)}${a.url?` <a href="${esc(a.url)}" target="_blank" rel="noopener">Source ↗</a>`:""}</div>`:`<p class="muted small">+10 XP si tu trouves du premier coup.</p>`}</div>`:"";
   const daily=`<div class="card stack daily"><p class="label" style="margin:0">Défi du jour · ${JOURS[today().getDay()].toLowerCase()} ${today().getDate()} ${MOIS[today().getMonth()]}</p>
     <div class="row" style="gap:12px;flex-wrap:nowrap"><span class="gico">${dg.e}</span><div style="min-width:0"><b style="font-family:var(--display);font-size:1.15rem">${dg.n}</b><p class="muted small">${dg.d}</p></div></div>
+    ${doneToday?"":labDaily(dg.k)}
     ${doneToday?`<p><b>✓ Terminé : ${doneToday.s}/${doneToday.m}</b>. Un nouveau défi t'attend demain.</p>`:`<div><button class="btn" data-play="daily|${dg.k}">Jouer (+${dg.k==="news"?60:dg.k==="calc"?60:dg.k==="simu"?60:50} XP max)</button></div>`}</div>`;
   const practice=`<div><p class="label">S'entraîner (sans XP, nouvelle partie à chaque fois)</p><div class="glist">${GAMES.map(x=>`<button class="card gcard" data-play="practice|${x.k}"><span class="gico">${x.e}</span><b>${x.n}</b><span class="muted small">${x.d}</span></button>`).join("")}</div></div>`;
   return head+daily+wgSafe(cgDefi)+actu+labSeg()+(V.labTab==="coach"?coCard():practice)+`<p class="muted small">Les défis du jour et les parties d'entraînement sont fabriqués par l'appli (sans IA) : ils sont illimités. Le coach IA, lui, invente des questions nouvelles. Les montants sont fictifs, rien n'est un conseil d'investissement.</p>`;
@@ -2897,6 +2906,7 @@ function jeuUI(){
 function gameUI(){
   const g=V.g,G=GAMES.find(x=>x.k===g.k),top=`<div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${G.e} ${G.n}</b><span class="muted small">${g.mode==="daily"?"Défi du jour":"Entraînement"}</span></div>`;
   const quit=`<button class="ghost" data-gquit="1">${g.done?"Fermer":"Quitter la partie"}</button>`;
+  if(g.pre&&!g.done)return labPre(top,quit);
   if(g.done){
     const sim=g.sim;
     return`<div class="card stack">${top}<div class="gscore"><b class="num">${g.score}/${g.max}</b><span>${g.score===g.max?"Parfait 🏆":g.score>=g.max*0.6?"Bien joué 👏":"On progresse 💪"}</span></div>
@@ -2913,7 +2923,7 @@ function gameUI(){
   let body;
   if(R.kind==="choice")body=`<div class="choices">${R.choices.map((c,i)=>`<button class="choice ${answered?(i===R.a?"right":i===g.pick?"wrong":""):""}" data-gpick="${i}" ${answered?"disabled":""}>${c}</button>`).join("")}</div>`;
   else body=`<form data-f="gnum" class="row" style="flex-direction:row;flex-wrap:nowrap"><input class="field" id="g-in" data-gin="1" inputmode="decimal" autocomplete="off" placeholder="Ta réponse" value="${esc(V.gin)}" ${answered?"disabled":""}>${R.unit?`<span class="muted">${R.unit}</span>`:""}${answered?"":`<button class="btn">Valider</button>`}</form>`;
-  return`<div class="card stack">${top}<div class="gdots">${dots}</div>${R.chart||""}<div class="qt">${R.q}</div>${body}
+  return`<div class="card stack">${top}<div class="gdots">${dots}</div>${R.chart||""}<div class="qt">${R.q}</div>${answered?"":labTools(g,R)}${body}
     ${answered?`<div class="corr"><b>${ok?"✓ Bien vu !":"✗ Pas tout à fait."}</b>${R.kind==="num"&&!ok?` Ta réponse : ${nfa(g.pick)} ${R.unit||""}.`:""}<br>${R.expl}</div><div class="row">${quit}<button class="btn" data-gnext="1">${g.i<n-1?"Suivant →":"Voir mon score"}</button></div>`:`<div class="row">${quit}</div>`}</div>`;
 }
 function simUI(top,quit){
@@ -8590,6 +8600,58 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   const D={...(dphDoc().done||{})};if(D[d.dph])delete D[d.dph];else D[d.dph]=true;put("ps","dph",{done:D})});
 
 /* ================================================================
+   2.27.1 : TRADING LAB COMPRIS PAR TOUS
+   Chaque défi commence par une mini-leçon en mots simples (ce qu'on te demande, les mots du
+   jeu, un exemple pas à pas). Pendant la partie : « 💡 Un indice » (les étapes du calcul sans
+   la réponse) et « 📖 Rappel des mots ». La mini-leçon s'affiche seule la 1re fois ; ensuite
+   elle reste disponible dans le défi du jour et pendant la partie.
+   ================================================================ */
+const LAB_AIDE={
+ news:{intro:"On te donne une nouvelle économique et tu dois deviner si le prix monte ou baisse. Aucun calcul : demande-toi juste « qui gagne de l'argent avec cette nouvelle, et qui en perd ? ».",
+  terms:[["Action","un petit morceau d'une entreprise : si l'entreprise va bien, son prix monte."],["Taux directeur","le prix auquel les banques empruntent à la banque centrale (BCE en Europe, Fed aux États-Unis). Quand il monte, tous les crédits coûtent plus cher."],["Obligation","un prêt que tu fais à un État ou à une entreprise, qui te rend des intérêts. Son prix baisse quand les taux montent."],["Valeur refuge","un placement où l'on se cache quand on a peur, comme l'or."],["Inflation","la hausse générale des prix."]],
+  ex:"« La BCE monte ses taux. » Les placements en euros rapportent plus, donc les investisseurs achètent des euros : l'<b>euro monte</b>.",
+  hints:["Pose-toi une question : cette nouvelle fait-elle <b>gagner</b> ou <b>perdre</b> de l'argent à l'entreprise ou au pays dont on parle ? Si elle gagne, le prix monte. Si elle perd, il baisse. Pense aussi à la peur : quand les gens ont peur, ils achètent l'or et vendent le reste."]},
+ risk:{intro:"Tu dois calculer combien d'actions acheter pour ne jamais perdre plus qu'une petite part de ton argent, même si tu te trompes. C'est la règle la plus importante du trading.",
+  terms:[["Capital","tout l'argent que tu as pour trader."],["Stop-loss","un prix de sécurité : si l'action descend jusqu'à lui, tu vends tout de suite pour que la perte reste petite."],["Risque par action","ce que tu perds sur UNE action si le stop-loss se déclenche : prix d'achat − stop-loss."],["Ratio gain / risque","combien tu espères gagner pour 1 € risqué. 2 pour 1 : tu risques 1 € pour en gagner 2."]],
+  ex:"Capital 10 000 €, tu acceptes de perdre 1 % = <b>100 €</b>. Tu achètes à 50 € avec un stop à 48 € : tu perds <b>2 €</b> par action. 100 ÷ 2 = <b>50 actions</b>.",
+  hints:["3 étapes. <b>①</b> Capital × % de risque = l'argent que tu acceptes de perdre. <b>②</b> Prix d'achat − stop-loss = ce que tu perds par action. <b>③</b> ① ÷ ② = le nombre d'actions (arrondi vers le bas).","3 étapes. <b>①</b> Capital × % de risque = l'argent que tu acceptes de perdre. <b>②</b> Prix d'achat − stop-loss = ce que tu perds par action. <b>③</b> ① ÷ ② = le nombre d'actions (arrondi vers le bas).","3 étapes. <b>①</b> Capital × % de risque = l'argent que tu acceptes de perdre. <b>②</b> Prix d'achat − stop-loss = ce que tu perds par action. <b>③</b> ① ÷ ② = le nombre d'actions (arrondi vers le bas).","Ratio = gain par action ÷ risque par action. Exemple : gagner 6 € pour risquer 3 €, c'est 6 ÷ 3 = 2 pour 1."]},
+ graph:{intro:"On te montre l'évolution d'un prix sur 40 séances. Tu dois lire sa direction, la comparer à sa moyenne, repérer son sommet et calculer de combien il a bougé.",
+  terms:[["Tendance haussière","les sommets et les creux sont de plus en plus hauts, comme un escalier qui monte."],["Tendance baissière","les sommets et les creux sont de plus en plus bas."],["Latérale","le prix va et vient sans direction."],["Moyenne mobile (pointillés)","la moyenne des 10 derniers prix : une ligne plus calme, qui lisse les zigzags."],["Variation en %","de combien le prix a changé, en pourcentage."]],
+  ex:"Un prix passe de 50 € à 60 € : (60 − 50) ÷ 50 = 0,2, donc <b>+20 %</b>.",
+  hints:["Regarde la courbe en entier : elle finit nettement plus haut qu'elle a commencé (haussière), plus bas (baissière), ou à peu près au même niveau en zigzaguant (latérale) ?","Regarde le point final (le gros rond) : est-il au-dessus ou en dessous de la ligne en pointillés ?","Les deux nombres à droite du graphique sont le prix le plus haut et le prix le plus bas de la période. Cherche le point le plus haut de la courbe.","Variation en % = (dernier prix − premier prix) ÷ premier prix × 100. Exemple : de 80 à 100, c'est (100 − 80) ÷ 80 = 0,25, donc +25 %."]},
+ levier:{intro:"Le levier, c'est jouer plus gros que ta mise grâce à un emprunt. Avec 1 000 € et un levier ×5, tu es exposé comme si tu avais 5 000 € : les gains sont multipliés par 5… et les pertes aussi.",
+  terms:[["Mise","l'argent à toi que tu engages."],["Levier ×5","ta position est 5 fois plus grosse que ta mise."],["Exposition","la taille réelle de ta position (mise × levier)."],["Liquidation","si tu perds toute ta mise, la position est fermée d'office : tu perds tout, mais pas plus."]],
+  ex:"Mise 1 000 €, levier ×5. Le prix baisse de 2 % : ta position perd 2 % × 5 = <b>10 %</b> de ta mise, soit <b>−100 €</b>.",
+  hints:["2 étapes. <b>①</b> Variation du prix en % × levier = variation de TA MISE en %. <b>②</b> Ce % × ta mise = ton résultat en euros. Si la perte dépasse 100 % de ta mise, tu perds exactement toute ta mise.","2 étapes. <b>①</b> Variation du prix en % × levier = variation de TA MISE en %. <b>②</b> Ce % × ta mise = ton résultat en euros. Si la perte dépasse 100 % de ta mise, tu perds exactement toute ta mise.","2 étapes. <b>①</b> Variation du prix en % × levier = variation de TA MISE en %. <b>②</b> Ce % × ta mise = ton résultat en euros. Si la perte dépasse 100 % de ta mise, tu perds exactement toute ta mise.","Perdre 100 % de ta mise : cherche la baisse du prix qui, multipliée par le levier, fait 100 %. Calcul : 100 % ÷ levier. Exemple : levier ×10, 100 ÷ 10 = 10 %."]},
+ calc:{intro:"Cinq petits calculs qu'un trader fait tout le temps : une variation en %, une baisse puis une hausse, le rendement d'un dividende, le PER et les intérêts composés. Tu peux utiliser ta calculatrice.",
+  terms:[["Variation en %","(nouveau prix − ancien prix) ÷ ancien prix × 100."],["Dividende","la part des bénéfices qu'une entreprise verse chaque année à ses actionnaires."],["Rendement du dividende","dividende ÷ prix de l'action × 100."],["PER","prix de l'action ÷ bénéfice par action : combien d'années de bénéfices tu paies."],["Intérêts composés","les intérêts rapportent eux-mêmes des intérêts : ton argent grossit de plus en plus vite."]],
+  ex:"Une action passe de 80 € à 100 € : (100 − 80) ÷ 80 = 0,25, donc <b>+25 %</b>.",
+  hints:["(nouveau prix − ancien prix) ÷ ancien prix × 100. Exemple : de 80 à 100, c'est (100 − 80) ÷ 80 = 0,25, donc +25 %.","Une baisse de x % multiplie par (1 − x/100) et une hausse de x % multiplie par (1 + x/100). Multiplie les deux. Exemple : −10 % puis +10 %, c'est 0,9 × 1,1 = 0,99, donc −1 %.","Dividende ÷ prix de l'action × 100. Exemple : 3 € de dividende pour une action à 60 €, c'est 3 ÷ 60 = 0,05, donc 5 %.","PER = prix de l'action ÷ bénéfice par action. Exemple : action à 60 €, bénéfice de 4 € par action, PER = 60 ÷ 4 = 15.","Multiplie 1 000 par (1 + taux) autant de fois que d'années. Exemple : 5 % pendant 2 ans, c'est 1 000 × 1,05 × 1,05 = 1 102,50 €. Sur la calculatrice : 1000 × 1,05 ^ 2 (touche ^)."]},
+ simu:{intro:"Un vrai cas de marché en 4 décisions. Tu regardes un graphique, tu choisis d'acheter ou d'attendre, et un coach t'explique à chaque étape ce qui est bon ou risqué. À la fin, tu vois ce que ta stratégie rapporterait en moyenne si tu la répétais 100 fois.",
+  terms:[["Stop-loss","un prix de sécurité : si le prix descend jusque-là, tu vends pour limiter la perte."],["Ratio gain / risque","ce que tu espères gagner pour 1 € risqué."],["Espérance","le gain moyen par trade si tu répétais le même choix un très grand nombre de fois."],["Tendance","la direction générale du prix : en hausse, en baisse ou sans direction."]],
+  ex:"Tu achètes à 100 € avec un stop à 95 € (tu risques 5 €) et tu vises 110 € (tu gagnes 10 €) : ratio <b>2 pour 1</b>. Même en te trompant une fois sur deux, tu restes gagnant.",
+  hints:["Demande-toi : que me dit le graphique (direction, cassure…) ? Et combien je risque si je me trompe ?"]}
+};
+const labSeen=k=>{const s=lsGet("cerveau-labseen",{});return!!(s&&s[k])};
+function labSee(k){const s=lsGet("cerveau-labseen",{})||{};s[k]=1;lsSet("cerveau-labseen",s)}
+function labBody(k,noIntro){const A=LAB_AIDE[k];if(!A)return"";
+  return`${noIntro?"":`<p style="margin:0">${A.intro}</p>`}<p class="label" style="margin:6px 0 0">Les mots du jeu</p>
+  <dl class="labterms">${A.terms.map(([t,d])=>`<dt>${t}</dt><dd>${d}</dd>`).join("")}</dl>
+  <div class="corr labex"><b>Exemple :</b> ${A.ex}</div>`}
+function labDaily(k){const A=LAB_AIDE[k];if(!A)return"";
+  return`<p class="small" style="margin:0"><b>En clair :</b> ${A.intro}</p><details class="labd"><summary>📖 Les mots du jeu et un exemple</summary><div class="stack" style="gap:6px;margin-top:8px">${labBody(k,true)}</div></details>`}
+function labPre(top,quit){const k=V.g.k;
+  return`<div class="card stack labpre">${top}<p class="label" style="margin:0">📖 Avant de jouer : l'essentiel en 1 minute</p>${labBody(k)}
+  <div class="row">${quit}<button class="btn" data-gpre="1">J'ai compris, je joue →</button></div></div>`}
+function labTools(g,R){const A=LAB_AIDE[g.k];if(!A)return"";const H=A.hints||[],h=H[Math.min(g.i,H.length-1)];
+  return`<div class="row labtools"><button class="ghost on" data-ghint="1">💡 ${V.gHint?"Cacher l'indice":"Un indice"}</button><button class="ghost" data-gaide="1">📖 ${V.gAide?"Fermer le rappel":"Rappel des mots"}</button></div>
+  ${V.gHint&&h?`<div class="corr labhint">💡 ${h}</div>`:""}${V.gAide?`<div class="card stack labrap" style="gap:6px">${labBody(g.k,true)}</div>`:""}`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-gpre],[data-ghint],[data-gaide]");if(!b||!V.g)return;
+  if(b.dataset.gpre){labSee(V.g.k);V.g.pre=false;render(true);return window.scrollTo(0,0)}
+  if(b.dataset.ghint){V.gHint=!V.gHint;return render(true)}
+  if(b.dataset.gaide){V.gAide=!V.gAide;return render(true)}});
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
 const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Master Dauphine"],["ps","Mon avenir"],["ent","Entraîne­ment"],["py","Python"],["cours","Cours"],["mx","Maths"],["mm","Mode maths"],["cg","Culture G"]];
@@ -8641,7 +8703,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.27.0";
+const APP_VERSION="2.27.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
