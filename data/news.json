@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-02T06:34:44.241Z",
+ "updated": "2026-11-03T06:30:32.916Z",
  "snap": {
-  "date": "2026-10-30",
+  "date": "2026-11-02",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 969",
-    "c": "−0,01 %"
+    "v": "8 048",
+    "c": "+0,98 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 580",
-    "c": "−1,82 %"
+    "v": "7 541",
+    "c": "−0,51 %"
    },
    {
     "n": "Nasdaq",
-    "v": "25 437",
-    "c": "−2,86 %"
+    "v": "25 164",
+    "c": "−1,07 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "19,42",
-    "c": "+12,91 %"
+    "v": "21,15",
+    "c": "+8,91 %"
    },
    {
     "n": "Brent",
-    "v": "110,1 $",
-    "c": "−6,41 %"
+    "v": "105,8 $",
+    "c": "+0,98 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "100,7 $",
-    "c": "−3,28 %"
+    "v": "97,6 $",
+    "c": "+1,13 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 920 $",
-    "c": "+0,55 %"
+    "v": "3 927 $",
+    "c": "−1,07 %"
    },
    {
     "n": "Bitcoin",
-    "v": "78 081 $",
-    "c": "+0,83 %"
+    "v": "76 600 $",
+    "c": "−2,11 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,93 %",
-    "c": "−0,06 pt"
+    "v": "4,89 %",
+    "c": "−0,03 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,118",
-    "c": "+0,00 %"
+    "v": "1,120",
+    "c": "+0,37 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-03-hausse-des-taux-en-australie-pour-contre",
+   "src": "Financial Times",
+   "date": "2026-11-03",
+   "url": "https://www.ft.com/content/60283bdf-e45d-4723-a68e-5a857a5b949e?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Hausse des taux en Australie pour contrer l'inflation",
+    "en": "Australia raises rates to fight inflation"
+   },
+   "s": {
+    "fr": "La banque centrale australienne a monté ses taux pour la cinquième fois de l'année, atteignant un sommet inédit depuis la crise financière de 2008. Cette décision intervient alors que l'inflation dépasse l'objectif fixé, conformément aux prévisions des analystes.",
+    "en": "Australia's central bank raised rates for the fifth time this year, hitting a high not seen since the 2008 financial crisis. This move comes as inflation remains above the targeted level, aligning with economists' expectations."
+   },
+   "d": {
+    "fr": "Pour un trader, surveiller les décisions des banques centrales est vital car une hausse des taux renforce généralement la devise locale. Cela impacte directement la valorisation des actifs et modifie les flux de capitaux sur le marché des changes.",
+    "en": "For a trader, monitoring central bank decisions is vital because rate hikes usually strengthen the local currency. This directly impacts asset valuations and alters capital flows in the foreign exchange market."
+   },
+   "v": [
+    [
+     "taux d'intérêt",
+     "interest rate"
+    ],
+    [
+     "banque centrale",
+     "central bank"
+    ],
+    [
+     "inflation",
+     "inflation"
+    ],
+    [
+     "devise",
+     "currency"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'effet habituel d'une hausse des taux directeurs sur la monnaie d'un pays ?",
+    "en": "What is the usual effect of a rate hike on a country's currency?"
+   },
+   "r": {
+    "fr": "Cela a tendance à renforcer et valoriser la monnaie locale sur le marché des changes.",
+    "en": "It tends to strengthen and appreciate the local currency in the foreign exchange market."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-03-risque-accru-de-volatilite-sur-les-march",
+   "src": "Financial Times",
+   "date": "2026-11-03",
+   "url": "https://www.ft.com/content/9349b88e-e290-4c64-a7cd-85ac83962a0c",
+   "t": {
+    "fr": "Risque accru de volatilité sur les marchés boursiers",
+    "en": "Rising risk of volatility in stock markets"
+   },
+   "s": {
+    "fr": "La solidité remarquable affichée récemment par les actions pourrait s'effriter plus vite que prévu par les investisseurs. Les marchés font face à des signaux mitigés et des inquiétudes persistantes dans le secteur technologique.",
+    "en": "The remarkable recent resilience of equities might crack sooner than many investors expect. Markets are dealing with mixed signals and ongoing concerns within the technology sector."
+   },
+   "d": {
+    "fr": "En trading, la volatilité mesure l'ampleur des variations de prix d'un actif sur une période donnée. Une hausse de la volatilité augmente le risque mais offre aussi de belles opportunités de gains à court terme pour les traders actifs.",
+    "en": "In trading, volatility measures the magnitude of an asset's price fluctuations over a given period. Higher volatility increases risk but also offers lucrative short-term opportunities for active traders."
+   },
+   "v": [
+    [
+     "volatilité",
+     "volatility"
+    ],
+    [
+     "action",
+     "equity / stock"
+    ],
+    [
+     "investisseur",
+     "investor"
+    ],
+    [
+     "marché boursier",
+     "stock market"
+    ]
+   ],
+   "q": {
+    "fr": "Que représente la volatilité pour un trader ? ",
+    "en": "What does volatility represent for a trader?"
+   },
+   "r": {
+    "fr": "Elle représente l'intensité des fluctuations de prix, synonyme à la fois de risque et d'opportunité.",
+    "en": "It represents the intensity of price fluctuations, meaning both risk and opportunity."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-03-ryanair-s-adapte-a-la-flambee-des-cours-",
+   "src": "franceinfo",
+   "date": "2026-11-03",
+   "url": "https://www.franceinfo.fr/replay-radio/le-brief-eco/ryanair-annonce-un-plan-d-adaptation-face-au-petrole-cher_8244766.html#xtor=RSS-3-%5Bgeneral%5D",
+   "t": {
+    "fr": "Ryanair s'adapte à la flambée des cours du pétrole",
+    "en": "Ryanair adapts to soaring oil prices"
+   },
+   "s": {
+    "fr": "La hausse des prix du kérosène pèse lourdement sur la santé financière des compagnies aériennes. Pour contrer ce coût, la compagnie low cost Ryanair a décidé de miser davantage sur l'intelligence artificielle.",
+    "en": "Rising jet fuel prices are weighing heavily on the financial health of airlines. To counter this cost, low-cost carrier Ryanair has announced it will rely more on artificial intelligence."
+   },
+   "d": {
+    "fr": "Le coût des matières premières comme le pétrole influence directement les marges bénéficiaires des entreprises grands consommateurs d'énergie. En bourse, une hausse de ces coûts pèse négativement sur la valorisation boursière de ces sociétés.",
+    "en": "The cost of raw materials like oil directly impacts the profit margins of energy-intensive companies. In the stock market, rising costs weigh negatively on these companies' valuations."
+   },
+   "v": [
+    [
+     "matière première",
+     "commodity"
+    ],
+    [
+     "pétrole",
+     "oil"
+    ],
+    [
+     "marge bénéficiaire",
+     "profit margin"
+    ],
+    [
+     "valorisation",
+     "valuation"
+    ]
+   ],
+   "q": {
+    "fr": "Quel impact a généralement une forte hausse du pétrole sur les compagnies aériennes ?",
+    "en": "What impact does a sharp rise in oil usually have on airlines?"
+   },
+   "r": {
+    "fr": "Cela alourdit leurs charges, pèse sur leurs marges financières et pénalise souvent leur cours de bourse.",
+    "en": "It increases their expenses, weighs on financial margins, and often penalizes their stock price."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-02-avertissement-sur-les-resultats-financie",
    "src": "Le Monde",
@@ -1270,158 +1405,20 @@
     "en": "It is usually lost, as assets are used to pay creditors before shareholders."
    },
    "ia": "Groq"
-  },
-  {
-   "id": "2026-10-22-le-17-octobre-une-onde-de-choc-chez-les-",
-   "src": "Le Monde",
-   "date": "2026-10-22",
-   "url": "https://www.lemonde.fr/politique/article/2026/10/22/le-17-octobre-une-onde-de-choc-chez-les-prefets-aussi-c-est-les-tenebres-qu-ils-disaient-en-effet-nous-y-sommes_6798581_823448.html",
-   "t": {
-    "fr": "Choc chez les préfets le 17 octobre : « C’est les ténèbres »",
-    "en": "Shock among prefects on Oct 17: “It’s darkness”"
-   },
-   "s": {
-    "fr": "Le 17 octobre, les préfets ont ressenti une onde de choc et ont décrit la situation comme des ténèbres. L’article souligne le sentiment d’urgence ressenti par les représentants de l’État.",
-    "en": "On Oct 17, prefects felt a shock wave and described the situation as darkness. The article highlights the sense of urgency felt by state representatives."
-   },
-   "d": {
-    "fr": "Les préfets sont les représentants du gouvernement au niveau départemental et assurent le respect des lois. Une crise sociale peut compliquer leurs missions de sécurité et de coordination.",
-    "en": "Prefects are the government’s representatives at the departmental level, ensuring law enforcement. Social unrest can complicate their security and coordination duties."
-   },
-   "v": [
-    [
-     "préfet",
-     "prefect"
-    ],
-    [
-     "décentralisation",
-     "decentralisation"
-    ],
-    [
-     "crise sociale",
-     "social crisis"
-    ],
-    [
-     "autorité d'État",
-     "state authority"
-    ]
-   ],
-   "q": {
-    "fr": "Quel rôle les préfets jouent‑ils dans l’administration française ?",
-    "en": "What role do prefects play in French administration?"
-   },
-   "r": {
-    "fr": "Ils représentent le gouvernement central dans chaque département et veillent à l’application des lois.",
-    "en": "They represent the central government in each department and ensure the application of laws."
-   },
-   "ia": "Groq",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-22-banque-43-des-francais-sont-a-decouvert-",
-   "src": "Le Monde",
-   "date": "2026-10-22",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/22/banque-43-des-francais-sont-a-decouvert-au-moins-une-fois-par-an_6798573_3234.html",
-   "t": {
-    "fr": "Banque : 43 % des Français sont à découvert au moins une fois par an",
-    "en": "Banking: 43 % of French people are overdrafted at least once a year"
-   },
-   "s": {
-    "fr": "Une part importante des Français se retrouve en découvert bancaire au moins une fois chaque année. L’article met en avant la fréquence de ce phénomène.",
-    "en": "A large share of French people end up with a bank overdraft at least once each year. The article highlights how common this phenomenon is."
-   },
-   "d": {
-    "fr": "Un découvert signifie que le solde du compte devient négatif, souvent accompagné de frais bancaires. Cela peut affecter la santé financière d’un ménage et son accès au crédit.",
-    "en": "An overdraft means the account balance goes negative, often with bank fees. It can affect a household’s financial health and credit access."
-   },
-   "v": [
-    [
-     "découvert bancaire",
-     "overdraft"
-    ],
-    [
-     "frais bancaires",
-     "bank fees"
-    ],
-    [
-     "solde négatif",
-     "negative balance"
-    ],
-    [
-     "gestion de trésorerie",
-     "cash management"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi les découverts fréquents sont‑ils risqués pour un ménage ?",
-    "en": "Why can frequent overdrafts be risky for a household?"
-   },
-   "r": {
-    "fr": "Ils entraînent des frais supplémentaires et peuvent détériorer la réputation de crédit du ménage.",
-    "en": "They generate extra fees and can damage the household’s credit reputation."
-   },
-   "ia": "Groq",
-   "iat": 1
-  },
-  {
-   "id": "2026-10-22-a-mayotte-orange-somme-de-stopper-son-de",
-   "src": "Le Monde",
-   "date": "2026-10-22",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/22/a-mayotte-orange-somme-de-stopper-son-deploiement-anarchique-de-la-fibre-optique_6798569_3234.html",
-   "t": {
-    "fr": "Mayotte : Orange sommé de stopper son « déploiement anarchique » de la fibre",
-    "en": "Mayotte: Orange ordered to halt its “chaotic” fiber rollout"
-   },
-   "s": {
-    "fr": "À Mayotte, l’opérateur Orange a reçu l’ordre de mettre fin à un déploiement de fibre jugé anarchique. L’article signale l’intervention des autorités de régulation.",
-    "en": "In Mayotte, telecom operator Orange was ordered to stop a fiber rollout deemed chaotic. The article notes regulatory intervention."
-   },
-   "d": {
-    "fr": "Le déploiement d’infrastructures numériques nécessite des autorisations et un suivi rigoureux. Un arrêt imposé peut retarder les revenus prévus et impacter la valorisation de l’entreprise.",
-    "en": "Deploying digital infrastructure requires permits and strict oversight. A forced halt can delay expected revenues and affect the company’s valuation."
-   },
-   "v": [
-    [
-     "déploiement de la fibre",
-     "fiber rollout"
-    ],
-    [
-     "autorité de régulation",
-     "regulatory authority"
-    ],
-    [
-     "infrastructure numérique",
-     "digital infrastructure"
-    ],
-    [
-     "investissement capex",
-     "capex investment"
-    ]
-   ],
-   "q": {
-    "fr": "Quelles conséquences une régulation stricte peut‑elle avoir sur un opérateur télécom ?",
-    "en": "What consequences can strict regulation have on a telecom operator?"
-   },
-   "r": {
-    "fr": "Elle peut entraîner des amendes, des retards de projet et une révision à la baisse des prévisions de revenu.",
-    "en": "It can lead to fines, project delays, and a downward revision of revenue forecasts."
-   },
-   "ia": "Groq",
-   "iat": 1
   }
  ],
  "actu": {
-  "date": "2026-10-28",
-  "q": "Quel événement récent a permis au bénéfice net de SK Hynix de bondir de 216% au troisième trimestre ?",
+  "date": "2026-11-03",
+  "q": "Quelle institution a augmenté ses taux à un niveau inédit depuis 2008 en raison de l'inflation ?",
   "choices": [
-   "La baisse des taux de la Réserve fédérale",
-   "Le boom de l'intelligence artificielle",
-   "Une introduction en bourse record",
-   "La hausse du prix des matières premières"
+   "La Réserve fédérale américaine",
+   "La Banque centrale européenne",
+   "La banque centrale australienne",
+   "La Banque du Japon"
   ],
-  "a": 1,
-  "expl": "Le géant des puces électroniques a profité de la forte demande liée au secteur de l'intelligence artificielle. Cette dynamique a propulsé ses résultats financiers trimestriels à la hausse.",
-  "src": "Le Figaro",
-  "url": "https://www.lefigaro.fr/societes/sk-hynix-portes-par-l-ia-le-benefice-net-bondit-de-216-au-troisieme-trimestre-20261028"
+  "a": 2,
+  "expl": "L'article indique que la banque centrale australienne a procédé à sa cinquième hausse de taux de l'année pour contrer l'inflation. Cette décision historique porte ses taux au plus haut depuis la crise financière de 2008.",
+  "src": "Financial Times",
+  "url": "https://www.ft.com/content/60283bdf-e45d-4723-a68e-5a857a5b949e?syn-25a6b1a6=1"
  }
 }
