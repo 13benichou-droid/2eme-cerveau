@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-03T06:30:32.916Z",
+ "updated": "2026-11-04T06:35:09.988Z",
  "snap": {
-  "date": "2026-11-02",
+  "date": "2026-11-03",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 048",
-    "c": "+0,98 %"
+    "v": "8 020",
+    "c": "−0,34 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 541",
-    "c": "−0,51 %"
+    "v": "7 569",
+    "c": "+0,36 %"
    },
    {
     "n": "Nasdaq",
-    "v": "25 164",
-    "c": "−1,07 %"
+    "v": "25 372",
+    "c": "+0,83 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "21,15",
-    "c": "+8,91 %"
+    "v": "20,83",
+    "c": "−1,51 %"
    },
    {
     "n": "Brent",
-    "v": "105,8 $",
-    "c": "+0,98 %"
+    "v": "104,0 $",
+    "c": "+0,42 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "97,6 $",
-    "c": "+1,13 %"
+    "v": "96,4 $",
+    "c": "+0,36 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 927 $",
-    "c": "−1,07 %"
+    "v": "4 021 $",
+    "c": "+2,04 %"
    },
    {
     "n": "Bitcoin",
-    "v": "76 600 $",
-    "c": "−2,11 %"
+    "v": "77 900 $",
+    "c": "+1,60 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,89 %",
-    "c": "−0,03 pt"
+    "v": "4,95 %",
+    "c": "+0,06 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,120",
-    "c": "+0,37 %"
+    "v": "1,123",
+    "c": "+0,36 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-04-victoire-politique-des-democrates-et-rep",
+   "src": "Financial Times",
+   "date": "2026-11-04",
+   "url": "https://www.ft.com/content/a0b18705-3bd8-4886-992c-b6062fdec6ea?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Victoire politique des Démocrates et repli des marchés mondiaux",
+    "en": "Democratic Election Wins Trigger Global Stock Decline"
+   },
+   "s": {
+    "fr": "Les résultats des élections américaines suggèrent une progression majeure des Démocrates, ce qui inquiète les investisseurs quant aux perspectives technologiques. En conséquence, les indices boursiers mondiaux ainsi que les contrats à terme sur le Nasdaq et le S&P 500 ont chuté. Les traders craignent notamment un frein au développement des infrastructures de l'intelligence artificielle.",
+    "en": "Election results in the United States point toward Democratic gains, sparking concerns among investors over tech sector expansion. As a result, global stock indices and futures for the S&P 500 and Nasdaq experienced a drop. Traders fear a potential slowdown in the build-out of artificial intelligence infrastructure."
+   },
+   "d": {
+    "fr": "En trading, les incertitudes politiques incitent souvent les investisseurs à réduire leur exposition aux actifs risqués. Comprendre l'impact des décisions gouvernementales sur un secteur clé permet de mieux anticiper la volatilité des cours.",
+    "en": "In trading, political uncertainty often prompts investors to reduce their exposure to risk assets. Understanding how policy decisions impact key industries helps anticipate market price volatility."
+   },
+   "v": [
+    [
+     "Contrat à terme",
+     "Futures contract"
+    ],
+    [
+     "Volatilité",
+     "Volatility"
+    ],
+    [
+     "Incertitude politique",
+     "Political uncertainty"
+    ],
+    [
+     "Actif à risque",
+     "Risk asset"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi des évolutions politiques peuvent-elles faire baisser le secteur technologique ?",
+    "en": "Why can political shifts cause a downturn in the tech sector?"
+   },
+   "r": {
+    "fr": "Un changement de majorité politique peut amener de nouvelles régulations ou un ralentissement des projets d'infrastructures cruciaux pour les entreprises du secteur.",
+    "en": "A shift in political leadership can bring new regulations or slow down key infrastructure projects essential for tech companies."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-04-immobilier-britannique-reprise-retardee-",
+   "src": "The Guardian",
+   "date": "2026-11-04",
+   "url": "https://www.theguardian.com/business/2026/nov/04/britains-housing-market-unlikely-to-recover-until-2028-says-savills",
+   "t": {
+    "fr": "Immobilier britannique : reprise retardée par les taux d'intérêt",
+    "en": "UK Housing Market Recovery Delayed by High Interest Rates"
+   },
+   "s": {
+    "fr": "Le marché immobilier au Royaume-Uni ne devrait pas se redresser avant 2028 selon des projections récentes. Les tensions au Moyen-Orient contribuent à maintenir des taux hypothécaires élevés plus longtemps. Il est ainsi anticipé une baisse des prix des logements de 1,5 % l'année prochaine.",
+    "en": "The United Kingdom housing market is not expected to recover until 2028 according to recent forecasts. Middle East conflict keeps mortgage rates elevated for longer. Consequently, residential property prices are expected to decline by 1.5% next year."
+   },
+   "d": {
+    "fr": "Des taux d'intérêt élevés renchérissent le coût des emprunts, ce qui freine la demande des acheteurs et pèse sur les prix. Suivre la trajectoire des taux permet aux traders d'évaluer la santé des marchés sensibles au crédit.",
+    "en": "High interest rates increase borrowing costs, which cools buyer demand and exerts downward pressure on prices. Tracking rate trends allows traders to evaluate credit-sensitive markets."
+   },
+   "v": [
+    [
+     "Taux hypothécaire",
+     "Mortgage rate"
+    ],
+    [
+     "Marché immobilier",
+     "Housing market"
+    ],
+    [
+     "Prévision économique",
+     "Economic forecast"
+    ],
+    [
+     "Coût du crédit",
+     "Borrowing cost"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'impact de la hausse des taux sur les prix de l'immobilier ?",
+    "en": "How do rising interest rates impact property prices?"
+   },
+   "r": {
+    "fr": "Lorsque le crédit devient plus cher, les acheteurs ont un pouvoir d'achat réduit, ce qui contraint les vendeurs à diminuer leurs prix.",
+    "en": "When borrowing grows more expensive, buyer purchasing power drops, forcing sellers to lower asking prices."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-04-l-envolee-speculative-puis-le-krach-des-",
+   "src": "Yahoo Finance",
+   "date": "2026-11-04",
+   "url": "https://stocktwits.com/news-articles/markets/equity/rklb-asts-space-stocks-surged-then-crashed-chamath-palihapitiya-investors-expect-prices/cNGhytqR9dr?.tsrc=rss",
+   "t": {
+    "fr": "L'envolée spéculative puis le krach des actions du secteur spatial",
+    "en": "The Boom and Bust Cycle of Space Sector Stocks"
+   },
+   "s": {
+    "fr": "Un panier de dix actions liées au secteur spatial a grimpé de 1 123 % avant de s'effondrer et de perdre deux tiers de sa valeur maximale. Ce mouvement brutal s'explique par la spéculation et les attentes exagérées des investisseurs. Les cours ont été portés par l'enthousiasme du marché plutôt que par les résultats réels des entreprises.",
+    "en": "A basket of ten space industry stocks surged by 1,123% before crashing and losing two-thirds of its peak valuation. This sharp move was driven by high market expectations and investor hype. Stock prices rose based on speculative sentiment rather than underlying company performance."
+   },
+   "d": {
+    "fr": "Ce phénomène illustre le risque d'une bulle spéculative où les prix se déconnectent de la valeur réelle des entreprises. Pour un débutant en trading, il est crucial de savoir repérer ces emballements afin de limiter les pertes lors du retournement.",
+    "en": "This scenario illustrates the risk of a speculative bubble where prices disconnect from actual company value. Beginner traders must learn to spot overly hyped rallies to avoid heavy losses when the trend reverses."
+   },
+   "v": [
+    [
+     "Bulle spéculative",
+     "Speculative bubble"
+    ],
+    [
+     "Panier d'actions",
+     "Stock basket"
+    ],
+    [
+     "Retournement de tendance",
+     "Trend reversal"
+    ],
+    [
+     "Valorisation boursière",
+     "Market valuation"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi est-il risqué d'acheter une action uniquement portée par l'engouement ?",
+    "en": "Why is it risky to buy a stock driven purely by hype?"
+   },
+   "r": {
+    "fr": "Si les résultats réels ne confirment pas les attentes très élevées, les investisseurs revendent précipitamment leurs titres, entraînant une chute violente du cours.",
+    "en": "If actual earnings fail to meet lofty expectations, investors sell off their shares rapidly, causing a sharp price collapse."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-03-hausse-des-taux-en-australie-pour-contre",
    "src": "Financial Times",
@@ -1270,155 +1405,20 @@
     "en": "It can reduce operational costs and concentrate its financial resources on its most profitable or strategic operations."
    },
    "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-22-taux-d-interet-au-dela-des-5-une-hausse-",
-   "src": "Le Monde",
-   "date": "2026-10-22",
-   "url": "https://www.lemonde.fr/idees/article/2026/10/22/taux-d-interet-au-dela-des-5-une-hausse-qui-sanctionne-un-debat-budgetaire-enlise_6798598_3232.html",
-   "t": {
-    "fr": "Taux d’intérêt au‑delà des 5 % : une hausse qui sanctionne un débat budgétaire enlisé",
-    "en": "Interest rates above 5 %: a rise that penalises a stuck budget debate"
-   },
-   "s": {
-    "fr": "Le rendement du bon du Trésor français à dix ans a franchi la barre des 5 %, un niveau jamais vu depuis 2002. Cette hausse intervient alors que les parlementaires peinent à débattre du projet de loi de finances 2027.",
-    "en": "The yield on France’s 10‑year government bond rose above 5 %, a level not seen since 2002. The increase comes while lawmakers struggle to discuss the 2027 budget bill."
-   },
-   "d": {
-    "fr": "Un rendement plus élevé signifie que l’État doit payer davantage d’intérêts lorsqu’il emprunte. Pour les traders, cela rend les obligations françaises plus attractives mais augmente le coût du financement public.",
-    "en": "Higher yields mean the state must pay more interest on new debt. For traders, French bonds become more attractive but public financing costs rise."
-   },
-   "v": [
-    [
-     "rendement obligataire",
-     "bond yield"
-    ],
-    [
-     "taux d'intérêt",
-     "interest rate"
-    ],
-    [
-     "débat budgétaire",
-     "budget debate"
-    ],
-    [
-     "émission d'État",
-     "government bond issuance"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi un rendement obligataire plus élevé augmente‑t‑il le coût de financement de l’État ?",
-    "en": "Why does a higher bond yield increase the cost of state financing?"
-   },
-   "r": {
-    "fr": "Parce que l’État doit verser plus d’intérêts sur chaque euro emprunté.",
-    "en": "Because the state has to pay more interest on every euro it borrows."
-   },
-   "ia": "Groq"
-  },
-  {
-   "id": "2026-10-22-meta-enregistre-ses-premiers-succes-dans",
-   "src": "Le Figaro",
-   "date": "2026-10-22",
-   "url": "https://www.lefigaro.fr/secteur/high-tech/nouveaux-modeles-investissements-colossaux-sous-la-houlette-d-alexandr-wang-meta-enregistre-ses-premiers-succes-dans-l-ia-20261022",
-   "t": {
-    "fr": "Meta enregistre ses premiers succès dans l’IA sous la houlette d’Alexandr Wang",
-    "en": "Meta records its first AI successes under Alexandr Wang"
-   },
-   "s": {
-    "fr": "Meta rattrape son retard face à OpenAI et Anthropic en lançant un agent d’intelligence artificielle destiné au grand public. Le groupe prévoit d’investir 145 milliards de dollars dans l’IA cette année.",
-    "en": "Meta is catching up with OpenAI and Anthropic by launching a consumer‑focused AI agent. The company plans to invest $145 billion in AI this year."
-   },
-   "d": {
-    "fr": "Des dépenses massives en R&D peuvent faire grimper le cours de l’action si les investisseurs anticipent de futurs profits. En même temps, le coût immédiat peut créer de la volatilité à court terme.",
-    "en": "Huge R&D spending can boost the stock price if investors expect future profits. At the same time, the immediate cost can cause short‑term volatility."
-   },
-   "v": [
-    [
-     "investissement",
-     "investment"
-    ],
-    [
-     "agent d'intelligence artificielle",
-     "AI agent"
-    ],
-    [
-     "logiciel de pointe",
-     "cutting‑edge software"
-    ],
-    [
-     "capitalisation boursière",
-     "market cap"
-    ]
-   ],
-   "q": {
-    "fr": "Comment un investissement massif en IA peut‑il influencer le cours de l’action de Meta ?",
-    "en": "How can a massive AI investment influence Meta’s share price?"
-   },
-   "r": {
-    "fr": "Les investisseurs évaluent les gains futurs attendus contre le poids du coût actuel, ce qui peut faire monter ou baisser le cours.",
-    "en": "Investors weigh expected future gains against the current cost, which can push the price up or down."
-   },
-   "ia": "Groq"
-  },
-  {
-   "id": "2026-10-22-epargnants-et-actionnaires-de-tudigo-pre",
-   "src": "Le Monde",
-   "date": "2026-10-22",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/22/epargnants-et-actionnaires-de-tudigo-premieres-victimes-de-sa-liquidation_6798615_3234.html",
-   "t": {
-    "fr": "Épargnants et actionnaires de Tudigo, premières victimes de sa liquidation",
-    "en": "Tudigo savers and shareholders become first victims of its liquidation"
-   },
-   "s": {
-    "fr": "Le tribunal de commerce de Bordeaux a rejeté les sept offres de reprise de la plateforme de crowdfunding en redressement judiciaire. Les clients devront payer des prestataires externes et les actionnaires perdront tout leur capital investi.",
-    "en": "The Bordeaux commercial court rejected seven takeover bids for the crowdfunding platform under judicial recovery. Clients will have to pay external providers and shareholders will lose all invested capital."
-   },
-   "d": {
-    "fr": "En liquidation, les actifs sont d’abord vendus pour rembourser les créanciers, les actionnaires étant les derniers à être payés. Cela montre l’importance d’évaluer le risque avant d’investir dans des start‑ups.",
-    "en": "In liquidation, assets are sold first to repay creditors, leaving shareholders last. This highlights the need to assess risk before investing in start‑ups."
-   },
-   "v": [
-    [
-     "liquidation judiciaire",
-     "court‑ordered liquidation"
-    ],
-    [
-     "actionnaire",
-     "shareholder"
-    ],
-    [
-     "crowdfunding",
-     "crowdfunding"
-    ],
-    [
-     "capital investi",
-     "invested capital"
-    ]
-   ],
-   "q": {
-    "fr": "Que devient l’argent des actionnaires lorsqu’une entreprise est liquidée ?",
-    "en": "What happens to shareholders’ money when a company is liquidated?"
-   },
-   "r": {
-    "fr": "Il est généralement perdu, les actifs étant utilisés pour payer les créanciers avant les actionnaires.",
-    "en": "It is usually lost, as assets are used to pay creditors before shareholders."
-   },
-   "ia": "Groq"
   }
  ],
  "actu": {
-  "date": "2026-11-03",
-  "q": "Quelle institution a augmenté ses taux à un niveau inédit depuis 2008 en raison de l'inflation ?",
+  "date": "2026-11-04",
+  "q": "De combien les prix des logements au Royaume-Uni devraient-ils baisser l'année prochaine d'après les prévisions ?",
   "choices": [
-   "La Réserve fédérale américaine",
-   "La Banque centrale européenne",
-   "La banque centrale australienne",
-   "La Banque du Japon"
+   "0,5 %",
+   "1,5 %",
+   "2,5 %",
+   "3,5 %"
   ],
-  "a": 2,
-  "expl": "L'article indique que la banque centrale australienne a procédé à sa cinquième hausse de taux de l'année pour contrer l'inflation. Cette décision historique porte ses taux au plus haut depuis la crise financière de 2008.",
-  "src": "Financial Times",
-  "url": "https://www.ft.com/content/60283bdf-e45d-4723-a68e-5a857a5b949e?syn-25a6b1a6=1"
+  "a": 1,
+  "expl": "Les prévisions indiquent une diminution de 1,5 % des prix immobiliers britanniques pour l'année à venir en raison du maintien de taux hypothécaires élevés. La reprise du marché ne devrait pas survenir avant 2028.",
+  "src": "The Guardian",
+  "url": "https://www.theguardian.com/business/2026/nov/04/britains-housing-market-unlikely-to-recover-until-2028-says-savills"
  }
 }
