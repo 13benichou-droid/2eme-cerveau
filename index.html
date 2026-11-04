@@ -1531,6 +1531,24 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 .labd summary{cursor:pointer;font-weight:700}
 .labtools{gap:8px}
 .labhint{border-color:var(--accent)}
+
+/* 2.28.0 : Macro Lab, la case « Que faire maintenant ? » */
+.mqnow{gap:10px;border-color:var(--hot,#ff7a1a);background:color-mix(in srgb,var(--hot,#ff7a1a) 10%,var(--surface))}
+.mqnowt{font-family:var(--display);font-size:1.2rem;line-height:1.25}
+.mqnowgo{width:100%;min-height:54px;font-size:1.1rem}
+.mqallb{align-self:stretch}
+
+/* 2.28.0 : sauvegarde, rappel mensuel, cours -> cartes */
+.bknag{border-color:var(--hot,#ff7a1a);background:color-mix(in srgb,var(--hot,#ff7a1a) 8%,var(--surface))}
+.bkconf{border-color:var(--hot,#ff7a1a)}
+.ccthumbs{display:flex;gap:8px;flex-wrap:wrap}
+.ccth{position:relative;width:84px;height:84px;border-radius:10px;overflow:hidden;border:1px solid var(--line,#ddd)}
+.ccth img{width:100%;height:100%;object-fit:cover;display:block}
+.ccx{position:absolute;top:2px;right:2px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:.8rem;line-height:1;cursor:pointer}
+.cclist{display:flex;flex-direction:column;gap:10px;padding:0;margin:0;list-style:none}
+.ccoff{opacity:.55}
+[data-ccsk],[data-cck],[data-ccother],[data-cctext],[data-ccf]{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+.cclist textarea{resize:vertical}
 </style>
 <script src="config.js"></script>
 </head>
@@ -2313,10 +2331,11 @@ function subjStats(s){if(cmxOn(s.k)){const st=(S.cours[s.k]||{}).st||{},L=cmxLis
 function chapQs(sk,ck){const st=(Q[sk]||{})[ck]||[],g=((S.gen[sk+"-"+ck]||{}).qs)||[];return[...st.map((x,i)=>({q:x[0],r:x[1],lvl:x[2]||0,k:sk+"|"+ck+"|s"+i,html:true})),...g.map((x,i)=>({q:x.q,r:x.r,lvl:x.lvl||0,k:sk+"|"+ck+"|g"+i,html:false,gen:true}))]}
 function chapScore(sk,ck){const r=(((S.quiz[sk]||{}).r)||{})[ck]||{ok:0,ko:0};return r}
 function pageCours(){
+  if(V.cc)return ccView();
   if(V.chap)return pageChap();
   const s=COURS.find(x=>x.k===V.subj)||COURS[0],st=(S.cours[s.k]||{}).st||{};
   const all=COURS.reduce((a,x)=>a+subjStats(x),0)/COURS.length;
-  return`<div class="row" style="gap:14px">${ring(all,"--cours")}<div><b style="font-family:var(--display);font-size:1.4rem">${Math.round(all*100)}%</b><div class="muted">du programme de Terminale maîtrisé</div></div></div>
+  return`<button class="btn ccadd" data-ccgo="1" style="width:100%">📸 Ajouter un cours</button><div class="row" style="gap:14px">${ring(all,"--cours")}<div><b style="font-family:var(--display);font-size:1.4rem">${Math.round(all*100)}%</b><div class="muted">du programme de Terminale maîtrisé</div></div></div>
   <div class="chips" role="group" aria-label="Matière">${COURS.map(x=>`<button class="chip" data-subj="${x.k}" aria-pressed="${x.k===s.k}">${x.n} · ${Math.round(subjStats(x)*100)}%</button>`).join("")}</div>
   ${true?`<button class="card tutorcard" data-open="${s.k}|all"><span class="av">${TUT[s.k].sym}</span><span style="flex:1;min-width:0"><b>Prof ${TUT[s.k].nom}</b><span class="muted small" style="display:block">Ton prof IA de ${s.n} : pose-lui une question sur toute la matière</span></span><span class="muted" aria-hidden="true">›</span></button>`:""}
   ${(s.k==="mspe"||s.k==="mexp")&&typeof mmBanner==="function"?mmBanner():s.k==="ses"&&typeof mmSesBanner==="function"?mmSesBanner():""}<div class="card">${cmxOn(s.k)?cmxRows(s):s.b.map((b,bi)=>`<div class="bloc"><h3>${b[0]}</h3>${b[1].map((c,ci)=>{const[name,hb]=c.split("|"),ck=bi+"-"+ci,v=st[ck]||0,nq=chapQs(s.k,ck).length,sc=chapScore(s.k,ck);
@@ -5807,7 +5826,7 @@ function srsView(){const st=V.srs,D=srsDecks()[st.deck]||{n:"?",e:""};
   const verdict=r?`<div class="srsres ${r.v}"><b>${r.v==="ok"?"✓ Juste !":r.v==="close"?"≈ Presque !":"✗ Pas tout à fait."}</b>${r.ans?` <span class="muted">Ta réponse : « ${esc(r.ans)} »</span>`:""}${r.note?`<small>${esc(r.note)}</small>`:""}
     ${r.v==="ko"&&r.ans&&SAMPLE?`<button class="linkb" data-srsai="1" ${r.busy?"disabled":""}>${r.busy?"🤖 L'IA vérifie…":"🤖 C'est un synonyme ? Demander à l'IA"}</button>`:""}</div>`:"";
   return`<div class="card stack srscard">${head}
-    <div class="srsface">${n.th||tag?`<div class="row" style="justify-content:center;gap:8px">${tag}${n.th?`<small class="muted">${esc(n.th)}</small>`:""}</div>`:""}${front}${st.flip?back:""}</div>
+    <div class="srsface">${n.th||n.ch||tag?`<div class="row" style="justify-content:center;gap:8px">${tag}${n.th?`<small class="muted">${esc(n.th)}</small>`:""}${n.ch?`<small class="muted">📖 ${esc(n.ch)}</small>`:""}</div>`:""}${front}${st.flip?back:""}</div>
     ${st.flip?`${verdict}<div class="srsbtns">${SRS_G.map(([g,l,k])=>`<button class="srsb ${k} ${r&&r.sug===g?"sug":""}" data-srsg="${g}"><small class="num">${srsLbl(cur,g)}</small><b>${l}</b></button>`).join("")}</div>${r?`<button class="btn srsnext" data-srsg="${r.sug}">Continuer →</button>`:""}`:ty?typeBox:`<button class="btn srsshow" data-srsflip="1">Voir la réponse</button>`}
     <div class="row srsfoot"><button class="linkb" data-srsstop="1">Terminer</button>${st.undo?`<button class="linkb" data-srsundo="1">↶ Annuler</button>`:""}<button class="linkb" data-srstype="${esc(st.deck)}">${ty?"✍️ Écrire : oui":"✍️ Écrire : non"}</button>${pc&&!ty?`<span class="muted small">Espace : retourner · 1 2 3 4 : répondre</span>`:""}</div></div>`}
 
@@ -5863,7 +5882,7 @@ function srsDeckPanel(k,D){const C=srsCards(),L=srsNotes(k);
   return`<div class="srspanel stack">
     <form class="srsopt" data-f="srsopt" data-deck="${k}"><label class="small">Nouvelles cartes par jour <input class="field num" type="number" name="nd" min="0" max="100" value="${D.nd??10}" inputmode="numeric"></label>${k==="en"?"":`<label class="srschk small"><input type="checkbox" name="both" ${D.both?"checked":""}> Nouvelles cartes dans les deux sens</label>`}<button class="ghost on">Enregistrer</button>${D.def?"":`<button type="button" class="ghost" data-srsdeldeck="${k}">${V.confirm==="srsdk"+k?"Confirmer la suppression":"Supprimer le paquet"}</button>`}</form>
     ${L.length?`<input class="field" type="search" placeholder="Chercher une carte" data-srsq="1" aria-label="Chercher une carte">
-    <ul class="srslist">${L.map(n=>{const ids=srsCids(n,D),sus=ids.every(i=>C[i]&&C[i].sus);return`<li data-srst="${esc((n.f+" "+n.b).toLowerCase())}"><div><span><b>${esc(n.f)}</b><span class="muted"> → ${esc(n.b)}</span></span><small class="muted">${ids.map(stat).join(" · ")}</small></div><span class="srsact">${n.bi||n.bx?"":`<button class="linkb" data-srsedit="${esc(n.id)}">Modifier</button><button class="linkb" data-srsdel="${esc(n.id)}">${V.confirm==="srsdel"+n.id?"Confirmer":"Supprimer"}</button>`}<button class="linkb" data-srssus="${esc(n.id)}">${sus?"Réactiver":"Suspendre"}</button></span></li>`}).join("")}</ul>`:`<p class="muted small">Aucune carte pour l'instant : ajoute-les ci-dessous, à la main ou avec l'IA.</p>`}</div>`}
+    <ul class="srslist">${L.map(n=>{const ids=srsCids(n,D),sus=ids.every(i=>C[i]&&C[i].sus);return`<li data-srst="${esc((n.f+" "+n.b).toLowerCase())}"><div><span><b>${esc(n.f)}</b><span class="muted"> → ${esc(n.b)}</span></span><small class="muted">${n.ch?"📖 "+esc(n.ch)+" · ":""}${ids.map(stat).join(" · ")}</small></div><span class="srsact">${n.bi||n.bx?"":`<button class="linkb" data-srsedit="${esc(n.id)}">Modifier</button><button class="linkb" data-srsdel="${esc(n.id)}">${V.confirm==="srsdel"+n.id?"Confirmer":"Supprimer"}</button>`}<button class="linkb" data-srssus="${esc(n.id)}">${sus?"Réactiver":"Suspendre"}</button></span></li>`}).join("")}</ul>`:`<p class="muted small">Aucune carte pour l'instant : ajoute-les ci-dessous, à la main ou avec l'IA.</p>`}</div>`}
 function srsNewDeck(){return`<form class="srsnew" data-f="srsdeck"><input class="field" name="n" placeholder="Nouveau paquet (ex. : Histoire-géo)" maxlength="40" aria-label="Nom du nouveau paquet"><button class="ghost on">Créer</button></form>`}
 const srsOpts=(Ds,sel)=>Object.entries(Ds).map(([k,x])=>`<option value="${k}" ${k===sel?"selected":""}>${esc(x.e)} ${esc(x.n)}</option>`).join("");
 function srsAddCard(){const a=V.srsAdd||{},Ds=srsDecks(),dk=Ds[a.d]?a.d:(Ds[V.srsOpen]?V.srsOpen:"en"),D=Ds[dk],en=dk==="en";
@@ -6619,7 +6638,7 @@ async function gmList(a){
 }
 /* un appel Gemini en direct (texte reçu au fur et à mesure) */
 async function gmCall(model,turns,json,opts,emit,key){
-  const body={contents:turns.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]})),generationConfig:{temperature:0.5,...(json?{responseMimeType:"application/json"}:{})}};
+  const body={contents:turns.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content},...(m.images||[]).map(i=>({inline_data:{mime_type:i.mime,data:i.b64}}))]})),generationConfig:{temperature:0.5,...(json?{responseMimeType:"application/json"}:{})}};
   const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":streamGenerateContent?alt=sse",
     {method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json","x-goog-api-key":key},body:JSON.stringify(body)});
   if(!r.ok){const tx=await r.text().catch(()=>"");let em=tx;try{const j=JSON.parse(tx);em=(j.error&&(j.error.message||j.error.status))||tx}catch(_){}
@@ -6661,7 +6680,7 @@ async function aiRelay(turns,json,opts,emit){
 async function aiOllama(turns,json,opts,emit){
   const a=aiCfg();
   const r=await fetch(a.ollamaUrl.replace(/\/+$/,"")+"/api/chat",{method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({model:(a.provider==="ollama"?a.model:a.omodel)||"llama3.2",messages:turns,stream:true,...(json?{format:"json"}:{})})});
+    body:JSON.stringify({model:(a.provider==="ollama"?a.model:a.omodel)||"llama3.2",messages:turns.map(m=>m.images?{role:m.role,content:m.content,images:m.images.map(i=>i.b64)}:m),stream:true,...(json?{format:"json"}:{})})});
   if(!r.ok)throw{code:r.status===404?"bad_model":"upstream_error",message:"Ollama "+r.status};
   AI_LAST="Ollama · "+((a.provider==="ollama"?a.model:a.omodel)||"llama3.2");
   await readLines(r,line=>{const j=JSON.parse(line);if(j.message&&j.message.content)emit(j.message.content)});
@@ -6674,6 +6693,7 @@ async function aiSample(input,opts={}){
   let last=null;
   for(const st of steps){
     if(st==="gemini"&&!a.key){if(only)throw{code:"no_key"};continue}
+    if(st==="relay"&&turns.some(t=>t.images)){if(only)throw{code:"relay_none"};continue}
     if(st==="relay"&&!(a.relayUrl&&a.relayTok)){if(only)throw{code:"relay_none"};continue}
     if(st==="ollama"&&!(only||a.provider==="ollama"||a.backup))continue;
     if(st!=="ollama"&&!navigator.onLine){last={code:"offline"};continue}
@@ -8503,8 +8523,31 @@ function mqUI(){const r=V.mq;if(r)return mqPlay();
       ${open?`<div class="mqpath">${nodes}<div class="mqnodew"><button class="mqboss ${beat?"done":""} ${cur&&nx.boss?"cur":""}" data-mqgo="boss|${wi}" ${bo?"":"disabled"} aria-label="Boss du monde ${wi+1}${bo?"":" (verrouillé)"}">${beat?"👑":bo?"👹":"🔒"}</button><span class="mqst">${beat?"Boss vaincu":"Boss"}</span></div></div>`:`<p class="small muted" style="margin:6px 0 0">Bats le boss du monde ${wi} pour ouvrir ce monde.</p>`}</section>`}).join("");
   const ach=`<details class="card mqach"><summary><b>🏅 Succès</b> <span class="muted small num">${Object.keys(g.ach).length}/${MQ_ACH.length}</span></summary><div class="mqachg">${MQ_ACH.map(([k,e,t,d])=>`<div class="mqa ${g.ach[k]?"on":""}"><span>${g.ach[k]?e:"🔒"}</span><b>${t}</b><small>${d}</small></div>`).join("")}</div></details>`;
   setTimeout(()=>{if(V.mqScroll){V.mqScroll=false;const c=document.getElementById("mqcur");c&&c.scrollIntoView&&c.scrollIntoView({block:"center"})}},30);
-  return`<div class="stack mqmap">${hud}${quests}${worlds}${ach}<button class="ghost on" data-mlv="codex" style="align-self:flex-start">📚 Ouvrir le Codex (vidéos, cas, enveloppes, glossaire…)</button>
-    <p class="mlsub small">Contenu tiré des vidéos de la chaîne Finary, chiffres vérifiés pour ${esc(MACRO.maj||"2026")}. Éducatif, pas un conseil personnalisé.</p></div>`}
+  const all=`${hud}${quests}${worlds}${ach}<button class="ghost on" data-mlv="codex" style="align-self:flex-start">📚 Ouvrir le Codex (vidéos, cas, enveloppes, glossaire…)</button>
+    <p class="mlsub small">Contenu tiré des vidéos de la chaîne Finary, chiffres vérifiés pour ${esc(MACRO.maj||"2026")}. Éducatif, pas un conseil personnalisé.</p>`;
+  return`<div class="stack mqmap">${mqNowCard(X,L,st)}<button class="ghost mqallb" data-mqall="1" aria-expanded="${!!V.mqAll}">${V.mqAll?"Masquer le programme ▴":"Voir tout le programme ▾"}</button>${V.mqAll?all:""}</div>`}
+/* ---- 2.28.0 : une seule case « Que faire maintenant ? » ---- */
+const mqMin=d=>{const m=String(d||"").match(/^(?:(\d+):)?(\d+):(\d+)$/);if(!m)return 0;const t=(+(m[1]||0))*60+(+m[2])+(+m[3]>=30?1:0);return Math.max(1,t)};
+function mqNowStep(){const M=mqMods(),p=mlP(),g=mqG();
+  for(let wi=0;wi<M.length;wi++){if(!mqWorldOpen(wi))break;
+    for(let li=0;li<M[wi].lecons.length;li++){const l=M[wi].lecons[li];if(mqStars(l.id))continue;
+      const vid=(l.v||[]).find(id=>ML_VID[id])||(l.v||[])[0],num=(wi+1)+"."+(li+1),seen=vid&&(p.vu||{})[vid],min=vid&&ML_VID[vid]?mqMin(ML_VID[vid].d):0;
+      if(vid&&!seen)return{k:"vid",vid,wi,li,n:1,e:"🎬",t:`regarde la vidéo de la leçon ${num}${min?` (${min} min)`:""}`,sub:l.titre,go:"vid|"+vid+"|"+wi+"|"+li};
+      return{k:"quiz",vid:seen?vid:null,wi,li,n:vid?2:1,e:"🧠",t:`fais le quiz de la leçon ${num} (5 questions, 2 min)`,sub:l.titre,go:"quiz|"+wi+"|"+li}}
+    if(!g.boss[M[wi].id])return{k:"boss",wi,n:3,e:"👹",t:`affronte le boss du monde ${wi+1} (10 questions)`,sub:M[wi].titre,go:"boss|"+wi}}
+  return null}
+function mqNowCard(X,L,st){const s=mqNowStep(),stat=`<p class="small muted num" style="margin:0">Niveau ${L.i+1} · ${esc(L.n)} · ${X} XP${st?` · 🔥 ${st} j`:""}</p>`;
+  if(!s)return`<div class="card stack mqnow"><p class="label" style="margin:0">Que faire maintenant ?</p><b class="mqnowt">🏆 Tout le programme est fini. Passe à l'Arène du jour pour t'entraîner.</b><button class="btn mqnowgo" data-mqnow="arena|0|0">C'est parti</button>${stat}</div>`;
+  return`<div class="card stack mqnow"><p class="label" style="margin:0">Que faire maintenant ?</p>
+    <b class="mqnowt"><span aria-hidden="true">${s.e}</span> Étape ${s.n} : ${esc(s.t)}</b><p class="small muted" style="margin:0">${esc(s.sub)}</p>
+    <button class="btn mqnowgo" data-mqnow="${esc(s.go)}">C'est parti</button>
+    ${s.k==="quiz"&&s.vid?`<p class="small muted" style="margin:0">Vidéo vue ✓ <button class="linkb" data-mqnow="unvu|${esc(s.vid)}">Pas encore vue ?</button></p>`:""}${s.k==="vid"?`<p class="small muted" style="margin:0">La vidéo s'ouvre sur YouTube. Reviens ici ensuite : l'étape suivante sera prête.</p>`:""}${stat}</div>`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-mqnow],[data-mqall]");if(!b)return;const d=b.dataset;
+  if(d.mqall){V.mqAll=!V.mqAll;return render(true)}
+  const[k,a,c,x]=d.mqnow.split("|");
+  if(k==="vid"){try{window.open(mlYT(a),"_blank","noopener")}catch(_){}return mlSave(p=>{p.vu=p.vu||{};p.vu[a]=dkey(today())})}
+  if(k==="unvu")return mlSave(p=>{if(p.vu)delete p.vu[a]});
+  V.mqNew=[];if(k==="quiz")return mqStart("les",+a||0,+c||0);if(k==="boss")return mqStart("boss",+a||0,0);if(k==="arena")return mqStart("arena",0,0)});
 
 /* ---- une partie : niveau, boss ou arène ---- */
 function mqStart(kind,a,b){const M=mqMods();let qs=[],brief=[],title,sub;
@@ -8659,6 +8702,147 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(b.dataset.gaide){V.gAide=!V.gAide;return render(true)}});
 
 /* ================================================================
+   2.28.0 : SAUVEGARDER / RESTAURER
+   Un fichier avec TOUTES tes données (habitudes, notes, cours, cartes, Macro Lab, Trading Lab,
+   progression…) + quelques réglages de l'appareil. Les clés d'IA et la connexion ne sont JAMAIS
+   dans le fichier. Restaurer demande une confirmation. Un rappel apparaît une fois par mois.
+   ================================================================ */
+const BK_LOCAL=["cerveau-labseen","cerveau-gx","cerveau-gm","cerveau-hints","cerveau-coach-vu","cerveau-cmode"];
+const bkLast=()=>lsGet("cerveau-lastbackup",null);
+function bkDays(){const l=bkLast();if(!l)return null;const[y,m,d]=String(l).split("-").map(Number);return Math.max(0,Math.round((+today()-new Date(y,m-1,d))/864e5))}
+function bkCount(D){let n=0;C.forEach(c=>{if(D&&D[c]&&typeof D[c]==="object")n+=Object.keys(D[c]).length});return n}
+function bkExport(){
+  const local={};BK_LOCAL.forEach(k=>{try{const v=localStorage.getItem(k);if(v!==null)local[k]=v}catch(e){}});
+  const data=JSON.stringify({app:"2eme-cerveau",v:2,version:APP_VERSION,date:new Date().toISOString(),data:S,local});
+  if(!DL){V.dataMsg="La sauvegarde n'est pas possible ici.";return render(true)}
+  DL.save({filename:"2eme-cerveau-"+dkey(today())+".json",data}).then(()=>{lsSet("cerveau-lastbackup",dkey(today()));lsSet("cerveau-bksnooze",null);V.dataMsg="✓ Sauvegarde créée ("+bkCount(S)+" éléments). Garde le fichier dans un endroit sûr (Fichiers, iCloud, Drive…)."})
+    .catch(e=>{V.dataMsg=e&&e.code==="declined"?"Sauvegarde annulée.":"La sauvegarde n'a pas pu être créée ici."}).finally(()=>render(true))}
+function bkRead(file){const fr=new FileReader();
+  fr.onload=()=>{try{const o=JSON.parse(fr.result),d=o&&o.data;if(!d||typeof d!=="object"||o.app!=="2eme-cerveau"&&!C.some(c=>d[c]))throw 0;
+      const imp={};C.forEach(c=>{if(d[c]&&typeof d[c]==="object")imp[c]=d[c]});const n=bkCount(imp);if(!n)throw 0;
+      V.imp={cols:imp,local:o.local&&typeof o.local==="object"?o.local:{},n,date:o.date||"",ver:o.version||""};V.dataMsg=""}
+    catch(e){V.imp=null;V.dataMsg="Ce fichier n'est pas une sauvegarde de l'appli."}render(true)};
+  fr.onerror=()=>{V.imp=null;V.dataMsg="Impossible de lire ce fichier.";render(true)};fr.readAsText(file)}
+async function bkApply(){const I=V.imp;if(!I)return;V.imp=null;V.dataMsg="Restauration en cours…";render(true);let n=0;
+  for(const c of Object.keys(I.cols))for(const[id,doc]of Object.entries(I.cols[c])){if(!doc||typeof doc!=="object")continue;S[c]={...S[c],[id]:doc};n++;if(!NOSYNC(c,id))enqueue(c,id,doc,false)}
+  BK_LOCAL.forEach(k=>{if(typeof I.local[k]==="string"){try{localStorage.setItem(k,I.local[k])}catch(e){}}});
+  localSave();V.dataMsg="✓ "+n+" éléments restaurés.";render(true)}
+function bkCard(){const dj=bkDays(),I=V.imp;
+  return`<div class="card stack bkcard"><p class="label" style="margin:0">💾 Sauvegarde de mes données</p>
+    <p class="muted small">Un seul fichier avec tout : habitudes, notes, cours, cartes, Macro Lab, Trading Lab, progression. Les clés d'IA et ta connexion n'y sont pas, par sécurité.</p>
+    <p class="small" style="margin:0">${dj===null?"Dernière sauvegarde : jamais.":"Dernière sauvegarde : "+(dj===0?"aujourd'hui":"il y a "+dj+" jour"+(dj>1?"s":""))+"."}</p>
+    <div class="row"><button class="btn" data-bkexport="1">⬇️ Sauvegarder mes données</button><label class="ghost on" for="bkimp" style="cursor:pointer">⬆️ Restaurer</label><input type="file" id="bkimp" data-bkimp="1" accept=".json,application/json" hidden></div>
+    ${V.dataMsg?`<p class="small">${esc(V.dataMsg)}</p>`:""}
+    ${I?`<div class="card stack bkconf" role="alertdialog" aria-label="Confirmer la restauration"><b>⚠️ Remplacer tes données actuelles ?</b>
+      <p class="small" style="margin:0">Ce fichier contient ${I.n} éléments${I.date?" (sauvegarde du "+esc(fdate(String(I.date).slice(0,10)))+")":""}. En restaurant, les éléments de ce fichier <b>écrasent</b> ceux qui ont le même nom sur cet appareil et sur ton compte. Pense à faire une sauvegarde de l'état actuel avant.</p>
+      <div class="row"><button class="btn" data-bkok="1">Oui, restaurer</button><button class="ghost" data-bkno="1">Annuler</button></div></div>`:""}</div>`}
+/* rappel une fois par mois, sur l'accueil */
+function bkNag(){const dj=bkDays(),sn=lsGet("cerveau-bksnooze",null);if(dj!==null&&dj<30)return"";if(sn&&sn>dkey(today()))return"";
+  if(dj===null){const f=lsGet("cerveau-bkfirst",null);if(!f){lsSet("cerveau-bkfirst",dkey(today()));return""}const[y,m,d]=String(f).split("-").map(Number);if(Math.round((+today()-new Date(y,m-1,d))/864e5)<7)return""}
+  return`<div class="card stack bknag"><b>💾 Pense à sauvegarder tes données</b><p class="small" style="margin:0">${dj===null?"Tu n'as encore jamais fait de sauvegarde.":"Ta dernière sauvegarde date de "+dj+" jours."} Un fichier suffit pour tout retrouver si tu changes de téléphone ou si tu perds l'accès à ton compte.</p>
+    <div class="row"><button class="btn" data-bkexport="1">Sauvegarder maintenant</button><button class="ghost" data-bklater="1">Plus tard</button></div></div>`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-bkexport],[data-bkok],[data-bkno],[data-bklater]");if(!b)return;const d=b.dataset;
+  if(d.bkexport)return bkExport();if(d.bkok)return bkApply();
+  if(d.bkno){V.imp=null;V.dataMsg="";return render(true)}
+  if(d.bklater){const t=add(today(),7);lsSet("cerveau-bksnooze",dkey(t));return render(true)}});
+document.addEventListener("change",e=>{const t=e.target;if(t&&t.dataset&&t.dataset.bkimp!==undefined&&t.files&&t.files[0]){bkRead(t.files[0]);t.value=""}});
+
+/* ================================================================
+   2.28.0 : COURS → CARTES DE RÉVISION
+   « 📸 Ajouter un cours » : on choisit la matière et le chapitre, on photographie le cahier (ou on
+   colle le texte), l'IA GRATUITE de l'appli (Gemini ou Ollama, jamais Claude) en tire des cartes
+   question/réponse qu'on relit et corrige, puis elles rejoignent le paquet de la matière avec le
+   chapitre en étiquette, en répétition espacée (méthode Anki). Mode « je tape mes cartes » sans IA.
+   ================================================================ */
+const CC_DECK={mspe:"maths",mexp:"maths",ses:"ses",philo:"philo"};
+const CC_EMO={mspe:"📐",mexp:"🧮",ses:"📊",philo:"🤔",hg:"🌍",sci:"🔬",ang:"🇬🇧",esp:"🇪🇸"};
+function ccChapters(sk){const s=COURS.find(x=>x.k===sk);if(!s)return[];
+  if(typeof cmxOn==="function"&&cmxOn(sk))return cmxList(sk).filter(c=>c.f!==false).map(c=>({k:"mx:"+c.id,n:c.t}));
+  return s.b.flatMap((b,bi)=>b[1].map((c,ci)=>({k:bi+"-"+ci,n:c.split("|")[0]})))}
+function ccDeckFor(sk){const s=COURS.find(x=>x.k===sk)||{n:sk};const id=CC_DECK[sk]||"c-"+sk;return{id,n:s.n,e:CC_EMO[sk]||"🗂️"}}
+function ccChName(c){if(c.ck==="__other")return String(c.other||"").trim();const l=ccChapters(c.sk).find(x=>x.k===c.ck);return l?l.n:""}
+function ccGo(){const sk=(typeof V.subj==="string"&&COURS.some(x=>x.k===V.subj))?V.subj:COURS[0].k;
+  V.cc={step:"form",sk,ck:"",other:"",text:"",imgs:[],cards:[],both:false,busy:false,err:"",done:null};render(true);window.scrollTo(0,0)}
+const ccFile=f=>new Promise((res,rej)=>{const u=URL.createObjectURL(f),im=new Image();
+  im.onload=()=>{try{const M=1600,k=Math.min(1,M/Math.max(im.width,im.height)),w=Math.max(1,Math.round(im.width*k)),h=Math.max(1,Math.round(im.height*k)),cv=document.createElement("canvas");cv.width=w;cv.height=h;
+    const g=cv.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,w,h);g.drawImage(im,0,0,w,h);const url=cv.toDataURL("image/jpeg",.82);URL.revokeObjectURL(u);res({url,b64:url.split(",")[1],mime:"image/jpeg"})}catch(e){rej(e)}};
+  im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error("image"))};im.src=u});
+async function ccAddFiles(files){const c=V.cc;if(!c)return;c.err="";const L=[...files].filter(f=>/^image\//.test(f.type)||/\.(jpe?g|png|webp|heic)$/i.test(f.name)).slice(0,Math.max(0,8-c.imgs.length));
+  for(const f of L){try{c.imgs.push(await ccFile(f))}catch(e){c.err="Une photo n'a pas pu être lue (format non géré). Essaie une photo normale (JPEG)."}}
+  if(files.length>L.length&&c.imgs.length>=8)c.err="8 photos au maximum d'un coup. Tu pourras en ajouter d'autres ensuite.";render(true)}
+function ccPrompt(c,withImg){const s=COURS.find(x=>x.k===c.sk)||{n:c.sk},ch=ccChName(c);
+  return`Tu aides un élève de Terminale générale en France (bac 2027) à réviser comme avec Anki. Matière : ${s.n}. Chapitre : « ${ch} ».
+${withImg?"Les images jointes sont des pages de son cahier de cours (écriture manuscrite possible). Lis-les attentivement.":"Voici le texte de son cours :\n\"\"\"\n"+c.text.slice(0,14000)+"\n\"\"\""}
+Crée des cartes de révision UNIQUEMENT à partir de ce cours, sans rien inventer : définitions, formules, propriétés, théorèmes, dates et auteurs, mécanismes, exemples clés. Entre 8 et 25 cartes selon la quantité de contenu. Une carte = au recto une question courte et précise, au verso la réponse exacte et concise. Pas de doublons. Écris les formules en texte simple et lisible (ex. : u(n+1) = u(n) + r ; x^2 ; racine de x), sans LaTeX. Si une partie est illisible, ignore-la.
+Réponds UNIQUEMENT en JSON : {"cards":[{"f":"la question","b":"la réponse","x":"un exemple court (facultatif)"}]}`}
+async function ccGen(){const c=V.cc;if(!c||c.busy)return;const ch=ccChName(c),hasImg=c.imgs.length>0;
+  if(!ch){c.err="Choisis d'abord le chapitre.";return render(true)}
+  if(!hasImg&&c.text.trim().length<30){c.err="Prends une photo de ton cahier ou colle le texte du cours.";return render(true)}
+  if(typeof SAMPLE_ST==="undefined"||SAMPLE_ST==="none"){c.err="L'IA gratuite n'est pas réglée : ajoute ta clé Gemini (gratuite) dans ⚙️ Réglages. Sinon, tape tes cartes toi-même.";return render(true)}
+  c.busy=true;c.err="";render(true);
+  try{const turn={role:"user",content:ccPrompt(c,hasImg),...(hasImg?{images:c.imgs.map(i=>({mime:i.mime,b64:i.b64}))}:{})};
+    const r=await aiSample.json([turn]),L=(r&&Array.isArray(r.cards)?r.cards:Array.isArray(r)?r:[]).filter(x=>x&&x.f&&x.b).slice(0,40).map(x=>({f:String(x.f).slice(0,500),b:String(x.b).slice(0,900),x:String(x.x||"").slice(0,300),on:true}));
+    if(!L.length)throw{code:"empty_completion"};c.cards=L;c.step="review";c.busy=false;render(true);window.scrollTo(0,0)}
+  catch(e){c.busy=false;const k=e&&e.code;
+    c.err=(hasImg&&(k==="no_key"||k==="relay_none"||k==="ollama_down"))?"Pour lire une photo, il faut une clé Gemini (gratuite, dans ⚙️ Réglages) ou Ollama avec un modèle qui sait lire les images. Sinon, colle le texte ou tape tes cartes."
+      :hasImg&&k==="bad_model"?"Ce modèle d'IA ne sait pas lire les images. Choisis un modèle Gemini, ou colle le texte du cours."
+      :"La création n'a pas marché ("+ERR(k)+"). Réessaie, ou colle le texte, ou tape tes cartes."}
+  render(true)}
+function ccSave(){const c=V.cc;if(!c)return;const keep=c.cards.filter(x=>x.on&&String(x.f).trim()&&String(x.b).trim());
+  if(!keep.length){c.err="Aucune carte à enregistrer : remplis au moins un recto et un verso.";return render(true)}
+  const dk=ccDeckFor(c.sk),ch=ccChName(c);
+  if(!srsDecks()[dk.id]){const d=srsDoc();srsSave({decks:{...(d.decks||{}),[dk.id]:{n:dk.n,e:dk.e,both:0,nd:10}}})}
+  srsAddNotes(keep.map(x=>({d:dk.id,f:String(x.f).trim(),b:String(x.b).trim(),x:String(x.x||"").trim(),r:c.both?1:0,sk:c.sk,ch,src:"cours"})));
+  c.done={n:keep.length,deck:dk.id,name:dk.e+" "+dk.n,ch};c.step="done";render(true);window.scrollTo(0,0)}
+function ccView(){const c=V.cc,s=COURS.find(x=>x.k===c.sk)||COURS[0],back=`<button class="crumb" data-ccquit="1">‹ Cours</button>`;
+  if(c.step==="done"&&c.done)return`<div class="stack">${back}<div class="card stack ccdone"><p class="egbig" style="margin:0">🎉</p><b>${c.done.n} carte${c.done.n>1?"s":""} ajoutée${c.done.n>1?"s":""}</b>
+    <p class="small" style="margin:0">Elles sont dans le paquet ${esc(c.done.name)}, avec le chapitre « ${esc(c.done.ch)} ». Elles reviennent en révision espacée (méthode Anki), dans l'onglet Cartes de S'entraîner.</p>
+    <div class="row"><button class="btn" data-srsgo="${esc(c.done.deck)}|cards">Réviser maintenant</button><button class="ghost" data-ccgo="1">Ajouter un autre cours</button><button class="ghost" data-ccquit="1">Terminer</button></div></div></div>`;
+  if(c.step==="review"){const n=c.cards.filter(x=>x.on).length;
+    return`<div class="stack">${back}<div><b style="font-family:var(--display);font-size:1.25rem">Relis tes cartes</b><p class="small muted" style="margin:4px 0 0">${esc(s.n)} · ${esc(ccChName(c))}. Corrige ce qui est faux (l'IA peut se tromper), décoche ce que tu ne veux pas garder.</p></div>
+    <ul class="srslist cclist">${c.cards.map((x,i)=>`<li class="card stack ${x.on?"":"ccoff"}" style="gap:6px"><label class="srschk small"><input type="checkbox" data-ccon="${i}" ${x.on?"checked":""}> Garder cette carte</label>
+      <label class="small">Recto : la question<textarea class="field" rows="2" data-ccf="f|${i}">${esc(x.f)}</textarea></label>
+      <label class="small">Verso : la réponse<textarea class="field" rows="2" data-ccf="b|${i}">${esc(x.b)}</textarea></label>
+      <div><button class="linkb" data-ccdel="${i}">🗑️ Supprimer</button></div></li>`).join("")}</ul>
+    <div><button class="ghost on" data-ccadd="1">➕ Ajouter une carte</button></div>
+    <label class="srschk small"><input type="checkbox" data-ccboth="1" ${c.both?"checked":""}> Aussi dans l'autre sens (verso → recto)</label>
+    ${c.err?`<p class="small" style="margin:0">${esc(c.err)}</p>`:""}
+    <div class="row"><button class="btn" data-ccsave="1">Enregistrer ${n} carte${n>1?"s":""}</button><button class="ghost" data-ccback="1">‹ Modifier la source</button></div></div>`}
+  const chs=ccChapters(c.sk),ready=c.imgs.length>0||c.text.trim().length>=30,ai=typeof SAMPLE_ST!=="undefined"&&SAMPLE_ST!=="none";
+  return`<div class="stack">${back}<div><b style="font-family:var(--display);font-size:1.25rem">📸 Ajouter un cours</b><p class="small muted" style="margin:4px 0 0">Tu choisis la matière et le chapitre, tu photographies ton cahier, et l'appli en fait des cartes de révision.</p></div>
+    <div class="card stack" style="gap:10px"><label class="small">Matière<select class="field" data-ccsk="1">${COURS.map(x=>`<option value="${x.k}" ${x.k===c.sk?"selected":""}>${esc(x.n)}</option>`).join("")}</select></label>
+      <label class="small">Chapitre<select class="field" data-cck="1"><option value="" ${c.ck===""?"selected":""}>Choisis le chapitre…</option>${chs.map(x=>`<option value="${esc(x.k)}" ${x.k===c.ck?"selected":""}>${esc(x.n)}</option>`).join("")}<option value="__other" ${c.ck==="__other"?"selected":""}>✏️ Autre chapitre (je l'écris)</option></select></label>
+      ${c.ck==="__other"?`<input class="field" data-ccother="1" placeholder="Nom du chapitre" value="${esc(c.other)}" maxlength="120">`:""}</div>
+    <div class="card stack" style="gap:10px"><p class="label" style="margin:0">Ton cours</p>
+      <div><label class="btn" for="ccfile" style="cursor:pointer">📸 Prendre ou choisir des photos</label><input type="file" id="ccfile" accept="image/*" multiple hidden data-ccfile="1"></div>
+      ${c.imgs.length?`<div class="ccthumbs">${c.imgs.map((m,i)=>`<span class="ccth"><img src="${m.url}" alt="Page ${i+1}"><button class="ccx" data-ccrm="${i}" aria-label="Retirer la page ${i+1}">✕</button></span>`).join("")}</div><p class="small muted" style="margin:0">${c.imgs.length} page${c.imgs.length>1?"s":""}. Cadre bien la page, avec une bonne lumière.</p>`:""}
+      <label class="small">Ou colle le texte de ton cours<textarea class="field" rows="5" data-cctext="1" placeholder="Colle ici ton cours (ou tape-le)…">${esc(c.text)}</textarea></label></div>
+    ${c.err?`<p class="small" style="margin:0">${esc(c.err)}</p>`:""}
+    ${!ai?`<p class="small muted" style="margin:0">L'IA gratuite n'est pas encore réglée sur cet appareil : ajoute ta clé Gemini dans ⚙️ Réglages. <button class="linkb" data-page="reglages">Ouvrir les Réglages</button></p>`:""}
+    <div class="row"><button class="btn" data-ccgen="1" ${c.busy||!ready||!ai?"disabled":""}>${c.busy?"Lecture du cours et création des cartes…":"✨ Créer les cartes avec l'IA"}</button><button class="ghost on" data-ccmanual="1" ${c.busy?"disabled":""}>✍️ Je tape mes cartes moi-même</button></div></div>`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ccgo],[data-ccquit],[data-ccgen],[data-ccmanual],[data-ccback],[data-ccsave],[data-ccadd],[data-ccdel],[data-ccrm]");if(!b)return;const d=b.dataset,c=V.cc;
+  if(d.ccgo!==undefined)return ccGo();
+  if(d.ccquit!==undefined){V.cc=null;return render(true)}
+  if(!c)return;
+  if(d.ccgen!==undefined)return ccGen();
+  if(d.ccmanual!==undefined){if(!ccChName(c)){c.err="Choisis d'abord le chapitre.";return render(true)}c.err="";c.cards=[{f:"",b:"",x:"",on:true}];c.step="review";return render(true)}
+  if(d.ccback!==undefined){c.step="form";c.err="";return render(true)}
+  if(d.ccsave!==undefined)return ccSave();
+  if(d.ccadd!==undefined){c.cards.push({f:"",b:"",x:"",on:true});return render(true)}
+  if(d.ccdel!==undefined){c.cards.splice(+d.ccdel,1);return render(true)}
+  if(d.ccrm!==undefined){c.imgs.splice(+d.ccrm,1);return render(true)}});
+document.addEventListener("input",e=>{const t=e.target,c=V.cc;if(!c||!t||!t.dataset)return;
+  if(t.dataset.ccf){const[k,i]=t.dataset.ccf.split("|");if(c.cards[+i])c.cards[+i][k]=t.value}
+  else if(t.dataset.cctext!==undefined){const was=c.text.trim().length>=30;c.text=t.value;if(was!==(c.text.trim().length>=30))render(true)}
+  else if(t.dataset.ccother!==undefined)c.other=t.value});
+document.addEventListener("change",e=>{const t=e.target,c=V.cc;if(!c||!t||!t.dataset)return;
+  if(t.dataset.ccsk!==undefined){c.sk=t.value;c.ck="";return render(true)}
+  if(t.dataset.cck!==undefined){c.ck=t.value;return render(true)}
+  if(t.dataset.ccon!==undefined){if(c.cards[+t.dataset.ccon])c.cards[+t.dataset.ccon].on=t.checked;return render(true)}
+  if(t.dataset.ccboth!==undefined){c.both=t.checked;return}
+  if(t.dataset.ccfile!==undefined&&t.files&&t.files.length){const f=[...t.files];t.value="";ccAddFiles(f)}});
+
+/* ================================================================
    ACCUEIL
    ================================================================ */
 const SECT=[["jour","Ma journée"],["hab","Suivi d'habitudes"],["pron","Pronote"],["proj","🪶"],["fin","Finance"],["obj","Objectif Master Dauphine"],["ps","Mon avenir"],["ent","Entraîne­ment"],["py","Python"],["cours","Cours"],["mx","Maths"],["mm","Mode maths"],["cg","Culture G"]];
@@ -8682,7 +8866,7 @@ function pageHome(){
   const t=today(),h=new Date().getHours();
   const W=homeMode()==="widgets";
   return`<div class="top">${W?`<div><p class="wgdate">${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p><h1>${h<18?"Bonjour":"Bonsoir"}</h1></div>`:`<div><h1>2ème cerveau 🧠</h1><p>${h<18?"Bonjour":"Bonsoir"} · ${JOURS[t.getDay()].toLowerCase()} ${t.getDate()} ${MOIS[t.getMonth()]}</p></div>`}<div class="topr"><div class="topb"><button class="gear" data-page="idees" aria-label="Suggestions">💡</button><button class="gear" data-page="reglages" aria-label="Réglages">⚙️</button></div><div class="sync" id="sync">${syncTxt}</div></div></div>
-  ${bilHome()}${W?wgHome():`<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>`}${modWrap("accueil","")}${citCard()}${W&&!wgOff("ps")?`<div class="wgs wgav">${wgSafe(()=>axOn()?axAv():wgAv())}</div>`:""}${W&&!wgOff("py")?`<div class="wgs wgpy">${wgSafe(()=>wgPy().replace('class="wg ','class="wg w2 '))}</div>`:""}`;
+  ${bkNag()}${bilHome()}${W?wgHome():`<div class="tiles">${sects().map(([k,n])=>{const mt=MOD.tiles.find(t=>t.k===k),[b,s]=mt?modSum(mt):summary(k);return`<button class="tile" style="--c:${mt?mt.couleur:`var(${COL[k]})`}" data-page="${k}">${mt?`<span class="modill" aria-hidden="true">${esc(mt.emoji)}</span>`:ILL[k]}<h2>${esc(n)}</h2><span class="big num">${b}</span><small>${s}</small></button>`}).join("")}</div>`}${modWrap("accueil","")}${citCard()}${W&&!wgOff("ps")?`<div class="wgs wgav">${wgSafe(()=>axOn()?axAv():wgAv())}</div>`:""}${W&&!wgOff("py")?`<div class="wgs wgpy">${wgSafe(()=>wgPy().replace('class="wg ','class="wg w2 '))}</div>`:""}`;
 }
 
 /* ---- sauvegarde / restauration ---- */
@@ -8710,7 +8894,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.27.2";
+const APP_VERSION="2.28.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -8816,7 +9000,7 @@ function lastSyncTxt(){const t=lsGet("cerveau-lastsync",0);if(!t)return"";const 
 function setupAI(){const a=aiCfg();if(a.provider==="ollama"||a.key||a.backup||(a.relayUrl&&a.relayTok)){SAMPLE=aiSample;SAMPLE_ST="ok"}else{SAMPLE=null;SAMPLE_ST="none"}TOOLS_OK=false}
 function mergeTurns(input){
   const t=typeof input==="string"?[{role:"user",content:input}]:input,out=[];
-  t.forEach(m=>{const role=m.role==="assistant"?"assistant":"user";if(out.length&&out[out.length-1].role===role)out[out.length-1].content+="\n\n"+m.content;else out.push({role,content:String(m.content)})});
+  t.forEach(m=>{const role=m.role==="assistant"?"assistant":"user";if(out.length&&out[out.length-1].role===role){out[out.length-1].content+="\n\n"+m.content;if(m.images&&m.images.length)out[out.length-1].images=[...(out[out.length-1].images||[]),...m.images]}else out.push({role,content:String(m.content),...(m.images&&m.images.length?{images:m.images}:{})})});
   return out;
 }
 async function readLines(r,fn){
@@ -8831,13 +9015,13 @@ async function aiSampleOld(input,opts={}){
   try{
     if(prov==="ollama"){
       const r=await fetch(a.ollamaUrl.replace(/\/+$/,"")+"/api/chat",{method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({model:(a.provider==="ollama"?a.model:a.omodel)||"llama3.2",messages:turns,stream:true,...(json?{format:"json"}:{})})});
+        body:JSON.stringify({model:(a.provider==="ollama"?a.model:a.omodel)||"llama3.2",messages:turns.map(m=>m.images?{role:m.role,content:m.content,images:m.images.map(i=>i.b64)}:m),stream:true,...(json?{format:"json"}:{})})});
       if(!r.ok)throw{code:r.status===404?"bad_model":"upstream_error",message:"Ollama "+r.status};
       await readLines(r,line=>{const j=JSON.parse(line);if(j.message&&j.message.content)emit(j.message.content)});
     }else{
       if(!a.key)throw{code:"no_key"};
       const model=a.model||"gemini-3.5-flash";
-      const body={contents:turns.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]})),generationConfig:{temperature:0.5,...(json?{responseMimeType:"application/json"}:{})}};
+      const body={contents:turns.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content},...(m.images||[]).map(i=>({inline_data:{mime_type:i.mime,data:i.b64}}))]})),generationConfig:{temperature:0.5,...(json?{responseMimeType:"application/json"}:{})}};
       const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+encodeURIComponent(model)+":streamGenerateContent?alt=sse",
         {method:"POST",signal:opts.signal,headers:{"Content-Type":"application/json","x-goog-api-key":a.key},body:JSON.stringify(body)});
       if(!r.ok){const tx=await r.text().catch(()=>"");let em=tx;try{const j=JSON.parse(tx);em=(j.error&&(j.error.message||j.error.status))||tx}catch(_){}
@@ -8903,7 +9087,7 @@ function pageReglages(){
   const inst=`<div class="card stack"><p class="label" style="margin:0">Installer l'appli</p>${isStandalone()?`<p>✓ L'appli est installée sur cet appareil.</p>`:`${INSTALL_EVT?`<div><button class="btn" data-install="1">Installer sur cet appareil</button></div>`:""}
     <p class="small"><b>iPhone</b> : dans Safari, bouton Partager puis « Sur l'écran d'accueil ».<br><b>Android</b> : menu ⋮ de Chrome puis « Installer l'application ».<br><b>Ordinateur</b> : dans Chrome ou Edge, icône d'installation à droite de la barre d'adresse.</p>`}</div>`;
   const aide=`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">Un problème ?</p><p class="muted small">Pronote, IA, synchronisation, actu : un mode d'emploi pas à pas pour chaque panne.</p><div><button class="btn" data-page="aide">🛟 Ouvrir le dépannage</button></div></div>`;
-  return themeCard()+homeCard()+aide+sync+pnReglages()+ai+dataCard()+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
+  return themeCard()+homeCard()+aide+sync+pnReglages()+ai+bkCard()+inst+`<p class="muted small">2ème cerveau ${APP_VERSION} · le code est à toi, sur ton compte GitHub.</p>`;
 }
 async function testOllama(){V.aiMsg2="Test d'Ollama…";render(true);
   try{const r=await aiSample("Réponds seulement par : OK, je suis prêt.",{_prov:"ollama"});V.aiMsg2="✓ Ollama répond : "+r.text.trim().slice(0,80)}
