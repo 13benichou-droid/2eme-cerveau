@@ -3207,6 +3207,9 @@ function pnDoneSet(x,k,on){const J=S.jours||{},s=pnSig(x),upd=[];
   if(on){const j=J[k]||{};put("jours",k,{...j,date:k,done:{...(j.done||{}),["pn:"+x.id]:true},donesig:{...(j.donesig||{}),[s]:true}});return}
   for(const d in J){const j=J[d];if(!j)continue;const a=j.done&&j.done["pn:"+x.id],b=j.donesig&&j.donesig[s];if(a||b){const dn={...(j.done||{})},dg={...(j.donesig||{})};delete dn["pn:"+x.id];delete dg[s];put("jours",d,{...j,date:d,done:dn,donesig:dg})}}}
 function pnById(id){const p=S.pronote&&S.pronote.data,a=p&&Array.isArray(p.devoirs)?p.devoirs:[];return a.find(y=>y&&y.id===id)}
+/* Pronote peut changer l'identifiant d'un devoir quand les données se rafraîchissent : on garde donc aussi la « signature » (matière + date + texte) de chaque devoir coché, même coché avant */
+function pnBackfill(){try{const J=S.jours||{},dv=((S.pronote||{}).data||{}).devoirs||[];for(const x of dv){if(!x||!x.id)continue;const s=pnSig(x);for(const k in J){const j=J[k];if(j&&j.done&&j.done["pn:"+x.id]&&!(j.donesig&&j.donesig[s]))put("jours",k,{...j,date:k,donesig:{...(j.donesig||{}),[s]:true}},true)}}}catch(e){}}
+setTimeout(pnBackfill,2500);setInterval(pnBackfill,30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)setTimeout(pnBackfill,800)});
 function jHwDone(x){return pnDoneAny(x)}
 /* tout ce qu'il y a à faire ce jour-là, par ordre de priorité */
 function jTasks(d){
@@ -9028,7 +9031,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.29.0";
+const APP_VERSION="2.29.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
