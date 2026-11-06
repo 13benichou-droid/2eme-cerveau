@@ -940,6 +940,35 @@ form>.field{flex-basis:auto}
 .exen .egsay{vertical-align:middle}
 .exfr{color:var(--muted);font-size:.9rem;line-height:1.35}
 
+/* ===== 2.30.0 · Notes façon Apple Notes ===== */
+body:has(.notesapp){background:#f2f2f7}
+.notesapp{--ncell:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body:has(.notesapp){background:#000}:root:not([data-theme="light"]) .notesapp{--ncell:#1c1c1e}}
+:root[data-theme="dark"] body:has(.notesapp){background:#000}
+:root[data-theme="dark"] .notesapp{--ncell:#1c1c1e}
+.notesapp:has(#ned) .ned{background:transparent}
+.nicon:disabled{opacity:.3}
+.nicon svg,.nkb svg{width:24px;height:24px}
+.nkbar{padding:4px 6px calc(4px + env(safe-area-inset-bottom,0px))}
+.nkb{min-width:44px;height:44px;border-radius:10px}
+.nkb:disabled{opacity:.3}
+.nkbar .nkrow{justify-content:space-between}
+.nkp{gap:10px;padding:6px 2px 8px;border-bottom:1px solid var(--line)}
+.nseg{display:flex;gap:2px;background:color-mix(in srgb,var(--ink) 7%,transparent);border-radius:10px;padding:2px}
+.nseg .nkb{flex:1;height:44px;font-weight:700}
+.nseg .nkb.on{background:var(--surface);box-shadow:0 1px 3px rgb(0 0 0 / .2)}
+.nstl{display:flex;flex-direction:column;border-radius:10px;overflow:hidden;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.nsty{border:0;background:none;color:var(--ink);text-align:left;font-family:inherit;min-height:44px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.nsty:last-child{border-bottom:0}
+.nsty.s-h1{font-size:1.5rem;font-weight:700}.nsty.s-h2{font-size:1.25rem;font-weight:700}.nsty.s-h3{font-size:1.1rem;font-weight:600}
+.nsty.s-pre{font-family:ui-monospace,Menlo,monospace;font-size:.95rem}
+.nsty[aria-pressed="true"] .nck{color:var(--ny);font-style:normal;font-weight:700}
+.ned ul.dash{list-style:none;padding-left:22px}
+.ned ul.dash>li{position:relative}
+.ned ul.dash>li::before{content:"–";position:absolute;left:-16px}
+.ned pre{font-family:ui-monospace,Menlo,monospace;font-size:.95rem;margin:2px 0;white-space:pre-wrap}
+.nmi svg{width:22px;height:22px}
+
 /* ================= 2.7.0 : une seule couleur, barre de navigation, pages plus courtes ================= */
 :root:root:root{--accent:#5b46e5;--warn:#c27c00;--info:#2d7ff0}
 @media (prefers-color-scheme:dark){:root:root:root:not([data-theme="light"]){--accent:#9284ff;--warn:#f2b33d;--info:#5aa2ff}}
@@ -3076,11 +3105,9 @@ function pageNote(){
     <p class="ndate">${nLong(n.suppr)}</p><div class="ned ro">${nHtml(n)}</div>`;
   const fs=Object.entries(S.projets).filter(([,p])=>p&&p.nom).sort((a,b)=>a[1].nom.localeCompare(b[1].nom,"fr"));
   return`<div class="nbar nedbar"><button class="nback" data-nback="1">${esc(back)}</button>
-    <div class="ntools"><button class="nicon" data-fmt="ck" aria-label="Liste de cases à cocher">${NI.check}</button><button class="nicon naa" data-ntoggle="nfmt" aria-label="Mise en forme">Aa</button><button class="nicon" data-ntoggle="nmenu" aria-label="Plus">${NI.more}</button><button class="nok" data-nok="1">OK</button></div></div>
-  <div class="npanel" id="nfmt" hidden>
-    <div class="nfmtrow"><button class="t1" data-fmt="h1">Titre</button><button class="t2" data-fmt="h2">En-tête</button><button class="t3" data-fmt="h3">Sous-titre</button><button data-fmt="div">Corps</button></div>
-    <div class="nfmtrow"><button data-fmt="bold" aria-label="Gras"><b>G</b></button><button data-fmt="italic" aria-label="Italique"><i>I</i></button><button data-fmt="underline" aria-label="Souligné"><u>S</u></button><button data-fmt="strikeThrough" aria-label="Barré"><s>B</s></button><button data-fmt="ul" aria-label="Liste à puces">• Liste</button><button data-fmt="ol" aria-label="Liste numérotée">1. Liste</button></div></div>
+    <div class="ntools"><button class="nicon" data-nundo="u" aria-label="Annuler" disabled>${NI.undo}</button><button class="nicon" data-nundo="r" aria-label="Rétablir" disabled>${NI.redo}</button><button class="nicon" data-ntoggle="nmenu" aria-label="Plus">${NI.more}</button><button class="nok" data-nok="1">OK</button></div></div>
   <div class="npanel" id="nmenu" hidden>
+    <button class="nmi" data-nshare="1">${NI.share}<span>Partager</span></button>
     <button class="nmi" data-npin="${id}">${NI.pin}${n.epingle?"Désépingler":"Épingler"}</button>
     <label class="nmi">${NI.folder}<span>Dossier</span><select data-nmove="${id}"><option value="">Notes</option>${fs.map(([fid,p])=>`<option value="${fid}" ${n.projet===fid?"selected":""}>${esc(p.nom)}</option>`).join("")}</select></label>
     ${SAMPLE_ST!=="none"?`<button class="nmi" data-ndeb="${id}" ${V.busy[dk]?"disabled":""}>✨ ${V.busy[dk]?"L'IA lit…":"Y voir clair avec l'IA"}</button>`:""}
@@ -3124,9 +3151,11 @@ function nFormat(cmd){
     if(ul&&ul.tagName==="UL"&&ul.classList.contains("ck"))document.execCommand("insertUnorderedList");
     else{if(!(ul&&ul.tagName==="UL"))document.execCommand(ul?"insertOrderedList":"insertUnorderedList");if(ul&&ul.tagName==="OL")document.execCommand("insertUnorderedList");const u=upTo(at(),"ul",el);if(u)u.className="ck"}
   }else if(cmd==="ul"||cmd==="ol"){
-    const u=upTo(at(),"ul",el);if(cmd==="ul"&&u&&u.classList.contains("ck")){u.removeAttribute("class");[...u.children].forEach(li=>li.removeAttribute("data-ok"))}
+    const u=upTo(at(),"ul",el);if(cmd==="ul"&&u&&(u.classList.contains("ck")||u.classList.contains("dash"))){u.removeAttribute("class");[...u.children].forEach(li=>li.removeAttribute("data-ok"))}
     else document.execCommand(cmd==="ul"?"insertUnorderedList":"insertOrderedList");
-  }else if(/^(h1|h2|h3|div)$/.test(cmd))document.execCommand("formatBlock",false,cmd==="div"?"div":"<"+cmd+">");
+  }else if(cmd==="dash"){const u=upTo(at(),"ul",el);if(u&&u.classList.contains("dash")){u.removeAttribute("class")}else{if(!(u))document.execCommand("insertUnorderedList");const v=upTo(at(),"ul",el);if(v)v.className="dash"}
+  }else if(cmd==="indent"||cmd==="outdent"){if(upTo(at(),"li",el))document.execCommand(cmd)
+  }else if(/^(h1|h2|h3|div|pre)$/.test(cmd)){const cur=String(document.queryCommandValue("formatBlock")||"").toLowerCase().replace(/[<>]/g,"");document.execCommand("formatBlock",false,cmd==="div"||cur===cmd?"div":"<"+cmd+">")}
   else document.execCommand(cmd);
   nSaveSoon();
 }
@@ -4659,8 +4688,8 @@ function cleanHtml(h){
       const kc=col&&NOKC.test(col)&&col!==NSENT,kb=bg&&NOKC.test(bg)&&bg!==NSENT&&!/^rgba\(0, 0, 0, 0\)$/.test(bg);
       if(!kc&&!kb){c.replaceWith(...c.childNodes);return}const sp=c.tagName==="SPAN"?c:document.createElement("span");if(kc)sp.style.color=col;if(kb)sp.style.backgroundColor=bg;if(sp!==c){sp.append(...c.childNodes);c.replaceWith(sp)}return}
     if(!NTAGS[c.tagName]){c.replaceWith(...c.childNodes);return}
-    const ck=c.tagName==="UL"&&c.classList.contains("ck"),ok=c.tagName==="LI"&&c.getAttribute("data-ok")==="1",col=c.style.color,bg=c.style.backgroundColor;
-    [...c.attributes].forEach(a=>c.removeAttribute(a.name));if(ck)c.className="ck";if(ok)c.setAttribute("data-ok","1");
+    const lk=c.tagName==="UL"?(c.classList.contains("ck")?"ck":c.classList.contains("dash")?"dash":""):"",ok=c.tagName==="LI"&&c.getAttribute("data-ok")==="1",col=c.style.color,bg=c.style.backgroundColor;
+    [...c.attributes].forEach(a=>c.removeAttribute(a.name));if(lk)c.className=lk;if(ok)c.setAttribute("data-ok","1");
     /* le navigateur met parfois la couleur directement sur <b>, <i>, <u>… : on la garde */
     if(col&&NOKC.test(col)&&col!==NSENT)c.style.color=col;if(bg&&NOKC.test(bg)&&bg!==NSENT&&!/^rgba\(0, 0, 0, 0\)$/.test(bg))c.style.backgroundColor=bg;
   });
@@ -4674,7 +4703,7 @@ function nInline(cmd,val){const el=nFocus();if(!el)return;
     try{document.execCommand("styleWithCSS",false,false)}catch(e){}
     if(!val)el.querySelectorAll("[style],font").forEach(s=>{if(s.style.color===NSENT)s.style.color="";if(s.style.backgroundColor===NSENT)s.style.backgroundColor="";if(s.tagName==="FONT"&&/^#010203$/i.test(s.getAttribute("color")||""))s.removeAttribute("color")})}
   else document.execCommand(cmd);
-  nSaveSoon();setTimeout(nUi,0)}
+  nSaveSoon();nhPush();setTimeout(nUi,0)}
 /* état des boutons (gras actif…) */
 function nState(c){try{return document.queryCommandState(c)}catch(e){return false}}
 function nBtns(list){return list.map(([c,l,a])=>`<button type="button" class="nkb ${nState(c)?"on":""}" data-nk="${c}" aria-label="${a}">${l}</button>`).join("")}
@@ -4687,13 +4716,12 @@ function nEls(){let b=document.getElementById("nbub"),k=document.getElementById(
 let nCol=false,nPanel=false;
 function nUi(){const{b,k}=nEls(),el=document.getElementById("ned"),on=V.page==="proj"&&el&&document.activeElement===el,s=getSelection();
   /* barre au-dessus du clavier */
-  if(on){k.innerHTML=`${nPanel?`<div class="nkp"><div class="nfmtrow"><button type="button" class="t1" data-nk="h1">Titre</button><button type="button" class="t2" data-nk="h2">En-tête</button><button type="button" class="t3" data-nk="h3">Sous-titre</button><button type="button" data-nk="div">Corps</button></div>
-      <div class="nfmtrow">${nBtns(NBIUS)}<button type="button" class="nkb" data-nk="ul">• Liste</button><button type="button" class="nkb" data-nk="ol">1. Liste</button></div>${nColors()}</div>`:""}
-    <div class="nkrow"><button type="button" class="nkb naa ${nPanel?"on":""}" data-nk="panel" aria-label="Mise en forme">Aa</button><button type="button" class="nkb" data-nk="ck" aria-label="Cases à cocher">☑︎</button>${nBtns(NBIUS.slice(0,3))}${nMicBtn()}<button type="button" class="nkb ${nCol?"on":""}" data-nk="cols" aria-label="Couleur">🎨</button><button type="button" class="nkb" data-nk="done" aria-label="Fermer le clavier">⌄</button></div>
-    ${nCol&&!nPanel?nColors():""}`;k.hidden=false;nPlace()}else{k.hidden=true;nPanel=false}
+  if(on){k.innerHTML=`${nPanel?nPanelHtml():""}
+    <div class="nkrow"><button type="button" class="nkb naa ${nPanel?"on":""}" data-nk="panel" aria-label="Mise en forme">Aa</button><button type="button" class="nkb" data-nk="ck" aria-label="Liste de cases à cocher">${NI.checklist}</button>${nBtns(NBIUS.slice(0,3))}${nMicBtn()}<button type="button" class="nkb" data-nk="done" aria-label="Fermer le clavier">${NI.down}</button></div>
+    ${nCol&&!nPanel?nColors():""}`;k.hidden=false;nPlace()}else{k.hidden=true;if(nPanel)nKbd(true);nPanel=false}
   /* petite barre près de la sélection */
   const sel=on&&s.rangeCount&&!s.isCollapsed&&el.contains(s.anchorNode);
-  if(sel){const r=s.getRangeAt(0).getBoundingClientRect();b.innerHTML=`<div class="nkrow">${nBtns(NBIUS)}<button type="button" class="nkb ${nCol?"on":""}" data-nk="cols" aria-label="Couleur">🎨</button></div>${nCol?nColors():""}`;b.hidden=false;
+  if(sel){const r=s.getRangeAt(0).getBoundingClientRect();b.innerHTML=`<div class="nkrow">${nBtns(NBIUS)}<button type="button" class="nkb ${nCol?"on":""}" data-nk="cols" aria-label="Couleur">${NI.swatch}</button></div>${nCol?nColors():""}`;b.hidden=false;
     const vv=window.visualViewport,vh=vv?vv.height+vv.offsetTop:innerHeight,w=b.offsetWidth,h=b.offsetHeight;let top=r.bottom+14;if(top+h>vh-(k.hidden?8:k.offsetHeight+8))top=Math.max(8,r.top-h-10);
     b.style.top=top+"px";b.style.left=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2))+"px"}else b.hidden=true}
 /* la barre suit le haut du clavier (iPhone) grâce à visualViewport */
@@ -4705,13 +4733,13 @@ document.addEventListener("focusout",e=>{if(e.target&&e.target.id==="ned")setTim
 window.addEventListener("scroll",()=>{const b=document.getElementById("nbub");if(b&&!b.hidden)nUi()},{passive:true});
 /* toucher un bouton des barres : on agit tout de suite, sans faire perdre la sélection ni fermer le clavier */
 function nAct(btn){const c=btn.dataset.nk,v=btn.dataset.v;
-  if(c==="panel"){nPanel=!nPanel;nCol=false;return nUi()}
+  if(c==="panel"){nPanel=!nPanel;nCol=false;nKbd(!nPanel);return nUi()}
   if(c==="cols"){nCol=!nCol;return nUi()}
   if(c==="done"){nPanel=false;nCol=false;const el=document.getElementById("ned");if(el)el.blur();nSave();return}
   if(c==="color"||c==="hl")return nInline(c,v);
   if(c==="nocolor"){nInline("color","");return nInline("hl","")}
   if(/^(bold|italic|underline|strikeThrough)$/.test(c))return nInline(c);
-  nFocus();nFormat(c);setTimeout(nUi,0)}
+  nFocus();nFormat(c);nhPush();setTimeout(nUi,0)}
 const nOnTool=e=>{const btn=e.target.closest&&e.target.closest(".nkeep [data-nk]");if(!btn)return false;e.preventDefault();e.stopPropagation();nAct(btn);return true};
 document.addEventListener("touchstart",e=>{if(e.target.closest&&e.target.closest(".nkeep")){if(!nOnTool(e))e.preventDefault()}},{passive:false,capture:true});
 document.addEventListener("mousedown",e=>{if(e.target.closest&&e.target.closest(".nkeep")){if(!nOnTool(e))e.preventDefault()}},true);
@@ -4723,7 +4751,73 @@ function nCaret(){const k=document.getElementById("nkbar"),s=getSelection();if(!
   const kt=k.getBoundingClientRect().top;if(r.bottom>kt-6)window.scrollBy(0,r.bottom-kt+28)}
 document.addEventListener("input",e=>{if(e.target&&e.target.id==="ned")requestAnimationFrame(nCaret)});
 /* micro de la barre du clavier (la dictée est dans mic.js) */
-function nMicBtn(){const on=typeof MIC!=="undefined"&&MIC&&MIC.el&&MIC.el.id==="ned";return`<button type="button" class="nkb micbtn ${on?"on "+MIC.st:""}" aria-label="${on?"Arrêter la dictée":"Dicter avec le micro"}">${on?(MIC.st==="wait"?"…":"■"):"🎤"}</button>`}
+function nMicBtn(){const on=typeof MIC!=="undefined"&&MIC&&MIC.el&&MIC.el.id==="ned";return`<button type="button" class="nkb micbtn ${on?"on "+MIC.st:""}" aria-label="${on?"Arrêter la dictée":"Dicter avec le micro"}">${on?(MIC.st==="wait"?"…":"■"):NI.mic}</button>`}
+
+/* ================================================================
+   2.30.0 · NOTES, ENCORE PLUS PROCHE D'APPLE NOTES
+   annuler / rétablir (secousse du téléphone comprise), panneau « Aa » (styles, Monostyle, tirets, retrait),
+   icônes à la place des emojis, partager.
+   ================================================================ */
+NTAGS.PRE=1;
+Object.assign(NI,{
+ undo:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5M4 9h10.5a5.5 5.5 0 0 1 0 11H11" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ redo:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 14l5-5-5-5M20 9H9.5a5.5 5.5 0 0 0 0 11H13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ share:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3.5M8 7l4-4 4 4M7.5 10H6.5A1.5 1.5 0 0 0 5 11.5v8A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5v-8a1.5 1.5 0 0 0-1.5-1.5h-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ mic:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ swatch:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.5" fill="#ff2d55"/><circle cx="14.4" cy="9" r="1.5" fill="#34c759"/><circle cx="15.2" cy="14.2" r="1.5" fill="#007aff"/></svg>`,
+ checklist:`<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5.8" cy="7" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.7 7l.8.9 1.5-1.7M11.5 7H20M11.5 17H20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5.8" cy="17" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>`,
+ down:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ indent:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M11 11h9M11 16h9M4 20h16M4 10.5v6l4-3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+ outdent:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M11 11h9M11 16h9M4 20h16M8 10.5v6l-4-3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+});
+/* ---- le panneau « Aa » : même organisation que chez Apple ---- */
+function nBlock(){try{const v=String(document.queryCommandValue("formatBlock")||"").toLowerCase().replace(/[<>]/g,"");return /^(h1|h2|h3|pre)$/.test(v)?v:"div"}catch(e){return"div"}}
+function nListKind(){const el=document.getElementById("ned"),s=getSelection();if(!el||!s.rangeCount)return"";const li=upTo(s.anchorNode,"li",el);if(!li)return"";const u=li.parentNode;return u.tagName==="OL"?"ol":u.classList.contains("ck")?"ck":u.classList.contains("dash")?"dash":"ul"}
+function nPanelHtml(){const bl=nBlock(),lk=nListKind();
+  const st=[["h1","Titre"],["h2","En-tête"],["h3","Sous-en-tête"],["div","Corps"],["pre","Monostyle"]];
+  const lb=(c,l,a,on)=>`<button type="button" class="nkb ${on?"on":""}" data-nk="${c}" aria-label="${a}">${l}</button>`;
+  return`<div class="nkp"><div class="nseg">${nBtns(NBIUS)}</div>
+    <div class="nstl">${st.map(([c,l])=>`<button type="button" class="nsty s-${c}" data-nk="${c}" aria-pressed="${bl===c}">${l}${bl===c?'<i class="nck">✓</i>':""}</button>`).join("")}</div>
+    <div class="nseg">${lb("ul","•","Liste à puces",lk==="ul")}${lb("dash","–","Liste avec tirets",lk==="dash")}${lb("ol","1.","Liste numérotée",lk==="ol")}${lb("outdent",NI.outdent,"Réduire le retrait",false).replace('class="nkb "',`class="nkb" ${lk?"":"disabled"}`)}${lb("indent",NI.indent,"Augmenter le retrait",false).replace('class="nkb "',`class="nkb" ${lk?"":"disabled"}`)}</div>
+    ${nColors()}</div>`}
+/* le clavier du téléphone s'efface pendant que le panneau est ouvert (le curseur reste dans la note) */
+function nKbd(show){const el=document.getElementById("ned");if(!el)return;
+  if(show){if(el.getAttribute("inputmode")==="none"){el.removeAttribute("inputmode");if(document.activeElement===el){el.blur();nFocus()}}}else el.setAttribute("inputmode","none")}
+/* ---- annuler / rétablir ---- */
+const NH={el:null,s:[],i:-1,t:null,c:"",dirty:false};
+function nhOff(el){const s=getSelection();if(!s.rangeCount||!el.contains(s.anchorNode))return null;const r=s.getRangeAt(0),a=document.createRange();a.selectNodeContents(el);a.setEnd(r.startContainer,r.startOffset);const st=a.toString().length;a.setEnd(r.endContainer,r.endOffset);return[st,a.toString().length]}
+function nhSet(el,o){const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let n,c=0,sn,so=0,en,eo=0;
+  if(o)while(n=w.nextNode()){const l=n.length;if(sn===undefined&&c+l>=o[0]){sn=n;so=o[0]-c}if(c+l>=o[1]){en=n;eo=o[1]-c;break}c+=l}
+  const r=document.createRange();if(!sn){r.selectNodeContents(el);r.collapse(false)}else{r.setStart(sn,so);if(en)r.setEnd(en,eo);else r.collapse(true)}
+  const s=getSelection();s.removeAllRanges();s.addRange(r)}
+function nhEl(){const el=document.getElementById("ned");if(!el||el.classList.contains("ro"))return null;
+  const id=el.dataset.ned||"";if(NH.id!==id){NH.id=id;NH.s=[{h:el.innerHTML,o:null}];NH.i=0;NH.dirty=false;NH.c="";clearTimeout(NH.t)}NH.el=el;return el}
+function nhBtn(){const u=NH.i>0||NH.dirty,r=NH.i<NH.s.length-1;document.querySelectorAll("[data-nundo]").forEach(b=>{b.disabled=b.dataset.nundo==="u"?!u:!r})}
+function nhPush(){clearTimeout(NH.t);const el=nhEl();if(!el)return;NH.dirty=false;const h=el.innerHTML;
+  if(NH.s[NH.i]&&NH.s[NH.i].h===h){NH.s[NH.i].o=nhOff(el);return nhBtn()}
+  NH.s=NH.s.slice(0,NH.i+1);NH.s.push({h,o:nhOff(el)});if(NH.s.length>300)NH.s.shift();NH.i=NH.s.length-1;nhBtn()}
+function nhApply(el){const s=NH.s[NH.i];el.innerHTML=s.h;el.focus({preventScroll:true});nhSet(el,s.o);nSaveSoon();nhBtn();setTimeout(nUi,0)}
+function nUndo(){const el=nhEl();if(!el)return;nhPush();if(NH.i<=0)return;NH.i--;nhApply(el)}
+function nRedo(){const el=nhEl();if(!el)return;if(NH.i>=NH.s.length-1)return;NH.i++;nhApply(el)}
+/* avant chaque frappe : on garde l'état d'avant, et on sépare « écrire » de « effacer » */
+document.addEventListener("beforeinput",e=>{if(!e.target||e.target.id!=="ned")return;
+  if(e.inputType==="historyUndo"){e.preventDefault();return nUndo()}
+  if(e.inputType==="historyRedo"){e.preventDefault();return nRedo()}
+  nhEl();const c=/^delete/.test(e.inputType)?"d":"i";if(NH.c&&NH.c!==c)nhPush();NH.c=c});
+document.addEventListener("input",e=>{if(!e.target||e.target.id!=="ned")return;nhEl();NH.dirty=true;clearTimeout(NH.t);
+  if(e.data===" "||/Paragraph|Paste|Cut|Drop|format|List/i.test(e.inputType||""))nhPush();else{NH.t=setTimeout(nhPush,450);nhBtn()}});
+document.addEventListener("focusin",e=>{if(e.target&&e.target.id==="ned"){nhEl();nhBtn()}});
+/* boutons ↶ ↷ de la barre du haut : le clavier reste ouvert */
+const nUndoTap=e=>{const b=e.target.closest&&e.target.closest("[data-nundo]");if(!b)return false;e.preventDefault();e.stopPropagation();if(!b.disabled)b.dataset.nundo==="u"?nUndo():nRedo();return true};
+document.addEventListener("touchstart",e=>{nUndoTap(e)},{passive:false,capture:true});
+document.addEventListener("mousedown",e=>{nUndoTap(e)},true);
+document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("[data-nundo]")){e.preventDefault();e.stopPropagation();if(e.detail===0)nUndoTap(e)}},true);
+/* Cmd/Ctrl + Z, Maj + Z, Y sur ordinateur */
+document.addEventListener("keydown",e=>{if(!e.target||e.target.id!=="ned"||!(e.ctrlKey||e.metaKey))return;const k=e.key.toLowerCase();
+  if(k==="z"){e.preventDefault();e.shiftKey?nRedo():nUndo()}else if(k==="y"){e.preventDefault();nRedo()}},true);
+/* partager la note */
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-nshare]");if(!b)return;nSave();const n=nCur();if(!n)return;nToggle("");
+  const txt=String(n.txt||"");if(navigator.share)navigator.share({title:nTitle(n),text:txt}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>{b.querySelector("span").textContent="Copié"},()=>{})});
 
 /* ================================================================
    💭 PENSÉE DU JOUR (accueil) : chaque jour une phrase d'un penseur (philosophe, savant, mathématicien, écrivain, économiste)
@@ -9043,7 +9137,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.29.2";
+const APP_VERSION="2.30.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
