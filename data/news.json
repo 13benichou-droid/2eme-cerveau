@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-05T06:34:43.899Z",
+ "updated": "2026-11-06T06:35:39.279Z",
  "snap": {
-  "date": "2026-11-04",
+  "date": "2026-11-05",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 178",
-    "c": "+1,96 %"
+    "v": "8 205",
+    "c": "+0,34 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 689",
-    "c": "+1,58 %"
+    "v": "7 354",
+    "c": "−4,36 %"
    },
    {
     "n": "Nasdaq",
-    "v": "25 737",
-    "c": "+1,44 %"
+    "v": "24 315",
+    "c": "−5,52 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "16,61",
-    "c": "−20,26 %"
+    "v": "28,18",
+    "c": "+69,66 %"
    },
    {
     "n": "Brent",
-    "v": "94,0 $",
-    "c": "−0,69 %"
+    "v": "99,7 $",
+    "c": "+1,45 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "87,0 $",
-    "c": "−1,25 %"
+    "v": "91,5 $",
+    "c": "+1,07 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 135 $",
-    "c": "+1,51 %"
+    "v": "4 059 $",
+    "c": "−1,32 %"
    },
    {
     "n": "Bitcoin",
-    "v": "80 363 $",
-    "c": "+3,90 %"
+    "v": "75 534 $",
+    "c": "−6,06 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,89 %",
+    "v": "4,84 %",
     "c": "−0,06 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,127",
-    "c": "+0,55 %"
+    "v": "1,120",
+    "c": "−0,35 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-06-degringolade-des-marches-asiatiques-suit",
+   "src": "Le Figaro",
+   "date": "2026-11-06",
+   "url": "https://www.lefigaro.fr/conjoncture/le-nikkei-chute-de-plus-de-5-apres-la-degringolade-des-valeurs-technologiques-americaines-20261106",
+   "t": {
+    "fr": "Dégringolade des marchés asiatiques suite à la chute de la tech américaine",
+    "en": "Asian markets plunge following the crash of American tech stocks"
+   },
+   "s": {
+    "fr": "Les Bourses de Tokyo et de Séoul ont fortement chuté après la baisse des valeurs technologiques aux États-Unis. Les investisseurs craignent que les résultats des élections américaines ne freinent les investissements dans les centres de données dédiés à l'intelligence artificielle.",
+    "en": "The stock exchanges in Tokyo and Seoul dropped sharply following the decline of tech stocks in the United States. Investors fear that the US election results could slow down investments in data centers dedicated to artificial intelligence."
+   },
+   "d": {
+    "fr": "En trading, on appelle cela un effet de contagion : un marché majeur influence directement les autres à l'international. Les anticipations politiques modifient rapidement la confiance des investisseurs sur un secteur porteur.",
+    "en": "In trading, this is called a contagion effect: a major market directly influences others internationally. Political expectations quickly alter investor confidence in a promising sector."
+   },
+   "v": [
+    [
+     "valeurs technologiques",
+     "tech stocks"
+    ],
+    [
+     "investissements",
+     "investments"
+    ],
+    [
+     "marchés",
+     "markets"
+    ],
+    [
+     "valeur",
+     "value"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les marchés asiatiques ont-ils chuté ?",
+    "en": "Why did Asian markets fall?"
+   },
+   "r": {
+    "fr": "À cause de la baisse des valeurs technologiques américaines et des craintes liées aux élections.",
+    "en": "Because of the drop in American tech stocks and election-related fears."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-06-anthropic-ajuste-ses-ambitions-pour-son-",
+   "src": "Le Figaro",
+   "date": "2026-11-06",
+   "url": "https://www.lefigaro.fr/secteur/high-tech/ia-anthropic-pourrait-revoir-a-la-baisse-ses-ambitions-boursieres-20261106",
+   "t": {
+    "fr": "Anthropic ajuste ses ambitions pour son introduction en Bourse",
+    "en": "Anthropic adjusts its ambitions for its IPO"
+   },
+   "s": {
+    "fr": "Le créateur de l'assistant Claude envisage de revoir ses objectifs boursiers à la baisse. Il visait initialement une entrée sur les marchés historiques avec une levée de fonds record.",
+    "en": "The creator of the Claude assistant is considering lowering its stock market targets. It initially aimed for a historic market entry with a record fundraising."
+   },
+   "d": {
+    "fr": "Lorsqu'une entreprise prépare son introduction en Bourse, elle ajuste son évaluation selon l'appétit du marché. Un retournement de tendance peut l'obliger à revoir ses ambitions financières à la baisse.",
+    "en": "When a company prepares its IPO, it adjusts its valuation according to market appetite. A trend reversal may force it to lower its financial ambitions."
+   },
+   "v": [
+    [
+     "introduction en Bourse",
+     "IPO"
+    ],
+    [
+     "lever des fonds",
+     "raise funds"
+    ],
+    [
+     "action",
+     "share"
+    ],
+    [
+     "capitalisation",
+     "market cap"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'objectif initial d'Anthropic pour son introduction en Bourse ?",
+    "en": "What was Anthropic's initial goal for its IPO?"
+   },
+   "r": {
+    "fr": "Lever jusqu'à 100 milliards de dollars lors de son entrée sur les marchés.",
+    "en": "To raise up to 100 billion dollars upon entering the markets."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-06-securisation-des-cryptomonnaies-apres-un",
+   "src": "Le Monde",
+   "date": "2026-11-06",
+   "url": "https://www.lemonde.fr/argent/article/2026/11/06/cryptomonnaies-apres-le-vol-historique-chez-binance-quel-moyen-pour-conserver-ses-actifs-en-securite_6807720_1657007.html",
+   "t": {
+    "fr": "Sécurisation des cryptomonnaies après un vol majeur chez Binance",
+    "en": "Securing cryptocurrencies after a major theft at Binance"
+   },
+   "s": {
+    "fr": "Suite à un vol historique sur la plateforme Binance, la question de la conservation des actifs numériques se pose. Les détenteurs de cryptos doivent choisir entre la garde autonome et le recours à des intermédiaires.",
+    "en": "Following a historic theft on the Binance platform, the question of storing digital assets arises. Crypto holders must choose between self-custody and using intermediaries."
+   },
+   "d": {
+    "fr": "En gestion d'actifs numériques, la sécurité est un paramètre primordial pour éviter la perte totale de son capital. Chaque méthode de stockage comporte des risques spécifiques qu'un trader doit anticiper.",
+    "en": "In digital asset management, security is a paramount parameter to avoid the total loss of capital. Each storage method carries specific risks that a trader must anticipate."
+   },
+   "v": [
+    [
+     "cryptomonnaies",
+     "cryptocurrencies"
+    ],
+    [
+     "actifs",
+     "assets"
+    ],
+    [
+     "intermédiaire",
+     "intermediary"
+    ],
+    [
+     "risque",
+     "risk"
+    ]
+   ],
+   "q": {
+    "fr": "Quelles sont les deux options pour conserver ses cryptomonnaies ?",
+    "en": "What are the two options for storing cryptocurrencies?"
+   },
+   "r": {
+    "fr": "Assurer la sécurité soi-même ou déléguer à des intermédiaires.",
+    "en": "Ensuring security oneself or delegating to intermediaries."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-05-rebond-des-marches-americains-apres-les-",
    "src": "Le Monde",
@@ -1268,141 +1403,6 @@
    "r": {
     "fr": "Cela peut accroître l'offre globale et influencer à la baisse les prix des hydrocarbures.",
     "en": "This can increase global supply and exert downward pressure on hydrocarbon prices."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-23-tension-sur-les-obligations-francaises-e",
-   "src": "Le Monde",
-   "date": "2026-10-23",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/23/qui-viendra-sauver-la-france-en-cas-de-crise-de-la-dette_6798902_3234.html",
-   "t": {
-    "fr": "Tension sur les obligations françaises et la dette souveraine",
-    "en": "Tension on French bonds and sovereign debt"
-   },
-   "s": {
-    "fr": "Les taux d'intérêt des obligations de l'État français ont dépassé la barre des 5 % pour la première fois depuis l'année 2002. Cette situation accentue les craintes d'une crise budgétaire, tandis que les investisseurs surveillent de près le rôle de la Banque centrale européenne.",
-    "en": "Interest rates on French government bonds exceeded 5% for the first time since 2002. This situation increases fears of a budgetary crisis, while investors closely monitor the role of the European Central Bank."
-   },
-   "d": {
-    "fr": "Quand les taux obligataires grimpent, cela signifie que emprunter de l'argent coûte de plus en plus cher aux États. Pour un trader, suivre ces fluctuations est vital car cela reflète la confiance des marchés dans l'économie d'un pays.",
-    "en": "When bond yields rise, it means borrowing money becomes increasingly expensive for governments. For a trader, monitoring these fluctuations is vital as it reflects market confidence in a country's economy."
-   },
-   "v": [
-    [
-     "obligation",
-     "bond"
-    ],
-    [
-     "taux d'intérêt",
-     "interest rate"
-    ],
-    [
-     "crise de la dette",
-     "debt crisis"
-    ],
-    [
-     "banque centrale",
-     "central bank"
-    ]
-   ],
-   "q": {
-    "fr": "Que se passe-t-il lorsque les taux d'emprunt d'un pays augmentent fortement ?",
-    "en": "What happens when a country's borrowing rates rise sharply?"
-   },
-   "r": {
-    "fr": "Le coût pour rembourser sa dette devient beaucoup plus lourd pour l'État.",
-    "en": "The cost of repaying its debt becomes much heavier for the state."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-23-wall-street-secouee-par-les-doutes-sur-l",
-   "src": "Le Monde",
-   "date": "2026-10-23",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/23/les-inquietudes-sur-l-intelligence-artificielle-font-plonger-wall-street_6798868_3234.html",
-   "t": {
-    "fr": "Wall Street secouée par les doutes sur l'intelligence artificielle",
-    "en": "Wall Street shaken by doubts over artificial intelligence"
-   },
-   "s": {
-    "fr": "Les marchés boursiers américains ont chuté après que Meta a annoncé une nouvelle levée de capitaux. Les investisseurs commencent à s'interroger sur la rentabilité réelle des investissements massifs réalisés dans le secteur technologique.",
-    "en": "US stock markets fell after Meta announced a new capital raise. Investors are beginning to question the actual profitability of massive investments made in the tech sector."
-   },
-   "d": {
-    "fr": "En trading, un engouement excessif peut créer des bulles spéculatives si les profits ne suivent pas. Il est donc crucial d'analyser les fondamentaux des entreprises avant d'investir massivement.",
-    "en": "In trading, excessive hype can create speculative bubbles if profits do not follow. It is therefore crucial to analyze companies' fundamentals before investing heavily."
-   },
-   "v": [
-    [
-     "levée de capital",
-     "capital raise"
-    ],
-    [
-     "investissement",
-     "investment"
-    ],
-    [
-     "baisse des marchés",
-     "market sell-off"
-    ],
-    [
-     "profit",
-     "profit"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi les investisseurs s'inquiètent-ils des dépenses dans l'intelligence artificielle ?",
-    "en": "Why are investors worried about spending on artificial intelligence?"
-   },
-   "r": {
-    "fr": "Ils doutent de la capacité des entreprises technologiques à générer assez de profits.",
-    "en": "They doubt the ability of tech companies to generate enough profits."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-23-risques-de-pression-sur-le-peso-argentin",
-   "src": "Financial Times",
-   "date": "2026-10-23",
-   "url": "https://www.ft.com/content/c97986bf-6d3a-47a9-834c-173228454c3d?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Risques de pression sur le peso argentin à l'approche des élections",
-    "en": "Risks of pressure on the Argentine peso as elections approach"
-   },
-   "s": {
-    "fr": "À l'approche des élections en Argentine, les sondages serrés font craindre de l'instabilité pour la monnaie locale. Certains analystes estiment que le peso va subir une forte pression sur le marché des changes.",
-    "en": "As elections approach in Argentina, close polls raise fears of instability for the local currency. Some analysts expect the peso to face strong pressure on the foreign exchange market."
-   },
-   "d": {
-    "fr": "Le marché des devises est très sensible à la politique et aux élections. Pour un trader, anticiper ce type d'événement permet de mieux gérer le risque de change.",
-    "en": "The foreign exchange market is very sensitive to politics and elections. For a trader, anticipating this type of event helps to better manage foreign exchange risk."
-   },
-   "v": [
-    [
-     "devise",
-     "currency"
-    ],
-    [
-     "taux de change",
-     "exchange rate"
-    ],
-    [
-     "analyste",
-     "analyst"
-    ],
-    [
-     "risque",
-     "risk"
-    ]
-   ],
-   "q": {
-    "fr": "Quel événement politique pèse actuellement sur la monnaie argentine ?",
-    "en": "What political event is currently weighing on the Argentine currency?"
-   },
-   "r": {
-    "fr": "Les élections nationales et les résultats incertains des sondages.",
-    "en": "National elections and uncertain poll results."
    },
    "ia": "Gemini"
   }
