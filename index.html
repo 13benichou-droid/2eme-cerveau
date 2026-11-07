@@ -3257,6 +3257,7 @@ function jTasks(d){
   const dk=dkey(d),P=jParams(dk),done=doneOf(d),od=(S.jours[dk]||{}).dur||{},out=[];
   const rp=(S.jours[dk]||{}).report||{};
   jExtras(dk).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,l:x.t,min:x.min||30,p:0,tag:"Ajouté"}));
+  if(isWE(d)){const o=weBlock(d).find(y=>dkey(y)!==dk);if(o)jExtras(dkey(o)).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,dk:dkey(o),l:x.t,min:x.min||30,p:0,tag:"Ajouté "+(+o<+d?"samedi":"dimanche")}))}
   pnTasks(d).filter(x=>!jHwDone(x)&&!rp["pn|"+x.id]).forEach(x=>out.push({k:"pn",ref:x.id,l:`${x.m||"Devoir"} : ${String(x.txt||"devoir").split("\n")[0].slice(0,70)}`,min:jDur("devoir",P.devoir),p:1,tag:"Devoir pour demain"}));
   planOf(d).filter(h=>!done[h]&&!rp["hab|"+h]).forEach(h=>out.push(h==="sport"?{k:"hab",ref:h,l:"Sport (trajets compris)",min:jDur("sport",P.sportTrajet+P.sportDur),p:0.5,tag:`${P.sportDur} min + ${P.sportTrajet} min de trajets`}
     :{k:"hab",ref:h,l:habL(h),min:od[h]||jDur(h,jBase(h)),p:1+(JORD[h]||5)/10,tag:od[h]?"juste aujourd'hui":(jLearn()[h]||[]).length>=2?"ton temps réel":""}));
@@ -3371,7 +3372,7 @@ function jourSummary(){
 /* ---- ▶ commencer, terminer, dépasser ---- */
 function jMark(dk,key,ok){const a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),j=S.jours[dk]||{},cur={...(j.done||{})},doc={...j,date:dk,done:cur};
   if(kind==="x")doc.extra=(j.extra||[]).map(x=>x.id===ref?{...x,ok}:x);else if(kind==="pn"){const x=pnById(ref);if(x)return pnDoneSet(x,dk,ok);const k="pn:"+ref;if(ok)cur[k]=true;else delete cur[k]}else{if(ok)cur[ref]=true;else delete cur[ref]}
-  return put("jours",dk,doc)}
+  const rr=put("jours",dk,doc);weUntick(dk,kind,ref,ok);return rr}
 function jSetRun(run){const td=dkey(today()),j=S.jours[td]||{},doc={...j,date:td,done:j.done||{}};if(run)doc.run=run;else delete doc.run;return put("jours",td,doc)}
 function jToggle(s,ok){const a=s.indexOf("|"),b=s.lastIndexOf("|"),kind=s.slice(0,a),ref=s.slice(a+1,b),dk=s.slice(b+1),key=kind+"|"+ref,run=(S.jours[dkey(today())]||{}).run;
   if(ok&&run&&run.key===key){jRecord(jLearnRef(kind,ref),(Date.now()-run.start)/60000);jSetRun(null)}
@@ -4333,7 +4334,7 @@ const jWork=s=>s&&(s.k==="hab"||s.k==="pn"||s.k==="x");
 const jKeyOf=s=>s.k==="repas"?"repas|"+s.ref:s.k==="bloc"?"bloc|"+s.ref:s.step?"step|"+s.ref:s.auto?"auto|"+s.k+"|"+s.a:s.k+"|"+s.ref;
 const jMovable=s=>true;/* tu as la main sur tout */
 function jPins(d){const w=((edtP().pinw||{})[d.getDay()])||{},p=(S.jours[dkey(d)]||{}).pin||{};const o={};Object.entries(w).forEach(([k,v])=>o[k]={...v,w:1});Object.entries(p).forEach(([k,v])=>o[k]={...(o[k]||{}),...v,w:o[k]?1:0});return o}
-function jIsDone(dk,key){const a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),j=S.jours[dk]||{},dn=j.done||{};
+function jIsDone(dk,key){const a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),j=S.jours[dk]||{},dn=(()=>{const d=jDateOf(dk);return isWE(d)?doneOf(d):(j.done||{})})();
   if(kind==="hab")return!!dn[ref];if(kind==="x")return!!(j.extra||[]).find(x=>x.id===ref&&x.ok);
   if(kind==="pn"){const x=(((S.pronote||{}).data||{}).devoirs||[]).find(y=>y.id===ref);return!!(dn["pn:"+ref]||(x&&pnDoneAny(x)))}return false}
 function jLabelK(dk,key){const a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),j=S.jours[dk]||{};
@@ -4675,6 +4676,8 @@ function pageHab(){
     <div class="seg">${[[4,"1 mois"],[12,"3 mois"],[26,"6 mois"]].map(([v,l])=>`<button data-range="${v}" aria-pressed="${v===V.range}">${l}</button>`).join("")}</div></div>
     <div class="chart">${lineChart(weekSeries(V.range))}</div></div>`;
 }
+/* décocher une tâche du week-end : elle se décoche aussi sur l'autre jour du week-end */
+function weUntick(dk,kind,ref,ok){if(ok||kind!=="hab")return;try{const d=jDateOf(dk);if(!isWE(d))return;weBlock(d).map(dkey).filter(k=>k!==dk).forEach(k=>{const j=S.jours[k];if(j&&j.done&&j.done[ref]){const dn={...j.done};delete dn[ref];put("jours",k,{...j,date:k,done:dn})}})}catch(e){}}
 
 /* ================================================================
    🪶 NOTES : la mise en forme toujours à portée de doigt, comme dans Notes d'Apple
@@ -6192,7 +6195,7 @@ function etResult(){const doc=egDoc(),t=(doc.tests||[]).slice(-1)[0];if(!t)retur
 function etrStart(){const li=egLvI(),h=(drill("entr").hist||[]).slice(-60).map(x=>x.i),seed=todayK()+Date.now();
   const pick=(L,n)=>{const P=EN_TR.map((x,i)=>i).filter(i=>EN_TR[i][0]===L),f=P.filter(i=>!h.includes(i));return egShuf(f.length>=n?f:P,seed+L).slice(0,n)};
   const fx=eneFix(li,seed),base=[...pick(EN_LV[li],4),...pick(EN_LV[Math.min(5,li+1)],1)].filter(i=>!fx.includes(i)),L=[...fx,...base].slice(0,5);
-  V.etr={L:egShuf(L,seed+"m"),fix:Object.fromEntries(fx.map(i=>[i,1])),i:0,res:null,sc:[],ok:{},seen:{}};V.etrHint=false;V.eg={m:"tr"};render(true);window.scrollTo(0,0)}
+  V.etr={L:L,fix:Object.fromEntries(fx.map(i=>[i,1])),i:0,res:null,sc:[],ok:{},seen:{}};V.etrHint=false;V.eg={m:"tr"};render(true);window.scrollTo(0,0)}
 function etrCheck(said){const st=V.etr;if(!st||st.res)return;said=String(said||"").trim();if(!said)return;const[l,fr,refs]=EN_TR[st.L[st.i]],b=enBest(said,refs);
   st.res={said,...b,v:enVerdict(b.s)};if(typeof MIC!=="undefined"&&MIC)micStop();render(true);if(st.res.v!=="ok"&&SAMPLE_ST!=="none")etrAI()}
 async function etrAI(){const st=V.etr,r0=st&&st.res;if(!r0||r0.ai||r0.busy)return;const[l,fr,refs]=EN_TR[st.L[st.i]];r0.busy=true;render(true);
@@ -9205,7 +9208,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.31.0";
+const APP_VERSION="2.31.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
