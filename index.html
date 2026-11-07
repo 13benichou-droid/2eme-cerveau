@@ -1587,6 +1587,14 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 .hedays.six{grid-template-columns:repeat(5,minmax(0,1fr)) minmax(0,1.7fr)}
 .hed.hewe{font-size:.85em}
 .hed.hewe.half{border-style:dashed;color:var(--ink)}
+.lcalc{background:var(--soft)}
+.lcd{display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding:8px 12px;border-radius:12px;background:var(--surface);min-height:62px;overflow:hidden}
+.lcd small{color:var(--muted);font-size:.95rem;word-break:break-all}.lcd b{font-size:1.9rem;font-family:var(--display);font-variant-numeric:tabular-nums;word-break:break-all}
+.lcgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.lck{height:48px;border:0;border-radius:12px;font:inherit;font-size:1.25rem;background:var(--surface);color:var(--ink)}
+.lck.o{background:color-mix(in srgb,var(--c,#d99a00) 22%,var(--surface))}.lck.eq{background:var(--c,#d99a00);color:#fff;font-weight:700}.lck.cl{color:#e5484d;font-weight:700}
+.lck:active{filter:brightness(.92)}
+.chip.ok{color:var(--ok,#1a8f4c)}
 </style>
 <script src="config.js"></script>
 </head>
@@ -6150,7 +6158,7 @@ function etAns(val){const st=V.et,it=st&&st.items[st.j];if(!it)return;
 function etFinish(){const st=V.et,by=st.by;let lv=-1;EN_LV.forEach((L,i)=>{if(by[L]&&by[L][0]>=5)lv=i});
   const nx=EN_LV[lv+1],near=!!(nx&&by[nx]&&by[nx][0]>=3),lvl=EN_LV[Math.max(0,lv)],sk={};
   st.res.forEach(r=>{sk[r.k]=sk[r.k]||[0,0];sk[r.k][1]++;if(r.ok)sk[r.k][0]++});
-  const doc=egDoc(),tests=[...(doc.tests||[]),{d:todayK(),lvl,near,below:lv<0,by,sk}].slice(-10);
+  const doc=egDoc(),tests=[...(doc.tests||[]),{d:todayK(),lvl,near,below:lv<0,by,sk,err:st.res.filter(r=>!r.ok).length,tot:st.res.length}].slice(-10);
   egSave({lvl,lvlNear:near,lvlBelow:lv<0,tests,u:Math.max(doc.u||0,lv>=2?14:lv>=1?7:0)});V.eg={m:"testfin"};sayStop();render(true);window.scrollTo(0,0)}
 const EN_SK={g:"Grammaire",v:"Vocabulaire",l:"Écoute",r:"Lecture",t:"Traduction"};
 function etLadder(cur,near){return`<div class="etlad" aria-label="Niveaux">${EN_LV.map((L,i)=>`<span class="${i<cur?"done":i===cur?"cur":near&&i===cur+1?"near":""}">${L}</span>`).join("")}</div>`}
@@ -6174,6 +6182,7 @@ function etResult(){const doc=egDoc(),t=(doc.tests||[]).slice(-1)[0];if(!t)retur
   return`<div class="card stack egcard"><p class="label" style="margin:0">🎯 Résultat du test</p>
     <p class="egbig">${t.below?"A1":t.lvl}</p><p style="margin:0"><b>${t.below?"Tu débutes : on commence par les bases du niveau A1.":esc(EN_LVN[t.lvl])}</b>${t.near&&!t.below?` · tu es tout près de ${EN_LV[li+1]}`:""}</p>
     ${etLadder(t.below?0:li,t.near)}
+    ${eneCmp()}
     <div class="stack" style="gap:6px">${Object.entries(t.sk).map(([k,[a,n]])=>`<div class="etsk"><span>${EN_SK[k]}</span><div class="mxbar"><i style="width:${Math.round(a/n*100)}%"></i></div><span class="num small">${a}/${n}</span></div>`).join("")}</div>
     <p class="muted small" style="margin:0">Niveaux réussis : ${Object.entries(t.by).map(([L,[a,n]])=>`${L} ${a}/${n}`).join(" · ")}. Ta séance quotidienne est maintenant réglée sur ce niveau, avec un peu du niveau au-dessus pour progresser.</p>
     ${wrong.length?`<details><summary class="small"><b>Revoir mes erreurs (${wrong.length})</b></summary><ul class="list etwrong">${wrong.map(x=>`<li><span class="muted small">${esc(x.l)} · ${esc(EN_SK[x.k==="w"?"g":x.k])}</span><span>${esc(x.q)}${x.au?` <i class="muted">(« ${esc(x.au)} »)</i>`:""}</span><b>→ ${esc(x.k==="w"?x.a[0]:x.o[x.a])}</b></li>`).join("")}</ul></details>`:""}
@@ -6182,7 +6191,8 @@ function etResult(){const doc=egDoc(),t=(doc.tests||[]).slice(-1)[0];if(!t)retur
 /* =============== ② TRADUCTION =============== */
 function etrStart(){const li=egLvI(),h=(drill("entr").hist||[]).slice(-60).map(x=>x.i),seed=todayK()+Date.now();
   const pick=(L,n)=>{const P=EN_TR.map((x,i)=>i).filter(i=>EN_TR[i][0]===L),f=P.filter(i=>!h.includes(i));return egShuf(f.length>=n?f:P,seed+L).slice(0,n)};
-  V.etr={L:[...pick(EN_LV[li],4),...pick(EN_LV[Math.min(5,li+1)],1)],i:0,res:null,sc:[],ok:{},seen:{}};V.etrHint=false;V.eg={m:"tr"};render(true);window.scrollTo(0,0)}
+  const fx=eneFix(li,seed),base=[...pick(EN_LV[li],4),...pick(EN_LV[Math.min(5,li+1)],1)].filter(i=>!fx.includes(i)),L=[...fx,...base].slice(0,5);
+  V.etr={L:egShuf(L,seed+"m"),fix:Object.fromEntries(fx.map(i=>[i,1])),i:0,res:null,sc:[],ok:{},seen:{}};V.etrHint=false;V.eg={m:"tr"};render(true);window.scrollTo(0,0)}
 function etrCheck(said){const st=V.etr;if(!st||st.res)return;said=String(said||"").trim();if(!said)return;const[l,fr,refs]=EN_TR[st.L[st.i]],b=enBest(said,refs);
   st.res={said,...b,v:enVerdict(b.s)};if(typeof MIC!=="undefined"&&MIC)micStop();render(true);if(st.res.v!=="ok"&&SAMPLE_ST!=="none")etrAI()}
 async function etrAI(){const st=V.etr,r0=st&&st.res;if(!r0||r0.ai||r0.busy)return;const[l,fr,refs]=EN_TR[st.L[st.i]];r0.busy=true;render(true);
@@ -6194,7 +6204,7 @@ Réponds UNIQUEMENT en JSON : {"ok": true si sa traduction est correcte et natur
     if(r&&typeof r==="object"&&st.res===r0){r0.ai=r;if(r.ok===true&&r0.v!=="ok"){r0.v="ok";r0.s=Math.max(r0.s,.93)}}}
   catch(e){r0.aiErr="La correction détaillée n'a pas marché ("+ERR(e&&e.code)+")."}
   r0.busy=false;render(true)}
-function etrNext(){const st=V.etr,r=st.res;if(!r)return;const[l]=EN_TR[st.L[st.i]];st.sc.push({i:st.L[st.i],s:r.s,v:r.v,said:r.said});drillAdd("entr",{d:todayK(),i:st.L[st.i],l,s:Math.round(r.s*100)/100});
+function etrNext(){const st=V.etr,r=st.res;if(!r)return;const[l]=EN_TR[st.L[st.i]];st.sc.push({i:st.L[st.i],s:r.s,v:r.v,said:r.said});eneLog("tr",st.L[st.i],r.v==="ok"?true:r.v==="ko"?false:null);drillAdd("entr",{d:todayK(),i:st.L[st.i],l,s:Math.round(r.s*100)/100});
   st.i++;st.res=null;V.etrHint=false;V.etrTxt="";if(st.i>=st.L.length){egDay({t:1});V.eg={m:"trfin"}}render(true);window.scrollTo(0,0)}
 /* ---- la petite leçon avant la phrase ---- */
 const lcFmt=s=>esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
@@ -6210,11 +6220,11 @@ function etrCard(){const st=V.etr;if(!st)return egHome();const[l,fr,refs]=EN_TR[
   const hint=refs[0].split(" ").slice(0,2).join(" ")+" …";
   const lid=etrLcId(st.L[st.i]),U=lid&&typeof EN_LC!=="undefined"?EN_LC[lid]:null;
   if(U&&!st.ok[st.i]&&!r){const again=!!st.seen[lid];
-    return`<div class="card stack egcard etlc"><div class="row" style="justify-content:space-between"><span class="muted small">🔁 Traduction · niveau ${l}</span><span class="muted small num">${st.i+1}/${st.L.length}</span></div>
+    return`<div class="card stack egcard etlc"><div class="row" style="justify-content:space-between"><span class="muted small">🔁 Traduction · niveau ${l}${st.fix&&st.fix[st.L[st.i]]?" · 🎯 pour tes erreurs":""}</span><span class="muted small num">${st.i+1}/${st.L.length}</span></div>
     ${etrLcHtml(U,again?"📘 Petit rappel avant de traduire":"📘 Petite leçon avant de traduire")}
     <button class="btn" data-etrok="1">Compris, je traduis →</button></div>`}
   const lcBox=U?`<details class="etlcrap"><summary class="small">📘 Revoir la leçon : ${esc(U.t)}</summary><div class="stack" style="gap:8px;margin-top:8px">${etrLcHtml(U,"Rappel")}</div></details>`:"";
-  return`<div class="card stack egcard"><div class="row" style="justify-content:space-between"><span class="muted small">🔁 Traduction · niveau ${l}</span><span class="muted small num">${st.i+1}/${st.L.length}</span></div>
+  return`<div class="card stack egcard"><div class="row" style="justify-content:space-between"><span class="muted small">🔁 Traduction · niveau ${l}${st.fix&&st.fix[st.L[st.i]]?" · 🎯 pour tes erreurs":""}</span><span class="muted small num">${st.i+1}/${st.L.length}</span></div>
     <p class="egq">« ${esc(fr)} »</p>${lcBox}${st.added&&!r?`<p class="muted small" style="margin:0">🃏 ${st.added} cartes de cette leçon ont été ajoutées à tes cartes Anglais.</p>`:""}
     ${!r?`<form data-f="etr" class="stack" style="gap:8px"><textarea class="field" name="t" rows="2" data-miclang="en-US" data-etrtxt="1" autocapitalize="sentences" placeholder="Écris (ou dicte avec 🎤) ta traduction en anglais">${esc(V.etrTxt||"")}</textarea>
       <div class="row"><button class="btn">Vérifier</button>${V.etrHint?`<span class="muted small">Indice : ${esc(hint)}</span>`:`<button type="button" class="linkb" data-etrhint="1">Un indice</button>`}</div></form>`
@@ -6230,9 +6240,9 @@ function etrFin(){const st=V.etr;if(!st)return egHome();const avg=st.sc.length?M
     <div class="row"><button class="btn" data-eghome="1">Continuer ma séance</button><button class="ghost on" data-etrgo="1">5 phrases de plus</button></div></div>`}
 
 /* =============== ③ ÉCOUTE : un texte + 3 phrases en dictée =============== */
-function elsStart(){const li=egLvI(),done=(drill("enls").hist||[]).map(x=>x.p),P=EN_LS.map((x,i)=>i).filter(i=>EN_LS[i].l===EN_LV[Math.min(li,5)]),f=P.filter(i=>!done.includes(i)),p=(f.length?f:egShuf(P,Date.now()))[0];
-  const dict=egShuf(EN_TR.map((x,i)=>i).filter(i=>EN_TR[i][0]===EN_LV[li]),String(Date.now())+"d").slice(0,3);
-  V.els={p,ph:"listen",plays:0,qi:0,ans:null,ok:0,dict,di:0,dres:null,dsc:[],ord:EN_LS[p].q.map((q,k)=>egShuf(q.o.map((_,j)=>j),"ls"+p+"|"+k))};V.eg={m:"ls"};render(true);window.scrollTo(0,0)}
+function elsStart(){const li=egLvI(),done=(drill("enls").hist||[]).map(x=>x.p),P=EN_LS.map((x,i)=>i).filter(i=>EN_LS[i].l===EN_LV[Math.min(li,5)]),f=P.filter(i=>!done.includes(i)),pend=eneOpen("ls").filter(i=>P.includes(i)),p=pend.length?pend[0]:(f.length?f:egShuf(P,Date.now()))[0];
+  const fxd=eneOpen("tr").filter(i=>EN_TR[i][0]===EN_LV[li]||EN_LV.indexOf(EN_TR[i][0])<li).slice(0,2),dict=[...fxd,...egShuf(EN_TR.map((x,i)=>i).filter(i=>EN_TR[i][0]===EN_LV[li]&&!fxd.includes(i)),String(Date.now())+"d")].slice(0,3);
+  V.els={p,fix:pend.length>0||fxd.length>0,ph:"listen",plays:0,qi:0,ans:null,ok:0,dict,di:0,dres:null,dsc:[],ord:EN_LS[p].q.map((q,k)=>egShuf(q.o.map((_,j)=>j),"ls"+p+"|"+k))};V.eg={m:"ls"};render(true);window.scrollTo(0,0)}
 function elsCard(){const st=V.els;if(!st)return egHome();const P=EN_LS[st.p];
   const head=`<div class="row" style="justify-content:space-between"><span class="muted small">🎧 Écoute · niveau ${P.l}</span><span class="muted small">${st.ph==="dict"?`dictée ${st.di+1}/${st.dict.length}`:st.ph==="q"?`question ${st.qi+1}/${P.q.length}`:""}</span></div>`;
   if(st.ph==="listen")return`<div class="card stack egcard">${head}<h3 class="egt">« ${esc(P.t)} »</h3><p class="small" style="margin:0">Écoute le texte <b>sans le lire</b> (tu le verras après). Tu peux l'écouter jusqu'à 3 fois, et le ralentir.</p>
@@ -6255,7 +6265,7 @@ function elsCard(){const st=V.els;if(!st)return egHome();const P=EN_LS[st.p];
 /* =============== ④ RÉSUMÉ =============== */
 function ersStart(src){const li=egLvI();let s=null;
   if(src==="art"){const a=typeof enArt==="function"?enArt():null;if(a&&a[1].s&&a[1].s.en)s={t:a[1].t.en,x:a[1].s.en,src:"art",id:a[0]}}
-  if(!s){const done=(drill("enrs").hist||[]).map(x=>x.p),P=EN_LS.map((x,i)=>i).filter(i=>EN_LS[i].l===EN_LV[li]),f=P.filter(i=>!done.includes(i)),p=(f.length?f:egShuf(P,Date.now()))[0];s={t:EN_LS[p].t,x:EN_LS[p].x,sum:EN_LS[p].sum,p,src:"ls"}}
+  if(!s){const done=(drill("enrs").hist||[]).map(x=>x.p),P=EN_LS.map((x,i)=>i).filter(i=>EN_LS[i].l===EN_LV[li]),f=P.filter(i=>!done.includes(i)),pend=[...eneOpen("rs"),...eneOpen("ls")].filter(i=>P.includes(i)),p=pend.length?pend[0]:(f.length?f:egShuf(P,Date.now()))[0];s={t:EN_LS[p].t,x:EN_LS[p].x,sum:EN_LS[p].sum,p,src:"ls"}}
   V.ers={...s,res:null,busy:false};V.ersTxt="";V.eg={m:"rs"};render(true);window.scrollTo(0,0)}
 const enWc=t=>String(t||"").trim().split(/\s+/).filter(Boolean).length;
 async function ersCheck(txt){const st=V.ers;if(!st||st.busy)return;txt=String(txt||"").trim();V.ersTxt=txt;if(enWc(txt)<12){st.err="Écris au moins 2 phrases (12 mots) avant la correction.";return render(true)}
@@ -6266,7 +6276,7 @@ async function ersCheck(txt){const st=V.ers;if(!st||st.busy)return;txt=String(tx
 Texte : """${st.x}"""
 Son résumé (il vient peut-être d'une dictée vocale : ignore la ponctuation et les majuscules) : """${txt.slice(0,2000)}"""
 Réponds UNIQUEMENT en JSON : {"score": note sur 10 (idées essentielles, anglais correct, ses propres mots plutôt que des phrases recopiées), "level": "A1"|"A2"|"B1"|"B2"|"C1"|"C2" (niveau de son anglais dans ce résumé), "good": "une phrase en français sur ce qui est réussi", "missing": "les idées importantes oubliées, en français (chaîne vide si rien ne manque)", "fix": [{"said": "ses mots", "better": "la correction", "why": "explication courte en français"}] (au plus 4, seulement de vraies fautes), "better": "une version améliorée de son résumé, mêmes idées, un cran au-dessus de son niveau, 70 mots maximum"}`);
-    if(!r||typeof r!=="object")throw{code:"invalid_json"};st.res={...r,txt};drillAdd("enrs",{d:todayK(),p:st.p??-1,sc:+r.score||0,lv:String(r.level||"").slice(0,2)});egDay({r:1})}
+    if(!r||typeof r!=="object")throw{code:"invalid_json"};st.res={...r,txt};drillAdd("enrs",{d:todayK(),p:st.p??-1,sc:+r.score||0,lv:String(r.level||"").slice(0,2)});if(st.src==="ls"&&st.p!=null)eneLog("rs",st.p,(+r.score||0)>=6);egDay({r:1})}
   catch(e){st.err="La correction n'a pas marché ("+ERR(e&&e.code)+"). Réessaie."}
   st.busy=false;render(true)}
 function ersCard(){const st=V.ers;if(!st)return egHome();const r=st.res;
@@ -6305,6 +6315,7 @@ function egHome(){const lv=egLv(),doc=egDoc(),td=egToday(),c=srsCount("en"),todo
     <p class="muted small" style="margin:0">Environ 25 minutes. Le plus important : un peu chaque jour.</p></div>
   ${wgSafe(toeflCard)}${exCard()}
   ${w.tr!=null||w.ls!=null||w.rs!=null?`<div class="card stack" style="gap:6px"><p class="label" style="margin:0">📈 Tes 7 derniers jours</p><p class="small" style="margin:0">${w.tr!=null?`Traduction : <b>${w.tr} %</b> (${w.ntr} phrases)`:""}${w.ls!=null?` · Écoute : <b>${w.ls} %</b>`:""}${w.rs!=null?` · Résumés : <b>${w.rs}/10</b>`:""} · <b>${c.known}</b> cartes bien sues</p></div>`:""}
+  ${eneCard()}
   ${gram}`}
 function engPage(){const sr=V.srs&&V.srs.tab==="en",st=sr?{m:"srs"}:V.eg||{m:"home"};let main="";const m=st.m||"home";
   if(sr)main=srsView();
@@ -6340,7 +6351,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(d.elsnext){const st=V.els;st.qi++;st.ans=null;if(st.qi>=EN_LS[st.p].q.length)st.ph="text";return render(true)}
   if(d.elsdict){const st=V.els;st.ph="dict";st.di=0;st.dres=null;say(EN_TR[st.dict[0]][2][0],.9);return render(true)}
   if(d.elsdplay){const st=V.els;return say(EN_TR[st.dict[st.di]][2][0],+d.elsdplay)}
-  if(d.elsdnext){const st=V.els;st.dsc.push(st.dres?st.dres.s:0);st.di++;st.dres=null;if(st.di>=st.dict.length){st.ph="fin";drillAdd("enls",{d:todayK(),p:st.p,q:st.ok,dict:Math.round(st.dsc.reduce((s,x)=>s+x,0)/st.dsc.length*100)/100});egDay({l:1})}else say(EN_TR[st.dict[st.di]][2][0],.9);return render(true)}
+  if(d.elsdnext){const st=V.els;st.dsc.push(st.dres?st.dres.s:0);eneLog("tr",st.dict[st.di],st.dres?(st.dres.v==="ok"?true:st.dres.v==="ko"?false:null):false);st.di++;st.dres=null;if(st.di>=st.dict.length){st.ph="fin";eneLog("ls",st.p,st.ok>=EN_LS[st.p].q.length);drillAdd("enls",{d:todayK(),p:st.p,q:st.ok,dict:Math.round(st.dsc.reduce((s,x)=>s+x,0)/st.dsc.length*100)/100});egDay({l:1})}else say(EN_TR[st.dict[st.di]][2][0],.9);return render(true)}
   if(d.ersgo)return ersStart(d.ersgo);
   if(d.erssay){const st=V.ers;if(st)sayAll(st.x,.9);return}
   if(d.egup){const li=egLvI();if(li<5){egSave({lvl:EN_LV[li+1],lvlNear:false});render(true)}return}});
@@ -6358,6 +6369,26 @@ document.addEventListener("keydown",e=>{if(e.key!=="Enter"||e.isComposing||e.ctr
   if(t&&/^(INPUT|TEXTAREA|SELECT|BUTTON|SUMMARY|A)$/.test(t.tagName))return;
   if(st.res){e.preventDefault();return etrNext()}
   const lid=etrLcId(st.L[st.i]);if(lid&&typeof EN_LC!=="undefined"&&EN_LC[lid]&&!st.ok[st.i]){e.preventDefault();etrOk()}},true);
+
+/* ================================================================
+   2.31.0 · MES ERREURS : chaque faute est comptée, et la séance s'adapte
+   (traduction, écoute et résumé reprennent ce que tu as raté ; il faut réussir 2 fois de suite pour que ce soit « réglé »)
+   ================================================================ */
+const ENE_K="enerr";
+function eneLog(kind,id,ok){if(ok==null||id==null)return;try{const d={...drill(ENE_K)},m={...(d[kind]||{})},e={...(m[id]||{m:0,c:0})};
+  if(ok)e.c++;else{e.m++;e.c=0}m[id]=e;d[kind]=m;put("drill",ENE_K,d,true)}catch(x){}}
+function eneOpen(kind){const m=drill(ENE_K)[kind]||{};return Object.keys(m).filter(k=>m[k].m>0&&m[k].c<2).sort((a,b)=>m[b].m-m[a].m||m[a].c-m[b].c).map(Number)}
+/* phrases à retravailler : 2 phrases ratées, + 1 autre phrase de la même leçon de grammaire */
+function eneFix(li,seed){const lim=Math.min(5,li+1),ok=i=>EN_LV.indexOf(EN_TR[i][0])<=lim,pend=eneOpen("tr").filter(ok),out=pend.slice(0,2);
+  for(const i of pend.slice(0,2)){const lid=etrLcId(i);if(!lid||out.length>=3)continue;const mate=egShuf(EN_TR.map((x,j)=>j).filter(j=>j!==i&&ok(j)&&etrLcId(j)===lid&&!out.includes(j)&&!pend.includes(j)),seed+"x"+i)[0];if(mate!=null)out.push(mate)}
+  return out.slice(0,3)}
+function eneCmp(){const T=(egDoc().tests||[]).filter(t=>t.err!=null);if(T.length<2)return T.length?`<p class="muted small" style="margin:0">Erreurs à ce test : <b>${T[0].err}</b> sur ${T[0].tot}. Au prochain test, je te montre si tu en fais moins.</p>`:"";
+  const a=T[T.length-2],b=T[T.length-1],d=b.err-a.err;return`<div class="egfb ${d<0?"ok":""}"><b>Tes erreurs : ${a.err} → ${b.err}</b> <span class="muted small">(test du ${fdate(a.d)} puis du ${fdate(b.d)})</span><br>${d<0?`Tu fais ${-d} erreur${-d>1?"s":""} de moins. Bravo !`:d===0?"Autant qu'au test précédent.":`${d} erreur${d>1?"s":""} de plus : c'est peut-être un test plus dur, regarde le détail plus bas.`}</div>`}
+function eneCard(){const d=drill(ENE_K),has=["tr","ls","rs"].some(k=>Object.keys(d[k]||{}).length)||(egDoc().tests||[]).some(t=>t.err!=null);if(!has)return"";
+  const n=k=>eneOpen(k).length,m=k=>Object.values(d[k]||{}).filter(e=>e.m>0&&e.c>=2).length,tr=n("tr"),ls=n("ls"),rs=n("rs"),fixed=m("tr")+m("ls")+m("rs");
+  return`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">🎯 Mes erreurs</p>
+    <div class="row" style="gap:8px;flex-wrap:wrap"><span class="chip">🔁 ${tr} phrase${tr>1?"s":""} à revoir</span><span class="chip">🎧 ${ls} écoute${ls>1?"s":""}</span><span class="chip">✍️ ${rs} résumé${rs>1?"s":""}</span><span class="chip ok">✓ ${fixed} réglée${fixed>1?"s":""}</span></div>
+    <p class="small" style="margin:0">${tr+ls+rs?"Ta prochaine séance reprend ces points : des phrases que tu as ratées (et une autre de la même leçon), le texte d'écoute raté et le résumé à refaire. Une erreur est « réglée » quand tu réussis 2 fois de suite.":"Plus aucune erreur en attente : bravo ! La séance reprend du nouveau."}</p>${eneCmp()}</div>`}
 
 /* ================================================================
    🐍 PYTHON POUR DÉBUTANT : une petite leçon par jour, du vrai Python qui tourne dans l'appli
@@ -8847,12 +8878,27 @@ function labPre(top,quit){const k=V.g.k;
   return`<div class="card stack labpre">${top}<p class="label" style="margin:0">📖 Avant de jouer : l'essentiel en 1 minute</p>${labBody(k)}
   <div class="row">${quit}<button class="btn" data-gpre="1">J'ai compris, je joue →</button></div></div>`}
 function labTools(g,R){const A=LAB_AIDE[g.k];if(!A)return"";const H=A.hints||[],h=H[Math.min(g.i,H.length-1)];
-  return`<div class="row labtools"><button class="ghost on" data-ghint="1">💡 ${V.gHint?"Cacher l'indice":"Un indice"}</button><button class="ghost" data-gaide="1">📖 ${V.gAide?"Fermer le rappel":"Rappel des mots"}</button></div>
-  ${V.gHint&&h?`<div class="corr labhint">💡 ${h}</div>`:""}${V.gAide?`<div class="card stack labrap" style="gap:6px">${labBody(g.k,true)}</div>`:""}`}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-gpre],[data-ghint],[data-gaide]");if(!b||!V.g)return;
+  return`<div class="row labtools"><button class="ghost on" data-ghint="1">💡 ${V.gHint?"Cacher l'indice":"Un indice"}</button><button class="ghost" data-gaide="1">📖 ${V.gAide?"Fermer le rappel":"Rappel des mots"}</button><button class="ghost${V.gCalc?" on":""}" data-gcalc="1">🧮 ${V.gCalc?"Fermer la calculette":"Calculette"}</button></div>
+  ${V.gCalc?lcPad():""}${V.gHint&&h?`<div class="corr labhint">💡 ${h}</div>`:""}${V.gAide?`<div class="card stack labrap" style="gap:6px">${labBody(g.k,true)}</div>`:""}`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-gpre],[data-ghint],[data-gaide],[data-gcalc]");if(!b||!V.g)return;
+  if(b.dataset.gcalc){V.gCalc=!V.gCalc;return render(true)}
   if(b.dataset.gpre){labSee(V.g.k);V.g.pre=false;render(true);return window.scrollTo(0,0)}
   if(b.dataset.ghint){V.gHint=!V.gHint;return render(true)}
   if(b.dataset.gaide){V.gAide=!V.gAide;return render(true)}});
+
+/* ---- 2.31.0 : calculette dans le Trading Lab (taux de variation, rendement, PER…) ---- */
+const LC_KEYS=["C","(",")","÷","7","8","9","×","4","5","6","−","1","2","3","+","0",",","⌫","="];
+function lcNum(v){if(!isFinite(v))return"";const r=Math.abs(v)>=1e9||(v!==0&&Math.abs(v)<1e-6)?v.toExponential(6):String(+v.toPrecision(10));return r.replace(".",",")}
+function lcPad(){const c=V.calc||(V.calc={x:"",r:""});
+  return`<div class="card stack lcalc" style="gap:8px"><div class="lcd"><small id="lcx">${esc(c.x)||"&nbsp;"}</small><b id="lcr">${esc(c.r)||"0"}</b></div>
+  <div class="lcgrid">${LC_KEYS.map(k=>`<button type="button" class="lck ${/[0-9,]/.test(k)?"n":k==="="?"eq":k==="C"?"cl":"o"}" data-lck="${k}" aria-label="${k}">${k}</button>`).join("")}</div>
+  <p class="muted small" style="margin:0">Taux de variation : (arrivée − départ) ÷ départ × 100. Tu peux aussi taper un nombre suivi de %.</p></div>`}
+function lcPress(k){const c=V.calc||(V.calc={x:"",r:""});
+  if(k==="C"){c.x="";c.r=""}else if(k==="⌫")c.x=c.x.slice(0,-1);else if(k==="="){const v=coEval(c.x);if(isFinite(v)){c.r=lcNum(v);c.x=c.r}}else c.x+=k;
+  if(k!=="="&&k!=="C"){const v=coEval(c.x);c.r=isFinite(v)&&/[+−×÷]/.test(c.x.replace(/^−/,""))?lcNum(v):c.r&&c.x?c.r:""}
+  const x=document.getElementById("lcx"),r=document.getElementById("lcr");if(x)x.textContent=c.x||"\u00a0";if(r)r.textContent=c.r||"0"}
+document.addEventListener("mousedown",e=>{if(e.target.closest&&e.target.closest("[data-lck]"))e.preventDefault()});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-lck]");if(b){e.preventDefault();lcPress(b.dataset.lck)}});
 
 /* ================================================================
    2.28.0 : SAUVEGARDER / RESTAURER
@@ -9159,7 +9205,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.30.2";
+const APP_VERSION="2.31.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
