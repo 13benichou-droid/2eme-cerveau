@@ -969,6 +969,8 @@ body:has(.notesapp){background:#f2f2f7}
 .ned pre{font-family:ui-monospace,Menlo,monospace;font-size:.95rem;margin:2px 0;white-space:pre-wrap}
 .nmi svg{width:22px;height:22px}
 .avnin{flex:1;min-width:0;height:44px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);font:inherit;font-size:1.1rem;text-align:center}
+.avfc{display:flex;flex-direction:column;gap:4px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}
+.avfn{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;background:var(--bg,#fff);color:var(--ink);font:inherit;font-size:.9rem;padding:6px}
 
 /* ================= 2.7.0 : une seule couleur, barre de navigation, pages plus courtes ================= */
 :root:root:root{--accent:#5b46e5;--warn:#c27c00;--info:#2d7ff0}
@@ -6031,7 +6033,8 @@ function srsHelp(){return`<details class="card"><summary><b>❓ Comment ça marc
   <p>Le secret : <b>un peu chaque jour</b>. Si tu sautes des jours, les cartes s'accumulent. Tu t'es trompé de bouton ? « ↶ Annuler » revient en arrière.</p></div></details>`}
 
 /* ---- finance : les mots d'un article vont dans tes cartes d'anglais ---- */
-function srsHave(){return new Set([...EG_VALL.map(w=>w.en.toLowerCase()),...Object.values(srsDoc().notes||{}).filter(n=>n&&!n.del&&n.d==="en").map(n=>String(n.f).toLowerCase().trim())])}
+function srsStem(w){let k=String(w||"").toLowerCase().trim().replace(/^(to|a|an|the)\s+/,"");if(k.length>3&&/ies$/.test(k))k=k.slice(0,-3)+"y";else if(k.length>3&&/(ses|xes|ches|shes)$/.test(k))k=k.slice(0,-2);else if(k.length>3&&/s$/.test(k)&&!/ss$/.test(k))k=k.slice(0,-1);return k}
+function srsHave(){const st=new Set(),add=w=>st.add(srsStem(w));EG_VALL.forEach(w=>add(w.en));EX_NOTES.forEach(n=>{if(n&&n.f&&(n.d==="mg"||n.d==="xq"||n.d==="xf"||n.d==="en"))add(n.f)});Object.values(srsDoc().notes||{}).forEach(n=>{if(n&&!n.del&&n.d==="en")add(n.f)});return{has:w=>st.has(srsStem(w)),add:w=>{add(w)}}}
 function srsArtBtn(id,a){if(!a||!Array.isArray(a.v)||!a.v.length)return"";const h=srsHave(),miss=a.v.filter(p=>p&&p[1]&&!h.has(String(p[1]).toLowerCase().trim()));
   return miss.length?`<button class="ghost on srsart" data-srsart="${esc(id)}">🗂️ Ajouter ${miss.length>1?"ces "+miss.length+" mots":"ce mot"} à mes cartes d'anglais</button>`:`<p class="muted small srsart">✓ Ces mots sont dans tes cartes d'anglais.</p>`}
 function srsAddNotes(L){const notes={...(srsDoc().notes||{})},t0=Date.now();L.forEach((n,i)=>{notes["u"+(t0+i).toString(36)+Math.random().toString(36).slice(2,5)]={...n,ts:t0+i}});srsSave({notes})}
@@ -7408,9 +7411,10 @@ const AV_SRC={jeu:"Sources : fiches des formations (voir les autres onglets), EN
 /* ---- 2.30.1 : où j'en suis (3 notes de même coefficient) + conditions du rebond à Dauphine ---- */
 function avNotes(){return`<div class="card stack avnotes" style="gap:10px"><p class="label" style="margin:0">🎚️ Où j'en suis · les 3 notes du trimestre</p>
   <p class="small" style="margin:0">3 notes de même coefficient. Mets les deux premières, puis la note que tu vises au prochain contrôle.</p>
-  <div class="row" style="gap:8px;flex-wrap:nowrap"><input class="avnin" id="avn1" type="number" inputmode="decimal" min="0" max="20" step="0.5" value="10.5" aria-label="Note 1"><input class="avnin" id="avn2" type="number" inputmode="decimal" min="0" max="20" step="0.5" value="10.5" aria-label="Note 2"><input class="avnin" id="avn3" type="number" inputmode="decimal" min="0" max="20" step="0.5" value="14" aria-label="Note 3 visée"></div>
+  <div class="row" style="gap:8px;flex-wrap:nowrap"><input class="avnin" id="avn1" type="number" inputmode="decimal" min="0" max="20" step="0.5" value="${avDoc().n[0]}" aria-label="Note 1"><input class="avnin" id="avn2" type="number" inputmode="decimal" min="0" max="20" step="0.5" value="${avDoc().n[1]}" aria-label="Note 2"><input class="avnin" id="avn3" type="number" inputmode="decimal" min="0" max="20" step="0.5" value="${avDoc().n[2]}" aria-label="Note 3 visée"></div>
   <div class="row" style="justify-content:space-between;align-items:baseline"><span class="small">Moyenne du trimestre</span><b class="num" id="avmoy" style="font-size:1.4rem">11,7</b></div>
   <p class="small" style="margin:0" id="avver"></p>
+  ${avRank()}
   <p class="small" style="margin:0"><b>Rebondir à Dauphine en L2</b> (Mathématiques appliquées ou Mathématiques-Informatique) : il faut avoir validé 60 ECTS dans un cursus universitaire analogue (une L1 de maths ou de maths-éco), puis candidater sur MyCandidature. Le dossier est jugé par une commission. Dauphine ne publie ni les notes attendues ni le nombre de places : demande-les à la scolarité. C'est ton classement en L1 qui décide, pas l'école d'origine.</p>
   <p class="muted small" style="margin:0">Repères, pas des probabilités : personne ne publie de taux d'admission en L2 selon la moyenne. Sources : pages d'admission L2 de Dauphine-PSL.</p></div>`}
 function avNotesCalc(){const g=i=>{const e=document.getElementById("avn"+i);return e?parseFloat(String(e.value).replace(",",".")):NaN},a=g(1),b=g(2),c=g(3),m=document.getElementById("avmoy"),v=document.getElementById("avver");if(!m||!v)return;
@@ -7418,6 +7422,30 @@ function avNotesCalc(){const g=i=>{const e=document.getElementById("avn"+i);retu
   const x=(a+b+c)/3;m.textContent=x.toFixed(1).replace(".",",");
   v.textContent=x>=14?"Niveau pour viser aussi les formations ambitieuses (TSE, Strasbourg, Lyon, Saclay), en gardant des vœux plus sûrs.":x>=12?"Niveau pour les doubles licences maths-éco plus accessibles (Nanterre, Orléans, Angers, Le Mans) ; une ambitieuse peut se tenter si la tendance monte.":"Pour l'instant, privilégie les vœux plus sûrs et le filet de sécurité, et fais monter la tendance avant la clôture des dossiers."}
 document.addEventListener("input",e=>{if(e.target&&e.target.classList&&e.target.classList.contains("avnin"))avNotesCalc()});
+
+/* ---- 2.32.1 : classement des facs selon mes notes + une note par fac ---- */
+const AV_FACS=[
+["tse","Toulouse School of Economics · Licence Économie-Maths",15,10,"Très sélective, très bonne passerelle vers les masters de finance."],
+["saclay","Université Paris-Saclay · Licence Maths (parcours maths-éco)",14,9,"Très bon niveau en maths, fort en maths appliquées."],
+["lyon","Lyon 1 / Lyon 2 · Double licence Maths-Éco",14,8,"Double licence solide, bonne réputation."],
+["sorb","Sorbonne Université · Licence Maths",13,9,"Maths pures et appliquées, à Paris."],
+["strasb","Strasbourg · Double licence Maths-Éco",13,8,"Reconnue, sélection sur dossier."],
+["pcite","Université Paris Cité · Licence Maths-Info / Maths-Éco",12,8,"À Paris, bon vivier pour un rebond."],
+["nant","Paris Nanterre · Maths-Éco / MIASHS",11,6,"Plus accessible, proche de Dauphine."],
+["orl","Orléans · Double licence Maths-Éco",11,6,"Accessible, bon encadrement."],
+["ang","Angers · Double licence Maths-Éco",10.5,5,"Accessible."],
+["mans","Le Mans · Double licence Maths-Éco",10,5,"Filet de sécurité."]];
+const avDoc=()=>{const d=drill("avfac")||{},n=Array.isArray(d.n)&&d.n.length===3?d.n.map(x=>x==null?NaN:x):[10.5,10.5,14];return{n,t:d.t||{}}};
+function avMoy(){const n=avDoc().n;return n.every(x=>isFinite(x))?(n[0]+n[1]+n[2])/3:NaN}
+function avRank(){const m=avMoy();if(!isFinite(m))return`<div id="avrank"></div>`;
+  const L=AV_FACS.map(f=>({f,g:m-f[2]})).filter(x=>x.g>=-2.5).sort((a,b)=>b.f[3]-a.f[3]||b.g-a.g),t=avDoc().t;
+  const lab=g=>g>=1?"✅ Très accessible":g>=-1?"🎯 Réaliste":"🚀 Ambitieux";
+  return`<div id="avrank" class="stack" style="gap:8px"><p class="label" style="margin:6px 0 0">🏆 Mon classement des facs pour moi (moyenne ${m.toFixed(1).replace(".",",")})</p>
+  <p class="muted small" style="margin:0">Classement du plus intéressant au plus sûr parmi celles à ta portée. Les niveaux demandés sont mes estimations à partir des moyennes d'admis souvent citées : ce ne sont pas des chiffres officiels, vérifie sur Parcoursup.</p>
+  ${L.length?L.map((x,i)=>`<div class="avfc"><div class="row" style="justify-content:space-between;gap:8px"><b>${i+1}. ${esc(x.f[1])}</b><span class="small">${lab(x.g)}</span></div><span class="small muted">${esc(x.f[4])} Niveau visé : environ ${String(x.f[2]).replace(".",",")}/20.</span><textarea class="avfn" data-avfn="${x.f[0]}" rows="2" placeholder="Mes notes sur cette fac…">${esc(t[x.f[0]]||"")}</textarea></div>`).join(""):`<p class="small">Avec cette moyenne, aucune des facs listées n'est encore à ta portée : fais monter les notes.</p>`}</div>`}
+document.addEventListener("input",e=>{const el=e.target;if(!el||!el.classList)return;
+  if(el.classList.contains("avnin")){const n=[1,2,3].map(i=>parseFloat(String((document.getElementById("avn"+i)||{}).value).replace(",",".")));const d=drill("avfac")||{};put("drill","avfac",{...d,n:n.map(x=>isFinite(x)?x:NaN)},true);const r=document.getElementById("avrank");if(r)r.outerHTML=avRank()}
+  if(el.classList.contains("avfn")){const d=drill("avfac")||{},t={...(d.t||{})};t[el.dataset.avfn]=el.value;put("drill","avfac",{...d,t},true)}});
 function avFac(){return`${avNotes()}${avReco()}<div class="card stack" style="gap:8px"><p class="label" style="margin:0">🌳 Toutes les formations, étape par étape</p>
   <p class="small" style="margin:0">1. Ta fac de l'an prochain (Parcoursup) → 2. un rebond en L2 ou en L3 → 3. un master ou une grande école → 4. le métier. Touche une formation pour la découvrir, puis choisis-la.</p>${avTree()}</div>`}
 function pagePs(){const t=AV_TABS.some(x=>x[0]===V.avTab)?V.avTab:"jeu";
@@ -9218,7 +9246,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION="2.32.0";
+const APP_VERSION = "2.32.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
