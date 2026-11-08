@@ -971,6 +971,12 @@ body:has(.notesapp){background:#f2f2f7}
 .avnin{flex:1;min-width:0;height:44px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);font:inherit;font-size:1.1rem;text-align:center}
 .avfc{display:flex;flex-direction:column;gap:4px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}
 .avfn{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;background:var(--bg,#fff);color:var(--ink);font:inherit;font-size:.9rem;padding:6px}
+/* 2.32.3 : palette Apex (noir + jaune doré) en mode sombre */
+@media (prefers-color-scheme:dark){:root:root:root:root:root:root:root:root:not([data-theme="light"]){--bg:#050506;--surface:#0e0e10;--soft:#18181b;--line:#27272b;--ink:#f3f3f1;--muted:#8d8d93;--accent:#fccc4e;--warn:#ff9f43;--hot:#fccc4e;--hotd:#a67c00;--onhot:#1a1400;--edge:#1c1c1f}
+:root:root:root:root:root:root:root:root:not([data-theme="light"]) .btn:not(.buy):not(.sell){color:#1a1400}}
+:root:root:root:root:root:root:root:root[data-theme="dark"]{--bg:#050506;--surface:#0e0e10;--soft:#18181b;--line:#27272b;--ink:#f3f3f1;--muted:#8d8d93;--accent:#fccc4e;--warn:#ff9f43;--hot:#fccc4e;--hotd:#a67c00;--onhot:#1a1400;--edge:#1c1c1f}
+:root:root:root:root:root:root:root:root[data-theme="dark"] .btn:not(.buy):not(.sell){color:#1a1400}
+:root:root:root:root:root:root:root:root:root[data-theme="dark"][data-black]{--bg:#000;--surface:#0a0a0b;--soft:#141416;--line:#232326}
 
 /* ================= 2.7.0 : une seule couleur, barre de navigation, pages plus courtes ================= */
 :root:root:root{--accent:#5b46e5;--warn:#c27c00;--info:#2d7ff0}
@@ -9246,7 +9252,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.32.2";
+const APP_VERSION = "2.32.3";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
