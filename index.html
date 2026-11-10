@@ -1614,6 +1614,7 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 :root:root:root:root:root:root:root:root:root:root[data-skin="journal"] .btn:not(.buy):not(.sell){background:#111;color:#fff}
 :root:root:root:root:root:root:root:root:root:root[data-skin="journal"] .btn:active{transform:none}
 :root[data-skin="journal"] h1,:root[data-skin="journal"] h2,:root[data-skin="journal"] h3{font-family:var(--display);font-weight:900;letter-spacing:-.01em;text-transform:none}
+.lck.hit{filter:brightness(1.35);transform:scale(.96)}
 /* 2.35.2 : accueil tout en noir et blanc (plus de trait orange, d'étoile jaune ni d'icônes colorées) */
 :root[data-skin="journal"] .wgbar i{background:#111!important}
 :root[data-skin="journal"] .wgbar i+i{background:#bdbdbd!important}
@@ -8986,13 +8987,21 @@ function lcNum(v){if(!isFinite(v))return"";const r=Math.abs(v)>=1e9||(v!==0&&Mat
 function lcPad(){const c=V.calc||(V.calc={x:"",r:""});
   return`<div class="card stack lcalc" style="gap:8px"><div class="lcd"><small id="lcx">${esc(c.x)||"&nbsp;"}</small><b id="lcr">${esc(c.r)||"0"}</b></div>
   <div class="lcgrid">${LC_KEYS.map(k=>`<button type="button" class="lck ${/[0-9,]/.test(k)?"n":k==="="?"eq":k==="C"?"cl":"o"}" data-lck="${k}" aria-label="${k}">${k}</button>`).join("")}</div>
-  <p class="muted small" style="margin:0">Taux de variation : (arrivée − départ) ÷ départ × 100. Tu peux aussi taper un nombre suivi de %.</p></div>`}
+  <p class="muted small" style="margin:0">Taux de variation : (arrivée − départ) ÷ départ × 100. Tu peux aussi taper un nombre suivi de %. Sur ordinateur, le clavier et le pavé numérique marchent : Entrée pour =, Suppr pour effacer.</p></div>`}
 function lcPress(k){const c=V.calc||(V.calc={x:"",r:""});
   if(k==="C"){c.x="";c.r=""}else if(k==="⌫")c.x=c.x.slice(0,-1);else if(k==="="){const v=coEval(c.x);if(isFinite(v)){c.r=lcNum(v);c.x=c.r}}else c.x+=k;
   if(k!=="="&&k!=="C"){const v=coEval(c.x);c.r=isFinite(v)&&/[+−×÷]/.test(c.x.replace(/^−/,""))?lcNum(v):c.r&&c.x?c.r:""}
   const x=document.getElementById("lcx"),r=document.getElementById("lcr");if(x)x.textContent=c.x||"\u00a0";if(r)r.textContent=c.r||"0"}
 document.addEventListener("mousedown",e=>{if(e.target.closest&&e.target.closest("[data-lck]"))e.preventDefault()});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-lck]");if(b){e.preventDefault();lcPress(b.dataset.lck)}});
+/* 2.36.0 : la calculette se pilote au clavier, pavé numérique compris (sauf quand tu écris dans une case) */
+const LC_MAP={"+":"+","-":"−","*":"×","x":"×","/":"÷",":":"÷",",":",",".":",","Decimal":",","Enter":"=","=":"=","Backspace":"⌫","Delete":"C","Escape":"C","(":"(",")":")","%":"%","^":"^"};
+document.addEventListener("keydown",e=>{if(e.ctrlKey||e.metaKey||e.altKey||e.isComposing)return;if(!document.querySelector(".lcalc"))return;
+  const t=e.target,tg=t&&t.tagName;if(tg==="INPUT"||tg==="TEXTAREA"||tg==="SELECT"||(t&&t.isContentEditable))return;
+  const nc=/^Numpad([0-9])$/.exec(e.code||""),NC={NumpadAdd:"+",NumpadSubtract:"−",NumpadMultiply:"×",NumpadDivide:"÷",NumpadDecimal:",",NumpadEnter:"="};
+  const k=nc?nc[1]:NC[e.code]||(/^[0-9]$/.test(e.key)?e.key:LC_MAP[e.key]);if(!k)return;
+  if(e.key==="Enter"&&t&&t.closest&&t.closest("button,a")&&!t.closest("[data-lck]"))return;
+  e.preventDefault();lcPress(k);const b=document.querySelector('[data-lck="'+k+'"]');if(b){b.classList.add("hit");setTimeout(()=>b.classList.remove("hit"),120)}});
 
 /* ================================================================
    2.28.0 : SAUVEGARDER / RESTAURER
@@ -9311,7 +9320,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.35.2";
+const APP_VERSION = "2.36.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
