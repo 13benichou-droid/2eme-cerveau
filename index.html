@@ -3275,13 +3275,15 @@ function jHwDone(x){return pnDoneAny(x)}
 function jTasks(d){
   const dk=dkey(d),P=jParams(dk),done=doneOf(d),od=(S.jours[dk]||{}).dur||{},out=[];
   const rp=(S.jours[dk]||{}).report||{};
+  /* 2.35.1 : un devoir « à avancer » enlevé de la journée ne revient plus (on regarde aussi les 2 jours suivants) */
+  const rpA={...rp,...((S.jours[dkey(add(d,1))]||{}).report||{}),...((S.jours[dkey(add(d,2))]||{}).report||{})};
   jExtras(dk).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,l:x.t,min:x.min||30,p:0,tag:"Ajouté"}));
   if(isWE(d)){const o=weBlock(d).find(y=>dkey(y)!==dk);if(o)jExtras(dkey(o)).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,dk:dkey(o),l:x.t,min:x.min||30,p:0,tag:"Ajouté "+(+o<+d?"samedi":"dimanche")}))}
   pnTasks(d).filter(x=>!jHwDone(x)&&!rp["pn|"+x.id]).forEach(x=>out.push({k:"pn",ref:x.id,l:`${x.m||"Devoir"} : ${String(x.txt||"devoir").split("\n")[0].slice(0,70)}`,min:jDur("devoir",P.devoir),p:1,tag:"Devoir pour demain"}));
   planOf(d).filter(h=>!done[h]&&!rp["hab|"+h]).forEach(h=>out.push(h==="sport"?{k:"hab",ref:h,l:"Sport (trajets compris)",min:jDur("sport",P.sportTrajet+P.sportDur),p:0.5,tag:`${P.sportDur} min + ${P.sportTrajet} min de trajets`}
     :{k:"hab",ref:h,l:habL(h),min:od[h]||jDur(h,jBase(h)),p:1+(JORD[h]||5)/10,tag:od[h]?"juste aujourd'hui":(jLearn()[h]||[]).length>=2?"ton temps réel":""}));
   /* devoirs des 2 jours suivants : à avancer s'il reste du temps */
-  for(let i=1;i<=2;i++)pnTasks(add(d,i)).filter(x=>!jHwDone(x)).forEach(x=>out.push({k:"pn",ref:x.id,dk:dkey(add(d,i)),l:`Avancer ${x.m||"un devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`,min:jDur("devoir",P.devoir),p:3+i,tag:"À avancer"}));
+  for(let i=1;i<=2;i++)pnTasks(add(d,i)).filter(x=>!jHwDone(x)&&!rpA["pn|"+x.id]).forEach(x=>out.push({k:"pn",ref:x.id,dk:dkey(add(d,i)),l:`Avancer ${x.m||"un devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`,min:jDur("devoir",P.devoir),p:3+i,tag:"À avancer"}));
   const pr=(S.jours[dk]||{}).prio||[];if(pr.length)out.forEach(x=>{const i=pr.indexOf(jKey(x));if(i>=0)x.p=-1+i*0.01});
   return out.sort((a,b)=>a.p-b.p);
 }
@@ -9299,7 +9301,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.35.0";
+const APP_VERSION = "2.35.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
