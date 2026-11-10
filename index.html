@@ -4413,7 +4413,7 @@ function planDay(d){
   /* blocs fixes pas encore placés (épinglés, ou repas dans la soirée) */
   fixed.filter(f=>!f.used&&(f.pin||(f.k==="repas"&&(f.a>=t||!live||f.b>nowM)))).forEach(f=>{f.used=1;plan.push({...f})});
   /* tâches déjà faites et épinglées : elles restent visibles à leur place */
-  Object.entries(pins).forEach(([k,p])=>{if(p.done&&p.b>p.a&&jIsDone(dk,k)&&!plan.some(s=>jKey(s)===k)){const a=k.indexOf("|");plan.push({k:k.slice(0,a),ref:k.slice(a+1),l:jLabelK(dk,k),a:p.a,b:p.b,pin:1,w:p.w,done:true,min:p.b-p.a})}});
+  Object.entries(pins).forEach(([k,p])=>{if(p.done&&!p.hid&&p.b>p.a&&jIsDone(dk,k)&&!plan.some(s=>jKey(s)===k)){const a=k.indexOf("|");plan.push({k:k.slice(0,a),ref:k.slice(a+1),l:jLabelK(dk,k),a:p.a,b:p.b,pin:1,w:p.w,done:true,min:p.b-p.a})}});
   plan.sort((x,y)=>x.a-y.a);
   const fin=plan.filter(jWork).reduce((m,s)=>Math.max(m,s.b),0)||t;
   return{dk,school,live,steps:live?[]:steps,steps0:steps,plan,reste:q,fin,stop,first:school?steps[0]:null};
@@ -4446,7 +4446,7 @@ function jOut(dk,key){const d=jDateOf(dk),j=jDayDoc(dk),a=key.indexOf("|"),kind=
   else if(kind==="auto"&&ref.startsWith("pause"))j.nap=true;
   else if(kind==="auto"&&ref.startsWith("libre"))j.nofree=true;
   V.jsel=null;return put("jours",dk,j)}
-function jDoneSet(dk,key,ok){const s=jFind(dk,key);if(s&&ok){const j=jDayDoc(dk);j.pin={...(j.pin||{}),[key]:{...((j.pin||{})[key]||{}),a:s.a,b:s.b,done:1}};S.jours[dk]=j}
+function jDoneSet(dk,key,ok){const s=jFind(dk,key);if(s&&ok){const j=jDayDoc(dk);j.pin={...(j.pin||{}),[key]:{...((j.pin||{})[key]||{}),a:s.a,b:s.b,done:1,hid:0}};S.jours[dk]=j}
   if(!ok){const j=jDayDoc(dk);if(j.pin&&j.pin[key]){j.pin={...j.pin,[key]:{...j.pin[key],done:0}};S.jours[dk]=j}}
   return jMark(dk,key,ok)}
 /* « chaque lundi à cette heure » : épingle dans l'emploi du temps de la semaine */
@@ -4505,7 +4505,7 @@ function jSheet(d,pl){if(!V.jsel||V.jselDk!==dkey(d))return"";const dk=dkey(d),k
     <div class="row">${w?(s.done?`<button class="ghost" data-jfait="0">↺ Pas fait</button>`:`<button class="btn" data-jfait="1">✓ Fait</button>${isT&&!s.run?`<button class="ghost on" data-jstart="${esc(key)}">▶ Commencer</button>`:""}`):""}
       ${!s.done&&(w||s.k==="repas"||s.step)?`<button class="ghost ${wk?"on":""}" data-jweek="1">📌 ${wk?"Plus chaque "+wd:"Chaque "+wd}</button>`:""}
       ${s.pin&&!s.done&&!wk?`<button class="ghost" data-jauto="1">✨ Remettre en automatique</button>`:""}
-      <button class="ghost danger" data-jout="1">Enlever de la journée</button></div>${s.auto?`<p class="small muted" style="margin:0">${s.k==="pause"?"Déplace-la ou change sa durée : elle devient à toi, et l'appli n'ajoute plus de pauses toute seule aujourd'hui":"Déplace-le ou change sa durée : il devient à toi, et l'appli ne rajoute plus de temps libre toute seule aujourd'hui"}.</p>`:""}${s.step?`<div class="row"><button class="ghost on" data-jnoschool="${dk}">🏖️ Pas cours ce jour-là</button></div><p class="small muted" style="margin:0">Grève, blocus, prof absent : touche « Pas cours ce jour-là » et la journée devient une journée libre. Si un seul cours saute, ajuste les horaires ici.</p>`:""}</div>`}
+      <button class="ghost danger" data-jout="1">Enlever de la journée</button>${s.done?`<button class="ghost on" data-jrange="1" title="Le bloc quitte le planning, la tâche reste cochée dans ton suivi d'habitudes">🧹 Ranger (reste fait)</button>`:""}</div>${s.auto?`<p class="small muted" style="margin:0">${s.k==="pause"?"Déplace-la ou change sa durée : elle devient à toi, et l'appli n'ajoute plus de pauses toute seule aujourd'hui":"Déplace-le ou change sa durée : il devient à toi, et l'appli ne rajoute plus de temps libre toute seule aujourd'hui"}.</p>`:""}${s.step?`<div class="row"><button class="ghost on" data-jnoschool="${dk}">🏖️ Pas cours ce jour-là</button></div><p class="small muted" style="margin:0">Grève, blocus, prof absent : touche « Pas cours ce jour-là » et la journée devient une journée libre. Si un seul cours saute, ajuste les horaires ici.</p>`:""}</div>`}
 function pageJour(){
   const d=V.jdk?jDateOf(V.jdk):today();V.jdk=dkey(d);
   const isT=V.jdk===dkey(today()),pl=planDay(d),{cur,next}=isT?jCurrent(pl):{};
@@ -4603,6 +4603,8 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(d.jweek)return jWeekPin(dk,key);
   if(d.jauto){V.jsel=null;return jPinSet(dk,key,null)}
   if(d.jout)return jOut(dk,key);
+  /* 2.36.1 : « Ranger » : une tâche faite quitte le planning mais reste cochée */
+  if(d.jrange){const j=jDayDoc(dk),s=jFind(dk,key);j.pin={...(j.pin||{}),[key]:{...((j.pin||{})[key]||{}),...(s?{a:s.a,b:s.b}:{}),done:1,hid:1}};V.jsel=null;return put("jours",dk,j)}
 });
 
 /* ================================================================
@@ -9320,7 +9322,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.36.0";
+const APP_VERSION = "2.36.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
