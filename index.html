@@ -1614,6 +1614,16 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 :root:root:root:root:root:root:root:root:root:root[data-skin="journal"] .btn:not(.buy):not(.sell){background:#111;color:#fff}
 :root:root:root:root:root:root:root:root:root:root[data-skin="journal"] .btn:active{transform:none}
 :root[data-skin="journal"] h1,:root[data-skin="journal"] h2,:root[data-skin="journal"] h3{font-family:var(--display);font-weight:900;letter-spacing:-.01em;text-transform:none}
+/* 2.35.2 : accueil tout en noir et blanc (plus de trait orange, d'étoile jaune ni d'icônes colorées) */
+:root[data-skin="journal"] .wgbar i{background:#111!important}
+:root[data-skin="journal"] .wgbar i+i{background:#bdbdbd!important}
+:root:root:root[data-skin="journal"] .axxp,:root:root:root[data-skin="journal"] .axfire,:root:root:root[data-skin="journal"] .axlv{color:#111}
+:root:root:root[data-skin="journal"] .axqi,:root:root:root[data-skin="journal"] .axqi.q1,:root:root:root[data-skin="journal"] .axqi.q2,:root:root:root[data-skin="journal"] .axqi.q3,:root:root:root[data-skin="journal"] .axqi.q4{background:#fff;color:#111;border:1.5px solid #111}
+:root:root:root[data-skin="journal"] .axq.ok .axqi{background:#111;color:#fff}
+:root[data-skin="journal"] .axqbar{background:#e6e6e6}
+:root[data-skin="journal"] .axqbar i{background:#111}
+:root[data-skin="journal"] .gear{filter:grayscale(1)}
+:root:root:root[data-skin="journal"] .axq{border-width:1.5px}
 </style>
 <script src="config.js"></script>
 </head>
@@ -9301,7 +9311,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.35.1";
+const APP_VERSION = "2.35.2";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
