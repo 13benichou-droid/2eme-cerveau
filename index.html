@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-title" content="2e cerveau">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0;-webkit-text-size-adjust:100%}
@@ -1603,6 +1603,17 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 .lck.o{background:color-mix(in srgb,var(--c,#d99a00) 22%,var(--surface))}.lck.eq{background:var(--c,#d99a00);color:#fff;font-weight:700}.lck.cl{color:#e5484d;font-weight:700}
 .lck:active{filter:brightness(.92)}
 .chip.ok{color:var(--ok,#1a8f4c)}
+
+/* ================= 2.35.0 : thème « Journal » (noir sur blanc, angles droits, titres Playfair) ================= */
+:root:root:root:root:root:root:root:root:root:root[data-skin="journal"]{
+  --bg:#ffffff;--surface:#ffffff;--soft:#f2f2f2;--line:#111111;--ink:#111111;--muted:#5c5c5c;
+  --accent:#111111;--hot:#111111;--hotd:#111111;--onhot:#ffffff;--edge:#111111;--warn:#8a4b00;--info:#111111;
+  --hab:#111111;--proj:#111111;--fin:#111111;--lect:#111111;--cours:#111111;--sport:#111111;--jour:#111111;--obj:#111111;--pron:#111111;--idee:#111111;--cg:#111111;
+  --display:"Playfair Display",Georgia,serif;--body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--tint:0%;color-scheme:light}
+:root[data-skin="journal"] *,:root[data-skin="journal"] *::before,:root[data-skin="journal"] *::after{border-radius:0!important;box-shadow:none!important}
+:root:root:root:root:root:root:root:root:root:root[data-skin="journal"] .btn:not(.buy):not(.sell){background:#111;color:#fff}
+:root:root:root:root:root:root:root:root:root:root[data-skin="journal"] .btn:active{transform:none}
+:root[data-skin="journal"] h1,:root[data-skin="journal"] h2,:root[data-skin="journal"] h3{font-family:var(--display);font-weight:900;letter-spacing:-.01em;text-transform:none}
 </style>
 <script src="config.js"></script>
 </head>
@@ -3542,14 +3553,15 @@ const habL=h=>habN(h)+(((HABITS[h]||[])[1])==="fiche"?" (fiche)":"");
 function jBase(h){const d=(edtP().dur||{})[h];if(d>0)return d;const c=(edtP().custom||{})[h];return(c&&c.min)||JDUR[h]||30}
 /* apparence : auto (comme le téléphone), clair, sombre, noir (noir pur, parfait pour l'écran OLED de l'iPhone) */
 function themeSync(){const t=appP().theme,r=document.documentElement;axSync();const ax=axOn();
-  if(t==="light"||t==="dark")r.dataset.theme=t;else if(t==="black")r.dataset.theme="dark";else delete r.dataset.theme;
+  if(t==="light"||t==="dark")r.dataset.theme=t;else if(t==="black")r.dataset.theme="dark";else if(t==="journal")r.dataset.theme="light";else delete r.dataset.theme;
+  if(t==="journal")r.dataset.skin="journal";else delete r.dataset.skin;
   if(t==="black")r.dataset.black="1";else delete r.dataset.black;
-  const dark=t==="dark"||t==="black"||(t!=="light"&&!!window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches),mc=document.querySelector('meta[name="theme-color"]');
-  if(mc){const c=t==="black"?"#000000":dark?(ax?"#0f0f0f":"#0e1218"):(ax?"#ffffff":"#7a5cff");if(mc.content!==c)mc.content=c}}
-const THEMES=[["auto","📱 Auto"],["light","☀️ Clair"],["dark","🌙 Sombre"],["black","⚫ Noir"]];
+  const dark=t==="dark"||t==="black"||(t!=="light"&&t!=="journal"&&!!window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches),mc=document.querySelector('meta[name="theme-color"]');
+  if(mc){const c=t==="journal"?"#ffffff":t==="black"?"#000000":dark?(ax?"#0f0f0f":"#0e1218"):(ax?"#ffffff":"#7a5cff");if(mc.content!==c)mc.content=c}}
+const THEMES=[["auto","📱 Auto"],["light","☀️ Clair"],["dark","🌙 Sombre"],["black","⚫ Noir"],["journal","📰 Journal"]];
 function themeCard(){const t=appP().theme||"auto";return styleCard()+`<div class="card stack" style="gap:10px"><p class="label" style="margin:0">🎨 Apparence</p>
   <div class="seg themeseg" role="group" aria-label="Apparence">${THEMES.map(([k,l])=>`<button data-themeset="${k}" aria-pressed="${t===k}">${l}</button>`).join("")}</div>
-  <p class="muted small" style="margin:0">${t==="black"?"Noir pur : plus reposant le soir et ça économise la batterie de l'iPhone.":t==="auto"?"Clair le jour, sombre quand ton téléphone passe en mode sombre.":"Le choix vaut aussi sur ton autre appareil (après synchronisation)."}</p></div>`}
+  <p class="muted small" style="margin:0">${t==="journal"?"Journal : noir sur blanc, angles droits, titres comme dans un journal.":t==="black"?"Noir pur : plus reposant le soir et ça économise la batterie de l'iPhone.":t==="auto"?"Clair le jour, sombre quand ton téléphone passe en mode sombre.":"Le choix vaut aussi sur ton autre appareil (après synchronisation)."}</p></div>`}
 /* tuiles de l'accueil : ordre, noms et tuiles cachées viennent de tes suggestions */
 /* tuiles cachées : celles que tu as cachées + Maths (cachée par défaut depuis la 1.6.0, « Afficher » la fait revenir) */
 /* rubriques cachées par défaut (on peut les réafficher dans Suggestions) : 2.17.0, Python et le mode maths sont mis de côté pour l'instant */
@@ -9287,7 +9299,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.34.0";
+const APP_VERSION = "2.35.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
