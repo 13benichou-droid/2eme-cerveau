@@ -4478,7 +4478,7 @@ function jSheet(d,pl){if(!V.jsel||V.jselDk!==dkey(d))return"";const dk=dkey(d),k
     ${s.done?`<p class="small muted">Fait de ${fmin(s.a)} à ${fmin(s.b)}.</p>`:`<div class="jadj"><span>Début <b class="num">${fmin(s.a)}</b></span><button class="ghost" data-jadj="a|-5">−5</button><button class="ghost" data-jadj="a|5">+5</button>
       <span>Fin <b class="num">${fmin(s.b)}</b></span><button class="ghost" data-jadj="b|-5">−5</button><button class="ghost" data-jadj="b|5">+5</button></div>`}
     <div class="row">${w?(s.done?`<button class="ghost" data-jfait="0">↺ Pas fait</button>`:`<button class="btn" data-jfait="1">✓ Fait</button>${isT&&!s.run?`<button class="ghost on" data-jstart="${esc(key)}">▶ Commencer</button>`:""}`):""}
-      ${!s.done&&(w||s.k==="repas"||s.step)?`<button class="ghost ${wk?"on":""}" data-jweek="1">📌 ${wk?"Plus chaque "+wd:"Chaque "+wd+" à cette heure"}</button>`:""}
+      ${!s.done&&(w||s.k==="repas"||s.step)?`<button class="ghost ${wk?"on":""}" data-jweek="1">📌 ${wk?"Plus chaque "+wd:"Chaque "+wd}</button>`:""}
       ${s.pin&&!s.done&&!wk?`<button class="ghost" data-jauto="1">✨ Remettre en automatique</button>`:""}
       <button class="ghost danger" data-jout="1">Enlever de la journée</button></div>${s.auto?`<p class="small muted" style="margin:0">${s.k==="pause"?"Déplace-la ou change sa durée : elle devient à toi, et l'appli n'ajoute plus de pauses toute seule aujourd'hui":"Déplace-le ou change sa durée : il devient à toi, et l'appli ne rajoute plus de temps libre toute seule aujourd'hui"}.</p>`:""}${s.step?`<div class="row"><button class="ghost on" data-jnoschool="${dk}">🏖️ Pas cours ce jour-là</button></div><p class="small muted" style="margin:0">Grève, blocus, prof absent : touche « Pas cours ce jour-là » et la journée devient une journée libre. Si un seul cours saute, ajuste les horaires ici.</p>`:""}</div>`}
 function pageJour(){
@@ -5859,7 +5859,9 @@ function srsNote(id){if(id.startsWith("x:"))return EX_MAP.get(id)||null;if(id.st
 /* tes cartes d'abord (dans l'ordre où tu les as ajoutées), puis les mots du cours */
 function srsNotes(deck){const N=Object.entries(srsDoc().notes||{}).filter(([,n])=>n&&!n.del&&n.d===deck).sort((a,b)=>(a[1].ts||0)-(b[1].ts||0)).map(([id,n])=>({id,...n}));
   if(deck==="en"){const C=srsCards();EG_VALL.forEach(w=>{if(srsVocOk(w,C))N.push({id:"v:"+w.en,d:"en",f:w.en,b:w.fr,th:w.th,bi:1})})}
-  if(deck==="xq"||deck==="xf"||deck==="mg")EX_NOTES.forEach(n=>{if(n.d===deck)N.push(n)});return N}
+  if(deck==="xq"||deck==="xf"||deck==="mg")EX_NOTES.forEach(n=>{if(n.d===deck)N.push(n)});
+  /* 2.34.0 : « Cartes de vocabulaire » reprend aussi les expressions du quotidien, de la finance et le Méga vocabulaire */
+  if(deck==="en")["xq","xf","mg"].forEach(k=>EX_NOTES.forEach(n=>{if(n.d===k)N.push(n)}));return N}
 const srsCids=(n,D)=>n.bi||n.r===1||(n.r==null&&D&&D.both)?[n.id+">0",n.id+">1"]:[n.id+">0"];
 const srsIsNew=c=>!c||!c.s;
 /* le sens inverse (français → anglais) arrive seulement quand le premier sens est appris, et pas le même jour */
@@ -5868,10 +5870,10 @@ function srsNewOk(cid,C){if(cid.endsWith(">0"))return true;const s=C[cid.slice(0
 /* les deux sens d'un même mot ne passent jamais le même jour (comme « enterrer les cartes sœurs » dans Anki) */
 const srsSib=cid=>cid.slice(0,-1)+(cid.endsWith(">0")?"1":"0");
 function srsLog(dk){const r=(srsDoc().rev||{})[todayK()]||{};return r[dk]||{n:0,r:0,a:0,ok:0}}
-function srsScan(deck){const D=srsDecks()[deck],learn=[],rev=[],fresh=[];let tot=0,known=0;
+function srsScan(deck){const DKS=srsDecks(),D=DKS[deck],learn=[],rev=[],fresh=[];let tot=0,known=0;
   if(!D)return{learn,rev,fresh,tot,known,revLeft:0};
   const C=srsCards(),t=todayK(),lg=srsLog(deck),newLeft=Math.max(0,(D.nd??10)-lg.n);
-  for(const n of srsNotes(deck))for(const cid of srsCids(n,D)){const c=C[cid];tot++;if(c&&c.sus)continue;
+  for(const n of srsNotes(deck))for(const cid of srsCids(n,(n.d&&n.d!==deck&&DKS[n.d])||D)){const c=C[cid];tot++;if(c&&c.sus)continue;
     const sc=C[srsSib(cid)],bur=!!(sc&&sc.last===t&&!(c&&(c.s===1||c.s===3)));
     if(srsIsNew(c)){if(!bur&&fresh.length<newLeft&&srsNewOk(cid,C))fresh.push(cid);continue}
     if(c.s===2&&c.ivl>=7)known++;
@@ -6345,7 +6347,7 @@ function egHome(){const lv=egLv(),doc=egDoc(),td=egToday(),c=srsCount("en"),todo
     <p class="muted small">Chaque leçon validée (4/6) débloque la suivante. Leçon conseillée : <b>${esc(EG_U[u].t)}</b>.</p><div class="row"><button class="btn" data-eggram="${u}">Ouvrir la leçon conseillée</button><button class="ghost on" data-egoral="1">🎙️ Oral : dire des phrases</button></div></details>`;
   if(!lv)return`<div class="card stack egcard"><p class="label" style="margin:0">🇬🇧 Anglais</p><h3 class="egt">Commence par le test de niveau</h3>
     <p style="margin:0">Des questions de plus en plus difficiles (A1 → C2) pour trouver ton vrai niveau. Ensuite, chaque jour, une séance réglée sur toi : cartes de vocabulaire, traduction, écoute et résumé.</p>
-    <div class="row"><button class="btn" data-etgo="1">🎯 Faire le test (10-25 min)</button><button class="ghost on" data-srsgo="en|en">Juste les cartes${todo?` (${todo})`:""}</button></div></div>${wgSafe(toeflCard)}${exCard()}${gram}`;
+    <div class="row"><button class="btn" data-etgo="1">🎯 Faire le test (10-25 min)</button><button class="ghost on" data-srsgo="en|en">Juste les cartes${todo?` (${todo})`:""}</button></div></div>${wgSafe(toeflCard)}${gram}`;
   const li=egLvI(),t=(doc.tests||[]).slice(-1)[0],w=egWeek(),done=[td.v&&!todo,!!td.t,!!td.l,!!td.r],n=done.filter(Boolean).length,artOk=li>=2&&typeof enArt==="function"&&enArt();
   return`<div class="card stack egcard"><div class="row" style="justify-content:space-between;align-items:flex-start"><div><p class="label" style="margin:0">Ton niveau</p><p class="eglvl"><b>${lv}</b> <span class="muted small">${esc(EN_LVN[lv].split(" · ")[1]||"")}${doc.lvlNear&&li<5?` · presque ${EN_LV[li+1]}`:""}</span></p></div><span class="muted small">${stk?`🔥 ${stk} jour${stk>1?"s":""}`:""}</span></div>
     ${etLadder(li,doc.lvlNear)}<p class="muted small" style="margin:0">Objectif : <b>C1 au TOEFL iBT</b> pour le Master 203, puis C2.${t?` Test du ${fdate(t.d)}.`:""} <button class="linkb" data-etgo="1">Refaire le test</button></p>
@@ -6356,7 +6358,7 @@ function egHome(){const lv=egLv(),doc=egDoc(),td=egToday(),c=srsCount("en"),todo
     ${step(3,"🎧","Écoute","un texte à comprendre + 3 phrases en dictée",done[2],`<button class="${done[2]?"ghost":"btn"}" data-elsgo="1">${done[2]?"Encore":"Commencer"}</button>`)}
     ${step(4,"✍️","Résumé",`lis un texte et résume-le en anglais${artOk?" (ou l'article du jour)":""}`,done[3],`<div class="stack" style="gap:6px;align-items:flex-end"><button class="${done[3]?"ghost":"btn"}" data-ersgo="ls">${done[3]?"Encore":"Commencer"}</button>${artOk?`<button class="linkb small" data-ersgo="art">l'article du jour</button>`:""}</div>`)}
     <p class="muted small" style="margin:0">Environ 25 minutes. Le plus important : un peu chaque jour.</p></div>
-  ${wgSafe(toeflCard)}${exCard()}
+  ${wgSafe(toeflCard)}
   ${w.tr!=null||w.ls!=null||w.rs!=null?`<div class="card stack" style="gap:6px"><p class="label" style="margin:0">📈 Tes 7 derniers jours</p><p class="small" style="margin:0">${w.tr!=null?`Traduction : <b>${w.tr} %</b> (${w.ntr} phrases)`:""}${w.ls!=null?` · Écoute : <b>${w.ls} %</b>`:""}${w.rs!=null?` · Résumés : <b>${w.rs}/10</b>`:""} · <b>${c.known}</b> cartes bien sues</p></div>`:""}
   ${eneCard()}
   ${gram}`}
@@ -9285,7 +9287,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.33.1";
+const APP_VERSION = "2.34.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
