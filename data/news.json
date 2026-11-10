@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-09T06:37:47.490Z",
+ "updated": "2026-11-10T13:44:50.724Z",
  "snap": {
-  "date": "2026-11-06",
+  "date": "2026-11-10",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 139",
-    "c": "−0,81 %"
+    "v": "8 333",
+    "c": "+1,22 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 377",
-    "c": "+0,31 %"
+    "v": "7 550",
+    "c": "+2,35 %"
    },
    {
     "n": "Nasdaq",
-    "v": "24 579",
-    "c": "+1,09 %"
+    "v": "25 253",
+    "c": "+2,74 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "25,64",
-    "c": "−9,01 %"
+    "v": "20,03",
+    "c": "+0,55 %"
    },
    {
     "n": "Brent",
-    "v": "96,9 $",
-    "c": "−1,44 %"
+    "v": "89,5 $",
+    "c": "−3,27 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "90,0 $",
-    "c": "−0,96 %"
+    "v": "84,4 $",
+    "c": "−2,81 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 125 $",
-    "c": "+1,23 %"
+    "v": "4 057 $",
+    "c": "−1,40 %"
    },
    {
     "n": "Bitcoin",
-    "v": "74 147 $",
-    "c": "−2,11 %"
+    "v": "73 806 $",
+    "c": "−1,88 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,86 %",
-    "c": "+0,02 pt"
+    "v": "4,90 %",
+    "c": "+0,04 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,117",
-    "c": "−0,55 %"
+    "v": "1,119",
+    "c": "+0,42 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-10-projet-d-introduction-en-bourse-pour-l-e",
+   "src": "Le Figaro",
+   "date": "2026-11-10",
+   "url": "https://www.lefigaro.fr/secteur/high-tech/anthropic-prevoit-de-lever-jusqu-a-64-milliards-de-dollars-pour-son-entree-en-bourse-20261110",
+   "t": {
+    "fr": "Projet d'introduction en Bourse pour l'entreprise Anthropic",
+    "en": "Anthropic Prepares for Initial Public Offering"
+   },
+   "s": {
+    "fr": "La société créatrice de l'intelligence artificielle Claude envisage de lever jusqu'à 64 milliards de dollars à l'occasion de son entrée en Bourse. Sa valorisation estimée pourrait atteindre 1 400 milliards de dollars, un montant revu en baisse face aux turbulences récentes du secteur.",
+    "en": "The developer behind the Claude AI technology is planning an IPO to gather up to $64 billion. Its projected market valuation of $1.4 trillion reflects a downward revision amid current volatility in the artificial intelligence sector."
+   },
+   "d": {
+    "fr": "Une introduction en Bourse permet à une jeune entreprise de collecter de nouveaux capitaux auprès des investisseurs du monde entier. La baisse de l'estimation de valorisation indique une prudence accrue des marchés financiers quant aux perspectives d'avenir de la tech.",
+    "en": "An initial public offering allows a growing tech company to raise fresh capital directly from public investors. Lowering valuation targets signals increased market caution regarding future profitability in the tech sector."
+   },
+   "v": [
+    [
+     "Introduction en Bourse",
+     "Initial Public Offering (IPO)"
+    ],
+    [
+     "Levée de fonds",
+     "Fundraising"
+    ],
+    [
+     "Valorisation",
+     "Valuation"
+    ],
+    [
+     "Volatilité",
+     "Volatility"
+    ]
+   ],
+   "q": {
+    "fr": "Pour quelle raison la valorisation visée par Anthropic a-t-elle été ajustée à la baisse ?",
+    "en": "Why was Anthropic's estimated valuation revised downwards before its public listing?"
+   },
+   "r": {
+    "fr": "Les marchés boursiers connaissent actuellement des hésitations et un climat d'incertitude concernant les valeurs liées à l'intelligence artificielle.",
+    "en": "Stock markets are currently experiencing turbulence and caution surrounding artificial intelligence stocks."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-10-recul-des-prix-du-baril-de-petrole-sous-",
+   "src": "Le Figaro",
+   "date": "2026-11-10",
+   "url": "https://www.lefigaro.fr/conjoncture/petrole-le-prix-du-baril-de-brent-repasse-sous-les-90-dollars-20261110",
+   "t": {
+    "fr": "Recul des prix du baril de pétrole sous le seuil des 90 dollars",
+    "en": "Crude Oil Prices Drop Below the $90 Threshold"
+   },
+   "s": {
+    "fr": "Le cours du pétrole brut Brent est repassé sous la barre des 90 dollars le baril. Ce repli s'explique par un regain d'optimisme des acteurs du marché concernant un possible apaisement des relations entre Téhéran et Washington.",
+    "en": "Brent crude oil prices dropped back under $90 per barrel. This decrease is driven by growing market optimism surrounding potential diplomatic progress between Tehran and Washington."
+   },
+   "d": {
+    "fr": "Les matières premières énergétiques réagissent de manière immédiate aux spéculations et aux risques géopolitiques. Lorsque les craintes de tensions géopolitiques s'atténuent, la prime de risque diminue, entraînant une baisse des cours.",
+    "en": "Energy commodities react instantly to geopolitical updates and market expectations. As fears of conflict ease, the geopolitical risk premium drops, pushing prices down."
+   },
+   "v": [
+    [
+     "Pétrole brut",
+     "Crude oil"
+    ],
+    [
+     "Baril",
+     "Barrel"
+    ],
+    [
+     "Prime de risque",
+     "Risk premium"
+    ],
+    [
+     "Matière première",
+     "Commodity"
+    ]
+   ],
+   "q": {
+    "fr": "Quel élément a favorisé la baisse des cours du pétrole selon les marchés ?",
+    "en": "What factor contributed to the decline in oil prices according to market participants?"
+   },
+   "r": {
+    "fr": "La perspective renforcée d'un accord diplomatique entre l'Iran et les États-Unis a rassuré les investisseurs.",
+    "en": "The higher likelihood of a diplomatic agreement between Iran and the United States reassured investors."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-10-restructuration-de-la-dette-du-groupe-de",
+   "src": "Le Figaro",
+   "date": "2026-11-10",
+   "url": "https://www.lefigaro.fr/societes/casino-daniel-kretinsky-trouve-un-accord-avec-les-creanciers-et-assoit-sa-domination-sur-le-distributeur-20261110",
+   "t": {
+    "fr": "Restructuration de la dette du groupe de distribution Plesio",
+    "en": "Debt Restructuring Agreement for Retailer Plesio"
+   },
+   "s": {
+    "fr": "Le groupe de grande distribution Plesio, anciennement nommé Casino, a conclu un compromis avec ses créanciers pour ramener sa dette de 1,4 milliard à 800 millions d'euros. Dans ce cadre, l'investisseur Daniel Kretinsky augmente sa part de capital pour atteindre 84,9 %.",
+    "en": "Retail company Plesio, formerly known as Casino, reached a deal with creditors to reduce its debt from 1.4 billion to 800 million euros. Under the agreement, investor Daniel Kretinsky expands his shareholding to 84.9%."
+   },
+   "d": {
+    "fr": "Une restructuration financière permet à une entreprise surendettée d'aménager son passif afin d'éviter la faillite. Le renforcement de la part de l'actionnaire principal consolide la prise de contrôle au détriment des anciens investisseurs.",
+    "en": "Financial restructuring allows a heavily indebted business to reorganize its obligations to prevent bankruptcy. Increasing a majority shareholder's stake secures corporate ownership at the expense of early investors."
+   },
+   "v": [
+    [
+     "Restructuration de dette",
+     "Debt restructuring"
+    ],
+    [
+     "Créancier",
+     "Creditor"
+    ],
+    [
+     "Participation au capital",
+     "Equity stake"
+    ],
+    [
+     "Actionnaire majoritaire",
+     "Majority shareholder"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'impact principal de l'accord sur le niveau d'endettement de Plesio ?",
+    "en": "What is the primary impact of the deal on Plesio's overall debt level?"
+   },
+   "r": {
+    "fr": "L'accord signé permet d'alléger la dette globale de l'entreprise de 600 millions d'euros.",
+    "en": "The signed agreement reduces the company's total debt load by 600 million euros."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-09-enquete-interne-sur-le-patron-de-nvidia-",
    "src": "Le Monde",
@@ -1270,155 +1405,20 @@
     "en": "It is the rise in interest rates."
    },
    "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-27-l-entree-en-bourse-d-anthropic-relance-l",
-   "src": "Yahoo Finance",
-   "date": "2026-10-27",
-   "url": "https://finance.yahoo.com/technology/ai/articles/asia-stocks-jump-anthropic-ipo-030941469.html?.tsrc=rss",
-   "t": {
-    "fr": "L'entrée en bourse d'Anthropic relance le secteur de l'IA",
-    "en": "Anthropic IPO Filing Revives AI Sector"
-   },
-   "s": {
-    "fr": "Le projet d'introduction en bourse de la jeune pousse Anthropic a relancé l'intérêt pour l'intelligence artificielle. Cela a entraîné une hausse des titres technologiques et des marchés asiatiques. Ce rebond survient juste avant plusieurs réunions de banques centrales et la publication de résultats d'entreprises.",
-    "en": "The initial public offering filing by startup Anthropic has renewed enthusiasm for artificial intelligence. This triggered a surge in technology stocks and Asian markets. This rally comes ahead of several central bank meetings and key corporate earnings announcements."
-   },
-   "d": {
-    "fr": "Une annonce majeure concernant une entreprise phare peut dynamiser l'ensemble d'un secteur sur les marchés. Pour un débutant, observer ces effets d'entraînement aide à comprendre les mouvements collectifs des actions.",
-    "en": "A major announcement regarding a flagship company can energize an entire sector across financial markets. For a beginner, observing these ripple effects helps in understanding collective stock movements."
-   },
-   "v": [
-    [
-     "Introduction en bourse",
-     "Initial public offering"
-    ],
-    [
-     "Action technologique",
-     "Tech stock"
-    ],
-    [
-     "Résultats d'entreprises",
-     "Corporate earnings"
-    ],
-    [
-     "Banque centrale",
-     "Central bank"
-    ]
-   ],
-   "q": {
-    "fr": "Quel événement a stimulé les marchés asiatiques au début de la semaine ?",
-    "en": "What event boosted Asian markets at the start of the week?"
-   },
-   "r": {
-    "fr": "C'est l'annonce du projet d'introduction en bourse de la société d'IA Anthropic.",
-    "en": "It was the announcement of the IPO filing by the AI company Anthropic."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-27-hsbc-lance-un-rachat-d-actions-de-1-mill",
-   "src": "Le Figaro",
-   "date": "2026-10-27",
-   "url": "https://www.lefigaro.fr/societes/hsbc-annonce-un-plan-de-rachat-d-actions-d-un-milliard-de-dollars-20261027",
-   "t": {
-    "fr": "HSBC lance un rachat d'actions de 1 milliard de dollars",
-    "en": "HSBC Announces $1 Billion Share Buyback Plan"
-   },
-   "s": {
-    "fr": "Le groupe bancaire HSBC a révélé un programme visant à racheter pour un milliard de dollars de ses propres actions. Cette décision est communiquée alors que les résultats nets du troisième trimestre 2026 sont ressortis en dessous des prévisions. Le marché financier n'a donc pas vu ses attentes comblées sur le plan des bénéfices.",
-    "en": "Banking group HSBC disclosed a plan to buy back one billion dollars worth of its own shares. This decision was released alongside third-quarter 2026 net profits that fell short of market forecasts. Investors had anticipated higher earnings performance for this period."
-   },
-   "d": {
-    "fr": "Un rachat d'actions permet à une société de diminuer le nombre de ses titres en circulation pour essayer de soutenir leur valeur. C'est une stratégie fréquente pour rassurer les investisseurs après des résultats financiers décevants.",
-    "en": "A share buyback enables a company to reduce the supply of its stock to help support its trading price. It is a common strategy to reassure investors after disappointing earnings results."
-   },
-   "v": [
-    [
-     "Rachat d'actions",
-     "Share buyback"
-    ],
-    [
-     "Bénéfice net",
-     "Net profit"
-    ],
-    [
-     "Troisième trimestre",
-     "Third quarter"
-    ],
-    [
-     "Attentes du marché",
-     "Market expectations"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi la décision de HSBC survient-elle dans un contexte particulier ?",
-    "en": "Why does HSBC's decision come in a specific context?"
-   },
-   "r": {
-    "fr": "Parce qu'elle intervient juste après la publication d'un bénéfice net plus faible que prévu.",
-    "en": "Because it arrives right after the publication of lower-than-expected net profit."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-27-chute-de-la-monnaie-bresilienne-face-aux",
-   "src": "Financial Times",
-   "date": "2026-10-27",
-   "url": "https://www.ft.com/content/0231b234-14dc-4ff0-8263-e1063b0a25d5?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Chute de la monnaie brésilienne face aux inquiétudes budgétaires",
-    "en": "Brazilian Currency Drops Amid Fiscal Management Concerns"
-   },
-   "s": {
-    "fr": "Le Brésil fait face à des secousses financières provoquées par des doutes sur la conduite économique du gouvernement de Lula. Ces inquiétudes ont causé la plus forte baisse journalière de la monnaie nationale depuis plus d'un quart de siècle. La situation politique et fiscale pèse lourdement sur la confiance des investisseurs.",
-    "en": "Brazil is experiencing financial distress caused by doubts regarding the economic management of Lula's administration. These concerns triggered the worst single-day decline for the national currency in over 25 years. Political and fiscal conditions are weighing heavily on investor confidence."
-   },
-   "d": {
-    "fr": "Sur le marché des devises, la méfiance envers la politique budgétaire d'un État entraîne souvent une dépréciative rapide de sa monnaie. Les traders Forex doivent impérativement suivre la stabilité économique des pays concernés.",
-    "en": "In currency markets, distrust regarding a state's fiscal policy often leads to a rapid devaluation of its tender. Forex traders must closely monitor the economic stability of the countries involved."
-   },
-   "v": [
-    [
-     "Déroute des marchés",
-     "Market rout"
-    ],
-    [
-     "Gestion budgétaire",
-     "Fiscal management"
-    ],
-    [
-     "Monnaie nationale",
-     "National currency"
-    ],
-    [
-     "Marché des devises",
-     "Foreign exchange market"
-    ]
-   ],
-   "q": {
-    "fr": "Quelle a été la réaction de la devise du Brésil face aux inquiétudes économiques ?",
-    "en": "How did Brazil's currency react to economic concerns?"
-   },
-   "r": {
-    "fr": "Elle a enregistré sa pire chute sur une journée depuis plus de 25 ans.",
-    "en": "It recorded its worst single-day fall in more than 25 years."
-   },
-   "ia": "Gemini"
   }
  ],
  "actu": {
-  "date": "2026-11-09",
-  "q": "À quel montant s'élève la valorisation boursière attribuée à l'entreprise Nvidia selon la presse ?",
+  "date": "2026-11-10",
+  "q": "À combien va s'élever le montant de la dette du groupe Plesio après la restructuration ?",
   "choices": [
-   "72,8 milliards d'euros",
-   "4 500 milliards de dollars",
-   "680 milliards d'euros",
-   "120 millions de dollars"
+   "1,4 milliard d'euros",
+   "800 millions d'euros",
+   "610 millions d'euros",
+   "1 400 milliards d'euros"
   ],
   "a": 1,
-  "expl": "La société Nvidia est valorisée à 4 500 milliards de dollars dans les données rapportées. Cette taille en fait un acteur central de la révolution de l'intelligence artificielle sur les marchés financiers.",
-  "src": "Le Monde",
-  "url": "https://www.lemonde.fr/economie/article/2026/11/09/le-patron-de-nvidia-jensen-huang-reconnait-avoir-eu-une-liaison-extraconjugale-avec-une-personne-consideree-comme-une-espionne-de-pekin_6808531_3234.html"
+  "expl": "Grâce au compromis trouvé avec les créanciers, la dette du groupe de distribution est ramenée de 1,4 milliard à 800 millions d'euros. Cela représente une effacement net de 600 millions d'euros de dette.",
+  "src": "Le Figaro",
+  "url": "https://www.lefigaro.fr/societes/casino-daniel-kretinsky-trouve-un-accord-avec-les-creanciers-et-assoit-sa-domination-sur-le-distributeur-20261110"
  }
 }
