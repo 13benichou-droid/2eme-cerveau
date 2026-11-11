@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-10T13:44:50.724Z",
+ "updated": "2026-11-11T12:56:12.861Z",
  "snap": {
-  "date": "2026-11-10",
+  "date": "2026-11-11",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 333",
-    "c": "+1,22 %"
+    "v": "8 305",
+    "c": "+0,32 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 550",
-    "c": "+2,35 %"
+    "v": "7 521",
+    "c": "−0,38 %"
    },
    {
     "n": "Nasdaq",
-    "v": "25 253",
-    "c": "+2,74 %"
+    "v": "25 066",
+    "c": "−0,74 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "20,03",
-    "c": "+0,55 %"
+    "v": "18,45",
+    "c": "−5,19 %"
    },
    {
     "n": "Brent",
-    "v": "89,5 $",
-    "c": "−3,27 %"
+    "v": "93,5 $",
+    "c": "+2,18 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "84,4 $",
-    "c": "−2,81 %"
+    "v": "87,4 $",
+    "c": "+1,62 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 057 $",
-    "c": "−1,40 %"
+    "v": "4 049 $",
+    "c": "+0,47 %"
    },
    {
     "n": "Bitcoin",
-    "v": "73 806 $",
-    "c": "−1,88 %"
+    "v": "73 893 $",
+    "c": "+0,23 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,90 %",
-    "c": "+0,04 pt"
+    "v": "4,98 %",
+    "c": "+0,12 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,119",
-    "c": "+0,42 %"
+    "v": "1,114",
+    "c": "−0,77 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-11-rebond-des-actions-technologiques-americ",
+   "src": "Financial Times",
+   "date": "2026-11-11",
+   "url": "https://www.ft.com/content/639de881-6017-454f-abfa-cfb191d1e7cd?syn-25a6b1a6=1",
+   "t": {
+    "fr": "Rebond des actions technologiques américaines grâce à l'IA",
+    "en": "US tech stocks rebound driven by AI"
+   },
+   "s": {
+    "fr": "Les valeurs technologiques aux États-Unis repartent à la hausse. Ce mouvement positif est soutenu par des performances financières solides et les attentes élevées autour d'une future introduction en bourse majeure.",
+    "en": "Technology equities in the US are moving upward again. This positive trend is supported by strong financial results and high expectations surrounding a major upcoming stock market debut."
+   },
+   "d": {
+    "fr": "En trading, surveiller le secteur tech est crucial car il donne le ton pour l'ensemble du marché boursier. Une introduction en bourse très attendue attire souvent de nouveaux capitaux et dynamise la spéculation sur les actions existantes.",
+    "en": "In trading, monitoring the tech sector is crucial because it sets the tone for the entire stock market. A highly anticipated IPO often attracts fresh capital and boosts speculation on existing stocks."
+   },
+   "v": [
+    [
+     "action",
+     "stock"
+    ],
+    [
+     "introduction en bourse",
+     "initial public offering (IPO)"
+    ],
+    [
+     "capitalisation",
+     "valuation"
+    ],
+    [
+     "marché",
+     "market"
+    ]
+   ],
+   "q": {
+    "fr": "Quel événement stimule l'intérêt des investisseurs pour les actions technologiques dans ce contexte ?",
+    "en": "What event is driving investor interest in tech stocks in this context?"
+   },
+   "r": {
+    "fr": "De bons résultats financiers et la perspective d'une introduction en bourse valorisée.",
+    "en": "Strong financial results and the prospect of a high-valuation IPO."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-11-ralentissement-de-l-immobilier-sur-fond-",
+   "src": "Le Monde",
+   "date": "2026-11-11",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/11/immobilier-les-transactions-ralentissent-sur-fond-de-hausse-des-taux-d-interet_6808945_3234.html",
+   "t": {
+    "fr": "Ralentissement de l'immobilier sur fond de taux d'emprunt élevés",
+    "en": "Real estate slowdown amid high borrowing rates"
+   },
+   "s": {
+    "fr": "Le marché immobilier connaît un ralentissement marqué des transactions en raison de conditions d'emprunt plus strictes. Les prix commencent à baisser légèrement, mais cela ne suffit pas à faciliter l'accès au crédit pour les acheteurs.",
+    "en": "The real estate market is experiencing a notable slowdown in transactions due to stricter borrowing conditions. Prices are starting to drop slightly, but this is not enough to ease credit access for buyers."
+   },
+   "d": {
+    "fr": "Pour un trader, comprendre l'impact des taux directeurs sur l'immobilier permet d'anticiper la santé des banques et du secteur de la construction. Quand l'emprunt devient cher, toute l'économie réelle ralentit.",
+    "en": "For a trader, understanding how benchmark rates impact real estate helps anticipate the health of banks and the construction sector. When borrowing becomes expensive, the entire real economy slows down."
+   },
+   "v": [
+    [
+     "taux d'intérêt",
+     "interest rate"
+    ],
+    [
+     "crédit",
+     "credit"
+    ],
+    [
+     "immobilier",
+     "real estate"
+    ],
+    [
+     "transaction",
+     "transaction"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi l'accès au logement devient-il plus difficile pour les acheteurs ?",
+    "en": "Why is access to housing becoming more difficult for buyers?"
+   },
+   "r": {
+    "fr": "À cause de la hausse des taux d'intérêt qui durcit les conditions de crédit.",
+    "en": "Because of rising interest rates which tighten credit conditions."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-11-fluctuations-des-cours-du-petrole-et-pri",
+   "src": "franceinfo",
+   "date": "2026-11-11",
+   "url": "https://www.franceinfo.fr/replay-radio/le-decryptage-eco/le-gouvernement-pret-a-puiser-une-nouvelle-fois-dans-les-stocks-strategiques-pour-maintenir-les-prix-a-la-pompe_8256619.html#xtor=RSS-3-%5Beconomie%5D",
+   "t": {
+    "fr": "Fluctuations des cours du pétrole et prix des carburants",
+    "en": "Fluctuations in oil prices and fuel costs"
+   },
+   "s": {
+    "fr": "Le gouvernement utilise ses réserves stratégiques pour contrer la cherté des carburants à la pompe. Les cours du pétrole affichent également une baisse, même si les automobilistes ressentent encore les effets des tensions géopolitiques passées.",
+    "en": "The government is using strategic reserves to counter high pump prices for fuel. Oil prices are also declining, although motorists still feel the lingering effects of past geopolitical tensions."
+   },
+   "d": {
+    "fr": "Les matières premières comme le pétrole sont extrêmement sensibles à l'actualité politique internationale. Suivre ces cours aide à anticiper l'inflation et l'évolution des coûts pour les entreprises.",
+    "en": "Commodities like oil are extremely sensitive to international political news. Tracking these prices helps anticipate inflation and shifting costs for businesses."
+   },
+   "v": [
+    [
+     "pétrole",
+     "oil"
+    ],
+    [
+     "matière première",
+     "commodity"
+    ],
+    [
+     "cours",
+     "price"
+    ],
+    [
+     "inflation",
+     "inflation"
+    ]
+   ],
+   "q": {
+    "fr": "Quel moyen le gouvernement utilise-t-il pour tenter de stabiliser les prix à la pompe ?",
+    "en": "What method does the government use to try to stabilize pump prices?"
+   },
+   "r": {
+    "fr": "Il puise dans les stocks stratégiques de carburant.",
+    "en": "It draws from strategic fuel reserves."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-10-projet-d-introduction-en-bourse-pour-l-e",
    "src": "Le Figaro",
@@ -1270,155 +1405,20 @@
     "en": "A drop in cryptocurrency prices discourages trading activity among users, directly reducing transaction fees collected by these platforms and hitting profitability."
    },
    "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-28-forte-hausse-des-benefices-pour-sk-hynix",
-   "src": "Le Figaro",
-   "date": "2026-10-28",
-   "url": "https://www.lefigaro.fr/societes/sk-hynix-portes-par-l-ia-le-benefice-net-bondit-de-216-au-troisieme-trimestre-20261028",
-   "t": {
-    "fr": "Forte hausse des bénéfices pour SK Hynix",
-    "en": "Strong profit surge for SK Hynix"
-   },
-   "s": {
-    "fr": "Le fabricant de puces électroniques sud-coréen a enregistré une augmentation spectaculaire de ses bénéfices au cours du troisième trimestre. Cette performance financière exceptionnelle est directement portée par la forte dynamique du secteur de l'intelligence artificielle.",
-    "en": "The South Korean chip manufacturer recorded a dramatic increase in profits during the third quarter. This exceptional financial performance is directly driven by the strong momentum of the artificial intelligence sector."
-   },
-   "d": {
-    "fr": "En trading, les résultats financiers d'une entreprise influencent directement sa valeur en bourse. Une forte croissance des profits peut attirer massivement les investisseurs et faire grimper le cours de l'action.",
-    "en": "In trading, a company's financial results directly influence its stock market value. Strong profit growth can massively attract investors and drive up the share price."
-   },
-   "v": [
-    [
-     "bénéfice net",
-     "net profit"
-    ],
-    [
-     "puces électroniques",
-     "electronic chips"
-    ],
-    [
-     "action",
-     "stock"
-    ],
-    [
-     "investisseur",
-     "investor"
-    ]
-   ],
-   "q": {
-    "fr": "Quel secteur d'activité est le principal moteur de cette forte croissance financière ?",
-    "en": "Which business sector is the main driver of this strong financial growth?"
-   },
-   "r": {
-    "fr": "Il s'agit du secteur de l'intelligence artificielle.",
-    "en": "It is the artificial intelligence sector."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-28-entree-en-bourse-record-pour-jio",
-   "src": "Financial Times",
-   "date": "2026-10-28",
-   "url": "https://www.ft.com/content/32f2864d-c122-4d83-b0c5-8d2f1fcc63bd?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Entrée en bourse record pour Jio",
-    "en": "Record IPO for Jio"
-   },
-   "s": {
-    "fr": "L'entreprise de télécommunications Jio, liée à Ambani, a fait une entrée remarquée sur le marché indien avec une hausse notable de ses actions. Cette introduction en bourse majeure a permis de lever des fonds importants malgré un climat boursier incertain.",
-    "en": "Telecom business Jio, linked to Ambani, made a notable market entry in India with a significant rise in its shares. This major initial public offering raised substantial funds despite an uncertain stock market climate."
-   },
-   "d": {
-    "fr": "Une introduction en bourse permet à une entreprise privée de vendre ses parts au grand public pour financer son développement. Pour un trader, c'est un moment clé pour analyser la demande et la valorisation initiale d'un nouvel actif.",
-    "en": "An initial public offering allows a private company to sell shares to the general public to fund its development. For a trader, this is a key moment to analyze demand and the initial valuation of a new asset."
-   },
-   "v": [
-    [
-     "introduction en bourse",
-     "initial public offering"
-    ],
-    [
-     "action",
-     "share"
-    ],
-    [
-     "valorisation",
-     "valuation"
-    ],
-    [
-     "marché boursier",
-     "stock market"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'objectif principal d'une entreprise lorsqu'elle réalise une introduction en bourse ?",
-    "en": "What is the main objective of a company when it carries out an initial public offering?"
-   },
-   "r": {
-    "fr": "Elle cherche à lever des fonds et à ouvrir son capital au public pour financer sa croissance.",
-    "en": "It seeks to raise funds and open its capital to the public to finance its growth."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-28-nouvelle-baisse-des-prix-pour-les-scpi",
-   "src": "Le Monde",
-   "date": "2026-10-28",
-   "url": "https://www.lemonde.fr/argent/article/2026/10/28/les-scpi-a-nouveau-dans-la-tourmente-la-hausse-des-taux-d-interet-conduit-a-de-nouvelles-baisses-de-prix_6801533_1657007.html",
-   "t": {
-    "fr": "Nouvelle baisse des prix pour les SCPI",
-    "en": "New price drop for SCPIs"
-   },
-   "s": {
-    "fr": "Le marché des SCPI subit de nouvelles pressions à la baisse sur ses prix en raison de la remontée des taux d'intérêt. Face à la concurrence de placements obligataires plus attractifs, seuls les meilleurs produits parviennent à séduire les épargnants.",
-    "en": "The SCPI market is experiencing further downward pressure on its prices due to rising interest rates. Faced with competition from more attractive bond investments, only the best products manage to seduce savers."
-   },
-   "d": {
-    "fr": "Quand les taux d'intérêt augmentent, les placements alternatifs deviennent plus compétitifs, ce qui pèse sur la valeur de certains actifs immobiliers. Un trader doit surveiller ces variations macroéconomiques pour ajuster ses choix de placement.",
-    "en": "When interest rates rise, alternative investments become more competitive, weighing on the value of certain real estate assets. A trader must monitor these macroeconomic variations to adjust their investment choices."
-   },
-   "v": [
-    [
-     "taux d'intérêt",
-     "interest rate"
-    ],
-    [
-     "placement",
-     "investment"
-    ],
-    [
-     "obligation",
-     "bond"
-    ],
-    [
-     "épargnant",
-     "saver"
-    ]
-   ],
-   "q": {
-    "fr": "Quel facteur économique principal est à l'origine de cette baisse des prix sur le marché des SCPI ?",
-    "en": "What main economic factor is causing this price drop in the SCPI market?"
-   },
-   "r": {
-    "fr": "Il s'agit de la hausse des taux d'intérêt.",
-    "en": "It is the rise in interest rates."
-   },
-   "ia": "Gemini"
   }
  ],
  "actu": {
-  "date": "2026-11-10",
-  "q": "À combien va s'élever le montant de la dette du groupe Plesio après la restructuration ?",
+  "date": "2026-11-11",
+  "q": "Quel type d'actif boursier connaît un rebond marqué selon l'actualité récente ?",
   "choices": [
-   "1,4 milliard d'euros",
-   "800 millions d'euros",
-   "610 millions d'euros",
-   "1 400 milliards d'euros"
+   "Les actions du secteur technologique",
+   "Les obligations d'État françaises",
+   "Les matières premières agricoles",
+   "L'immobilier commercial"
   ],
-  "a": 1,
-  "expl": "Grâce au compromis trouvé avec les créanciers, la dette du groupe de distribution est ramenée de 1,4 milliard à 800 millions d'euros. Cela représente une effacement net de 600 millions d'euros de dette.",
-  "src": "Le Figaro",
-  "url": "https://www.lefigaro.fr/societes/casino-daniel-kretinsky-trouve-un-accord-avec-les-creanciers-et-assoit-sa-domination-sur-le-distributeur-20261110"
+  "a": 0,
+  "expl": "Les valeurs technologiques américaines profitent d'un regain d'optimisme lié à de bons résultats et à des projets d'introduction en bourse. C'est un indicateur clé de la santé du secteur de la tech.",
+  "src": "Financial Times",
+  "url": "https://www.ft.com/content/639de881-6017-454f-abfa-cfb191d1e7cd?syn-25a6b1a6=1"
  }
 }
