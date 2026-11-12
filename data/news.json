@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-11T12:56:12.861Z",
+ "updated": "2026-11-12T13:59:13.086Z",
  "snap": {
-  "date": "2026-11-11",
+  "date": "2026-11-12",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 305",
-    "c": "+0,32 %"
+    "v": "8 355",
+    "c": "+0,26 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 521",
-    "c": "−0,38 %"
+    "v": "7 619",
+    "c": "+1,31 %"
    },
    {
     "n": "Nasdaq",
-    "v": "25 066",
-    "c": "−0,74 %"
+    "v": "25 466",
+    "c": "+1,60 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "18,45",
-    "c": "−5,19 %"
+    "v": "18,87",
+    "c": "+7,89 %"
    },
    {
     "n": "Brent",
-    "v": "93,5 $",
-    "c": "+2,18 %"
+    "v": "93,6 $",
+    "c": "+0,87 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "87,4 $",
-    "c": "+1,62 %"
+    "v": "86,9 $",
+    "c": "+0,44 %"
    },
    {
     "n": "Or (once)",
-    "v": "4 049 $",
-    "c": "+0,47 %"
+    "v": "3 902 $",
+    "c": "−2,47 %"
    },
    {
     "n": "Bitcoin",
-    "v": "73 893 $",
-    "c": "+0,23 %"
+    "v": "72 473 $",
+    "c": "−2,02 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,98 %",
-    "c": "+0,12 pt"
+    "v": "5,05 %",
+    "c": "+0,05 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,114",
-    "c": "−0,77 %"
+    "v": "1,109",
+    "c": "−0,74 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-12-nvidia-le-depart-de-jensen-huang",
+   "src": "Le Monde",
+   "date": "2026-11-12",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/12/jensen-huang-patron-emblematique-de-nvidia-et-parrain-de-l-ia-demis-de-ses-fonctions_6809106_3234.html",
+   "t": {
+    "fr": "Nvidia : le départ de Jensen Huang",
+    "en": "Nvidia: Jensen Huang steps down"
+   },
+   "s": {
+    "fr": "Le cofondateur et patron de Nvidia a été limogé par son conseil d'administration. Cette décision fait suite à des révélations sur une relation privée avec une entrepreneuse chinoise soupçonnée d'espionnage.",
+    "en": "The co-founder and CEO of Nvidia has been dismissed by the board. This follows revelations regarding a private relationship with a Chinese entrepreneur suspected of espionage."
+   },
+   "d": {
+    "fr": "Le départ soudain d'un dirigeant emblématique peut provoquer une forte volatilité sur le cours de l'action. Les investisseurs surveillent la stabilité de la gouvernance pour évaluer la pérennité de la stratégie de l'entreprise.",
+    "en": "The sudden departure of an iconic leader can trigger high volatility in the stock price. Investors monitor governance stability to assess the long-term viability of the company's strategy."
+   },
+   "v": [
+    [
+     "Conseil d'administration",
+     "Board of directors"
+    ],
+    [
+     "Volatilité",
+     "Volatility"
+    ],
+    [
+     "Gouvernance",
+     "Governance"
+    ],
+    [
+     "Action",
+     "Stock"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi le départ d'un PDG influence-t-il le prix d'une action ?",
+    "en": "Why does a CEO's departure influence a stock price?"
+   },
+   "r": {
+    "fr": "Le marché anticipe un changement de stratégie ou une période d'incertitude qui peut affecter les bénéfices futurs.",
+    "en": "The market anticipates a change in strategy or a period of uncertainty that may affect future earnings."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-12-crise-dans-l-immobilier-neuf",
+   "src": "Le Monde",
+   "date": "2026-11-12",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/12/logements-les-promoteurs-immobiliers-s-enfoncent-un-peu-plus-dans-la-crise_6809079_3234.html",
+   "t": {
+    "fr": "Crise dans l'immobilier neuf",
+    "en": "Crisis in the new housing market"
+   },
+   "s": {
+    "fr": "Le secteur des promoteurs immobiliers subit un recul marqué des réservations de logements neufs. La hausse des taux d'intérêt est identifiée comme le principal facteur pesant sur cette activité.",
+    "en": "The real estate development sector is seeing a sharp decline in new housing reservations. Rising interest rates are identified as the main factor weighing on this activity."
+   },
+   "d": {
+    "fr": "Les taux d'intérêt élevés augmentent le coût du crédit pour les acheteurs, ce qui réduit la demande. C'est un exemple classique de corrélation entre la politique monétaire et la santé d'un secteur économique.",
+    "en": "High interest rates increase borrowing costs for buyers, which reduces demand. This is a classic example of the correlation between monetary policy and the health of an economic sector."
+   },
+   "v": [
+    [
+     "Taux d'intérêt",
+     "Interest rates"
+    ],
+    [
+     "Crédit",
+     "Credit"
+    ],
+    [
+     "Demande",
+     "Demand"
+    ],
+    [
+     "Politique monétaire",
+     "Monetary policy"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'impact direct d'une hausse des taux sur les promoteurs ?",
+    "en": "What is the direct impact of a rate hike on developers?"
+   },
+   "r": {
+    "fr": "Cela freine les ventes car les emprunts deviennent plus coûteux pour les clients finaux.",
+    "en": "It slows down sales because borrowing becomes more expensive for end customers."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-12-la-nouvelle-taxe-sucre-inquiete-les-indu",
+   "src": "Le Figaro",
+   "date": "2026-11-12",
+   "url": "https://www.lefigaro.fr/conso/bonbons-biscuits-viennoiseries-industrielles-quels-produits-seraient-vises-par-la-taxe-sucre-du-budget-2027-20261002",
+   "t": {
+    "fr": "La nouvelle taxe sucre inquiète les industriels",
+    "en": "New sugar tax worries manufacturers"
+   },
+   "s": {
+    "fr": "Le Sénat a étendu la taxe sur les boissons sucrées aux produits alimentaires solides pré-emballés. Les entreprises du secteur craignent des conséquences économiques négatives.",
+    "en": "The Senate has extended the tax on sugary drinks to pre-packaged solid food products. Companies in the sector fear negative economic consequences."
+   },
+   "d": {
+    "fr": "Les décisions fiscales modifient les marges bénéficiaires des entreprises cotées. En trading, il est crucial d'analyser comment une nouvelle taxe peut impacter les résultats financiers d'un secteur spécifique.",
+    "en": "Fiscal decisions alter the profit margins of listed companies. In trading, it is crucial to analyze how a new tax can impact the financial results of a specific sector."
+   },
+   "v": [
+    [
+     "Taxe",
+     "Tax"
+    ],
+    [
+     "Marge bénéficiaire",
+     "Profit margin"
+    ],
+    [
+     "Résultats financiers",
+     "Financial results"
+    ],
+    [
+     "Secteur",
+     "Sector"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi une taxe peut-elle faire baisser le cours d'une action ?",
+    "en": "Why can a tax cause a stock price to fall?"
+   },
+   "r": {
+    "fr": "Elle réduit les marges bénéficiaires de l'entreprise, ce qui diminue sa rentabilité aux yeux des investisseurs.",
+    "en": "It reduces the company's profit margins, which decreases its profitability in the eyes of investors."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-11-rebond-des-actions-technologiques-americ",
    "src": "Financial Times",
@@ -1270,155 +1405,20 @@
     "en": "It tends to lower or stabilize prices by increasing immediate supply."
    },
    "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-29-samsung-multiplie-ses-profits-grace-a-l-",
-   "src": "Le Figaro",
-   "date": "2026-10-29",
-   "url": "https://www.lefigaro.fr/societes/samsung-electronics-multiplie-son-benefice-net-par-six-porte-par-l-essor-de-l-ia-20261029",
-   "t": {
-    "fr": "Samsung multiplie ses profits grâce à l'envolée des puces IA",
-    "en": "Samsung Profits Soar on Strong AI Chip Demand"
-   },
-   "s": {
-    "fr": "Le groupe sud-coréen Samsung Electronics enregistre une progression spectaculaire de son bénéfice net au troisième trimestre. Celui-ci a bondi de 514,6 % sur un an, soit une multiplication par six. Cette performance impressionnante est tirée par un engouement massif pour les semi-conducteurs adaptés à l'intelligence artificielle.",
-    "en": "South Korean tech giant Samsung Electronics reported a massive surge in its third-quarter net profit. Its earnings jumped 514.6% year-on-year, effectively multiplying by six. This performance was driven by surging global demand for semiconductors used in artificial intelligence."
-   },
-   "d": {
-    "fr": "Pour un trader, les publications de résultats permettent de mesurer l'écart entre la réalité financière d'une entreprise et les attentes des marchés. Lorsqu'une société profite à plein d'une tendance forte comme l'IA, la hausse soudaine des profits peut soutenir durablement le cours de son action.",
-    "en": "For a trader, earnings announcements reveal how a company performs relative to market expectations. When a business fully capitalizes on a powerful trend like AI, a sharp earnings beat can strongly support its stock price."
-   },
-   "v": [
-    [
-     "Bénéfice net",
-     "Net profit"
-    ],
-    [
-     "Semi-conducteur",
-     "Semiconductor"
-    ],
-    [
-     "Résultats trimestriels",
-     "Quarterly earnings"
-    ],
-    [
-     "Action de croissance",
-     "Growth stock"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi les entreprises du secteur des semi-conducteurs ont-elles un impact si fort sur les indices boursiers ?",
-    "en": "Why do semiconductor companies have such a large impact on stock market indexes?"
-   },
-   "r": {
-    "fr": "Elles produisent les composants indispensables aux technologies d'avenir, ce qui en fait des piliers stratégiques de l'économie moderne. Leurs performances financières influencent ainsi la confiance globale des investisseurs dans le secteur technologique.",
-    "en": "They supply core components essential to future technologies, making them strategic pillars of the modern economy. Consequently, their financial results heavily influence overall investor confidence in tech."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-29-la-reserve-federale-fait-une-pause-sur-s",
-   "src": "Yahoo Finance",
-   "date": "2026-10-29",
-   "url": "https://www.fool.com/investing/2026/10/28/the-fed-holds-interest-rates-in-a-102-vote-heres-what-this-means-for-artificial-intelligence-ai-stocks/?.tsrc=rss",
-   "t": {
-    "fr": "La Réserve fédérale fait une pause sur ses taux d'intérêt",
-    "en": "Federal Reserve Holds Interest Rates Steady"
-   },
-   "s": {
-    "fr": "Lors de sa récente réunion de politique monétaire, la banque centrale américaine a décidé de maintenir ses taux d'intérêt inchangés avec un vote de 10 contre 2. Les investisseurs actifs dans la tech apprécient ce statu quo, même si l'interruption des hausses pourrait s'avérer temporaire.",
-    "en": "During its recent policy meeting, the US central bank decided to leave interest rates unchanged following a 10-to-2 vote. Investors in tech equities welcomed the pause, although there are doubts about how long it will last."
-   },
-   "d": {
-    "fr": "Les taux d'intérêt fixent le coût du crédit pour les entreprises et les particuliers. En trading, anticiper les décisions des banques centrales est crucial car des taux élevés réduisent la valorisation des entreprises et la liquidité disponible sur les marchés.",
-    "en": "Interest rates determine the cost of borrowing for companies and individuals alike. In trading, tracking central bank policy is essential because higher rates depress stock valuations and reduce overall market liquidity."
-   },
-   "v": [
-    [
-     "Taux d'intérêt",
-     "Interest rate"
-    ],
-    [
-     "Banque centrale",
-     "Central bank"
-    ],
-    [
-     "Politique monétaire",
-     "Monetary policy"
-    ],
-    [
-     "Liquidité",
-     "Liquidity"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est le risque pour les marchés si la pause sur les taux ne dure pas ?",
-    "en": "What is the risk for markets if the interest rate pause is short-lived?"
-   },
-   "r": {
-    "fr": "Si les taux repartent à la hausse, emprunter deviendra plus cher pour les entreprises, ce qui peut freiner leurs investissements et provoquer une correction à la baisse sur les marchés d'actions.",
-    "en": "If rates start rising again, corporate borrowing costs will increase, potentially slowing business investments and triggering a downward correction in equities."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-29-decrochage-silencieux-des-actions-liees-",
-   "src": "Yahoo Finance",
-   "date": "2026-10-29",
-   "url": "https://beincrypto.com/stealth-bear-market-crypto-stocks-coinbase/?.tsrc=rss",
-   "t": {
-    "fr": "Décrochage silencieux des actions liées aux cryptomonnaies",
-    "en": "Stealth Bear Market Hits Crypto-Related Stocks"
-   },
-   "s": {
-    "fr": "Alors que le S&P 500 se maintient à un niveau stable, les valeurs liées aux actifs numériques subissent un choc majeur. Des plateformes comme Coinbase, Circle et Robinhood ont vu leur cours s'effondrer de 40 % à 56 % à la suite d'un repli du Bitcoin sous les 80 000 dollars.",
-    "en": "While the S&P 500 holds steady, digital asset stocks are facing a steep decline. Shares of firms like Coinbase, Circle, and Robinhood dropped by 40% to 56% as Bitcoin slid below the $80,000 threshold."
-   },
-   "d": {
-    "fr": "Ce phénomène montre que des actions d'entreprises cotées peuvent entrer en marché baissier spécifique sans que l'ensemble du marché boursier ne chute. Un trader doit donc surveiller la corrélation étroite entre le cours des jetons virtuels et les résultats des courtier en ligne.",
-    "en": "This scenario highlights how sector-specific stocks can enter a bear market even when indices remain stable. Traders must monitor the direct correlation between underlying token prices and digital brokerage revenues."
-   },
-   "v": [
-    [
-     "Marché baissier",
-     "Bear market"
-    ],
-    [
-     "Corrélation",
-     "Correlation"
-    ],
-    [
-     "Courtiers en ligne",
-     "Online brokerages"
-    ],
-    [
-     "Actif numérique",
-     "Digital asset"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi les actions des sociétés du secteur crypto chutent-elles lorsque le Bitcoin baisse ?",
-    "en": "Why do crypto company stocks fall when Bitcoin drops?"
-   },
-   "r": {
-    "fr": "Une baisse des cours des cryptomonnaies décourage les échanges chez les utilisateurs, ce qui diminue directement les commissions perçues par ces plateformes et détériore leur rentabilité.",
-    "en": "A drop in cryptocurrency prices discourages trading activity among users, directly reducing transaction fees collected by these platforms and hitting profitability."
-   },
-   "ia": "Gemini"
   }
  ],
  "actu": {
-  "date": "2026-11-11",
-  "q": "Quel type d'actif boursier connaît un rebond marqué selon l'actualité récente ?",
+  "date": "2026-11-12",
+  "q": "Quel facteur explique principalement la baisse des réservations dans l'immobilier neuf ?",
   "choices": [
-   "Les actions du secteur technologique",
-   "Les obligations d'État françaises",
-   "Les matières premières agricoles",
-   "L'immobilier commercial"
+   "La baisse des prix",
+   "La hausse des taux",
+   "Le manque de terrains",
+   "La hausse des salaires"
   ],
-  "a": 0,
-  "expl": "Les valeurs technologiques américaines profitent d'un regain d'optimisme lié à de bons résultats et à des projets d'introduction en bourse. C'est un indicateur clé de la santé du secteur de la tech.",
-  "src": "Financial Times",
-  "url": "https://www.ft.com/content/639de881-6017-454f-abfa-cfb191d1e7cd?syn-25a6b1a6=1"
+  "a": 1,
+  "expl": "La hausse des taux d'intérêt rend le financement des projets immobiliers plus onéreux pour les acheteurs. Ce renchérissement du crédit freine mécaniquement la demande de logements neufs.",
+  "src": "Le Monde",
+  "url": "https://www.lemonde.fr/economie/article/2026/11/12/logements-les-promoteurs-immobiliers-s-enfoncent-un-peu-plus-dans-la-crise_6809079_3234.html"
  }
 }
