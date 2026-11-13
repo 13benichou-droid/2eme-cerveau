@@ -3299,15 +3299,28 @@ function pnCat(s){const n=" "+String(s||"").normalize("NFD").replace(/[\u0300-\u
   if(/expert/.test(n))return"exp";if(/ econom| ses | s e s /.test(n))return"ses";if(/philo/.test(n))return"phi";if(/histoire|geograph| hg /.test(n))return"his";
   if(/espagnol/.test(n))return"esp";if(/anglais/.test(n))return"ang";if(/scien/.test(n))return"sci";if(/math/.test(n))return"math";if(/ eps | sport/.test(n))return"eps";return""}
 function jHwCats(d){return new Set(planOf(d).map(h=>pnCat(habL(h))).filter(Boolean))}
+/* 2.41.0 : sous chaque matière, les devoirs Pronote + ce que TU ajoutes (devoir, consigne) ; ✕ pour enlever, ↺ pour revenir à la liste de base */
+const hwxDoc=()=>drill("hwx");
+function hwxOf(h){return(hwxDoc()[h])||{add:[],hid:{}}}
+function hwxSave(h,o){const D={...hwxDoc()};if(o)D[h]=o;else delete D[h];put("drill","hwx",D,true);render(true)}
 function jHwAll(d,h){const r=jHwFor(d,h);return r?r.L:[]}
-function jHwFor(d,h){const c=pnCat(habL(h));if(!c)return null;const p=S.pronote&&S.pronote.data,a=p&&Array.isArray(p.devoirs)?p.devoirs:[],k=dkey(d),lim=dkey(add(d,14));
-  const L=a.filter(x=>x&&x.id&&x.pour&&pnCat(x.m)===c&&!jHwDone(x)&&String(x.pour).slice(0,10)>k&&String(x.pour).slice(0,10)<=lim).sort((x,y)=>String(x.pour)<String(y.pour)?-1:1);
-  return L.length?{x:L[0],n:L.length,L}:null}
-function jHwPour(x){const[y,m,dd]=String(x.pour).slice(0,10).split("-").map(Number),t=new Date(y,m-1,dd),df=Math.round((t-today())/864e5);return df===1?"demain":df>1&&df<7?JOURS[t.getDay()].toLowerCase():`le ${dd}/${m}`}
-/* 2.40.0 : TOUS les devoirs de la matière, un point par devoir */
-function jHwLine(d,s,full){if(!s||s.k!=="hab")return"";const r=jHwFor(d,s.ref);if(!r)return"";const T=x=>String(x.txt||"devoir").replace(/\s+/g," ").trim();
-  if(full)return`<div class="jhwbox">📝 <ul class="jhwl">${r.L.slice(0,6).map(x=>`<li><b>Pour ${esc(jHwPour(x))} :</b> ${esc(T(x).slice(0,300))}</li>`).join("")}</ul></div>`;
-  return r.L.slice(0,3).map(x=>`<span class="jhw">• ${esc(T(x).slice(0,55))} · ${esc(jHwPour(x))}</span>`).join("")+(r.n>3?`<span class="jhw">+${r.n-3} autre${r.n>4?"s":""}</span>`:"")}
+function jHwFor(d,h){const c=pnCat(habL(h)),X=hwxOf(h),p=S.pronote&&S.pronote.data,a=c&&p&&Array.isArray(p.devoirs)?p.devoirs:[],k=dkey(d),lim=dkey(add(d,14));
+  const P=a.filter(x=>x&&x.id&&x.pour&&pnCat(x.m)===c&&!jHwDone(x)&&!(X.hid||{})[x.id]&&String(x.pour).slice(0,10)>k&&String(x.pour).slice(0,10)<=lim).sort((x,y)=>String(x.pour)<String(y.pour)?-1:1);
+  const L=[...P,...(X.add||[]).map(m=>({id:m.id,txt:m.t,mine:1}))];
+  return L.length?{x:P[0]||L[0],n:L.length,L,pn:P}:null}
+function jHwPour(x){if(!x||!x.pour)return"";const[y,m,dd]=String(x.pour).slice(0,10).split("-").map(Number),t=new Date(y,m-1,dd),df=Math.round((t-today())/864e5);return df===1?"demain":df>1&&df<7?JOURS[t.getDay()].toLowerCase():`le ${dd}/${m}`}
+function jHwLine(d,s,full){if(!s||s.k!=="hab")return"";const r=jHwFor(d,s.ref),T=x=>String(x.txt||"devoir").replace(/\s+/g," ").trim(),L=r?r.L:[],X=hwxOf(s.ref),custom=(X.add||[]).length||Object.keys(X.hid||{}).length;
+  if(full)return`<div class="jhwbox" style="flex-direction:column;gap:6px"><div class="row" style="justify-content:space-between;gap:8px"><b>📝 Devoirs et consignes</b>${custom?`<button class="linkb small" data-hwreset="${esc(s.ref)}" title="Revenir à la liste de base (devoirs Pronote)">↺ Réinitialiser</button>`:""}</div>
+    ${L.length?`<ul class="jhwl">${L.slice(0,10).map(x=>`<li class="row" style="justify-content:space-between;gap:6px;align-items:flex-start"><span>${x.mine?"":`<b>Pour ${esc(jHwPour(x))} :</b> `}${esc(T(x).slice(0,300))}</span><button class="linkb" aria-label="Enlever" data-hwdel="${esc(x.id)}" data-hwh="${esc(s.ref)}" data-hwmine="${x.mine?1:""}">✕</button></li>`).join("")}</ul>`:`<p class="small muted" style="margin:0">Rien pour l'instant.</p>`}
+    <div class="row" style="gap:6px"><input class="field" id="hwnew" placeholder="Ajouter un devoir ou une consigne…" style="flex:1;min-width:0" data-hwh="${esc(s.ref)}"><button class="btn" data-hwadd="${esc(s.ref)}">Ajouter</button></div></div>`;
+  if(!L.length)return"";
+  return L.slice(0,3).map(x=>`<span class="jhw">• ${esc(T(x).slice(0,55))}${x.mine?"":" · "+esc(jHwPour(x))}</span>`).join("")+(L.length>3?`<span class="jhw">+${L.length-3} autre${L.length>4?"s":""}</span>`:"")}
+function hwxAdd(h){const el=document.getElementById("hwnew"),t=String(el&&el.value||"").trim();if(!t)return;const X=hwxOf(h);hwxSave(h,{...X,add:[...(X.add||[]),{id:"m"+Date.now().toString(36),t:t.slice(0,300)}]})}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-hwdel],[data-hwadd],[data-hwreset]");if(!b)return;e.preventDefault();const d=b.dataset;
+  if(d.hwadd)return hwxAdd(d.hwadd);
+  if(d.hwreset)return hwxSave(d.hwreset,null);
+  const h=d.hwh,X=hwxOf(h);if(d.hwmine)hwxSave(h,{...X,add:(X.add||[]).filter(m=>m.id!==d.hwdel)});else hwxSave(h,{...X,hid:{...(X.hid||{}),[d.hwdel]:1}})});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target&&e.target.id==="hwnew"){e.preventDefault();hwxAdd(e.target.dataset.hwh)}});
 /* tout ce qu'il y a à faire ce jour-là, par ordre de priorité */
 function jTasks(d){
   const dk=dkey(d),P=jParams(dk),done=doneOf(d),od=(S.jours[dk]||{}).dur||{},out=[];
@@ -4532,12 +4545,12 @@ function jTimeline(d,pl,isT){
 function jSheet(d,pl){if(!V.jsel||V.jselDk!==dkey(d))return"";const dk=dkey(d),key=V.jsel,s=jFind(dk,key);if(!s){V.jsel=null;return""}
   const w=jWork(s),wd=JOURS[d.getDay()].toLowerCase(),isT=dk===dkey(today()),wk=!!(((edtP().pinw||{})[d.getDay()]||{})[key]);
   return`<div class="jsheet card" role="dialog" aria-label="${esc(s.l)}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${jIcon(s.k,s.ref,s.l)} ${esc(s.l)}</b><button class="ghost" data-jclose="1" aria-label="Fermer">✕</button></div>
-    ${s.done?"":jHwLine(d,s,1)}${s.done?`<p class="small muted">Fait de ${fmin(s.a)} à ${fmin(s.b)}.</p>`:`<div class="jadj"><span>Début <b class="num">${fmin(s.a)}</b></span><button class="ghost" data-jadj="a|-5">−5</button><button class="ghost" data-jadj="a|5">+5</button>
+    ${jHwLine(d,s,1)}${s.done?`<p class="small muted">Fait de ${fmin(s.a)} à ${fmin(s.b)}.</p>`:`<div class="jadj"><span>Début <b class="num">${fmin(s.a)}</b></span><button class="ghost" data-jadj="a|-5">−5</button><button class="ghost" data-jadj="a|5">+5</button>
       <span>Fin <b class="num">${fmin(s.b)}</b></span><button class="ghost" data-jadj="b|-5">−5</button><button class="ghost" data-jadj="b|5">+5</button></div>`}
     <div class="row">${w?(s.done?`<button class="ghost" data-jfait="0">↺ Pas fait</button>`:`<button class="btn" data-jfait="1">✓ Fait</button>${isT&&!s.run?`<button class="ghost on" data-jstart="${esc(key)}">▶ Commencer</button>`:""}`):""}
       ${!s.done&&(w||s.k==="repas"||s.step)?`<button class="ghost ${wk?"on":""}" data-jweek="1">📌 ${wk?"Plus chaque "+wd:"Chaque "+wd}</button>`:""}
       ${s.pin&&!s.done&&!wk?`<button class="ghost" data-jauto="1">✨ Remettre en automatique</button>`:""}
-      <button class="ghost danger" data-jout="1">Enlever de la journée</button>${s.done?`<button class="ghost on" data-jrange="1" title="Le bloc quitte le planning, la tâche reste cochée dans ton suivi d'habitudes">🧹 Ranger (reste fait)</button>`:""}</div>${s.auto?`<p class="small muted" style="margin:0">${s.k==="pause"?"Déplace-la ou change sa durée : elle devient à toi, et l'appli n'ajoute plus de pauses toute seule aujourd'hui":"Déplace-le ou change sa durée : il devient à toi, et l'appli ne rajoute plus de temps libre toute seule aujourd'hui"}.</p>`:""}${s.step?`<div class="row"><button class="ghost on" data-jnoschool="${dk}">🏖️ Pas cours ce jour-là</button></div><p class="small muted" style="margin:0">Grève, blocus, prof absent : touche « Pas cours ce jour-là » et la journée devient une journée libre. Si un seul cours saute, ajuste les horaires ici.</p>`:""}</div>`}
+      <button class="ghost" data-jdup="1" title="Crée une copie de ce bloc juste après">⧉ Dupliquer</button><button class="ghost danger" data-jout="1">Enlever de la journée</button>${s.done?`<button class="ghost on" data-jrange="1" title="Le bloc quitte le planning, la tâche reste cochée dans ton suivi d'habitudes">🧹 Ranger (reste fait)</button>`:""}</div>${s.auto?`<p class="small muted" style="margin:0">${s.k==="pause"?"Déplace-la ou change sa durée : elle devient à toi, et l'appli n'ajoute plus de pauses toute seule aujourd'hui":"Déplace-le ou change sa durée : il devient à toi, et l'appli ne rajoute plus de temps libre toute seule aujourd'hui"}.</p>`:""}${s.step?`<div class="row"><button class="ghost on" data-jnoschool="${dk}">🏖️ Pas cours ce jour-là</button></div><p class="small muted" style="margin:0">Grève, blocus, prof absent : touche « Pas cours ce jour-là » et la journée devient une journée libre. Si un seul cours saute, ajuste les horaires ici.</p>`:""}</div>`}
 function pageJour(){
   const d=V.jdk?jDateOf(V.jdk):today();V.jdk=dkey(d);
   const isT=V.jdk===dkey(today()),pl=planDay(d),{cur,next}=isT?jCurrent(pl):{};
@@ -4636,6 +4649,11 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(d.jauto){V.jsel=null;return jPinSet(dk,key,null)}
   if(d.jout)return jOut(dk,key);
   /* 2.36.1 : « Ranger » : une tâche faite quitte le planning mais reste cochée */
+  /* 2.41.0 : dupliquer un bloc : la copie se place juste après, avec la même durée (une pause reste une pause) */
+  if(d.jdup){const s=jFind(dk,key);if(!s)return;const j=jDayDoc(dk),len=Math.max(5,(s.b||0)-(s.a||0)),a=Math.min(24*60-len,s.b),id=uid();
+    if(key.startsWith("bloc|")||s.k==="pause"){j.blocs=[...(j.blocs||[]),{id,l:s.l||"Pause",a,b:a+len}];V.jsel="bloc|"+id}
+    else{j.extra=[...(j.extra||[]),{id,t:String(s.l||"Tâche").replace(/^Avancer /,"").slice(0,120),min:len,ok:false}];j.pin={...(j.pin||{}),["x|"+id]:{a,b:a+len}};V.jsel="x|"+id}
+    return put("jours",dk,j)}
   if(d.jrange){const j=jDayDoc(dk),s=jFind(dk,key);j.pin={...(j.pin||{}),[key]:{...((j.pin||{})[key]||{}),...(s?{a:s.a,b:s.b}:{}),done:1,hid:1}};V.jsel=null;return put("jours",dk,j)}
 });
 
@@ -9173,7 +9191,7 @@ function abkHtml(){const L=ABK.list;return`<div class="stack" style="gap:6px;bor
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-abkr]");if(b)abkRestore(b.dataset.abkr)});
 abkRefresh();
 /* 2.38.0 : quand tu coches une matière qui avait un devoir affiché dessous, l'appli te demande si le devoir est fait aussi */
-function hwAsk(d,h){try{const r=jHwFor(d,h);if(!r)return;const x=r.x;let el=document.getElementById("hwask");if(!el){el=document.createElement("div");el.id="hwask";el.setAttribute("role","alertdialog");document.body.appendChild(el)}
+function hwAsk(d,h){try{const r=jHwFor(d,h);if(!r||!r.pn||!r.pn.length)return;const x=r.pn[0];let el=document.getElementById("hwask");if(!el){el=document.createElement("div");el.id="hwask";el.setAttribute("role","alertdialog");document.body.appendChild(el)}
   el.innerHTML=`<p style="margin:0"><b>Le devoir aussi ?</b><br><span class="small">📝 ${esc(String(x.txt||"devoir").replace(/\s+/g," ").slice(0,90))} · pour ${esc(jHwPour(x))}</span></p><div class="row"><button class="btn" data-hwy="1">Oui, fait</button><button class="ghost" data-hwn="1">Pas encore</button></div>`;
   el.dataset.id=x.id;el.hidden=false;clearTimeout(hwAsk.t);hwAsk.t=setTimeout(()=>{el.hidden=true},20000)}catch(e){}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#hwask [data-hwy],#hwask [data-hwn]");if(!b)return;const el=document.getElementById("hwask");el.hidden=true;
@@ -9457,7 +9475,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.40.0";
+const APP_VERSION = "2.41.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
