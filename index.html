@@ -1614,6 +1614,12 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 :root:root:root:root:root:root:root:root:root:root[data-skin="journal"] .btn:not(.buy):not(.sell){background:#111;color:#fff}
 :root:root:root:root:root:root:root:root:root:root[data-skin="journal"] .btn:active{transform:none}
 :root[data-skin="journal"] h1,:root[data-skin="journal"] h2,:root[data-skin="journal"] h3{font-family:var(--display);font-weight:900;letter-spacing:-.01em;text-transform:none}
+.jhw{display:block;font-size:.72rem;line-height:1.25;color:#b45309;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+[data-theme="dark"] .jhw{color:#fde68a}
+.jhwbox{display:flex;gap:8px;align-items:flex-start;text-align:left;background:color-mix(in srgb,#fccc4e 14%,var(--surface));border:1px solid color-mix(in srgb,#fccc4e 45%,var(--line));border-radius:12px;padding:9px 11px;font-size:.88rem;line-height:1.35;color:var(--ink);margin:6px 0}
+.jhwbox b{color:inherit}
+:root[data-skin="journal"] .jhwbox{background:#fff;border:1.5px solid #111}
+:root[data-skin="journal"] .jhw{color:#111}
 .lck.hit{filter:brightness(1.35);transform:scale(.96)}
 /* 2.35.2 : accueil tout en noir et blanc (plus de trait orange, d'étoile jaune ni d'icônes colorées) */
 :root[data-skin="journal"] .wgbar i{background:#111!important}
@@ -3282,6 +3288,17 @@ function pnById(id){const p=S.pronote&&S.pronote.data,a=p&&Array.isArray(p.devoi
 function pnBackfill(){try{const J=S.jours||{},dv=((S.pronote||{}).data||{}).devoirs||[];for(const x of dv){if(!x||!x.id)continue;const s=pnSig(x);for(const k in J){const j=J[k];if(j&&j.done&&j.done["pn:"+x.id]&&!(j.donesig&&j.donesig[s]))put("jours",k,{...j,date:k,donesig:{...(j.donesig||{}),[s]:true}},true)}}}catch(e){}}
 setTimeout(pnBackfill,2500);setInterval(pnBackfill,30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)setTimeout(pnBackfill,800)});
 function jHwDone(x){return pnDoneAny(x)}
+/* 2.37.0 : chaque devoir Pronote se range sous la matière du planning (Espagnol, Maths spé…) au lieu d'avoir son propre bloc */
+function pnCat(s){const n=" "+String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ")+" ";
+  if(/expert/.test(n))return"exp";if(/ econom| ses | s e s /.test(n))return"ses";if(/philo/.test(n))return"phi";if(/histoire|geograph| hg /.test(n))return"his";
+  if(/espagnol/.test(n))return"esp";if(/anglais/.test(n))return"ang";if(/scien/.test(n))return"sci";if(/math/.test(n))return"math";if(/ eps | sport/.test(n))return"eps";return""}
+function jHwCats(d){return new Set(planOf(d).map(h=>pnCat(habL(h))).filter(Boolean))}
+function jHwFor(d,h){const c=pnCat(habL(h));if(!c)return null;const p=S.pronote&&S.pronote.data,a=p&&Array.isArray(p.devoirs)?p.devoirs:[],k=dkey(d),lim=dkey(add(d,14));
+  const L=a.filter(x=>x&&x.id&&x.pour&&pnCat(x.m)===c&&!jHwDone(x)&&String(x.pour).slice(0,10)>k&&String(x.pour).slice(0,10)<=lim).sort((x,y)=>String(x.pour)<String(y.pour)?-1:1);
+  return L.length?{x:L[0],n:L.length}:null}
+function jHwPour(x){const[y,m,dd]=String(x.pour).slice(0,10).split("-").map(Number),t=new Date(y,m-1,dd),df=Math.round((t-today())/864e5);return df===1?"demain":df>1&&df<7?JOURS[t.getDay()].toLowerCase():`le ${dd}/${m}`}
+function jHwLine(d,s,full){if(!s||s.k!=="hab")return"";const r=jHwFor(d,s.ref);if(!r)return"";const t=String(r.x.txt||"devoir").replace(/\s+/g," ").trim();
+  return full?`<div class="jhwbox">📝 <span><b>Pour ${esc(jHwPour(r.x))} :</b> ${esc(t.slice(0,400))}${r.n>1?` <i class="muted">(+${r.n-1} autre${r.n>2?"s":""})</i>`:""}</span></div>`:`<span class="jhw">📝 ${esc(t.slice(0,60))} · pour ${esc(jHwPour(r.x))}</span>`}
 /* tout ce qu'il y a à faire ce jour-là, par ordre de priorité */
 function jTasks(d){
   const dk=dkey(d),P=jParams(dk),done=doneOf(d),od=(S.jours[dk]||{}).dur||{},out=[];
@@ -3290,11 +3307,12 @@ function jTasks(d){
   const rpA={...rp,...((S.jours[dkey(add(d,1))]||{}).report||{}),...((S.jours[dkey(add(d,2))]||{}).report||{})};
   jExtras(dk).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,l:x.t,min:x.min||30,p:0,tag:"Ajouté"}));
   if(isWE(d)){const o=weBlock(d).find(y=>dkey(y)!==dk);if(o)jExtras(dkey(o)).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,dk:dkey(o),l:x.t,min:x.min||30,p:0,tag:"Ajouté "+(+o<+d?"samedi":"dimanche")}))}
-  pnTasks(d).filter(x=>!jHwDone(x)&&!rp["pn|"+x.id]).forEach(x=>out.push({k:"pn",ref:x.id,l:`${x.m||"Devoir"} : ${String(x.txt||"devoir").split("\n")[0].slice(0,70)}`,min:jDur("devoir",P.devoir),p:1,tag:"Devoir pour demain"}));
+  const hc=jHwCats(d);
+  pnTasks(d).filter(x=>!jHwDone(x)&&!rp["pn|"+x.id]&&!hc.has(pnCat(x.m))).forEach(x=>out.push({k:"pn",ref:x.id,l:`${x.m||"Devoir"} : ${String(x.txt||"devoir").split("\n")[0].slice(0,70)}`,min:jDur("devoir",P.devoir),p:1,tag:"Devoir pour demain"}));
   planOf(d).filter(h=>!done[h]&&!rp["hab|"+h]).forEach(h=>out.push(h==="sport"?{k:"hab",ref:h,l:"Sport (trajets compris)",min:jDur("sport",P.sportTrajet+P.sportDur),p:0.5,tag:`${P.sportDur} min + ${P.sportTrajet} min de trajets`}
     :{k:"hab",ref:h,l:habL(h),min:od[h]||jDur(h,jBase(h)),p:1+(JORD[h]||5)/10,tag:od[h]?"juste aujourd'hui":(jLearn()[h]||[]).length>=2?"ton temps réel":""}));
   /* devoirs des 2 jours suivants : à avancer s'il reste du temps */
-  for(let i=1;i<=2;i++)pnTasks(add(d,i)).filter(x=>!jHwDone(x)&&!rpA["pn|"+x.id]).forEach(x=>out.push({k:"pn",ref:x.id,dk:dkey(add(d,i)),l:`Avancer ${x.m||"un devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`,min:jDur("devoir",P.devoir),p:3+i,tag:"À avancer"}));
+  for(let i=1;i<=2;i++)pnTasks(add(d,i)).filter(x=>!jHwDone(x)&&!rpA["pn|"+x.id]&&!hc.has(pnCat(x.m))).forEach(x=>out.push({k:"pn",ref:x.id,dk:dkey(add(d,i)),l:`Avancer ${x.m||"un devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`,min:jDur("devoir",P.devoir),p:3+i,tag:"À avancer"}));
   const pr=(S.jours[dk]||{}).prio||[];if(pr.length)out.forEach(x=>{const i=pr.indexOf(jKey(x));if(i>=0)x.p=-1+i*0.01});
   return out.sort((a,b)=>a.p-b.p);
 }
@@ -4493,14 +4511,14 @@ function jTimeline(d,pl,isT){
   const hrs=[];for(let h=st;h<en;h+=60)hrs.push(`<span class="jhl" style="top:${(h-st)*JPX}px">${h/60} h</span>`);hrs.push(`<span class="jhl jend" style="top:${(en-st)*JPX}px">23 h 59</span>`);
   const blocks=items.map(s=>{const ln=lanes.get(s),key=jKeyOf(s),mv=jMovable(s),sel=V.jsel===key&&V.jselDk===dk,h=(Math.min(s.b,en)-Math.max(s.a,st))*JPX,hd=mv&&!s.done&&(h>=34||sel);
     return`<div class="jb mv ${jWork(s)?"":"fx"} ${s.done?"done":""} ${s.pin?"pin":""} ${s.run?"run":""} ${s.over?"over":""} ${sel?"sel":""} ${h<34?"tiny":""} ${V.jHi&&V.jHi.includes(key)?"jnew":""}" ${mv?`data-jb="${esc(key)}" data-a="${s.a}" data-b="${s.b}" tabindex="0" role="button" aria-label="${esc(s.l)}, ${fmin(s.a)} à ${jEnd(s.b)}${s.done?", fini":""}"`:""} style="--b:${s.done?"var(--up)":jCol(s)};top:${(Math.max(s.a,st)-st)*JPX}px;height:${Math.max(16,h-2)}px;left:calc(${ln.c/ln.n*100}% + 2px);width:calc(${100/ln.n}% - 4px)">
-      ${hd?`<i class="jh t" data-jh="a"></i>`:""}<b>${s.done?"✓ ":""}${s.done?"":jIcon(s.k,s.ref,s.l)+" "}${esc(s.l)}</b><small>${fmin(s.a)}–${jEnd(s.b)}${s.done?" · fini":s.pin?(s.w?" · 📌 chaque semaine":""):""}</small>${hd?`<i class="jh bt" data-jh="b"></i>`:""}</div>`}).join("");
+      ${hd?`<i class="jh t" data-jh="a"></i>`:""}<b>${s.done?"✓ ":""}${s.done?"":jIcon(s.k,s.ref,s.l)+" "}${esc(s.l)}</b><small>${fmin(s.a)}–${jEnd(s.b)}${s.done?" · fini":s.pin?(s.w?" · 📌 chaque semaine":""):""}</small>${s.done||h<52?"":jHwLine(d,s)}${hd?`<i class="jh bt" data-jh="b"></i>`:""}</div>`}).join("");
   return`<div class="jcal"><div class="jhrs" style="height:${(en-st)*JPX}px">${hrs.join("")}</div>
     <div class="jgrid" id="jgrid" style="height:${(en-st)*JPX}px;--hh:${60*JPX}px">${blocks}${isT&&nowM>=st&&nowM<=en?`<div class="jnowl" style="top:${(nowM-st)*JPX}px"><span>${fmin(nowM)}</span></div>`:""}</div>
     <aside class="jpal" id="jpal" aria-label="Blocs à placer et blocs finis">${pal}</aside></div>`}
 function jSheet(d,pl){if(!V.jsel||V.jselDk!==dkey(d))return"";const dk=dkey(d),key=V.jsel,s=jFind(dk,key);if(!s){V.jsel=null;return""}
   const w=jWork(s),wd=JOURS[d.getDay()].toLowerCase(),isT=dk===dkey(today()),wk=!!(((edtP().pinw||{})[d.getDay()]||{})[key]);
   return`<div class="jsheet card" role="dialog" aria-label="${esc(s.l)}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><b>${jIcon(s.k,s.ref,s.l)} ${esc(s.l)}</b><button class="ghost" data-jclose="1" aria-label="Fermer">✕</button></div>
-    ${s.done?`<p class="small muted">Fait de ${fmin(s.a)} à ${fmin(s.b)}.</p>`:`<div class="jadj"><span>Début <b class="num">${fmin(s.a)}</b></span><button class="ghost" data-jadj="a|-5">−5</button><button class="ghost" data-jadj="a|5">+5</button>
+    ${s.done?"":jHwLine(d,s,1)}${s.done?`<p class="small muted">Fait de ${fmin(s.a)} à ${fmin(s.b)}.</p>`:`<div class="jadj"><span>Début <b class="num">${fmin(s.a)}</b></span><button class="ghost" data-jadj="a|-5">−5</button><button class="ghost" data-jadj="a|5">+5</button>
       <span>Fin <b class="num">${fmin(s.b)}</b></span><button class="ghost" data-jadj="b|-5">−5</button><button class="ghost" data-jadj="b|5">+5</button></div>`}
     <div class="row">${w?(s.done?`<button class="ghost" data-jfait="0">↺ Pas fait</button>`:`<button class="btn" data-jfait="1">✓ Fait</button>${isT&&!s.run?`<button class="ghost on" data-jstart="${esc(key)}">▶ Commencer</button>`:""}`):""}
       ${!s.done&&(w||s.k==="repas"||s.step)?`<button class="ghost ${wk?"on":""}" data-jweek="1">📌 ${wk?"Plus chaque "+wd:"Chaque "+wd}</button>`:""}
@@ -5865,7 +5883,7 @@ const EG_U2=[
    juste avant que tu l'oublies. Quatre réponses : À revoir · Difficile · Correct · Facile.
    Paquet Anglais (les mots du cours + tes mots) et un paquet par matière.
    ================================================================ */
-const SRS_STEPS=[1,10],SRS_RESTEPS=[10],SRS_GRAD=1,SRS_EASY=4,SRS_EF0=2500,SRS_EFMIN=1300,SRS_AHEAD=20,SRS_MAXREV=200,SRS_MIN=60000;
+const SRS_STEPS=[1,10],SRS_RESTEPS=[10],SRS_GRAD=1,SRS_EASY=4,SRS_EF0=2500,SRS_EFMIN=1300,SRS_AHEAD=0,SRS_MAXREV=200,SRS_MIN=60000;
 const SRS_DECKS0={en:{n:"Anglais",e:"🇬🇧",both:1,nd:10},xq:{n:"Expressions du quotidien",e:"💬",both:0,nd:10},xf:{n:"Expressions de la finance",e:"📈",both:0,nd:10},maths:{n:"Maths",e:"📐",both:0,nd:10},ses:{n:"SES",e:"📊",both:0,nd:10},philo:{n:"Philo",e:"🤔",both:0,nd:10},cg:{n:"Culture G",e:"🌍",both:0,nd:10},mg:{n:"Méga vocabulaire",e:"📚",both:0,nd:10}};
 /* tous les mots du cours : A1-A2 (les 150 de départ) puis B1, B2, C1 (engdata.js) */
 const EG_VALL=[...EG_VOC.map(w=>({...w,lv:w.ti<5?"A1":"A2"})),...EG_VOC2];
@@ -5920,7 +5938,8 @@ function srsPick(deck,k,avoid){const s=srsScan(deck),now=Date.now();
 
 /* ---- l'algorithme (réglages par défaut d'Anki) ---- */
 const srsDays=(a,b)=>{const f=k=>{const[y,m,d]=String(k).split("-").map(Number);return Date.UTC(y,m-1,d)};return Math.round((f(b)-f(a))/864e5)};
-function srsFuzz(n){if(n<3)return n;const f=Math.max(1,Math.round(n*.05));return n+Math.round((Math.random()*2-1)*f)}
+/* 2.36.2 : la carte revient exactement au délai affiché sur le bouton (plus de hasard ±5 %) */
+function srsFuzz(n){return n;if(n<3)return n;const f=Math.max(1,Math.round(n*.05));return n+Math.round((Math.random()*2-1)*f)}
 function srsNext(c,g,now,nofz){const t=today(),M=SRS_MIN,ef=(c&&c.ef)||SRS_EF0,r=((c&&c.r)||0)+1,l=(c&&c.l)||0;
   const rev=(ivl,e)=>{ivl=Math.min(36500,Math.max(1,nofz?ivl:srsFuzz(ivl)));return{s:2,ivl,ef:e,dd:dkey(add(t,ivl)),r,l}};
   if(srsIsNew(c)||c.s===1){const st=srsIsNew(c)?0:(c.st||0);
@@ -8570,7 +8589,8 @@ function axHero(){const pl=planDay(today()),{cur,next}=jCurrent(pl),now=new Date
   else{const ds=dayStats(today()),r=ds.t-ds.n;lab=esc(sectName("jour"));big=ds.t?`${ds.n}/${ds.t}`:"✓";what=r>0?"tâches cochées":"Journée bouclée";sub=r>0?`encore ${r} tâche${r>1?"s":""} à cocher aujourd'hui`:"tout est fait pour aujourd'hui"}
   const rest=[...pl.steps,...pl.plan].filter(s=>s&&s.b>nm&&s.b>s.a).sort((a,b)=>a.a-b.a).slice(0,14);
   const bar=rest.length?`<span class="wgbar" aria-hidden="true">${rest.map(s=>`<i style="flex:${Math.max(6,s.b-Math.max(s.a,nm))} 1 0;background:${jCol(s)}${s.done?";opacity:.35":""}"></i>`).join("")}</span><span class="wgaxis" aria-hidden="true"><span>${fmin(Math.max(rest[0].a,nm))}</span><span>${fmin(rest[rest.length-1].b)}</span></span>`:"";
-  return`<button class="wg w2 axhero" style="--c:var(--jour)" data-wgo="jour"><span class="wgl">${lab}</span><span class="axrow"><span class="axbig num">${big}</span><span class="axwhat">${what}</span></span><small>${sub}</small>${bar}<span class="axgo">${cur||next?"C'est parti":"Ouvrir ma journée"}${AXI.go}</span></button>`}
+  const hw=cur||next?wgSafe(()=>jHwLine(today(),cur||next,1))||"":"";
+  return`<button class="wg w2 axhero" style="--c:var(--jour)" data-wgo="jour"><span class="wgl">${lab}</span><span class="axrow"><span class="axbig num">${big}</span><span class="axwhat">${what}</span></span><small>${sub}</small>${hw}${bar}<span class="axgo">${cur||next?"C'est parti":"Ouvrir ma journée"}${AXI.go}</span></button>`}
 
 /* ---- les quêtes du jour : ce qu'il reste à faire, avec une barre ---- */
 function axQuests(){const Q=[];
@@ -9322,7 +9342,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.36.1";
+const APP_VERSION = "2.37.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
