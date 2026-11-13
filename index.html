@@ -1620,6 +1620,9 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 .jhwbox b{color:inherit}
 :root[data-skin="journal"] .jhwbox{background:#fff;border:1.5px solid #111}
 :root[data-skin="journal"] .jhw{color:#111}
+#hwask{position:fixed;left:50%;transform:translateX(-50%);bottom:96px;z-index:60;width:min(420px,calc(100% - 32px));background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:8px}
+#hwask[hidden]{display:none}
+.egfb.warn{background:color-mix(in srgb,#f59e0b 16%,var(--surface));border:1px solid color-mix(in srgb,#f59e0b 50%,var(--line))}
 .lck.hit{filter:brightness(1.35);transform:scale(.96)}
 /* 2.35.2 : accueil tout en noir et blanc (plus de trait orange, d'étoile jaune ni d'icônes colorées) */
 :root[data-skin="journal"] .wgbar i{background:#111!important}
@@ -1657,7 +1660,8 @@ const PLAN0={...PLAN_V2,4:["maths","fses"],5:["sport"]};
 /* emploi du temps de base : versions datées créées par tes suggestions (les jours passés gardent la leur) */
 const planBase=(k,wd)=>{const vc=jVacPlan(k,wd);if(vc)return vc;const vs=((((S.params||{}).edt)||{}).v||[]).filter(v=>v&&v.from<=k&&v.p).sort((a,b)=>a.from<b.from?-1:1);if(vs.length){const p=vs[vs.length-1].p[wd];return Array.isArray(p)?p:[]}return(k<"2026-10-09"?PLAN0:k<"2026-10-11"?PLAN_V2:PLAN)[wd]||[]};
 /* un jour peut avoir son propre planning (« juste cette fois ») */
-const planOf=d=>{const k=dkey(d),o=((S.jours||{})[k]||{}).plan;return Array.isArray(o)?o:planBase(k,d.getDay())};
+/* 2.38.0 : plus de bloc « Maths » tout court à partir du 13 novembre 2026 (Maths spé et Maths expertes restent) */
+const planOf=d=>{const k=dkey(d),o=((S.jours||{})[k]||{}).plan,L=Array.isArray(o)?o:planBase(k,d.getDay());return k>="2026-11-13"?L.filter(h=>h!=="maths"):L};
 
 const AXES=["Identités et échanges","Espace privé et espace public","Art et pouvoir","Citoyenneté et mondes virtuels","Fictions et réalités","Innovations scientifiques et responsabilité","Diversité et inclusion","Territoire et mémoire"];
 const SESA_SPE="https://manuel.sesamath.net/numerique/?ouvrage=mstsspe_2020";
@@ -2328,6 +2332,7 @@ function localSave(){try{localStorage.setItem("cerveau",JSON.stringify(S))}catch
 let lsT=null;function localSaveSoon(){clearTimeout(lsT);lsT=setTimeout(localSave,500)}
 function setSync(t){syncTxt=t;const el=document.getElementById("sync");if(el)el.textContent=t}
 async function put(col,id,data,quiet){
+  try{lwStamp(col,id,data)}catch(e){}
   S[col]={...S[col],[id]:data};if(!quiet)render();localSaveSoon();enqueue(col,id,data,false);
 }
 async function del(col,id){
@@ -4487,7 +4492,7 @@ function jLanes(items){const out=new Map(),s=[...items].sort((x,y)=>x.a-y.a||y.b
 const jEnd=m=>m>=24*60?"23:59":fmin(m);
 function jPalList(d,pl){const dk=dkey(d),inPlan=new Set(planOf(d)),dn=doneOf(d)||{},j=S.jours[dk]||{},P=jParams(dk),items=[];
   pl.reste.forEach(x=>items.push({t:"task",key:jKey(x),min:x.min,l:x.l,k:x.k,ref:x.ref,g:"todo"}));
-  Object.keys(HABITS).filter(h=>!inPlan.has(h)&&!dn[h]).forEach(h=>items.push({t:"hab",id:h,key:"hab|"+h,l:habL(h),k:"hab",ref:h,min:h==="sport"?P.sportDur+P.sportTrajet:jDur(h,jBase(h)),g:"add"}));
+  Object.keys(HABITS).filter(h=>h!=="maths"&&!inPlan.has(h)&&!dn[h]).forEach(h=>items.push({t:"hab",id:h,key:"hab|"+h,l:habL(h),k:"hab",ref:h,min:h==="sport"?P.sportDur+P.sportTrajet:jDur(h,jBase(h)),g:"add"}));
   items.push({t:"pause",l:"Pause",k:"bloc",ref:"",min:15,g:"add"});
   const pins=jPins(d),seen=new Set(),fini=(key,l,k,ref)=>{if(seen.has(key))return;seen.add(key);const p=pins[key],at=p&&p.done&&p.b>p.a?p:null;items.push({t:"done",key,l,k,ref,min:at?at.b-at.a:30,at,g:"done"})};
   Object.keys(dn).filter(h=>dn[h]&&HABITS[h]).forEach(h=>fini("hab|"+h,habL(h),"hab",h));
@@ -5917,7 +5922,7 @@ const srsSib=cid=>cid.slice(0,-1)+(cid.endsWith(">0")?"1":"0");
 function srsLog(dk){const r=(srsDoc().rev||{})[todayK()]||{};return r[dk]||{n:0,r:0,a:0,ok:0}}
 function srsScan(deck){const DKS=srsDecks(),D=DKS[deck],learn=[],rev=[],fresh=[];let tot=0,known=0;
   if(!D)return{learn,rev,fresh,tot,known,revLeft:0};
-  const C=srsCards(),t=todayK(),lg=srsLog(deck),newLeft=Math.max(0,(D.nd??10)-lg.n);
+  const C=srsCards(),t=todayK(),lg=srsLog(deck),newLeft=(srsDoc().pauseNew||{})[deck]===t?0:Math.max(0,(D.nd??10)-lg.n);
   for(const n of srsNotes(deck))for(const cid of srsCids(n,(n.d&&n.d!==deck&&DKS[n.d])||D)){const c=C[cid];tot++;if(c&&c.sus)continue;
     const sc=C[srsSib(cid)],bur=!!(sc&&sc.last===t&&!(c&&(c.s===1||c.s===3)));
     if(srsIsNew(c)){if(!bur&&fresh.length<newLeft&&srsNewOk(cid,C))fresh.push(cid);continue}
@@ -6403,7 +6408,7 @@ function egHome(){const lv=egLv(),doc=egDoc(),td=egToday(),c=srsCount("en"),todo
     ${step(2,"🔁","Traduction",`5 phrases du français vers l'anglais (niveau ${lv})`,done[1],`<button class="${done[1]?"ghost":"btn"}" data-etrgo="1">${done[1]?"Encore":"Commencer"}</button>`)}
     ${step(3,"🎧","Écoute","un texte à comprendre + 3 phrases en dictée",done[2],`<button class="${done[2]?"ghost":"btn"}" data-elsgo="1">${done[2]?"Encore":"Commencer"}</button>`)}
     ${step(4,"✍️","Résumé",`lis un texte et résume-le en anglais${artOk?" (ou l'article du jour)":""}`,done[3],`<div class="stack" style="gap:6px;align-items:flex-end"><button class="${done[3]?"ghost":"btn"}" data-ersgo="ls">${done[3]?"Encore":"Commencer"}</button>${artOk?`<button class="linkb small" data-ersgo="art">l'article du jour</button>`:""}</div>`)}
-    <p class="muted small" style="margin:0">Environ 25 minutes. Le plus important : un peu chaque jour.</p></div>
+    ${srsLate()}<p class="muted small" style="margin:0">Environ 25 minutes. Le plus important : un peu chaque jour.</p></div>
   ${wgSafe(toeflCard)}
   ${w.tr!=null||w.ls!=null||w.rs!=null?`<div class="card stack" style="gap:6px"><p class="label" style="margin:0">📈 Tes 7 derniers jours</p><p class="small" style="margin:0">${w.tr!=null?`Traduction : <b>${w.tr} %</b> (${w.ntr} phrases)`:""}${w.ls!=null?` · Écoute : <b>${w.ls} %</b>`:""}${w.rs!=null?` · Résumés : <b>${w.rs}/10</b>`:""} · <b>${c.known}</b> cartes bien sues</p></div>`:""}
   ${eneCard()}
@@ -9048,7 +9053,7 @@ function bkRead(file){const fr=new FileReader();
     catch(e){V.imp=null;V.dataMsg="Ce fichier n'est pas une sauvegarde de l'appli."}render(true)};
   fr.onerror=()=>{V.imp=null;V.dataMsg="Impossible de lire ce fichier.";render(true)};fr.readAsText(file)}
 async function bkApply(){const I=V.imp;if(!I)return;V.imp=null;V.dataMsg="Restauration en cours…";render(true);let n=0;
-  for(const c of Object.keys(I.cols))for(const[id,doc]of Object.entries(I.cols[c])){if(!doc||typeof doc!=="object")continue;S[c]={...S[c],[id]:doc};n++;if(!NOSYNC(c,id))enqueue(c,id,doc,false)}
+  for(const c of Object.keys(I.cols))for(const[id,doc]of Object.entries(I.cols[c])){if(!doc||typeof doc!=="object")continue;try{lwStamp(c,id,doc)}catch(e){}S[c]={...S[c],[id]:doc};n++;if(!NOSYNC(c,id))enqueue(c,id,doc,false)}
   BK_LOCAL.forEach(k=>{if(typeof I.local[k]==="string"){try{localStorage.setItem(k,I.local[k])}catch(e){}}});
   localSave();V.dataMsg="✓ "+n+" éléments restaurés.";render(true)}
 function bkCard(){const dj=bkDays(),I=V.imp;
@@ -9056,7 +9061,7 @@ function bkCard(){const dj=bkDays(),I=V.imp;
     <p class="muted small">Un seul fichier avec tout : habitudes, notes, cours, cartes, Macro Lab, Trading Lab, progression. Les clés d'IA et ta connexion n'y sont pas, par sécurité.</p>
     <p class="small" style="margin:0">${dj===null?"Dernière sauvegarde : jamais.":"Dernière sauvegarde : "+(dj===0?"aujourd'hui":"il y a "+dj+" jour"+(dj>1?"s":""))+"."}</p>
     <div class="row"><button class="btn" data-bkexport="1">⬇️ Sauvegarder mes données</button><label class="ghost on" for="bkimp" style="cursor:pointer">⬆️ Restaurer</label><input type="file" id="bkimp" data-bkimp="1" accept=".json,application/json" hidden></div>
-    ${V.dataMsg?`<p class="small">${esc(V.dataMsg)}</p>`:""}
+    ${V.dataMsg?`<p class="small">${esc(V.dataMsg)}</p>`:""}${abkHtml()}
     ${I?`<div class="card stack bkconf" role="alertdialog" aria-label="Confirmer la restauration"><b>⚠️ Remplacer tes données actuelles ?</b>
       <p class="small" style="margin:0">Ce fichier contient ${I.n} éléments${I.date?" (sauvegarde du "+esc(fdate(String(I.date).slice(0,10)))+")":""}. En restaurant, les éléments de ce fichier <b>écrasent</b> ceux qui ont le même nom sur cet appareil et sur ton compte. Pense à faire une sauvegarde de l'état actuel avant.</p>
       <div class="row"><button class="btn" data-bkok="1">Oui, restaurer</button><button class="ghost" data-bkno="1">Annuler</button></div></div>`:""}</div>
@@ -9072,6 +9077,39 @@ function bkCard(){const dj=bkDays(),I=V.imp;
       <li>Si quelque chose manque : « ⬆️ Restaurer » avec ton fichier de sauvegarde.</li>
     </ol>
     <p class="small" style="margin:8px 0 0">À savoir : les clés (IA, etc.) et réglages propres à l'appareil sont à remettre sur le Mac. Les mots de passe ne passent pas dans la sauvegarde.</p></details>`}
+/* 2.38.0 : sauvegarde AUTOMATIQUE chaque semaine, gardée sur l'appareil (les 4 dernières), restaurable en un clic */
+const ABK={db:null,list:[]};
+function abkDb(){return ABK.db||(ABK.db=new Promise((ok,ko)=>{try{const r=indexedDB.open("cerveau-autobk",1);r.onupgradeneeded=()=>r.result.createObjectStore("bk",{keyPath:"date"});r.onsuccess=()=>ok(r.result);r.onerror=()=>ko(r.error)}catch(e){ko(e)}}))}
+async function abkTx(mode,fn){const db=await abkDb();return new Promise((ok,ko)=>{const t=db.transaction("bk",mode),st=t.objectStore("bk");let out;Promise.resolve(fn(st)).then(v=>out=v);t.oncomplete=()=>ok(out);t.onerror=()=>ko(t.error)})}
+async function abkAll(){return abkTx("readonly",st=>new Promise(ok=>{const r=st.getAll();r.onsuccess=()=>ok((r.result||[]).sort((a,b)=>a.date<b.date?1:-1))}))}
+async function abkRefresh(){try{ABK.list=(await abkAll()).map(x=>({date:x.date,n:x.n}))}catch(e){ABK.list=[]}}
+async function abkRun(force){try{const L=await abkAll(),t=dkey(today()),last=L[0]&&L[0].date;
+  if(!force&&last){const[y,m,d]=last.split("-").map(Number);if(Math.round((+today()-new Date(y,m-1,d))/864e5)<7){ABK.list=L.map(x=>({date:x.date,n:x.n}));return}}
+  if(bkCount(S)<3)return;const snap=JSON.parse(JSON.stringify(S));
+  await abkTx("readwrite",st=>{st.put({date:t,n:bkCount(snap),data:snap});L.filter(x=>x.date!==t).slice(3).forEach(x=>st.delete(x.date))});await abkRefresh();if(V.page==="reglages")render(true)}catch(e){}}
+setTimeout(()=>abkRun(false),8000);setInterval(()=>abkRun(false),6*3600e3);
+async function abkRestore(date){try{const x=await abkTx("readonly",st=>new Promise(ok=>{const r=st.get(date);r.onsuccess=()=>ok(r.result)}));if(!x||!x.data)throw 0;
+  const imp={};C.forEach(c=>{if(x.data[c]&&typeof x.data[c]==="object")imp[c]=x.data[c]});V.imp={cols:imp,local:{},n:bkCount(imp),date:x.date,ver:"auto"};V.dataMsg=""}catch(e){V.dataMsg="Cette sauvegarde automatique est introuvable."}render(true)}
+function abkHtml(){const L=ABK.list;return`<div class="stack" style="gap:6px;border-top:1px solid var(--line);padding-top:10px"><b class="small">🔁 Sauvegardes automatiques (chaque semaine, sur cet appareil)</b>
+  ${L.length?`<ul class="list">${L.map(x=>`<li class="row" style="justify-content:space-between;gap:8px"><span class="small">${esc(fdate(x.date))} · ${x.n} éléments</span><button class="ghost" data-abkr="${esc(x.date)}">Restaurer</button></li>`).join("")}</ul>`:`<p class="small muted" style="margin:0">La première sera faite automatiquement dans quelques secondes.</p>`}
+  <p class="small muted" style="margin:0">Les 4 dernières sont gardées. Restaurer te demande toujours une confirmation.</p></div>`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-abkr]");if(b)abkRestore(b.dataset.abkr)});
+abkRefresh();
+/* 2.38.0 : quand tu coches une matière qui avait un devoir affiché dessous, l'appli te demande si le devoir est fait aussi */
+function hwAsk(d,h){try{const r=jHwFor(d,h);if(!r)return;const x=r.x;let el=document.getElementById("hwask");if(!el){el=document.createElement("div");el.id="hwask";el.setAttribute("role","alertdialog");document.body.appendChild(el)}
+  el.innerHTML=`<p style="margin:0"><b>Le devoir aussi ?</b><br><span class="small">📝 ${esc(String(x.txt||"devoir").replace(/\s+/g," ").slice(0,90))} · pour ${esc(jHwPour(x))}</span></p><div class="row"><button class="btn" data-hwy="1">Oui, fait</button><button class="ghost" data-hwn="1">Pas encore</button></div>`;
+  el.dataset.id=x.id;el.hidden=false;clearTimeout(hwAsk.t);hwAsk.t=setTimeout(()=>{el.hidden=true},20000)}catch(e){}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#hwask [data-hwy],#hwask [data-hwn]");if(!b)return;const el=document.getElementById("hwask");el.hidden=true;
+  if(b.dataset.hwy){const x=pnById(el.dataset.id);if(x){pnDoneSet(x,dkey(today()),true);render(true)}}});
+{const _jds=jDoneSet;jDoneSet=function(dk,key,ok){const r=_jds.apply(this,arguments);if(ok&&String(key).startsWith("hab|"))hwAsk(jDateOf(dk),key.slice(4));return r}}
+{const _ht=habToggle;habToggle=function(d,hb,on){const r=_ht.apply(this,arguments);if(on)hwAsk(d,hb);return r}}
+/* 2.38.0 : alerte quand les cartes à revoir s'accumulent : on propose une journée sans nouvelles cartes pour rattraper */
+const SRS_LATE=120;
+function srsLate(){const c=wgSafe(()=>srsCount("en"))||{r:0,l:0},due=(c.r||0)+(c.l||0),t=todayK(),pz=(srsDoc().pauseNew||{}).en===t;
+  if(pz)return`<div class="egfb"><b>⏸️ Pas de nouvelles cartes aujourd'hui.</b> Tu rattrapes tes ${due} cartes à revoir. <button class="linkb" data-srspz="0">Remettre les nouvelles</button></div>`;
+  if(due<SRS_LATE)return"";
+  return`<div class="egfb warn"><b>⚠️ ${due} cartes à revoir aujourd'hui.</b> Ça s'accumule. Tu peux mettre les nouvelles cartes en pause aujourd'hui pour rattraper (tes ${(srsDecks().en||{}).nd??10} nouvelles par jour reviennent demain). <button class="btn" data-srspz="1">Pause des nouvelles aujourd'hui</button></div>`}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-srspz]");if(!b)return;const pz={...(srsDoc().pauseNew||{})};if(b.dataset.srspz==="1")pz.en=todayK();else delete pz.en;srsSave({pauseNew:pz});render(true)});
 /* rappel une fois par mois, sur l'accueil */
 function bkNag(){const dj=bkDays(),sn=lsGet("cerveau-bksnooze",null);if(dj!==null&&dj<30)return"";if(sn&&sn>dkey(today()))return"";
   if(dj===null){const f=lsGet("cerveau-bkfirst",null);if(!f){lsSet("cerveau-bkfirst",dkey(today()));return""}const[y,m,d]=String(f).split("-").map(Number);if(Math.round((+today()-new Date(y,m-1,d))/864e5)<7)return""}
@@ -9333,7 +9371,7 @@ function readImport(file){
 async function importData(){
   const imp=V.imp;if(!imp)return;V.imp=null;let n=0,err=0;V.dataMsg="Restauration en cours…";render(true);
   for(const c of Object.keys(imp))for(const[id,doc]of Object.entries(imp[c])){
-    if(!doc||typeof doc!=="object")continue;S[c]={...S[c],[id]:doc};n++;
+    if(!doc||typeof doc!=="object")continue;try{lwStamp(c,id,doc)}catch(e){}S[c]={...S[c],[id]:doc};n++;
     if(!NOSYNC(c,id))enqueue(c,id,doc,false)}
   localSave();V.dataMsg=err?"Restauré avec "+err+" erreur(s) sur "+n+" éléments.":n+" éléments restaurés.";render(true);
 }
@@ -9342,7 +9380,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.37.0";
+const APP_VERSION = "2.38.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
@@ -9396,6 +9434,33 @@ async function sbRest(method,path,body,extra){
 
 /* ---------- synchronisation : tout part d'abord sur l'appareil, puis vers le compte ---------- */
 let OUTBOX=lsGet("cerveau-outbox",{});
+/* ---- 2.38.0 : synchro champ par champ. Chaque modif note l'heure de chaque case changée (cochée, déplacée, ajoutée, supprimée) ;
+   entre le PC et l'iPhone, c'est la modif la plus récente de CHAQUE case qui gagne, au lieu du document entier. ---- */
+const LWW=(col,id)=>C.includes(col)&&!NOUP(col,id)&&!(col==="drill"&&SM_IDS.includes(id));
+let STAMPS=lsGet("cerveau-stamps",{});const PREV=new Map();let stT=null;function stampSave(){clearTimeout(stT);stT=setTimeout(()=>lsSet("cerveau-stamps",STAMPS),400)}
+const lwObj=v=>v&&typeof v==="object"&&!Array.isArray(v);
+function lwFlat(d){const o={};if(!lwObj(d))return o;for(const k in d){if(k==="_t")continue;const v=d[k];
+  if(lwObj(v)){o[JSON.stringify([k,"{}"])]=1;for(const s in v)o[JSON.stringify([k,"o",s])]=v[s]}
+  else if(Array.isArray(v)&&v.length&&v.every(e=>lwObj(e)&&e.id!=null)){o[JSON.stringify([k,"[]"])]=v.map(e=>String(e.id));v.forEach(e=>{o[JSON.stringify([k,"a",String(e.id)])]=e})}
+  else o[JSON.stringify([k])]=v}return o}
+function lwBuild(f){const o={},arr={};for(const p in f){const v=f[p];if(v===undefined)continue;const a=JSON.parse(p),k=a[0];
+  if(a.length===1)o[k]=v;else if(a[1]==="{}"){if(!lwObj(o[k]))o[k]={}}else if(a[1]==="o"){if(!lwObj(o[k]))o[k]={};o[k][a[2]]=v}
+  else if(a[1]==="[]"){(arr[k]=arr[k]||{ord:[],it:{}}).ord=v}else if(a[1]==="a"){(arr[k]=arr[k]||{ord:[],it:{}}).it[a[2]]=v}}
+  for(const k in arr){const A=arr[k],seen=new Set(),L=[];(Array.isArray(A.ord)?A.ord:[]).forEach(i=>{if(A.it[i]&&!seen.has(i)){seen.add(i);L.push(A.it[i])}});Object.keys(A.it).forEach(i=>{if(!seen.has(i))L.push(A.it[i])});o[k]=L}
+  return o}
+function lwDiff(prev,next,t,now){const a=lwFlat(prev),b=lwFlat(next);let ch=false;for(const p of new Set([...Object.keys(a),...Object.keys(b)]))if(smCanon(a[p])!==smCanon(b[p])){t[p]=now;ch=true}return ch}
+function lwStamp(col,id,data){if(!LWW(col,id)||!lwObj(data))return;const k=col+"|"+id,prev=PREV.has(k)?PREV.get(k):(S[col]||{})[id];
+  const t={...(STAMPS[k]||{})};if(lwDiff(prev,data,t,Date.now())){STAMPS[k]=t;stampSave()}try{PREV.set(k,JSON.parse(JSON.stringify(data)))}catch(e){}}
+/* fusion : pour chaque case, l'heure la plus récente gagne. Sans heure des deux côtés (ancienne version), on garde ce qui existe d'un seul côté. */
+function lwMerge(L,tl,R,tr,pend){tl=tl||{};tr=tr||{};const fl=lwFlat(L),fr=lwFlat(R),out={},T={};
+  for(const p of new Set([...Object.keys(fl),...Object.keys(fr),...Object.keys(tl),...Object.keys(tr)])){const a=tl[p]||0,b=tr[p]||0,inL=p in fl&&fl[p]!==undefined,inR=p in fr&&fr[p]!==undefined;let useL;
+    if(a!==b)useL=a>b;else if(a)useL=smCanon(fl[p])>=smCanon(fr[p]);else if(inL&&inR)useL=!!pend;else useL=inL;
+    out[p]=useL?fl[p]:fr[p];if(a||b)T[p]=Math.max(a,b)}
+  return{d:lwBuild(out),t:T}}
+function lwOut(x){if(x.deleted||!LWW(x.col,x.id)||!lwObj(x.data))return x.data;const t=STAMPS[x.col+"|"+x.id];return t&&Object.keys(t).length?{...x.data,_t:t}:x.data}
+function lwSplit(d){if(!lwObj(d)||!("_t" in d))return[d,{}];const c={...d},t=lwObj(c._t)?c._t:{};delete c._t;return[c,t]}
+setTimeout(()=>{try{C.forEach(c=>{if(c==="pronote"||c==="presse"||c==="marche")return;for(const id in (S[c]||{})){const k=c+"|"+id;if(!PREV.has(k)&&LWW(c,id))PREV.set(k,JSON.parse(JSON.stringify(S[c][id])))}})}catch(e){}},50);
+
 function enqueue(col,id,data,deleted){if(NOUP(col,id))return;OUTBOX[col+"|"+id]={col,id,data:deleted?{}:data,deleted:!!deleted,ts:Date.now()};lsSet("cerveau-outbox",OUTBOX);flushSoon()}
 let flT=null;function flushSoon(){clearTimeout(flT);flT=setTimeout(flush,700)}
 let flushing=false,smDirty=false;
@@ -9412,7 +9477,15 @@ async function flush(){
           try{const rows=await sbRest("GET","docs?select=data,deleted&col=eq.drill&id=eq."+encodeURIComponent(x.id)),rw=rows&&rows[0];
             if(rw&&!rw.deleted&&rw.data&&OUTBOX["drill|"+x.id]===x){const m=smMerge(x.id,x.data,rw.data);
               if(smCanon(m)!==smCanon(x.data)){x.data=m;S.drill={...S.drill,[x.id]:m};localSaveSoon();smDirty=true}}}catch(e){}}}
-      await sbRest("POST","docs?on_conflict=user_id,col,id",chunk.map(x=>({user_id:SESSION.user.id,col:x.col,id:x.id,data:x.data,deleted:x.deleted})),{Prefer:"resolution=merge-duplicates,return=minimal"});
+      const lws=chunk.filter(x=>!x.deleted&&LWW(x.col,x.id)&&lwObj(x.data));
+      if(lws.length){const byC={};lws.forEach(x=>{(byC[x.col]=byC[x.col]||[]).push(x)});
+        for(const c in byC){try{const ids=byC[c].map(x=>'"'+String(x.id).replace(/"/g,'\\"')+'"').join(",");
+          const rows=await sbRest("GET","docs?select=id,data,deleted&col=eq."+encodeURIComponent(c)+"&id=in.("+encodeURIComponent(ids)+")")||[];
+          for(const rw of rows){const x=byC[c].find(y=>String(y.id)===String(rw.id)),k=c+"|"+rw.id;if(!x||rw.deleted||!lwObj(rw.data)||OUTBOX[k]!==x)continue;
+            const[rd,rt]=lwSplit(rw.data),m=lwMerge(x.data,STAMPS[k],rd,rt,true);
+            if(smCanon(m.d)!==smCanon(x.data)){x.data=m.d;S[c]={...S[c],[rw.id]:m.d};try{PREV.set(k,JSON.parse(JSON.stringify(m.d)))}catch(e){}localSaveSoon();smDirty=true}
+            STAMPS[k]=m.t;stampSave()}}catch(e){}}}
+      await sbRest("POST","docs?on_conflict=user_id,col,id",chunk.map(x=>({user_id:SESSION.user.id,col:x.col,id:x.id,data:lwOut(x),deleted:x.deleted})),{Prefer:"resolution=merge-duplicates,return=minimal"});
       chunk.forEach(x=>{const k=x.col+"|"+x.id;if(OUTBOX[k]&&OUTBOX[k].ts===x.ts)delete OUTBOX[k]});
     }
     lsSet("cerveau-outbox",OUTBOX);lsSet("cerveau-lastsync",Date.now());setSync("Synchronisé");if(smDirty){smDirty=false;render(true)}
@@ -9436,6 +9509,15 @@ async function pull(full){
           if(smCanon(m)!==smCanon(loc)){S.drill={...S.drill,[r.id]:m};changed=true}
           if(smCanon(m)!==smCanon(r.data))enqueue("drill",r.id,m,false);
           else if(OUTBOX[k]&&OUTBOX[k].ts<=Date.now()){delete OUTBOX[k];lsSet("cerveau-outbox",OUTBOX)}
+          continue}
+        if(!r.deleted&&LWW(r.col,r.id)&&lwObj(r.data)){
+          const[rd,rt]=lwSplit(r.data),loc=(S[r.col]||{})[r.id];
+          if(loc===undefined){S[r.col]={...S[r.col],[r.id]:rd};STAMPS[k]=rt;stampSave();try{PREV.set(k,JSON.parse(JSON.stringify(rd)))}catch(e){}changed=true;continue}
+          const m=lwMerge(loc,STAMPS[k],rd,rt,!!OUTBOX[k]);
+          if(smCanon(m.d)!==smCanon(loc)){S[r.col]={...S[r.col],[r.id]:m.d};changed=true}
+          try{PREV.set(k,JSON.parse(JSON.stringify(m.d)))}catch(e){}STAMPS[k]=m.t;stampSave();
+          if(smCanon(m.d)!==smCanon(rd)||smCanon(m.t)!==smCanon(rt))enqueue(r.col,r.id,m.d,false);
+          else if(OUTBOX[k]){delete OUTBOX[k];lsSet("cerveau-outbox",OUTBOX)}
           continue}
         if(OUTBOX[k]||NOSYNC(r.col,r.id)||!C.includes(r.col))continue;
         if(r.deleted){if(S[r.col]&&S[r.col][r.id]!==undefined){const n={...S[r.col]};delete n[r.id];S[r.col]=n;changed=true}}
