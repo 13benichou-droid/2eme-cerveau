@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-12T13:59:13.086Z",
+ "updated": "2026-11-13T13:24:37.506Z",
  "snap": {
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 355",
-    "c": "+0,26 %"
+    "v": "8 357",
+    "c": "−0,05 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 619",
-    "c": "+1,31 %"
+    "v": "7 592",
+    "c": "−0,35 %"
    },
    {
     "n": "Nasdaq",
-    "v": "25 466",
-    "c": "+1,60 %"
+    "v": "25 366",
+    "c": "−0,39 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "18,87",
-    "c": "+7,89 %"
+    "v": "18,24",
+    "c": "−2,46 %"
    },
    {
     "n": "Brent",
-    "v": "93,6 $",
-    "c": "+0,87 %"
+    "v": "96,1 $",
+    "c": "+0,27 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "86,9 $",
-    "c": "+0,44 %"
+    "v": "88,5 $",
+    "c": "−0,27 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 902 $",
-    "c": "−2,47 %"
+    "v": "3 891 $",
+    "c": "+0,15 %"
    },
    {
     "n": "Bitcoin",
-    "v": "72 473 $",
-    "c": "−2,02 %"
+    "v": "69 138 $",
+    "c": "−3,09 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,05 %",
-    "c": "+0,05 pt"
+    "v": "5,10 %",
+    "c": "+0,11 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,109",
-    "c": "−0,74 %"
+    "v": "1,105",
+    "c": "−0,37 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-13-petrole-vers-un-retour-de-l-excedent-d-o",
+   "src": "Le Monde",
+   "date": "2026-11-13",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/13/le-marche-mondial-du-petrole-devrait-redevenir-excedentaire-au-dernier-trimestre-selon-l-agence-internationale-de-l-energie_6809326_3234.html",
+   "t": {
+    "fr": "Pétrole : vers un retour de l'excédent d'offre en fin d'année 2026",
+    "en": "Oil: Return to Supply Surplus Expected in Late 2026"
+   },
+   "s": {
+    "fr": "L'Agence internationale de l'énergie prévoit que la production globale de pétrole surpasse la consommation au dernier trimestre 2026. Cela représente une première évolution de ce type depuis l'éclatement du conflit armé en Iran en février. Le marché mondial s'apprête ainsi à repasser dans une phase de surplus.",
+    "en": "The International Energy Agency forecasts that global oil production will surpass consumption in the fourth quarter of 2026. This marks the first such reversal since the outbreak of war in Iran in February. The global market is thus preparing to shift back into a surplus."
+   },
+   "d": {
+    "fr": "Pour un trader, une offre supérieure à la demande entraîne souvent un repli des cours de la matière première. Observer ces données d'équilibre permet de mieux anticiper les tendances sur les marchés de l'énergie.",
+    "en": "For a trader, supply exceeding demand often causes the commodity's market price to decline. Tracking these balance figures helps better forecast trends in energy markets."
+   },
+   "v": [
+    [
+     "Offre et demande",
+     "Supply and demand"
+    ],
+    [
+     "Excédent de marché",
+     "Market surplus"
+    ],
+    [
+     "Matière première",
+     "Commodity"
+    ],
+    [
+     "Cours du pétrole",
+     "Oil price"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'effet habituel d'un surplus d'offre sur le prix d'un produit ?",
+    "en": "What is the typical effect of a supply surplus on a product's price?"
+   },
+   "r": {
+    "fr": "Lorsque la marchandise disponible dépasse les besoins des acheteurs, la concurrence pousse les vendeurs à baisser les prix.",
+    "en": "When available merchandise exceeds buyer needs, competition forces sellers to lower prices."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-13-technologie-perturbation-majeure-des-ser",
+   "src": "Le Monde",
+   "date": "2026-11-13",
+   "url": "https://www.lemonde.fr/pixels/article/2026/11/13/ce-que-l-on-sait-de-la-panne-d-outlook-et-de-microsoft-365_6809312_4408996.html",
+   "t": {
+    "fr": "Technologie : perturbation majeure des services informatiques de Microsoft",
+    "en": "Technology: Major Service Disruption Hits Microsoft"
+   },
+   "s": {
+    "fr": "Une panne d'ampleur internationale affecte plusieurs outils de Microsoft comme sa messagerie Outlook et Copilot, perturbant le fonctionnement d'entreprises et de gouvernements. L'entreprise informatique rejette l'hypothèse d'une cyberattaque et tente de stabiliser la situation. Des améliorations ont été constatées en Europe, mais le retour à la normale reste fragile.",
+    "en": "A widespread global outage has impacted several Microsoft tools, including Outlook messaging and Copilot, disrupting businesses and government operations. The tech company has ruled out a cyberattack while working to stabilize the situation. Improvements were noted in Europe, but recovery remains fragile."
+   },
+   "d": {
+    "fr": "Les incidents techniques d'une telle échelle génèrent du risque opérationnel et peuvent affaiblir temporairement le cours de bourse d'une entreprise tech. Les investisseurs surveillent la rapidité de résolution pour évaluer l'impact financier et réputationnel.",
+    "en": "Technical failures on this scale create operational risk and can temporarily weaken a tech company's stock price. Investors watch the resolution speed to evaluate the financial and reputational impact."
+   },
+   "v": [
+    [
+     "Panne technique",
+     "System outage"
+    ],
+    [
+     "Risque opérationnel",
+     "Operational risk"
+    ],
+    [
+     "Valorisation boursière",
+     "Market valuation"
+    ],
+    [
+     "Confiance des investisseurs",
+     "Investor confidence"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi une panne informatique globale préoccupe-t-elle les marchés financiers ?",
+    "en": "Why does a global IT outage concern financial markets?"
+   },
+   "r": {
+    "fr": "Elle bloque les activités économiques de nombreuses entreprises clients et risque d'entacher la réputation du fournisseur de services.",
+    "en": "It halts the business activities of many client companies and threatens to damage the service provider's reputation."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-13-semi-conducteurs-demission-du-pdg-de-nvi",
+   "src": "Le Monde",
+   "date": "2026-11-13",
+   "url": "https://www.lemonde.fr/international/article/2026/11/13/nvidia-l-ancien-pdg-de-nvidia-et-le-secretaire-au-commerce-invites-a-temoigner-au-senat-americain_6809295_3210.html",
+   "t": {
+    "fr": "Semi-conducteurs : démission du PDG de Nvidia et auditions au Sénat américain",
+    "en": "Semiconductors: Nvidia CEO Resigns Amid US Senate Hearing Call"
+   },
+   "s": {
+    "fr": "Jensen Huang a quitté la direction du géant des puces Nvidia suite à la révélation de liaisons personnelles, l'une d'elles impliquant des soupçons d'espionnage au profit de la Chine. Il est convoqué par le Sénat des États-Unis aux côtés du secrétaire au Commerce Howard Lutnick. Cet événement relance les débats politiques autour des règles d'exportation des puces électroniques avancées.",
+    "en": "Jensen Huang stepped down as head of chipmaker Nvidia following revelations of personal relationships, one involving suspicions of espionage for China. He has been invited to testify before the US Senate alongside Commerce Secretary Howard Lutnick. This event reignites political debates over export controls on advanced chips."
+   },
+   "d": {
+    "fr": "Le départ imprévu d'un dirigeant historique crée souvent une forte instabilité sur le prix de l'action. De plus, la perspective d'enquêtes étatiques renforce l'incertitude réglementaire pour le secteur technologique.",
+    "en": "The unexpected departure of a longtime leader often causes high volatility in a company's share price. Furthermore, the prospect of government inquiries adds regulatory uncertainty to the tech sector."
+   },
+   "v": [
+    [
+     "Démission du dirigeant",
+     "CEO resignation"
+    ],
+    [
+     "Volatilité des titres",
+     "Stock volatility"
+    ],
+    [
+     "Contrôle des exportations",
+     "Export controls"
+    ],
+    [
+     "Incertitude réglementaire",
+     "Regulatory uncertainty"
+    ]
+   ],
+   "q": {
+    "fr": "Comment les marchés réagissent-ils habituellement à la démission soudaine d'un patron emblématique ?",
+    "en": "How do markets typically react to the sudden resignation of an iconic CEO?"
+   },
+   "r": {
+    "fr": "Les investisseurs tendent à vendre le titre à court terme en raison du manque de visibilité sur le futur leadership.",
+    "en": "Investors tend to sell the stock in the short term due to a lack of clarity regarding future leadership."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-12-nvidia-le-depart-de-jensen-huang",
    "src": "Le Monde",
@@ -1268,141 +1403,6 @@
    "r": {
     "fr": "Cela lui garantit un accès direct à la ressource et réduit son exposition aux variations brutales des prix sur le marché libre.",
     "en": "It guarantees direct access to the resource while lowering vulnerability to sharp open-market price swings."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-30-vague-de-baisse-sur-la-tech-a-cause-de-r",
-   "src": "Le Monde",
-   "date": "2026-10-30",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/30/apres-google-amazon-pris-entre-la-progression-de-l-ia-et-la-deception-sur-ses-metiers-traditionnels_6802592_3234.html",
-   "t": {
-    "fr": "Vague de baisse sur la tech à cause de résultats décevants",
-    "en": "Tech sell-off following disappointing financial results"
-   },
-   "s": {
-    "fr": "Le titre d'Amazon a chuté après la publication de résultats trimestriels inférieurs aux attentes des investisseurs. Cette contre-performance s'inscrit dans un contexte où les marchés sanctionnent la transition des géants technologiques vers l'intelligence artificielle.",
-    "en": "Amazon shares dropped after reporting quarterly results below expectations. Markets are punishing tech giants navigating their transition toward artificial intelligence."
-   },
-   "d": {
-    "fr": "En trading, les attentes des analystes sont cruciales : si une entreprise performe mais reste sous les prévisions, son cours peut s'effondrer. C'est un rappel que le marché anticipe toujours le futur plutôt que de se contenter du présent.",
-    "en": "Analyst expectations drive stock prices; missing forecasts often triggers a sell-off. Markets always price in future expectations rather than past achievements."
-   },
-   "v": [
-    [
-     "action",
-     "stock"
-    ],
-    [
-     "résultats trimestriels",
-     "quarterly earnings"
-    ],
-    [
-     "bourse",
-     "stock exchange"
-    ],
-    [
-     "attentes",
-     "expectations"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi une action baisse-t-elle alors que l'entreprise continue de faire du chiffre ?",
-    "en": "Why does a stock price drop even when a company generates revenue?"
-   },
-   "r": {
-    "fr": "Parce que ses résultats sont inférieurs aux prévisions des analystes et aux attentes du marché.",
-    "en": "Because its results fall short of analyst forecasts and market expectations."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-30-la-plateforme-crypto-binance-subit-un-pi",
-   "src": "Financial Times",
-   "date": "2026-10-30",
-   "url": "https://www.ft.com/content/c7f5e395-c3a9-430e-b757-5014527b4d49?syn-25a6b1a6=1",
-   "t": {
-    "fr": "La plateforme crypto Binance subit un piratage massif",
-    "en": "Crypto exchange Binance hit by massive security breach"
-   },
-   "s": {
-    "fr": "La plus grande plateforme d'échange de cryptomonnaies au monde a dû suspendre les retraits suite à un vol évalué à des milliards de dollars. Cet incident fait suite à la compromission de l'ordinateur d'un ingénieur.",
-    "en": "The world's largest crypto exchange halted withdrawals after a massive multi-billion dollar hack originating from a compromised laptop."
-   },
-   "d": {
-    "fr": "Cet événement illustre le risque systémique et technique inhérent au secteur des cryptomonnaies. Pour un trader, la sécurité des plateformes est un paramètre primordial à intégrer dans sa gestion du risque.",
-    "en": "This event highlights the technical and systemic risks in crypto markets. Platform security is a vital metric for traders to monitor in risk management."
-   },
-   "v": [
-    [
-     "cryptomonnaie",
-     "cryptocurrency"
-    ],
-    [
-     "retraits",
-     "withdrawals"
-    ],
-    [
-     "piratage",
-     "hack"
-    ],
-    [
-     "gestion du risque",
-     "risk management"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est le risque principal pour les fonds déposés sur une plateforme d'échange centralisée ?",
-    "en": "What is the primary risk for funds deposited on a centralized exchange?"
-   },
-   "r": {
-    "fr": "Le risque de cyberattaque ou de piratage pouvant bloquer les actifs des utilisateurs.",
-    "en": "The risk of a cyberattack or security breach freezing user assets."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-10-30-l-union-europeenne-libere-des-barils-de-",
-   "src": "Le Monde",
-   "date": "2026-10-30",
-   "url": "https://www.lemonde.fr/economie/article/2026/10/30/crise-energetique-onze-pays-de-l-ue-vont-liberer-42-6-millions-de-barils-de-petrole-afin-de-stabiliser-les-prix-du-gazole-avant-l-hiver_6802691_3234.html",
-   "t": {
-    "fr": "L'Union européenne libère des barils de pétrole pour stabiliser les cours",
-    "en": "EU releases strategic oil barrels to stabilize energy prices"
-   },
-   "s": {
-    "fr": "Face à la flambée des prix de l'énergie à l'approche de l'hiver, onze pays de l'Union européenne ont décidé de puiser dans leurs réserves stratégiques de pétrole. L'objectif est de réguler le marché et d'apaiser les tarifs du gazole.",
-    "en": "Faced with soaring energy prices ahead of winter, eleven EU nations decided to tap strategic oil reserves to stabilize diesel prices."
-   },
-   "d": {
-    "fr": "Sur les marchés des matières premières, l'offre et la demande dictent les prix. Lorsque les États interviennent pour augmenter l'offre disponible, ils cherchent directement à calmer la volatilité des cours.",
-    "en": "In commodities markets, supply and demand drive prices. When governments increase available supply, they actively seek to calm price volatility."
-   },
-   "v": [
-    [
-     "matières premières",
-     "commodities"
-    ],
-    [
-     "pétrole",
-     "oil"
-    ],
-    [
-     "offre",
-     "supply"
-    ],
-    [
-     "volatilité",
-     "volatility"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'effet généralement observé sur les prix d'une matière première lorsque les stocks stratégiques sont augmentés sur le marché ?",
-    "en": "What is the typical price effect on a commodity when strategic reserves are released onto the market?"
-   },
-   "r": {
-    "fr": "Cela tend à faire baisser ou stabiliser les prix en augmentant l'offre immédiate.",
-    "en": "It tends to lower or stabilize prices by increasing immediate supply."
    },
    "ia": "Gemini"
   }
