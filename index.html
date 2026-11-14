@@ -3313,6 +3313,8 @@ function jHwFor(d,h){const c=pnCat(habL(h)),X=hwxOf(h),p=S.pronote&&S.pronote.da
   return L.length?{x:P[0]||L[0],n:L.length,L,pn:P}:null}
 function jHwPour(x){if(!x||!x.pour)return"";const[y,m,dd]=String(x.pour).slice(0,10).split("-").map(Number),t=new Date(y,m-1,dd),df=Math.round((t-today())/864e5);return df===1?"demain":df>1&&df<7?JOURS[t.getDay()].toLowerCase():`le ${dd}/${m}`}
 function jHwLine(d,s,full){if(!s||s.k!=="hab")return"";const r=jHwFor(d,s.ref),T=x=>String(x.txt||"devoir").replace(/\s+/g," ").trim(),L=r?r.L:[],X=hwxOf(s.ref),custom=(X.add||[]).length||Object.keys(X.hid||{}).length;
+  /* 2.42.1 : sur l'accueil, la carte est un bouton : la liste reste en lecture seule (un bouton dans un bouton cassait la mise en page) */
+  if(full==="ro")return L.length?`<span class="jhwbox" style="display:flex;flex-direction:column;gap:4px"><b>📝 Devoirs et consignes</b>${L.slice(0,5).map(x=>`<span class="small">• ${x.mine?"":`<b>Pour ${esc(jHwPour(x))} :</b> `}${esc(T(x).slice(0,140))}</span>`).join("")}${L.length>5?`<span class="small muted">+${L.length-5} autre${L.length>6?"s":""}</span>`:""}</span>`:"";
   if(full)return`<div class="jhwbox" style="flex-direction:column;gap:6px"><div class="row" style="justify-content:space-between;gap:8px"><b>📝 Devoirs et consignes</b>${custom?`<button class="linkb small" data-hwreset="${esc(s.ref)}" title="Revenir à la liste de base (devoirs Pronote)">↺ Réinitialiser</button>`:""}</div>
     ${L.length?`<ul class="jhwl">${L.slice(0,10).map(x=>`<li class="row" style="justify-content:space-between;gap:6px;align-items:flex-start"><span>${x.mine?"":`<b>Pour ${esc(jHwPour(x))} :</b> `}${esc(T(x).slice(0,300))}</span><button class="linkb" aria-label="Enlever" data-hwdel="${esc(x.id)}" data-hwh="${esc(s.ref)}" data-hwmine="${x.mine?1:""}">✕</button></li>`).join("")}</ul>`:`<p class="small muted" style="margin:0">Rien pour l'instant.</p>`}
     <div class="row" style="gap:6px"><input class="field" id="hwnew" placeholder="Ajouter un devoir ou une consigne…" style="flex:1;min-width:0" data-hwh="${esc(s.ref)}"><button class="btn" data-hwadd="${esc(s.ref)}">Ajouter</button></div></div>`;
@@ -5988,7 +5990,8 @@ function srsPick(deck,k,avoid){const s=srsScan(deck),now=Date.now();
   const rv=s.revLeft>0?s.rev.map(x=>x[0]):[];
   if(rv.length&&(!s.fresh.length||k%4!==3))return rv[0];
   if(s.fresh.length)return s.fresh[0];
-  const la=s.learn.filter(x=>x[1]<=now+SRS_AHEAD*SRS_MIN);
+  /* 2.42.1 : plus de nouvelles ni de révisions : les cartes ratées reviennent tout de suite, sans attendre la minuterie */
+  const la=s.learn;
   if(la.length)return(la.find(x=>x[0]!==avoid)||la[0])[0];
   return null}
 
@@ -6033,7 +6036,7 @@ function srsNext(c,g,now,nofz){const t=today(),M=SRS_MIN,ef=(c&&c.ef)||SRS_EF0,r
   return rev(iE,sE,fNextD(d,4))}
 const srsFmtMin=m=>m<60?m+" min":Math.round(m/60)+" h";
 const srsFmtDays=d=>d<30?d+" j":d<365?(Math.round(d/3)/10).toLocaleString("fr-FR")+" mois":(Math.round(d/36.5)/10).toLocaleString("fr-FR")+" an"+(d>=730?"s":"");
-function srsLbl(c,g){const now=Date.now(),n=srsNext(c,g,now,true);return n.s===2?srsFmtDays(n.ivl):srsFmtMin(Math.round((n.dm-now)/SRS_MIN))}
+function srsLbl(c,g){const now=Date.now();if(c&&(c.s===1||c.s===3)&&(c.dm||0)>now&&g===3)c={...c,st:(c.s===1?SRS_STEPS:SRS_RESTEPS).length-1};const n=srsNext(c,g,now,true);return n.s===2?srsFmtDays(n.ivl):srsFmtMin(Math.round((n.dm-now)/SRS_MIN))}
 
 /* ---- la séance ---- */
 function srsStart(deck,tab){V.srs={deck,tab,k:0,again:0,flip:false,undo:null};srsGo();window.scrollTo(0,0)}
@@ -6042,7 +6045,9 @@ function srsGo(){const st=V.srs;st.flip=false;st.res=null;st.cid=srsPick(st.deck
 function srsFlip(){const st=V.srs;if(!st||!st.cid)return;st.flip=true;srsSay(true);render(true)}
 function srsSay(back){const st=V.srs;if(!st||!st.cid||V.srsMute)return;const[nid,dir]=st.cid.split(">"),n=srsNote(nid);if(!srsIsEn(n))return;if((dir==="0")!==back)say(n.f)}
 function srsAnswer(g){const st=V.srs;if(!st||!st.cid||!st.flip)return;const d=srsDoc(),C={...srsCards()},cid=st.cid,old=C[cid],t=todayK();
-  C[cid]={...srsNext(old,g,Date.now()),last:t};
+  /* 2.42.1 : une carte ratée revue en fin de séance (avant sa minuterie) et réussie est acquise : elle part à demain */
+  const early=old&&(old.s===1||old.s===3)&&(old.dm||0)>Date.now()&&g===3,base=early?{...old,st:(old.s===1?SRS_STEPS:SRS_RESTEPS).length-1}:old;
+  C[cid]={...srsNext(base,g,Date.now()),last:t};
   const rv={...(d.rev||{})},day={...(rv[t]||{})},x={...(day[st.deck]||{n:0,r:0,a:0,ok:0})};
   if(srsIsNew(old))x.n++;else if(old.s===2)x.r++;x.a++;if(g>1)x.ok++;day[st.deck]=x;rv[t]=day;
   const ks=Object.keys(rv).sort();while(ks.length>120)delete rv[ks.shift()];
@@ -8670,7 +8675,7 @@ function axHero(){const pl=planDay(today()),{cur,next}=jCurrent(pl),now=new Date
   else{const ds=dayStats(today()),r=ds.t-ds.n;lab=esc(sectName("jour"));big=ds.t?`${ds.n}/${ds.t}`:"✓";what=r>0?"tâches cochées":"Journée bouclée";sub=r>0?`encore ${r} tâche${r>1?"s":""} à cocher aujourd'hui`:"tout est fait pour aujourd'hui"}
   const rest=[...pl.steps,...pl.plan].filter(s=>s&&s.b>nm&&s.b>s.a).sort((a,b)=>a.a-b.a).slice(0,14);
   const bar=rest.length?`<span class="wgbar" aria-hidden="true">${rest.map(s=>`<i style="flex:${Math.max(6,s.b-Math.max(s.a,nm))} 1 0;background:${jCol(s)}${s.done?";opacity:.35":""}"></i>`).join("")}</span><span class="wgaxis" aria-hidden="true"><span>${fmin(Math.max(rest[0].a,nm))}</span><span>${fmin(rest[rest.length-1].b)}</span></span>`:"";
-  const hw=cur||next?wgSafe(()=>jHwLine(today(),cur||next,1))||"":"";
+  const hw=cur||next?wgSafe(()=>jHwLine(today(),cur||next,"ro"))||"":"";
   return`<button class="wg w2 axhero" style="--c:var(--jour)" data-wgo="jour"><span class="wgl">${lab}</span><span class="axrow"><span class="axbig num">${big}</span><span class="axwhat">${what}</span></span><small>${sub}</small>${hw}${bar}<span class="axgo">${cur||next?"C'est parti":"Ouvrir ma journée"}${AXI.go}</span></button>`}
 
 /* ---- les quêtes du jour : ce qu'il reste à faire, avec une barre ---- */
@@ -9492,7 +9497,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.42.0";
+const APP_VERSION = "2.42.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
