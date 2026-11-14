@@ -3339,9 +3339,13 @@ function jTasks(d){
   /* 2.42.2 : le week-end compte pour UN jour (sauf les maths) : une tâche n'apparaît qu'un seul jour.
      Placée un jour → pas proposée l'autre ; pas placée → elle est sur le samedi tant que samedi n'est pas passé. */
   const weSkip=h=>{if(!isWE(d)||/^(mspe|mexp|maths)$/.test(h))return false;const o=weBlock(d).find(y=>dkey(y)!==dk);if(!o)return false;
-    const ok=dkey(o),k="hab|"+h;if(((S.jours[dk]||{}).pin||{})[k])return false;if(((S.jours[ok]||{}).pin||{})[k])return true;
-    return d.getDay()===0&&+o>=+today()&&planOf(o).includes(h)};
-  planOf(d).filter(h=>!done[h]&&!rp["hab|"+h]&&!weSkip(h)).forEach(h=>out.push(h==="sport"?{k:"hab",ref:h,l:"Sport (trajets compris)",min:jDur("sport",P.sportTrajet+P.sportDur),p:0.5,tag:`${P.sportDur} min + ${P.sportTrajet} min de trajets`}
+    const ok=dkey(o),k="hab|"+h;if(((S.jours[dk]||{}).pin||{})[k])return false;
+    /* 2.42.3 : samedi passé, ce qui n'a pas été fait samedi revient dimanche (même si c'était placé samedi) */
+    if(d.getDay()===0&&+o<+today())return false;
+    if(((S.jours[ok]||{}).pin||{})[k])return true;
+    return d.getDay()===0&&planOf(o).includes(h)};
+  const satLeft=d.getDay()===0&&+add(d,-1)<+today()?planOf(add(d,-1)).filter(h=>!planOf(d).includes(h)):[];
+  [...planOf(d),...satLeft].filter(h=>!done[h]&&!rp["hab|"+h]&&!weSkip(h)).forEach(h=>out.push(h==="sport"?{k:"hab",ref:h,l:"Sport (trajets compris)",min:jDur("sport",P.sportTrajet+P.sportDur),p:0.5,tag:`${P.sportDur} min + ${P.sportTrajet} min de trajets`}
     :{k:"hab",ref:h,l:habL(h),min:od[h]||jDur(h,jBase(h)),p:1+(JORD[h]||5)/10,tag:od[h]?"juste aujourd'hui":(jLearn()[h]||[]).length>=2?"ton temps réel":""}));
   /* devoirs des 2 jours suivants : à avancer s'il reste du temps */
   for(let i=1;i<=2;i++)pnTasks(add(d,i)).filter(x=>!jHwDone(x)&&!rpA["pn|"+x.id]&&!hc.has(pnCat(x.m))).forEach(x=>out.push({k:"pn",ref:x.id,dk:dkey(add(d,i)),l:`Avancer ${x.m||"un devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`,min:jDur("devoir",P.devoir),p:3+i,tag:"À avancer"}));
@@ -9506,7 +9510,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.42.2";
+const APP_VERSION = "2.42.3";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
