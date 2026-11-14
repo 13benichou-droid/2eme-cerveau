@@ -3336,7 +3336,12 @@ function jTasks(d){
   if(isWE(d)){const o=weBlock(d).find(y=>dkey(y)!==dk);if(o)jExtras(dkey(o)).filter(x=>!x.ok).forEach(x=>out.push({k:"x",ref:x.id,dk:dkey(o),l:x.t,min:x.min||30,p:0,tag:"Ajouté "+(+o<+d?"samedi":"dimanche")}))}
   const hc=jHwCats(d);
   pnTasks(d).filter(x=>!jHwDone(x)&&!rp["pn|"+x.id]&&!hc.has(pnCat(x.m))).forEach(x=>out.push({k:"pn",ref:x.id,l:`${x.m||"Devoir"} : ${String(x.txt||"devoir").split("\n")[0].slice(0,70)}`,min:jDur("devoir",P.devoir),p:1,tag:"Devoir pour demain"}));
-  planOf(d).filter(h=>!done[h]&&!rp["hab|"+h]).forEach(h=>out.push(h==="sport"?{k:"hab",ref:h,l:"Sport (trajets compris)",min:jDur("sport",P.sportTrajet+P.sportDur),p:0.5,tag:`${P.sportDur} min + ${P.sportTrajet} min de trajets`}
+  /* 2.42.2 : le week-end compte pour UN jour (sauf les maths) : une tâche n'apparaît qu'un seul jour.
+     Placée un jour → pas proposée l'autre ; pas placée → elle est sur le samedi tant que samedi n'est pas passé. */
+  const weSkip=h=>{if(!isWE(d)||/^(mspe|mexp|maths)$/.test(h))return false;const o=weBlock(d).find(y=>dkey(y)!==dk);if(!o)return false;
+    const ok=dkey(o),k="hab|"+h;if(((S.jours[dk]||{}).pin||{})[k])return false;if(((S.jours[ok]||{}).pin||{})[k])return true;
+    return d.getDay()===0&&+o>=+today()&&planOf(o).includes(h)};
+  planOf(d).filter(h=>!done[h]&&!rp["hab|"+h]&&!weSkip(h)).forEach(h=>out.push(h==="sport"?{k:"hab",ref:h,l:"Sport (trajets compris)",min:jDur("sport",P.sportTrajet+P.sportDur),p:0.5,tag:`${P.sportDur} min + ${P.sportTrajet} min de trajets`}
     :{k:"hab",ref:h,l:habL(h),min:od[h]||jDur(h,jBase(h)),p:1+(JORD[h]||5)/10,tag:od[h]?"juste aujourd'hui":(jLearn()[h]||[]).length>=2?"ton temps réel":""}));
   /* devoirs des 2 jours suivants : à avancer s'il reste du temps */
   for(let i=1;i<=2;i++)pnTasks(add(d,i)).filter(x=>!jHwDone(x)&&!rpA["pn|"+x.id]&&!hc.has(pnCat(x.m))).forEach(x=>out.push({k:"pn",ref:x.id,dk:dkey(add(d,i)),l:`Avancer ${x.m||"un devoir"} : ${String(x.txt||"").split("\n")[0].slice(0,60)}`,min:jDur("devoir",P.devoir),p:3+i,tag:"À avancer"}));
@@ -4483,6 +4488,7 @@ function jFind(dk,key){const pl=planDay(jDateOf(dk));return[...pl.steps0,...pl.p
 function jPlace(dk,it,a){const d=jDateOf(dk),j=jDayDoc(dk),P=jParams(dk);a=Math.max(0,Math.min(24*60-10,a));const B=m=>Math.min(24*60,a+m);
   if(it.t==="done"){j.pin={...(j.pin||{}),[it.key]:{a,b:B(it.min||30),done:1}};return put("jours",dk,j)}
   if(it.t==="pause"){j.blocs=[...(j.blocs||[]),{id:uid(),l:"Pause",a,b:B(15)}];return put("jours",dk,j)}
+  if(it.t==="bonus"){const id=uid();j.extra=[...(j.extra||[]),{id,t:habL(it.id)+" (en plus)",min:it.min||30,ok:false}];j.pin={...(j.pin||{}),["x|"+id]:{a,b:B(it.min||30)}};V.jHi=["x|"+id];return put("jours",dk,j)}
   if(it.t==="hab"){const id=it.id,plan=planOf(d).slice();if(!plan.includes(id))plan.push(id);j.plan=plan;
     const m=id==="sport"?jDur("sport",P.sportTrajet+P.sportDur):jDur(id,jBase(id));j.pin={...(j.pin||{}),["hab|"+id]:{a,b:B(m)}};return put("jours",dk,j)}
   j.pin={...(j.pin||{}),[it.key]:{a,b:B(it.min||30)}};return put("jours",dk,j)}
@@ -4529,6 +4535,8 @@ const jEnd=m=>m>=24*60?"23:59":fmin(m);
 function jPalList(d,pl){const dk=dkey(d),inPlan=new Set(planOf(d)),dn=doneOf(d)||{},j=S.jours[dk]||{},P=jParams(dk),items=[];
   pl.reste.forEach(x=>items.push({t:"task",key:jKey(x),min:x.min,l:x.l,k:x.k,ref:x.ref,g:"todo"}));
   Object.keys(HABITS).filter(h=>h!=="maths"&&!inPlan.has(h)&&!dn[h]).forEach(h=>items.push({t:"hab",id:h,key:"hab|"+h,l:habL(h),k:"hab",ref:h,min:h==="sport"?P.sportDur+P.sportTrajet:jDur(h,jBase(h)),g:"add"}));
+  /* 2.42.2 : maths et sciences « en plus » : toujours proposées, même déjà prévues ou faites */
+  ["mspe","mexp","fsci"].filter(h=>HABITS[h]&&(inPlan.has(h)||dn[h])).forEach(h=>items.push({t:"bonus",id:h,key:"bonus|"+h,l:habL(h)+" · en plus",k:"hab",ref:h,min:jDur(h,jBase(h)),g:"add"}));
   items.push({t:"pause",l:"Pause",k:"bloc",ref:"",min:15,g:"add"});
   const pins=jPins(d),seen=new Set(),fini=(key,l,k,ref)=>{if(seen.has(key))return;seen.add(key);const p=pins[key],at=p&&p.done&&p.b>p.a?p:null;items.push({t:"done",key,l,k,ref,min:at?at.b-at.a:30,at,g:"done"})};
   Object.keys(dn).filter(h=>dn[h]&&HABITS[h]).forEach(h=>fini("hab|"+h,habL(h),"hab",h));
@@ -4630,6 +4638,7 @@ function jdEnd(e){const d=JD;JD=null;clearTimeout(d.timer);jTipOff();document.bo
     /* toucher une matière sans la glisser : elle s'ajoute et se range toute seule */
     if(d.it.t==="hab"){const dd=jDateOf(V.jdk),j=jDayDoc(V.jdk),pl=planOf(dd).slice();if(!pl.includes(d.it.id))pl.push(d.it.id);j.plan=pl;V.jHi=["hab|"+d.it.id];put("jours",V.jdk,j);return sgShowJ()}
     if(d.it.t==="pause"){V.jHi=[];jPlace(V.jdk,d.it,jSnap(Math.max(nowMin(),V.jRange?V.jRange.st:0)+5));return}
+    if(d.it.t==="bonus"){const j=jDayDoc(V.jdk),id=uid();j.extra=[...(j.extra||[]),{id,t:habL(d.it.id)+" (en plus)",min:d.it.min||30,ok:false}];V.jHi=["x|"+id];put("jours",V.jdk,j);return sgShowJ()}
     jTip(d.x0,d.y0,d.it.t==="done"?"Glisse-le dans la journée pour noter quand tu l'as fait":"Glisse-la dans l'emploi du temps");setTimeout(jTipOff,1800);return}
   const dk=V.jdk,x=e.clientX,y=e.clientY;
   if(d.kind==="new"){if(d.na!=null){V.jHi=[];jPlace(dk,d.it,d.na);V.jHi=[d.it.key||""]}render(true);return}
@@ -9497,7 +9506,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.42.1";
+const APP_VERSION = "2.42.2";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
