@@ -3299,7 +3299,7 @@ setTimeout(pnBackfill,2500);setInterval(pnBackfill,30000);document.addEventListe
 function jHwDone(x){return pnDoneAny(x)}
 /* 2.37.0 : chaque devoir Pronote se range sous la matière du planning (Espagnol, Maths spé…) au lieu d'avoir son propre bloc */
 function pnCat(s){const n=" "+String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ")+" ";
-  if(/expert/.test(n))return"exp";if(/ econom| ses | s e s /.test(n))return"ses";if(/philo/.test(n))return"phi";if(/histoire|geograph| hg /.test(n))return"his";
+  if(/expert/.test(n))return"exp";if(/ econo| ses | s e s /.test(n))return"ses";if(/philo/.test(n))return"phi";if(/histoire|geograph| hg /.test(n))return"his";
   if(/espagnol/.test(n))return"esp";if(/anglais/.test(n))return"ang";if(/scien/.test(n))return"sci";if(/math/.test(n))return"math";if(/ eps | sport/.test(n))return"eps";return""}
 function jHwCats(d){return new Set(planOf(d).map(h=>pnCat(habL(h))).filter(Boolean))}
 /* 2.41.0 : sous chaque matière, les devoirs Pronote + ce que TU ajoutes (devoir, consigne) ; ✕ pour enlever, ↺ pour revenir à la liste de base */
@@ -9510,7 +9510,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.42.3";
+const APP_VERSION = "2.42.4";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
