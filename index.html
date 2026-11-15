@@ -4540,7 +4540,7 @@ function jPalList(d,pl){const dk=dkey(d),inPlan=new Set(planOf(d)),dn=doneOf(d)|
   pl.reste.forEach(x=>items.push({t:"task",key:jKey(x),min:x.min,l:x.l,k:x.k,ref:x.ref,g:"todo"}));
   Object.keys(HABITS).filter(h=>h!=="maths"&&!inPlan.has(h)&&!dn[h]).forEach(h=>items.push({t:"hab",id:h,key:"hab|"+h,l:habL(h),k:"hab",ref:h,min:h==="sport"?P.sportDur+P.sportTrajet:jDur(h,jBase(h)),g:"add"}));
   /* 2.42.2 : maths et sciences « en plus » : toujours proposées, même déjà prévues ou faites */
-  ["mspe","mexp","fsci"].filter(h=>HABITS[h]&&(inPlan.has(h)||dn[h])).forEach(h=>items.push({t:"bonus",id:h,key:"bonus|"+h,l:habL(h)+" · en plus",k:"hab",ref:h,min:jDur(h,jBase(h)),g:"add"}));
+  /* 2.42.5 : plus de « en plus » dans la colonne (le bouton Dupliquer suffit) */
   items.push({t:"pause",l:"Pause",k:"bloc",ref:"",min:15,g:"add"});
   const pins=jPins(d),seen=new Set(),fini=(key,l,k,ref)=>{if(seen.has(key))return;seen.add(key);const p=pins[key],at=p&&p.done&&p.b>p.a?p:null;items.push({t:"done",key,l,k,ref,min:at?at.b-at.a:30,at,g:"done"})};
   Object.keys(dn).filter(h=>dn[h]&&HABITS[h]).forEach(h=>fini("hab|"+h,habL(h),"hab",h));
@@ -9510,7 +9510,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.42.4";
+const APP_VERSION = "2.42.5";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
