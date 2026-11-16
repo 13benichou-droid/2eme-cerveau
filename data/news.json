@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-13T13:24:37.506Z",
+ "updated": "2026-11-16T13:58:08.493Z",
  "snap": {
-  "date": "2026-11-13",
+  "date": "2026-11-16",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 357",
-    "c": "−0,05 %"
+    "v": "8 390",
+    "c": "+0,26 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 592",
-    "c": "−0,35 %"
+    "v": "7 562",
+    "c": "−0,40 %"
    },
    {
     "n": "Nasdaq",
-    "v": "25 366",
-    "c": "−0,39 %"
+    "v": "25 136",
+    "c": "−0,91 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "18,24",
-    "c": "−2,46 %"
+    "v": "20,64",
+    "c": "+6,94 %"
    },
    {
     "n": "Brent",
-    "v": "96,1 $",
-    "c": "+0,27 %"
+    "v": "94,3 $",
+    "c": "−1,62 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "88,5 $",
-    "c": "−0,27 %"
+    "v": "87,7 $",
+    "c": "−1,03 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 891 $",
-    "c": "+0,15 %"
+    "v": "3 872 $",
+    "c": "−0,36 %"
    },
    {
     "n": "Bitcoin",
-    "v": "69 138 $",
-    "c": "−3,09 %"
+    "v": "64 034 $",
+    "c": "−1,95 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,10 %",
-    "c": "+0,11 pt"
+    "v": "5,14 %",
+    "c": "−0,01 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,105",
-    "c": "−0,37 %"
+    "v": "1,101",
+    "c": "−0,35 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-16-lancement-d-une-augmentation-de-capital-",
+   "src": "Le Monde",
+   "date": "2026-11-16",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/16/eramet-l-etat-sacrifie-les-petits-et-grands-actionnaires-minoritaires-sur-l-autel-de-la-souverainete-nationale_6811684_3234.html",
+   "t": {
+    "fr": "Lancement d'une augmentation de capital chez Eramet",
+    "en": "Eramet Launches Capital Increase"
+   },
+   "s": {
+    "fr": "Le groupe minier Eramet cherche à lever 500 millions d'euros pour assainir sa situation financière. Cette opération renforce la participation publique à 47 % au détriment des actionnaires minoritaires et de la famille Duval.",
+    "en": "Mining group Eramet is raising 500 million euros to strengthen its financial standing. This operation increases the state's stake to 47% while diluting minority shareholders and the Duval family."
+   },
+   "d": {
+    "fr": "Lorsqu'une entreprise crée de nouvelles actions, cela réduit la proportion du capital détenue par les investisseurs existants qui n'achètent pas de nouveaux titres. Pour un trader, la perspective d'une telle dilution entraîne généralement des tensions à la baisse sur le cours de bourse.",
+    "en": "When a company issues new shares, it reduces the ownership percentage of existing investors who do not purchase the new stock. For a trader, news of stock dilution typically exerts downward pressure on the share price."
+   },
+   "v": [
+    [
+     "augmentation de capital",
+     "capital increase"
+    ],
+    [
+     "actionnaire minoritaire",
+     "minority shareholder"
+    ],
+    [
+     "levée de fonds",
+     "fundraising"
+    ],
+    [
+     "dilution",
+     "dilution"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi une augmentation de capital peut-elle déplaire aux actionnaires minoritaires ?",
+    "en": "Why might minority shareholders dislike a capital increase?"
+   },
+   "r": {
+    "fr": "Elle réduit leur pourcentage de détention dans l'entreprise s'ils ne réinvestissent pas pour maintenir leur part.",
+    "en": "It lowers their ownership percentage in the company unless they invest more money to maintain their share."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-16-baisse-de-remuneration-pour-les-obligati",
+   "src": "Le Monde",
+   "date": "2026-11-16",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/16/miser-sur-les-risques-de-catastrophes-naturelles-rapporte-moins_6811732_3234.html",
+   "t": {
+    "fr": "Baisse de rémunération pour les obligations catastrophes",
+    "en": "Yields Decline for Catastrophe Bonds"
+   },
+   "s": {
+    "fr": "Après avoir offert des gains élevés proches de 10 % en 2023, les obligations catastrophes attirent un grand nombre d'investisseurs. Cet engouement provoque toutefois une diminution de leur rendement, alors même que les événements climatiques s'intensifient.",
+    "en": "Following strong returns close to 10% in 2023, catastrophe bonds continue to attract investor interest. However, this popularity is driving yields down even as climate-related risks become more severe."
+   },
+   "d": {
+    "fr": "En finance, une forte demande pour un actif tend à réduire sa rentabilité future pour les nouveaux acheteurs. Les traders doivent donc mesurer si la rémunération proposée couvre encore suffisamment le risque environnemental sous-jacent.",
+    "en": "In finance, high demand for an asset tends to reduce its future return for buyers. Traders must continuously assess whether the offered yield adequately compensates for the underlying environmental risk."
+   },
+   "v": [
+    [
+     "obligation catastrophe",
+     "catastrophe bond"
+    ],
+    [
+     "rendement",
+     "yield"
+    ],
+    [
+     "marché obligataire",
+     "bond market"
+    ],
+    [
+     "prime de risque",
+     "risk premium"
+    ]
+   ],
+   "q": {
+    "fr": "Que se passe-t-il pour un investisseur en obligation catastrophe lorsqu'un sinistre majeur survient ?",
+    "en": "What happens to a catastrophe bond investor when a major disaster occurs?"
+   },
+   "r": {
+    "fr": "L'investisseur peut perdre une partie ou la totalité de son capital pour financer les indemnisions prévues.",
+    "en": "The investor risks losing part or all of their capital to help cover the contractual damages."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-16-la-banque-revolut-sous-tutelle-judiciair",
+   "src": "Le Figaro",
+   "date": "2026-11-16",
+   "url": "https://www.lefigaro.fr/societes/en-italie-la-banque-revolut-placee-sous-administration-judiciaire-pour-des-controles-antiblanchiment-insuffisants-20261116",
+   "t": {
+    "fr": "La banque Revolut sous tutelle judiciaire en Italie",
+    "en": "Revolut Placed Under Judicial Administration in Italy"
+   },
+   "s": {
+    "fr": "Le tribunal de Milan a placé les activités de Revolut sous administration judiciaire en raison de contrôles insuffisants sur l'origine des fonds. Les autorités reprochent à la banque en ligne d'avoir facilité les opérations de personnes ciblées par des enquêtes pour blanchiment ou fraude.",
+    "en": "A Milan court placed Revolut under judicial administration due to inadequate anti-money laundering controls. Authorities stated that the online bank's failures facilitated transactions for individuals facing criminal investigations."
+   },
+   "d": {
+    "fr": "La conformité réglementaire est cruciale pour le secteur bancaire car des faiblesses internes entraînent des sanctions et un risque de réputation. Pour les investisseurs, ces ennuis juridiques pénalisent souvent la valeur globale de l'entreprise.",
+    "en": "Regulatory compliance is critical for banking as internal control weaknesses lead to legal sanctions and reputational risk. For investors, such legal troubles often negatively impact the company's valuation."
+   },
+   "v": [
+    [
+     "banque en ligne",
+     "online bank"
+    ],
+    [
+     "blanchiment d'argent",
+     "money laundering"
+    ],
+    [
+     "administration judiciaire",
+     "judicial administration"
+    ],
+    [
+     "contrôle interne",
+     "internal control"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les failles de contrôle anti-blanchiment représentent-elles un danger majeur pour une néobanque ?",
+    "en": "Why do anti-money laundering control failures represent a major threat to a neobank?"
+   },
+   "r": {
+    "fr": "Elles exposent l'établissement à des poursuites judiciaires et dégradent la confiance des clients comme des marchés.",
+    "en": "They expose the institution to legal action and undermine trust from customers and financial markets."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-13-petrole-vers-un-retour-de-l-excedent-d-o",
    "src": "Le Monde",
@@ -1268,141 +1403,6 @@
    "r": {
     "fr": "Cela alourdit leurs charges, pèse sur leurs marges financières et pénalise souvent leur cours de bourse.",
     "en": "It increases their expenses, weighs on financial margins, and often penalizes their stock price."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-02-avertissement-sur-les-resultats-financie",
-   "src": "Le Monde",
-   "date": "2026-11-02",
-   "url": "https://www.lemonde.fr/economie/article/2026/11/02/en-retard-sur-ses-livraisons-de-trains-en-allemagne-alstom-emet-un-nouvel-avertissement-sur-ses-resultats_6805052_3234.html",
-   "t": {
-    "fr": "Avertissement sur les résultats financiers du groupe Alstom",
-    "en": "Financial profit warning issued by Alstom"
-   },
-   "s": {
-    "fr": "Le constructeur ferroviaire français Alstom a révisé à la baisse ses objectifs financiers pour la période d'avril à septembre 2026. Cette alerte s'explique par des retards accumulés dans la livraison de ses modèles de trains Coradia Max à l'Allemagne.",
-    "en": "French train manufacturer Alstom has lowered its financial guidance for the period from April to September 2026. This warning stems from delivery delays regarding its Coradia Max trains in Germany."
-   },
-   "d": {
-    "fr": "Lorsqu'une entreprise ne tient pas ses délais de livraison, ses coûts augmentent et la confiance des marchés s'effrite instantanément. Pour un investisseur débutant, un avertissement sur résultats annonce très souvent un décrochage du cours de l'action.",
-    "en": "When a company fails to meet delivery schedules, its costs rise and market confidence rapidly erodes. For a beginner trader, a profit warning frequently signals a sharp decline in stock price."
-   },
-   "v": [
-    [
-     "avertissement sur résultats",
-     "profit warning"
-    ],
-    [
-     "prévisions financières",
-     "financial forecasts"
-    ],
-    [
-     "constructeur ferroviaire",
-     "train manufacturer"
-    ],
-    [
-     "retard de livraison",
-     "delivery delay"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi un problème industriel sur une ligne de production influence-t-il directement la Bourse ?",
-    "en": "Why does an industrial issue on a production line directly influence the stock market?"
-   },
-   "r": {
-    "fr": "Parce qu'un retard industriel perturbe les encaissements prévus et détériore les bénéfices futurs de l'entreprise.",
-    "en": "Because industrial delays disrupt expected cash flows and harm the company's future profits."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-02-l-impact-des-taux-d-interet-sur-l-enthou",
-   "src": "Financial Times",
-   "date": "2026-11-02",
-   "url": "https://www.ft.com/content/6e99dc59-8bd0-4c5c-8186-f6ceed04233a?syn-25a6b1a6=1",
-   "t": {
-    "fr": "L'impact des taux d'intérêt sur l'enthousiasme pour l'IA",
-    "en": "The impact of interest rates on the AI boom"
-   },
-   "s": {
-    "fr": "L'engouement massif des marchés pour les valeurs de l'intelligence artificielle pourrait être rapidement limité si les taux d'intérêt restent élevés. La hausse du coût du capital agit en effet comme un facteur dégonflant les bulles spéculatives.",
-    "en": "The market's intense enthusiasm for artificial intelligence stocks could be checked if interest rates stay high. High capital costs function as a mechanism that deflates speculative bubbles."
-   },
-   "d": {
-    "fr": "Des taux d'intérêt élevés rendent les financements plus coûteux et incitent les investisseurs à privilégier des actifs moins risqués. Pour un trader, il est essentiel d'analyser le coût de l'argent avant de miser sur des sociétés technologiques fortement valorisées.",
-    "en": "High interest rates make funding more expensive and prompt investors to favor lower-risk assets. For a trader, evaluating the cost of money is critical before speculating on highly valued tech firms."
-   },
-   "v": [
-    [
-     "taux d'intérêt",
-     "interest rate"
-    ],
-    [
-     "bulle boursière",
-     "market bubble"
-    ],
-    [
-     "coût du capital",
-     "cost of capital"
-    ],
-    [
-     "engouement spéculatif",
-     "speculative mania"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi des taux plus élevés pénalisent-ils davantage les entreprises technologiques ?",
-    "en": "Why do higher interest rates hurt tech companies more significantly?"
-   },
-   "r": {
-    "fr": "Les entreprises technologiques s'appuient sur des profits futurs très lointains, qui perdent de leur valeur actuelle lorsque les taux grimpent.",
-    "en": "Tech companies rely heavily on distant future earnings, which lose present value when interest rates rise."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-02-offensive-majeure-des-groupes-japonais-d",
-   "src": "Financial Times",
-   "date": "2026-11-02",
-   "url": "https://www.ft.com/content/9652cb30-c8b1-4f36-993f-54f7827d2174?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Offensive majeure des groupes japonais dans le gaz américain",
-    "en": "Major offensive by Japanese groups in US gas assets"
-   },
-   "s": {
-    "fr": "Plusieurs entreprises japonaises ont investi 21 milliards de dollars pour acquérir des actifs de gaz de schiste le long du Golfe du Mexique. Deuxième plus grand acheteur mondial de GNL, le Japon cherche à sécuriser son approvisionnement énergétique face aux tensions mondiales.",
-    "en": "Several Japanese companies invested $21 billion to acquire shale gas assets along the US Gulf Coast. As the world's second-biggest LNG buyer, Japan aims to secure its energy supply amid global volatility."
-   },
-   "d": {
-    "fr": "Ce type d'opération de grande ampleur montre comment les acteurs économiques anticipent les risques de pénurie énergétique. Un trader surveillant les matières premières observe ces achats stratégiques pour comprendre l'évolution de l'offre et de la demande à long terme.",
-    "en": "Such large-scale deals demonstrate how corporate entities hedge against potential energy shortages. Traders monitoring commodities watch these strategic purchases to gauge long-term supply and demand trends."
-   },
-   "v": [
-    [
-     "gaz naturel liquéfié (GNL)",
-     "liquefied natural gas (LNG)"
-    ],
-    [
-     "gaz de schiste",
-     "shale gas"
-    ],
-    [
-     "approvisionnement énergétique",
-     "energy supply"
-    ],
-    [
-     "vague de transactions",
-     "deal spree"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'intérêt pour un pays importateur de posséder la source d'extraction à l'étranger ?",
-    "en": "Why does an importing country benefit from owning foreign extraction sources?"
-   },
-   "r": {
-    "fr": "Cela lui garantit un accès direct à la ressource et réduit son exposition aux variations brutales des prix sur le marché libre.",
-    "en": "It guarantees direct access to the resource while lowering vulnerability to sharp open-market price swings."
    },
    "ia": "Gemini"
   }
