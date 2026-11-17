@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-16T13:58:08.493Z",
+ "updated": "2026-11-17T14:53:22.638Z",
  "snap": {
-  "date": "2026-11-16",
+  "date": "2026-11-17",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 390",
-    "c": "+0,26 %"
+    "v": "8 256",
+    "c": "−1,15 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 562",
-    "c": "−0,40 %"
+    "v": "7 404",
+    "c": "−0,17 %"
    },
    {
     "n": "Nasdaq",
-    "v": "25 136",
-    "c": "−0,91 %"
+    "v": "24 478",
+    "c": "−0,13 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "20,64",
-    "c": "+6,94 %"
+    "v": "23,09",
+    "c": "+0,79 %"
    },
    {
     "n": "Brent",
-    "v": "94,3 $",
-    "c": "−1,62 %"
+    "v": "93,8 $",
+    "c": "+1,42 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "87,7 $",
-    "c": "−1,03 %"
+    "v": "87,1 $",
+    "c": "+1,55 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 872 $",
-    "c": "−0,36 %"
+    "v": "3 867 $",
+    "c": "+0,37 %"
    },
    {
     "n": "Bitcoin",
-    "v": "64 034 $",
-    "c": "−1,95 %"
+    "v": "64 925 $",
+    "c": "+0,11 %"
    },
    {
     "n": "US 10 ans",
     "v": "5,14 %",
-    "c": "−0,01 pt"
+    "c": "+0,02 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,101",
-    "c": "−0,35 %"
+    "v": "1,100",
+    "c": "−0,27 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-17-chute-importante-du-cours-de-l-or-sur-le",
+   "src": "Le Figaro",
+   "date": "2026-11-17",
+   "url": "https://www.lefigaro.fr/conjoncture/une-chute-de-31-depuis-le-debut-de-l-annee-le-cours-de-l-or-tombe-a-son-plus-bas-depuis-octobre-2025-20261117",
+   "t": {
+    "fr": "Chute importante du cours de l'or sur les marchés",
+    "en": "Significant drop in gold prices on the markets"
+   },
+   "s": {
+    "fr": "Le prix du métal précieux a fortement baissé depuis le début de l'année. Cette baisse fait suite à un record atteint en début d'année et est influencée par l'inflation aux États-Unis.",
+    "en": "The price of the precious metal has dropped sharply since the beginning of the year. This fall follows a record reached earlier in the year and is influenced by US inflation."
+   },
+   "d": {
+    "fr": "En trading, l'or est souvent considéré comme une valeur refuge en période d'incertitude économique. Sa baisse montre que les conditions de marché évoluent et que les investisseurs réajustent leurs portefeuilles face aux données économiques américaines.",
+    "en": "In trading, gold is often seen as a safe haven during economic uncertainty. Its decline shows that market conditions are shifting and investors are readjusting their portfolios in response to US economic data."
+   },
+   "v": [
+    [
+     "valeur refuge",
+     "safe haven"
+    ],
+    [
+     "cours",
+     "price"
+    ],
+    [
+     "métal précieux",
+     "precious metal"
+    ],
+    [
+     "inflation",
+     "inflation"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi l'or est-il traditionnellement surveillé de près par les traders ?",
+    "en": "Why is gold traditionally monitored closely by traders?"
+   },
+   "r": {
+    "fr": "Parce qu'il sert souvent de protection aux investisseurs lorsque l'économie ou l'inflation deviennent instables.",
+    "en": "Because it often acts as protection for investors when the economy or inflation becomes unstable."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-17-forte-baisse-de-l-action-deutsche-bank-e",
+   "src": "Le Figaro",
+   "date": "2026-11-17",
+   "url": "https://www.lefigaro.fr/societes/deutsche-bank-chute-en-bourse-de-pres-de-6-apres-une-enquete-sur-une-fuite-de-documents-internes-20261117",
+   "t": {
+    "fr": "Forte baisse de l'action Deutsche Bank en Bourse",
+    "en": "Sharp drop in Deutsche Bank stock on the stock exchange"
+   },
+   "s": {
+    "fr": "L'action de la banque allemande a chuté à la suite de la publication d'une vaste enquête reposant sur des documents internes ayant fuité. Le ministre des Finances du pays a demandé des explications transparentes à l'établissement.",
+    "en": "The German bank's stock tumbled following the publication of a major investigation based on leaked internal documents. The country's finance minister has asked the institution for transparent explanations."
+   },
+   "d": {
+    "fr": "Cet événement illustre le risque de réputation en Bourse, où une mauvaise nouvelle ou un scandale fait immédiatement chuter la valeur d'une entreprise. Pour un trader, suivre l'actualité des entreprises est indispensable pour anticiper ces variations soudaines.",
+    "en": "This event illustrates reputation risk in the stock market, where bad news or a scandal immediately causes a company's value to drop. For a trader, following corporate news is essential to anticipate these sudden variations."
+   },
+   "v": [
+    [
+     "action",
+     "stock"
+    ],
+    [
+     "Bourse",
+     "stock exchange"
+    ],
+    [
+     "valeur",
+     "value"
+    ],
+    [
+     "risque",
+     "risk"
+    ]
+   ],
+   "q": {
+    "fr": "Quel impact direct une mauvaise nouvelle ou une enquête a-t-elle généralement sur l'action d'une entreprise ?",
+    "en": "What direct impact does bad news or an investigation generally have on a company's stock?"
+   },
+   "r": {
+    "fr": "Elle entraîne souvent une baisse de sa valeur en Bourse car les investisseurs vendent leurs titres par précaution.",
+    "en": "It often leads to a drop in its stock market value as investors sell their shares as a precaution."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-17-alerte-sur-une-possible-bulle-financiere",
+   "src": "Le Figaro",
+   "date": "2026-11-17",
+   "url": "https://www.lefigaro.fr/secteur/high-tech/l-ia-est-une-bulle-qui-va-exploser-a-court-terme-alerte-l-ancien-president-du-gendarme-boursier-americain-20261117",
+   "t": {
+    "fr": "Alerte sur une possible bulle financière liée à l'intelligence artificielle",
+    "en": "Warning about a potential financial bubble related to artificial intelligence"
+   },
+   "s": {
+    "fr": "Un ancien régulateur boursier américain prévient que les investissements massifs dans l'intelligence artificielle pourraient provoquer une crise rapide. Il estime que cette bulle finira par éclater à court terme.",
+    "en": "A former US securities regulator warns that massive investments in artificial intelligence could trigger a rapid crisis. He believes this bubble will eventually burst in the short term."
+   },
+   "d": {
+    "fr": "En finance, une bulle se forme lorsque les prix d'un secteur montent excessivement par rapport à leur valeur réelle en raison d'un engouement spéculatif. Lorsqu'elle éclate, les cours s'effondrent brutalement, ce qui représente un risque majeur pour les investisseurs imprudents.",
+    "en": "In finance, a bubble forms when asset prices rise excessively relative to their real value due to speculative hype. When it bursts, prices collapse sharply, posing a major risk for careless investors."
+   },
+   "v": [
+    [
+     "bulle",
+     "bubble"
+    ],
+    [
+     "investissement",
+     "investment"
+    ],
+    [
+     "crise",
+     "crisis"
+    ],
+    [
+     "spéculation",
+     "speculation"
+    ]
+   ],
+   "q": {
+    "fr": "Qu'appelle-t-on une bulle financière sur les marchés ?",
+    "en": "What is a financial bubble in the markets?"
+   },
+   "r": {
+    "fr": "C'est une situation où la valeur d'actifs monte de façon exagérée avant de chuter brutalement lors de son éclatement.",
+    "en": "It is a situation where asset values rise excessively before plunging sharply when it bursts."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-16-lancement-d-une-augmentation-de-capital-",
    "src": "Le Monde",
@@ -1268,141 +1403,6 @@
    "r": {
     "fr": "Si les résultats réels ne confirment pas les attentes très élevées, les investisseurs revendent précipitamment leurs titres, entraînant une chute violente du cours.",
     "en": "If actual earnings fail to meet lofty expectations, investors sell off their shares rapidly, causing a sharp price collapse."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-03-hausse-des-taux-en-australie-pour-contre",
-   "src": "Financial Times",
-   "date": "2026-11-03",
-   "url": "https://www.ft.com/content/60283bdf-e45d-4723-a68e-5a857a5b949e?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Hausse des taux en Australie pour contrer l'inflation",
-    "en": "Australia raises rates to fight inflation"
-   },
-   "s": {
-    "fr": "La banque centrale australienne a monté ses taux pour la cinquième fois de l'année, atteignant un sommet inédit depuis la crise financière de 2008. Cette décision intervient alors que l'inflation dépasse l'objectif fixé, conformément aux prévisions des analystes.",
-    "en": "Australia's central bank raised rates for the fifth time this year, hitting a high not seen since the 2008 financial crisis. This move comes as inflation remains above the targeted level, aligning with economists' expectations."
-   },
-   "d": {
-    "fr": "Pour un trader, surveiller les décisions des banques centrales est vital car une hausse des taux renforce généralement la devise locale. Cela impacte directement la valorisation des actifs et modifie les flux de capitaux sur le marché des changes.",
-    "en": "For a trader, monitoring central bank decisions is vital because rate hikes usually strengthen the local currency. This directly impacts asset valuations and alters capital flows in the foreign exchange market."
-   },
-   "v": [
-    [
-     "taux d'intérêt",
-     "interest rate"
-    ],
-    [
-     "banque centrale",
-     "central bank"
-    ],
-    [
-     "inflation",
-     "inflation"
-    ],
-    [
-     "devise",
-     "currency"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'effet habituel d'une hausse des taux directeurs sur la monnaie d'un pays ?",
-    "en": "What is the usual effect of a rate hike on a country's currency?"
-   },
-   "r": {
-    "fr": "Cela a tendance à renforcer et valoriser la monnaie locale sur le marché des changes.",
-    "en": "It tends to strengthen and appreciate the local currency in the foreign exchange market."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-03-risque-accru-de-volatilite-sur-les-march",
-   "src": "Financial Times",
-   "date": "2026-11-03",
-   "url": "https://www.ft.com/content/9349b88e-e290-4c64-a7cd-85ac83962a0c",
-   "t": {
-    "fr": "Risque accru de volatilité sur les marchés boursiers",
-    "en": "Rising risk of volatility in stock markets"
-   },
-   "s": {
-    "fr": "La solidité remarquable affichée récemment par les actions pourrait s'effriter plus vite que prévu par les investisseurs. Les marchés font face à des signaux mitigés et des inquiétudes persistantes dans le secteur technologique.",
-    "en": "The remarkable recent resilience of equities might crack sooner than many investors expect. Markets are dealing with mixed signals and ongoing concerns within the technology sector."
-   },
-   "d": {
-    "fr": "En trading, la volatilité mesure l'ampleur des variations de prix d'un actif sur une période donnée. Une hausse de la volatilité augmente le risque mais offre aussi de belles opportunités de gains à court terme pour les traders actifs.",
-    "en": "In trading, volatility measures the magnitude of an asset's price fluctuations over a given period. Higher volatility increases risk but also offers lucrative short-term opportunities for active traders."
-   },
-   "v": [
-    [
-     "volatilité",
-     "volatility"
-    ],
-    [
-     "action",
-     "equity / stock"
-    ],
-    [
-     "investisseur",
-     "investor"
-    ],
-    [
-     "marché boursier",
-     "stock market"
-    ]
-   ],
-   "q": {
-    "fr": "Que représente la volatilité pour un trader ? ",
-    "en": "What does volatility represent for a trader?"
-   },
-   "r": {
-    "fr": "Elle représente l'intensité des fluctuations de prix, synonyme à la fois de risque et d'opportunité.",
-    "en": "It represents the intensity of price fluctuations, meaning both risk and opportunity."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-03-ryanair-s-adapte-a-la-flambee-des-cours-",
-   "src": "franceinfo",
-   "date": "2026-11-03",
-   "url": "https://www.franceinfo.fr/replay-radio/le-brief-eco/ryanair-annonce-un-plan-d-adaptation-face-au-petrole-cher_8244766.html#xtor=RSS-3-%5Bgeneral%5D",
-   "t": {
-    "fr": "Ryanair s'adapte à la flambée des cours du pétrole",
-    "en": "Ryanair adapts to soaring oil prices"
-   },
-   "s": {
-    "fr": "La hausse des prix du kérosène pèse lourdement sur la santé financière des compagnies aériennes. Pour contrer ce coût, la compagnie low cost Ryanair a décidé de miser davantage sur l'intelligence artificielle.",
-    "en": "Rising jet fuel prices are weighing heavily on the financial health of airlines. To counter this cost, low-cost carrier Ryanair has announced it will rely more on artificial intelligence."
-   },
-   "d": {
-    "fr": "Le coût des matières premières comme le pétrole influence directement les marges bénéficiaires des entreprises grands consommateurs d'énergie. En bourse, une hausse de ces coûts pèse négativement sur la valorisation boursière de ces sociétés.",
-    "en": "The cost of raw materials like oil directly impacts the profit margins of energy-intensive companies. In the stock market, rising costs weigh negatively on these companies' valuations."
-   },
-   "v": [
-    [
-     "matière première",
-     "commodity"
-    ],
-    [
-     "pétrole",
-     "oil"
-    ],
-    [
-     "marge bénéficiaire",
-     "profit margin"
-    ],
-    [
-     "valorisation",
-     "valuation"
-    ]
-   ],
-   "q": {
-    "fr": "Quel impact a généralement une forte hausse du pétrole sur les compagnies aériennes ?",
-    "en": "What impact does a sharp rise in oil usually have on airlines?"
-   },
-   "r": {
-    "fr": "Cela alourdit leurs charges, pèse sur leurs marges financières et pénalise souvent leur cours de bourse.",
-    "en": "It increases their expenses, weighs on financial margins, and often penalizes their stock price."
    },
    "ia": "Gemini"
   }
