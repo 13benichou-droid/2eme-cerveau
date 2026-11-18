@@ -3403,7 +3403,7 @@ function jStep(s,i,isT){
 function pageJourOld(){
   const d=V.jdk?(([y,m,dd])=>new Date(y,m-1,dd))(V.jdk.split("-").map(Number)):today();V.jdk=dkey(d);
   const isT=V.jdk===dkey(today()),P=jParams(),pl=planDay(d),{cur,next}=isT?jCurrent(pl):{};
-  const head=`<div class="seg" role="group" aria-label="Jour">${[0,1].map(i=>{const x=add(today(),i);return`<button data-jday="${dkey(x)}" aria-pressed="${dkey(x)===V.jdk}">${i?"Demain":"Aujourd'hui"}</button>`}).join("")}</div>`;
+  const head=`<div class="seg" role="group" aria-label="Jour">${[0,1,2].map(i=>{const x=add(today(),i);return`<button data-jday="${dkey(x)}" aria-pressed="${dkey(x)===V.jdk}">${i===2?JOURS[x.getDay()]:i?"Demain":"Aujourd'hui"}</button>`}).join("")}</div>`;
   const R=pl.plan.find(s=>s.run),isWork=s=>s&&(s.k==="hab"||s.k==="pn"||s.k==="x"),todo=isWork(cur)?cur:isWork(next)?next:null;
   const now=!isT?"":R?`<div class="card jnow ${R.over?"over":""}"><p class="label" style="margin:0">${R.over?`⏱️ Tu dépasses de ${fdur(Math.max(1,R.overBy))}`:"▶ En cours"}</p>
       <b>${jIcon(R.k,R.ref)} ${esc(R.l)}</b><span class="muted">commencé à ${fmin(R.a)} · ${fdur(Math.max(0,R.el))} passées${R.over?"":` · fin prévue ${fmin(R.b)}`}</span>
@@ -4612,7 +4612,7 @@ function pageJour(){
   const isT=V.jdk===dkey(today()),pl=planDay(d),{cur,next}=isT?jCurrent(pl):{};
   const pal=jPalList(d,pl),nTodo=pal.filter(x=>x.g==="todo").length,nDone=pal.filter(x=>x.g==="done").length,nPlan=pl.plan.filter(s=>jWork(s)&&!s.done).length,nAll=nDone+nPlan+nTodo;
   const late=((S.jours[V.jdk]||{}).par||{}).stop==="23:59";
-  const head=`<div class="jtop"><div class="seg" role="group" aria-label="Jour">${[0,1].map(i=>{const x=add(today(),i);return`<button data-jday="${dkey(x)}" aria-pressed="${dkey(x)===V.jdk}">${i?"Demain":"Aujourd'hui"}</button>`}).join("")}</div>
+  const head=`<div class="jtop"><div class="seg" role="group" aria-label="Jour">${[0,1,2].map(i=>{const x=add(today(),i);return`<button data-jday="${dkey(x)}" aria-pressed="${dkey(x)===V.jdk}">${i===2?JOURS[x.getDay()]:i?"Demain":"Aujourd'hui"}</button>`}).join("")}</div>
     <span class="jprog" title="Blocs finis sur l'ensemble de la journée">✓ <b class="num">${nDone}</b> / ${nAll}</span></div>`;
   const R=pl.plan.find(s=>s.run),todo=jWork(cur)&&!cur.done?cur:jWork(next)&&!next.done?next:null;
   const now=!isT?"":R?`<div class="card jnow ${R.over?"over":""}"><p class="label" style="margin:0">${R.over?`⏱️ Tu dépasses de ${fdur(Math.max(1,R.overBy))}`:"▶ En cours"}</p>
@@ -9555,7 +9555,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.44.1";
+const APP_VERSION = "2.45.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
