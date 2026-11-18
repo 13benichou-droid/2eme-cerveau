@@ -6172,7 +6172,8 @@ Réponds uniquement en JSON : {"ok": true ou false, "pourquoi": "une phrase cour
 /* ---- l'onglet 🗂️ Cartes ---- */
 function srsPage(){if(V.srs&&V.srs.tab==="cards")return srsView();
   const Ds=srsDecks(),day=(srsDoc().rev||{})[todayK()]||{};let a=0,ok=0;Object.values(day).forEach(x=>{a+=x.a||0;ok+=x.ok||0});
-  let lastG="";const rows=Object.entries(Ds).map(([k,D])=>{const c=srsCount(k),todo=c.n+c.l+c.r,op=V.srsOpen===k,gh=D.grp&&D.grp!==lastG?`<p class="srsgrp">${esc(D.grp)}</p>`:"";lastG=D.grp||"";
+  /* 2.44.1 : expressions et Méga vocabulaire sont déjà dans « Anglais » : plus de paquets en double dans la liste */
+  let lastG="";const rows=Object.entries(Ds).filter(([k])=>!["xq","xf","mg"].includes(k)).map(([k,D])=>{const c=srsCount(k),todo=c.n+c.l+c.r,op=V.srsOpen===k,gh=D.grp&&D.grp!==lastG?`<p class="srsgrp">${esc(D.grp)}</p>`:"";lastG=D.grp||"";
     return gh+`<div class="srsrow${D.grp?" srsin":""}"><button class="srsname" data-srsopen="${k}" aria-expanded="${op}"><span class="srse" aria-hidden="true">${esc(D.e)}</span><span><b>${esc(D.n)}</b><small class="muted">${c.tot?`${c.tot} carte${c.tot>1?"s":""}${c.known?` · ${c.known} bien sue${c.known>1?"s":""}`:""}`:"vide : ajoute des cartes"} ${op?"▴":"▾"}</small></span></button>${c.tot?srsCnt(c):""}${todo?`<button class="btn srsgo" data-srsgo="${k}|cards">Étudier</button>`:`<span class="srsok" aria-label="Rien à réviser">✓</span>`}</div>${op?srsDeckPanel(k,D):""}`}).join("");
   return`<div class="card stack" style="gap:10px"><div class="row" style="justify-content:space-between"><p class="label" style="margin:0">🗂️ Mes paquets de cartes</p><span class="muted small">${a?`aujourd'hui : ${a} réponse${a>1?"s":""} · ${Math.round(ok/a*100)} % de bonnes`:""}</span></div>
     <div class="srsleg muted small"><span><i class="srsN"></i>nouvelles</span><span><i class="srsL"></i>en cours</span><span><i class="srsR"></i>à revoir</span></div>
@@ -8741,6 +8742,9 @@ function axQuests(){const Q=[];
   if(!wgOff("fin")){const r=wgSafe(()=>prog().days[dkey(today())]);Q.push({go:"fin|actu",ic:AXI.chart,c:"q3",t:"Défi finance du jour",v:r?`${r.s}/${r.m}`:"0/1",p:r?1:0,ok:!!r,sub:r?(r.s>=r.m?"tout juste, bravo":"fait aujourd'hui"):"une question sur l'actu"})}
   if(!wgOff("cg")){const v=wgSafe(()=>cgDone());Q.push({go:"fin|jeu",ic:AXI.star,c:"q1",t:"Quiz culture G",v:v?(v.ok?"✓":"fait"):"0/1",p:v?1:0,ok:!!v,sub:v?(v.ok?"bonne réponse, bravo":"fait aujourd'hui"):"dans le défi du jour"})}
   if(!wgOff("ent")){const st=wgSafe(()=>cmStats())||{best:0,tb:0};Q.push({go:"ent|cm",ic:AXI.bolt,c:"q4",t:"Calcul mental",v:st.tb?String(st.tb):"0/1",p:st.tb?1:0,ok:!!st.tb,sub:st.tb?`aujourd'hui ${st.tb}${st.best?" · record "+st.best:""}`:st.best?`record à battre : ${st.best}`:"2 min chrono"})}
+  /* 2.44.1 : quête SES (cartes des chapitres de SES) */
+  if(!wgOff("ent")){const ks=["ses1","ses2"],k=ks.reduce((s,dk)=>{const c=wgSafe(()=>srsCount(dk))||{n:0,l:0,r:0};return s+c.n+c.l+c.r},0),day=(srsDoc().rev||{})[todayK()]||{},a=ks.reduce((s,dk)=>s+((day[dk]||{}).a||0),0),ok=!k&&a>0;
+    Q.push({go:"ent|cards",ic:AXI.cards,c:"q3",t:"SES",v:ok?"fait":k?`${k} carte${k>1?"s":""}`:"0/1",p:ok?1:a?a/(a+k):0,ok,sub:ok?"cartes du jour faites":k?"cartes de SES à revoir":"rien à revoir aujourd'hui"})}
   if(!Q.length)return"";const nOk=Q.filter(q=>q.ok).length;
   return`<section class="axcard axquests"><div class="axqh"><h2>Quêtes du jour</h2><span class="num">${nOk}/${Q.length}</span></div>
   ${Q.map(q=>`<button class="axq${q.ok?" ok":""}" data-wgo="${q.go}"><span class="axqi ${q.c}">${q.ok?AXI.ok:q.ic}</span><span class="axqt"><b>${q.t}</b>${q.sub?`<small>${q.sub}</small>`:""}<span class="axqbar" aria-hidden="true"><i style="width:${Math.round(Math.max(0,Math.min(1,q.p))*100)}%"></i></span></span><span class="axqv num">${q.v}</span></button>`).join("")}</section>`}
@@ -9551,7 +9555,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.44.0";
+const APP_VERSION = "2.44.1";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
