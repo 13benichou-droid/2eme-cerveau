@@ -1627,6 +1627,8 @@ body.pbdrag .pbc[data-pbok] .pbo{border-color:var(--c);border-style:solid}
 .wd .vb i.ms{background:repeating-linear-gradient(135deg,#e5484d 0 3px,color-mix(in srgb,#e5484d 35%,transparent) 3px 6px)}
 .jpi.miss{opacity:.85;border:1.5px dashed color-mix(in srgb,#e5484d 60%,transparent)}
 .jpi.miss>span{color:#e5484d;font-weight:800}
+.wbonb{flex-direction:row!important;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.wbonb button{flex:none}
 .lck.hit{filter:brightness(1.35);transform:scale(.96)}
 /* 2.35.2 : accueil tout en noir et blanc (plus de trait orange, d'étoile jaune ni d'icônes colorées) */
 :root[data-skin="journal"] .wgbar i{background:#111!important}
@@ -3312,14 +3314,17 @@ function jHwFor(d,h){const c=pnCat(habL(h)),X=hwxOf(h),p=S.pronote&&S.pronote.da
   const L=[...P,...(X.add||[]).map(m=>({id:m.id,txt:m.t,mine:1}))];
   return L.length?{x:P[0]||L[0],n:L.length,L,pn:P}:null}
 function jHwPour(x){if(!x||!x.pour)return"";const[y,m,dd]=String(x.pour).slice(0,10).split("-").map(Number),t=new Date(y,m-1,dd),df=Math.round((t-today())/864e5);return df===1?"demain":df>1&&df<7?JOURS[t.getDay()].toLowerCase():`le ${dd}/${m}`}
+function wbonFor(d,s){return s&&s.k==="hab"&&d&&isWE(d)?WBON.filter(b=>b.h===s.ref):[]}
+function wbonLine(d,s){const o=wbonOf(d);return wbonFor(d,s).map(b=>`<span class="jhw">⭐ ${o[b.id]?"✓ ":""}${esc(b.l.split(" : ")[1]||b.l)}</span>`).join("")}
+function wbonBox(d,s){const o=wbonOf(d);return wbonFor(d,s).map(b=>`<div class="jhwbox wbonb"><span>⭐ <b>Bonus du week-end :</b> ${esc(b.l.split(" : ")[1]||b.l)}<small class="muted" style="display:block">Pas obligatoire : si tu le fais, ça compte en plus.</small></span><button class="${o[b.id]?"btn":"ghost"}" data-wbonb="${b.id}" data-wbd="${dkey(d)}">${o[b.id]?"✓ Fait":"Je l'ai fait"}</button></div>`).join("")}
 function jHwLine(d,s,full){if(!s||s.k!=="hab")return"";const r=jHwFor(d,s.ref),T=x=>String(x.txt||"devoir").replace(/\s+/g," ").trim(),L=r?r.L:[],X=hwxOf(s.ref),custom=(X.add||[]).length||Object.keys(X.hid||{}).length;
   /* 2.42.1 : sur l'accueil, la carte est un bouton : la liste reste en lecture seule (un bouton dans un bouton cassait la mise en page) */
   if(full==="ro")return L.length?`<span class="jhwbox" style="display:flex;flex-direction:column;gap:4px"><b>📝 Devoirs et consignes</b>${L.slice(0,5).map(x=>`<span class="small">• ${x.mine?"":`<b>Pour ${esc(jHwPour(x))} :</b> `}${esc(T(x).slice(0,140))}</span>`).join("")}${L.length>5?`<span class="small muted">+${L.length-5} autre${L.length>6?"s":""}</span>`:""}</span>`:"";
-  if(full)return`<div class="jhwbox" style="flex-direction:column;gap:6px"><div class="row" style="justify-content:space-between;gap:8px"><b>📝 Devoirs et consignes</b>${custom?`<button class="linkb small" data-hwreset="${esc(s.ref)}" title="Revenir à la liste de base (devoirs Pronote)">↺ Réinitialiser</button>`:""}</div>
+  if(full)return wbonBox(d,s)+`<div class="jhwbox" style="flex-direction:column;gap:6px"><div class="row" style="justify-content:space-between;gap:8px"><b>📝 Devoirs et consignes</b>${custom?`<button class="linkb small" data-hwreset="${esc(s.ref)}" title="Revenir à la liste de base (devoirs Pronote)">↺ Réinitialiser</button>`:""}</div>
     ${L.length?`<ul class="jhwl">${L.slice(0,10).map(x=>`<li class="row" style="justify-content:space-between;gap:6px;align-items:flex-start"><span>${x.mine?"":`<b>Pour ${esc(jHwPour(x))} :</b> `}${esc(T(x).slice(0,300))}</span><button class="linkb" aria-label="Enlever" data-hwdel="${esc(x.id)}" data-hwh="${esc(s.ref)}" data-hwmine="${x.mine?1:""}">✕</button></li>`).join("")}</ul>`:`<p class="small muted" style="margin:0">Rien pour l'instant.</p>`}
     <div class="row" style="gap:6px"><input class="field" id="hwnew" placeholder="Ajouter un devoir ou une consigne…" style="flex:1;min-width:0" data-hwh="${esc(s.ref)}"><button class="btn" data-hwadd="${esc(s.ref)}">Ajouter</button></div></div>`;
-  if(!L.length)return"";
-  return L.slice(0,3).map(x=>`<span class="jhw">• ${esc(T(x).slice(0,55))}${x.mine?"":" · "+esc(jHwPour(x))}</span>`).join("")+(L.length>3?`<span class="jhw">+${L.length-3} autre${L.length>4?"s":""}</span>`:"")}
+  if(!L.length)return wbonLine(d,s);
+  return wbonLine(d,s)+L.slice(0,3).map(x=>`<span class="jhw">• ${esc(T(x).slice(0,55))}${x.mine?"":" · "+esc(jHwPour(x))}</span>`).join("")+(L.length>3?`<span class="jhw">+${L.length-3} autre${L.length>4?"s":""}</span>`:"")}
 function hwxAdd(h){const el=document.getElementById("hwnew"),t=String(el&&el.value||"").trim();if(!t)return;const X=hwxOf(h);hwxSave(h,{...X,add:[...(X.add||[]),{id:"m"+Date.now().toString(36),t:t.slice(0,300)}]})}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-hwdel],[data-hwadd],[data-hwreset]");if(!b)return;e.preventDefault();const d=b.dataset;
   if(d.hwadd)return hwxAdd(d.hwadd);
@@ -4504,6 +4509,27 @@ function jReport(dk,key){const d=jDateOf(dk),a=key.indexOf("|"),kind=key.slice(0
   if(kind==="hab"){const t=add(d,1),tk=dkey(t),jt=jDayDoc(tk),pl=planOf(t);if(!pl.includes(ref))put("jours",tk,{...jt,plan:[...pl,ref]},true)}
   return jOut(dk,key)}
 const jCounts=k=>k==="hab"||k==="pn";
+/* 2.43.0 : à quelle heure mettre mon réveil ? (cycles de 90 min + 15 min pour s'endormir, et l'heure du 1er cours) */
+function sleepP(){let o={};try{o=JSON.parse(localStorage.getItem("cerveau-sleep")||"{}")||{}}catch(e){}return{bed:o.bed||"23:00",prep:o.prep!=null?+o.prep:30,traj:o.traj!=null?+o.traj:22}}
+function sleepSave(o){try{localStorage.setItem("cerveau-sleep",JSON.stringify({...sleepP(),...o}))}catch(e){}}
+function sleepRes(){const P=sleepP(),hm=s=>{const [a,b]=String(s).split(":").map(Number);return(a||0)*60+(b||0)},f=m=>{m=((Math.round(m)%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")};
+  const now=new Date(),tg=now.getHours()<5?today():add(today(),1),tk=dkey(tg),L=jLessons(tk).map(c=>new Date(c.d)).filter(x=>!isNaN(x)).sort((a,b)=>a-b);
+  let bed=hm(P.bed);if(bed<12*60)bed+=1440;const st=bed+15,first=L.length?L[0].getHours()*60+L[0].getMinutes()+1440:null,late=first!=null?first-P.traj-P.prep-5:null;
+  const C=[6,5,4].map(c=>({c,w:st+c*90}));let best=late!=null?C.find(x=>x.w<=late):C.find(x=>x.c===6),warn="";
+  if(late!=null&&!best){best={c:0,w:late};warn=`Moins de 6 h de sommeil : si tu peux, couche-toi avant ${f(late-4*90-15)}.`}
+  const dur=best.w-st,jr=JOURS[tg.getDay()].toLowerCase();
+  return`<p style="margin:0;font-size:2.2rem;font-family:var(--display)" class="num">⏰ ${f(best.w)}</p>
+    <p class="small" style="margin:0">${best.c?`${best.c} cycles de sommeil · ${fdur(dur)}`:`${fdur(dur)} de sommeil seulement`}${first!=null?` · cours ${jr} à ${f(first)}, départ à ${f(first-P.traj-5)}`:` · pas de cours ${jr}`}</p>
+    ${late!=null&&best.c?`<p class="small muted" style="margin:0">Au plus tard ${f(late)} : se réveiller en fin de cycle évite d'être dans le brouillard.</p>`:""}
+    ${warn?`<p class="small" style="margin:0;color:#e5484d">${warn}</p>`:""}
+    <p class="small muted" style="margin:0">Autres réveils en fin de cycle : ${C.filter(x=>x.c!==best.c).map(x=>`${f(x.w)} (${x.c} cycles)${late!=null&&x.w>late?" ⚠ trop tard":""}`).join(" · ")}</p>`}
+function sleepCard(){const P=sleepP();return`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">😴 Mon réveil</p>
+  <div class="row" style="gap:8px;flex-wrap:wrap;align-items:center"><label class="row" style="gap:6px"><span class="small">Je me couche à</span><input class="field" type="time" data-sleep="bed" value="${esc(P.bed)}" style="width:auto"></label></div>
+  <div id="sleepres" class="stack" style="gap:4px">${sleepRes()}</div>
+  <details><summary class="small muted" style="cursor:pointer">Réglages (préparation, trajet)</summary><div class="row" style="gap:8px;flex-wrap:wrap;margin-top:6px">
+    <label class="row" style="gap:6px"><span class="small">Préparation (min)</span><input class="field" type="number" inputmode="numeric" min="0" step="5" data-sleep="prep" value="${P.prep}" style="width:5em"></label>
+    <label class="row" style="gap:6px"><span class="small">Trajet (min)</span><input class="field" type="number" inputmode="numeric" min="0" step="1" data-sleep="traj" value="${P.traj}" style="width:5em"></label></div></details></div>`}
+document.addEventListener("input",e=>{const i=e.target.closest&&e.target.closest("[data-sleep]");if(!i)return;sleepSave({[i.dataset.sleep]:i.dataset.sleep==="bed"?i.value:+i.value||0});const r=document.getElementById("sleepres");if(r)r.innerHTML=sleepRes()});
 /* enlever un bloc de la journée (il retourne dans la palette) */
 function jOut(dk,key){const d=jDateOf(dk),j=jDayDoc(dk),a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),pin={...(j.pin||{})};delete pin[key];j.pin=pin;
   if(kind==="hab")j.plan=planOf(d).filter(h=>h!==ref);
@@ -4604,6 +4630,7 @@ function pageJour(){
     <select class="field" name="min" style="flex:0 0 88px" aria-label="Durée">${[15,20,30,45,60,90].map(m=>`<option value="${m}" ${m===30?"selected":""}>${m} min</option>`).join("")}</select><button class="btn" aria-label="Ajouter">+</button></form>
     ${xs.length?`<div class="jxs">${xs.map(x=>`<span class="chip ${x.ok?"on":""}">${x.ok?"✓ ":""}${esc(x.t)} · ${x.min} min <button class="jxdel" data-jdel="${x.id}" aria-label="Supprimer ${esc(x.t)}">✕</button></span>`).join("")}</div>`:""}
   </div>${jSheet(d,pl)}${sgCard("jour")}${jNoSchool(V.jdk)?jVacCard(V.jdk):""}
+  ${sleepCard()}
   <details class="card jmore" ${V.jmore?"open":""}><summary style="cursor:pointer"><b>⚙️ Plus d'options</b><small class="muted" style="display:block">${jNoSchool(V.jdk)?"Mes réglages de journée":"Pas cours, vacances, mes réglages de journée"}</small></summary>
     <div class="stack" style="gap:12px;margin-top:12px">${jNoSchool(V.jdk)?"":jVacCard(V.jdk)}
     <div class="card stack" style="gap:8px"><p class="label" style="margin:0">Mes réglages de journée</p><form data-f="jparams" class="stack" style="gap:8px">
@@ -4750,7 +4777,12 @@ function doneOf(d){if(!isWE(d))return(S.jours[dkey(d)]||{}).done||{};const[a,b]=
 function unitItems(d){const days=isWE(d)?weBlock(d):[d],dn=doneOf(d),hab=[],pn=[],xs=[];
   days.forEach(x=>{planOf(x).forEach(h=>{if(!hab.includes(h))hab.push(h)});pnTasks(x).forEach(y=>{if(!pn.some(z=>z.id===y.id))pn.push({...y,_dk:dkey(x)})});((S.jours[dkey(x)]||{}).extra||[]).forEach(e=>xs.push({...e,_dk:dkey(x)}))});
   return{days,dn,hab,pn,xs}}
-function dayStats(d){const u=unitItems(d),k=u.dn;return{n:u.hab.filter(h=>k[h]).length+u.pn.filter(x=>pnDoneAny(x)||k["pn:"+x.id]).length+u.xs.filter(x=>x.ok).length,t:u.hab.length+u.pn.length+u.xs.length}}
+/* 2.43.0 : bonus du week-end : toujours là, ne s'enlève jamais ; pas fait = rien ne change, fait = +1 réussite */
+const WBON=[{id:"maths",h:"mspe",l:"Maths : essayer une annale de bac"},{id:"philo",h:"fphi",l:"Philo : essayer une partie de dissertation"}];
+function wbonOf(d){if(!d||!isWE(d))return{};return((S.jours[dkey(weBlock(d)[0])]||{}).bon)||{}}
+function wbonSet(d,id,on){const k=dkey(weBlock(d)[0]),j=jDayDoc(k),b={...(j.bon||{})};if(on)b[id]=1;else delete b[id];j.bon=b;return put("jours",k,j)}
+function wbonN(d){const o=wbonOf(d);return WBON.filter(b=>o[b.id]).length}
+function dayStats(d){const u=unitItems(d),k=u.dn,bn=wbonN(d);return{n:bn+u.hab.filter(h=>k[h]).length+u.pn.filter(x=>pnDoneAny(x)||k["pn:"+x.id]).length+u.xs.filter(x=>x.ok).length,t:bn+u.hab.length+u.pn.length+u.xs.length}}
 /* objectif Master Dauphine : le bloc week-end compte une fois (le samedi tant que dimanche n'est pas arrivé, sinon le dimanche) */
 function dayW(d){if(d.getDay()===6&&+today()>+d)return{n:0,t:0};
   const u=unitItems(d),k=u.dn;let n=0,t=0;u.hab.forEach(h=>{const w=tW(h);t+=w;if(k[h])n+=w});u.pn.forEach(x=>{const w=tW("devoir");t+=w;if(pnDoneAny(x)||k["pn:"+x.id])n+=w});u.xs.forEach(x=>{t+=1;if(x.ok)n+=1});return{n,t}}
@@ -4782,6 +4814,7 @@ function pageHab(){
     <div class="row" style="gap:14px">${ring(t?n/t:0,"--hab")}<div><b style="font-family:var(--display);font-size:1.4rem" class="num">${n} / ${t}</b><div class="muted">${n===t?(we?"Week-end bouclé":"Journée bouclée"):(t-n)+" à faire"}</div></div></div>
     ${we?`<p class="small muted" style="margin:0">Une tâche du week-end compte une fois : fais-la samedi ou dimanche, comme tu veux.</p>`:""}
     <ul class="list">${u.hab.map(h=>`<li><label class="chk"><input type="checkbox" id="hab-${h}" data-hab="${h}" ${k[h]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(habN(h))}</span><span class="tag">${(HABITS[h]||[])[1]||""}</span></label></li>`).join("")}${u.pn.map(x=>`<li><label class="chk"><input type="checkbox" id="hab-pn-${sid(x.id)}" data-pnd="${esc(x.id)}|${x._dk}" ${pnDoneAny(x)||k["pn:"+x.id]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.m||"Devoir")}<small class="pnhw">${esc(String(x.txt||"").slice(0,140))}</small></span><span class="tag">Devoir</span></label></li>`).join("")}${u.xs.map(x=>`<li><label class="chk"><input type="checkbox" id="hab-x-${x.id}" data-jt="x|${x.id}|${x._dk}" ${x.ok?"checked":""}><span class="box">${tick}</span><span class="t">${esc(x.t)}</span><span class="tag">${x.min} min</span></label></li>`).join("")}</ul>
+    ${we?`<div class="wbon"><p class="label" style="margin:0 0 4px">⭐ Bonus du week-end <small class="muted" style="text-transform:none;letter-spacing:0">· pas obligatoire, ça ne compte que si tu le fais</small></p><ul class="list">${WBON.map(b=>`<li><label class="chk"><input type="checkbox" data-wbon="${b.id}" data-wbd="${dkey(sa)}" ${wbonOf(d)[b.id]?"checked":""}><span class="box">${tick}</span><span class="t">${esc(b.l)}</span><span class="tag">bonus</span></label></li>`).join("")}</ul></div>`:""}
     <form class="row" data-f="jadd" data-dk="${addK}" style="flex-direction:row;flex-wrap:nowrap"><input class="field" id="hab-add" name="t" placeholder="+ Ajouter une tâche pour ${we?"ce week-end":"ce jour"}" autocomplete="off" required><input type="hidden" name="min" value="30"><button class="ghost on" aria-label="Ajouter">Ajouter</button></form>
   </div>
   ${heCard()}
@@ -4793,6 +4826,8 @@ function pageHab(){
     <div class="seg">${[[4,"1 mois"],[12,"3 mois"],[26,"6 mois"]].map(([v,l])=>`<button data-range="${v}" aria-pressed="${v===V.range}">${l}</button>`).join("")}</div></div>
     <div class="chart">${lineChart(weekSeries(V.range))}</div></div>`;
 }
+document.addEventListener("change",e=>{const c=e.target.closest&&e.target.closest("[data-wbon]");if(!c)return;wbonSet(jDateOf(c.dataset.wbd),c.dataset.wbon,c.checked);render(true)});
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-wbonb]");if(!b)return;e.preventDefault();e.stopPropagation();const d=jDateOf(b.dataset.wbd);wbonSet(d,b.dataset.wbonb,!wbonOf(d)[b.dataset.wbonb]);render(true)});
 /* décocher une tâche du week-end : elle se décoche aussi sur l'autre jour du week-end */
 function weUntick(dk,kind,ref,ok){if(ok||kind!=="hab")return;try{const d=jDateOf(dk);if(!isWE(d))return;weBlock(d).map(dkey).filter(k=>k!==dk).forEach(k=>{const j=S.jours[k];if(j&&j.done&&j.done[ref]){const dn={...j.done};delete dn[ref];put("jours",k,{...j,date:k,done:dn})}})}catch(e){}}
 
@@ -9510,7 +9545,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.42.5";
+const APP_VERSION = "2.43.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
