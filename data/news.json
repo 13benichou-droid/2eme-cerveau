@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-18T14:31:23.402Z",
+ "updated": "2026-11-19T14:45:42.305Z",
  "snap": {
-  "date": "2026-11-18",
+  "date": "2026-11-19",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 196",
-    "c": "−0,25 %"
+    "v": "8 139",
+    "c": "−0,09 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 352",
-    "c": "+0,15 %"
+    "v": "7 384",
+    "c": "+0,82 %"
    },
    {
     "n": "Nasdaq",
-    "v": "24 328",
-    "c": "−0,74 %"
+    "v": "24 820",
+    "c": "+1,60 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "24,20",
-    "c": "−4,95 %"
+    "v": "22,49",
+    "c": "−8,43 %"
    },
    {
     "n": "Brent",
-    "v": "90,0 $",
-    "c": "−3,39 %"
+    "v": "90,4 $",
+    "c": "−1,69 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "84,0 $",
-    "c": "−2,34 %"
+    "v": "83,6 $",
+    "c": "+0,38 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 779 $",
-    "c": "−2,22 %"
+    "v": "3 711 $",
+    "c": "−0,82 %"
    },
    {
     "n": "Bitcoin",
-    "v": "63 927 $",
-    "c": "−1,49 %"
+    "v": "63 890 $",
+    "c": "+1,43 %"
    },
    {
     "n": "US 10 ans",
     "v": "5,09 %",
-    "c": "−0,01 pt"
+    "c": "+0,02 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,097",
-    "c": "−0,25 %"
+    "v": "1,100",
+    "c": "+0,07 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-19-l-entreprise-d-intelligence-artificielle",
+   "src": "franceinfo",
+   "date": "2026-11-19",
+   "url": "https://www.franceinfo.fr/internet/intelligence-artificielle/entretien-le-fondateur-d-anthropic-est-persuade-d-avoir-le-sort-du-monde-sur-ses-epaules_8289752.html#xtor=RSS-3-%5Beconomie%5D",
+   "t": {
+    "fr": "L'entreprise d'intelligence artificielle Anthropic fait son entrée sur les marchés boursiers",
+    "en": "Artificial Intelligence Firm Anthropic Makes Its Stock Market Debut"
+   },
+   "s": {
+    "fr": "La société d'intelligence artificielle Anthropic vient d'être introduite en Bourse. À cette occasion, l'attention se porte sur son fondateur Dario Amodei et sa vision singulière quant à l'avenir de cette technologie.",
+    "en": "The artificial intelligence company Anthropic has just completed its initial public offering. On this occasion, attention turns to its founder Dario Amodei and his unique vision regarding the future of this technology."
+   },
+   "d": {
+    "fr": "L'entrée en Bourse permet à une entreprise de récolter des fonds auprès du public pour financer ses projets de développement. Pour un apprenti trader, observer ces premières cotations d'entreprises technologiques est formateur car la volatilité y est très forte.",
+    "en": "An initial public offering allows a company to raise capital from the public to finance its growth projects. For a beginner trader, observing these initial listings of tech firms is insightful as volatility is usually very high."
+   },
+   "v": [
+    [
+     "Introduction en Bourse",
+     "Initial Public Offering (IPO)"
+    ],
+    [
+     "Action",
+     "Share / Stock"
+    ],
+    [
+     "Volatilité",
+     "Volatility"
+    ],
+    [
+     "Capitalisation boursière",
+     "Market capitalization"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi l'arrivée en Bourse d'un acteur majeur de la tech attire-t-elle autant les traders ?",
+    "en": "Why does the stock market debut of a major tech player attract so many traders?"
+   },
+   "r": {
+    "fr": "Ces opérations génèrent un très fort volume de transactions et des mouvements de prix rapides, offrant des opportunités mais aussi des risques importants.",
+    "en": "These events generate high transaction volumes and rapid price movements, offering opportunities but also significant risks."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-19-recul-marque-du-prix-des-carburants-a-la",
+   "src": "franceinfo",
+   "date": "2026-11-19",
+   "url": "https://www.franceinfo.fr/economie/transports/prix-des-carburants/c-est-toujours-ca-de-pris-des-automobilistes-saluent-la-baisse-significative-du-prix-des-carburants_8290100.html#xtor=RSS-3-%5Beconomie%5D",
+   "t": {
+    "fr": "Recul marqué du prix des carburants à la pompe",
+    "en": "Significant Drop in Gas Station Fuel Prices"
+   },
+   "s": {
+    "fr": "Le coût des carburants poursuit sa trajectoire baissière dans les stations-service françaises. Le Sans-plomb est redescendu sous le seuil symbolique des deux euros pour s'établir à 1,98 euro par litre en moyenne.",
+    "en": "Fuel costs continue their downward path in French gas stations. Unleaded petrol has dropped back below the symbolic two-euro threshold to average 1.98 euros per liter."
+   },
+   "d": {
+    "fr": "Les variations du prix de l'essence reflètent directement l'évolution des cours mondiaux du pétrole et des matières premières. En trading, suivre ces tarifs aide à mesurer les pressions de l'inflation sur l'économie réelle.",
+    "en": "Fluctuations in petrol prices directly reflect movement in global crude oil and commodity markets. In trading, tracking these rates helps assess inflationary pressures on the real economy."
+   },
+   "v": [
+    [
+     "Matières premières",
+     "Commodities"
+    ],
+    [
+     "Pétrole brut",
+     "Crude oil"
+    ],
+    [
+     "Inflation",
+     "Inflation"
+    ],
+    [
+     "Tendance baissière",
+     "Bearish trend"
+    ]
+   ],
+   "q": {
+    "fr": "Comment la baisse des prix du carburant influence-t-elle la consommation des ménages ?",
+    "en": "How does a drop in fuel prices impact household consumption?"
+   },
+   "r": {
+    "fr": "En réduisant les dépenses de transport, elle redonne du pouvoir d'achat aux consommateurs pour d'autres biens et services.",
+    "en": "By reducing transportation expenses, it gives consumers more purchasing power for other goods and services."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-19-disparition-d-un-fonds-immobilier-specia",
+   "src": "Le Monde",
+   "date": "2026-11-19",
+   "url": "https://www.lemonde.fr/argent/article/2026/11/19/une-nouvelle-scpi-disparait-faute-d-epargnants_6813306_1657007.html",
+   "t": {
+    "fr": "Disparition d'un fonds immobilier spécialisé faute de capitaux",
+    "en": "Specialized Real Estate Fund Closes Due to Lack of Capital"
+   },
+   "s": {
+    "fr": "La SCPI Vitality, axée sur les secteurs du bien-être et du sport, cesse d'exister en raison du manque de souscripteurs. Ses actifs vont être intégrés par une entité concurrente nommée Newgen.",
+    "en": "The Vitality real estate fund, focused on wellness and sports sectors, ceases to exist due to a lack of investors. Its assets are set to be absorbed by a rival entity named Newgen."
+   },
+   "d": {
+    "fr": "Quand un fonds de placement ne parvient plus à attirer d'argent, sa rentabilité et sa liquidité sont compromises. Le rachat par un concurrent permet de regrouper les actifs et d'éviter une faillite sèche.",
+    "en": "When an investment fund fails to attract funds, its profitability and liquidity are compromised. An acquisition by a competitor consolidates assets and prevents a total collapse."
+   },
+   "v": [
+    [
+     "SCPI (Société civile de placement immobilier)",
+     "Real Estate Investment Trust (REIT)"
+    ],
+    [
+     "Fusion-acquisition",
+     "Mergers and acquisitions (M&A)"
+    ],
+    [
+     "Liquidité",
+     "Liquidity"
+    ],
+    [
+     "Fonds d'investissement",
+     "Investment fund"
+    ]
+   ],
+   "q": {
+    "fr": "Que devient un placement lorsqu'un fonds d'investissement est absorbé par un autre ?",
+    "en": "What happens to an investment when a fund is absorbed by another?"
+   },
+   "r": {
+    "fr": "Les investisseurs voient généralement leurs parts transférées ou converties dans la nouvelle structure qui reprend la gestion des actifs.",
+    "en": "Investors generally see their shares transferred or converted into the new entity taking over asset management."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-18-le-poids-economique-des-achats-integres-",
    "src": "Le Figaro",
@@ -1270,155 +1405,20 @@
     "en": "Ensuring security oneself or delegating to intermediaries."
    },
    "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-05-rebond-des-marches-americains-apres-les-",
-   "src": "Le Monde",
-   "date": "2026-11-05",
-   "url": "https://www.lemonde.fr/economie/article/2026/11/05/midterms-2026-wall-street-salue-la-vague-democrate-au-congres-et-ses-promesses-de-certitudes-et-de-statu-quo_6806670_3234.html",
-   "t": {
-    "fr": "Rebond des marchés américains après les résultats des Midterms",
-    "en": "US Markets Rally Following Midterm Election Results"
-   },
-   "s": {
-    "fr": "Les principaux indices boursiers américains ont progressé à la suite des résultats des élections de mi-mandat marquant une avancée démocrate au Congrès. Dans le même temps, les rendements des obligations d'État à dix ans ont enregistré une légère baisse. Les investisseurs anticipent qu'une situation de blocage politique apportera une forme de stabilité.",
-    "en": "Major US stock indices closed higher following Democratic gains in the midterm elections. Meanwhile, ten-year Treasury yields experienced a slight decline. Investors expect political stalemate in Washington to offer market stability."
-   },
-   "d": {
-    "fr": "Pour un débutant en trading, la certitude politique ou l'absence de réformes radicales rassure souvent la bourse. Quand l'incertitude diminue, la confiance revient sur les actions et les taux d'intérêt se détendent.",
-    "en": "For a beginner trader, political predictability or gridlock often reassures financial markets. As uncertainty drops, investor confidence boosts equities while bond yields ease."
-   },
-   "v": [
-    [
-     "bon du Trésor",
-     "Treasury bond"
-    ],
-    [
-     "indice boursier",
-     "stock index"
-    ],
-    [
-     "statu quo",
-     "status quo"
-    ],
-    [
-     "rendement",
-     "yield"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi une situation de blocage politique peut-elle rassurer les marchés boursiers ?",
-    "en": "Why can political gridlock reassure stock markets?"
-   },
-   "r": {
-    "fr": "Elle réduit le risque d'adopter des lois imprévisibles, ce qui donne de la visibilité aux entreprises et aux investisseurs.",
-    "en": "It reduces the risk of passing unpredictable laws, giving businesses and investors greater visibility."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-05-chute-du-prix-du-baril-de-petrole-sous-l",
-   "src": "Financial Times",
-   "date": "2026-11-05",
-   "url": "https://www.ft.com/content/b526f876-810a-4e74-8b8d-4ffca04b29c7?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Chute du prix du baril de pétrole sous les 100 dollars",
-    "en": "Oil Prices Drop Below $100 per Barrel"
-   },
-   "s": {
-    "fr": "Le cours du pétrole est tombé sous le seuil des 100 dollars le baril en raison des espoirs de paix consécutifs aux élections américaines. La défaite républicaine a été attribuée par le vice-président à la mécontentement face à la guerre avec l'Iran, ce qui a modifié les anticipations des marchés.",
-    "en": "Oil prices fell below $100 per barrel driven by hopes of peace following the US midterm elections. The Republican defeat was linked by the US vice president to public dissatisfaction with the Iran war, changing market expectations."
-   },
-   "d": {
-    "fr": "Les matières premières comme le pétrole réagissent très fortement aux nouvelles géopolitiques. Un apaisement des risques de conflit réduit les craintes de pénurie d'approvisionnement, tirant ainsi les cours vers le bas.",
-    "en": "Commodities such as crude oil react strongly to geopolitical headlines. Lower war risks diminish supply disruption concerns, driving market prices lower."
-   },
-   "v": [
-    [
-     "cours du pétrole",
-     "oil price"
-    ],
-    [
-     "matière première",
-     "commodity"
-    ],
-    [
-     "géopolitique",
-     "geopolitics"
-    ],
-    [
-     "approvisionnement",
-     "supply"
-    ]
-   ],
-   "q": {
-    "fr": "Comment les perspectives de paix influent-elles sur les prix de l'énergie ?",
-    "en": "How do peace prospects influence energy prices?"
-   },
-   "r": {
-    "fr": "Elles diminuent la crainte de blocages dans la livraison de pétrole, ce qui fait baisser la prime de risque et les cours.",
-    "en": "They reduce fears of oil delivery disruptions, lowering the risk premium and market prices."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-05-envolee-des-prix-du-cuivre-des-profits-i",
-   "src": "Financial Times",
-   "date": "2026-11-05",
-   "url": "https://www.ft.com/content/6c4d1285-535d-4e86-895b-afddd1d15491?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Envolée des prix du cuivre : des profits inégaux dans la filière",
-    "en": "Copper Price Surge: Unequal Gains Across the Industry"
-   },
-   "s": {
-    "fr": "Le marché du cuivre est en pleine expansion avec une hausse importante de ses prix de vente au niveau mondial. Cependant, cet engouement profite avant tout aux entreprises minières qui extraient le minerai plutôt qu'aux fondeurs qui le façonnent.",
-    "en": "The copper market is experiencing a major boom with soaring global selling prices. However, this rally primarily favors mining companies that extract the metal over smelters that process it."
-   },
-   "d": {
-    "fr": "En trading, il faut examiner l'ensemble de la chaîne de production d'un secteur avant d'acheter une action. La hausse d'une ressource brute n'assure pas des gains identiques pour toutes les sociétés de la filière.",
-    "en": "In trading, you must analyze the whole industry supply chain before buying a stock. A rally in raw materials does not guarantee equal profits for all companies involved."
-   },
-   "v": [
-    [
-     "entreprise minière",
-     "mining company"
-    ],
-    [
-     "fondeur",
-     "smelter"
-    ],
-    [
-     "chaîne de valeur",
-     "value chain"
-    ],
-    [
-     "prix de vente",
-     "selling price"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi un boom sur une matière première ne profite-t-il pas également à tous les acteurs ?",
-    "en": "Why doesn't a commodity boom benefit all market players equally?"
-   },
-   "r": {
-    "fr": "Les extracteurs bénéficient directement des prix de vente élevés, tandis que les transformateurs font face à des coûts de matière première accrus.",
-    "en": "Extractors profit directly from high market prices, whereas processors face increased raw material costs."
-   },
-   "ia": "Gemini"
   }
  ],
  "actu": {
-  "date": "2026-11-18",
-  "q": "Quelle est la situation actuelle concernant la prévision de croissance française pour 2027 ?",
+  "date": "2026-11-19",
+  "q": "Selon les récentes données relevées dans les stations, à quel niveau s'établit désormais le prix moyen du litre de Sans-plomb ?",
   "choices": [
-   "Elle est confirmée à 2 %",
-   "Elle est jugée risquée et potentiellement à la baisse",
-   "Elle a été supprimée",
-   "Elle est en forte augmentation"
+   "1,85 euro",
+   "1,90 euro",
+   "1,98 euro",
+   "2,05 euros"
   ],
-  "a": 1,
-  "expl": "Le ministre de l'Économie a reconnu que la prévision initiale de 1 % est menacée. Cela oblige le gouvernement à envisager des mesures d'économie budgétaire.",
-  "src": "Le Figaro",
-  "url": "https://www.lefigaro.fr/conjoncture/la-prevision-de-croissance-de-1-pour-2027-est-a-risque-reconnait-roland-lescure-20261118"
+  "a": 2,
+  "expl": "Le litre de Sans-plomb est repassé sous la barre des deux euros pour s'établir à 1,98 euro en moyenne. C'est la première fois depuis trois mois que ce seuil est franchi à la baisse.",
+  "src": "franceinfo",
+  "url": "https://www.franceinfo.fr/economie/transports/prix-des-carburants/c-est-toujours-ca-de-pris-des-automobilistes-saluent-la-baisse-significative-du-prix-des-carburants_8290100.html#xtor=RSS-3-%5Beconomie%5D"
  }
 }
