@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-19T14:45:42.305Z",
+ "updated": "2026-11-20T14:20:09.014Z",
  "snap": {
-  "date": "2026-11-19",
+  "date": "2026-11-20",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 139",
-    "c": "−0,09 %"
+    "v": "7 962",
+    "c": "−1,47 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 384",
-    "c": "+0,82 %"
+    "v": "7 176",
+    "c": "−2,02 %"
    },
    {
     "n": "Nasdaq",
-    "v": "24 820",
-    "c": "+1,60 %"
+    "v": "23 879",
+    "c": "−2,25 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "22,49",
-    "c": "−8,43 %"
+    "v": "30,08",
+    "c": "+5,77 %"
    },
    {
     "n": "Brent",
-    "v": "90,4 $",
-    "c": "−1,69 %"
+    "v": "89,0 $",
+    "c": "−3,21 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "83,6 $",
-    "c": "+0,38 %"
+    "v": "82,3 $",
+    "c": "−1,08 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 711 $",
-    "c": "−0,82 %"
+    "v": "3 568 $",
+    "c": "−3,18 %"
    },
    {
     "n": "Bitcoin",
-    "v": "63 890 $",
-    "c": "+1,43 %"
+    "v": "61 826 $",
+    "c": "−0,12 %"
    },
    {
     "n": "US 10 ans",
-    "v": "5,09 %",
-    "c": "+0,02 pt"
+    "v": "4,98 %",
+    "c": "−0,07 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,100",
-    "c": "+0,07 %"
+    "v": "1,099",
+    "c": "+0,17 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-20-reallocation-d-actifs-de-l-automobile-ve",
+   "src": "Le Monde",
+   "date": "2026-11-20",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/20/industrie-pharmaceutique-les-agnelli-et-les-peugeot-misent-sur-les-merieux-pour-s-eloigner-des-essieux_6813617_3234.html",
+   "t": {
+    "fr": "Réallocation d'actifs : de l'automobile vers la santé",
+    "en": "Asset Reallocation: Shifting from Automotive to Healthcare"
+   },
+   "s": {
+    "fr": "Le groupe financier Exor, lié à la famille Agnelli, a doublé sa participation au capital du spécialiste de la santé BioMérieux. Ce renforcement reflète une volonté stratégique de se diversifier afin d'échapper aux difficultés actuelles du marché automobile.",
+    "en": "Investment firm Exor, linked to the Agnelli family, doubled its stake in healthcare company BioMérieux. This move reflects a strategic push to diversify and shield its assets from current automotive industry pressures."
+   },
+   "d": {
+    "fr": "En trading, ce phénomène s'apparente à de la rotation sectorielle, consistant à placer son capital vers des secteurs défensifs pour réduire son exposition au risque. Observer où les gros fonds transfèrent leurs liquidités donne d'excellents indices sur les tendances futures des marchés.",
+    "en": "In trading, this phenomenon aligns with sector rotation, where capital moves into defensive sectors to reduce overall risk exposure. Tracking where major funds relocate their liquidity provides valuable indicators regarding market trends."
+   },
+   "v": [
+    [
+     "Holding financier",
+     "Holding company"
+    ],
+    [
+     "Rotation sectorielle",
+     "Sector rotation"
+    ],
+    [
+     "Secteur défensif",
+     "Defensive sector"
+    ],
+    [
+     "Participation au capital",
+     "Equity stake"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi des investisseurs réduisent-ils leurs positions automobiles au profit du secteur médical ?",
+    "en": "Why would investors trim their automotive positions in favor of the medical sector?"
+   },
+   "r": {
+    "fr": "Le secteur médical est perçu comme plus résilient face aux secousses économiques par rapport à l'industrie automobile qui est très cyclique.",
+    "en": "The medical sector is viewed as more resilient during economic volatility compared to the highly cyclical automotive industry."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-20-modernisation-industrielle-l-oreal-mise-",
+   "src": "Le Figaro",
+   "date": "2026-11-20",
+   "url": "https://www.lefigaro.fr/societes/l-oreal-va-investir-pres-de-300-millions-d-euros-en-france-d-ici-2029-pour-moderniser-ses-usines-et-ses-laboratoires-20261120",
+   "t": {
+    "fr": "Modernisation industrielle : L'Oréal mise sur l'innovation en France",
+    "en": "Industrial Modernization: L'Oréal Bets on Innovation in France"
+   },
+   "s": {
+    "fr": "Le leader mondial des cosmétiques prévoit d'investir près de 300 millions d'euros sur le sol français avant 2029. Ces sommes financeront la transformation écologique des usines ainsi que l'intégration de l'intelligence artificielle dans ses laboratoires de recherche.",
+    "en": "The global cosmetics giant plans to invest nearly 300 million euros in France prior to 2029. These funds will finance factory green initiatives and integrate artificial intelligence into research laboratories."
+   },
+   "d": {
+    "fr": "Les programmes de dépense en capital à long terme (CAPEX) sont suivis de près par les traders car ils démontrent la santé financière d'un groupe. L'adoption d'outils d'IA permet souvent d'accroître l'efficacité opérationnelle et d'améliorer la rentabilité future.",
+    "en": "Long-term capital expenditure (CAPEX) programs are closely monitored by traders as they indicate strong corporate health. Adopting AI tools frequently enhances operational efficiency and boosts long-term profitability."
+   },
+   "v": [
+    [
+     "Dépenses d'investissement",
+     "Capital expenditure"
+    ],
+    [
+     "Recherche et développement",
+     "Research and development"
+    ],
+    [
+     "Gain d'efficacité",
+     "Efficiency gain"
+    ],
+    [
+     "Rentabilité",
+     "Profitability"
+    ]
+   ],
+   "q": {
+    "fr": "Quel message envoie une hausse des investissements dans les laboratoires de recherche ?",
+    "en": "What message does an increase in research lab investments convey?"
+   },
+   "r": {
+    "fr": "Elle indique que l'entreprise dispose d'une trésorerie suffisante et cherche à protéger sa position dominante sur le marché à long terme.",
+    "en": "It shows the company maintains solid cash reserves and aims to protect its dominant market position over the long run."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-20-reglementation-les-decouverts-assimiles-",
+   "src": "Le Monde",
+   "date": "2026-11-20",
+   "url": "https://www.lemonde.fr/argent/article/2026/11/20/les-decouverts-bancaires-de-moins-de-200-euros-desormais-consideres-comme-des-credits-a-la-consommation_6813600_1657007.html",
+   "t": {
+    "fr": "Réglementation : les découverts assimilés à des crédits à la consommation",
+    "en": "Regulation: Overdrafts Reclassified as Consumer Credit"
+   },
+   "s": {
+    "fr": "Dès le 20 novembre, les sommes dues au titre d'un découvert bancaire inférieur à 200 euros entrent dans la catégorie des crédits à la consommation. Les institutions bancaires doivent désormais vérifier au préalable la capacité financière de leurs clients avant toute autorisation.",
+    "en": "Starting November 20, bank overdraft balances under 200 euros fall under consumer credit regulations. Banking institutions must now assess customer solvency prior to granting any overdraft allowance."
+   },
+   "d": {
+    "fr": "Un durcissement des normes réglementaires impose des contraintes opérationnelles supplémentaires aux banques, ce qui peut impacter leurs revenus. Pour un trader, l'analyse des réformes bancaires est essentielle car la conformité juridique influence le profil de risque d'un secteur.",
+    "en": "Tighter regulatory compliance imposes added operational costs on banks, potentially impacting earnings. For a trader, analyzing banking reforms is essential because legal changes alter a sector's risk profile."
+   },
+   "v": [
+    [
+     "Découvert bancaire",
+     "Bank overdraft"
+    ],
+    [
+     "Examen de solvabilité",
+     "Solvency assessment"
+    ],
+    [
+     "Crédit à la consommation",
+     "Consumer credit"
+    ],
+    [
+     "Risque de défaillance",
+     "Default risk"
+    ]
+   ],
+   "q": {
+    "fr": "Comment un contrôle préalable de solvabilité protège-t-il les banques ?",
+    "en": "How does a prior solvency check protect banks?"
+   },
+   "r": {
+    "fr": "Il limite les impayés en évitant d'accorder du crédit à des emprunteurs présentant un risque élevé de non-remboursement.",
+    "en": "It restricts bad debts by preventing credit issuance to borrowers with a high risk of non-repayment."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-19-l-entreprise-d-intelligence-artificielle",
    "src": "franceinfo",
@@ -1268,141 +1403,6 @@
    "r": {
     "fr": "Ces marques permettent de préserver des marges élevées sans reposer uniquement sur une guerre des prix avec la concurrence.",
     "en": "These brands make it possible to maintain high margins without relying solely on price wars against rivals."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-06-degringolade-des-marches-asiatiques-suit",
-   "src": "Le Figaro",
-   "date": "2026-11-06",
-   "url": "https://www.lefigaro.fr/conjoncture/le-nikkei-chute-de-plus-de-5-apres-la-degringolade-des-valeurs-technologiques-americaines-20261106",
-   "t": {
-    "fr": "Dégringolade des marchés asiatiques suite à la chute de la tech américaine",
-    "en": "Asian markets plunge following the crash of American tech stocks"
-   },
-   "s": {
-    "fr": "Les Bourses de Tokyo et de Séoul ont fortement chuté après la baisse des valeurs technologiques aux États-Unis. Les investisseurs craignent que les résultats des élections américaines ne freinent les investissements dans les centres de données dédiés à l'intelligence artificielle.",
-    "en": "The stock exchanges in Tokyo and Seoul dropped sharply following the decline of tech stocks in the United States. Investors fear that the US election results could slow down investments in data centers dedicated to artificial intelligence."
-   },
-   "d": {
-    "fr": "En trading, on appelle cela un effet de contagion : un marché majeur influence directement les autres à l'international. Les anticipations politiques modifient rapidement la confiance des investisseurs sur un secteur porteur.",
-    "en": "In trading, this is called a contagion effect: a major market directly influences others internationally. Political expectations quickly alter investor confidence in a promising sector."
-   },
-   "v": [
-    [
-     "valeurs technologiques",
-     "tech stocks"
-    ],
-    [
-     "investissements",
-     "investments"
-    ],
-    [
-     "marchés",
-     "markets"
-    ],
-    [
-     "valeur",
-     "value"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi les marchés asiatiques ont-ils chuté ?",
-    "en": "Why did Asian markets fall?"
-   },
-   "r": {
-    "fr": "À cause de la baisse des valeurs technologiques américaines et des craintes liées aux élections.",
-    "en": "Because of the drop in American tech stocks and election-related fears."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-06-anthropic-ajuste-ses-ambitions-pour-son-",
-   "src": "Le Figaro",
-   "date": "2026-11-06",
-   "url": "https://www.lefigaro.fr/secteur/high-tech/ia-anthropic-pourrait-revoir-a-la-baisse-ses-ambitions-boursieres-20261106",
-   "t": {
-    "fr": "Anthropic ajuste ses ambitions pour son introduction en Bourse",
-    "en": "Anthropic adjusts its ambitions for its IPO"
-   },
-   "s": {
-    "fr": "Le créateur de l'assistant Claude envisage de revoir ses objectifs boursiers à la baisse. Il visait initialement une entrée sur les marchés historiques avec une levée de fonds record.",
-    "en": "The creator of the Claude assistant is considering lowering its stock market targets. It initially aimed for a historic market entry with a record fundraising."
-   },
-   "d": {
-    "fr": "Lorsqu'une entreprise prépare son introduction en Bourse, elle ajuste son évaluation selon l'appétit du marché. Un retournement de tendance peut l'obliger à revoir ses ambitions financières à la baisse.",
-    "en": "When a company prepares its IPO, it adjusts its valuation according to market appetite. A trend reversal may force it to lower its financial ambitions."
-   },
-   "v": [
-    [
-     "introduction en Bourse",
-     "IPO"
-    ],
-    [
-     "lever des fonds",
-     "raise funds"
-    ],
-    [
-     "action",
-     "share"
-    ],
-    [
-     "capitalisation",
-     "market cap"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'objectif initial d'Anthropic pour son introduction en Bourse ?",
-    "en": "What was Anthropic's initial goal for its IPO?"
-   },
-   "r": {
-    "fr": "Lever jusqu'à 100 milliards de dollars lors de son entrée sur les marchés.",
-    "en": "To raise up to 100 billion dollars upon entering the markets."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-06-securisation-des-cryptomonnaies-apres-un",
-   "src": "Le Monde",
-   "date": "2026-11-06",
-   "url": "https://www.lemonde.fr/argent/article/2026/11/06/cryptomonnaies-apres-le-vol-historique-chez-binance-quel-moyen-pour-conserver-ses-actifs-en-securite_6807720_1657007.html",
-   "t": {
-    "fr": "Sécurisation des cryptomonnaies après un vol majeur chez Binance",
-    "en": "Securing cryptocurrencies after a major theft at Binance"
-   },
-   "s": {
-    "fr": "Suite à un vol historique sur la plateforme Binance, la question de la conservation des actifs numériques se pose. Les détenteurs de cryptos doivent choisir entre la garde autonome et le recours à des intermédiaires.",
-    "en": "Following a historic theft on the Binance platform, the question of storing digital assets arises. Crypto holders must choose between self-custody and using intermediaries."
-   },
-   "d": {
-    "fr": "En gestion d'actifs numériques, la sécurité est un paramètre primordial pour éviter la perte totale de son capital. Chaque méthode de stockage comporte des risques spécifiques qu'un trader doit anticiper.",
-    "en": "In digital asset management, security is a paramount parameter to avoid the total loss of capital. Each storage method carries specific risks that a trader must anticipate."
-   },
-   "v": [
-    [
-     "cryptomonnaies",
-     "cryptocurrencies"
-    ],
-    [
-     "actifs",
-     "assets"
-    ],
-    [
-     "intermédiaire",
-     "intermediary"
-    ],
-    [
-     "risque",
-     "risk"
-    ]
-   ],
-   "q": {
-    "fr": "Quelles sont les deux options pour conserver ses cryptomonnaies ?",
-    "en": "What are the two options for storing cryptocurrencies?"
-   },
-   "r": {
-    "fr": "Assurer la sécurité soi-même ou déléguer à des intermédiaires.",
-    "en": "Ensuring security oneself or delegating to intermediaries."
    },
    "ia": "Gemini"
   }
