@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-20T14:20:09.014Z",
+ "updated": "2026-11-23T16:26:25.910Z",
  "snap": {
-  "date": "2026-11-20",
+  "date": "2026-11-23",
   "items": [
    {
     "n": "CAC 40",
-    "v": "7 962",
-    "c": "−1,47 %"
+    "v": "8 053",
+    "c": "+1,59 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 176",
-    "c": "−2,02 %"
+    "v": "7 259",
+    "c": "+5,05 %"
    },
    {
     "n": "Nasdaq",
-    "v": "23 879",
-    "c": "−2,25 %"
+    "v": "24 181",
+    "c": "+6,91 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "30,08",
-    "c": "+5,77 %"
+    "v": "27,44",
+    "c": "−23,54 %"
    },
    {
     "n": "Brent",
-    "v": "89,0 $",
-    "c": "−3,21 %"
+    "v": "86,5 $",
+    "c": "−6,57 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "82,3 $",
-    "c": "−1,08 %"
+    "v": "80,2 $",
+    "c": "−4,50 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 568 $",
-    "c": "−3,18 %"
+    "v": "3 670 $",
+    "c": "+4,39 %"
    },
    {
     "n": "Bitcoin",
-    "v": "61 826 $",
-    "c": "−0,12 %"
+    "v": "62 657 $",
+    "c": "+2,44 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,98 %",
-    "c": "−0,07 pt"
+    "v": "4,93 %",
+    "c": "+0,02 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,099",
-    "c": "+0,17 %"
+    "v": "1,089",
+    "c": "−0,69 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-23-jensen-huang-de-retour-chez-nvidia-l-act",
+   "src": "Le Figaro",
+   "date": "2026-11-23",
+   "url": "https://www.lefigaro.fr/secteur/high-tech/retour-de-jensen-huang-a-la-tete-de-nvidia-l-action-du-geant-americain-s-envole-de-pres-de-30-a-wall-street-20261123",
+   "t": {
+    "fr": "Jensen Huang de retour chez Nvidia, l'action grimpe",
+    "en": "Jensen Huang returns to Nvidia, stock soars"
+   },
+   "s": {
+    "fr": "Le conseil d'administration a réintégré Jensen Huang à la tête de Nvidia, dix jours après sa démission. L'annonce a immédiatement fait bondir le cours de l'action de près de 30 % à Wall Street.",
+    "en": "The board reinstated Jensen Huang as CEO of Nvidia ten days after his resignation. The news instantly pushed Nvidia’s share price up by roughly 30 % on the NYSE."
+   },
+   "d": {
+    "fr": "Un retour de dirigeant emblématique crée un effet de confiance qui attire les acheteurs à court terme. Les traders surveillent ce type de surprise pour profiter du rebond rapide du cours.",
+    "en": "A high‑profile CEO comeback generates a confidence boost that draws short‑term buyers. Traders watch such surprises to capture the quick price rally."
+   },
+   "v": [
+    [
+     "action",
+     "stock"
+    ],
+    [
+     "capitalisation boursière",
+     "market capitalization"
+    ],
+    [
+     "directeur général",
+     "CEO"
+    ],
+    [
+     "secteur technologique",
+     "technology sector"
+    ]
+   ],
+   "q": {
+    "fr": "Comment la réintégration d’un dirigeant peut‑elle influencer le cours d’une action ?",
+    "en": "How can the reinstatement of a CEO affect a stock’s price?"
+   },
+   "r": {
+    "fr": "Elle signale une stabilité de la stratégie et rassure les investisseurs, ce qui peut déclencher un afflux d’achats et faire monter le cours.",
+    "en": "It signals strategic continuity and reassures investors, often triggering buying pressure that lifts the price."
+   },
+   "ia": "Groq"
+  },
+  {
+   "id": "2026-11-23-mise-en-service-de-la-ligne-18-du-grand-",
+   "src": "Le Monde",
+   "date": "2026-11-23",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/23/grand-paris-express-valerie-pecresse-juge-tres-compromise-la-mise-en-service-de-la-ligne-18-avant-la-fin-de-l-annee_6814396_3234.html",
+   "t": {
+    "fr": "Mise en service de la ligne 18 du Grand Paris Express très compromise",
+    "en": "Line 18 of Grand Paris Express launch highly compromised"
+   },
+   "s": {
+    "fr": "Valérie Pécresse estime que la mise en service de la ligne 18 avant la fin de l’année est « très compromise ». Le retard est attribué à des difficultés d’exploitation et à un logiciel d’automatisation d’Alstom.",
+    "en": "Valérie Pécresse says the opening of Line 18 before year‑end is “highly compromised”. Delays stem from operational issues and an Alstom automation software problem."
+   },
+   "d": {
+    "fr": "Les retards d’infrastructures peuvent peser sur les actions des entreprises de construction et de transport. Les investisseurs surveillent les calendriers pour ajuster leurs positions.",
+    "en": "Infrastructure delays can weigh on construction and transport stocks. Investors track project timelines to adjust their holdings."
+   },
+   "v": [
+    [
+     "chantier",
+     "construction site"
+    ],
+    [
+     "retard",
+     "delay"
+    ],
+    [
+     "logiciel d’automatisation",
+     "automation software"
+    ],
+    [
+     "investisseurs",
+     "investors"
+    ]
+   ],
+   "q": {
+    "fr": "Quel impact un retard majeur sur un projet de transport peut‑il avoir sur les marchés ?",
+    "en": "What impact can a major delay in a transport project have on the markets?"
+   },
+   "r": {
+    "fr": "Il peut entraîner une baisse des cours des entreprises impliquées et augmenter la volatilité du secteur, les analystes révisant leurs prévisions de revenus.",
+    "en": "It may cause share prices of involved firms to fall and raise sector volatility as analysts downgrade revenue forecasts."
+   },
+   "ia": "Groq"
+  },
+  {
+   "id": "2026-11-23-la-finlande-fer-de-lance-europeen-des-ma",
+   "src": "Le Figaro",
+   "date": "2026-11-23",
+   "url": "https://www.lefigaro.fr/conjoncture/nous-sommes-le-seul-pays-en-europe-qui-possede-lithium-cobalt-nickel-et-terres-rares-la-finlande-fer-de-lance-en-europe-des-materiaux-critiques-20261123",
+   "t": {
+    "fr": "La Finlande, fer de lance européen des matières critiques",
+    "en": "Finland, Europe's leader in critical raw materials"
+   },
+   "s": {
+    "fr": "La Finlande possède du lithium, du cobalt, du nickel et des terres rares, faisant d’elle le seul pays européen à couvrir l’ensemble de ces ressources stratégiques. Elle accueille plusieurs projets soutenus par l’UE.",
+    "en": "Finland holds lithium, cobalt, nickel and rare earths, making it the only European nation with the full suite of these strategic resources. It hosts several EU‑backed projects."
+   },
+   "d": {
+    "fr": "Les matières critiques sont essentielles pour les technologies vertes, ce qui crée une demande soutenue et des prix volatils. Les traders surveillent ces marchés pour anticiper les mouvements liés aux politiques environnementales.",
+    "en": "Critical minerals are key for green tech, driving steady demand and price volatility. Traders watch these markets to anticipate moves tied to environmental policies."
+   },
+   "v": [
+    [
+     "matières critiques",
+     "critical minerals"
+    ],
+    [
+     "lithium",
+     "lithium"
+    ],
+    [
+     "cobalt",
+     "cobalt"
+    ],
+    [
+     "marché des matières premières",
+     "commodities market"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les investisseurs s’intéressent‑ils aux pays producteurs de matières critiques ?",
+    "en": "Why do investors focus on countries that produce critical minerals?"
+   },
+   "r": {
+    "fr": "Ces pays offrent un approvisionnement stratégique pour les technologies d’avenir, ce qui peut générer des marges élevées et des opportunités de croissance pour les entreprises du secteur.",
+    "en": "They provide strategic supply for future technologies, potentially yielding high margins and growth opportunities for sector firms."
+   },
+   "ia": "Groq"
+  },
   {
    "id": "2026-11-20-reallocation-d-actifs-de-l-automobile-ve",
    "src": "Le Monde",
@@ -1268,141 +1403,6 @@
    "r": {
     "fr": "L'accord signé permet d'alléger la dette globale de l'entreprise de 600 millions d'euros.",
     "en": "The signed agreement reduces the company's total debt load by 600 million euros."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-09-enquete-interne-sur-le-patron-de-nvidia-",
-   "src": "Le Monde",
-   "date": "2026-11-09",
-   "url": "https://www.lemonde.fr/economie/article/2026/11/09/le-patron-de-nvidia-jensen-huang-reconnait-avoir-eu-une-liaison-extraconjugale-avec-une-personne-consideree-comme-une-espionne-de-pekin_6808531_3234.html",
-   "t": {
-    "fr": "Enquête interne sur le patron de Nvidia et retombées boursières",
-    "en": "Internal probe into Nvidia CEO and market fallout"
-   },
-   "s": {
-    "fr": "Le dirigeant du groupe américain Nvidia fait l'objet d'une procédure d'enquête interne à la suite d'une relation avec une femme suspectée d'espionnage. Cette affaire provoque des inquiétudes politiques aux États-Unis et alimente la volatilité sur le marché des composants pour l'intelligence artificielle.",
-    "en": "The head of US firm Nvidia is facing an internal investigation following a relationship with a suspected spy. This situation is sparking political concerns in the United States and driving volatility across the artificial intelligence chip market."
-   },
-   "d": {
-    "fr": "En trading, les turbulences liées aux dirigeants d'entreprises majeures peuvent créer des mouvements soudains sur leurs actions. Les tensions géopolitiques incitent souvent les traders à réduire leur prise de risque sur ces valeurs technologiques.",
-    "en": "In trading, turmoil surrounding top executives can trigger sudden price movements in their stocks. Geopolitical friction frequently prompts traders to lower their risk exposure on high-profile tech names."
-   },
-   "v": [
-    [
-     "capitalisation boursière",
-     "market capitalization"
-    ],
-    [
-     "action",
-     "stock"
-    ],
-    [
-     "volatilité",
-     "volatility"
-    ],
-    [
-     "semi-conducteur",
-     "semiconductor"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi la gouvernance d'une grande entreprise technologique influe-t-elle sur le cours de son action ?",
-    "en": "Why does corporate governance at a major tech firm impact its stock price?"
-   },
-   "r": {
-    "fr": "Une crise de gouvernance génère des incertitudes sur la direction stratégique et la stabilité future des bénéfices.",
-    "en": "A governance crisis creates uncertainty regarding strategic direction and the future stability of earnings."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-08-divergences-majeures-sur-l-estimation-du",
-   "src": "Le Figaro",
-   "date": "2026-11-08",
-   "url": "https://www.lefigaro.fr/societes/72-8-milliards-d-euros-selon-edf-680-milliards-selon-greenpeace-quel-est-le-veritable-cout-des-six-prochains-reacteurs-nucleaires-20261108",
-   "t": {
-    "fr": "Divergences majeures sur l'estimation du coût des futurs réacteurs nucléaires",
-    "en": "Major discrepancies in estimated costs for future nuclear reactors"
-   },
-   "s": {
-    "fr": "L'évaluation budgétaire pour la réalisation de six nouveaux réacteurs nucléaires fait s'opposer EDF et Greenpeace. L'électricien table sur un montant de 72,8 milliards d'euros, tandis que l'organisation écologiste évalue ce projet à 680 milliards d'euros.",
-    "en": "Budget estimates for building six new nuclear reactors differ sharply between EDF and Greenpeace. The utility company projects a cost of 72.8 billion euros, whereas the environmental group estimates it at 680 billion euros."
-   },
-   "d": {
-    "fr": "Pour un analyste ou un trader, d'importants écarts de chiffrage mettent en évidence le risque d'un dépassement de budget sur des projets d'infrastructure lourds. Ces incertitudes ont une influence directe sur l'appréciation du niveau d'endettement d'une société.",
-    "en": "For an analyst or trader, wide cost discrepancies highlight the risk of budget overruns on heavy infrastructure projects. Such uncertainties directly influence how a company's debt profile is evaluated."
-   },
-   "v": [
-    [
-     "dépenses d'investissement",
-     "capital expenditures"
-    ],
-    [
-     "risque de dépassement de coût",
-     "cost overrun risk"
-    ],
-    [
-     "évaluation d'entreprise",
-     "valuation"
-    ],
-    [
-     "gestion de la dette",
-     "debt management"
-    ]
-   ],
-   "q": {
-    "fr": "De quelle manière l'imprécision du coût d'un projet industriel peut-elle impacter une valeur boursière ?",
-    "en": "How can uncertainty surrounding an industrial project's cost impact a stock value?"
-   },
-   "r": {
-    "fr": "Le risque de hausse non maîtrisée des coûts réduit la rentabilité attendue et pèse négativement sur le bilan financier.",
-    "en": "The risk of unmanaged cost growth lowers expected profitability and places a strain on the financial balance sheet."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-08-croissance-soutenue-de-l-oreal-sur-le-ma",
-   "src": "Le Figaro",
-   "date": "2026-11-08",
-   "url": "https://www.lefigaro.fr/societes/20-millions-de-colis-120-millions-de-consommateurs-comment-l-oreal-a-repris-des-couleurs-en-chine-20261108",
-   "t": {
-    "fr": "Croissance soutenue de L'Oréal sur le marché cosmétique en Chine",
-    "en": "Sustained growth for L'Oréal in the Chinese cosmetics market"
-   },
-   "s": {
-    "fr": "Grâce aux performances de son segment haut de gamme, L'Oréal enregistre une progression trois fois supérieure à celle du marché en Chine. Cette performance intervient dans un secteur local extrêmement concurrentiel qui compte 15 000 marques.",
-    "en": "Boosted by its premium segment performance, L'Oréal is growing three times faster than the broader Chinese market. This achievement comes in a highly competitive local landscape featuring 15,000 brands."
-   },
-   "d": {
-    "fr": "En analyse boursière, surveiller le positionnement de marque permet d'évaluer la capacité d'un groupe à maintenir sa rentabilité dans un environnement saturé. Un solide pouvoir de fixation des prix protège les marges opérationnelles des entreprises.",
-    "en": "In stock analysis, monitoring brand positioning helps gauge a firm's ability to sustain profitability in a crowded market. Strong pricing power helps shield a company's operating margins."
-   },
-   "v": [
-    [
-     "part de marché",
-     "market share"
-    ],
-    [
-     "pouvoir de fixation des prix",
-     "pricing power"
-    ],
-    [
-     "marge opérationnelle",
-     "operating margin"
-    ],
-    [
-     "secteur grand public",
-     "consumer goods sector"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi la possession de marques de prestige constitue-t-elle un avantage dans un marché très concurrentiel ?",
-    "en": "Why is owning premium brands an advantage in a highly competitive market?"
-   },
-   "r": {
-    "fr": "Ces marques permettent de préserver des marges élevées sans reposer uniquement sur une guerre des prix avec la concurrence.",
-    "en": "These brands make it possible to maintain high margins without relying solely on price wars against rivals."
    },
    "ia": "Gemini"
   }
