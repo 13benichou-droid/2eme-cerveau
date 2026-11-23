@@ -4513,11 +4513,11 @@ function jReport(dk,key){const d=jDateOf(dk),a=key.indexOf("|"),kind=key.slice(0
   return jOut(dk,key)}
 const jCounts=k=>k==="hab"||k==="pn";
 /* 2.43.0 : à quelle heure mettre mon réveil ? (cycles de 90 min + 15 min pour s'endormir, et l'heure du 1er cours) */
-function sleepP(){let o={};try{o=JSON.parse(localStorage.getItem("cerveau-sleep")||"{}")||{}}catch(e){}return{bed:o.bed||"23:00",prep:o.prep!=null?+o.prep:30,traj:o.traj!=null?+o.traj:22}}
+function sleepP(){let o={};try{o=JSON.parse(localStorage.getItem("cerveau-sleep")||"{}")||{}}catch(e){}return{bed:o.bed||"23:00",start:o.start||"",prep:o.prep!=null?+o.prep:30,traj:o.traj!=null?+o.traj:22}}
 function sleepSave(o){try{localStorage.setItem("cerveau-sleep",JSON.stringify({...sleepP(),...o}))}catch(e){}}
 function sleepRes(){const P=sleepP(),hm=s=>{const [a,b]=String(s).split(":").map(Number);return(a||0)*60+(b||0)},f=m=>{m=((Math.round(m)%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")};
   const now=new Date(),tg=now.getHours()<5?today():add(today(),1),tk=dkey(tg),L=jLessons(tk).map(c=>new Date(c.d)).filter(x=>!isNaN(x)).sort((a,b)=>a-b);
-  let bed=hm(P.bed);if(bed<12*60)bed+=1440;const st=bed+15,first=L.length?L[0].getHours()*60+L[0].getMinutes()+1440:null,late=first!=null?first-P.traj-P.prep-5:null;
+  let bed=hm(P.bed);if(bed<12*60)bed+=1440;const st=bed+15,first=P.start?hm(P.start)+1440:L.length?L[0].getHours()*60+L[0].getMinutes()+1440:null,late=first!=null?first-P.traj-P.prep-5:null;
   const C=[6,5,4].map(c=>({c,w:st+c*90}));let best=late!=null?C.find(x=>x.w<=late):C.find(x=>x.c===6),warn="";
   if(late!=null&&!best){best={c:0,w:late};warn=`Moins de 6 h de sommeil : si tu peux, couche-toi avant ${f(late-4*90-15)}.`}
   const dur=best.w-st,jr=JOURS[tg.getDay()].toLowerCase();
@@ -4525,14 +4525,16 @@ function sleepRes(){const P=sleepP(),hm=s=>{const [a,b]=String(s).split(":").map
     <p class="small" style="margin:0">${best.c?`${best.c} cycles de sommeil · ${fdur(dur)}`:`${fdur(dur)} de sommeil seulement`}${first!=null?` · cours ${jr} à ${f(first)}, départ à ${f(first-P.traj-5)}`:` · pas de cours ${jr}`}</p>
     ${late!=null&&best.c?`<p class="small muted" style="margin:0">Au plus tard ${f(late)} : se réveiller en fin de cycle évite d'être dans le brouillard.</p>`:""}
     ${warn?`<p class="small" style="margin:0;color:#e5484d">${warn}</p>`:""}
+    ${late!=null?`<p class="small" style="margin:0">🛏️ Pour dormir <b>9 h</b> (6 cycles, l'idéal : 8 à 10 h à ton âge), couche-toi à <b>${f(late-6*90-15)}</b> · pour 7 h 30 au minimum : <b>${f(late-5*90-15)}</b>.</p>`:""}
     <p class="small muted" style="margin:0">Autres réveils en fin de cycle : ${C.filter(x=>x.c!==best.c).map(x=>`${f(x.w)} (${x.c} cycles)${late!=null&&x.w>late?" ⚠ trop tard":""}`).join(" · ")}</p>`}
 function sleepCard(){const P=sleepP();return`<div class="card stack" style="gap:8px"><p class="label" style="margin:0">😴 Mon réveil</p>
   <div class="row" style="gap:8px;flex-wrap:wrap;align-items:center"><label class="row" style="gap:6px"><span class="small">Je me couche à</span><input class="field" type="time" data-sleep="bed" value="${esc(P.bed)}" style="width:auto"></label></div>
   <div id="sleepres" class="stack" style="gap:4px">${sleepRes()}</div>
   <details><summary class="small muted" style="cursor:pointer">Réglages (préparation, trajet)</summary><div class="row" style="gap:8px;flex-wrap:wrap;margin-top:6px">
+    <label class="row" style="gap:6px"><span class="small">Je commence à</span><input class="field" type="time" data-sleep="start" value="${esc(P.start)}" style="width:auto"></label><span class="small muted" style="flex-basis:100%">Laisse vide pour prendre ton 1er cours sur Pronote.</span>
     <label class="row" style="gap:6px"><span class="small">Préparation (min)</span><input class="field" type="number" inputmode="numeric" min="0" step="5" data-sleep="prep" value="${P.prep}" style="width:5em"></label>
     <label class="row" style="gap:6px"><span class="small">Trajet (min)</span><input class="field" type="number" inputmode="numeric" min="0" step="1" data-sleep="traj" value="${P.traj}" style="width:5em"></label></div></details></div>`}
-document.addEventListener("input",e=>{const i=e.target.closest&&e.target.closest("[data-sleep]");if(!i)return;sleepSave({[i.dataset.sleep]:i.dataset.sleep==="bed"?i.value:+i.value||0});const r=document.getElementById("sleepres");if(r)r.innerHTML=sleepRes()});
+document.addEventListener("input",e=>{const i=e.target.closest&&e.target.closest("[data-sleep]");if(!i)return;sleepSave({[i.dataset.sleep]:i.dataset.sleep==="bed"||i.dataset.sleep==="start"?i.value:+i.value||0});const r=document.getElementById("sleepres");if(r)r.innerHTML=sleepRes()});
 /* enlever un bloc de la journée (il retourne dans la palette) */
 function jOut(dk,key){const d=jDateOf(dk),j=jDayDoc(dk),a=key.indexOf("|"),kind=key.slice(0,a),ref=key.slice(a+1),pin={...(j.pin||{})};delete pin[key];j.pin=pin;
   if(kind==="hab")j.plan=planOf(d).filter(h=>h!==ref);
@@ -9565,7 +9567,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.46.2";
+const APP_VERSION = "2.46.3";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
