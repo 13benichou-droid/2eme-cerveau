@@ -3547,7 +3547,12 @@ function objFin(sim){
   return{reg,lvl,done,nd,xp,s:0.7*reg+0.3*lvl};
 }
 function objScore(o){
-  o=o||{};objCfg();const N=objNotes(),H=objHab(o.hab||0),F=objFin(o);
+  o=o||{};objCfg();let N=objNotes();const H=objHab(o.hab||0),F=objFin(o);
+  /* 2.46.4 : début de trimestre sans notes → on garde le dernier score de notes connu, au lieu de compter 0 */
+  if(N)try{localStorage.setItem("cerveau-lastN",JSON.stringify(N))}catch(e){}
+  else{let L=null;try{L=JSON.parse(localStorage.getItem("cerveau-lastN")||"null")}catch(e){}
+    if(!L){const ks=Object.keys(S.objectif||{}).filter(k=>S.objectif[k]&&S.objectif[k].n>0).sort();if(ks.length)L={s:S.objectif[ks[ks.length-1]].n,g:null,gw:null,maths:null}}
+    if(L&&L.s>0)N={...L,stale:1}}
   const total=OBJ_W.n*(N?N.s:0)+OBJ_W.h*H.s+OBJ_W.f*F.s;
   return{total,N,H,F};
 }
@@ -3557,7 +3562,8 @@ function objActions(sc){
   if(rest>0){const d=objScore({hab:rest}).total-sc.total;if(d>0.04)out.push({g:d,t:`Coche ${rest>1?"les "+rest+" tâches qui restent":"la tâche qui reste"} aujourd'hui`,p:"hab"})}
   if(!prog().days[dkey(t)]){const d=objScore({defi:true}).total-sc.total;if(d>0.04)out.push({g:d,t:"Fais le défi du jour du Trading Lab",p:"fin"})}
   const a=S.jeu.actu;if(a&&a.date===dkey(t)&&!prog().actu[a.date]){const d=objScore({actu:true}).total-sc.total;if(d>0.04)out.push({g:d,t:"Réponds à la question d'actu (Finance)",p:"fin"})}
-  if(!sc.N)out.push({g:null,t:"Relie Pronote : tes notes comptent pour 50 % du score",p:"pron"});
+  if(sc.N&&sc.N.stale)out.push({g:null,t:"Nouveau trimestre sans notes pour l'instant : ton score garde tes dernières notes jusqu'aux premières du trimestre.",p:"pron"});
+  else if(!sc.N)out.push({g:null,t:"Relie Pronote : tes notes comptent pour 50 % du score",p:"pron"});
   else{
     if(sc.N.g<OBJ_CIBLE)out.push({g:OBJ_W.n*0.7/(OBJ_CIBLE-10),t:`+1 point de moyenne générale (${pct1(sc.N.g)} → ${pct1(Math.min(20,sc.N.g+1))})`,per:true,p:"pron"});
     if(sc.N.maths!=null&&sc.N.maths<OBJ_CIBLE)out.push({g:OBJ_W.n*0.3/(OBJ_CIBLE-10),t:`+1 point de moyenne en maths (${pct1(sc.N.maths)} → ${pct1(Math.min(20,sc.N.maths+1))})`,per:true,p:"pron"});
@@ -3603,7 +3609,7 @@ function pageObj(){
     ${acts.length?`<ul class="objact">${acts.map(a=>`<li><button data-page="${a.p}"><span>${esc(a.t)}</span>${a.g!=null?`<b class="num">+${pct1(a.g)} %${a.per?"":""}</b>`:""}</button></li>`).join("")}</ul>`:`<p>Tout est fait pour aujourd'hui. Il ne reste qu'à recommencer demain. 💪</p>`}</div>
   <div class="card objq"><p>« ${esc(q[0])} »</p><span class="muted small">${esc(q[1])}</span></div>
   <div class="card stack" style="gap:14px"><p class="label" style="margin:0">Tes 3 piliers</p>
-    ${bar("Notes",OBJ_W.n,N?N.s:0,N?`Moyenne générale ${pct1(N.g)}${N.gw!=null?` · pondérée comme au bac ${pct1(N.gw)}`:""}${N.maths!=null?` · maths ${pct1(N.maths)}`:""} · repère visé : ${OBJ_CIBLE}${N.periode?" · "+esc(N.periode):""}`:"Relie Pronote pour compter tes notes.","pron")}
+    ${bar("Notes",OBJ_W.n,N?N.s:0,N&&N.stale&&N.g==null?`Dernières notes connues (le nouveau trimestre n'en a pas encore)`:N?`${N.stale?"Trimestre précédent · ":""}Moyenne générale ${pct1(N.g)}${N.gw!=null?` · pondérée comme au bac ${pct1(N.gw)}`:""}${N.maths!=null?` · maths ${pct1(N.maths)}`:""} · repère visé : ${OBJ_CIBLE}${N.periode?" · "+esc(N.periode):""}`:"Relie Pronote pour compter tes notes.","pron")}
     ${bar("Régularité",OBJ_W.h,H.s,`${Math.round(H.rate*100)} % de ton travail prévu fait depuis le début · série de ${H.streak} jour${H.streak>1?"s":""} parfait${H.streak>1?"s":""}`,"hab")}
     ${bar("Finance",OBJ_W.f,F.s,`${F.done} défi${F.done>1?"s":""} sur ${F.nd} jour${F.nd>1?"s":""} · ${esc(lv.name)} (${F.xp} XP)`,"fin")}</div>
   <div class="card stack" style="gap:8px"><p class="label" style="margin:0">Comment ton % est calculé</p><div class="objw"><span>Notes ${OBJ_W.n} % · régularité ${OBJ_W.h} % · finance ${OBJ_W.f} % · moyenne visée ${pct1(OBJ_CIBLE)}</span><span class="muted">Dans la régularité : ${esc(objWTxt())}.</span></div><div><button class="ghost on" data-page="idees">💡 Changer avec une suggestion</button></div></div>
@@ -9567,7 +9573,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.46.3";
+const APP_VERSION = "2.46.4";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
