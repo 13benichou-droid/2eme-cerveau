@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-23T16:26:25.910Z",
+ "updated": "2026-11-24T16:20:19.124Z",
  "snap": {
-  "date": "2026-11-23",
+  "date": "2026-11-24",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 053",
-    "c": "+1,59 %"
+    "v": "8 036",
+    "c": "−0,11 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 259",
-    "c": "+5,05 %"
+    "v": "7 152",
+    "c": "−1,18 %"
    },
    {
     "n": "Nasdaq",
-    "v": "24 181",
-    "c": "+6,91 %"
+    "v": "23 495",
+    "c": "−2,47 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "27,44",
-    "c": "−23,54 %"
+    "v": "28,94",
+    "c": "+8,72 %"
    },
    {
     "n": "Brent",
-    "v": "86,5 $",
-    "c": "−6,57 %"
+    "v": "86,8 $",
+    "c": "−2,93 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "80,2 $",
-    "c": "−4,50 %"
+    "v": "80,0 $",
+    "c": "−0,26 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 670 $",
-    "c": "+4,39 %"
+    "v": "3 567 $",
+    "c": "−2,30 %"
    },
    {
     "n": "Bitcoin",
-    "v": "62 657 $",
-    "c": "+2,44 %"
+    "v": "59 488 $",
+    "c": "−2,81 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,93 %",
-    "c": "+0,02 pt"
+    "v": "4,89 %",
+    "c": "−0,03 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,089",
-    "c": "−0,69 %"
+    "v": "1,098",
+    "c": "+0,04 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-24-montagnes-russes-boursieres-pour-l-actio",
+   "src": "Le Figaro",
+   "date": "2026-11-24",
+   "url": "https://www.lefigaro.fr/secteur/high-tech/2000-milliards-de-dollars-partis-en-fumee-puis-un-rebond-de-36-en-quelques-heures-l-incroyable-mois-de-l-action-nvidia-20261123",
+   "t": {
+    "fr": "Montagnes russes boursières pour l'action Nvidia",
+    "en": "Stock market rollercoaster for Nvidia shares"
+   },
+   "s": {
+    "fr": "Au cours du mois de novembre 2026, le cours du géant des puces informatiques Nvidia a subi d'importantes secousses. Après l'abandon temporaire de son poste par son cofondateur, l'action a brusquement grimpé de 31 % dès l'annonce de sa réintégration.",
+    "en": "During November 2026, the share price of chip giant Nvidia experienced major turbulence. Following the temporary departure of its co-founder, the stock surged 31% as soon as his return was announced."
+   },
+   "d": {
+    "fr": "Cette vive réaction boursière montre l'impact direct des annonces de gouvernance sur la valeur perçue d'une entreprise par les investisseurs. Pour un apprenti trader, comprendre cette volatilité est essentiel car elle génère des opportunités rapides mais implique un risque élevé.",
+    "en": "This sharp market reaction shows how governance news directly impacts how investors value a company. For a novice trader, understanding this volatility is key as it creates fast opportunities alongside high risk."
+   },
+   "v": [
+    [
+     "Volatilité",
+     "Volatility"
+    ],
+    [
+     "Capitalisation boursière",
+     "Market capitalization"
+    ],
+    [
+     "Rebond boursier",
+     "Stock rebound"
+    ],
+    [
+     "Action",
+     "Share / Stock"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les marchés réagissent-ils si fort au retour d'un dirigeant historique ?",
+    "en": "Why do markets react so strongly to the return of a historic CEO?"
+   },
+   "r": {
+    "fr": "Les investisseurs lient souvent la performance future de l'entreprise à la vision du dirigeant, ce qui restaure immédiatement leur confiance.",
+    "en": "Investors often tie the company's future performance to the leader's vision, which instantly restores market confidence."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-24-sanofi-realise-son-plus-important-rachat",
+   "src": "Le Monde",
+   "date": "2026-11-24",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/24/sanofi-pret-a-debourser-37-6-milliards-d-euros-pour-l-americain-insmed-un-specialiste-du-traitement-des-maladies-respiratoires_6814758_3234.html",
+   "t": {
+    "fr": "Sanofi réalise son plus important rachat depuis 2004",
+    "en": "Sanofi completes its largest acquisition since 2004"
+   },
+   "s": {
+    "fr": "Le groupe pharmaceutique français Sanofi a conclu l'acquisition de la société américaine Insmed pour 37,6 milliards d'euros. Cette firme médicale possède un médicament générant plus d'un milliard de dollars par an ainsi que d'autres traitements prometteurs.",
+    "en": "French pharmaceutical group Sanofi has agreed to acquire US company Insmed for 37.6 billion euros. This biotech company holds a drug generating over one billion dollars annually alongside other promising treatments."
+   },
+   "d": {
+    "fr": "Les géants du secteur achètent fréquemment des biotechs innovantes pour renouveler leur portefeuille de produits et soutenir leur croissance future. L'annonce d'une telle transaction fait généralement grimper le cours de la cible et modifie la perception stratégique de l'acheteur.",
+    "en": "Industry giants frequently acquire innovative biotechs to refresh their product pipeline and fuel future growth. Announcing such a deal typically pushes up the target's share price and alters the buyer's strategic outlook."
+   },
+   "v": [
+    [
+     "Fusion-acquisition",
+     "Mergers and acquisitions"
+    ],
+    [
+     "Biotech",
+     "Biotech company"
+    ],
+    [
+     "Rachat d'entreprise",
+     "Corporate takeover"
+    ],
+    [
+     "Chiffre d'affaires",
+     "Revenue"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi un grand groupe paie-t-il une somme importante pour racheter une biotech ?",
+    "en": "Why does a large corporation pay a high sum to acquire a biotech firm?"
+   },
+   "r": {
+    "fr": "Cela lui permet de s'approprier directement des médicaments déjà rentables et des traitements innovants en cours de développement.",
+    "en": "It allows the buyer to directly acquire established profitable drugs and promising novel treatments under development."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-24-decollecte-importante-observee-sur-le-li",
+   "src": "franceinfo",
+   "date": "2026-11-24",
+   "url": "https://www.franceinfo.fr/economie/votre-argent/livret-a/la-baisse-de-l-encours-du-livret-a-en-2026-est-un-signal-reel-de-la-baisse-du-pouvoir-d-achat-des-francais-explique-un-economiste_8297811.html#xtor=RSS-3-%5Beconomie%5D",
+   "t": {
+    "fr": "Décollecte importante observée sur le Livret A en 2026",
+    "en": "Significant net outflow observed on Livret A in 2026"
+   },
+   "s": {
+    "fr": "En France, le Livret A a connu en 2026 son résultat annuel le plus bas depuis 2008. Les retraits de fonds effectués par les épargnants ont dépassé les d'épôts de près de 10 milliards d'euros depuis le début de l'année.",
+    "en": "In France, the Livret A registered its lowest annual result since 2008 in 2026. Fund withdrawals by savers exceeded deposits by nearly 10 billion euros since the beginning of the year."
+   },
+   "d": {
+    "fr": "Quand les ménages retirent massivement leur argent des placements sécurisés, cela traduit souvent une pression sur leur pouvoir d'achat quotidien. En macroéconomie, le trader analyse ce comportement de consommation pour anticiper la santé globale de l'économie.",
+    "en": "When households withdraw cash heavily from safe accounts, it often signals pressure on daily purchasing power. In macroeconomics, traders analyze consumer savings behavior to gauge broader economic health."
+   },
+   "v": [
+    [
+     "Décollecte",
+     "Net outflow"
+    ],
+    [
+     "Épargne",
+     "Savings"
+    ],
+    [
+     "Pouvoir d'achat",
+     "Purchasing power"
+    ],
+    [
+     "Encours",
+     "Outstanding balance"
+    ]
+   ],
+   "q": {
+    "fr": "Que révèle une supériorité des retraits sur les dépôts d'épargne d'un pays ?",
+    "en": "What does a higher volume of withdrawals over savings deposits reveal?"
+   },
+   "r": {
+    "fr": "Cela indique que les particuliers ont besoin de piocher dans leurs réserves financières pour couvrir leurs dépenses.",
+    "en": "It indicates that individuals need to tap into their financial reserves to meet their expenses."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-23-jensen-huang-de-retour-chez-nvidia-l-act",
    "src": "Le Figaro",
@@ -1268,141 +1403,6 @@
    "r": {
     "fr": "Il puise dans les stocks stratégiques de carburant.",
     "en": "It draws from strategic fuel reserves."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-10-projet-d-introduction-en-bourse-pour-l-e",
-   "src": "Le Figaro",
-   "date": "2026-11-10",
-   "url": "https://www.lefigaro.fr/secteur/high-tech/anthropic-prevoit-de-lever-jusqu-a-64-milliards-de-dollars-pour-son-entree-en-bourse-20261110",
-   "t": {
-    "fr": "Projet d'introduction en Bourse pour l'entreprise Anthropic",
-    "en": "Anthropic Prepares for Initial Public Offering"
-   },
-   "s": {
-    "fr": "La société créatrice de l'intelligence artificielle Claude envisage de lever jusqu'à 64 milliards de dollars à l'occasion de son entrée en Bourse. Sa valorisation estimée pourrait atteindre 1 400 milliards de dollars, un montant revu en baisse face aux turbulences récentes du secteur.",
-    "en": "The developer behind the Claude AI technology is planning an IPO to gather up to $64 billion. Its projected market valuation of $1.4 trillion reflects a downward revision amid current volatility in the artificial intelligence sector."
-   },
-   "d": {
-    "fr": "Une introduction en Bourse permet à une jeune entreprise de collecter de nouveaux capitaux auprès des investisseurs du monde entier. La baisse de l'estimation de valorisation indique une prudence accrue des marchés financiers quant aux perspectives d'avenir de la tech.",
-    "en": "An initial public offering allows a growing tech company to raise fresh capital directly from public investors. Lowering valuation targets signals increased market caution regarding future profitability in the tech sector."
-   },
-   "v": [
-    [
-     "Introduction en Bourse",
-     "Initial Public Offering (IPO)"
-    ],
-    [
-     "Levée de fonds",
-     "Fundraising"
-    ],
-    [
-     "Valorisation",
-     "Valuation"
-    ],
-    [
-     "Volatilité",
-     "Volatility"
-    ]
-   ],
-   "q": {
-    "fr": "Pour quelle raison la valorisation visée par Anthropic a-t-elle été ajustée à la baisse ?",
-    "en": "Why was Anthropic's estimated valuation revised downwards before its public listing?"
-   },
-   "r": {
-    "fr": "Les marchés boursiers connaissent actuellement des hésitations et un climat d'incertitude concernant les valeurs liées à l'intelligence artificielle.",
-    "en": "Stock markets are currently experiencing turbulence and caution surrounding artificial intelligence stocks."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-10-recul-des-prix-du-baril-de-petrole-sous-",
-   "src": "Le Figaro",
-   "date": "2026-11-10",
-   "url": "https://www.lefigaro.fr/conjoncture/petrole-le-prix-du-baril-de-brent-repasse-sous-les-90-dollars-20261110",
-   "t": {
-    "fr": "Recul des prix du baril de pétrole sous le seuil des 90 dollars",
-    "en": "Crude Oil Prices Drop Below the $90 Threshold"
-   },
-   "s": {
-    "fr": "Le cours du pétrole brut Brent est repassé sous la barre des 90 dollars le baril. Ce repli s'explique par un regain d'optimisme des acteurs du marché concernant un possible apaisement des relations entre Téhéran et Washington.",
-    "en": "Brent crude oil prices dropped back under $90 per barrel. This decrease is driven by growing market optimism surrounding potential diplomatic progress between Tehran and Washington."
-   },
-   "d": {
-    "fr": "Les matières premières énergétiques réagissent de manière immédiate aux spéculations et aux risques géopolitiques. Lorsque les craintes de tensions géopolitiques s'atténuent, la prime de risque diminue, entraînant une baisse des cours.",
-    "en": "Energy commodities react instantly to geopolitical updates and market expectations. As fears of conflict ease, the geopolitical risk premium drops, pushing prices down."
-   },
-   "v": [
-    [
-     "Pétrole brut",
-     "Crude oil"
-    ],
-    [
-     "Baril",
-     "Barrel"
-    ],
-    [
-     "Prime de risque",
-     "Risk premium"
-    ],
-    [
-     "Matière première",
-     "Commodity"
-    ]
-   ],
-   "q": {
-    "fr": "Quel élément a favorisé la baisse des cours du pétrole selon les marchés ?",
-    "en": "What factor contributed to the decline in oil prices according to market participants?"
-   },
-   "r": {
-    "fr": "La perspective renforcée d'un accord diplomatique entre l'Iran et les États-Unis a rassuré les investisseurs.",
-    "en": "The higher likelihood of a diplomatic agreement between Iran and the United States reassured investors."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-10-restructuration-de-la-dette-du-groupe-de",
-   "src": "Le Figaro",
-   "date": "2026-11-10",
-   "url": "https://www.lefigaro.fr/societes/casino-daniel-kretinsky-trouve-un-accord-avec-les-creanciers-et-assoit-sa-domination-sur-le-distributeur-20261110",
-   "t": {
-    "fr": "Restructuration de la dette du groupe de distribution Plesio",
-    "en": "Debt Restructuring Agreement for Retailer Plesio"
-   },
-   "s": {
-    "fr": "Le groupe de grande distribution Plesio, anciennement nommé Casino, a conclu un compromis avec ses créanciers pour ramener sa dette de 1,4 milliard à 800 millions d'euros. Dans ce cadre, l'investisseur Daniel Kretinsky augmente sa part de capital pour atteindre 84,9 %.",
-    "en": "Retail company Plesio, formerly known as Casino, reached a deal with creditors to reduce its debt from 1.4 billion to 800 million euros. Under the agreement, investor Daniel Kretinsky expands his shareholding to 84.9%."
-   },
-   "d": {
-    "fr": "Une restructuration financière permet à une entreprise surendettée d'aménager son passif afin d'éviter la faillite. Le renforcement de la part de l'actionnaire principal consolide la prise de contrôle au détriment des anciens investisseurs.",
-    "en": "Financial restructuring allows a heavily indebted business to reorganize its obligations to prevent bankruptcy. Increasing a majority shareholder's stake secures corporate ownership at the expense of early investors."
-   },
-   "v": [
-    [
-     "Restructuration de dette",
-     "Debt restructuring"
-    ],
-    [
-     "Créancier",
-     "Creditor"
-    ],
-    [
-     "Participation au capital",
-     "Equity stake"
-    ],
-    [
-     "Actionnaire majoritaire",
-     "Majority shareholder"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'impact principal de l'accord sur le niveau d'endettement de Plesio ?",
-    "en": "What is the primary impact of the deal on Plesio's overall debt level?"
-   },
-   "r": {
-    "fr": "L'accord signé permet d'alléger la dette globale de l'entreprise de 600 millions d'euros.",
-    "en": "The signed agreement reduces the company's total debt load by 600 million euros."
    },
    "ia": "Gemini"
   }
