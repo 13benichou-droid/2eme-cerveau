@@ -4634,7 +4634,7 @@ function pageJour(){
       <div class="row">${todo?`<button class="btn" data-jstart="${esc(jKey(todo))}">▶ Commencer : ${esc(todo.l.length>30?todo.l.slice(0,29)+"…":todo.l)}</button>`:""}${!cur&&!next&&nTodo&&!late?`<button class="ghost on" data-jlate="1">⏩ Prolonger jusqu'à 23 h 59</button>`:""}</div></div>`;
   const P=jParams(V.jdk),xs=jExtras(V.jdk),coarse=typeof matchMedia==="function"&&matchMedia("(pointer:coarse)").matches;
   return`${head}${now}
-  <div class="card stack jcard" style="gap:8px"><div class="row" style="justify-content:space-between;align-items:center"><p class="label" style="margin:0">🗓️ ${isT?"Aujourd'hui":"Demain"} · ${JOURS[d.getDay()].toLowerCase()} ${d.getDate()}</p><button class="ghost" data-jtout="1">${V.confirm==="jtout"?"Confirmer":"✨ Réorganiser"}</button></div>
+  <div class="card stack jcard" style="gap:8px"><div class="row" style="justify-content:space-between;align-items:center"><p class="label" style="margin:0">🗓️ ${isT?"Aujourd'hui":dkey(d)===dkey(add(today(),1))?"Demain":JOURS[d.getDay()]} · ${JOURS[d.getDay()].toLowerCase()} ${d.getDate()}</p><div class="stack" style="gap:6px;align-items:flex-end"><button class="ghost" data-jtout="1">${V.confirm==="jtout"?"Confirmer":"✨ Réorganiser"}</button>${(()=>{const jj=S.jours[dkey(d)]||{};return jj.noschool||jj.nofree||jj.nap||(jj.hide&&Object.keys(jj.hide).length)?`<button class="ghost small" data-jbase="1">${V.confirm==="jbase"?"Confirmer":"↺ Remettre ma journée habituelle"}</button>`:""})()}</div></div>
     <p class="muted small jhint" style="margin:0">${coarse?"Appuie une demi-seconde sur un bloc, puis glisse-le":"Glisse un bloc"} pour changer l'heure ; tire son bord pour la durée. Les blocs de droite se glissent dans la journée.</p>
     ${jTimeline(d,pl,isT)}
     <form class="row jadd" data-f="jadd" style="flex-direction:row;flex-wrap:nowrap"><input class="field" id="jadd-t" name="t" placeholder="＋ Une tâche en plus (ex. texte d'anglais)" autocomplete="off" required>
@@ -4709,6 +4709,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
   if(d.junmiss){V.jsel=null;return jUnmiss(dk,d.junmiss)}
   if(d.jlate){const j=jDayDoc(dk);j.par={...(j.par||{}),stop:"23:59"};V.jsel=null;return put("jours",dk,j)}
   if(d.jclose){V.jsel=null;return render(true)}
+  if(d.jbase)return confirmOr("jbase",()=>{const j=jDayDoc(dk);delete j.noschool;delete j.nofree;delete j.nap;delete j.hide;V.jsel=null;put("jours",dk,j)});
   if(d.jtout)return confirmOr("jtout",()=>{const j=jDayDoc(dk),pin={};Object.entries(j.pin||{}).forEach(([k,p])=>{if(p.done)pin[k]=p});j.pin=pin;delete j.hide;delete j.nap;delete j.nofree;V.jsel=null;put("jours",dk,j)});
   if(!key)return;
   if(d.jadj){const[w,n]=d.jadj.split("|"),s=jFind(dk,key);if(!s)return;let a=s.a,bb=s.b;if(w==="a")a=Math.min(s.a+ +n,s.b-10);else bb=Math.max(s.b+ +n,s.a+10);V.jHi=[key];return jPinSet(dk,key,{a,b:bb})}
@@ -9573,7 +9574,7 @@ async function importData(){
    APPLI AUTONOME : synchronisation (Supabase), IA (Gemini ou Ollama), actu du jour
    Aucune dépendance à Claude.
    ================================================================ */
-const APP_VERSION = "2.46.6";
+const APP_VERSION = "2.47.0";
 let INSTALL_EVT=null;
 const NOSYNC=(col,id)=>col==="presse"||col==="marche"||(col==="jeu"&&id==="actu");
 /* « pronote » est écrit par la fonction serveur : l'appli le lit mais ne le renvoie jamais */
