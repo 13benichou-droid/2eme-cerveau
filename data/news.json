@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-24T16:20:19.124Z",
+ "updated": "2026-11-25T16:00:13.511Z",
  "snap": {
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 036",
-    "c": "−0,11 %"
-   },
-   {
-    "n": "S&P 500",
-    "v": "7 152",
-    "c": "−1,18 %"
-   },
-   {
-    "n": "Nasdaq",
-    "v": "23 495",
-    "c": "−2,47 %"
-   },
-   {
-    "n": "VIX (peur)",
-    "v": "28,94",
-    "c": "+8,72 %"
-   },
-   {
-    "n": "Brent",
-    "v": "86,8 $",
-    "c": "−2,93 %"
-   },
-   {
-    "n": "Pétrole WTI",
-    "v": "80,0 $",
+    "v": "8 020",
     "c": "−0,26 %"
    },
    {
+    "n": "S&P 500",
+    "v": "7 008",
+    "c": "−2,68 %"
+   },
+   {
+    "n": "Nasdaq",
+    "v": "22 773",
+    "c": "−4,05 %"
+   },
+   {
+    "n": "VIX (peur)",
+    "v": "33,50",
+    "c": "+27,09 %"
+   },
+   {
+    "n": "Brent",
+    "v": "89,8 $",
+    "c": "−1,75 %"
+   },
+   {
+    "n": "Pétrole WTI",
+    "v": "83,2 $",
+    "c": "+1,34 %"
+   },
+   {
     "n": "Or (once)",
-    "v": "3 567 $",
-    "c": "−2,30 %"
+    "v": "3 473 $",
+    "c": "−2,50 %"
    },
    {
     "n": "Bitcoin",
-    "v": "59 488 $",
-    "c": "−2,81 %"
+    "v": "58 280 $",
+    "c": "−2,46 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,89 %",
-    "c": "−0,03 pt"
+    "v": "4,82 %",
+    "c": "−0,08 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,098",
-    "c": "+0,04 %"
+    "v": "1,095",
+    "c": "+0,39 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-25-nouvelle-vague-de-taxes-douanieres-decid",
+   "src": "Le Monde",
+   "date": "2026-11-25",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/25/donald-trump-persiste-avec-une-nouvelle-salve-de-droits-de-douane-malgre-la-claque-electorale_6815108_3234.html",
+   "t": {
+    "fr": "Nouvelle vague de taxes douanières décidée par Washington",
+    "en": "New Wave of Import Tariffs Imposed by Washington"
+   },
+   "s": {
+    "fr": "L'administration américaine remet en place des taxes sur les importations touchant 14 de ses partenaires commerciaux, dont l'Union européenne et la Chine. Cette décision intervient à la suite d'une enquête officielle ouverte plus tôt dans l'année. Les pays concernés s'opposent aux sanctions et contestent la position des États-Unis.",
+    "en": "The US administration is introducing import tariffs targeting 14 trade partners, including the European Union and China. This decision concludes an official investigation started earlier this year. Affected nations contest the sanctions and oppose the American stance."
+   },
+   "d": {
+    "fr": "Pour un apprenti trader, les annonces de surtaxes douanières provoquent souvent de la volatilité sur le marché des devises et des actions exportatrices. Cela s'explique par la hausse des craintes de ralentissement du commerce international.",
+    "en": "For a beginner trader, announcements of import tariffs often cause volatility in currency markets and exporting stocks. This stems from concerns over a slowdown in international trade."
+   },
+   "v": [
+    [
+     "droits de douane",
+     "customs duties"
+    ],
+    [
+     "surtaxe",
+     "surcharge"
+    ],
+    [
+     "partenaire commercial",
+     "trading partner"
+    ],
+    [
+     "importation",
+     "import"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les marchés réagissent-ils fortement aux annonces de taxes douanières ?",
+    "en": "Why do markets react strongly to announcements of import tariffs?"
+   },
+   "r": {
+    "fr": "Elles augmentent le coût des échanges commerciaux et risquent de réduire les ventes des entreprises à l'export.",
+    "en": "They increase trading costs and risk reducing sales for exporting businesses."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-25-l-union-europeenne-projette-un-fonds-de-",
+   "src": "Le Figaro",
+   "date": "2026-11-25",
+   "url": "https://www.lefigaro.fr/secteur/high-tech/ia-informatique-quantique-l-union-europeenne-veut-lancer-un-fonds-souverain-de-50-milliards-d-euros-20261125",
+   "t": {
+    "fr": "L'Union européenne projette un fonds de 50 milliards d'euros pour la tech",
+    "en": "European Union Plans a 50 Billion Euro Fund for Tech"
+   },
+   "s": {
+    "fr": "Bruxelles envisage la création d'un fonds souverain de 50 milliards d'euros combinant capitaux publics et privés. L'initiative vise à soutenir les développements dans l'intelligence artificielle et l'informatique quantique. Ce projet cherche à renforcer la souveraineté technologique du continent européen.",
+    "en": "Brussels is considering a 50 billion euro sovereign fund combining public and private capital. The initiative aims to support developments in artificial intelligence and quantum computing. This project seeks to strengthen the European continent's technological sovereignty."
+   },
+   "d": {
+    "fr": "Les programmes d'investissement public de grande ampleur attirent l'attention des investisseurs vers les entreprises innovantes du secteur concerné. Ils permettent de repérer les futurs champions technologiques financés par ces fonds.",
+    "en": "Large-scale public investment programs attract investor attention toward innovative companies in the targeted sector. They help identify potential tech leaders backed by these funds."
+   },
+   "v": [
+    [
+     "fonds souverain",
+     "sovereign wealth fund"
+    ],
+    [
+     "capitaux publics",
+     "public capital"
+    ],
+    [
+     "indépendance technologique",
+     "technological independence"
+    ],
+    [
+     "sécurité économique",
+     "economic security"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'objectif d'un fonds souverain technologique ?",
+    "en": "What is the goal of a technology sovereign fund?"
+   },
+   "r": {
+    "fr": "Il finance des projets stratégiques pour accroître l'autonomie et la compétitivité industrielle de la région.",
+    "en": "It finances strategic projects to increase the region's autonomy and industrial competitiveness."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-25-remy-cointreau-prevoit-une-diminution-de",
+   "src": "Le Figaro",
+   "date": "2026-11-25",
+   "url": "https://www.lefigaro.fr/societes/le-geant-des-spiritueux-remy-cointreau-souhaite-reduire-de-12-a-15-ses-effectifs-20261125",
+   "t": {
+    "fr": "Rémy Cointreau prévoit une diminution de ses effectifs",
+    "en": "Rémy Cointreau Plans Workforce Reductions"
+   },
+   "s": {
+    "fr": "Le producteur de spiritueux projette de réduire son personnel de 12% à 15% au niveau mondial. Les coupes concerneront jusqu'à 14% des postes en France et jusqu'à 16% dans les filiales internationales. Les détails ont été présentés dans des documents officiels de la société.",
+    "en": "The spirits manufacturer plans to decrease its global staff by 12% to 15%. Reductions will affect up to 14% of positions in France and up to 16% in international subsidiaries. Details were outlined in the company's official documents."
+   },
+   "d": {
+    "fr": "Une restructuration d'effectifs signale aux traders qu'une entreprise tente de réduire ses coûts d'exploitation. La réaction du cours de bourse dépendra de la capacité de ces mesures à redresser la rentabilité.",
+    "en": "Workforce restructuring signals to traders that a company is trying to cut operating costs. The stock price reaction will depend on whether these measures restore profitability."
+   },
+   "v": [
+    [
+     "réduction d'effectifs",
+     "workforce reduction"
+    ],
+    [
+     "spiritueux",
+     "spirits"
+    ],
+    [
+     "restructuration",
+     "restructuring"
+    ],
+    [
+     "coûts d'exploitation",
+     "operating costs"
+    ]
+   ],
+   "q": {
+    "fr": "Comment un trader interprète-t-il une annonce de réduction d'effectifs ?",
+    "en": "How does a trader interpret a workforce reduction announcement?"
+   },
+   "r": {
+    "fr": "Comme une volonté de diminuer les charges pour préserver les marges financières du groupe.",
+    "en": "As an effort to lower expenses in order to protect the group's financial margins."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-24-montagnes-russes-boursieres-pour-l-actio",
    "src": "Le Figaro",
@@ -1270,155 +1405,20 @@
     "en": "It reduces the company's profit margins, which decreases its profitability in the eyes of investors."
    },
    "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-11-rebond-des-actions-technologiques-americ",
-   "src": "Financial Times",
-   "date": "2026-11-11",
-   "url": "https://www.ft.com/content/639de881-6017-454f-abfa-cfb191d1e7cd?syn-25a6b1a6=1",
-   "t": {
-    "fr": "Rebond des actions technologiques américaines grâce à l'IA",
-    "en": "US tech stocks rebound driven by AI"
-   },
-   "s": {
-    "fr": "Les valeurs technologiques aux États-Unis repartent à la hausse. Ce mouvement positif est soutenu par des performances financières solides et les attentes élevées autour d'une future introduction en bourse majeure.",
-    "en": "Technology equities in the US are moving upward again. This positive trend is supported by strong financial results and high expectations surrounding a major upcoming stock market debut."
-   },
-   "d": {
-    "fr": "En trading, surveiller le secteur tech est crucial car il donne le ton pour l'ensemble du marché boursier. Une introduction en bourse très attendue attire souvent de nouveaux capitaux et dynamise la spéculation sur les actions existantes.",
-    "en": "In trading, monitoring the tech sector is crucial because it sets the tone for the entire stock market. A highly anticipated IPO often attracts fresh capital and boosts speculation on existing stocks."
-   },
-   "v": [
-    [
-     "action",
-     "stock"
-    ],
-    [
-     "introduction en bourse",
-     "initial public offering (IPO)"
-    ],
-    [
-     "capitalisation",
-     "valuation"
-    ],
-    [
-     "marché",
-     "market"
-    ]
-   ],
-   "q": {
-    "fr": "Quel événement stimule l'intérêt des investisseurs pour les actions technologiques dans ce contexte ?",
-    "en": "What event is driving investor interest in tech stocks in this context?"
-   },
-   "r": {
-    "fr": "De bons résultats financiers et la perspective d'une introduction en bourse valorisée.",
-    "en": "Strong financial results and the prospect of a high-valuation IPO."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-11-ralentissement-de-l-immobilier-sur-fond-",
-   "src": "Le Monde",
-   "date": "2026-11-11",
-   "url": "https://www.lemonde.fr/economie/article/2026/11/11/immobilier-les-transactions-ralentissent-sur-fond-de-hausse-des-taux-d-interet_6808945_3234.html",
-   "t": {
-    "fr": "Ralentissement de l'immobilier sur fond de taux d'emprunt élevés",
-    "en": "Real estate slowdown amid high borrowing rates"
-   },
-   "s": {
-    "fr": "Le marché immobilier connaît un ralentissement marqué des transactions en raison de conditions d'emprunt plus strictes. Les prix commencent à baisser légèrement, mais cela ne suffit pas à faciliter l'accès au crédit pour les acheteurs.",
-    "en": "The real estate market is experiencing a notable slowdown in transactions due to stricter borrowing conditions. Prices are starting to drop slightly, but this is not enough to ease credit access for buyers."
-   },
-   "d": {
-    "fr": "Pour un trader, comprendre l'impact des taux directeurs sur l'immobilier permet d'anticiper la santé des banques et du secteur de la construction. Quand l'emprunt devient cher, toute l'économie réelle ralentit.",
-    "en": "For a trader, understanding how benchmark rates impact real estate helps anticipate the health of banks and the construction sector. When borrowing becomes expensive, the entire real economy slows down."
-   },
-   "v": [
-    [
-     "taux d'intérêt",
-     "interest rate"
-    ],
-    [
-     "crédit",
-     "credit"
-    ],
-    [
-     "immobilier",
-     "real estate"
-    ],
-    [
-     "transaction",
-     "transaction"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi l'accès au logement devient-il plus difficile pour les acheteurs ?",
-    "en": "Why is access to housing becoming more difficult for buyers?"
-   },
-   "r": {
-    "fr": "À cause de la hausse des taux d'intérêt qui durcit les conditions de crédit.",
-    "en": "Because of rising interest rates which tighten credit conditions."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-11-fluctuations-des-cours-du-petrole-et-pri",
-   "src": "franceinfo",
-   "date": "2026-11-11",
-   "url": "https://www.franceinfo.fr/replay-radio/le-decryptage-eco/le-gouvernement-pret-a-puiser-une-nouvelle-fois-dans-les-stocks-strategiques-pour-maintenir-les-prix-a-la-pompe_8256619.html#xtor=RSS-3-%5Beconomie%5D",
-   "t": {
-    "fr": "Fluctuations des cours du pétrole et prix des carburants",
-    "en": "Fluctuations in oil prices and fuel costs"
-   },
-   "s": {
-    "fr": "Le gouvernement utilise ses réserves stratégiques pour contrer la cherté des carburants à la pompe. Les cours du pétrole affichent également une baisse, même si les automobilistes ressentent encore les effets des tensions géopolitiques passées.",
-    "en": "The government is using strategic reserves to counter high pump prices for fuel. Oil prices are also declining, although motorists still feel the lingering effects of past geopolitical tensions."
-   },
-   "d": {
-    "fr": "Les matières premières comme le pétrole sont extrêmement sensibles à l'actualité politique internationale. Suivre ces cours aide à anticiper l'inflation et l'évolution des coûts pour les entreprises.",
-    "en": "Commodities like oil are extremely sensitive to international political news. Tracking these prices helps anticipate inflation and shifting costs for businesses."
-   },
-   "v": [
-    [
-     "pétrole",
-     "oil"
-    ],
-    [
-     "matière première",
-     "commodity"
-    ],
-    [
-     "cours",
-     "price"
-    ],
-    [
-     "inflation",
-     "inflation"
-    ]
-   ],
-   "q": {
-    "fr": "Quel moyen le gouvernement utilise-t-il pour tenter de stabiliser les prix à la pompe ?",
-    "en": "What method does the government use to try to stabilize pump prices?"
-   },
-   "r": {
-    "fr": "Il puise dans les stocks stratégiques de carburant.",
-    "en": "It draws from strategic fuel reserves."
-   },
-   "ia": "Gemini"
   }
  ],
  "actu": {
-  "date": "2026-11-19",
-  "q": "Selon les récentes données relevées dans les stations, à quel niveau s'établit désormais le prix moyen du litre de Sans-plomb ?",
+  "date": "2026-11-25",
+  "q": "De combien le groupe Rémy Cointreau envisage-t-il de réduire ses effectifs mondiaux ?",
   "choices": [
-   "1,85 euro",
-   "1,90 euro",
-   "1,98 euro",
-   "2,05 euros"
+   "Entre 5% et 8%",
+   "Entre 8% et 10%",
+   "Entre 12% et 15%",
+   "Entre 18% et 20%"
   ],
   "a": 2,
-  "expl": "Le litre de Sans-plomb est repassé sous la barre des deux euros pour s'établir à 1,98 euro en moyenne. C'est la première fois depuis trois mois que ce seuil est franchi à la baisse.",
-  "src": "franceinfo",
-  "url": "https://www.franceinfo.fr/economie/transports/prix-des-carburants/c-est-toujours-ca-de-pris-des-automobilistes-saluent-la-baisse-significative-du-prix-des-carburants_8290100.html#xtor=RSS-3-%5Beconomie%5D"
+  "expl": "Les documents présentés par le spécialiste des spiritueux prévoient une diminution d'effectifs comprise entre 12% et 15% au niveau mondial. En France, la baisse maximale envisagée est de 14%, contre 16% à l'international.",
+  "src": "Le Figaro",
+  "url": "https://www.lefigaro.fr/societes/le-geant-des-spiritueux-remy-cointreau-souhaite-reduire-de-12-a-15-ses-effectifs-20261125"
  }
 }
