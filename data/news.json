@@ -1,61 +1,196 @@
 {
- "updated": "2026-11-25T16:00:13.511Z",
+ "updated": "2026-11-26T15:46:58.190Z",
  "snap": {
-  "date": "2026-11-25",
+  "date": "2026-11-26",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 020",
-    "c": "−0,26 %"
+    "v": "8 125",
+    "c": "+1,81 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 008",
-    "c": "−2,68 %"
+    "v": "7 183",
+    "c": "−0,25 %"
    },
    {
     "n": "Nasdaq",
-    "v": "22 773",
-    "c": "−4,05 %"
+    "v": "23 586",
+    "c": "−0,62 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "33,50",
-    "c": "+27,09 %"
+    "v": "26,72",
+    "c": "−5,55 %"
    },
    {
     "n": "Brent",
-    "v": "89,8 $",
-    "c": "−1,75 %"
+    "v": "91,5 $",
+    "c": "−3,33 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "83,2 $",
-    "c": "+1,34 %"
+    "v": "84,9 $",
+    "c": "+1,52 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 473 $",
-    "c": "−2,50 %"
+    "v": "3 598 $",
+    "c": "+1,77 %"
    },
    {
     "n": "Bitcoin",
-    "v": "58 280 $",
-    "c": "−2,46 %"
+    "v": "60 391 $",
+    "c": "+0,02 %"
    },
    {
     "n": "US 10 ans",
-    "v": "4,82 %",
-    "c": "−0,08 pt"
+    "v": "4,85 %",
+    "c": "−0,06 pt"
    },
    {
     "n": "EUR/USD",
-    "v": "1,095",
-    "c": "+0,39 %"
+    "v": "1,097",
+    "c": "+0,11 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-26-passage-de-flambeau-a-la-presidence-de-l",
+   "src": "Le Figaro",
+   "date": "2026-11-26",
+   "url": "https://www.lefigaro.fr/conjoncture/l-espagnol-pablo-hernandez-de-cos-va-succeder-a-christine-lagarde-a-la-bce-20261126",
+   "t": {
+    "fr": "Passage de flambeau à la présidence de la BCE",
+    "en": "Leadership Shift at the European Central Bank"
+   },
+   "s": {
+    "fr": "Pablo Hernandez de Cos a été désigné pour succéder à Christine Lagarde à la tête de la Banque centrale européenne. L'ancien gouverneur de la Banque d'Espagne exerçait récemment la fonction de directeur de la Banque des règlements internationaux à Bâle. Son profil a été préféré à celui du candidat néerlandais Klaas Knot.",
+    "en": "Pablo Hernandez de Cos has been selected to succeed Christine Lagarde as president of the European Central Bank. The former governor of the Bank of Spain was recently serving as director of the Bank for International Settlements in Basel. He was chosen over Dutch candidate Klaas Knot."
+   },
+   "d": {
+    "fr": "Le changement de direction au sein d'une banque centrale influence la politique monétaire globale et l'évolution future des taux d'intérêt. Les traders surveillent attentivement ce poste car les annonces du président ont un impact immédiat sur le cours de l'euro et des obligations.",
+    "en": "A leadership change at a central bank impacts overall monetary policy and the future path of interest rates. Traders closely track this position because statements from the president directly influence the euro and bond markets."
+   },
+   "v": [
+    [
+     "Banque centrale",
+     "Central bank"
+    ],
+    [
+     "Politique monétaire",
+     "Monetary policy"
+    ],
+    [
+     "Taux d'intérêt",
+     "Interest rate"
+    ],
+    [
+     "Zone euro",
+     "Eurozone"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi les acteurs des marchés financiers observent-ils de près la désignation du dirigeant de la BCE ?",
+    "en": "Why do financial market participants closely monitor the appointment of the ECB leader?"
+   },
+   "r": {
+    "fr": "Le président de la BCE définit les choix d'orientations des taux d'intérêt, ce qui réagit directement sur la valeur des monnaies et des titres financiers.",
+    "en": "The ECB president shapes interest rate policy decisions, which directly impacts currency values and financial securities."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-26-enquete-judiciaire-et-perquisitions-chez",
+   "src": "Le Monde",
+   "date": "2026-11-26",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/26/airbags-takata-stellantis-et-l-equipementier-joyson-safety-systems-france-ont-ete-perquisitionnes-selon-le-parquet-de-paris_6815521_3234.html",
+   "t": {
+    "fr": "Enquête judiciaire et perquisitions chez Stellantis",
+    "en": "Judicial Investigation and Searches at Stellantis"
+   },
+   "s": {
+    "fr": "Une enquête ouverte à Paris a conduit à des perquisitions dans les locaux de Stellantis et de l'équipementier Joyson Safety Systems France. Les magistrats cherchent à déterminer si le constructeur a manqué de réactivité dans le remplacement d'airbags défectueux fournis par Takata. Les poursuites découlent notamment de plaintes déposées par des propriétaires et l'association UFC-Que choisir.",
+    "en": "A judicial inquiry opened in Paris led to searches at the premises of Stellantis and supplier Joyson Safety Systems France. Investigators are assessing whether the automaker failed to act quickly enough in replacing defective Takata airbags. The legal action follows complaints from vehicle owners and the consumer association UFC-Que Choisir."
+   },
+   "d": {
+    "fr": "Les procédures pénales font peser un risque réputationnel et financier important sur les entreprises en bourse. L'émergence de sanctions potentielles ou de campagnes de rappel coûteuses pousse souvent les investisseurs à céder leurs titres.",
+    "en": "Criminal proceedings impose significant reputational and financial risk on publicly listed companies. Potential regulatory fines or costly recall campaigns often prompt investors to sell their shares."
+   },
+   "v": [
+    [
+     "Action",
+     "Share / Stock"
+    ],
+    [
+     "Risque juridique",
+     "Legal risk"
+    ],
+    [
+     "Équipementier",
+     "Auto parts supplier"
+    ],
+    [
+     "Marché boursier",
+     "Stock market"
+    ]
+   ],
+   "q": {
+    "fr": "En quoi les soucis judiciaires d'une entreprise peuvent-ils faire chuter son cours en bourse ?",
+    "en": "How can a company's legal troubles cause its stock price to drop?"
+   },
+   "r": {
+    "fr": "L'incertitude liée aux amendes judiciaires et aux indemnités réduit la rentabilité future anticipée, ce qui décourage les acheteurs d'actions.",
+    "en": "Uncertainty surrounding potential court fines and compensation reduces expected future profitability, discouraging stock buyers."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-26-plus-de-500-millions-d-amende-pour-enten",
+   "src": "Le Monde",
+   "date": "2026-11-26",
+   "url": "https://www.lemonde.fr/economie/article/2026/11/26/pour-le-cartel-des-parfums-finalement-c-est-le-consommateur-qui-a-paye-l-addition_6815514_3234.html",
+   "t": {
+    "fr": "Plus de 500 millions d'amende pour entente dans les parfums",
+    "en": "Over 500 Million Euros in Fines for Perfume Cartel"
+   },
+   "s": {
+    "fr": "Les autorités de la concurrence européenne et britannique ont sanctionné les entreprises Firmenich, Givaudan et IFF à hauteur de plus de 500 millions d'euros. Ces acteurs de la parfumerie s'étaient concertés illégalement sur les prix fixés au groupe Unilever. Cette stratégie d'entente commerciale s'est répercutée sur les tarifs finaux payés par les acheteurs.",
+    "en": "European and British competition regulators fined Firmenich, Givaudan, and IFF over 500 million euros combined. These fragrance industry players illegally colluded on pricing offered to Unilever. This price-fixing agreement ultimately resulted in higher costs for retail consumers."
+   },
+   "d": {
+    "fr": "Les ententes sur les prix perturbent le libre jeu du marché et sont sévèrement combattues par les régulateurs. L'application de lourdes amendes ampute directement les bénéfices des entreprises cotées, affectant leur valeur boursière.",
+    "en": "Price collusion distorts fair market competition and faces strict penalties from regulators. Heavy fines directly reduce the net profits of listed companies, negatively impacting their stock value."
+   },
+   "v": [
+    [
+     "Entente sur les prix",
+     "Price collusion / Fixing"
+    ],
+    [
+     "Amende réglementaire",
+     "Regulatory fine"
+    ],
+    [
+     "Autorité de la concurrence",
+     "Antitrust authority"
+    ],
+    [
+     "Bénéfice net",
+     "Net profit"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est l'impact financier direct d'une décision de l'autorité de la concurrence sur une société ?",
+    "en": "What is the direct financial impact of an antitrust decision on a company?"
+   },
+   "r": {
+    "fr": "La pénalité constitue un montant à décaisser immédiatement, réduisant le résultat net et les montants attribuables aux actionnaires.",
+    "en": "The financial penalty is an immediate cash outflow that lowers net earnings and payouts available to shareholders."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-25-nouvelle-vague-de-taxes-douanieres-decid",
    "src": "Le Monde",
@@ -1268,141 +1403,6 @@
    "r": {
     "fr": "Les investisseurs tendent à vendre le titre à court terme en raison du manque de visibilité sur le futur leadership.",
     "en": "Investors tend to sell the stock in the short term due to a lack of clarity regarding future leadership."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-12-nvidia-le-depart-de-jensen-huang",
-   "src": "Le Monde",
-   "date": "2026-11-12",
-   "url": "https://www.lemonde.fr/economie/article/2026/11/12/jensen-huang-patron-emblematique-de-nvidia-et-parrain-de-l-ia-demis-de-ses-fonctions_6809106_3234.html",
-   "t": {
-    "fr": "Nvidia : le départ de Jensen Huang",
-    "en": "Nvidia: Jensen Huang steps down"
-   },
-   "s": {
-    "fr": "Le cofondateur et patron de Nvidia a été limogé par son conseil d'administration. Cette décision fait suite à des révélations sur une relation privée avec une entrepreneuse chinoise soupçonnée d'espionnage.",
-    "en": "The co-founder and CEO of Nvidia has been dismissed by the board. This follows revelations regarding a private relationship with a Chinese entrepreneur suspected of espionage."
-   },
-   "d": {
-    "fr": "Le départ soudain d'un dirigeant emblématique peut provoquer une forte volatilité sur le cours de l'action. Les investisseurs surveillent la stabilité de la gouvernance pour évaluer la pérennité de la stratégie de l'entreprise.",
-    "en": "The sudden departure of an iconic leader can trigger high volatility in the stock price. Investors monitor governance stability to assess the long-term viability of the company's strategy."
-   },
-   "v": [
-    [
-     "Conseil d'administration",
-     "Board of directors"
-    ],
-    [
-     "Volatilité",
-     "Volatility"
-    ],
-    [
-     "Gouvernance",
-     "Governance"
-    ],
-    [
-     "Action",
-     "Stock"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi le départ d'un PDG influence-t-il le prix d'une action ?",
-    "en": "Why does a CEO's departure influence a stock price?"
-   },
-   "r": {
-    "fr": "Le marché anticipe un changement de stratégie ou une période d'incertitude qui peut affecter les bénéfices futurs.",
-    "en": "The market anticipates a change in strategy or a period of uncertainty that may affect future earnings."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-12-crise-dans-l-immobilier-neuf",
-   "src": "Le Monde",
-   "date": "2026-11-12",
-   "url": "https://www.lemonde.fr/economie/article/2026/11/12/logements-les-promoteurs-immobiliers-s-enfoncent-un-peu-plus-dans-la-crise_6809079_3234.html",
-   "t": {
-    "fr": "Crise dans l'immobilier neuf",
-    "en": "Crisis in the new housing market"
-   },
-   "s": {
-    "fr": "Le secteur des promoteurs immobiliers subit un recul marqué des réservations de logements neufs. La hausse des taux d'intérêt est identifiée comme le principal facteur pesant sur cette activité.",
-    "en": "The real estate development sector is seeing a sharp decline in new housing reservations. Rising interest rates are identified as the main factor weighing on this activity."
-   },
-   "d": {
-    "fr": "Les taux d'intérêt élevés augmentent le coût du crédit pour les acheteurs, ce qui réduit la demande. C'est un exemple classique de corrélation entre la politique monétaire et la santé d'un secteur économique.",
-    "en": "High interest rates increase borrowing costs for buyers, which reduces demand. This is a classic example of the correlation between monetary policy and the health of an economic sector."
-   },
-   "v": [
-    [
-     "Taux d'intérêt",
-     "Interest rates"
-    ],
-    [
-     "Crédit",
-     "Credit"
-    ],
-    [
-     "Demande",
-     "Demand"
-    ],
-    [
-     "Politique monétaire",
-     "Monetary policy"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'impact direct d'une hausse des taux sur les promoteurs ?",
-    "en": "What is the direct impact of a rate hike on developers?"
-   },
-   "r": {
-    "fr": "Cela freine les ventes car les emprunts deviennent plus coûteux pour les clients finaux.",
-    "en": "It slows down sales because borrowing becomes more expensive for end customers."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-12-la-nouvelle-taxe-sucre-inquiete-les-indu",
-   "src": "Le Figaro",
-   "date": "2026-11-12",
-   "url": "https://www.lefigaro.fr/conso/bonbons-biscuits-viennoiseries-industrielles-quels-produits-seraient-vises-par-la-taxe-sucre-du-budget-2027-20261002",
-   "t": {
-    "fr": "La nouvelle taxe sucre inquiète les industriels",
-    "en": "New sugar tax worries manufacturers"
-   },
-   "s": {
-    "fr": "Le Sénat a étendu la taxe sur les boissons sucrées aux produits alimentaires solides pré-emballés. Les entreprises du secteur craignent des conséquences économiques négatives.",
-    "en": "The Senate has extended the tax on sugary drinks to pre-packaged solid food products. Companies in the sector fear negative economic consequences."
-   },
-   "d": {
-    "fr": "Les décisions fiscales modifient les marges bénéficiaires des entreprises cotées. En trading, il est crucial d'analyser comment une nouvelle taxe peut impacter les résultats financiers d'un secteur spécifique.",
-    "en": "Fiscal decisions alter the profit margins of listed companies. In trading, it is crucial to analyze how a new tax can impact the financial results of a specific sector."
-   },
-   "v": [
-    [
-     "Taxe",
-     "Tax"
-    ],
-    [
-     "Marge bénéficiaire",
-     "Profit margin"
-    ],
-    [
-     "Résultats financiers",
-     "Financial results"
-    ],
-    [
-     "Secteur",
-     "Sector"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi une taxe peut-elle faire baisser le cours d'une action ?",
-    "en": "Why can a tax cause a stock price to fall?"
-   },
-   "r": {
-    "fr": "Elle réduit les marges bénéficiaires de l'entreprise, ce qui diminue sa rentabilité aux yeux des investisseurs.",
-    "en": "It reduces the company's profit margins, which decreases its profitability in the eyes of investors."
    },
    "ia": "Gemini"
   }
