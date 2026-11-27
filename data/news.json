@@ -1,47 +1,47 @@
 {
- "updated": "2026-11-26T15:46:58.190Z",
+ "updated": "2026-11-27T15:32:32.665Z",
  "snap": {
-  "date": "2026-11-26",
+  "date": "2026-11-27",
   "items": [
    {
     "n": "CAC 40",
-    "v": "8 125",
-    "c": "+1,81 %"
+    "v": "8 155",
+    "c": "+0,57 %"
    },
    {
     "n": "S&P 500",
-    "v": "7 183",
-    "c": "−0,25 %"
+    "v": "7 244",
+    "c": "+0,85 %"
    },
    {
     "n": "Nasdaq",
-    "v": "23 586",
-    "c": "−0,62 %"
+    "v": "23 855",
+    "c": "+1,14 %"
    },
    {
     "n": "VIX (peur)",
-    "v": "26,72",
-    "c": "−5,55 %"
+    "v": "26,69",
+    "c": "−0,41 %"
    },
    {
     "n": "Brent",
-    "v": "91,5 $",
-    "c": "−3,33 %"
+    "v": "90,9 $",
+    "c": "−3,87 %"
    },
    {
     "n": "Pétrole WTI",
-    "v": "84,9 $",
-    "c": "+1,52 %"
+    "v": "83,7 $",
+    "c": "+0,02 %"
    },
    {
     "n": "Or (once)",
-    "v": "3 598 $",
-    "c": "+1,77 %"
+    "v": "3 651 $",
+    "c": "+3,26 %"
    },
    {
     "n": "Bitcoin",
-    "v": "60 391 $",
-    "c": "+0,02 %"
+    "v": "59 763 $",
+    "c": "−1,21 %"
    },
    {
     "n": "US 10 ans",
@@ -50,12 +50,147 @@
    },
    {
     "n": "EUR/USD",
-    "v": "1,097",
-    "c": "+0,11 %"
+    "v": "1,095",
+    "c": "−0,22 %"
    }
   ]
  },
  "articles": [
+  {
+   "id": "2026-11-27-la-france-entre-en-recession-au-troisiem",
+   "src": "Le Figaro",
+   "date": "2026-11-27",
+   "url": "https://www.lefigaro.fr/conjoncture/visualisez-la-croissance-francaise-en-2025-20261030",
+   "t": {
+    "fr": "La France entre en récession au troisième trimestre",
+    "en": "France Enters Recession in the Third Quarter"
+   },
+   "s": {
+    "fr": "Le produit intérieur brut français a diminué de 0,2 % au cours du troisième trimestre, marquant l'entrée officielle du pays en récession. Selon les données de l'Insee, la progression annuelle s'établit à 0,1 %, ce qui rend difficile l'atteinte de l'objectif de 0,5 % visé par le gouvernement.",
+    "en": "French gross domestic product contracted by 0.2% during the third quarter, marking the country's entry into recession. According to Insee, full-year growth stands at 0.1%, making the government's 0.5% target hard to reach."
+   },
+   "d": {
+    "fr": "Pour un trader, un recul du PIB signale un ralentissement général de l'économie qui pèse sur les bénéfices des entreprises. Cette dégradation incite souvent la banque centrale à baisser ses taux pour relancer la consommation et l'investissement.",
+    "en": "For a trader, a GDP contraction signals a general economic slowdown that weighs on corporate earnings. This downturn often prompts the central bank to lower interest rates to stimulate spending and investment."
+   },
+   "v": [
+    [
+     "Produit intérieur brut (PIB)",
+     "Gross Domestic Product (GDP)"
+    ],
+    [
+     "Récession",
+     "Recession"
+    ],
+    [
+     "Taux de croissance",
+     "Growth rate"
+    ],
+    [
+     "Banque centrale",
+     "Central bank"
+    ]
+   ],
+   "q": {
+    "fr": "Pourquoi une récession économique a-t-elle un impact direct sur la valeur des actions ?",
+    "en": "Why does an economic recession directly impact stock values?"
+   },
+   "r": {
+    "fr": "En période de récession, les ménages et les entreprises réduisent leurs dépenses, ce qui fait chuter le chiffre d'affaires et les profits futurs des sociétés cotées.",
+    "en": "During a recession, households and businesses cut back spending, which reduces the revenue and future profits of listed companies."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-27-pertes-massives-sur-les-fonds-de-retrait",
+   "src": "Le Figaro",
+   "date": "2026-11-27",
+   "url": "https://www.lefigaro.fr/conjoncture/11-milliards-de-dollars-de-retraites-partis-en-fumee-au-chili-le-coup-de-poker-qui-a-aneanti-l-epargne-de-millions-de-travailleurs-20261127",
+   "t": {
+    "fr": "Pertes massives sur les fonds de retraite au Chili",
+    "en": "Massive Losses in Chilean Pension Funds"
+   },
+   "s": {
+    "fr": "Au Chili, le fonds de pension considéré comme le plus sécurisé a perdu près de 10 % de sa valeur en l'espace de neuf mois. Cette chute équivaut à la disparition de 11 milliards de dollars et a provoqué l'ouverture d'une enquête par l'autorité de régulation.",
+    "en": "In Chile, the pension fund considered the safest lost nearly 10% of its value in just nine months. This decline represents 11 billion dollars wiped out and triggered an investigation by the financial regulator."
+   },
+   "d": {
+    "fr": "Les fonds de pension placent l'épargne des salariés sur les marchés financiers pour générer du rendement sur le long terme. Quand les actifs sous-jacents perdent de la valeur, le capital des futurs retraités subit directement la volatilité des marchés.",
+    "en": "Pension funds invest workers' savings in financial markets to generate long-term returns. When underlying assets drop in value, future retirees' capital is directly exposed to market volatility."
+   },
+   "v": [
+    [
+     "Fonds de pension",
+     "Pension fund"
+    ],
+    [
+     "Système par capitalisation",
+     "Fully funded pension system"
+    ],
+    [
+     "Régulateur",
+     "Regulator"
+    ],
+    [
+     "Épargne",
+     "Savings"
+    ]
+   ],
+   "q": {
+    "fr": "Quel est le risque principal pour les épargnants dans un système de retraite par capitalisation ?",
+    "en": "What is the main risk for savers in a capital-based pension system?"
+   },
+   "r": {
+    "fr": "Les épargnants sont exposés au risque de marché : si la valeur des placements chute au moment de leur départ à la retraite, leur capital disponible est réduit.",
+    "en": "Savers face market risk: if investment values drop when they retire, their available capital is reduced."
+   },
+   "ia": "Gemini"
+  },
+  {
+   "id": "2026-11-27-stellantis-interrompt-la-production-dans",
+   "src": "franceinfo",
+   "date": "2026-11-27",
+   "url": "https://www.franceinfo.fr/economie/industrie/on-est-quand-meme-inquiets-pour-l-avenir-du-site-des-salaries-de-stellantis-mis-en-chomage-partiel-a-rennes-et-mulhouse-face-aux-difficultes-du-groupe_8303127.html#xtor=RSS-3-%5Beconomie%5D",
+   "t": {
+    "fr": "Stellantis interrompt la production dans plusieurs usines",
+    "en": "Stellantis Halts Production Across Multiple Plants"
+   },
+   "s": {
+    "fr": "Le constructeur automobile Stellantis impose le chômage partiel à ses salariés sur les sites de Mulhouse et Rennes en raison d'une baisse importante des commandes. Cette baisse d'activité suscite de vive inquiétudes chez les employés quant à la situation financière de l'entreprise.",
+    "en": "Automaker Stellantis is placing workers on partial unemployment at its Mulhouse and Rennes sites due to a sharp drop in orders. This slowdown is raising strong concerns among staff regarding the group's financial health."
+   },
+   "d": {
+    "fr": "Une baisse du carnet de commandes indique que la demande des consommateurs recule, ce qui annonce une diminution des revenus futurs du groupe. Les traders anticipent généralement cette dégradation de la rentabilité en vendant les actions de la société.",
+    "en": "A shrinking order book shows falling consumer demand, signaling lower future corporate revenues. Traders typically anticipate this drop in profitability by selling the company's shares."
+   },
+   "v": [
+    [
+     "Chômage partiel",
+     "Short-time work"
+    ],
+    [
+     "Carnet de commandes",
+     "Order book"
+    ],
+    [
+     "Constructeur automobile",
+     "Automaker"
+    ],
+    [
+     "Rentabilité",
+     "Profitability"
+    ]
+   ],
+   "q": {
+    "fr": "Comment un ralentissement des commandes affecte-t-il le cours en bourse d'un constructeur ?",
+    "en": "How does a slowdown in orders affect an automaker's stock price?"
+   },
+   "r": {
+    "fr": "La baisse des commandes annonce une chute des ventes et des bénéfices, ce qui incite les investisseurs à céder leurs titres et fait baisser le cours.",
+    "en": "Lower orders point to a drop in sales and profits, driving investors to sell their stock and pushing the price down."
+   },
+   "ia": "Gemini"
+  },
   {
    "id": "2026-11-26-passage-de-flambeau-a-la-presidence-de-l",
    "src": "Le Figaro",
@@ -1268,141 +1403,6 @@
    "r": {
     "fr": "Elles exposent l'établissement à des poursuites judiciaires et dégradent la confiance des clients comme des marchés.",
     "en": "They expose the institution to legal action and undermine trust from customers and financial markets."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-13-petrole-vers-un-retour-de-l-excedent-d-o",
-   "src": "Le Monde",
-   "date": "2026-11-13",
-   "url": "https://www.lemonde.fr/economie/article/2026/11/13/le-marche-mondial-du-petrole-devrait-redevenir-excedentaire-au-dernier-trimestre-selon-l-agence-internationale-de-l-energie_6809326_3234.html",
-   "t": {
-    "fr": "Pétrole : vers un retour de l'excédent d'offre en fin d'année 2026",
-    "en": "Oil: Return to Supply Surplus Expected in Late 2026"
-   },
-   "s": {
-    "fr": "L'Agence internationale de l'énergie prévoit que la production globale de pétrole surpasse la consommation au dernier trimestre 2026. Cela représente une première évolution de ce type depuis l'éclatement du conflit armé en Iran en février. Le marché mondial s'apprête ainsi à repasser dans une phase de surplus.",
-    "en": "The International Energy Agency forecasts that global oil production will surpass consumption in the fourth quarter of 2026. This marks the first such reversal since the outbreak of war in Iran in February. The global market is thus preparing to shift back into a surplus."
-   },
-   "d": {
-    "fr": "Pour un trader, une offre supérieure à la demande entraîne souvent un repli des cours de la matière première. Observer ces données d'équilibre permet de mieux anticiper les tendances sur les marchés de l'énergie.",
-    "en": "For a trader, supply exceeding demand often causes the commodity's market price to decline. Tracking these balance figures helps better forecast trends in energy markets."
-   },
-   "v": [
-    [
-     "Offre et demande",
-     "Supply and demand"
-    ],
-    [
-     "Excédent de marché",
-     "Market surplus"
-    ],
-    [
-     "Matière première",
-     "Commodity"
-    ],
-    [
-     "Cours du pétrole",
-     "Oil price"
-    ]
-   ],
-   "q": {
-    "fr": "Quel est l'effet habituel d'un surplus d'offre sur le prix d'un produit ?",
-    "en": "What is the typical effect of a supply surplus on a product's price?"
-   },
-   "r": {
-    "fr": "Lorsque la marchandise disponible dépasse les besoins des acheteurs, la concurrence pousse les vendeurs à baisser les prix.",
-    "en": "When available merchandise exceeds buyer needs, competition forces sellers to lower prices."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-13-technologie-perturbation-majeure-des-ser",
-   "src": "Le Monde",
-   "date": "2026-11-13",
-   "url": "https://www.lemonde.fr/pixels/article/2026/11/13/ce-que-l-on-sait-de-la-panne-d-outlook-et-de-microsoft-365_6809312_4408996.html",
-   "t": {
-    "fr": "Technologie : perturbation majeure des services informatiques de Microsoft",
-    "en": "Technology: Major Service Disruption Hits Microsoft"
-   },
-   "s": {
-    "fr": "Une panne d'ampleur internationale affecte plusieurs outils de Microsoft comme sa messagerie Outlook et Copilot, perturbant le fonctionnement d'entreprises et de gouvernements. L'entreprise informatique rejette l'hypothèse d'une cyberattaque et tente de stabiliser la situation. Des améliorations ont été constatées en Europe, mais le retour à la normale reste fragile.",
-    "en": "A widespread global outage has impacted several Microsoft tools, including Outlook messaging and Copilot, disrupting businesses and government operations. The tech company has ruled out a cyberattack while working to stabilize the situation. Improvements were noted in Europe, but recovery remains fragile."
-   },
-   "d": {
-    "fr": "Les incidents techniques d'une telle échelle génèrent du risque opérationnel et peuvent affaiblir temporairement le cours de bourse d'une entreprise tech. Les investisseurs surveillent la rapidité de résolution pour évaluer l'impact financier et réputationnel.",
-    "en": "Technical failures on this scale create operational risk and can temporarily weaken a tech company's stock price. Investors watch the resolution speed to evaluate the financial and reputational impact."
-   },
-   "v": [
-    [
-     "Panne technique",
-     "System outage"
-    ],
-    [
-     "Risque opérationnel",
-     "Operational risk"
-    ],
-    [
-     "Valorisation boursière",
-     "Market valuation"
-    ],
-    [
-     "Confiance des investisseurs",
-     "Investor confidence"
-    ]
-   ],
-   "q": {
-    "fr": "Pourquoi une panne informatique globale préoccupe-t-elle les marchés financiers ?",
-    "en": "Why does a global IT outage concern financial markets?"
-   },
-   "r": {
-    "fr": "Elle bloque les activités économiques de nombreuses entreprises clients et risque d'entacher la réputation du fournisseur de services.",
-    "en": "It halts the business activities of many client companies and threatens to damage the service provider's reputation."
-   },
-   "ia": "Gemini"
-  },
-  {
-   "id": "2026-11-13-semi-conducteurs-demission-du-pdg-de-nvi",
-   "src": "Le Monde",
-   "date": "2026-11-13",
-   "url": "https://www.lemonde.fr/international/article/2026/11/13/nvidia-l-ancien-pdg-de-nvidia-et-le-secretaire-au-commerce-invites-a-temoigner-au-senat-americain_6809295_3210.html",
-   "t": {
-    "fr": "Semi-conducteurs : démission du PDG de Nvidia et auditions au Sénat américain",
-    "en": "Semiconductors: Nvidia CEO Resigns Amid US Senate Hearing Call"
-   },
-   "s": {
-    "fr": "Jensen Huang a quitté la direction du géant des puces Nvidia suite à la révélation de liaisons personnelles, l'une d'elles impliquant des soupçons d'espionnage au profit de la Chine. Il est convoqué par le Sénat des États-Unis aux côtés du secrétaire au Commerce Howard Lutnick. Cet événement relance les débats politiques autour des règles d'exportation des puces électroniques avancées.",
-    "en": "Jensen Huang stepped down as head of chipmaker Nvidia following revelations of personal relationships, one involving suspicions of espionage for China. He has been invited to testify before the US Senate alongside Commerce Secretary Howard Lutnick. This event reignites political debates over export controls on advanced chips."
-   },
-   "d": {
-    "fr": "Le départ imprévu d'un dirigeant historique crée souvent une forte instabilité sur le prix de l'action. De plus, la perspective d'enquêtes étatiques renforce l'incertitude réglementaire pour le secteur technologique.",
-    "en": "The unexpected departure of a longtime leader often causes high volatility in a company's share price. Furthermore, the prospect of government inquiries adds regulatory uncertainty to the tech sector."
-   },
-   "v": [
-    [
-     "Démission du dirigeant",
-     "CEO resignation"
-    ],
-    [
-     "Volatilité des titres",
-     "Stock volatility"
-    ],
-    [
-     "Contrôle des exportations",
-     "Export controls"
-    ],
-    [
-     "Incertitude réglementaire",
-     "Regulatory uncertainty"
-    ]
-   ],
-   "q": {
-    "fr": "Comment les marchés réagissent-ils habituellement à la démission soudaine d'un patron emblématique ?",
-    "en": "How do markets typically react to the sudden resignation of an iconic CEO?"
-   },
-   "r": {
-    "fr": "Les investisseurs tendent à vendre le titre à court terme en raison du manque de visibilité sur le futur leadership.",
-    "en": "Investors tend to sell the stock in the short term due to a lack of clarity regarding future leadership."
    },
    "ia": "Gemini"
   }
